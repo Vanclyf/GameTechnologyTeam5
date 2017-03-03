@@ -88,16 +88,18 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\OgreWikiTutorialFramework_1-9\BaseApplication.cpp" />
-    <ClCompile Include="..\OgreWikiTutorialFramework_1-9\TutorialApplication.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\OgreWikiTutorialFramework_1-9\BaseApplication.h" />
-    <ClInclude Include="..\OgreWikiTutorialFramework_1-9\TutorialApplication.h" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="GameObjStandard.cg" />
     <None Include="testMaterial.material" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="BaseApplication.cpp" />
+    <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="Player.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BaseApplication.h" />
+    <ClInclude Include="GameManager.h" />
+    <ClInclude Include="Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
