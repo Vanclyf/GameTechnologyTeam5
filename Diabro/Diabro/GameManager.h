@@ -9,8 +9,12 @@ Filename:    GameManager.h
 
 #include "Player.h"
 #include "BaseApplication.h"
+#include "CharacterStats.h"
 
 //---------------------------------------------------------------------------
+
+
+
 
 class GameManager : public BaseApplication
 {

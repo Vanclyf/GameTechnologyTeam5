@@ -6,6 +6,7 @@ Filename:    GameManager.cpp
 */
 #include "GameManager.h"
 //---------------------------------------------------------------------------
+
 GameManager::GameManager()
 {
 	//_instance = this;
@@ -105,14 +106,17 @@ bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& fe)
 {
 	bool ret = BaseApplication::frameRenderingQueued(fe);
 
-	mSceneMgr->getSceneNode("PlayerNode")->translate(_playerScript.getDirVector() * fe.timeSinceLastFrame, Ogre::Node::TS_LOCAL);
+	mSceneMgr->getSceneNode("PlayerNode")->translate(_playerScript.GetDirVector() * _playerScript.GetMovespeed() * fe.timeSinceLastFrame, Ogre::Node::TS_LOCAL);
+
+	// drain stamina
+	_playerScript.AdjustStaminaOverTime(fe.timeSinceLastFrame);
 
 	return ret;
 }
 
 bool GameManager::keyPressed(const OIS::KeyEvent& ke)
 {
-	Ogre::Vector3 dirVec = _playerScript.getDirVector();
+	Ogre::Vector3 dirVec = _playerScript.GetDirVector();
 
 	switch (ke.key)
 	{
@@ -122,35 +126,39 @@ bool GameManager::keyPressed(const OIS::KeyEvent& ke)
 		break;
 	case OIS::KC_UP:
 	case OIS::KC_W:
-		dirVec.z = -_playerScript.getMovespeed();
+		dirVec.z = -1;
 		break;
 
 	case OIS::KC_DOWN:
 	case OIS::KC_S:
-		dirVec.z = _playerScript.getMovespeed();
+		dirVec.z = 1;
 		break;
 
 	case OIS::KC_LEFT:
 	case OIS::KC_A:
-		dirVec.x = -_playerScript.getMovespeed();
+		dirVec.x = -1;
 		break;
 
 	case OIS::KC_RIGHT:
 	case OIS::KC_D:
-		dirVec.x = _playerScript.getMovespeed();
+		dirVec.x = 1;
 		break;
-		
+	
+	case OIS::KC_LSHIFT:
+		_playerScript.ToggleRun(true);
+		break;
+
 	default:
 		break;
 	}
 
-	_playerScript.setDirVector(dirVec);
+	_playerScript.SetDirVector(dirVec);
 	return true;
 }
 
 bool GameManager::keyReleased(const OIS::KeyEvent& ke)
 {
-	Ogre::Vector3 dirVec = _playerScript.getDirVector();
+	Ogre::Vector3 dirVec = _playerScript.GetDirVector();
 
 	switch (ke.key)
 	{
@@ -174,21 +182,25 @@ bool GameManager::keyReleased(const OIS::KeyEvent& ke)
 		dirVec.x = 0;
 		break;
 
+	case OIS::KC_LSHIFT:
+		_playerScript.ToggleRun(false);
+		break;
+
 	default:
 		break;
 	}
 
-	_playerScript.setDirVector(dirVec);
+	_playerScript.SetDirVector(dirVec);
 	return true;
 }
 
 bool GameManager::mouseMoved(const OIS::MouseEvent& me)
 {
-	Ogre::Degree rotX = Ogre::Degree(-_playerScript.getRotationspeed()/2 * me.state.Y.rel);
+	Ogre::Degree rotX = Ogre::Degree(-_playerScript.GetRotationspeed()/2 * me.state.Y.rel);
 	Ogre::Degree originalPitch = mSceneMgr->getSceneNode("CameraNode")->getOrientation().getPitch();
 	Ogre::Degree degreeFrmStartPitch = (rotX + originalPitch) - _startPitchCam;
 
-	mSceneMgr->getSceneNode("PlayerNode")->yaw(Ogre::Degree(-_playerScript.getRotationspeed() * me.state.X.rel), Ogre::Node::TS_WORLD);
+	mSceneMgr->getSceneNode("PlayerNode")->yaw(Ogre::Degree(-_playerScript.GetRotationspeed() * me.state.X.rel), Ogre::Node::TS_WORLD);
 
 	if (degreeFrmStartPitch < Ogre::Degree(10) && degreeFrmStartPitch > Ogre::Degree(-40))
 	{
