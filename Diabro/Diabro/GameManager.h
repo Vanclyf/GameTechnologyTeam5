@@ -8,7 +8,9 @@ Filename:    GameManager.h
 #define __GameManager_h_
 
 #include "Player.h"
+#include "Npc.h"
 #include "BaseApplication.h"
+
 
 //---------------------------------------------------------------------------
 
@@ -35,7 +37,9 @@ private:
 	virtual bool mouseReleased(const OIS::MouseEvent& me, OIS::MouseButtonID id);
 
 	Player _playerScript;
+	Npc _npcScript;
 	Ogre::Entity* _playerEntity;
+	Ogre::Entity*_npcEntity;
 	Ogre::Degree _startPitchCam;
 };
 

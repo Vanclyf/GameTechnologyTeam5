@@ -33,6 +33,17 @@ void GameManager::createScene(void)
 	mSceneMgr->getSceneNode("CameraNode")->pitch(Ogre::Degree(10), Ogre::Node::TS_LOCAL);
 	_startPitchCam = mSceneMgr->getSceneNode("CameraNode")->getOrientation().getPitch();
 
+	//creating a NPC object
+	_npcScript.Initialize();
+	_npcEntity = mSceneMgr->createEntity("penguin.mesh");
+	Ogre::SceneNode* npcNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
+	npcNode->attachObject(_npcEntity);
+	npcNode->setPosition(10, 20, 10);
+	npcNode->getPosition();
+	if (npcNode->getPosition() != Ogre::Vector3(20, 20, 20)) {
+
+	}
+
 	createGroundMesh();
 	Ogre::Entity* groundEntity = mSceneMgr->createEntity("ground");
 	mSceneMgr->getRootSceneNode()->createChildSceneNode()->attachObject(groundEntity);
