@@ -98,6 +98,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseApplication.h" />
+    <ClInclude Include="CharacterStats.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Player.h" />
   </ItemGroup>
