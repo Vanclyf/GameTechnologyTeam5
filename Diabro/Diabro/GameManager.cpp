@@ -25,20 +25,8 @@ void GameManager::createScene(void)
 	// set shadow technique
 	mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 
-	// create player
-	_playerScript.Initialize();
-	_playerEntity = mSceneMgr->createEntity("ninja.mesh");
-	_playerEntity->setCastShadows(true);
-	mSceneMgr->getRootSceneNode()->createChildSceneNode("PlayerNode")->attachObject(_playerEntity);
-	mSceneMgr->getSceneNode("PlayerNode")->createChildSceneNode("CameraNode")->attachObject(mCamera);
-	mSceneMgr->getSceneNode("CameraNode")->pitch(Ogre::Degree(10), Ogre::Node::TS_LOCAL);
-	_startPitchCam = mSceneMgr->getSceneNode("CameraNode")->getOrientation().getPitch();
-
-	createGroundMesh();
-	Ogre::Entity* groundEntity = mSceneMgr->createEntity("ground");
-	mSceneMgr->getRootSceneNode()->createChildSceneNode()->attachObject(groundEntity);
-	groundEntity->setCastShadows(false);
-	groundEntity->setMaterialName("Examples/Rockwall");
+	_levelManager = new LevelManager(mCamera, mSceneMgr);
+	_levelManager->Init();
 }
 
 void GameManager::setupLights(Ogre::SceneManager* sceneMgr)
@@ -54,21 +42,6 @@ void GameManager::setupLights(Ogre::SceneManager* sceneMgr)
 	light->setDirection(-1, -1, 0);
 	light->setPosition(Ogre::Vector3(200, 200, 0));
 	light->setSpotlightRange(Ogre::Degree(35), Ogre::Degree(50));
-
-	return;
-}
-
-void GameManager::createGroundMesh()
-{
-	Ogre::Plane plane(Ogre::Vector3::UNIT_Y, 0);
-	Ogre::MeshManager::getSingleton().createPlane(
-		"ground",
-		Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
-		plane,
-		1500, 1500, 20, 20,
-		true,
-		1, 5, 5,
-		Ogre::Vector3::UNIT_Z);
 
 	return;
 }
@@ -106,17 +79,14 @@ bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& fe)
 {
 	bool ret = BaseApplication::frameRenderingQueued(fe);
 
-	mSceneMgr->getSceneNode("PlayerNode")->translate(_playerScript.GetDirVector() * _playerScript.GetMovespeed() * fe.timeSinceLastFrame, Ogre::Node::TS_LOCAL);
-
-	// drain stamina
-	_playerScript.AdjustStaminaOverTime(fe.timeSinceLastFrame);
+	_levelManager->Update(fe);
 
 	return ret;
 }
 
 bool GameManager::keyPressed(const OIS::KeyEvent& ke)
 {
-	Ogre::Vector3 dirVec = _playerScript.GetDirVector();
+	Ogre::Vector3 dirVec = _levelManager->_playerScript->GetDirVector();
 
 	switch (ke.key)
 	{
@@ -145,20 +115,21 @@ bool GameManager::keyPressed(const OIS::KeyEvent& ke)
 		break;
 	
 	case OIS::KC_LSHIFT:
-		_playerScript.ToggleRun(true);
+		_levelManager->_playerScript->ToggleRun(true);
 		break;
 
 	default:
 		break;
 	}
 
-	_playerScript.SetDirVector(dirVec);
+	_levelManager->_playerScript->SetDirVector(dirVec);
 	return true;
 }
 
 bool GameManager::keyReleased(const OIS::KeyEvent& ke)
 {
-	Ogre::Vector3 dirVec = _playerScript.GetDirVector();
+
+	Ogre::Vector3 dirVec = _levelManager->_playerScript->GetDirVector();
 
 	switch (ke.key)
 	{
@@ -183,24 +154,24 @@ bool GameManager::keyReleased(const OIS::KeyEvent& ke)
 		break;
 
 	case OIS::KC_LSHIFT:
-		_playerScript.ToggleRun(false);
+		_levelManager->_playerScript->ToggleRun(false);
 		break;
 
 	default:
 		break;
 	}
 
-	_playerScript.SetDirVector(dirVec);
+	_levelManager->_playerScript->SetDirVector(dirVec);
 	return true;
 }
 
 bool GameManager::mouseMoved(const OIS::MouseEvent& me)
 {
-	Ogre::Degree rotX = Ogre::Degree(-_playerScript.GetRotationspeed()/2 * me.state.Y.rel);
+	Ogre::Degree rotX = Ogre::Degree(-_levelManager->_playerScript->GetRotationspeed()/2 * me.state.Y.rel);
 	Ogre::Degree originalPitch = mSceneMgr->getSceneNode("CameraNode")->getOrientation().getPitch();
-	Ogre::Degree degreeFrmStartPitch = (rotX + originalPitch) - _startPitchCam;
+	Ogre::Degree degreeFrmStartPitch = (rotX + originalPitch) - _levelManager->_startPitchCam;
 
-	mSceneMgr->getSceneNode("PlayerNode")->yaw(Ogre::Degree(-_playerScript.GetRotationspeed() * me.state.X.rel), Ogre::Node::TS_WORLD);
+	mSceneMgr->getSceneNode("PlayerNode")->yaw(Ogre::Degree(-_levelManager->_playerScript->GetRotationspeed() * me.state.X.rel), Ogre::Node::TS_WORLD);
 
 	if (degreeFrmStartPitch < Ogre::Degree(10) && degreeFrmStartPitch > Ogre::Degree(-40))
 	{

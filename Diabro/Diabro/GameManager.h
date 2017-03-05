@@ -10,11 +10,9 @@ Filename:    GameManager.h
 #include "Player.h"
 #include "BaseApplication.h"
 #include "CharacterStats.h"
+#include "LevelManager.h"
 
 //---------------------------------------------------------------------------
-
-
-
 
 class GameManager : public BaseApplication
 {
@@ -27,7 +25,6 @@ protected:
 	virtual void createCamera(void);
 	virtual void createViewports(void);
 
-	static void createGroundMesh();
 	static void setupLights(Ogre::SceneManager*);
 
 private:
@@ -38,9 +35,7 @@ private:
 	virtual bool mousePressed(const OIS::MouseEvent& me, OIS::MouseButtonID id);
 	virtual bool mouseReleased(const OIS::MouseEvent& me, OIS::MouseButtonID id);
 
-	Player _playerScript;
-	Ogre::Entity* _playerEntity;
-	Ogre::Degree _startPitchCam;
+	LevelManager* _levelManager;
 };
 
 //---------------------------------------------------------------------------
