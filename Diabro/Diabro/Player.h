@@ -15,6 +15,8 @@ public:
 	bool AdjustStamina(float adjust);
 	void Die();
 
+	int GetLevel() { return _currentLevel; }
+
 	Ogre::Vector3 GetDirVector() { return _dirVec; }
 	Ogre::Vector3 SetDirVector(Ogre::Vector3 moveVec) { return _dirVec = moveVec; }
 
@@ -25,9 +27,15 @@ public:
 
 	void Move(Ogre::Vector3&);
 
+	void GainXP(int);
+
 private:
 	Ogre::Real _currentHealth;
 	Ogre::Real _currentStamina;
+
+	int _currentLevel;
+	int _currentXP;
+	int _xpTillNextLevel;
 
 	Ogre::Vector3 _dirVec;
 	
@@ -41,4 +49,6 @@ private:
 
 	bool SetUpStats();
 
+	int CalcXpTillLevel(int);
+	void LevelUp();
 };

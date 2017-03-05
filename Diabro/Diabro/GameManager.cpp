@@ -101,6 +101,7 @@ bool GameManager::keyPressed(const OIS::KeyEvent& ke)
 
 	case OIS::KC_DOWN:
 	case OIS::KC_S:
+		_levelManager->_playerScript->GainXP(10);
 		dirVec.z = 1;
 		break;
 

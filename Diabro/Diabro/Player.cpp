@@ -8,19 +8,17 @@ Player::Player()
 	_dirVec = (0, 0, 0);
 	_movespeed = 250;
 	_runspeed = 450;
-
 	_rotationspeed = 0.13;
+
+	_currentLevel = 1;
+	_currentXP = 0;
+	_xpTillNextLevel = CalcXpTillLevel(_currentLevel+1);
 
 	//_stats = new CharacterStats();
 }
 
 bool Player::Initialize()
 {
-	_dirVec = (0, 0, 0);
-	_movespeed = 250;
-	_runspeed = 750;
-
-	_rotationspeed = 0.13;
 	_isRunning = false;
 
 	SetUpStats();
@@ -45,15 +43,6 @@ bool Player::AdjustHealth(float adjust)
 bool Player::AdjustStaminaOverTime(Ogre::Real deltaTime)
 {
 	Ogre::Real adjust = _isRunning ? -_stats->GetStat(StaminaRegen)/2 : _stats->GetStat(MaxStamina);
-	
-	FILE* fp;
-
-	freopen_s(&fp, "CONOUT$", "w", stdout);
-
-	printf("%f\n", adjust);
-	printf("current health: %f\n", _currentStamina);
-
-	fclose(fp);
 
 	adjust *= deltaTime;
 
@@ -124,4 +113,43 @@ bool Player::SetUpStats()
 void Player::Move(Ogre::Vector3& moveVec)
 {
 	_dirVec = moveVec;
+}
+
+int Player::CalcXpTillLevel(int level)
+{
+	int newXP = 0;
+
+	for (int i = 1; i < level; ++i)
+	{
+		newXP += Ogre::Math::Floor(i + 300 * Ogre::Math::Pow(2, i / 7.0f));
+	}
+
+	newXP = Ogre::Math::Floor(newXP/4);
+
+	FILE* fp;
+
+	freopen_s(&fp, "CONOUT$", "w", stdout);
+
+	printf("current level: %d\n", _currentLevel);
+	printf("%d\n", newXP);
+
+	fclose(fp);
+
+	return newXP;
+}
+
+void Player::GainXP(int xp)
+{
+	if((_currentXP += xp) >= _xpTillNextLevel)
+	{
+		LevelUp();
+	}
+}
+
+void Player::LevelUp()
+{
+	++_currentLevel;
+	_xpTillNextLevel = CalcXpTillLevel(_currentLevel+1);
+
+	// Increase stats
 }
