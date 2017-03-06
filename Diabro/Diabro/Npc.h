@@ -10,19 +10,20 @@ public:
 	bool Initialize();
 	bool AdjustHealth(int adjust);
 	void Die();
+	void moveTo(Ogre::Vector3 position);
 
-	Ogre::Vector3 getDirVector() { return _dirVec; }
-	Ogre::Vector3 setDirVector(Ogre::Vector3 moveVec) { return _dirVec = moveVec; }
+	Ogre::Vector3 getDirVector() { return dirVec; }
+	Ogre::Vector3 setDirVector(Ogre::Vector3 moveVec) { return dirVec = moveVec; }
 
-	Ogre::Real getMovespeed() { return _movespeed; }
-	Ogre::Real getRotationspeed() { return _rotationspeed; }
+	Ogre::Real getMovespeed() { return movespeed; }
+	Ogre::Real getRotationspeed() { return rotationspeed; }
 
 	void Move(Ogre::Vector3&);
 
 private:
-	Ogre::Vector3 _dirVec;
-	Ogre::Real _movespeed;
-	Ogre::Real _rotationspeed;
+	Ogre::Vector3 dirVec;
+	Ogre::Real movespeed;
+	Ogre::Real rotationspeed;
 
 	int startHP;
 	int currHP;

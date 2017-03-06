@@ -12,7 +12,9 @@ bool Npc::Initialize() {
 
 void Npc::Move(Ogre::Vector3& moveVec)
 {
-	_dirVec = moveVec;
+	dirVec = (0, 0, 0);
+	movespeed = 300;
+	rotationspeed = 0.13;
 }
 
 void Npc::Die() {
@@ -20,4 +22,15 @@ void Npc::Die() {
 	{
 		
 	}
+
+
+}
+void Npc::moveTo(Ogre::Vector3 position) {
+	Ogre::Vector3 goal = position;
+	//do direction + movespeed
+	Ogre::Vector3 dirVec = getDirVector();
+	
+	dirVec.z = -getMovespeed();
+
+
 }

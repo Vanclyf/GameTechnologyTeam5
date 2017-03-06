@@ -34,15 +34,12 @@ void GameManager::createScene(void)
 	_startPitchCam = mSceneMgr->getSceneNode("CameraNode")->getOrientation().getPitch();
 
 	//creating a NPC object
-	_npcScript.Initialize();
-	_npcEntity = mSceneMgr->createEntity("penguin.mesh");
-	Ogre::SceneNode* npcNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
-	npcNode->attachObject(_npcEntity);
-	npcNode->setPosition(10, 20, 10);
-	npcNode->getPosition();
-	if (npcNode->getPosition() != Ogre::Vector3(20, 20, 20)) {
+	npcScript.Initialize();
+	npcEntity = mSceneMgr->createEntity("penguin.mesh");
+	mSceneMgr->getRootSceneNode()->createChildSceneNode("npcNode")->attachObject(npcEntity);
+	
+	mSceneMgr->getSceneNode("npcNode")->setPosition(Ogre::Vector3(1, 20, 1));
 
-	}
 
 	createGroundMesh();
 	Ogre::Entity* groundEntity = mSceneMgr->createEntity("ground");
@@ -117,6 +114,18 @@ bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& fe)
 	bool ret = BaseApplication::frameRenderingQueued(fe);
 
 	mSceneMgr->getSceneNode("PlayerNode")->translate(_playerScript.getDirVector() * fe.timeSinceLastFrame, Ogre::Node::TS_LOCAL);
+
+	FILE* fp;
+
+	freopen_s(&fp, "CONOUT$", "w", stdout);
+	Ogre::Vector3 npcPos = mSceneMgr->getSceneNode("npcNode")->getPosition();
+	Ogre::Vector3 playerPos = mSceneMgr->getSceneNode("PlayerNode")->getPosition();
+
+	fclose(fp);
+
+	if (npcPos != playerPos) {
+		npcScript.moveTo(playerPos);
+	}
 
 	return ret;
 }

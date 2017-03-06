@@ -37,9 +37,9 @@ private:
 	virtual bool mouseReleased(const OIS::MouseEvent& me, OIS::MouseButtonID id);
 
 	Player _playerScript;
-	Npc _npcScript;
+	Npc npcScript;
 	Ogre::Entity* _playerEntity;
-	Ogre::Entity*_npcEntity;
+	Ogre::Entity* npcEntity;
 	Ogre::Degree _startPitchCam;
 };
 
