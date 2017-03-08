@@ -11,6 +11,8 @@ public:
 	void Update(const Ogre::FrameEvent& fe);
 
 	static void CreateGroundMesh();
+	Ogre::SceneNode* GetLevelNode() { return _levelNode; }
+	Ogre::SceneNode* GetCamNode() { return _camNode; }
 
 	Ogre::Vector3 GetPlayerDirection();
 	void SetPlayerDirection();

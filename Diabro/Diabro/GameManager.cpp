@@ -22,11 +22,29 @@ void GameManager::createScene(void)
     // set lights
 	setupLights(mSceneMgr);
 
+
 	// set shadow technique
 	mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 
 	_levelManager = new LevelManager(mCamera, mSceneMgr);
 	_levelManager->Init();
+
+	setupUI(mSceneMgr, mCamera);
+
+}
+
+void GameManager::setupUI(Ogre::SceneManager* mSceneMgr, Ogre::Camera* cam)
+{
+	uiNode = _levelManager->GetCamNode()->createChildSceneNode("UINode");
+	uiNode->setPosition(-215, 175, -5);
+
+	Ogre::BillboardSet* healthBarSet = mSceneMgr->createBillboardSet("UISet");
+	healthBarSet->setBillboardOrigin(Ogre::BBO_TOP_LEFT);
+	Ogre::Billboard* healthBar = healthBarSet->createBillboard(0, 0, 10, Ogre::ColourValue::Green);
+	healthBar->mColour = Ogre::ColourValue::Green;
+	healthBar->setDimensions(100, 25);
+	
+	uiNode->attachObject(healthBarSet);
 }
 
 void GameManager::setupLights(Ogre::SceneManager* sceneMgr)
@@ -36,11 +54,18 @@ void GameManager::setupLights(Ogre::SceneManager* sceneMgr)
 
 	// create the main light
 	Ogre::Light* light = sceneMgr->createLight("MainLight");
-	light->setDiffuseColour(0.5, 0.5, 0.5);
+	light->setDiffuseColour(1, 1, 1);
 	light->setSpecularColour(0.5, 0.5, 0.5);
-	light->setType(Ogre::Light::LT_SPOTLIGHT);
+	light->setType(Ogre::Light::LT_DIRECTIONAL);
 	light->setDirection(-1, -1, 0);
-	light->setPosition(Ogre::Vector3(200, 200, 0));
+
+
+	Ogre::Light* pointLight = sceneMgr->createLight("PointLight");
+	light->setDiffuseColour(1, 1, 1);
+	light->setSpecularColour(0.5, 0.5, 0.5);
+	light->setType(Ogre::Light::LT_POINT);
+	light->setDirection(-1, -1, 0);
+	light->setPosition(Ogre::Vector3(300, 300, 0));
 	light->setSpotlightRange(Ogre::Degree(35), Ogre::Degree(50));
 
 	return;
@@ -73,6 +98,13 @@ void GameManager::createViewports()
 	mCamera->setAspectRatio(
 		Ogre::Real(vp->getActualWidth()) /
 		Ogre::Real(vp->getActualHeight()));
+}
+
+void GameManager::createFrameListener(void)
+{
+	BaseApplication::createFrameListener();
+
+	return;
 }
 
 bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& fe)
