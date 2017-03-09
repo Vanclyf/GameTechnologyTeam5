@@ -26,8 +26,6 @@ protected:
 	virtual void createViewports(void);
 	virtual void createFrameListener(void);
 	
-	void setupUI(Ogre::SceneManager*, Ogre::Camera*);
-	void setupUIBar();
 	static void setupLights(Ogre::SceneManager*);
 
 private:
@@ -39,8 +37,6 @@ private:
 	virtual bool mouseReleased(const OIS::MouseEvent& me, OIS::MouseButtonID id);
 
 	LevelManager* _levelManager;
-	Ogre::SceneNode* uiNode;
-
 };
 
 //---------------------------------------------------------------------------

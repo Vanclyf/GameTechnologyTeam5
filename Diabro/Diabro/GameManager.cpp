@@ -21,33 +21,15 @@ void GameManager::createScene(void)
 {
     // set lights
 	setupLights(mSceneMgr);
-
-
+	
 	// set shadow technique
 	mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 
 	_levelManager = new LevelManager(mCamera, mSceneMgr);
 	_levelManager->Init();
-
-	setupUI(mSceneMgr, mCamera);
-
 }
 
-void GameManager::setupUI(Ogre::SceneManager* mSceneMgr, Ogre::Camera* cam)
-{
-	uiNode = _levelManager->GetCamNode()->createChildSceneNode("UINode");
-	uiNode->setPosition(-250, 215, -5);
 
-	Ogre::BillboardSet* healthBarSet = mSceneMgr->createBillboardSet("UISet");
-	healthBarSet->setMaterialName("UI/Green");
-	healthBarSet->setBillboardOrigin(Ogre::BBO_TOP_LEFT);
-
-	Ogre::Billboard* healthBar = healthBarSet->createBillboard(0, 0, 10);
-	healthBar->setDimensions(100, 25);
-	
-	uiNode->attachObject(healthBarSet);
-
-}
 
 void GameManager::setupLights(Ogre::SceneManager* sceneMgr)
 {
@@ -85,7 +67,6 @@ void GameManager::createCamera()
 
 	// create the camera man
 	mCameraMan = new OgreBites::SdkCameraMan(mCamera);
-
 }
 
 void GameManager::createViewports()
@@ -135,7 +116,8 @@ bool GameManager::keyPressed(const OIS::KeyEvent& ke)
 
 	case OIS::KC_DOWN:
 	case OIS::KC_S:
-		_levelManager->_playerScript->GainXP(10);
+		//_levelManager->_playerScript->GainXP(10);
+		_levelManager->_playerScript->AdjustHealth(1);
 		dirVec.z = 1;
 		break;
 
