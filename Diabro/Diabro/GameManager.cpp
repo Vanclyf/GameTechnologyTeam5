@@ -36,15 +36,17 @@ void GameManager::createScene(void)
 void GameManager::setupUI(Ogre::SceneManager* mSceneMgr, Ogre::Camera* cam)
 {
 	uiNode = _levelManager->GetCamNode()->createChildSceneNode("UINode");
-	uiNode->setPosition(-215, 175, -5);
+	uiNode->setPosition(-250, 215, -5);
 
 	Ogre::BillboardSet* healthBarSet = mSceneMgr->createBillboardSet("UISet");
+	healthBarSet->setMaterialName("UI/Green");
 	healthBarSet->setBillboardOrigin(Ogre::BBO_TOP_LEFT);
-	Ogre::Billboard* healthBar = healthBarSet->createBillboard(0, 0, 10, Ogre::ColourValue::Green);
-	healthBar->mColour = Ogre::ColourValue::Green;
+
+	Ogre::Billboard* healthBar = healthBarSet->createBillboard(0, 0, 10);
 	healthBar->setDimensions(100, 25);
 	
 	uiNode->attachObject(healthBarSet);
+
 }
 
 void GameManager::setupLights(Ogre::SceneManager* sceneMgr)
