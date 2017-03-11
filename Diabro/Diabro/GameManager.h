@@ -41,6 +41,20 @@ private:
 	Ogre::Entity* _playerEntity;
 	Ogre::Entity* npcEntity;
 	Ogre::Degree _startPitchCam;
+
+	//npcMovement
+	bool nextLocation();
+
+	std::deque<Ogre::Vector3> mWalkList;
+
+	Ogre::Real mDistance;
+	Ogre::Real mWalkSpd;
+	Ogre::Vector3 mDirection;
+	Ogre::Vector3 mDestination;
+	Ogre::AnimationState* mAnimationState;
+	Ogre::Entity* mEntity;
+	Ogre::SceneNode* mNode;
+
 };
 
 //---------------------------------------------------------------------------

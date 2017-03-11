@@ -8,6 +8,7 @@ Filename:    GameManager.cpp
 //---------------------------------------------------------------------------
 GameManager::GameManager()
 {
+
 	//_instance = this;
 }
 //---------------------------------------------------------------------------
@@ -37,8 +38,37 @@ void GameManager::createScene(void)
 	npcScript.Initialize();
 	npcEntity = mSceneMgr->createEntity("penguin.mesh");
 	mSceneMgr->getRootSceneNode()->createChildSceneNode("npcNode")->attachObject(npcEntity);
+	/**mEntity = mSceneMgr->createEntity("penguin.mesh");
+	mNode = mSceneMgr->getRootSceneNode()->createChildSceneNode(
+		Ogre::Vector3(0, 20, 0));
+	mNode->attachObject(mEntity);**/
 	
 	mSceneMgr->getSceneNode("npcNode")->setPosition(Ogre::Vector3(1, 20, 1));
+	/**mWalkList.push_back(Ogre::Vector3(2, 20, 2));
+	mWalkList.push_back(Ogre::Vector3(-2, 20, -2));
+	mWalkList.push_back(Ogre::Vector3(-1, 20, 2));
+
+	Ogre::Entity* ent;
+	Ogre::SceneNode* node;
+
+	ent = mSceneMgr->createEntity("knot.mesh");
+	node = mSceneMgr->getRootSceneNode()->createChildSceneNode(
+		Ogre::Vector3(2, 20, 2));
+	node->attachObject(ent);
+	node->setScale(0.1, 0.1, 0.1);
+
+	ent = mSceneMgr->createEntity("knot.mesh");
+	node = mSceneMgr->getRootSceneNode()->createChildSceneNode(
+		Ogre::Vector3(-2, 20, -2));
+	node->attachObject(ent);
+	node->setScale(0.1, 0.1, 0.1);
+
+	ent = mSceneMgr->createEntity("knot.mesh");
+	node = mSceneMgr->getRootSceneNode()->createChildSceneNode(
+		Ogre::Vector3(-1, 20, 2));
+	node->attachObject(ent);
+	node->setScale(0.1, 0.1, 0.1); **/
+
 
 
 	createGroundMesh();
@@ -114,20 +144,84 @@ bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& fe)
 	bool ret = BaseApplication::frameRenderingQueued(fe);
 
 	mSceneMgr->getSceneNode("PlayerNode")->translate(_playerScript.getDirVector() * fe.timeSinceLastFrame, Ogre::Node::TS_LOCAL);
-
+	
 	FILE* fp;
 
 	freopen_s(&fp, "CONOUT$", "w", stdout);
 	Ogre::Vector3 npcPos = mSceneMgr->getSceneNode("npcNode")->getPosition();
 	Ogre::Vector3 playerPos = mSceneMgr->getSceneNode("PlayerNode")->getPosition();
-
-	fclose(fp);
-
-	if (npcPos != playerPos) {
-		npcScript.moveTo(playerPos);
+	if(mKeyboard->isKeyDown(OIS::KC_F))
+	{
+		npcScript.dialog(npcPos, playerPos);
 	}
+	
 
+	//std::cout << "X:  " << mNode->getPosition().x << "Y:  " << mNode->getPosition().y << "Z: " << mNode->getPosition().z << std::endl;
+	
+	
+/**	if (mDirection == Ogre::Vector3::ZERO)
+	{
+		if (nextLocation())
+		{
+			
+			mAnimationState = mEntity->getAnimationState("Walk");
+			mAnimationState->setLoop(true);
+			mAnimationState->setEnabled(true);
+		}
+	}
+	else
+	{
+		Ogre::Real move = mWalkSpd * fe.timeSinceLastFrame;
+		std::cout << "move: "<< move << mWalkSpd << std::endl;
+		mDistance -= move;
+		
+		if (mDistance <= 0)
+		{
+			mNode->setPosition(mDestination);
+			mDirection = Ogre::Vector3::ZERO;
+
+			if (nextLocation())
+			{
+				Ogre::Vector3 src = mNode->getOrientation() * Ogre::Vector3::UNIT_X;
+
+				if ((1.0 + src.dotProduct(mDirection)) < 0.0001)
+				{
+					mNode->yaw(Ogre::Degree(180));
+				}
+				else
+				{
+					Ogre::Quaternion quat = src.getRotationTo(mDirection);
+					mNode->rotate(quat);
+				}
+			}
+			else
+			{
+				mAnimationState = mEntity->getAnimationState("Idle");
+				mAnimationState->setLoop(true);
+				mAnimationState->setEnabled(true);
+			}
+		}
+		else
+		{
+			mNode->translate(move * mDirection, Ogre::Node::TS_LOCAL);
+		}
+	
+	}**/
+	fclose(fp); 
 	return ret;
+}
+
+bool GameManager::nextLocation()
+{
+	if (mWalkList.empty())
+		return false;
+
+	mDestination = mWalkList.front();
+	mWalkList.pop_front();
+	mDirection = mDestination - mNode->getPosition();
+	mDistance = mDirection.normalise();
+
+	return true;
 }
 
 bool GameManager::keyPressed(const OIS::KeyEvent& ke)
