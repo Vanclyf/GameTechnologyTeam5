@@ -11,18 +11,20 @@ public:
 	void Update(const Ogre::FrameEvent& fe);
 
 	static void CreateGroundMesh();
+	static void CreatePlane(std::string name);
 
 	Ogre::Vector3 GetPlayerDirection();
 	void SetPlayerDirection();
 
 	// for now public so that game manager can access it. TO DO: implement singleton for GM.
-	Player* _playerScript; 
+	Player* _playerScript;
+	Ogre::SceneNode* _playerNode;
 	Ogre::Degree _startPitchCam;
 
 private:
 	Ogre::SceneManager* _sceneManager;
 	Ogre::SceneNode* _levelNode;
-	Ogre::SceneNode* _playerNode;
+	//playernode
 	Ogre::SceneNode* _camNode;
 
 	Ogre::Camera* _camera;

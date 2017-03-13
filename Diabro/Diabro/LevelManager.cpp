@@ -29,6 +29,14 @@ void LevelManager::Init()
 	_levelNode->createChildSceneNode()->attachObject(groundEntity);
 	groundEntity->setCastShadows(false);
 	groundEntity->setMaterialName("Examples/Rockwall");
+
+	CreatePlane("wall");
+	Ogre::Entity* wallEntity = _sceneManager->createEntity("wall");
+	Ogre::SceneNode* wallNode = _levelNode->createChildSceneNode("WallNode");
+	wallNode->attachObject(wallEntity);
+	wallNode->pitch(Ogre::Degree(90), Ogre::Node::TS_WORLD);
+	wallEntity->setCastShadows(false);
+	wallEntity->setMaterialName("Examples/Rockwall");
 }
 
 void LevelManager::Update(const Ogre::FrameEvent& fe)
@@ -43,6 +51,21 @@ void LevelManager::CreateGroundMesh()
 	Ogre::Plane plane(Ogre::Vector3::UNIT_Y, 0);
 	Ogre::MeshManager::getSingleton().createPlane(
 		"ground",
+		Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+		plane,
+		1500, 1500, 20, 20,
+		true,
+		1, 5, 5,
+		Ogre::Vector3::UNIT_Z);
+
+	return;
+}
+
+void LevelManager::CreatePlane(std::string name)
+{
+	Ogre::Plane plane(Ogre::Vector3::UNIT_Y, 0);
+	Ogre::MeshManager::getSingleton().createPlane(
+		name,
 		Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
 		plane,
 		1500, 1500, 20, 20,

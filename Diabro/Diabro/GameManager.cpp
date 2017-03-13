@@ -27,6 +27,8 @@ void GameManager::createScene(void)
 
 	_levelManager = new LevelManager(mCamera, mSceneMgr);
 	_levelManager->Init();
+
+	collisionManager = new CollisionManager(mSceneMgr, _levelManager->_playerNode, _levelManager->_playerScript);
 }
 
 void GameManager::setupLights(Ogre::SceneManager* sceneMgr)
@@ -80,6 +82,7 @@ bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& fe)
 	bool ret = BaseApplication::frameRenderingQueued(fe);
 
 	_levelManager->Update(fe);
+	collisionManager->CheckPlayerCollision();
 
 	return ret;
 }

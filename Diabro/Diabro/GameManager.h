@@ -11,6 +11,7 @@ Filename:    GameManager.h
 #include "BaseApplication.h"
 #include "CharacterStats.h"
 #include "LevelManager.h"
+#include "CollisionManager.h"
 
 //---------------------------------------------------------------------------
 
@@ -36,6 +37,7 @@ private:
 	virtual bool mouseReleased(const OIS::MouseEvent& me, OIS::MouseButtonID id);
 
 	LevelManager* _levelManager;
+	CollisionManager* collisionManager;
 };
 
 //---------------------------------------------------------------------------

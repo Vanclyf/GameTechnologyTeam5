@@ -92,14 +92,18 @@
     <None Include="testMaterial.material" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\MOC\CollisionTools.cpp" />
     <ClCompile Include="BaseApplication.cpp" />
+    <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\MOC\CollisionTools.h" />
     <ClInclude Include="BaseApplication.h" />
     <ClInclude Include="CharacterStats.h" />
+    <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="LevelManager.h" />
     <ClInclude Include="Player.h" />
