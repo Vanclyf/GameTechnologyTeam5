@@ -7,29 +7,65 @@ Npc::Npc()
 }
 
 bool Npc::Initialize() {
+	dirVec = (0, 0, 0);
+	movespeed = 2;
+	rotationspeed = 0.13;
 	return true;
 }
 
 void Npc::Move(Ogre::Vector3& moveVec)
 {
-	dirVec = (0, 0, 0);
-	movespeed = 300;
-	rotationspeed = 0.13;
+	dirVec = moveVec;
 }
 
-void Npc::dialog(Ogre::Vector3 npcPos, Ogre::Vector3 playerPos)
+void Npc::Wander() {
+
+	//Switch direction
+	//generate a random integer value 1-4 every second
+	randomIntNumber = rand() % 5 + 1;
+
+
+	//if case 1 the dirVec is pointed forward (1,0,0)
+	//if case 2-4 dirvec is pointed backward left and right
+	switch (randomIntNumber)
+	{
+	case 1:
+		_dirVec.x = 1;
+		break;
+	case 2:
+		_dirVec.x = -1;
+		break;
+	case 3:
+		_dirVec.z = 1;
+		break;
+	case 4:
+		_dirVec.z = -1;
+		break;
+	case 5:
+		_dirVec.x = 0;
+		_dirVec.y = 0;
+	default:
+		break;
+	}	
+}
+
+
+bool Npc::dialog(Ogre::Vector3 npcPos, Ogre::Vector3 playerPos)
 {
 	Ogre::Real distance = npcPos.distance(playerPos);
 	std::cout << distance;
 	if (distance < 200) // needs to be tweaked
 	{
-		this->movespeed = 0;
+		
 		std::cout << "you can now have dialog since your distance is" << distance << std::endl;
+		return true;
+
 	}
 	else
 	{
-		this->movespeed = 300;
+		
 		std::cout << "not in range";
+		return false;
 	}
 	
 }
@@ -41,48 +77,10 @@ void Npc::Die() {
 	}
 }
 
-/**void Npc::moveTo(Ogre::Vector3 position, ) 
-{
-	
-	mWalkList.push_back(Ogre::Vector3(5, 20, 5));
-	
-	//Ogre::Vector3 dirVec = getDirVector();
-	if (dirVec == Ogre::Vector3::ZERO )
-	{
-		if (nextLocation(position))
-		{
-			std::cout << "walk"; //needs animation
-		}
-		
-	}
-	else {
-		Ogre::Real move = movespeed; //* Ogre::FrameEvent.timeSinceLastFrame;
-		distance -= move;
-		if (distance <= 0.0)
-		{
-			position = mDestination;
-			dirVec = Ogre::Vector3::ZERO;
-
-			
-		}
-		else {
-			this->
-		}
-	}
-	dirVec.z = -getMovespeed();
 
 
-}**/
 
-/**bool Npc::nextLocation(Ogre::Vector3 position) 
-{
-	if (mWalkList.empty()) {
-		return false;
-	}
-	mDestination = mWalkList.front();
-	mWalkList.pop_front();
-	dirVec = mDestination - position;
-	distance = dirVec.normalise();
-}**/
+
+
 
 

@@ -27,6 +27,7 @@ protected:
 
 	static void createGroundMesh();
 	static void setupLights(Ogre::SceneManager*);
+	void Wander();
 
 private:
 	virtual bool frameRenderingQueued(const Ogre::FrameEvent& fe);

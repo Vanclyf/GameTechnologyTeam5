@@ -144,6 +144,10 @@ bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& fe)
 	bool ret = BaseApplication::frameRenderingQueued(fe);
 
 	mSceneMgr->getSceneNode("PlayerNode")->translate(_playerScript.getDirVector() * fe.timeSinceLastFrame, Ogre::Node::TS_LOCAL);
+
+	Ogre::Vector3 npcDirVec = npcScript.getDirVector();
+	npcScript.Wander();
+	
 	
 	FILE* fp;
 
@@ -152,7 +156,14 @@ bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& fe)
 	Ogre::Vector3 playerPos = mSceneMgr->getSceneNode("PlayerNode")->getPosition();
 	if(mKeyboard->isKeyDown(OIS::KC_F))
 	{
-		npcScript.dialog(npcPos, playerPos);
+		if(npcScript.dialog(npcPos,playerPos))
+		{
+			npcScript.setMoveSpeed(0);
+		}
+		else
+		{
+			npcScript.setMoveSpeed(10);
+		}
 	}
 	
 
