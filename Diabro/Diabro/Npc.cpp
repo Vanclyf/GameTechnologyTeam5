@@ -1,15 +1,16 @@
 #include "Npc.h"
 #include "GameManager.h"
+#include <vector>
 
 Npc::Npc()
 {
-	
+	_dirVec = (0, 0, 0);
+	movespeed = 50;
+	rotationspeed = 0.13;
 }
 
 bool Npc::Initialize() {
-	dirVec = (0, 0, 0);
-	movespeed = 2;
-	rotationspeed = 0.13;
+	currHP = 10;
 	return true;
 }
 
@@ -25,30 +26,31 @@ void Npc::Wander() {
 	randomIntNumber = rand() % 5 + 1;
 
 
+
 	//if case 1 the dirVec is pointed forward (1,0,0)
 	//if case 2-4 dirvec is pointed backward left and right
 	switch (randomIntNumber)
 	{
 	case 1:
+		_dirVec = (0, 0, 0);
 		_dirVec.x = 1;
 		break;
 	case 2:
+		_dirVec = (0, 0, 0);
 		_dirVec.x = -1;
 		break;
 	case 3:
+		_dirVec = (0, 0, 0);
 		_dirVec.z = 1;
 		break;
 	case 4:
+		_dirVec = (0, 0, 0);
 		_dirVec.z = -1;
 		break;
 	case 5:
-		_dirVec.x = 0;
-		_dirVec.y = 0;
-	default:
-		break;
-	}	
+		_dirVec = (0, 0, 0);
+	}
 }
-
 
 bool Npc::dialog(Ogre::Vector3 npcPos, Ogre::Vector3 playerPos)
 {

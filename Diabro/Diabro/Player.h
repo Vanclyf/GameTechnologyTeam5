@@ -1,4 +1,5 @@
 #pragma once
+#include "CharacterStats.h"
 #include <OgrePrerequisites.h>
 #include "OgreEntity.h"
 
@@ -9,22 +10,45 @@ public:
 	Player();
 	~Player(){}
 	bool Initialize();
-	bool AdjustHealth(int adjust);
+	bool AdjustHealth(float adjust);
+	bool AdjustStaminaOverTime(Ogre::Real deltaTime);
+	bool AdjustStamina(float adjust);
 	void Die();
 
-	Ogre::Vector3 getDirVector() { return _dirVec; }
-	Ogre::Vector3 setDirVector(Ogre::Vector3 moveVec) { return _dirVec = moveVec; }
+	int GetLevel() { return _currentLevel; }
 
-	Ogre::Real getMovespeed() { return _movespeed; }
-	Ogre::Real getRotationspeed() { return _rotationspeed; }
+	Ogre::Vector3 GetDirVector() { return _dirVec; }
+	Ogre::Vector3 SetDirVector(Ogre::Vector3 moveVec) { return _dirVec = moveVec; }
+
+	Ogre::Real GetMovespeed() { return _isRunning ? _runspeed : _movespeed; }
+	Ogre::Real GetRotationspeed() { return _rotationspeed; }
+
+	void ToggleRun(bool run) { _isRunning = run; }
 
 	void Move(Ogre::Vector3&);
 
-private:
-	Ogre::Vector3 _dirVec;
-	Ogre::Real _movespeed;
-	Ogre::Real _rotationspeed;
+	void GainXP(int);
 
-	int startHP;
-	int currHP;
+private:
+	Ogre::Real _currentHealth;
+	Ogre::Real _currentStamina;
+
+	int _currentLevel;
+	int _currentXP;
+	int _xpTillNextLevel;
+
+	Ogre::Vector3 _dirVec;
+	
+	Ogre::Real _movespeed;
+	Ogre::Real _runspeed;
+
+	Ogre::Real _rotationspeed;
+	bool _isRunning;
+
+	CharacterStats* _stats;
+
+	bool SetUpStats();
+
+	int CalcXpTillLevel(int);
+	void LevelUp();
 };

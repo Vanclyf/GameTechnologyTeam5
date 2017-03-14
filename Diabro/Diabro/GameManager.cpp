@@ -6,6 +6,7 @@ Filename:    GameManager.cpp
 */
 #include "GameManager.h"
 //---------------------------------------------------------------------------
+
 GameManager::GameManager()
 {
 
@@ -25,57 +26,9 @@ void GameManager::createScene(void)
 	// set shadow technique
 	mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 
-	// create player
-	_playerScript.Initialize();
-	_playerEntity = mSceneMgr->createEntity("ninja.mesh");
-	_playerEntity->setCastShadows(true);
-	mSceneMgr->getRootSceneNode()->createChildSceneNode("PlayerNode")->attachObject(_playerEntity);
-	mSceneMgr->getSceneNode("PlayerNode")->createChildSceneNode("CameraNode")->attachObject(mCamera);
-	mSceneMgr->getSceneNode("CameraNode")->pitch(Ogre::Degree(10), Ogre::Node::TS_LOCAL);
-	_startPitchCam = mSceneMgr->getSceneNode("CameraNode")->getOrientation().getPitch();
+	_levelManager = new LevelManager(mCamera, mSceneMgr);
+	_levelManager->Init();
 
-	//creating a NPC object
-	npcScript.Initialize();
-	npcEntity = mSceneMgr->createEntity("penguin.mesh");
-	mSceneMgr->getRootSceneNode()->createChildSceneNode("npcNode")->attachObject(npcEntity);
-	/**mEntity = mSceneMgr->createEntity("penguin.mesh");
-	mNode = mSceneMgr->getRootSceneNode()->createChildSceneNode(
-		Ogre::Vector3(0, 20, 0));
-	mNode->attachObject(mEntity);**/
-	
-	mSceneMgr->getSceneNode("npcNode")->setPosition(Ogre::Vector3(1, 20, 1));
-	/**mWalkList.push_back(Ogre::Vector3(2, 20, 2));
-	mWalkList.push_back(Ogre::Vector3(-2, 20, -2));
-	mWalkList.push_back(Ogre::Vector3(-1, 20, 2));
-
-	Ogre::Entity* ent;
-	Ogre::SceneNode* node;
-
-	ent = mSceneMgr->createEntity("knot.mesh");
-	node = mSceneMgr->getRootSceneNode()->createChildSceneNode(
-		Ogre::Vector3(2, 20, 2));
-	node->attachObject(ent);
-	node->setScale(0.1, 0.1, 0.1);
-
-	ent = mSceneMgr->createEntity("knot.mesh");
-	node = mSceneMgr->getRootSceneNode()->createChildSceneNode(
-		Ogre::Vector3(-2, 20, -2));
-	node->attachObject(ent);
-	node->setScale(0.1, 0.1, 0.1);
-
-	ent = mSceneMgr->createEntity("knot.mesh");
-	node = mSceneMgr->getRootSceneNode()->createChildSceneNode(
-		Ogre::Vector3(-1, 20, 2));
-	node->attachObject(ent);
-	node->setScale(0.1, 0.1, 0.1); **/
-
-
-
-	createGroundMesh();
-	Ogre::Entity* groundEntity = mSceneMgr->createEntity("ground");
-	mSceneMgr->getRootSceneNode()->createChildSceneNode()->attachObject(groundEntity);
-	groundEntity->setCastShadows(false);
-	groundEntity->setMaterialName("Examples/Rockwall");
 }
 
 void GameManager::setupLights(Ogre::SceneManager* sceneMgr)
@@ -91,21 +44,6 @@ void GameManager::setupLights(Ogre::SceneManager* sceneMgr)
 	light->setDirection(-1, -1, 0);
 	light->setPosition(Ogre::Vector3(200, 200, 0));
 	light->setSpotlightRange(Ogre::Degree(35), Ogre::Degree(50));
-
-	return;
-}
-
-void GameManager::createGroundMesh()
-{
-	Ogre::Plane plane(Ogre::Vector3::UNIT_Y, 0);
-	Ogre::MeshManager::getSingleton().createPlane(
-		"ground",
-		Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
-		plane,
-		1500, 1500, 20, 20,
-		true,
-		1, 5, 5,
-		Ogre::Vector3::UNIT_Z);
 
 	return;
 }
@@ -143,101 +81,17 @@ bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& fe)
 {
 	bool ret = BaseApplication::frameRenderingQueued(fe);
 
-	mSceneMgr->getSceneNode("PlayerNode")->translate(_playerScript.getDirVector() * fe.timeSinceLastFrame, Ogre::Node::TS_LOCAL);
+	_levelManager->Update(fe);
 
-	Ogre::Vector3 npcDirVec = npcScript.getDirVector();
-	npcScript.Wander();
-	
-	
-	FILE* fp;
-
-	freopen_s(&fp, "CONOUT$", "w", stdout);
-	Ogre::Vector3 npcPos = mSceneMgr->getSceneNode("npcNode")->getPosition();
-	Ogre::Vector3 playerPos = mSceneMgr->getSceneNode("PlayerNode")->getPosition();
-	if(mKeyboard->isKeyDown(OIS::KC_F))
-	{
-		if(npcScript.dialog(npcPos,playerPos))
-		{
-			npcScript.setMoveSpeed(0);
-		}
-		else
-		{
-			npcScript.setMoveSpeed(10);
-		}
-	}
-	
-
-	//std::cout << "X:  " << mNode->getPosition().x << "Y:  " << mNode->getPosition().y << "Z: " << mNode->getPosition().z << std::endl;
-	
-	
-/**	if (mDirection == Ogre::Vector3::ZERO)
-	{
-		if (nextLocation())
-		{
-			
-			mAnimationState = mEntity->getAnimationState("Walk");
-			mAnimationState->setLoop(true);
-			mAnimationState->setEnabled(true);
-		}
-	}
-	else
-	{
-		Ogre::Real move = mWalkSpd * fe.timeSinceLastFrame;
-		std::cout << "move: "<< move << mWalkSpd << std::endl;
-		mDistance -= move;
-		
-		if (mDistance <= 0)
-		{
-			mNode->setPosition(mDestination);
-			mDirection = Ogre::Vector3::ZERO;
-
-			if (nextLocation())
-			{
-				Ogre::Vector3 src = mNode->getOrientation() * Ogre::Vector3::UNIT_X;
-
-				if ((1.0 + src.dotProduct(mDirection)) < 0.0001)
-				{
-					mNode->yaw(Ogre::Degree(180));
-				}
-				else
-				{
-					Ogre::Quaternion quat = src.getRotationTo(mDirection);
-					mNode->rotate(quat);
-				}
-			}
-			else
-			{
-				mAnimationState = mEntity->getAnimationState("Idle");
-				mAnimationState->setLoop(true);
-				mAnimationState->setEnabled(true);
-			}
-		}
-		else
-		{
-			mNode->translate(move * mDirection, Ogre::Node::TS_LOCAL);
-		}
-	
-	}**/
-	fclose(fp); 
+ 
 	return ret;
 }
 
-bool GameManager::nextLocation()
-{
-	if (mWalkList.empty())
-		return false;
 
-	mDestination = mWalkList.front();
-	mWalkList.pop_front();
-	mDirection = mDestination - mNode->getPosition();
-	mDistance = mDirection.normalise();
-
-	return true;
-}
 
 bool GameManager::keyPressed(const OIS::KeyEvent& ke)
 {
-	Ogre::Vector3 dirVec = _playerScript.getDirVector();
+	Ogre::Vector3 dirVec = _levelManager->_playerScript->GetDirVector();
 
 	switch (ke.key)
 	{
@@ -247,35 +101,41 @@ bool GameManager::keyPressed(const OIS::KeyEvent& ke)
 		break;
 	case OIS::KC_UP:
 	case OIS::KC_W:
-		dirVec.z = -_playerScript.getMovespeed();
+		dirVec.z = -1;
 		break;
 
 	case OIS::KC_DOWN:
 	case OIS::KC_S:
-		dirVec.z = _playerScript.getMovespeed();
+		_levelManager->_playerScript->GainXP(10);
+		dirVec.z = 1;
 		break;
 
 	case OIS::KC_LEFT:
 	case OIS::KC_A:
-		dirVec.x = -_playerScript.getMovespeed();
+		dirVec.x = -1;
 		break;
 
 	case OIS::KC_RIGHT:
 	case OIS::KC_D:
-		dirVec.x = _playerScript.getMovespeed();
+		dirVec.x = 1;
 		break;
-		
+	
+	case OIS::KC_LSHIFT:
+		_levelManager->_playerScript->ToggleRun(true);
+		break;
+
 	default:
 		break;
 	}
 
-	_playerScript.setDirVector(dirVec);
+	_levelManager->_playerScript->SetDirVector(dirVec);
 	return true;
 }
 
 bool GameManager::keyReleased(const OIS::KeyEvent& ke)
 {
-	Ogre::Vector3 dirVec = _playerScript.getDirVector();
+
+	Ogre::Vector3 dirVec = _levelManager->_playerScript->GetDirVector();
 
 	switch (ke.key)
 	{
@@ -299,21 +159,25 @@ bool GameManager::keyReleased(const OIS::KeyEvent& ke)
 		dirVec.x = 0;
 		break;
 
+	case OIS::KC_LSHIFT:
+		_levelManager->_playerScript->ToggleRun(false);
+		break;
+
 	default:
 		break;
 	}
 
-	_playerScript.setDirVector(dirVec);
+	_levelManager->_playerScript->SetDirVector(dirVec);
 	return true;
 }
 
 bool GameManager::mouseMoved(const OIS::MouseEvent& me)
 {
-	Ogre::Degree rotX = Ogre::Degree(-_playerScript.getRotationspeed()/2 * me.state.Y.rel);
+	Ogre::Degree rotX = Ogre::Degree(-_levelManager->_playerScript->GetRotationspeed()/2 * me.state.Y.rel);
 	Ogre::Degree originalPitch = mSceneMgr->getSceneNode("CameraNode")->getOrientation().getPitch();
-	Ogre::Degree degreeFrmStartPitch = (rotX + originalPitch) - _startPitchCam;
+	Ogre::Degree degreeFrmStartPitch = (rotX + originalPitch) - _levelManager->_startPitchCam;
 
-	mSceneMgr->getSceneNode("PlayerNode")->yaw(Ogre::Degree(-_playerScript.getRotationspeed() * me.state.X.rel), Ogre::Node::TS_WORLD);
+	mSceneMgr->getSceneNode("PlayerNode")->yaw(Ogre::Degree(-_levelManager->_playerScript->GetRotationspeed() * me.state.X.rel), Ogre::Node::TS_WORLD);
 
 	if (degreeFrmStartPitch < Ogre::Degree(10) && degreeFrmStartPitch > Ogre::Degree(-40))
 	{

@@ -8,8 +8,9 @@ Filename:    GameManager.h
 #define __GameManager_h_
 
 #include "Player.h"
-#include "Npc.h"
 #include "BaseApplication.h"
+#include "CharacterStats.h"
+#include "LevelManager.h"
 
 
 //---------------------------------------------------------------------------
@@ -25,9 +26,8 @@ protected:
 	virtual void createCamera(void);
 	virtual void createViewports(void);
 
-	static void createGroundMesh();
 	static void setupLights(Ogre::SceneManager*);
-	void Wander();
+	
 
 private:
 	virtual bool frameRenderingQueued(const Ogre::FrameEvent& fe);
@@ -37,24 +37,7 @@ private:
 	virtual bool mousePressed(const OIS::MouseEvent& me, OIS::MouseButtonID id);
 	virtual bool mouseReleased(const OIS::MouseEvent& me, OIS::MouseButtonID id);
 
-	Player _playerScript;
-	Npc npcScript;
-	Ogre::Entity* _playerEntity;
-	Ogre::Entity* npcEntity;
-	Ogre::Degree _startPitchCam;
-
-	//npcMovement
-	bool nextLocation();
-
-	std::deque<Ogre::Vector3> mWalkList;
-
-	Ogre::Real mDistance;
-	Ogre::Real mWalkSpd;
-	Ogre::Vector3 mDirection;
-	Ogre::Vector3 mDestination;
-	Ogre::AnimationState* mAnimationState;
-	Ogre::Entity* mEntity;
-	Ogre::SceneNode* mNode;
+	LevelManager* _levelManager;
 
 };
 
