@@ -8,6 +8,7 @@ Filename:    GameManager.h
 #define __GameManager_h_
 
 #include "Player.h"
+#include "BasicEnemy.h"
 #include "BaseApplication.h"
 #include "CharacterStats.h"
 #include "LevelManager.h"

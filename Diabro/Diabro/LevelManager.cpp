@@ -9,6 +9,7 @@ void LevelManager::Init()
 
 	//init timer
 	_timer = new Ogre::Timer();
+
 	// create level node, the root node for everything in the level
 	_levelNode = _sceneManager->getRootSceneNode()->createChildSceneNode("LevelNode");
 
@@ -21,14 +22,23 @@ void LevelManager::Init()
 	_playerNode->attachObject(_playerEntity);
 
 	//creating a NPC object
+	characterScript = new Character;
 	npcScript = new Npc();
-	npcScript->Initialize();
+	characterScript->Initialize();
+	npcScript->initialize();
 	npcEntity = _sceneManager->createEntity("penguin.mesh");
 	npcEntity->setCastShadows(true);
 	_npcNode = _levelNode->createChildSceneNode("NpcNode");
 	_npcNode->attachObject(npcEntity);
-	_npcNode->setPosition(Ogre::Vector3(1, 20, 1));
-	
+	_npcNode->setPosition(5, 20, 5);
+
+	// create enemy
+	_basicEnemyScript = new BasicEnemy();
+	_basicEnemyScript->Initialize();
+	_basicEnemyEntity = _sceneManager->createEntity("robot.mesh");
+	_basicEnemyEntity->setCastShadows(true);
+	_basicEnemyNode = _levelNode->createChildSceneNode("BasicEnemyNode");
+	_basicEnemyNode->attachObject(_basicEnemyEntity);
 
 	// camera
 	_camNode = _playerNode->createChildSceneNode("CameraNode");
@@ -42,6 +52,9 @@ void LevelManager::Init()
 	_levelNode->createChildSceneNode()->attachObject(groundEntity);
 	groundEntity->setCastShadows(false);
 	groundEntity->setMaterialName("Examples/Rockwall");
+
+	//timer
+	_timer = new Ogre::Timer();
 }
 
 void LevelManager::Update(const Ogre::FrameEvent& fe)
@@ -51,25 +64,30 @@ void LevelManager::Update(const Ogre::FrameEvent& fe)
 	_playerScript->AdjustStaminaOverTime(fe.timeSinceLastFrame);
 
 	// Update enemy
-	_npcNode->translate(npcScript->getDirVector() * npcScript->getMovespeed() * fe.timeSinceLastFrame, Ogre::Node::TS_LOCAL);
-	if (((_timer->getMicroseconds() / 10000) % 200) == 0) {
-		npcScript->Wander();
-	}
-	cout << "dirVector:   " << npcScript->getDirVector() << endl;
+	_npcNode->translate(characterScript->getDirVector() * characterScript->getMovespeed() * fe.timeSinceLastFrame, Ogre::Node::TS_LOCAL);
+	_basicEnemyNode->translate(_basicEnemyScript->GetDirVector() * _basicEnemyScript->GetMovespeed() * fe.timeSinceLastFrame, Ogre::Node::TS_LOCAL);
 	
+		
 	Ogre::Vector3 npcPos = _npcNode->getPosition();
 	Ogre::Vector3 playerPos = _playerNode->getPosition();
-	/**if (mKeyboard->isKeyDown(OIS::KC_F))
+
+	//dependent on singelton of gamemanager
+	/**if (ke.isKeyDown(OIS::KC_F))
 	{
-		if (npcScript->dialog(npcPos, playerPos))
+		if (this->npcScript->dialog(npcPos, playerPos))
 		{
-			npcScript->setMoveSpeed(0);
+			this->characterScript->setMoveSpeed(0);
 		}
 		else
 		{
-			npcScript->setMoveSpeed(10);
+			this->characterScript->setMoveSpeed(10);
 		}
 	}**/
+	
+	if (((_timer->getMicroseconds() / 10000) % 200) == 0) {
+		_basicEnemyScript->Wander();
+		characterScript->Wander();
+	}
 	
 }
 

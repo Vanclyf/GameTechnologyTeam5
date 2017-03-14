@@ -83,6 +83,8 @@ bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& fe)
 
 	_levelManager->Update(fe);
 
+	
+
  
 	return ret;
 }

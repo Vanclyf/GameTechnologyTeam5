@@ -93,6 +93,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseApplication.cpp" />
+    <ClCompile Include="BasicEnemy.cpp" />
+    <ClCompile Include="Character.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Npc.cpp" />
     <ClCompile Include="LevelManager.cpp" />
@@ -100,6 +102,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseApplication.h" />
+    <ClInclude Include="BasicEnemy.h" />
+    <ClInclude Include="Character.h" />
     <ClInclude Include="CharacterStats.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Npc.h" />
