@@ -6,6 +6,7 @@ LevelManager::LevelManager(Ogre::Camera* cam, Ogre::SceneManager* sm) : _camera(
 
 void LevelManager::Init()
 {
+
 	// create level node, the root node for everything in the level
 	_levelNode = _sceneManager->getRootSceneNode()->createChildSceneNode("LevelNode");
 
@@ -16,6 +17,16 @@ void LevelManager::Init()
 	_playerEntity->setCastShadows(true);
 	_playerNode = _levelNode->createChildSceneNode("PlayerNode");
 	_playerNode->attachObject(_playerEntity);
+
+	
+
+	// create enemy
+	_basicEnemyScript = new BasicEnemy();
+	_basicEnemyScript->Initialize();
+	_basicEnemyEntity = _sceneManager->createEntity("robot.mesh");
+	_basicEnemyEntity->setCastShadows(true);
+	_basicEnemyNode = _levelNode->createChildSceneNode("BasicEnemyNode");
+	_basicEnemyNode->attachObject(_basicEnemyEntity);
 
 	// camera
 	_camNode = _playerNode->createChildSceneNode("CameraNode");
@@ -29,6 +40,9 @@ void LevelManager::Init()
 	_levelNode->createChildSceneNode()->attachObject(groundEntity);
 	groundEntity->setCastShadows(false);
 	groundEntity->setMaterialName("Examples/Rockwall");
+
+	//timer
+	_timer = new Ogre::Timer();
 }
 
 void LevelManager::Update(const Ogre::FrameEvent& fe)
@@ -36,6 +50,16 @@ void LevelManager::Update(const Ogre::FrameEvent& fe)
 	// Update player
 	_playerNode->translate(_playerScript->GetDirVector() * _playerScript->GetMovespeed() * fe.timeSinceLastFrame, Ogre::Node::TS_LOCAL);
 	_playerScript->AdjustStaminaOverTime(fe.timeSinceLastFrame);
+
+	// Update enemy
+	_basicEnemyNode->translate(_basicEnemyScript->GetDirVector() * _basicEnemyScript->GetMovespeed() * fe.timeSinceLastFrame, Ogre::Node::TS_LOCAL);
+	
+
+
+	if (((_timer->getMicroseconds() / 10000) % 200) == 0) {
+		_basicEnemyScript->Wander();
+	}
+	
 }
 
 void LevelManager::CreateGroundMesh()

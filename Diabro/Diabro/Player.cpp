@@ -4,7 +4,7 @@
 using namespace std;
 
 Player::Player()
-{	
+{
 	_dirVec = (0, 0, 0);
 	_movespeed = 250;
 	_runspeed = 450;
@@ -12,7 +12,7 @@ Player::Player()
 
 	_currentLevel = 1;
 	_currentXP = 0;
-	_xpTillNextLevel = CalcXpTillLevel(_currentLevel+1);
+	_xpTillNextLevel = CalcXpTillLevel(_currentLevel + 1);
 
 	//_stats = new CharacterStats();
 }
@@ -31,7 +31,7 @@ bool Player::Initialize()
 
 bool Player::AdjustHealth(float adjust)
 {
-	if((_currentHealth -= adjust) <= 0)
+	if ((_currentHealth -= adjust) <= 0)
 	{
 		//Die();
 		return false;
@@ -42,7 +42,7 @@ bool Player::AdjustHealth(float adjust)
 
 bool Player::AdjustStaminaOverTime(Ogre::Real deltaTime)
 {
-	Ogre::Real adjust = _isRunning ? -_stats->GetStat(StaminaRegen)/2 : _stats->GetStat(MaxStamina);
+	Ogre::Real adjust = _isRunning ? -_stats->GetStat(StaminaRegen) / 2 : _stats->GetStat(MaxStamina);
 
 	adjust *= deltaTime;
 
@@ -67,7 +67,7 @@ bool Player::AdjustStamina(float adjust)
 		// attack should be canceled
 		return false;
 	}
-	else if((_currentStamina += adjust) >= _stats->GetStat(MaxStamina))
+	else if ((_currentStamina += adjust) >= _stats->GetStat(MaxStamina))
 	{
 		_currentStamina = _stats->GetStat(MaxStamina);
 	}
@@ -81,7 +81,7 @@ bool Player::SetUpStats()
 
 	int statNr = (int)StatType::AMOUNT_OF_TYPES;
 
-	for(int i = 0; i < statNr; ++i)
+	for (int i = 0; i < statNr; ++i)
 	{
 		Stat tempStat((StatType)i, 0);
 
@@ -124,7 +124,7 @@ int Player::CalcXpTillLevel(int level)
 		newXP += Ogre::Math::Floor(i + 300 * Ogre::Math::Pow(2, i / 7.0f));
 	}
 
-	newXP = Ogre::Math::Floor(newXP/4);
+	newXP = Ogre::Math::Floor(newXP / 4);
 
 	FILE* fp;
 
@@ -140,7 +140,7 @@ int Player::CalcXpTillLevel(int level)
 
 void Player::GainXP(int xp)
 {
-	if((_currentXP += xp) >= _xpTillNextLevel)
+	if ((_currentXP += xp) >= _xpTillNextLevel)
 	{
 		LevelUp();
 	}
@@ -149,7 +149,7 @@ void Player::GainXP(int xp)
 void Player::LevelUp()
 {
 	++_currentLevel;
-	_xpTillNextLevel = CalcXpTillLevel(_currentLevel+1);
+	_xpTillNextLevel = CalcXpTillLevel(_currentLevel + 1);
 
 	// Increase stats
 }
