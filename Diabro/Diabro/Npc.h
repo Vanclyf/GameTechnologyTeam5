@@ -10,7 +10,7 @@ class Npc
 		Npc();
 		~Npc() {}
 		int randomIntNumber;
-		bool Npc::dialog(Ogre::Vector3 npcPos, Ogre::Vector3 playerPos, null);
+		bool Npc::dialog(Ogre::Vector3 npcPos, Ogre::Vector3 playerPos);
 		bool Npc::initialize();
 
 	private:
