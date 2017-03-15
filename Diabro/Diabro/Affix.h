@@ -1,9 +1,6 @@
 #pragma once
 #include <string>
-#include <rpcndr.h>
 #include "Modifier.h"
-
-using namespace std;
 
 class Affix
 {
