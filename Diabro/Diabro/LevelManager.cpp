@@ -54,12 +54,18 @@ void LevelManager::Update(const Ogre::FrameEvent& fe)
 	// Update enemy
 	_basicEnemyNode->translate(_basicEnemyScript->GetDirVector() * _basicEnemyScript->GetMovespeed() * fe.timeSinceLastFrame, Ogre::Node::TS_LOCAL);
 	
+	Ogre::Vector3 basicEnemyPos = _basicEnemyNode->_getDerivedPosition();
+	Ogre::Vector3 playerPos = _playerNode->_getDerivedPosition();
+
+	// check if the player is within range of an enemy
+	_basicEnemyScript->DetectPlayer(playerPos, basicEnemyPos);
 
 
-	if (((_timer->getMicroseconds() / 10000) % 200) == 0) {
-		_basicEnemyScript->Wander();
-	}
-	
+	//let the enemy wander into a different direction or idle every 2 seconds
+		if (((_timer->getMicroseconds() / 10000) % 200) == 0) {
+			_basicEnemyScript->Wander();
+		}
+
 }
 
 void LevelManager::CreateGroundMesh()
