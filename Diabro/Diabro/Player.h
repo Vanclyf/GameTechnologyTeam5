@@ -2,20 +2,25 @@
 #include "CharacterStats.h"
 #include <OgrePrerequisites.h>
 #include "OgreEntity.h"
+#include "BasicEnemy.h"
 
 // TO DO: inherit this class from Character.cpp
 class Player
 {
 public:
-	Player();
+	Player(BasicEnemy* enemyScript);
 	~Player(){}
 	bool Initialize();
 	bool AdjustHealth(float adjust);
 	bool AdjustStaminaOverTime(Ogre::Real deltaTime);
+	bool LightAttack(bool Weapon);
 	bool AdjustStamina(float adjust);
 	void Die();
 
+	bool AttackCooldown(bool Cooldown);
 	int GetLevel() { return _currentLevel; }
+	int _attackSpeed;
+	int _AttackCD;
 
 	Ogre::Vector3 GetDirVector() { return _dirVec; }
 	Ogre::Vector3 SetDirVector(Ogre::Vector3 moveVec) { return _dirVec = moveVec; }
@@ -28,7 +33,7 @@ public:
 	void Move(Ogre::Vector3&);
 
 	void GainXP(int);
-
+	BasicEnemy* _BasicEnemy;
 private:
 	Ogre::Real _currentHealth;
 	Ogre::Real _currentStamina;
@@ -44,6 +49,7 @@ private:
 
 	Ogre::Real _rotationspeed;
 	bool _isRunning;
+	bool _canAttack;
 
 	CharacterStats* _stats;
 

@@ -9,13 +9,26 @@ void LevelManager::Init()
 	// create level node, the root node for everything in the level
 	_levelNode = _sceneManager->getRootSceneNode()->createChildSceneNode("LevelNode");
 
-	// create player
-	_playerScript = new Player();
-	_playerScript->Initialize();
+	//player
 	_playerEntity = _sceneManager->createEntity("ninja.mesh");
 	_playerEntity->setCastShadows(true);
 	_playerNode = _levelNode->createChildSceneNode("PlayerNode");
 	_playerNode->attachObject(_playerEntity);
+
+	//enemy
+	_basicEnemyEntity = _sceneManager->createEntity("Robot.mesh");
+	_basicEnemyEntity->setCastShadows(true);
+	_basicEnemyNode = _levelNode->createChildSceneNode("BasicEnemy");
+	_basicEnemyNode->attachObject(_basicEnemyEntity);
+
+	//create enemy
+	_basicEnemyScript = new BasicEnemy(_playerNode, _basicEnemyNode);
+	_basicEnemyScript->Initialize();
+
+
+	// create player
+	_playerScript = new Player(_basicEnemyScript);
+	_playerScript->Initialize();
 
 	// camera
 	_camNode = _playerNode->createChildSceneNode("CameraNode");
@@ -29,6 +42,9 @@ void LevelManager::Init()
 	_levelNode->createChildSceneNode()->attachObject(groundEntity);
 	groundEntity->setCastShadows(false);
 	groundEntity->setMaterialName("Examples/Rockwall");
+
+	//timer
+	_timer = new Ogre::Timer();
 }
 
 void LevelManager::Update(const Ogre::FrameEvent& fe)
@@ -36,6 +52,13 @@ void LevelManager::Update(const Ogre::FrameEvent& fe)
 	// Update player
 	_playerNode->translate(_playerScript->GetDirVector() * _playerScript->GetMovespeed() * fe.timeSinceLastFrame, Ogre::Node::TS_LOCAL);
 	_playerScript->AdjustStaminaOverTime(fe.timeSinceLastFrame);
+	
+	//timer usage for attackcooldown.
+	if (((_timer->getMicroseconds() / (_playerScript->_attackSpeed * 10000)) % 100) == 0)
+	{
+		_playerScript->AttackCooldown(true);
+	}
+
 }
 
 void LevelManager::CreateGroundMesh()

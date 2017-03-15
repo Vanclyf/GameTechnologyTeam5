@@ -185,6 +185,14 @@ bool GameManager::mouseMoved(const OIS::MouseEvent& me)
 bool GameManager::mousePressed(
 	const OIS::MouseEvent& me, OIS::MouseButtonID id)
 {
+	switch (id)
+	{
+	case OIS::MB_Left:
+		_levelManager->_playerScript->LightAttack(true);
+		break;
+	default:
+		break;
+	}
 	return true;
 }
 

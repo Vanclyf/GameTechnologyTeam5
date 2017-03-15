@@ -3,8 +3,11 @@
 
 using namespace std;
 
-Player::Player()
+Player::Player(BasicEnemy* enemyScript)
+	:_BasicEnemy(enemyScript)
+
 {	
+	_attackSpeed = 1;
 	_dirVec = (0, 0, 0);
 	_movespeed = 250;
 	_runspeed = 450;
@@ -137,6 +140,37 @@ int Player::CalcXpTillLevel(int level)
 
 	return newXP;
 }
+
+bool Player::AttackCooldown(bool Cooldown)
+{
+	_canAttack = Cooldown;
+	return true;
+}
+
+bool Player::LightAttack(bool Weapon)
+{
+
+	FILE* fp;
+
+	freopen_s(&fp, "CONOUT$", "w", stdout);
+
+	//need to make function to calculate distance between the two.
+	//damage calculation with playerstats.
+	int AttackDamage = _stats->GetStat(Damage) * _stats->GetStat(Strength);
+	if (_canAttack)
+	{
+		//deal damage 
+		_BasicEnemy->AdjustHealth(AttackDamage, Weapon);
+		printf("dealingDamage");
+		_canAttack = false;
+		//_AttackCD = _stats->GetStat(AttackSpeed) + 10;
+	}
+	//check if target is in range if distance to mouse pos is less than attack range then attack
+	//need to get object under mouse and extract hp from the object.
+
+	return true;
+}
+
 
 void Player::GainXP(int xp)
 {

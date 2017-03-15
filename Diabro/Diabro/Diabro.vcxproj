@@ -93,12 +93,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseApplication.cpp" />
+    <ClCompile Include="BasicEnemy.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseApplication.h" />
+    <ClInclude Include="BasicEnemy.h" />
     <ClInclude Include="CharacterStats.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="LevelManager.h" />
