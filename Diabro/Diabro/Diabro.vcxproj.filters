@@ -33,6 +33,18 @@
     <None Include="GameObjStandard.cg">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="Resources\materials\scripts\UI.material">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\materials\textures\greenBox.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\materials\textures\greyBox.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Resources\materials\textures\yellowBox.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseApplication.cpp">

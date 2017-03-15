@@ -7,12 +7,13 @@
 class Player
 {
 public:
-	Player();
+	Player(Ogre::Billboard*, Ogre::Billboard*);
 	~Player(){}
 	bool Initialize();
 	bool AdjustHealth(float adjust);
 	bool AdjustStaminaOverTime(Ogre::Real deltaTime);
 	bool AdjustStamina(float adjust);
+	Ogre::Real CalcNewBarSize(Ogre::Real value, Ogre::Real maxValue, Ogre::Real maxSize);
 	void Die();
 
 	int GetLevel() { return _currentLevel; }
@@ -32,6 +33,12 @@ public:
 private:
 	Ogre::Real _currentHealth;
 	Ogre::Real _currentStamina;
+
+	Ogre::Billboard* _healthBar;
+	Ogre::Billboard* _staminaBar;
+
+	Ogre::Real _maxWidthBar;
+	Ogre::Real _heightBar;
 
 	int _currentLevel;
 	int _currentXP;

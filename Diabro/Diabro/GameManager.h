@@ -26,7 +26,8 @@ protected:
     virtual void createScene(void);
 	virtual void createCamera(void);
 	virtual void createViewports(void);
-
+	virtual void createFrameListener(void);
+	
 	static void setupLights(Ogre::SceneManager*);
 	
 

@@ -89,6 +89,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="GameObjStandard.cg" />
+    <None Include="Resources\materials\scripts\UI.material" />
+    <None Include="Resources\materials\textures\greenBox.jpg" />
+    <None Include="Resources\materials\textures\greyBox.jpg" />
+    <None Include="Resources\materials\textures\yellowBox.jpg" />
     <None Include="testMaterial.material" />
   </ItemGroup>
   <ItemGroup>

@@ -1,10 +1,16 @@
+
 #include <vector>
 #include "Player.h"
+#include "BaseApplication.h"
 
-using namespace std;
-
-Player::Player()
+// TO DO: init in signature (?)
+Player::Player(Ogre::Billboard* healthBar, Ogre::Billboard* staminaBar) //here
 {
+	_healthBar = healthBar;
+	_staminaBar = staminaBar;
+	_maxWidthBar = _healthBar->getOwnWidth();
+	_heightBar = _healthBar->getOwnHeight();
+
 	_dirVec = (0, 0, 0);
 	_movespeed = 250;
 	_runspeed = 450;
@@ -13,8 +19,6 @@ Player::Player()
 	_currentLevel = 1;
 	_currentXP = 0;
 	_xpTillNextLevel = CalcXpTillLevel(_currentLevel + 1);
-
-	//_stats = new CharacterStats();
 }
 
 bool Player::Initialize()
@@ -37,6 +41,7 @@ bool Player::AdjustHealth(float adjust)
 		return false;
 	}
 
+	_healthBar->setDimensions(CalcNewBarSize(_currentHealth, _stats->GetStat(StatType::MaxHealth), _maxWidthBar), _heightBar);
 	return true;
 }
 
@@ -57,6 +62,8 @@ bool Player::AdjustStaminaOverTime(Ogre::Real deltaTime)
 		_currentStamina = _stats->GetStat(MaxStamina);
 	}
 
+	_staminaBar->setDimensions(CalcNewBarSize(_currentStamina, _stats->GetStat(StatType::MaxStamina), _maxWidthBar), _heightBar);
+
 	return true;
 }
 
@@ -72,7 +79,14 @@ bool Player::AdjustStamina(float adjust)
 		_currentStamina = _stats->GetStat(MaxStamina);
 	}
 
+	_staminaBar->setDimensions(CalcNewBarSize(_currentStamina, _stats->GetStat(StatType::MaxStamina), _maxWidthBar), _heightBar);
+
 	return true;
+}
+
+Ogre::Real Player::CalcNewBarSize(Ogre::Real value, Ogre::Real maxValue, Ogre::Real maxSize)
+{
+	return((value/maxValue) * maxSize);
 }
 
 bool Player::SetUpStats()
@@ -125,15 +139,6 @@ int Player::CalcXpTillLevel(int level)
 	}
 
 	newXP = Ogre::Math::Floor(newXP / 4);
-
-	FILE* fp;
-
-	freopen_s(&fp, "CONOUT$", "w", stdout);
-
-	printf("current level: %d\n", _currentLevel);
-	printf("%d\n", newXP);
-
-	fclose(fp);
 
 	return newXP;
 }

@@ -5,6 +5,8 @@ Filename:    GameManager.cpp
 
 */
 #include "GameManager.h"
+#define RESOURCESCRIPTS_PATH "/materials/scripts"
+#define RESOURCETEXTURES_PATH "/materials/textures"
 //---------------------------------------------------------------------------
 
 GameManager::GameManager()
@@ -22,7 +24,7 @@ void GameManager::createScene(void)
 {
     // set lights
 	setupLights(mSceneMgr);
-
+	
 	// set shadow technique
 	mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 
@@ -38,11 +40,18 @@ void GameManager::setupLights(Ogre::SceneManager* sceneMgr)
 
 	// create the main light
 	Ogre::Light* light = sceneMgr->createLight("MainLight");
-	light->setDiffuseColour(0.5, 0.5, 0.5);
+	light->setDiffuseColour(1, 1, 1);
 	light->setSpecularColour(0.5, 0.5, 0.5);
-	light->setType(Ogre::Light::LT_SPOTLIGHT);
+	light->setType(Ogre::Light::LT_DIRECTIONAL);
 	light->setDirection(-1, -1, 0);
-	light->setPosition(Ogre::Vector3(200, 200, 0));
+
+
+	Ogre::Light* pointLight = sceneMgr->createLight("PointLight");
+	light->setDiffuseColour(1, 1, 1);
+	light->setSpecularColour(0.5, 0.5, 0.5);
+	light->setType(Ogre::Light::LT_POINT);
+	light->setDirection(-1, -1, 0);
+	light->setPosition(Ogre::Vector3(300, 300, 0));
 	light->setSpotlightRange(Ogre::Degree(35), Ogre::Degree(50));
 
 	return;
@@ -60,7 +69,6 @@ void GameManager::createCamera()
 
 	// create the camera man
 	mCameraMan = new OgreBites::SdkCameraMan(mCamera);
-
 }
 
 void GameManager::createViewports()
@@ -75,6 +83,13 @@ void GameManager::createViewports()
 	mCamera->setAspectRatio(
 		Ogre::Real(vp->getActualWidth()) /
 		Ogre::Real(vp->getActualHeight()));
+}
+
+void GameManager::createFrameListener(void)
+{
+	BaseApplication::createFrameListener();
+
+	return;
 }
 
 bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& fe)
@@ -108,7 +123,8 @@ bool GameManager::keyPressed(const OIS::KeyEvent& ke)
 
 	case OIS::KC_DOWN:
 	case OIS::KC_S:
-		_levelManager->_playerScript->GainXP(10);
+		//_levelManager->_playerScript->GainXP(10);
+		_levelManager->_playerScript->AdjustHealth(1);
 		dirVec.z = 1;
 		break;
 
