@@ -16,6 +16,7 @@ void LevelManager::Init()
 
 	setupUI();
 	_healthBar->getOwnWidth();
+
 	// create player
 	_playerScript = new Player(_healthBar, _staminaBar);
 	_playerScript->Initialize();

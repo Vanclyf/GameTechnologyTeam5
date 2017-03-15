@@ -5,6 +5,8 @@ Filename:    GameManager.cpp
 
 */
 #include "GameManager.h"
+#define RESOURCESCRIPTS_PATH "/materials/scripts"
+#define RESOURCETEXTURES_PATH "/materials/textures"
 //---------------------------------------------------------------------------
 
 GameManager::GameManager()
@@ -28,8 +30,6 @@ void GameManager::createScene(void)
 	_levelManager = new LevelManager(mCamera, mSceneMgr);
 	_levelManager->Init();
 }
-
-
 
 void GameManager::setupLights(Ogre::SceneManager* sceneMgr)
 {
