@@ -9,6 +9,7 @@ Filename:    GameManager.cpp
 
 GameManager::GameManager()
 {
+
 	//_instance = this;
 }
 //---------------------------------------------------------------------------
@@ -27,6 +28,7 @@ void GameManager::createScene(void)
 
 	_levelManager = new LevelManager(mCamera, mSceneMgr);
 	_levelManager->Init();
+
 }
 
 void GameManager::setupLights(Ogre::SceneManager* sceneMgr)
@@ -81,8 +83,13 @@ bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& fe)
 
 	_levelManager->Update(fe);
 
+	
+
+ 
 	return ret;
 }
+
+
 
 bool GameManager::keyPressed(const OIS::KeyEvent& ke)
 {

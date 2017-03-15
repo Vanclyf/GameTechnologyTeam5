@@ -44,14 +44,21 @@
     <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Npc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="LevelManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BaseItem.cpp">
       <Filter>Source Files\Item</Filter>
+    <ClCompile Include="BasicEnemy.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ItemInstance.cpp">
       <Filter>Source Files\Item</Filter>
+    <ClCompile Include="Character.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BaseEquipment.cpp">
       <Filter>Source Files\Item</Filter>
@@ -76,10 +83,19 @@
     <ClInclude Include="Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Npc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="CharacterStats.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="LevelManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicEnemy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BaseItem.h">

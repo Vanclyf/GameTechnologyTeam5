@@ -8,9 +8,11 @@ Filename:    GameManager.h
 #define __GameManager_h_
 
 #include "Player.h"
+#include "BasicEnemy.h"
 #include "BaseApplication.h"
 #include "CharacterStats.h"
 #include "LevelManager.h"
+
 
 //---------------------------------------------------------------------------
 
@@ -26,6 +28,7 @@ protected:
 	virtual void createViewports(void);
 
 	static void setupLights(Ogre::SceneManager*);
+	
 
 private:
 	virtual bool frameRenderingQueued(const Ogre::FrameEvent& fe);
@@ -36,6 +39,7 @@ private:
 	virtual bool mouseReleased(const OIS::MouseEvent& me, OIS::MouseButtonID id);
 
 	LevelManager* _levelManager;
+
 };
 
 //---------------------------------------------------------------------------
