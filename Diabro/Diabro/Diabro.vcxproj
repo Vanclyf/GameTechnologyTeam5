@@ -93,16 +93,31 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseApplication.cpp" />
+    <ClCompile Include="BaseEquipment.cpp" />
+    <ClCompile Include="BaseItem.cpp" />
+    <ClCompile Include="BaseWeapon.cpp" />
+    <ClCompile Include="EquimentInstance.cpp" />
+    <ClCompile Include="FloatRange.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="ItemInstance.cpp" />
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Affix.h" />
     <ClInclude Include="BaseApplication.h" />
+    <ClInclude Include="BaseEquipment.h" />
+    <ClInclude Include="BaseItem.h" />
+    <ClInclude Include="BaseWeapon.h" />
     <ClInclude Include="CharacterStats.h" />
+    <ClInclude Include="EquimentInstance.h" />
+    <ClInclude Include="FloatRange.h" />
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="ItemInstance.h" />
     <ClInclude Include="LevelManager.h" />
+    <ClInclude Include="Modifier.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="StatRange.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
