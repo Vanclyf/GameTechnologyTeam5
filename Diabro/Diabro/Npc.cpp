@@ -1,33 +1,48 @@
+#include "Npc.h"
 
-#include "GameManager.h"
-#include <vector>
-
-Npc::Npc()
+Npc::Npc(Ogre::SceneNode* myNode, Ogre::Entity* myEntity) : BaseNpc(myNode, myEntity), _inDialog(false)
 {
-	
+
 }
 
-bool Npc::initialize()
+void Npc::update(Ogre::Real deltatime)
 {
-	ch.setCurrHealth(20);
-	return true;
+	BaseNpc::update(deltatime);
+
+	if(_inDialog)
+	{
+		//TODO: it's not movement that should be changed, since it should become a const var
+		_movespeed = 0;
+	} else
+	{
+		_movespeed = 100;
+	}
 }
 
 
-bool Npc::dialog(Ogre::Vector3 npcPos, Ogre::Vector3 playerPos)
+bool Npc::dialog(Ogre::Vector3 playerPos)
 {	
-	Ogre::Real distance = npcPos.distance(playerPos);
+	_inDialog = true;
+
+	Ogre::Real distance = _myNode->getPosition().distance(playerPos);
+
 	if (distance < 200) // needs to be tweaked
 	{
+		FILE* fp;
+		freopen_s(&fp, "CONOUT$", "w", stdout);
+		printf("dialog on");
+		fclose(fp);		
 		
-		std::cout << "you can now have dialog since your distance is" << distance << std::endl;
 		return true;
-
-	}else{	
-		std::cout << "not in range";
+	} else
+	{	
+		FILE* fp;
+		freopen_s(&fp, "CONOUT$", "w", stdout);
+		printf("out of range for dialog");
+		fclose(fp);	
+		
 		return false;
 	}
-	
 }
 
 

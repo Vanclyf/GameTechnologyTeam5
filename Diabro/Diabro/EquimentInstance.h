@@ -1,3 +1,6 @@
+#ifndef EQUIPMENT_INSTANCE_H_
+#define EQUIPMENT_INSTANCE_H_
+
 #pragma once
 #include "ItemInstance.h"
 #include "CharacterStats.h"
@@ -45,3 +48,4 @@ private:
 
 };
 
+#endif

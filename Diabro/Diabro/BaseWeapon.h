@@ -1,3 +1,6 @@
+#ifndef BASE_WEAPON_H_
+#define BASE_WEAPON_H_
+
 #pragma once
 #include "BaseEquipment.h"
 
@@ -32,3 +35,4 @@ private:
 	
 };
 
+#endif

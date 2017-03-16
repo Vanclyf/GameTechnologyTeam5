@@ -1,22 +1,21 @@
+#ifndef NPC_H_
+#define NPC_H_
+
 #pragma once
-#include <OgrePrerequisites.h>
-#include "OgreEntity.h"
-#include "Character.h"
+#include "BaseNpc.h"
 
-class Npc 
+class Npc : public BaseNpc
 {
-	public:
-		Character ch;
-		Npc();
-		~Npc() {}
-		int randomIntNumber;
-		bool Npc::dialog(Ogre::Vector3 npcPos, Ogre::Vector3 playerPos);
-		bool Npc::initialize();
+public:
+	Npc(Ogre::SceneNode*, Ogre::Entity*);
+	~Npc();
 
-	private:
-		Ogre::Real movespeed;
-		Ogre::Real rotationspeed;
-		Ogre::Vector3 _dirVec;
-		int startHP;
-		int currHP;
+	void update(Ogre::Real deltatime) override;
+	bool dialog(Ogre::Vector3 playerPos);
+	void toggleDialog(bool on) { _inDialog = on; }
+
+private: 
+	bool _inDialog;
 };
+
+#endif

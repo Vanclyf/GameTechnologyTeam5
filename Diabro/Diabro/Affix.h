@@ -1,3 +1,6 @@
+#ifndef AFFIX_H_
+#define AFFIX_H_
+
 #pragma once
 #include <string>
 #include "Modifier.h"
@@ -47,3 +50,4 @@ private:
 
 };
 
+#endif

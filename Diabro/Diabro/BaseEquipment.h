@@ -1,3 +1,6 @@
+#ifndef BASE_EQUIPMENT_H_
+#define BASE_EQUIPMENT_H_
+
 #pragma once
 #include "BaseItem.h"
 #include "CharacterStats.h"
@@ -10,8 +13,7 @@ enum EquipmentType : unsigned int {
 	baseJewelry = 3
 };
 
-class BaseEquipment :
-	public BaseItem
+class BaseEquipment : public BaseItem
 {
 public:
 	BaseEquipment();
@@ -39,3 +41,4 @@ private:
 
 };
 
+#endif

@@ -5,33 +5,51 @@ Filename:    GameManager.cpp
 
 */
 #include "GameManager.h"
-#define RESOURCESCRIPTS_PATH "/materials/scripts"
-#define RESOURCETEXTURES_PATH "/materials/textures"
 //---------------------------------------------------------------------------
 
 GameManager::GameManager()
 {
-
-	//_instance = this;
 }
 //---------------------------------------------------------------------------
 GameManager::~GameManager()
 {
+	delete _gameTimer;
+	delete _levelManager;
+	delete _uiManager;
 }
 
 //---------------------------------------------------------------------------
+
+template<> GameManager* Ogre::Singleton<GameManager>::msSingleton = 0;
+GameManager* GameManager::getSingletonPtr(void)
+{
+	return msSingleton;
+}
+
+GameManager& GameManager::getSingleton(void)
+{
+	assert(msSingleton);  return (*msSingleton);
+}
+
+//---------------------------------------------------------------------------
+
 void GameManager::createScene(void)
 {
+	_gameTimer = new Ogre::Timer();
+
     // set lights
 	setupLights(mSceneMgr);
 	
 	// set shadow technique
 	mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 
-	_levelManager = new LevelManager(mCamera, mSceneMgr);
+	_levelManager = new LevelManager();
 	_levelManager->Init();
 
+	_uiManager = new UIManager();
+	_uiManager->init();
 }
+
 
 void GameManager::setupLights(Ogre::SceneManager* sceneMgr)
 {
@@ -44,7 +62,6 @@ void GameManager::setupLights(Ogre::SceneManager* sceneMgr)
 	light->setSpecularColour(0.5, 0.5, 0.5);
 	light->setType(Ogre::Light::LT_DIRECTIONAL);
 	light->setDirection(-1, -1, 0);
-
 
 	Ogre::Light* pointLight = sceneMgr->createLight("PointLight");
 	light->setDiffuseColour(1, 1, 1);
@@ -97,18 +114,13 @@ bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& fe)
 	bool ret = BaseApplication::frameRenderingQueued(fe);
 
 	_levelManager->Update(fe);
-
-	
-
  
 	return ret;
 }
 
-
-
 bool GameManager::keyPressed(const OIS::KeyEvent& ke)
 {
-	Ogre::Vector3 dirVec = _levelManager->_playerScript->GetDirVector();
+	Ogre::Vector3 dirVec = _levelManager->playerScript->getDirVector();
 
 	switch (ke.key)
 	{
@@ -124,7 +136,7 @@ bool GameManager::keyPressed(const OIS::KeyEvent& ke)
 	case OIS::KC_DOWN:
 	case OIS::KC_S:
 		//_levelManager->_playerScript->GainXP(10);
-		_levelManager->_playerScript->AdjustHealth(1);
+		_levelManager->playerScript->adjustHealth(1);
 		dirVec.z = 1;
 		break;
 
@@ -139,21 +151,26 @@ bool GameManager::keyPressed(const OIS::KeyEvent& ke)
 		break;
 	
 	case OIS::KC_LSHIFT:
-		_levelManager->_playerScript->ToggleRun(true);
+		_levelManager->playerScript->toggleRun(true);
+		break;
+
+	//TODO: this code should check whether or not an NPC is in range and if so, start the conversation
+	case OIS::KC_F:
+		_levelManager->npcScript->dialog(_levelManager->getPlayer()->getPosition());
 		break;
 
 	default:
 		break;
 	}
 
-	_levelManager->_playerScript->SetDirVector(dirVec);
+	_levelManager->playerScript->setDirVector(dirVec);
 	return true;
 }
 
 bool GameManager::keyReleased(const OIS::KeyEvent& ke)
 {
-
-	Ogre::Vector3 dirVec = _levelManager->_playerScript->GetDirVector();
+	
+	Ogre::Vector3 dirVec = _levelManager->playerScript->getDirVector();
 
 	switch (ke.key)
 	{
@@ -178,24 +195,30 @@ bool GameManager::keyReleased(const OIS::KeyEvent& ke)
 		break;
 
 	case OIS::KC_LSHIFT:
-		_levelManager->_playerScript->ToggleRun(false);
+		_levelManager->playerScript->toggleRun(false);
+		break;
+
+	//TODO: this code should end the conversation with the current talking to NPC
+	case OIS::KC_F:
+		_levelManager->npcScript->toggleDialog(false);
 		break;
 
 	default:
 		break;
 	}
 
-	_levelManager->_playerScript->SetDirVector(dirVec);
+	_levelManager->playerScript->setDirVector(dirVec);
 	return true;
 }
 
+//TODO: where/how should the turning be handled? 
 bool GameManager::mouseMoved(const OIS::MouseEvent& me)
 {
-	Ogre::Degree rotX = Ogre::Degree(-_levelManager->_playerScript->GetRotationspeed()/2 * me.state.Y.rel);
+	Ogre::Degree rotX = Ogre::Degree(-_levelManager->playerScript->getRotationspeed()/2 * me.state.Y.rel);
 	Ogre::Degree originalPitch = mSceneMgr->getSceneNode("CameraNode")->getOrientation().getPitch();
-	Ogre::Degree degreeFrmStartPitch = (rotX + originalPitch) - _levelManager->_startPitchCam;
+	Ogre::Degree degreeFrmStartPitch = (rotX + originalPitch) - _levelManager->startPitchCam;
 
-	mSceneMgr->getSceneNode("PlayerNode")->yaw(Ogre::Degree(-_levelManager->_playerScript->GetRotationspeed() * me.state.X.rel), Ogre::Node::TS_WORLD);
+	mSceneMgr->getSceneNode("PlayerNode")->yaw(Ogre::Degree(-_levelManager->playerScript->getRotationspeed() * me.state.X.rel), Ogre::Node::TS_WORLD);
 
 	if (degreeFrmStartPitch < Ogre::Degree(10) && degreeFrmStartPitch > Ogre::Degree(-40))
 	{
@@ -205,14 +228,12 @@ bool GameManager::mouseMoved(const OIS::MouseEvent& me)
 	return true;
 }
 
-bool GameManager::mousePressed(
-	const OIS::MouseEvent& me, OIS::MouseButtonID id)
+bool GameManager::mousePressed(const OIS::MouseEvent& me, OIS::MouseButtonID id)
 {
 	return true;
 }
 
-bool GameManager::mouseReleased(
-	const OIS::MouseEvent& me, OIS::MouseButtonID id)
+bool GameManager::mouseReleased(const OIS::MouseEvent& me, OIS::MouseButtonID id)
 {
 	return true;
 }
@@ -235,6 +256,7 @@ extern "C" {
 #endif
     {
 		AllocConsole();
+
         // Create application object
         GameManager app;
 

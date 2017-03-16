@@ -1,4 +1,9 @@
+#ifndef FLOAT_RANGE_H_
+#define FLOAT_RANGE_H_
+
 #pragma once
+#include <iostream>
+
 class FloatRange
 {
 public:
@@ -18,8 +23,8 @@ public:
 	int RandomInRange();
 
 private:
-
 	int _min;
 	int _max;
 };
 
+#endif

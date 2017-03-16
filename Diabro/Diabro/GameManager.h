@@ -4,23 +4,33 @@ Filename:    GameManager.h
 -----------------------------------------------------------------------------
 */
 
-#ifndef __GameManager_h_
-#define __GameManager_h_
+#ifndef GAMEMANAGER_H_
+#define GAMEMANAGER_H_
 
 #include "Player.h"
 #include "BasicEnemy.h"
 #include "BaseApplication.h"
 #include "CharacterStats.h"
 #include "LevelManager.h"
-
+#include <OgreSingleton.h>
+#include "UIManager.h"
 
 //---------------------------------------------------------------------------
 
-class GameManager : public BaseApplication
+class GameManager : public BaseApplication, public Ogre::Singleton<GameManager>
 {
 public:
 	GameManager(void);
 	~GameManager(void);
+
+	static GameManager& getSingleton(void);
+	static GameManager* getSingletonPtr(void);
+
+	Ogre::SceneManager* getSceneManager(void) { return mSceneMgr; }
+	Ogre::Camera* getCamera(void) { return mCamera; }
+	LevelManager* getLevelManager(void) { return _levelManager; }
+	UIManager* getUIManager(void) { return _uiManager; }
+	Ogre::Timer* getGameTime(void) { return _gameTimer; }
 
 protected:
     virtual void createScene(void);
@@ -30,7 +40,6 @@ protected:
 	
 	static void setupLights(Ogre::SceneManager*);
 	
-
 private:
 	virtual bool frameRenderingQueued(const Ogre::FrameEvent& fe);
 	virtual bool keyPressed(const OIS::KeyEvent& ke);
@@ -40,7 +49,9 @@ private:
 	virtual bool mouseReleased(const OIS::MouseEvent& me, OIS::MouseButtonID id);
 
 	LevelManager* _levelManager;
+	UIManager* _uiManager;
 
+	Ogre::Timer* _gameTimer;
 };
 
 //---------------------------------------------------------------------------

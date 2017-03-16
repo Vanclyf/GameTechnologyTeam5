@@ -1,3 +1,6 @@
+#ifndef BASE_ITEM_H_
+#define BASE_ITEM_H_
+
 #pragma once
 #include <OgrePrerequisites.h>
 
@@ -29,3 +32,4 @@ private:
 
 };
 
+#endif

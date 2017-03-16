@@ -1,3 +1,6 @@
+#ifndef STAT_RANGE_H_
+#define STAT_RANGE_H_
+
 #pragma once
 #include <stddef.h>
 #include "CharacterStats.h"
@@ -22,3 +25,5 @@ private:
 	vector<StatType> _statTypes;
 	FloatRange _range;
 };
+
+#endif

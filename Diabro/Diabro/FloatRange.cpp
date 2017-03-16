@@ -1,6 +1,4 @@
 #include "FloatRange.h"
-#include <iostream>
-
 
 FloatRange::FloatRange(float min, float max)
 {

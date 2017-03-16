@@ -1,3 +1,6 @@
+#ifndef CHARACTER_STATS_H_
+#define CHARACTER_STATS_H_
+
 #pragma once
 
 #include <vector>
@@ -90,4 +93,4 @@ private:
 
 };
 
-
+#endif
