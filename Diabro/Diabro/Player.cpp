@@ -4,8 +4,10 @@
 #include "BaseApplication.h"
 
 // TO DO: init in signature (?)
-Player::Player(Ogre::Billboard* healthBar, Ogre::Billboard* staminaBar) //here
+Player::Player(Ogre::Billboard* healthBar, Ogre::Billboard* staminaBar, BasicEnemy* enemyScript)
+	:_BasicEnemy(enemyScript)
 {
+	_attackSpeed = 1;
 	_healthBar = healthBar;
 	_staminaBar = staminaBar;
 	_maxWidthBar = _healthBar->getOwnWidth();
@@ -80,6 +82,39 @@ bool Player::AdjustStamina(float adjust)
 	}
 
 	_staminaBar->setDimensions(CalcNewBarSize(_currentStamina, _stats->GetStat(StatType::MaxStamina), _maxWidthBar), _heightBar);
+
+	return true;
+}
+bool Player::AttackCooldown(bool Cooldown)
+{
+	_canAttack = Cooldown;
+	return true;
+}
+
+bool Player::LightAttack(bool Weapon)
+{
+
+	FILE* fp;
+
+	freopen_s(&fp, "CONOUT$", "w", stdout);
+
+	//need to make function to calculate distance between the two.
+	//damage calculation with playerstats.
+	int AttackDamage = _stats->GetStat(Damage) * _stats->GetStat(Strength);
+	if (_canAttack)
+	{
+		//check if no cooldown cd = AttackSpeed
+		if (_AttackCD <= 0)
+		{
+			//deal damage 
+			_BasicEnemy->AdjustHealth(AttackDamage, Weapon);
+			printf("dealingDamage");
+			_canAttack = false;
+			//_AttackCD = _stats->GetStat(AttackSpeed) + 10;
+		}
+	}
+	//check if target is in range if distance to mouse pos is less than attack range then attack
+	//need to get object under mouse and extract hp from the object.
 
 	return true;
 }

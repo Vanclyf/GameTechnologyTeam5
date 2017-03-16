@@ -21,13 +21,26 @@ void LevelManager::Init()
 	setupUI();
 	_healthBar->getOwnWidth();
 
-	// create player
-	_playerScript = new Player(_healthBar, _staminaBar);
-	_playerScript->Initialize();
+	//player
 	_playerEntity = _sceneManager->createEntity("ninja.mesh");
 	_playerEntity->setCastShadows(true);
 	_playerNode->attachObject(_playerEntity);
 
+	//enemy
+	_basicEnemyEntity = _sceneManager->createEntity("Robot.mesh");
+	_basicEnemyEntity->setCastShadows(true);
+	_basicEnemyNode = _levelNode->createChildSceneNode("BasicEnemy");
+	_basicEnemyNode->attachObject(_basicEnemyEntity);
+
+	//create enemy
+	_basicEnemyScript = new BasicEnemy(_playerNode, _basicEnemyNode);
+	_basicEnemyScript->Initialize();
+
+	// create player
+	_playerScript = new Player(_healthBar, _staminaBar,_basicEnemyScript);
+	_playerScript->Initialize();
+
+	
 	//creating a NPC object
 	characterScript = new Character;
 	npcScript = new Npc();
@@ -38,15 +51,7 @@ void LevelManager::Init()
 	_npcNode = _levelNode->createChildSceneNode("NpcNode");
 	_npcNode->attachObject(npcEntity);
 	_npcNode->setPosition(5, 20, 5);
-
-	// create enemy
-	_basicEnemyScript = new BasicEnemy();
-	_basicEnemyScript->Initialize();
-	_basicEnemyEntity = _sceneManager->createEntity("robot.mesh");
-	_basicEnemyEntity->setCastShadows(true);
-	_basicEnemyNode = _levelNode->createChildSceneNode("BasicEnemyNode");
-	_basicEnemyNode->attachObject(_basicEnemyEntity);
-
+	
 	// camera
 	_camNode->attachObject(_camera);
 	_camNode->pitch(Ogre::Degree(10), Ogre::Node::TS_LOCAL);
@@ -99,6 +104,12 @@ void LevelManager::Update(const Ogre::FrameEvent& fe)
 			_basicEnemyScript->Wander();
 		characterScript->Wander();
 		}
+		
+		if(((_timer->getMicroseconds() / (_playerScript->_attackSpeed*10000)) % 100) == 0)
+		{
+			_playerScript->AttackCooldown(true);
+		}
+		
 
 }
 

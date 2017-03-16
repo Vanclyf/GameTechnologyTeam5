@@ -7,10 +7,10 @@
 class BasicEnemy
 {
 public:
-	BasicEnemy();
+	BasicEnemy(Ogre::SceneNode* _playerNode, Ogre::SceneNode* enemyNode);
 	~BasicEnemy() {}
 	bool Initialize();
-	bool AdjustHealth(float adjust);
+	bool AdjustHealth(float adjust, bool weapon);
 
 	void Die();
 	void DetectPlayer(Ogre::Vector3, Ogre::Vector3);
@@ -31,6 +31,9 @@ public:
 private:
 	Ogre::Real _currentHealth;
 	Ogre::Vector3 _dirVec;
+
+	Ogre::SceneNode* playerNode;
+	Ogre::SceneNode* enemyNode;
 
 	Ogre::Real _movespeed;
 	Ogre::Real _runspeed;
