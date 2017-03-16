@@ -11,9 +11,13 @@ public:
 	~BasicEnemy() {}
 	bool Initialize();
 	bool AdjustHealth(float adjust);
+
 	void Die();
-	void DetectPlayer();
+	void DetectPlayer(Ogre::Vector3, Ogre::Vector3);
+	void Attack();
+
 	int randomIntNumber;
+
 
 	Ogre::Vector3 GetDirVector() { return _dirVec; }
 	Ogre::Vector3 SetDirVector(Ogre::Vector3 moveVec) { return _dirVec = moveVec; }
@@ -30,6 +34,7 @@ private:
 
 	Ogre::Real _movespeed;
 	Ogre::Real _runspeed;
+	Ogre::Real _detectionRange;
 
 	Ogre::Real _rotationspeed;
 };

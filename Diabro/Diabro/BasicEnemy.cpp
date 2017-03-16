@@ -1,6 +1,8 @@
 #include <vector>
 #include "BasicEnemy.h"
 #include "BaseApplication.h"
+#include "GameManager.h"
+#include "Player.h"
 
 using namespace std;
 
@@ -10,25 +12,36 @@ BasicEnemy::BasicEnemy()
 	_movespeed = 50;
 	_runspeed = 450;
 	_rotationspeed = 0.13;
-
-	
+	_detectionRange = 100000;
 }
 
 bool BasicEnemy::Initialize()
 {
-	_currentHealth = 10;
 
+	_currentHealth = 10;
 
 
 	return true;
 }
 
-void BasicEnemy::DetectPlayer() {
-	//Ogre::Vector3 basicEnemyPos = mSceneMgr->getSceneNode("BasicEnemyNode")->getPosition();
-	//Ogre::Vector3 playerPos = mSceneMgr->getSceneNode("PlayerNode")->getPosition();
 
-	//Ogre::Real distance = basicEnemyPos.distance(playerPos);
+void BasicEnemy::DetectPlayer(Ogre::Vector3 playerPos, Ogre::Vector3 enemyPos) {
 
+	//calculate the distance between the enemy and the player
+	Ogre::Real distance = enemyPos.squaredDistance(playerPos);
+
+	//if the distance is lower than the predefined range
+	if (distance <= _detectionRange) {
+
+		//player detected
+		//attack player
+
+		//TODO manipulate the playerhealth by accessing the playerscript
+	}
+}
+
+void BasicEnemy::Attack() {
+	//TODO start the attack animation
 
 }
 

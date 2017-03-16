@@ -73,9 +73,13 @@ void LevelManager::Update(const Ogre::FrameEvent& fe)
 	_npcNode->translate(characterScript->getDirVector() * characterScript->getMovespeed() * fe.timeSinceLastFrame, Ogre::Node::TS_LOCAL);
 	_basicEnemyNode->translate(_basicEnemyScript->GetDirVector() * _basicEnemyScript->GetMovespeed() * fe.timeSinceLastFrame, Ogre::Node::TS_LOCAL);
 	
+	Ogre::Vector3 basicEnemyPos = _basicEnemyNode->_getDerivedPosition();
+	Ogre::Vector3 playerPos = _playerNode->_getDerivedPosition();
+
+	// check if the player is within range of an enemy
+	_basicEnemyScript->DetectPlayer(playerPos, basicEnemyPos);
 		
 	Ogre::Vector3 npcPos = _npcNode->getPosition();
-	Ogre::Vector3 playerPos = _playerNode->getPosition();
 
 	//dependent on singelton of gamemanager
 	/**if (ke.isKeyDown(OIS::KC_F))
@@ -90,11 +94,12 @@ void LevelManager::Update(const Ogre::FrameEvent& fe)
 		}
 	}**/
 	
-	if (((_timer->getMicroseconds() / 10000) % 200) == 0) {
-		_basicEnemyScript->Wander();
+	//let the enemy wander into a different direction or idle every 2 seconds
+		if (((_timer->getMicroseconds() / 10000) % 200) == 0) {
+			_basicEnemyScript->Wander();
 		characterScript->Wander();
-	}
-	
+		}
+
 }
 
 void LevelManager::CreateGroundMesh()
