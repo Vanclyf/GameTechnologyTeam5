@@ -1,20 +1,22 @@
+#ifndef DIABRO_COLLISIONMANAGER_H_
+#define DIABRO_COLLISIONMANAGER_H_
+
 #include "Player.h"
 #include "../MOC/CollisionTools.h"
 
 class CollisionManager
 {
 public:
-	CollisionManager(Ogre::SceneManager* mSceneMgr, Ogre::SceneNode* _playerNode, Player* _playerScript);
+	CollisionManager(Ogre::SceneManager* pMSceneMgr, Ogre::SceneNode* pPlayerNode, Player* pPlayerScript);
 	~CollisionManager();
 
-	void CheckPlayerCollision();
+	void checkPlayerCollision();
 private:
-	Ogre::SceneManager* mSceneMgr;
+	Ogre::SceneManager* _mSceneMgr;
 
-	Ogre::SceneNode* playerNode;
-	Player* playerScript;
+	Ogre::SceneNode* _playerNode;
+	Player* _playerScript;
 	
-	MOC::CollisionTools collisionTools;
-
-
+	MOC::CollisionTools _collisionTools;
 };
+#endif

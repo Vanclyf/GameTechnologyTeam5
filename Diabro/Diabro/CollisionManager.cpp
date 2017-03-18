@@ -1,7 +1,7 @@
 #include "CollisionManager.h"
 
-CollisionManager::CollisionManager(Ogre::SceneManager* sm, Ogre::SceneNode* playerNode, Player* playerScript)
-	: mSceneMgr(sm), playerNode(playerNode), playerScript(playerScript), collisionTools(sm)
+CollisionManager::CollisionManager(Ogre::SceneManager* pSM, Ogre::SceneNode* pPlayerNode, Player* pPlayerScript)
+	: _mSceneMgr(pSM), _playerNode(pPlayerNode), _playerScript(pPlayerScript), _collisionTools(pSM)
 {
 }
 
@@ -10,15 +10,15 @@ CollisionManager::~CollisionManager()
 }
 
 
-void CollisionManager::CheckPlayerCollision()
+void CollisionManager::checkPlayerCollision()
 {
-	if (collisionTools.collidesWithEntity(playerNode->getPosition() + (playerScript->GetDirVector() * 0.1f), playerNode->getPosition() + playerScript->GetDirVector(), 5))
+	if (_collisionTools.collidesWithEntity(_playerNode->getPosition() + (_playerScript->GetDirVector() * 0.1f), _playerNode->getPosition() + _playerScript->GetDirVector(), 5))
 	{
 		//TODO
-		//place player back at edge of collision
-		//check further distances?
-		//tweak collision distance (5 in parameters ^)
-		//implement collision for all objects
+		//1. place player back at edge of collision
+		//2. check further distances?
+		//3. tweak collision distance (5 in parameters ^)
+		//4. implement collision for all objects
 		FILE* fp;
 		freopen_s(&fp, "CONOUT$", "w", stdout);
 		printf("collision detected BIATCH!");
