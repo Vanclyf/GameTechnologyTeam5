@@ -6,7 +6,8 @@
 /// This class is created by the <see cref="GameManager" /> and contains all level information
 /// like characters and the environment.
 /// </summary>
-LevelManager::LevelManager() : _playerEntity(0), _npcEntity(0), _basicEnemyEntity(0), _groundEntity(0)
+LevelManager::LevelManager() : _playerEntity(0), _npcEntity(0), _basicEnemyEntity(0), _groundEntity(0),
+playerScript(0), npcScript(0), enemyScript(0), _levelNode(0), _camNode(0)
 {
 }
 

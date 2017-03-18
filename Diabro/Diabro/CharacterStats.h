@@ -58,7 +58,7 @@ class CharacterStats
 public:
 	CharacterStats();
 	CharacterStats(std::vector<Stat> pStats) : _stats(pStats){};
-	//TO DO: add modifiers for items. 
+	//TODO: add modifiers for items. 
 
 	std::vector<Stat> GetStats() { return _stats; }
 	Ogre::Real GetStat(StatType pID) { return _stats.at((int)pID).value; }

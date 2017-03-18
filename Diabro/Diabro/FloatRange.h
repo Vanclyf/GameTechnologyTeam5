@@ -2,7 +2,6 @@
 #define FLOAT_RANGE_H_
 
 #pragma once
-#include <iostream>
 
 class FloatRange
 {

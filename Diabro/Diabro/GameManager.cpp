@@ -12,7 +12,7 @@ Filename:    GameManager.cpp
 /// This class is the central manager of the game and has therefore the only singleton instance.
 /// It contains all other managers.
 /// </summary>
-GameManager::GameManager()
+GameManager::GameManager() : _levelManager(0), _uiManager(0), _gameTimer(0)
 {
 }
 //---------------------------------------------------------------------------

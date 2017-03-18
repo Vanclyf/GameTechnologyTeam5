@@ -6,7 +6,6 @@
 #include "OgreEntity.h"
 #include "CharacterStats.h"
 #include "BaseApplication.h"
-#include <vector>
 
 class Character
 {

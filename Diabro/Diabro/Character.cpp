@@ -8,12 +8,9 @@
 /// </summary>
 /// <param name="pMyNode">My node.</param>
 /// <param name="pMyEntity">My entity.</param>
-Character::Character(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : _myNode(pMyNode), _myEntity(pMyEntity)
+Character::Character(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : _myNode(pMyNode), _myEntity(pMyEntity), _stats(0), _dirVec(0, 0, 0),
+	_movespeed(100), _runspeed(250), _rotationspeed(0.13), _isRunning(false), _currentLevel(1), _currentHealth(0), _currentStamina(0) 
 {
-	_dirVec = (0, 0, 0);
-	_movespeed = 100;
-	_runspeed = 250;
-	_rotationspeed = 0.13;
 }
 
 /// <summary>

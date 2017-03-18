@@ -6,7 +6,7 @@
 /// This class is created by the <see cref="GameManager" /> and contains all UI information, 
 /// e.g. the in-game and menu UI.
 /// </summary>
-UIManager::UIManager() : _uiNode(0), _healthBar(0), _staminaBar(0)
+UIManager::UIManager() : _uiNode(0), _healthBar(0), _staminaBar(0), _maxWidthBar(0), _heightBar(0)
 {
 }
 

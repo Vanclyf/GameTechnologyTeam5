@@ -56,5 +56,8 @@ void BaseNpc::wander() {
 	case 5:
 		_dirVec = (0, 0, 0);
 		break;
+	default:
+		_dirVec = (0, 0, 0);
+		break;
 	}
 }

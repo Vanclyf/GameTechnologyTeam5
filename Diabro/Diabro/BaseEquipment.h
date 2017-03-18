@@ -37,7 +37,7 @@ public:
 private:
 	EquipmentType _equipmentType;
 	StatType _mainStat;
-	vector<StatRange> _baseStats;
+	std::vector<StatRange> _baseStats;
 
 };
 
