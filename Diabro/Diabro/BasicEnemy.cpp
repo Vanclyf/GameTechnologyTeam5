@@ -1,63 +1,47 @@
-#include <vector>
 #include "BasicEnemy.h"
-#include "BaseApplication.h"
 #include "GameManager.h"
 #include "Player.h"
 
-using namespace std;
-
-BasicEnemy::BasicEnemy(Ogre::SceneNode* _playerNode, Ogre::SceneNode* _enemyNode)
-	:playerNode(_playerNode), enemyNode(_enemyNode)
+/// <summary>
+/// Creates a new instance of the <see cref="BasicEnemy"/> class.
+/// All enemies inherit from this class.
+/// </summary>
+/// <param name="pMyNode">My node.</param>
+/// <param name="pMyEntity">My entity.</param>
+BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : BaseNpc(pMyNode, pMyEntity)
 {
-	_dirVec = (0, 0, 0);
-	_movespeed = 50;
-	_runspeed = 450;
-	_rotationspeed = 0.13;
-	_detectionRange = 100000;
 }
 
-bool BasicEnemy::Initialize()
+/// <summary>
+/// Detects the player if he is in range.
+/// </summary>
+void BasicEnemy::detectPlayer()
 {
+	//Ogre::Vector3 basicEnemyPos = mSceneMgr->getSceneNode("BasicEnemyNode")->getPosition();
+	//Ogre::Vector3 playerPos = mSceneMgr->getSceneNode("PlayerNode")->getPosition();
 
-	_currentHealth = 10;
-
-
-	return true;
+	//Ogre::Real distance = basicEnemyPos.distance(playerPos);
 }
 
-
-void BasicEnemy::DetectPlayer(Ogre::Vector3 playerPos, Ogre::Vector3 enemyPos) {
-
-	//calculate the distance between the enemy and the player
-	Ogre::Real distance = enemyPos.squaredDistance(playerPos);
-
-	//if the distance is lower than the predefined range
-	if (distance <= _detectionRange) {
-
-		//player detected
-		//attack player
-
-		//TODO manipulate the playerhealth by accessing the playerscript
-	}
-}
-
-void BasicEnemy::Attack() {
+void BasicEnemy::Attack() 
+{
 	//TODO start the attack animation
 
 }
 
 bool BasicEnemy::AdjustHealth(float adjust, bool weapon)
 {
-
-	Ogre::Vector3 tempVec3 = enemyNode->getPosition() - playerNode->getPosition();
+	//TODO implement adjusthealth method with new manager classes
+	/*
+	Ogre::Vector3 tempVec3 = this->getPosition() - GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition();
 	Ogre::Real distance = tempVec3.length();
 	if (weapon)
 	{
 
 		if (distance < 200)
 		{
-			cout << "Damage Dealt: " << adjust << endl;
-			cout << "current health: " << _currentHealth << endl;
+			std::cout << "Damage Dealt: " << adjust << std::endl;
+			std::cout << "current health: " << _currentHealth << std::endl;
 
 			if ((_currentHealth -= adjust) <= 0)
 			{
@@ -71,8 +55,8 @@ bool BasicEnemy::AdjustHealth(float adjust, bool weapon)
 	{
 		if (distance < 50)
 		{
-			cout << "Damage Dealt: " << adjust << endl;
-			cout << "current health: " << _currentHealth << endl;
+			std::cout << "Damage Dealt: " << adjust << std::endl;
+			std::cout << "current health: " << _currentHealth << std::endl;
 			if ((_currentHealth -= adjust) <= 0)
 			{
 				//Die();
@@ -80,48 +64,9 @@ bool BasicEnemy::AdjustHealth(float adjust, bool weapon)
 				return false;
 			}
 		}
-	}
+	}*/
 	return true;
 
-}
-
-
-void BasicEnemy::Move(Ogre::Vector3& moveVec)
-{
-	_dirVec = moveVec;
-}
-
-void BasicEnemy::Wander() {
-
-	//Switch direction
-	//generate a random integer value 1-4 every second
-	randomIntNumber = rand() % 5 + 1;
-
-
-
-	//if case 1 the dirVec is pointed forward (1,0,0)
-	//if case 2-4 dirvec is pointed backward left and right
-	switch (randomIntNumber)
-	{
-	case 1:
-		_dirVec = (0, 0, 0);
-		_dirVec.x = 1;
-		break;
-	case 2:
-		_dirVec = (0, 0, 0);
-		_dirVec.x = -1;
-		break;
-	case 3:
-		_dirVec = (0, 0, 0);
-		_dirVec.z = 1;
-		break;
-	case 4:
-		_dirVec = (0, 0, 0);
-		_dirVec.z = -1;
-		break;
-	case 5:
-		_dirVec = (0, 0, 0);
-	}
 }
 
 

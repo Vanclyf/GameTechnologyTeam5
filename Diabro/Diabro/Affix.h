@@ -1,3 +1,6 @@
+#ifndef AFFIX_H_
+#define AFFIX_H_
+
 #pragma once
 #include <string>
 #include "Modifier.h"
@@ -6,22 +9,22 @@ class Affix
 {
 public:
 
-	int GetId()
+	int getId()
 	{
 		return _id;
 	}
 
-	string GetName()
+	std::string getName()
 	{
 		return _name;
 	}
 
-	int GetTier()
+	int getTier()
 	{
 		return _tier;
 	}
 
-	float GetValue()
+	float getValue()
 	{
 		return _value;
 	}
@@ -31,19 +34,19 @@ public:
 		return _isPresent;
 	}
 
-	Modifier GetModifier()
+	Modifier getModifier()
 	{
 		return _modifier;
 	}
+
 private:
 	int _id;
-	string _name;
+	std::string _name;
 	int _tier;
 	Modifier _modifier;
 	float _value;
 	bool _isPresent;
 
-
-
 };
 
+#endif

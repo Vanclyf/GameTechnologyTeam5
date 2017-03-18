@@ -1,60 +1,49 @@
+#ifndef LEVEL_MANAGER_H_
+#define LEVEL_MANAGER_H_
+
 #pragma once
 #include "Player.h"
 #include "Npc.h"
-#include <OgreBillboardSet.h>
 #include "BaseApplication.h"
 #include "BasicEnemy.h"
+#include <OgreSceneManager.h>
+#include <OgreMeshManager.h>
 
 class LevelManager
 {
 public:
-	LevelManager(Ogre::Camera*, Ogre::SceneManager*);
+	LevelManager();
 
-	// TO DO: These billboards should be moved to UI manager and the player should message/call method to
-	// adjust on changes. For now, give these bars to the player. 
-	void Init();
+	void initialize();
 
-	void Update(const Ogre::FrameEvent& fe);
+	void update(const Ogre::FrameEvent&);
 
-	static void CreateGroundMesh();
-	Ogre::SceneNode* GetLevelNode() { return _levelNode; }
-	Ogre::SceneNode* GetCamNode() { return _camNode; }
+	static void createGroundMesh();
 
-	Ogre::Vector3 _playerPosition;
+	Ogre::SceneNode* getLevelNode() { return _levelNode; }
+	Ogre::SceneNode* getCamNode() { return _camNode; }
 
-	Ogre::Vector3 GetPlayerDirection();
-	void SetPlayerDirection();
+	Player* getPlayer() { return playerScript; }
 
-	Ogre::Vector3 GetBasicEnemyDirection();
-	void SetBasicEnemyDirection();
-
-	// for now public so that game manager can access it. TO DO: implement singleton for GM.
-	Player* _playerScript; 
+	// for now public so that game manager can access it. 
+	Player* playerScript; 
 	Npc* npcScript;
-	Character* characterScript;
-	BasicEnemy* _basicEnemyScript;
-	Ogre::Degree _startPitchCam;
-	void setupUI();
-	Ogre::Billboard* setupUIBar(Ogre::String, Ogre::SceneNode*, Ogre::BillboardOrigin, Ogre::String, Ogre::Vector3, Ogre::Vector3);
+	BasicEnemy* enemyScript;
+
+	Ogre::Degree startPitchCam;
+	Ogre::Vector3 playerPosition;
 
 private:
-	Ogre::Camera* _camera;
 	Ogre::Entity* _playerEntity;
-	Ogre::Entity* npcEntity;
-	Ogre::SceneManager* _sceneManager;
-	Ogre::SceneNode* _levelNode;
-	Ogre::SceneNode* _playerNode;
-	Ogre::SceneNode* _npcNode;
-	//create refference to the _basicenemynode
-	Ogre::SceneNode* _basicEnemyNode;
-	Ogre::SceneNode* _camNode;
-	Ogre::Timer* _timer;
-	Ogre::SceneNode* _uiNode;
-
-	Ogre::Billboard* _healthBar;
-	Ogre::Billboard* _staminaBar;
-	
-
+	Ogre::Entity* _npcEntity;
 	Ogre::Entity* _basicEnemyEntity;
+	Ogre::Entity* _groundEntity;
 
+	Ogre::SceneNode* _levelNode;
+	Ogre::SceneNode* _camNode;
+	
+	std::vector<BaseNpc*> _npcScripts;
+	// TODO: lists of different scripts (NPC's, enemies, e.d.) 
 };
+
+#endif

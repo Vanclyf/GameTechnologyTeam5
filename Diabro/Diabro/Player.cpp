@@ -1,87 +1,57 @@
-
-#include <vector>
 #include "Player.h"
-#include "BaseApplication.h"
+#include "GameManager.h"
 
-// TO DO: init in signature (?)
-Player::Player(Ogre::Billboard* healthBar, Ogre::Billboard* staminaBar, BasicEnemy* enemyScript)
-	:_BasicEnemy(enemyScript)
+/// <summary>
+/// Creates a new instance of the <see cref="Player"/> class.
+/// </summary>
+/// <param name="pMyNode">My node.</param>
+/// <param name="pMyEntity">My entity.</param>
+Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pMyNode, pMyEntity)
 {
-	_attackSpeed = 1;
-	_healthBar = healthBar;
-	_staminaBar = staminaBar;
-	_maxWidthBar = _healthBar->getOwnWidth();
-	_heightBar = _healthBar->getOwnHeight();
-
-	_dirVec = (0, 0, 0);
+	// override default speeds
 	_movespeed = 250;
 	_runspeed = 450;
-	_rotationspeed = 0.13;
 
+	// initialize pLevel vars
 	_currentLevel = 1;
 	_currentXP = 0;
-	_xpTillNextLevel = CalcXpTillLevel(_currentLevel + 1);
+	_xpTillNextLevel = calcXpTillLevel(_currentLevel + 1);
 }
 
-bool Player::Initialize()
+/// <summary>
+/// Initializes this instance.
+/// </summary>
+/// <returns></returns>
+bool Player::initialize()
 {
-	_isRunning = false;
-
-	SetUpStats();
-
-	_currentHealth = _stats->GetStat(MaxHealth);
-	_currentStamina = _stats->GetStat(MaxStamina);
+	Character::initialize();
 
 	return true;
 }
 
-bool Player::AdjustHealth(float adjust)
+/// <summary>
+/// Adjusts the health.
+/// </summary>
+/// <param name="pAdjust">The adjustment of health.</param>
+/// <returns>False if the player runs out of health and dies.</returns>
+bool Player::adjustHealth(float pAdjust)
 {
-	if ((_currentHealth -= adjust) <= 0)
-	{
-		//Die();
-		return false;
-	}
+	if (!Character::adjustHealth(pAdjust)) { return false; }
 
-	_healthBar->setDimensions(CalcNewBarSize(_currentHealth, _stats->GetStat(StatType::MaxHealth), _maxWidthBar), _heightBar);
+	GameManager::getSingleton().getUIManager()->adjustHealthBar(_currentHealth, _stats->GetStat(StatType::MaxHealth));
 	return true;
 }
 
-bool Player::AdjustStaminaOverTime(Ogre::Real deltaTime)
+/// <summary>
+/// Adjusts the stamina over time.
+/// </summary>
+/// <param name="deltatime">The time since last frame.</param>
+/// <returns>False if the player runs out of statina.</returns>
+bool Player::adjustStaminaOverTime(Ogre::Real pDeltaTime)
 {
-	Ogre::Real adjust = _isRunning ? -_stats->GetStat(StaminaRegen) / 2 : _stats->GetStat(MaxStamina);
+	Character::adjustStaminaOverTime(pDeltaTime);
 
-	adjust *= deltaTime;
-
-	if ((_currentStamina += adjust) <= 0)
-	{
-		ToggleRun(false);
-
-		return false;
-	}
-	else if ((_currentStamina += adjust) >= _stats->GetStat(MaxStamina))
-	{
-		_currentStamina = _stats->GetStat(MaxStamina);
-	}
-
-	_staminaBar->setDimensions(CalcNewBarSize(_currentStamina, _stats->GetStat(StatType::MaxStamina), _maxWidthBar), _heightBar);
-
-	return true;
-}
-
-bool Player::AdjustStamina(float adjust)
-{
-	if ((_currentStamina += adjust) <= 0)
-	{
-		// attack should be canceled
-		return false;
-	}
-	else if ((_currentStamina += adjust) >= _stats->GetStat(MaxStamina))
-	{
-		_currentStamina = _stats->GetStat(MaxStamina);
-	}
-
-	_staminaBar->setDimensions(CalcNewBarSize(_currentStamina, _stats->GetStat(StatType::MaxStamina), _maxWidthBar), _heightBar);
+	GameManager::getSingleton().getUIManager()->adjustStaminaBar(_currentStamina, _stats->GetStat(StatType::MaxStamina));
 
 	return true;
 }
@@ -119,56 +89,30 @@ bool Player::LightAttack(bool Weapon)
 	return true;
 }
 
-Ogre::Real Player::CalcNewBarSize(Ogre::Real value, Ogre::Real maxValue, Ogre::Real maxSize)
+/// <summary>
+/// Adjusts the stamina.
+/// </summary>
+/// <param name="pAdjust">The adjustment in stamina.</param>
+/// <returns>False if the player runs out of statina.</returns>
+bool Player::adjustStamina(float pAdjust)
 {
-	return((value/maxValue) * maxSize);
-}
+	Character::adjustStamina(pAdjust);
 
-bool Player::SetUpStats()
-{
-	vector<Stat> stats;
-
-	int statNr = (int)StatType::AMOUNT_OF_TYPES;
-
-	for (int i = 0; i < statNr; ++i)
-	{
-		Stat tempStat((StatType)i, 0);
-
-		stats.push_back(tempStat);
-	}
-
-	// Set all key stats. 
-	stats.at((int)Strength).value = 8;
-	stats.at((int)Dexterity).value = 8;
-	stats.at((int)Intelligence).value = 8;
-	stats.at((int)Vitality).value = 8;
-
-	// Add 2 to the prim stat of player class. 
-	stats.at((int)Strength).value += 2;
-
-	stats.at((int)Armor).value = 18;
-	stats.at((int)Damage).value = 2;
-	stats.at((int)Resistance).value = 1;
-	stats.at((int)MaxHealth).value = 40;
-	stats.at((int)MaxStamina).value = 125;
-	stats.at((int)StaminaRegen).value = 4;
-	stats.at((int)AttackSpeed).value = 0;
-
-	_stats = new CharacterStats(stats);
+	GameManager::getSingleton().getUIManager()->adjustStaminaBar(_currentStamina, _stats->GetStat(StatType::MaxStamina));
 
 	return true;
 }
 
-void Player::Move(Ogre::Vector3& moveVec)
-{
-	_dirVec = moveVec;
-}
-
-int Player::CalcXpTillLevel(int level)
+/// <summary>
+/// Calculates the pXP need to reach the next pLevel.
+/// </summary>
+/// <param name="pLevel">The next pLevel.</param>
+/// <returns></returns>
+int Player::calcXpTillLevel(int pLevel)
 {
 	int newXP = 0;
 
-	for (int i = 1; i < level; ++i)
+	for (int i = 1; i < pLevel; ++i)
 	{
 		newXP += Ogre::Math::Floor(i + 300 * Ogre::Math::Pow(2, i / 7.0f));
 	}
@@ -178,18 +122,25 @@ int Player::CalcXpTillLevel(int level)
 	return newXP;
 }
 
-void Player::GainXP(int xp)
+/// <summary>
+/// Increases the pXP of the player.
+/// </summary>
+/// <param name="pXP">The pXP gained.</param>
+void Player::gainXP(int pXP)
 {
-	if ((_currentXP += xp) >= _xpTillNextLevel)
+	if ((_currentXP += pXP) >= _xpTillNextLevel)
 	{
-		LevelUp();
+		levelUp();
 	}
 }
 
-void Player::LevelUp()
+/// <summary>
+/// Levels up the player.
+/// </summary>
+void Player::levelUp()
 {
 	++_currentLevel;
-	_xpTillNextLevel = CalcXpTillLevel(_currentLevel + 1);
+	_xpTillNextLevel = calcXpTillLevel(_currentLevel + 1);
 
-	// Increase stats
+	// Increase _stats
 }

@@ -1,3 +1,6 @@
+#ifndef ITEM_INSTANCE_H_
+#define ITEM_INSTANCE_H_
+
 #pragma once
 #include "BaseItem.h"
 
@@ -11,29 +14,24 @@ enum Quality : unsigned int {
 };
 
 
-class ItemInstance :
-	public BaseItem
+class ItemInstance : public BaseItem
 {
-
-
 public:
 	ItemInstance();
 	~ItemInstance();
-	BaseItem GetInfo() { return _info; }
-	bool GetDropped() { return _dropped; }
-	Quality GetQuality() { return _quality; }
+	BaseItem getInfo() { return _info; }
+	bool getDropped() { return _dropped; }
+	Quality getQuality() { return _quality; }
 	void use();
 	void drop();
 	void onCollision();
 	void addToInventory();
-	void initialize(BaseItem _info, Quality _quality);
-
+	void initialize(BaseItem, Quality);
 
 private:
 	BaseItem _info;
 	bool _dropped;
 	Quality _quality;
-
-
 };
 
+#endif

@@ -1,26 +1,33 @@
 #include "FloatRange.h"
-#include <iostream>
+#include <cstdlib>
 
-
-FloatRange::FloatRange(float min, float max)
+/// <summary>
+/// Initializes a new instance of the <see cref="FloatRange"/> .
+/// </summary>
+/// <param name="pMin">The minimum.</param>
+/// <param name="pMax">The maximum.</param>
+FloatRange::FloatRange(float pMin, float pMax)
 {
-	this->_min = min;
-	this->_max = max;
+	this->_min = pMin;
+	this->_max = pMax;
 }
 
 
+/// <summary>
+/// Finalizes an instance of the <see cref="FloatRange"/> class.
+/// </summary>
 FloatRange::~FloatRange()
 {
 }
 
 
 /// <summary>
-/// Returns an Random Number between the set Min and Max.
+/// Returns an random number between the pMin and pMax.
 /// </summary>
-/// <returns></returns>
-int FloatRange::RandomInRange()
+/// <returns>Random integer in range</returns>
+int FloatRange::randomInRange()
 {
-	return rand() % GetMax() + GetMin();
+	return rand() % getMax() + getMin();
 }
 
 

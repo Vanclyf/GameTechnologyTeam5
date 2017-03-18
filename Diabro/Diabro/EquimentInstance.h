@@ -1,3 +1,6 @@
+#ifndef EQUIPMENT_INSTANCE_H_
+#define EQUIPMENT_INSTANCE_H_
+
 #pragma once
 #include "ItemInstance.h"
 #include "CharacterStats.h"
@@ -10,38 +13,39 @@ public:
 	EquimentInstance();
 	~EquimentInstance();
 
-	string GetName()
+	std::string getName()
 	{
 		return _generatedName;
 	}
-	bool GetEquipped()
+	bool getEquipped()
 	{
 		return _equipped;
 	}
-	vector<Stat> GetBaseStats()
+	std::vector<Stat> getBaseStats()
 	{
 		return _baseStats;
 	}
-	vector<Affix> GetAffixStats()
+	std::vector<Affix> getAffixStats()
 	{
 		return _affixStats;
 	}
-	int GetLevel()
+	int getLevel()
 	{
 		return _level;
 	}
 
-	void MainStatValue();
+	void mainStatValue();
 
 
 private:
 
-	string _generatedName;
+	std::string _generatedName;
 	bool _equipped;
-	vector<Stat> _baseStats;
-	vector<Affix> _affixStats;
-	vector<Modifier> _modifiers;
+	std::vector<Stat> _baseStats;
+	std::vector<Affix> _affixStats;
+	std::vector<Modifier> _modifiers;
 	int _level;
 
 };
 
+#endif

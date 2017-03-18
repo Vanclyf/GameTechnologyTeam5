@@ -1,3 +1,6 @@
+#ifndef BASE_EQUIPMENT_H_
+#define BASE_EQUIPMENT_H_
+
 #pragma once
 #include "BaseItem.h"
 #include "CharacterStats.h"
@@ -10,24 +13,23 @@ enum EquipmentType : unsigned int {
 	baseJewelry = 3
 };
 
-class BaseEquipment :
-	public BaseItem
+class BaseEquipment : public BaseItem
 {
 public:
 	BaseEquipment();
 	~BaseEquipment();
 
-	EquipmentType GetEquipmentType()
+	EquipmentType getEquipmentType()
 	{
 		return _equipmentType;
 	}
 
-	StatType GetMainStat()
+	StatType getMainStat()
 	{
 		return _mainStat;
 	}
 
-	vector<StatRange> GetBaseStats()
+	std::vector<StatRange> getBaseStats()
 	{
 		return _baseStats;
 	}
@@ -35,7 +37,8 @@ public:
 private:
 	EquipmentType _equipmentType;
 	StatType _mainStat;
-	vector<StatRange> _baseStats;
+	std::vector<StatRange> _baseStats;
 
 };
 
+#endif

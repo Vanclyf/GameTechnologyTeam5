@@ -1,7 +1,8 @@
+#ifndef BASE_ITEM_H_
+#define BASE_ITEM_H_
+
 #pragma once
 #include <OgrePrerequisites.h>
-
-using namespace std;
 
 enum ItemType : unsigned int{
 	potion = 0,
@@ -15,17 +16,17 @@ public:
 	BaseItem();
 	~BaseItem();
 
-	string GetName() { return _name; }
-	string GetSpriteName() { return  _spriteName; }
-	ItemType GetItemType() { return _itemType; }
-	int GetItemTier() { return _itemTier; }
-	
+	std::string getName() { return _name; }
+	std::string getSpriteName() { return  _spriteName; }
+	ItemType getItemType() { return _itemType; }
+	int getItemTier() { return _itemTier; }
 
 private:
-	string _name;
-	string _spriteName;
+	std::string _name;
+	std::string _spriteName;
 	ItemType _itemType;
 	int _itemTier;
 
 };
 
+#endif

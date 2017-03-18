@@ -1,119 +1,80 @@
-#include <OgreSceneManager.h>
-#include <OgreMeshManager.h>
-
+#include "GameManager.h"
 #include "LevelManager.h"
-#include "BaseApplication.h"
 
-LevelManager::LevelManager(Ogre::Camera* cam, Ogre::SceneManager* sm) : _camera(cam), _sceneManager(sm) { }
-
-void LevelManager::Init()
+/// <summary>
+/// Initializes a new instance of the <see cref="LevelManager" /> class.
+/// This class is created by the <see cref="GameManager" /> and contains all level information
+/// like characters and the environment.
+/// </summary>
+LevelManager::LevelManager() : _playerEntity(0), _npcEntity(0), _basicEnemyEntity(0), _groundEntity(0),
+playerScript(0), npcScript(0), enemyScript(0), _levelNode(0), _camNode(0)
 {
+}
 
-	//init timer
-	_timer = new Ogre::Timer();
-
+/// <summary>
+/// Initializes this the level by setting the camera, player, NPC's and surroundings.
+/// </summary>
+void LevelManager::initialize()
+{
 	// create level node, the root node for everything in the level
-	_levelNode = _sceneManager->getRootSceneNode()->createChildSceneNode("LevelNode");
+	_levelNode = GameManager::getSingletonPtr()->getSceneManager()->getRootSceneNode()->createChildSceneNode("LevelNode");
 
-	_playerNode = _levelNode->createChildSceneNode("PlayerNode");
-	_camNode = _playerNode->createChildSceneNode("CameraNode");
-
-	setupUI();
-	_healthBar->getOwnWidth();
+	Ogre::SceneNode* playerNode = _levelNode->createChildSceneNode("PlayerNode");
+	_camNode = playerNode->createChildSceneNode("CameraNode");
 
 	//player
-	_playerEntity = _sceneManager->createEntity("ninja.mesh");
-	_playerEntity->setCastShadows(true);
-	_playerNode->attachObject(_playerEntity);
-
-	//enemy
-	_basicEnemyEntity = _sceneManager->createEntity("Robot.mesh");
-	_basicEnemyEntity->setCastShadows(true);
-	_basicEnemyNode = _levelNode->createChildSceneNode("BasicEnemy");
-	_basicEnemyNode->attachObject(_basicEnemyEntity);
-
-	//create enemy
-	_basicEnemyScript = new BasicEnemy(_playerNode, _basicEnemyNode);
-	_basicEnemyScript->Initialize();
-
-	// create player
-	_playerScript = new Player(_healthBar, _staminaBar,_basicEnemyScript);
-	_playerScript->Initialize();
+	_playerEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("ninja.mesh");
+	playerNode->createChildSceneNode()->attachObject(_playerEntity);
+	playerScript = new Player(playerNode, _playerEntity);
+	playerScript->initialize();
 
 	
 	//creating a NPC object
-	characterScript = new Character;
-	npcScript = new Npc();
-	characterScript->Initialize();
+	Ogre::SceneNode* npcNode = _levelNode->createChildSceneNode("NpcNode");
+	_npcEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("penguin.mesh");
+	npcNode->createChildSceneNode()->attachObject(_npcEntity);
+	npcScript = new Npc(npcNode, _npcEntity);
 	npcScript->initialize();
-	npcEntity = _sceneManager->createEntity("penguin.mesh");
-	npcEntity->setCastShadows(true);
-	_npcNode = _levelNode->createChildSceneNode("NpcNode");
-	_npcNode->attachObject(npcEntity);
-	_npcNode->setPosition(5, 20, 5);
 	
-	// camera
-	_camNode->attachObject(_camera);
-	_camNode->pitch(Ogre::Degree(10), Ogre::Node::TS_LOCAL);
-	_startPitchCam = _camNode->getOrientation().getPitch();
+	Ogre::SceneNode* enemyNode = _levelNode->createChildSceneNode("EnemyNode");
+	_basicEnemyEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("robot.mesh");
+	enemyNode->createChildSceneNode()->attachObject(_basicEnemyEntity);
+	enemyScript = new BasicEnemy(enemyNode, _basicEnemyEntity);
+	enemyScript->initialize();
 
 	// ground 
-	CreateGroundMesh();
-	Ogre::Entity* groundEntity = _sceneManager->createEntity("ground");
-	_levelNode->createChildSceneNode()->attachObject(groundEntity);
-	groundEntity->setCastShadows(false);
-	groundEntity->setMaterialName("Examples/Rockwall");
+	createGroundMesh();
+	_groundEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("ground");
+	_levelNode->createChildSceneNode()->attachObject(_groundEntity);
+	_groundEntity->setMaterialName("Examples/Rockwall");
+	// camera
+	_camNode->attachObject(GameManager::getSingletonPtr()->getCamera());
+	_camNode->pitch(Ogre::Degree(10), Ogre::Node::TS_LOCAL);
+	startPitchCam = _camNode->getOrientation().getPitch();
 
-	//timer
-	_timer = new Ogre::Timer();
+	_npcScripts.push_back(npcScript);
+	_npcScripts.push_back(enemyScript);
 }
 
-void LevelManager::Update(const Ogre::FrameEvent& fe)
+/// <summary>
+/// Updates the frame based on the specified fe.
+/// </summary>
+/// <param name="fe">The frame event.</param>
+void LevelManager::update(const Ogre::FrameEvent& pFE)
 {
-	// Update player
-	_playerNode->translate(_playerScript->GetDirVector() * _playerScript->GetMovespeed() * fe.timeSinceLastFrame, Ogre::Node::TS_LOCAL);
-	_playerScript->AdjustStaminaOverTime(fe.timeSinceLastFrame);
+	// update characters
+	playerScript->update(pFE.timeSinceLastFrame);
 
-	// Update enemy
-	_npcNode->translate(characterScript->getDirVector() * characterScript->getMovespeed() * fe.timeSinceLastFrame, Ogre::Node::TS_LOCAL);
-	_basicEnemyNode->translate(_basicEnemyScript->GetDirVector() * _basicEnemyScript->GetMovespeed() * fe.timeSinceLastFrame, Ogre::Node::TS_LOCAL);
-	
-	Ogre::Vector3 basicEnemyPos = _basicEnemyNode->_getDerivedPosition();
-	Ogre::Vector3 playerPos = _playerNode->_getDerivedPosition();
-
-	// check if the player is within range of an enemy
-	_basicEnemyScript->DetectPlayer(playerPos, basicEnemyPos);
-		
-	Ogre::Vector3 npcPos = _npcNode->getPosition();
-
-	//dependent on singelton of gamemanager
-	/**if (ke.isKeyDown(OIS::KC_F))
+	for(int i = 0; i < _npcScripts.size(); i++)
 	{
-		if (this->npcScript->dialog(npcPos, playerPos))
-		{
-			this->characterScript->setMoveSpeed(0);
-		}
-		else
-		{
-			this->characterScript->setMoveSpeed(10);
-		}
-	}**/
-	
-	//let the enemy wander into a different direction or idle every 2 seconds
-		if (((_timer->getMicroseconds() / 10000) % 200) == 0) {
-			_basicEnemyScript->Wander();
-		characterScript->Wander();
-		}
-		
-		if(((_timer->getMicroseconds() / (_playerScript->_attackSpeed*10000)) % 100) == 0)
-		{
-			_playerScript->AttackCooldown(true);
-		}
-		
-
+		_npcScripts[i]->update(pFE.timeSinceLastFrame);
+	}
 }
 
-void LevelManager::CreateGroundMesh()
+/// <summary>
+/// Creates the ground mesh.
+/// </summary>
+void LevelManager::createGroundMesh()
 {
 	Ogre::Plane plane(Ogre::Vector3::UNIT_Y, 0);
 	Ogre::MeshManager::getSingleton().createPlane(
@@ -126,35 +87,4 @@ void LevelManager::CreateGroundMesh()
 		Ogre::Vector3::UNIT_Z);
 
 	return;
-}
-
-void LevelManager::setupUI()
-{
-	_uiNode = GetCamNode()->createChildSceneNode("UINode");
-	_uiNode->setPosition(0, 0, 0);
-
-	// create health bar
-	_healthBar = setupUIBar("Health", _uiNode, Ogre::BBO_TOP_LEFT, "UI/Green", Ogre::Vector3(-250, 215, -5), Ogre::Vector3(-4, 2, 5));
-	_staminaBar = setupUIBar("Stamina", _uiNode, Ogre::BBO_TOP_RIGHT, "UI/Yellow", Ogre::Vector3(250, 215, -5), Ogre::Vector3(4, 2, 5));
-}
-
-Ogre::Billboard* LevelManager::setupUIBar(Ogre::String id, Ogre::SceneNode* node, Ogre::BillboardOrigin origin, Ogre::String materialName, Ogre::Vector3 pos, Ogre::Vector3 offset)
-{
-	Ogre::BillboardSet* barbackgroundSet = _sceneManager->createBillboardSet("Background" + id + "Set");
-	barbackgroundSet->setMaterialName("UI/Grey");
-	barbackgroundSet->setBillboardOrigin(origin);
-
-	Ogre::Billboard* barbackground = barbackgroundSet->createBillboard(pos.x + offset.x, pos.y + offset.y, pos.z + offset.z);
-	barbackground->setDimensions(206, 26);
-	node->attachObject(barbackgroundSet);
-
-	Ogre::BillboardSet* barSet = _sceneManager->createBillboardSet(id + "Set");
-	barSet->setMaterialName(materialName);
-	barSet->setBillboardOrigin(origin);
-
-	Ogre::Billboard* bar = barSet->createBillboard(pos.x, pos.y, pos.z + 10);
-	bar->setDimensions(200, 20);
-	node->attachObject(barSet);
-
-	return(bar);
 }
