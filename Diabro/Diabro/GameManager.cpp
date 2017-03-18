@@ -7,10 +7,18 @@ Filename:    GameManager.cpp
 #include "GameManager.h"
 //---------------------------------------------------------------------------
 
+/// <summary>
+/// Initializes a new instance of the <see cref="GameManager"/> class.
+/// This class is the central manager of the game and has therefore the only singleton instance.
+/// It contains all other managers.
+/// </summary>
 GameManager::GameManager()
 {
 }
 //---------------------------------------------------------------------------
+/// <summary>
+/// Finalizes an instance of the <see cref="GameManager"/> class.
+/// </summary>
 GameManager::~GameManager()
 {
 	delete _gameTimer;
@@ -21,11 +29,19 @@ GameManager::~GameManager()
 //---------------------------------------------------------------------------
 
 template<> GameManager* Ogre::Singleton<GameManager>::msSingleton = 0;
+/// <summary>
+/// Gets the singleton pointer.
+/// </summary>
+/// <returns></returns>
 GameManager* GameManager::getSingletonPtr(void)
 {
 	return msSingleton;
 }
 
+/// <summary>
+/// Gets the singleton.
+/// </summary>
+/// <returns></returns>
 GameManager& GameManager::getSingleton(void)
 {
 	assert(msSingleton);  return (*msSingleton);
@@ -33,6 +49,9 @@ GameManager& GameManager::getSingleton(void)
 
 //---------------------------------------------------------------------------
 
+/// <summary>
+/// Creates the scene.
+/// </summary>
 void GameManager::createScene(void)
 {
 	_gameTimer = new Ogre::Timer();
@@ -50,7 +69,10 @@ void GameManager::createScene(void)
 	_uiManager->init();
 }
 
-
+/// <summary>
+/// Setups the lights.
+/// </summary>
+/// <param name="sceneMgr">The scenemanager.</param>
 void GameManager::setupLights(Ogre::SceneManager* sceneMgr)
 {
 	// set ambient lighting
@@ -74,6 +96,9 @@ void GameManager::setupLights(Ogre::SceneManager* sceneMgr)
 	return;
 }
 
+/// <summary>
+/// Creates the camera.
+/// </summary>
 void GameManager::createCamera()
 {
 	// create the camera
@@ -88,6 +113,9 @@ void GameManager::createCamera()
 	mCameraMan = new OgreBites::SdkCameraMan(mCamera);
 }
 
+/// <summary>
+/// Creates the viewports.
+/// </summary>
 void GameManager::createViewports()
 {
 	// add a viewport
@@ -102,6 +130,9 @@ void GameManager::createViewports()
 		Ogre::Real(vp->getActualHeight()));
 }
 
+/// <summary>
+/// Creates the frame listener.
+/// </summary>
 void GameManager::createFrameListener(void)
 {
 	BaseApplication::createFrameListener();
@@ -109,6 +140,10 @@ void GameManager::createFrameListener(void)
 	return;
 }
 
+/// <summary>
+/// Updates the frame based on the specified fe.
+/// </summary>
+/// <param name="fe">The frame event.</param>
 bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& fe)
 {
 	bool ret = BaseApplication::frameRenderingQueued(fe);
@@ -118,6 +153,11 @@ bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& fe)
 	return ret;
 }
 
+/// <summary>
+/// Called when a key is pressed.
+/// </summary>
+/// <param name="ke">The key event.</param>
+/// <returns></returns>
 bool GameManager::keyPressed(const OIS::KeyEvent& ke)
 {
 	Ogre::Vector3 dirVec = _levelManager->playerScript->getDirVector();
@@ -167,9 +207,13 @@ bool GameManager::keyPressed(const OIS::KeyEvent& ke)
 	return true;
 }
 
+/// <summary>
+/// Called when a key is released.
+/// </summary>
+/// <param name="ke">The key event.</param>
+/// <returns></returns>
 bool GameManager::keyReleased(const OIS::KeyEvent& ke)
 {
-	
 	Ogre::Vector3 dirVec = _levelManager->playerScript->getDirVector();
 
 	switch (ke.key)
@@ -212,6 +256,11 @@ bool GameManager::keyReleased(const OIS::KeyEvent& ke)
 }
 
 //TODO: where/how should the turning be handled? 
+/// <summary>
+/// Called when the mouse is moved.
+/// </summary>
+/// <param name="me">The mouse event.</param>
+/// <returns></returns>
 bool GameManager::mouseMoved(const OIS::MouseEvent& me)
 {
 	Ogre::Degree rotX = Ogre::Degree(-_levelManager->playerScript->getRotationspeed()/2 * me.state.Y.rel);
@@ -228,11 +277,23 @@ bool GameManager::mouseMoved(const OIS::MouseEvent& me)
 	return true;
 }
 
+/// <summary>
+/// Called when the mouse is pressed.
+/// </summary>
+/// <param name="me">The mouse event.</param>
+/// <param name="id">The identifier of the mouse button.</param>
+/// <returns></returns>
 bool GameManager::mousePressed(const OIS::MouseEvent& me, OIS::MouseButtonID id)
 {
 	return true;
 }
 
+/// <summary>
+/// Called when the mouse is released.
+/// </summary>
+/// <param name="me">The mouse event.</param>
+/// <param name="id">The identifier of the mouse button.</param>
+/// <returns></returns>
 bool GameManager::mouseReleased(const OIS::MouseEvent& me, OIS::MouseButtonID id)
 {
 	return true;

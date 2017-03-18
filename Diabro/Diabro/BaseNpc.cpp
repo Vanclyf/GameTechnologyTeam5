@@ -1,9 +1,19 @@
 #include "BaseNpc.h"
 
+/// <summary>
+/// Creates a new instance of the <see cref="BaseNpc" /> class.
+/// All NPC's inherit from this class, either friendly and hostile NPC's.
+/// </summary>
+/// <param name="myNode">My node.</param>
+/// <param name="myEntity">My entity.</param>
 BaseNpc::BaseNpc(Ogre::SceneNode* myNode, Ogre::Entity* myEntity) : Character(myNode, myEntity), _timeSince(0)
 {
 }
 
+/// <summary>
+/// Updates the frame based on the specified deltatime.
+/// </summary>
+/// <param name="deltatime">The time since last frame.</param>
 void BaseNpc::update(Ogre::Real deltatime)
 {
 	Character::update(deltatime);
@@ -17,6 +27,9 @@ void BaseNpc::update(Ogre::Real deltatime)
 	}
 }
 
+/// <summary>
+/// Lets this instance wander randomly.
+/// </summary>
 void BaseNpc::wander() {
 
 	//Switch direction

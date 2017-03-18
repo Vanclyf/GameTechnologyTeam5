@@ -1,12 +1,17 @@
 #include "GameManager.h"
 #include "LevelManager.h"
 
+/// <summary>
+/// Initializes a new instance of the <see cref="LevelManager" /> class.
+/// This class is created by the <see cref="GameManager" /> and contains all level information
+/// like characters and the environment.
+/// </summary>
 LevelManager::LevelManager() : _playerEntity(0), _npcEntity(0), _basicEnemyEntity(0), _groundEntity(0)
 {
 }
 
 /// <summary>
-/// Initializes this instance.
+/// Initializes this the level by setting the camera, player, NPC's and surroundings.
 /// </summary>
 void LevelManager::Init()
 {
@@ -51,6 +56,10 @@ void LevelManager::Init()
 	_npcScripts.push_back(enemyScript);
 }
 
+/// <summary>
+/// Updates the frame based on the specified fe.
+/// </summary>
+/// <param name="fe">The frame event.</param>
 void LevelManager::Update(const Ogre::FrameEvent& fe)
 {
 	// Update characters
@@ -62,6 +71,9 @@ void LevelManager::Update(const Ogre::FrameEvent& fe)
 	}
 }
 
+/// <summary>
+/// Creates the ground mesh.
+/// </summary>
 void LevelManager::createGroundMesh()
 {
 	Ogre::Plane plane(Ogre::Vector3::UNIT_Y, 0);
