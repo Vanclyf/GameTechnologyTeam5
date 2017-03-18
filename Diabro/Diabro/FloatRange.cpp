@@ -1,4 +1,5 @@
 #include "FloatRange.h"
+#include <cstdlib>
 
 /// <summary>
 /// Initializes a new instance of the <see cref="FloatRange"/> .
