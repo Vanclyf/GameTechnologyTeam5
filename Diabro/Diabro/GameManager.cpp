@@ -63,7 +63,7 @@ void GameManager::createScene(void)
 	mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 
 	_levelManager = new LevelManager();
-	_levelManager->Init();
+	_levelManager->initialize();
 
 	_uiManager = new UIManager();
 	_uiManager->init();
@@ -72,20 +72,20 @@ void GameManager::createScene(void)
 /// <summary>
 /// Setups the lights.
 /// </summary>
-/// <param name="sceneMgr">The scenemanager.</param>
-void GameManager::setupLights(Ogre::SceneManager* sceneMgr)
+/// <param name="pSceneMgr">The scenemanager.</param>
+void GameManager::setupLights(Ogre::SceneManager* pSceneMgr)
 {
 	// set ambient lighting
-	sceneMgr->setAmbientLight(Ogre::ColourValue(0.2, 0.2, 0.5));
+	pSceneMgr->setAmbientLight(Ogre::ColourValue(0.2, 0.2, 0.5));
 
 	// create the main light
-	Ogre::Light* light = sceneMgr->createLight("MainLight");
+	Ogre::Light* light = pSceneMgr->createLight("MainLight");
 	light->setDiffuseColour(1, 1, 1);
 	light->setSpecularColour(0.5, 0.5, 0.5);
 	light->setType(Ogre::Light::LT_DIRECTIONAL);
 	light->setDirection(-1, -1, 0);
 
-	Ogre::Light* pointLight = sceneMgr->createLight("PointLight");
+	Ogre::Light* pointLight = pSceneMgr->createLight("PointLight");
 	light->setDiffuseColour(1, 1, 1);
 	light->setSpecularColour(0.5, 0.5, 0.5);
 	light->setType(Ogre::Light::LT_POINT);
@@ -141,14 +141,14 @@ void GameManager::createFrameListener(void)
 }
 
 /// <summary>
-/// Updates the frame based on the specified fe.
+/// Updates the frame based on the specified pFE.
 /// </summary>
-/// <param name="fe">The frame event.</param>
-bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& fe)
+/// <param name="pFE">The frame event.</param>
+bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& pFE)
 {
-	bool ret = BaseApplication::frameRenderingQueued(fe);
+	bool ret = BaseApplication::frameRenderingQueued(pFE);
 
-	_levelManager->Update(fe);
+	_levelManager->update(pFE);
  
 	return ret;
 }
@@ -156,13 +156,13 @@ bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& fe)
 /// <summary>
 /// Called when a key is pressed.
 /// </summary>
-/// <param name="ke">The key event.</param>
+/// <param name="pKE">The key event.</param>
 /// <returns></returns>
-bool GameManager::keyPressed(const OIS::KeyEvent& ke)
+bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 {
 	Ogre::Vector3 dirVec = _levelManager->playerScript->getDirVector();
 
-	switch (ke.key)
+	switch (pKE.key)
 	{
 		// on esc close app
 	case OIS::KC_ESCAPE:
@@ -210,13 +210,13 @@ bool GameManager::keyPressed(const OIS::KeyEvent& ke)
 /// <summary>
 /// Called when a key is released.
 /// </summary>
-/// <param name="ke">The key event.</param>
+/// <param name="pKE">The key event.</param>
 /// <returns></returns>
-bool GameManager::keyReleased(const OIS::KeyEvent& ke)
+bool GameManager::keyReleased(const OIS::KeyEvent& pKE)
 {
 	Ogre::Vector3 dirVec = _levelManager->playerScript->getDirVector();
 
-	switch (ke.key)
+	switch (pKE.key)
 	{
 	case OIS::KC_UP:
 	case OIS::KC_W:
@@ -261,13 +261,13 @@ bool GameManager::keyReleased(const OIS::KeyEvent& ke)
 /// </summary>
 /// <param name="me">The mouse event.</param>
 /// <returns></returns>
-bool GameManager::mouseMoved(const OIS::MouseEvent& me)
+bool GameManager::mouseMoved(const OIS::MouseEvent& pME)
 {
-	Ogre::Degree rotX = Ogre::Degree(-_levelManager->playerScript->getRotationspeed()/2 * me.state.Y.rel);
+	Ogre::Degree rotX = Ogre::Degree(-_levelManager->playerScript->getRotationspeed()/2 * pME.state.Y.rel);
 	Ogre::Degree originalPitch = mSceneMgr->getSceneNode("CameraNode")->getOrientation().getPitch();
 	Ogre::Degree degreeFrmStartPitch = (rotX + originalPitch) - _levelManager->startPitchCam;
 
-	mSceneMgr->getSceneNode("PlayerNode")->yaw(Ogre::Degree(-_levelManager->playerScript->getRotationspeed() * me.state.X.rel), Ogre::Node::TS_WORLD);
+	mSceneMgr->getSceneNode("PlayerNode")->yaw(Ogre::Degree(-_levelManager->playerScript->getRotationspeed() * pME.state.X.rel), Ogre::Node::TS_WORLD);
 
 	if (degreeFrmStartPitch < Ogre::Degree(10) && degreeFrmStartPitch > Ogre::Degree(-40))
 	{
@@ -283,7 +283,7 @@ bool GameManager::mouseMoved(const OIS::MouseEvent& me)
 /// <param name="me">The mouse event.</param>
 /// <param name="id">The identifier of the mouse button.</param>
 /// <returns></returns>
-bool GameManager::mousePressed(const OIS::MouseEvent& me, OIS::MouseButtonID id)
+bool GameManager::mousePressed(const OIS::MouseEvent& pME, OIS::MouseButtonID pID)
 {
 	return true;
 }
@@ -294,7 +294,7 @@ bool GameManager::mousePressed(const OIS::MouseEvent& me, OIS::MouseButtonID id)
 /// <param name="me">The mouse event.</param>
 /// <param name="id">The identifier of the mouse button.</param>
 /// <returns></returns>
-bool GameManager::mouseReleased(const OIS::MouseEvent& me, OIS::MouseButtonID id)
+bool GameManager::mouseReleased(const OIS::MouseEvent& pME, OIS::MouseButtonID pID)
 {
 	return true;
 }

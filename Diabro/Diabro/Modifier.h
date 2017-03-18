@@ -14,20 +14,9 @@ enum ModifierType : unsigned int
 class Modifier
 {
 public:
-	ModifierType GetModifierType()
-	{
-		return _modifierType;
-	}
-
-	StatType GetAffected()
-	{
-		return _affected;
-	}
-
-	float GetValue()
-	{
-		return _value;
-	}
+	ModifierType getModifierType() { return _modifierType; }
+	StatType getAffected() { return _affected; }
+	float getValue() { return _value; }
 
 private:
 	ModifierType _modifierType;

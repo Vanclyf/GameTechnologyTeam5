@@ -11,15 +11,8 @@ using namespace std;
 class StatRange
 {
 public:
-	vector<StatType> GetStatTypes()
-	{
-		return _statTypes;
-	}
-
-	FloatRange GetFloatRange()
-	{
-		return _range;
-	}
+	vector<StatType> getStatTypes() { return _statTypes; }
+	FloatRange getFloatRange() { return _range; }
 
 private:
 	vector<StatType> _statTypes;

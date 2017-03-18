@@ -4,9 +4,9 @@
 /// Creates a new instance of the <see cref="BasicEnemy"/> class.
 /// All enemies inherit from this class.
 /// </summary>
-/// <param name="myNode">My node.</param>
-/// <param name="myEntity">My entity.</param>
-BasicEnemy::BasicEnemy(Ogre::SceneNode* myNode, Ogre::Entity* myEntity) : BaseNpc(myNode, myEntity)
+/// <param name="pMyNode">My node.</param>
+/// <param name="pMyEntity">My entity.</param>
+BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : BaseNpc(pMyNode, pMyEntity)
 {
 }
 

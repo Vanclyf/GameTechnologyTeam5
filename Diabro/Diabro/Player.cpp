@@ -4,15 +4,15 @@
 /// <summary>
 /// Creates a new instance of the <see cref="Player"/> class.
 /// </summary>
-/// <param name="myNode">My node.</param>
-/// <param name="myEntity">My entity.</param>
-Player::Player(Ogre::SceneNode* myNode, Ogre::Entity* myEntity) : Character(myNode, myEntity)
+/// <param name="pMyNode">My node.</param>
+/// <param name="pMyEntity">My entity.</param>
+Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pMyNode, pMyEntity)
 {
 	// override default speeds
 	_movespeed = 250;
 	_runspeed = 450;
 
-	// initialize level vars
+	// initialize pLevel vars
 	_currentLevel = 1;
 	_currentXP = 0;
 	_xpTillNextLevel = calcXpTillLevel(_currentLevel + 1);
@@ -32,11 +32,11 @@ bool Player::initialize()
 /// <summary>
 /// Adjusts the health.
 /// </summary>
-/// <param name="adjust">The adjustment of health.</param>
+/// <param name="pAdjust">The adjustment of health.</param>
 /// <returns>False if the player runs out of health and dies.</returns>
-bool Player::adjustHealth(float adjust)
+bool Player::adjustHealth(float pAdjust)
 {
-	if (!Character::adjustHealth(adjust)) { return false; }
+	if (!Character::adjustHealth(pAdjust)) { return false; }
 
 	GameManager::getSingleton().getUIManager()->adjustHealthBar(_currentHealth, _stats->GetStat(StatType::MaxHealth));
 	return true;
@@ -47,9 +47,9 @@ bool Player::adjustHealth(float adjust)
 /// </summary>
 /// <param name="deltatime">The time since last frame.</param>
 /// <returns>False if the player runs out of statina.</returns>
-bool Player::adjustStaminaOverTime(Ogre::Real deltaTime)
+bool Player::adjustStaminaOverTime(Ogre::Real pDeltaTime)
 {
-	Character::adjustStaminaOverTime(deltaTime);
+	Character::adjustStaminaOverTime(pDeltaTime);
 
 	GameManager::getSingleton().getUIManager()->adjustStaminaBar(_currentStamina, _stats->GetStat(StatType::MaxStamina));
 
@@ -59,11 +59,11 @@ bool Player::adjustStaminaOverTime(Ogre::Real deltaTime)
 /// <summary>
 /// Adjusts the stamina.
 /// </summary>
-/// <param name="adjust">The adjustment in stamina.</param>
+/// <param name="pAdjust">The adjustment in stamina.</param>
 /// <returns>False if the player runs out of statina.</returns>
-bool Player::adjustStamina(float adjust)
+bool Player::adjustStamina(float pAdjust)
 {
-	Character::adjustStamina(adjust);
+	Character::adjustStamina(pAdjust);
 
 	GameManager::getSingleton().getUIManager()->adjustStaminaBar(_currentStamina, _stats->GetStat(StatType::MaxStamina));
 
@@ -71,15 +71,15 @@ bool Player::adjustStamina(float adjust)
 }
 
 /// <summary>
-/// Calculates the xp need to reach the next level.
+/// Calculates the pXP need to reach the next pLevel.
 /// </summary>
-/// <param name="level">The next level.</param>
+/// <param name="pLevel">The next pLevel.</param>
 /// <returns></returns>
-int Player::calcXpTillLevel(int level)
+int Player::calcXpTillLevel(int pLevel)
 {
 	int newXP = 0;
 
-	for (int i = 1; i < level; ++i)
+	for (int i = 1; i < pLevel; ++i)
 	{
 		newXP += Ogre::Math::Floor(i + 300 * Ogre::Math::Pow(2, i / 7.0f));
 	}
@@ -90,12 +90,12 @@ int Player::calcXpTillLevel(int level)
 }
 
 /// <summary>
-/// Increases the xp of the player.
+/// Increases the pXP of the player.
 /// </summary>
-/// <param name="xp">The xp gained.</param>
-void Player::gainXP(int xp)
+/// <param name="pXP">The pXP gained.</param>
+void Player::gainXP(int pXP)
 {
-	if ((_currentXP += xp) >= _xpTillNextLevel)
+	if ((_currentXP += pXP) >= _xpTillNextLevel)
 	{
 		levelUp();
 	}

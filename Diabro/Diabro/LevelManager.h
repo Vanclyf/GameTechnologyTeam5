@@ -14,9 +14,9 @@ class LevelManager
 public:
 	LevelManager();
 
-	void Init();
+	void initialize();
 
-	void Update(const Ogre::FrameEvent& fe);
+	void update(const Ogre::FrameEvent&);
 
 	static void createGroundMesh();
 
@@ -42,7 +42,7 @@ private:
 	Ogre::SceneNode* _levelNode;
 	Ogre::SceneNode* _camNode;
 	
-	vector<BaseNpc*> _npcScripts;
+	std::vector<BaseNpc*> _npcScripts;
 	// TODO: lists of different scripts (NPC's, enemies, e.d.) 
 };
 

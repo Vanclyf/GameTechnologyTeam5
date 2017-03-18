@@ -13,9 +13,9 @@ public:
 	void init();
 	void setupUI();
 
-	void adjustHealthBar(Ogre::Real value, Ogre::Real maxValue);
-	void adjustStaminaBar(Ogre::Real value, Ogre::Real maxValue);
-	Ogre::Real calcBarSize(Ogre::Real value, Ogre::Real maxValue, Ogre::Real maxSize);
+	void adjustHealthBar(Ogre::Real, Ogre::Real);
+	void adjustStaminaBar(Ogre::Real, Ogre::Real);
+	Ogre::Real calcBarSize(Ogre::Real, Ogre::Real, Ogre::Real);
 
 private:
 	Ogre::Billboard* setupUIBar(Ogre::String, Ogre::SceneNode*, Ogre::BillboardOrigin, Ogre::String, Ogre::Vector3, Ogre::Vector3);

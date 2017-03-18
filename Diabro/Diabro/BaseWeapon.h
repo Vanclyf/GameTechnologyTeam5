@@ -5,7 +5,7 @@
 #include "BaseEquipment.h"
 
 
-enum HandledType : unsigned int
+enum HandedType : unsigned int
 {
 	OneHanded = 0,
 	TwoHanded = 1
@@ -18,20 +18,20 @@ public:
 	BaseWeapon();
 	~BaseWeapon();
 
-	HandledType GetHandledType()
+	HandedType getHandledType()
 	{
 		return _handed;
 	}
 
-	string GetModelPath()
+	std::string getModelPath()
 	{
 		return _modelPath;
 	}
 
 
 private:
-	HandledType _handed;
-	string _modelPath;
+	HandedType _handed;
+	std::string _modelPath;
 	
 };
 

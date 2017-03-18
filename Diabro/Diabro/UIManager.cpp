@@ -38,62 +38,62 @@ void UIManager::setupUI()
 /// <summary>
 /// Setups the UI bar.
 /// </summary>
-/// <param name="id">The identifier of the specific bar.</param>
-/// <param name="node">The node to attach the bar to.</param>
-/// <param name="origin">The origin of the bar.</param>
-/// <param name="materialName">Name of the material.</param>
-/// <param name="pos">The position.</param>
-/// <param name="offset">The offset.</param>
+/// <param name="pID">The identifier of the specific bar.</param>
+/// <param name="pNode">The pNode to attach the bar to.</param>
+/// <param name="pOrigin">The pOrigin of the bar.</param>
+/// <param name="pMaterialName">Name of the material.</param>
+/// <param name="pPos">The position.</param>
+/// <param name="pOffset">The pOffset.</param>
 /// <returns></returns>
-Ogre::Billboard* UIManager::setupUIBar(Ogre::String id, Ogre::SceneNode* node, Ogre::BillboardOrigin origin, Ogre::String materialName, Ogre::Vector3 pos, Ogre::Vector3 offset)
+Ogre::Billboard* UIManager::setupUIBar(Ogre::String pID, Ogre::SceneNode* pNode, Ogre::BillboardOrigin pOrigin, Ogre::String pMaterialName, Ogre::Vector3 pPos, Ogre::Vector3 pOffset)
 {
-	Ogre::BillboardSet* barbackgroundSet = GameManager::getSingletonPtr()->getSceneManager()->createBillboardSet("Background" + id + "Set");
+	Ogre::BillboardSet* barbackgroundSet = GameManager::getSingletonPtr()->getSceneManager()->createBillboardSet("Background" + pID + "Set");
 	barbackgroundSet->setMaterialName("UI/Grey");
-	barbackgroundSet->setBillboardOrigin(origin);
+	barbackgroundSet->setBillboardOrigin(pOrigin);
 
-	Ogre::Billboard* barbackground = barbackgroundSet->createBillboard(pos.x + offset.x, pos.y + offset.y, pos.z + offset.z);
+	Ogre::Billboard* barbackground = barbackgroundSet->createBillboard(pPos.x + pOffset.x, pPos.y + pOffset.y, pPos.z + pOffset.z);
 	barbackground->setDimensions(206, 26);
-	node->attachObject(barbackgroundSet);
+	pNode->attachObject(barbackgroundSet);
 
-	Ogre::BillboardSet* barSet = GameManager::getSingletonPtr()->getSceneManager()->createBillboardSet(id + "Set");
-	barSet->setMaterialName(materialName);
-	barSet->setBillboardOrigin(origin);
+	Ogre::BillboardSet* barSet = GameManager::getSingletonPtr()->getSceneManager()->createBillboardSet(pID + "Set");
+	barSet->setMaterialName(pMaterialName);
+	barSet->setBillboardOrigin(pOrigin);
 
-	Ogre::Billboard* bar = barSet->createBillboard(pos.x, pos.y, pos.z + 10);
+	Ogre::Billboard* bar = barSet->createBillboard(pPos.x, pPos.y, pPos.z + 10);
 	bar->setDimensions(200, 20);
-	node->attachObject(barSet);
+	pNode->attachObject(barSet);
 
 	return(bar);
 }
 
 /// <summary>
-/// Adjusts the health bar value.
+/// Adjusts the health bar pValue.
 /// </summary>
-/// <param name="value">The value.</param>
-/// <param name="maxValue">The maximum value.</param>
-void UIManager::adjustHealthBar(Ogre::Real value, Ogre::Real maxValue)
+/// <param name="pValue">The pValue.</param>
+/// <param name="pMaxValue">The maximum pValue.</param>
+void UIManager::adjustHealthBar(Ogre::Real pValue, Ogre::Real pMaxValue)
 {
-	_healthBar->setDimensions(calcBarSize(value, maxValue, _maxWidthBar), _heightBar);
+	_healthBar->setDimensions(calcBarSize(pValue, pMaxValue, _maxWidthBar), _heightBar);
 }
 
 /// <summary>
-/// Adjusts the stamina bar value.
+/// Adjusts the stamina bar pValue.
 /// </summary>
-/// <param name="value">The value.</param>
-/// <param name="maxValue">The maximum value.</param>
-void UIManager::adjustStaminaBar(Ogre::Real value, Ogre::Real maxValue)
+/// <param name="pValue">The pValue.</param>
+/// <param name="pMaxValue">The maximum pValue.</param>
+void UIManager::adjustStaminaBar(Ogre::Real pValue, Ogre::Real pMaxValue)
 {
-	_staminaBar->setDimensions(calcBarSize(value, maxValue, _maxWidthBar), _heightBar);
+	_staminaBar->setDimensions(calcBarSize(pValue, pMaxValue, _maxWidthBar), _heightBar);
 }
 
 /// <summary>
 /// Calculates the new size of the bar.
 /// </summary>
-/// <param name="value">The current value.</param>
-/// <param name="maxValue">The maximum value.</param>
+/// <param name="pValue">The current pValue.</param>
+/// <param name="pMaxValue">The maximum pValue.</param>
 /// <param name="maxSize">The maximum size.</param>
 /// <returns></returns>
-Ogre::Real UIManager::calcBarSize(Ogre::Real value, Ogre::Real maxValue, Ogre::Real maxSize)
+Ogre::Real UIManager::calcBarSize(Ogre::Real pValue, Ogre::Real pMaxValue, Ogre::Real pMaxSize)
 {
-	return((value / maxValue) * maxSize);
+	return((pValue / pMaxValue) * pMaxSize);
 }

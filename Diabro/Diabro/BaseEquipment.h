@@ -19,17 +19,17 @@ public:
 	BaseEquipment();
 	~BaseEquipment();
 
-	EquipmentType GetEquipmentType()
+	EquipmentType getEquipmentType()
 	{
 		return _equipmentType;
 	}
 
-	StatType GetMainStat()
+	StatType getMainStat()
 	{
 		return _mainStat;
 	}
 
-	vector<StatRange> GetBaseStats()
+	std::vector<StatRange> getBaseStats()
 	{
 		return _baseStats;
 	}

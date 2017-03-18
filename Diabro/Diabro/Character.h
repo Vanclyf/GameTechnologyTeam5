@@ -15,19 +15,19 @@ public:
 	~Character() {}
 
 	virtual bool initialize();
-	virtual void update(Ogre::Real deltatime);
+	virtual void update(Ogre::Real);
 
 	// -------------------------------------------------------------------------------
 	// Properties
 
 	Ogre::Vector3 getDirVector() { return _dirVec; }
-	Ogre::Vector3 setDirVector(Ogre::Vector3 moveVec) { return _dirVec = moveVec; }
+	Ogre::Vector3 setDirVector(Ogre::Vector3 pMoveVec) { return _dirVec = pMoveVec; }
 
 	Ogre::Real getSpeed() { return _isRunning ? _runspeed : _movespeed; }
 	Ogre::Real getRotationspeed() { return _rotationspeed; }
 
 	Ogre::Real getCurrHealth() { return _currentHealth;  }
-	Ogre::Real setCurrHealth(Ogre::Real HP) { return _currentHealth = HP; }
+	Ogre::Real setCurrHealth(Ogre::Real pHP) { return _currentHealth = pHP; }
 
 	Ogre::Vector3 getPosition() { return _myNode->getPosition(); }
 
@@ -36,11 +36,11 @@ public:
 	// -------------------------------------------------------------------------------
 
 	virtual void move(Ogre::Vector3&);
-	void toggleRun(bool run) { _isRunning = run; }
+	void toggleRun(bool pRun) { _isRunning = pRun; }
 
-	virtual bool adjustHealth(float adjust);
-	virtual bool adjustStaminaOverTime(Ogre::Real deltaTime);
-	virtual bool adjustStamina(float adjust);
+	virtual bool adjustHealth(float);
+	virtual bool adjustStaminaOverTime(Ogre::Real);
+	virtual bool adjustStamina(float);
 	virtual void die();
 
 protected:

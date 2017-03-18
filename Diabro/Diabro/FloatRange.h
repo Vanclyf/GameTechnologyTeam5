@@ -7,20 +7,14 @@
 class FloatRange
 {
 public:
-	FloatRange(float min, float max);
+	FloatRange(float, float);
 	~FloatRange();
 
-	int GetMin()
-	{
-		return _min;
-	}
+	int getMin() { return _min; }
 
-	int GetMax()
-	{
-		return _max;
-	}
+	int getMax() { return _max; }
 
-	int RandomInRange();
+	int randomInRange();
 
 private:
 	int _min;

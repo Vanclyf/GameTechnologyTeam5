@@ -6,8 +6,6 @@
 #include <vector>
 #include <OgrePrerequisites.h>
 
-using namespace std;
-
 enum StatType : unsigned int
 {
 	Strength = 0,
@@ -59,12 +57,11 @@ class CharacterStats
 {
 public:
 	CharacterStats();
-	CharacterStats(vector<Stat> stats) : _stats(stats){};
-	// TO DO: add modifiers for items. 
+	CharacterStats(std::vector<Stat> pStats) : _stats(pStats){};
+	//TO DO: add modifiers for items. 
 
-	vector<Stat> GetStats() { return _stats; }
-	Ogre::Real GetStat(StatType id) { return _stats.at((int)id).value; }
-	void SetStats(vector<Stat> stats);
+	std::vector<Stat> GetStats() { return _stats; }
+	Ogre::Real GetStat(StatType pID) { return _stats.at((int)pID).value; }
 
 	/*Ogre::Real MaxDeterminedHealth() { return (int)(GetStat(MaxHealth) + (GetStat(Vitality) * 10)); }
 	Ogre::Real DeterminedDamage() { return GetStat(Damage) * (1 + (GetStat(Strength) / 100)); }
@@ -88,7 +85,7 @@ public:
 	Ogre::Real PotentialProtectionPerSec() { return (int)(MaxDeterminedHealth() * (1 + ArmorToughnessFactor()) * (1 + ResistanceToughnessFactor())); }
 	*/
 private:
-	vector<Stat> _stats;
+	std::vector<Stat> _stats;
 	int _level;
 
 };

@@ -10,7 +10,7 @@ public:
 	BaseNpc(Ogre::SceneNode*, Ogre::Entity*);
 	~BaseNpc();
 
-	void update(Ogre::Real deltatime) override;
+	void update(Ogre::Real) override;
 
 private:
 	float _timeSince;

@@ -4,21 +4,21 @@
 /// Creates a new instance of the <see cref="BaseNpc" /> class.
 /// All NPC's inherit from this class, either friendly and hostile NPC's.
 /// </summary>
-/// <param name="myNode">My node.</param>
-/// <param name="myEntity">My entity.</param>
-BaseNpc::BaseNpc(Ogre::SceneNode* myNode, Ogre::Entity* myEntity) : Character(myNode, myEntity), _timeSince(0)
+/// <param name="pMyNode">My node.</param>
+/// <param name="pMyEntity">My entity.</param>
+BaseNpc::BaseNpc(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pMyNode, pMyEntity), _timeSince(0)
 {
 }
 
 /// <summary>
-/// Updates the frame based on the specified deltatime.
+/// Updates the frame based on the specified pDeltatime.
 /// </summary>
-/// <param name="deltatime">The time since last frame.</param>
-void BaseNpc::update(Ogre::Real deltatime)
+/// <param name="pDeltatime">The time since last frame.</param>
+void BaseNpc::update(Ogre::Real pDeltatime)
 {
-	Character::update(deltatime);
+	Character::update(pDeltatime);
 
-	_timeSince += deltatime;
+	_timeSince += pDeltatime;
 
 	if (_timeSince > 2) 
 	{

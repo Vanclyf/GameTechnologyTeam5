@@ -41,12 +41,12 @@ protected:
 	static void setupLights(Ogre::SceneManager*);
 	
 private:
-	virtual bool frameRenderingQueued(const Ogre::FrameEvent& fe);
-	virtual bool keyPressed(const OIS::KeyEvent& ke);
-	virtual bool keyReleased(const OIS::KeyEvent& ke);
-	virtual bool mouseMoved(const OIS::MouseEvent& me);
-	virtual bool mousePressed(const OIS::MouseEvent& me, OIS::MouseButtonID id);
-	virtual bool mouseReleased(const OIS::MouseEvent& me, OIS::MouseButtonID id);
+	virtual bool frameRenderingQueued(const Ogre::FrameEvent&);
+	virtual bool keyPressed(const OIS::KeyEvent&);
+	virtual bool keyReleased(const OIS::KeyEvent&);
+	virtual bool mouseMoved(const OIS::MouseEvent&);
+	virtual bool mousePressed(const OIS::MouseEvent&, OIS::MouseButtonID);
+	virtual bool mouseReleased(const OIS::MouseEvent&, OIS::MouseButtonID);
 
 	LevelManager* _levelManager;
 	UIManager* _uiManager;

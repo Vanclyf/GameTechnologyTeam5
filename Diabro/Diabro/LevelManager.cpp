@@ -13,7 +13,7 @@ LevelManager::LevelManager() : _playerEntity(0), _npcEntity(0), _basicEnemyEntit
 /// <summary>
 /// Initializes this the level by setting the camera, player, NPC's and surroundings.
 /// </summary>
-void LevelManager::Init()
+void LevelManager::initialize()
 {
 	// create level node, the root node for everything in the level
 	_levelNode = GameManager::getSingletonPtr()->getSceneManager()->getRootSceneNode()->createChildSceneNode("LevelNode");
@@ -60,14 +60,14 @@ void LevelManager::Init()
 /// Updates the frame based on the specified fe.
 /// </summary>
 /// <param name="fe">The frame event.</param>
-void LevelManager::Update(const Ogre::FrameEvent& fe)
+void LevelManager::update(const Ogre::FrameEvent& pFE)
 {
-	// Update characters
-	playerScript->update(fe.timeSinceLastFrame);
+	// update characters
+	playerScript->update(pFE.timeSinceLastFrame);
 
 	for(int i = 0; i < _npcScripts.size(); i++)
 	{
-		_npcScripts[i]->update(fe.timeSinceLastFrame);
+		_npcScripts[i]->update(pFE.timeSinceLastFrame);
 	}
 }
 

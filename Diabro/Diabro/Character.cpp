@@ -6,9 +6,9 @@
 /// This class is contained by the <see cref="LevelManager"/>, which manages all instances in the level. 
 /// All characters in the game, NPC's and the player, inherit from this base class. 
 /// </summary>
-/// <param name="myNode">My node.</param>
-/// <param name="myEntity">My entity.</param>
-Character::Character(Ogre::SceneNode* myNode, Ogre::Entity* myEntity) : _myNode(myNode), _myEntity(myEntity)
+/// <param name="pMyNode">My node.</param>
+/// <param name="pMyEntity">My entity.</param>
+Character::Character(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : _myNode(pMyNode), _myEntity(pMyEntity)
 {
 	_dirVec = (0, 0, 0);
 	_movespeed = 100;
@@ -33,13 +33,13 @@ bool Character::initialize()
 }
 
 /// <summary>
-/// Updates the frame based on the specified deltatime.
+/// Updates the frame based on the specified pDeltatime.
 /// </summary>
-/// <param name="deltatime">The time since last frame.</param>
-void Character::update(Ogre::Real deltatime)
+/// <param name="pDeltatime">The time since last frame.</param>
+void Character::update(Ogre::Real pDeltatime)
 {
-	_myNode->translate(_dirVec * getSpeed() * deltatime, Ogre::Node::TS_LOCAL);
-	adjustStaminaOverTime(deltatime);
+	_myNode->translate(_dirVec * getSpeed() * pDeltatime, Ogre::Node::TS_LOCAL);
+	adjustStaminaOverTime(pDeltatime);
 }
 
 /// <summary>
@@ -48,7 +48,7 @@ void Character::update(Ogre::Real deltatime)
 /// <returns></returns>
 bool Character::setUpStats()
 {
-	vector<Stat> tempStats;
+	std::vector<Stat> tempStats;
 
 	int statNr = (int)StatType::AMOUNT_OF_TYPES;
 
@@ -84,20 +84,20 @@ bool Character::setUpStats()
 /// <summary>
 /// Set the direction vector of the character with the specified vector.
 /// </summary>
-/// <param name="moveVec">The new direction vector.</param>
-void Character::move(Ogre::Vector3& moveVec)
+/// <param name="pMoveVec">The new direction vector.</param>
+void Character::move(Ogre::Vector3& pMoveVec)
 {
-	_dirVec = moveVec;
+	_dirVec = pMoveVec;
 }
 
 /// <summary>
 /// Adjusts the health.
 /// </summary>
-/// <param name="adjust">The adjustment of health.</param>
+/// <param name="pAdjust">The adjustment of health.</param>
 /// <returns>False if the character runs out of health.</returns>
-bool Character::adjustHealth(float adjust)
+bool Character::adjustHealth(float pAdjust)
 {
-	if ((_currentHealth -= adjust) <= 0)
+	if ((_currentHealth -= pAdjust) <= 0)
 	{
 		//Die();
 		return false;
@@ -109,13 +109,13 @@ bool Character::adjustHealth(float adjust)
 /// <summary>
 /// Adjusts the stamina over time.
 /// </summary>
-/// <param name="deltatime">The time since last frame.</param>
+/// <param name="pDeltatime">The time since last frame.</param>
 /// <returns>False if the character runs out of statina.</returns>
-bool Character::adjustStaminaOverTime(Ogre::Real deltaTime)
+bool Character::adjustStaminaOverTime(Ogre::Real pDeltaTime)
 {
 	Ogre::Real adjust = _isRunning ? -_stats->GetStat(StaminaRegen) / 2 : _stats->GetStat(MaxStamina);
 
-	adjust *= deltaTime;
+	adjust *= pDeltaTime;
 
 	if ((_currentStamina += adjust) <= 0)
 	{
@@ -134,16 +134,16 @@ bool Character::adjustStaminaOverTime(Ogre::Real deltaTime)
 /// <summary>
 /// Adjusts the stamina.
 /// </summary>
-/// <param name="adjust">The adjustment in stamina.</param>
+/// <param name="pAdjust">The adjustment in stamina.</param>
 /// <returns>False if the character runs out of statina.</returns>
-bool Character::adjustStamina(float adjust)
+bool Character::adjustStamina(float pAdjust)
 {
-	if ((_currentStamina += adjust) <= 0)
+	if ((_currentStamina += pAdjust) <= 0)
 	{
 		// attack should be canceled
 		return false;
 	}
-	else if ((_currentStamina += adjust) >= _stats->GetStat(MaxStamina))
+	else if ((_currentStamina += pAdjust) >= _stats->GetStat(MaxStamina))
 	{
 		_currentStamina = _stats->GetStat(MaxStamina);
 	}

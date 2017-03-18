@@ -14,9 +14,9 @@ public:
 
 	bool initialize() override;
 	
-	bool adjustHealth(float adjust) override;
-	bool adjustStaminaOverTime(Ogre::Real deltaTime) override;
-	bool adjustStamina(float adjust) override;
+	bool adjustHealth(float) override;
+	bool adjustStaminaOverTime(Ogre::Real) override;
+	bool adjustStamina(float) override;
 
 private:
 	int _currentXP;
