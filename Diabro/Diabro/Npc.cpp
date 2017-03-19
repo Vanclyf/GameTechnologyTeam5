@@ -1,4 +1,5 @@
 #include "Npc.h"
+#include "GameManager.h"
 
 /// <summary>
 /// Creates a new instance of the <see cref="Npc"/> class.
@@ -7,6 +8,7 @@
 /// <param name="pMyEntity">My entity.</param>
 Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : BaseNpc(pMyNode, pMyEntity), _inDialog(false)
 {
+	_id = GameManager::getSingletonPtr()->getLevelManager()->subscribeFriendlyNPC(this);
 }
 
 /// <summary>
@@ -17,14 +19,10 @@ void Npc::update(Ogre::Real pDeltatime)
 {
 	BaseNpc::update(pDeltatime);
 
-	if(_inDialog)
+	if(_playerDetected)
 	{
-		//TODO: it's not movement that should be changed, since it should become a const var
-		_movespeed = 0;
-	} else
-	{
-		_movespeed = 100;
-	}
+		_dirVec = Ogre::Vector3::ZERO;
+	} 
 }
 
 
@@ -56,4 +54,10 @@ bool Npc::dialog(Ogre::Vector3 pPlayerPos)
 		
 		return false;
 	}
+}
+
+void Npc::die() {
+	Character::die();
+
+	GameManager::getSingletonPtr()->getLevelManager()->detachFriendlyNPC(_id);
 }

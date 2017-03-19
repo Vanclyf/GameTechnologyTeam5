@@ -7,7 +7,6 @@
 #include "BaseApplication.h"
 #include "BasicEnemy.h"
 #include <OgreSceneManager.h>
-#include <OgreMeshManager.h>
 
 class LevelManager
 {
@@ -24,6 +23,14 @@ public:
 	Ogre::SceneNode* getCamNode() { return _camNode; }
 
 	Player* getPlayer() { return playerScript; }
+	std::vector<Character*> getFriendlyNpcs() { return _friendlyNpcScripts; }
+	std::vector<Character*> getHostileNpcs() { return _hostileNpcScripts; }
+
+	int subscribeHostileNPC(BasicEnemy*);
+	int subscribeFriendlyNPC(Npc*);
+
+	void detachHostileNPC(int);
+	void detachFriendlyNPC(int);
 
 	// for now public so that game manager can access it. 
 	Player* playerScript; 
@@ -42,7 +49,8 @@ private:
 	Ogre::SceneNode* _levelNode;
 	Ogre::SceneNode* _camNode;
 	
-	std::vector<BaseNpc*> _npcScripts;
+	std::vector<Character*> _friendlyNpcScripts;
+	std::vector<Character*> _hostileNpcScripts;
 	// TODO: lists of different scripts (NPC's, enemies, e.d.) 
 };
 

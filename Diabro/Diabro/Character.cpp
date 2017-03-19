@@ -9,7 +9,8 @@
 /// <param name="pMyNode">My node.</param>
 /// <param name="pMyEntity">My entity.</param>
 Character::Character(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : _myNode(pMyNode), _myEntity(pMyEntity), _stats(0), _dirVec(0, 0, 0),
-	_movespeed(100), _runspeed(250), _rotationspeed(0.13), _isRunning(false), _currentLevel(1), _currentHealth(0), _currentStamina(0) 
+_movespeed(100), _runspeed(250), _rotationspeed(0.13), _isRunning(false), _currentLevel(1), _currentHealth(0), _currentStamina(0), _canAttack(true),
+_attackDistance(20), _currAttackCooldown(0), _lightAttackCooldown(5.0f), _hitted(false), _totalHitTime(.5f)
 {
 }
 
@@ -35,8 +36,38 @@ bool Character::initialize()
 /// <param name="pDeltatime">The time since last frame.</param>
 void Character::update(Ogre::Real pDeltatime)
 {
-	_myNode->translate(_dirVec * getSpeed() * pDeltatime, Ogre::Node::TS_LOCAL);
 	adjustStaminaOverTime(pDeltatime);
+
+	if (_currAttackCooldown > 0) {
+		_currAttackCooldown -= pDeltatime;
+	}else {
+		_canAttack = true;
+	}
+
+	if (_hitTime > 0) {
+		_hitTime -= pDeltatime;
+		return;
+	}
+	else {
+		_hitted = false;
+	}
+
+	_myNode->translate(_dirVec * getSpeed() * pDeltatime, Ogre::Node::TS_LOCAL);
+
+
+}
+
+void Character::findTarget(std::vector<Character*> pPossibleTargets)
+{
+	for (int i = 0; i < pPossibleTargets.size(); ++i) {
+		if (getPosition().distance(pPossibleTargets[i]->getPosition()) < _attackDistance) {
+			//TODO: check for allignment with the other character
+			_target = pPossibleTargets[i];
+			return;
+		}
+	}
+
+	_target = nullptr;
 }
 
 /// <summary>
@@ -87,6 +118,15 @@ void Character::move(Ogre::Vector3& pMoveVec)
 	_dirVec = pMoveVec;
 }
 
+bool Character::lightAttack()
+{
+	if (!_canAttack || _hitted)
+	{
+		return false;
+	}
+
+	return true;
+}
 /// <summary>
 /// Adjusts the health.
 /// </summary>
@@ -94,9 +134,17 @@ void Character::move(Ogre::Vector3& pMoveVec)
 /// <returns>False if the character runs out of health.</returns>
 bool Character::adjustHealth(float pAdjust)
 {
+	FILE* fp;
+	freopen_s(&fp, "CONOUT$", "w", stdout);
+	printf("I got hit... %f", _currentHealth);
+	fclose(fp);
+
+	_hitTime = _totalHitTime;
+	_hitted = true;
+
 	if ((_currentHealth -= pAdjust) <= 0)
 	{
-		//Die();
+		die();
 		return false;
 	}
 
@@ -153,9 +201,12 @@ bool Character::adjustStamina(float pAdjust)
 /// </summary>
 void Character::die()
 {
-	if (_currentHealth <= 0)
-	{
-		//std::cout << "seems you did as health is/or below 0" << currHP;
-	}
+	_myNode->setVisible(false);
+
+	//TODO: clean up the memory.. 
+
+	//TODO: actually destroy the node and its children
+	//_myNode->removeAndDestroyAllChildren();
+	//GameManager::getSingletonPtr()->getSceneManager()->destroySceneNode(_myNode);
 }
 

@@ -7,10 +7,7 @@ Filename:    GameManager.h
 #ifndef GAMEMANAGER_H_
 #define GAMEMANAGER_H_
 
-#include "Player.h"
-#include "BasicEnemy.h"
 #include "BaseApplication.h"
-#include "CharacterStats.h"
 #include "LevelManager.h"
 #include <OgreSingleton.h>
 #include "UIManager.h"

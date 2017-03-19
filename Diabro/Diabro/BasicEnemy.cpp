@@ -10,64 +10,50 @@
 /// <param name="pMyEntity">My entity.</param>
 BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : BaseNpc(pMyNode, pMyEntity)
 {
+	_id = GameManager::getSingletonPtr()->getLevelManager()->subscribeHostileNPC(this);
 }
 
-/// <summary>
-/// Detects the player if he is in range.
-/// </summary>
-void BasicEnemy::detectPlayer()
+void BasicEnemy::update(Ogre::Real pDeltatime)
 {
-	//Ogre::Vector3 basicEnemyPos = mSceneMgr->getSceneNode("BasicEnemyNode")->getPosition();
-	//Ogre::Vector3 playerPos = mSceneMgr->getSceneNode("PlayerNode")->getPosition();
+	BaseNpc::update(pDeltatime);
 
-	//Ogre::Real distance = basicEnemyPos.distance(playerPos);
-}
+	if(_playerDetected) {
+		walkTo(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition());
 
-void BasicEnemy::Attack() 
-{
-	//TODO start the attack animation
-
-}
-
-bool BasicEnemy::AdjustHealth(float adjust, bool weapon)
-{
-	//TODO implement adjusthealth method with new manager classes
-	/*
-	Ogre::Vector3 tempVec3 = this->getPosition() - GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition();
-	Ogre::Real distance = tempVec3.length();
-	if (weapon)
-	{
-
-		if (distance < 200)
-		{
-			std::cout << "Damage Dealt: " << adjust << std::endl;
-			std::cout << "current health: " << _currentHealth << std::endl;
-
-			if ((_currentHealth -= adjust) <= 0)
-			{
-				//Die();
-				printf("dead!");
-				return false;
-			}
+		if (getPosition().distance(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition()) < _attackDistance) {
+			lightAttack();
 		}
 	}
-	else
-	{
-		if (distance < 50)
-		{
-			std::cout << "Damage Dealt: " << adjust << std::endl;
-			std::cout << "current health: " << _currentHealth << std::endl;
-			if ((_currentHealth -= adjust) <= 0)
-			{
-				//Die();
-				printf("dead!");
-				return false;
-			}
-		}
-	}*/
-	return true;
-
 }
 
+
+bool BasicEnemy::lightAttack()
+{
+	if (!Character::lightAttack()) {
+		return false;
+	}
+
+	std::vector<Character*> targets;
+	targets.push_back(GameManager::getSingletonPtr()->getLevelManager()->getPlayer());
+	findTarget(targets);
+
+	if (_target == nullptr) {
+		return false;
+	}
+
+	//deal damage 
+	_target->adjustHealth(_stats->DeterminedDamage());
+	
+	_canAttack = false;
+	_currAttackCooldown = _lightAttackCooldown;
+	return true;
+}
+
+void BasicEnemy::die() {
+	Character::die();
+
+	GameManager::getSingletonPtr()->getLevelManager()->detachHostileNPC(_id);
+	GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->gainXP(10);
+}
 
 

@@ -9,12 +9,15 @@ class BasicEnemy : public BaseNpc
 public:
 	BasicEnemy(Ogre::SceneNode*, Ogre::Entity*);
 	~BasicEnemy() {}
-	bool AdjustHealth(float adjust, bool weapon);
 
-	void Attack();
+	void update(Ogre::Real) override;
+	void die() override;
 
+private:
+	//TODO: this code may be moved to the BaseNPC 
+	// so that all NPC's can attack
+	bool lightAttack() override;
 
-	void detectPlayer();
 };
 
 #endif

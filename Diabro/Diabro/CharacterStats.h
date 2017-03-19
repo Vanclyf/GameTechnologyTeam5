@@ -63,7 +63,7 @@ public:
 	std::vector<Stat> GetStats() { return _stats; }
 	Ogre::Real GetStat(StatType pID) { return _stats.at((int)pID).value; }
 
-	/*Ogre::Real MaxDeterminedHealth() { return (int)(GetStat(MaxHealth) + (GetStat(Vitality) * 10)); }
+	Ogre::Real MaxDeterminedHealth() { return (int)(GetStat(MaxHealth) + (GetStat(Vitality) * 10)); }
 	Ogre::Real DeterminedDamage() { return GetStat(Damage) * (1 + (GetStat(Strength) / 100)); }
 	Ogre::Real DeterminedArmor() { return GetStat(Armor) * (1 + (GetStat(Strength) / 100)); }
 	Ogre::Real DeterminedResistance() { return GetStat(Resistance) * (1 + (GetStat(Intelligence) / 100)); }
@@ -83,7 +83,7 @@ public:
 	Ogre::Real PotentialHealPerSec() { return (int)(GetStat(HealthPerSec) + (GetStat(AttackSpeed) * GetStat(HealthPerHit)) + (PotentialMonstersKilledPerSecond() * GetStat(HealthPerKill))); }
 	
 	Ogre::Real PotentialProtectionPerSec() { return (int)(MaxDeterminedHealth() * (1 + ArmorToughnessFactor()) * (1 + ResistanceToughnessFactor())); }
-	*/
+	
 private:
 	std::vector<Stat> _stats;
 	int _level;

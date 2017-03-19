@@ -51,10 +51,46 @@ void LevelManager::initialize()
 	_camNode->attachObject(GameManager::getSingletonPtr()->getCamera());
 	_camNode->pitch(Ogre::Degree(10), Ogre::Node::TS_LOCAL);
 	startPitchCam = _camNode->getOrientation().getPitch();
-
-	_npcScripts.push_back(npcScript);
-	_npcScripts.push_back(enemyScript);
 }
+
+/// <summary>
+/// Subscribes the friendly NPC.
+/// </summary>
+/// <param name="friendly">The friendly.</param>
+/// <returns></returns>
+int LevelManager::subscribeFriendlyNPC(Npc* friendly) {
+	_friendlyNpcScripts.push_back(friendly); 
+
+	return _friendlyNpcScripts.size() - 1;
+}
+
+/// <summary>
+/// Subscribes the hostile NPC.
+/// </summary>
+/// <param name="hostile">The hostile.</param>
+/// <returns></returns>
+int LevelManager::subscribeHostileNPC(BasicEnemy* hostile) {
+	_hostileNpcScripts.push_back(hostile);
+
+	return _hostileNpcScripts.size() - 1;
+}
+
+/// <summary>
+/// Detaches the friendly NPC.
+/// </summary>
+/// <param name="id">The identifier.</param>
+void LevelManager::detachFriendlyNPC(int id) {
+	_friendlyNpcScripts.erase(_friendlyNpcScripts.begin() + id);
+}
+
+/// <summary>
+/// Detaches the hostile NPC.
+/// </summary>
+/// <param name="id">The identifier.</param>
+void LevelManager::detachHostileNPC(int id) {
+	_hostileNpcScripts.erase(_hostileNpcScripts.begin() + id);
+}
+
 
 /// <summary>
 /// Updates the frame based on the specified fe.
@@ -65,9 +101,14 @@ void LevelManager::update(const Ogre::FrameEvent& pFE)
 	// update characters
 	playerScript->update(pFE.timeSinceLastFrame);
 
-	for(int i = 0; i < _npcScripts.size(); i++)
+	for(int i = 0; i < _friendlyNpcScripts.size(); i++)
 	{
-		_npcScripts[i]->update(pFE.timeSinceLastFrame);
+		_friendlyNpcScripts[i]->update(pFE.timeSinceLastFrame);
+	}
+
+	for (int i = 0; i < _hostileNpcScripts.size(); i++)
+	{
+		_hostileNpcScripts[i]->update(pFE.timeSinceLastFrame);
 	}
 }
 

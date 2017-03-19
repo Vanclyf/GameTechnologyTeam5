@@ -16,6 +16,9 @@ Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pM
 	_currentLevel = 1;
 	_currentXP = 0;
 	_xpTillNextLevel = calcXpTillLevel(_currentLevel + 1);
+
+	_attackDistance = 35;
+	_lightAttackCooldown = 1.2f;
 }
 
 /// <summary>
@@ -55,36 +58,25 @@ bool Player::adjustStaminaOverTime(Ogre::Real pDeltaTime)
 
 	return true;
 }
-bool Player::AttackCooldown(bool Cooldown)
+
+bool Player::lightAttack()
 {
-	_canAttack = Cooldown;
-	return true;
-}
-
-bool Player::LightAttack(bool Weapon)
-{
-
-	FILE* fp;
-
-	freopen_s(&fp, "CONOUT$", "w", stdout);
-
-	//need to make function to calculate distance between the two.
-	//damage calculation with playerstats.
-	int AttackDamage = _stats->GetStat(Damage) * _stats->GetStat(Strength);
-	if (_canAttack)
-	{
-		//check if no cooldown cd = AttackSpeed
-		if (_AttackCD <= 0)
-		{
-			//deal damage 
-			_BasicEnemy->AdjustHealth(AttackDamage, Weapon);
-			printf("dealingDamage");
-			_canAttack = false;
-			//_AttackCD = _stats->GetStat(AttackSpeed) + 10;
-		}
+	if (!Character::lightAttack()) {
+		return false;
 	}
-	//check if target is in range if distance to mouse pos is less than attack range then attack
-	//need to get object under mouse and extract hp from the object.
+
+	std::vector<Character*> targets = GameManager::getSingletonPtr()->getLevelManager()->getHostileNpcs();
+	findTarget(targets);
+
+	if (_target == nullptr) {
+		return false;
+	}
+
+	//deal damage 
+	_target->adjustHealth(_stats->DeterminedDamage());
+	
+	_canAttack = false;
+	_currAttackCooldown = _lightAttackCooldown;
 
 	return true;
 }

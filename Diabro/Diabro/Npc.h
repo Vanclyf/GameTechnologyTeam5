@@ -13,6 +13,7 @@ public:
 	void update(Ogre::Real) override;
 	bool dialog(Ogre::Vector3);
 	void toggleDialog(bool pOn) { _inDialog = pOn; }
+	void die() override;
 
 private: 
 	bool _inDialog;

@@ -8,9 +8,17 @@ class BaseNpc : public Character
 {
 public:
 	BaseNpc(Ogre::SceneNode*, Ogre::Entity*);
-	~BaseNpc();
+	//~BaseNpc();
 
 	void update(Ogre::Real) override;
+
+protected:
+	int _id;
+
+	float _noticeDistance;
+	bool _playerDetected;
+	void detectPlayer(); 
+	void walkTo(Ogre::Vector3);
 
 private:
 	float _timeSince;

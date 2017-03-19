@@ -10,11 +10,9 @@ class Player : public Character
 public:
 	Player(Ogre::SceneNode*, Ogre::Entity*);
 	~Player(){}
-	bool LightAttack(bool Weapon);
-	bool AttackCooldown(bool Cooldown);
-
 
 	void gainXP(int);
+	bool lightAttack() override;
 
 	bool initialize() override;
 	int _attackSpeed;

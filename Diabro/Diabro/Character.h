@@ -54,6 +54,20 @@ protected:
 	CharacterStats* _stats;
 	Ogre::Real _currentHealth;
 	Ogre::Real _currentStamina;
+	
+	Ogre::Real _totalHitTime;
+	Ogre::Real _hitTime;
+	bool _hitted;
+
+	bool _canAttack;
+	Ogre::Real _attackDistance;
+	Ogre::Real _currAttackCooldown;
+	Ogre::Real _lightAttackCooldown;
+	//Ogre::Real _heavyAttackCooldown;
+
+	Character* _target;
+	virtual void findTarget(std::vector<Character*>);
+	virtual bool lightAttack();
 
 	Ogre::SceneNode* _myNode;
 	Ogre::Entity* _myEntity;

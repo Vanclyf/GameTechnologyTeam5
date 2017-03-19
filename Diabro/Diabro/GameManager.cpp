@@ -175,8 +175,6 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 
 	case OIS::KC_DOWN:
 	case OIS::KC_S:
-		//_levelManager->_playerScript->GainXP(10);
-		_levelManager->playerScript->adjustHealth(1);
 		dirVec.z = 1;
 		break;
 
@@ -299,7 +297,7 @@ bool GameManager::mouseReleased(const OIS::MouseEvent& pME, OIS::MouseButtonID p
 	switch (pID)
 	{
 	case OIS::MB_Left:
-		_levelManager->playerScript->LightAttack(true);
+		_levelManager->playerScript->lightAttack();
 		break;
 	default:
 		break;
