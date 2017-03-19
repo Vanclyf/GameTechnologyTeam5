@@ -19,6 +19,7 @@ public:
 	void update(const Ogre::FrameEvent&);
 
 	static void createGroundMesh();
+	static void createWallMesh();
 
 	Ogre::SceneNode* getLevelNode() { return _levelNode; }
 	Ogre::SceneNode* getCamNode() { return _camNode; }
@@ -38,9 +39,11 @@ private:
 	Ogre::Entity* _npcEntity;
 	Ogre::Entity* _basicEnemyEntity;
 	Ogre::Entity* _groundEntity;
+	Ogre::Entity* _wallEntity;
 
 	Ogre::SceneNode* _levelNode;
 	Ogre::SceneNode* _camNode;
+	Ogre::SceneNode* _npcNode;
 	
 	std::vector<BaseNpc*> _npcScripts;
 	// TODO: lists of different scripts (NPC's, enemies, e.d.) 

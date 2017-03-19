@@ -30,11 +30,24 @@ void LevelManager::initialize()
 
 	
 	//creating a NPC object
-	Ogre::SceneNode* npcNode = _levelNode->createChildSceneNode("NpcNode");
-	_npcEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("penguin.mesh");
-	npcNode->createChildSceneNode()->attachObject(_npcEntity);
-	npcScript = new Npc(npcNode, _npcEntity);
-	npcScript->initialize();
+	_npcNode = _levelNode->createChildSceneNode("NpcNode");
+
+
+	for(int i = 0; i < 10;i++)
+	{
+		Ogre::SceneNode *npc;
+		Ogre::Entity *npcEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("Number" + Ogre::StringConverter::toString(i),"penguin.mesh");
+		npc = _npcNode->createChildSceneNode();
+		npc->attachObject(npcEntity);
+		npc->setPosition(Ogre::Vector3(Ogre::Math::RangeRandom(-400,400), 0, Ogre::Math::RangeRandom(-400, 400)));
+		npc->setOrientation(Ogre::Quaternion(Ogre::Math::RangeRandom(-90, 90), 0, Ogre::Math::RangeRandom(-90, 90),0));
+		npcScript = new Npc(_npcNode, npcEntity);
+		npcScript->initialize();
+	}
+
+
+	
+	
 	
 	Ogre::SceneNode* enemyNode = _levelNode->createChildSceneNode("EnemyNode");
 	_basicEnemyEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("robot.mesh");
@@ -47,6 +60,14 @@ void LevelManager::initialize()
 	_groundEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("ground");
 	_levelNode->createChildSceneNode()->attachObject(_groundEntity);
 	_groundEntity->setMaterialName("Examples/Rockwall");
+
+	// wall
+	createWallMesh();
+	_wallEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("wall");
+	_levelNode->createChildSceneNode()->attachObject(_wallEntity);
+	_wallEntity->setMaterialName("Examples/Rockwall");
+	
+
 	// camera
 	_camNode->attachObject(GameManager::getSingletonPtr()->getCamera());
 	_camNode->pitch(Ogre::Degree(10), Ogre::Node::TS_LOCAL);
@@ -54,6 +75,9 @@ void LevelManager::initialize()
 
 	_npcScripts.push_back(npcScript);
 	_npcScripts.push_back(enemyScript);
+
+	
+	
 }
 
 /// <summary>
@@ -76,6 +100,7 @@ void LevelManager::update(const Ogre::FrameEvent& pFE)
 /// </summary>
 void LevelManager::createGroundMesh()
 {
+
 	Ogre::Plane plane(Ogre::Vector3::UNIT_Y, 0);
 	Ogre::MeshManager::getSingleton().createPlane(
 		"ground",
@@ -87,4 +112,20 @@ void LevelManager::createGroundMesh()
 		Ogre::Vector3::UNIT_Z);
 
 	return;
+}
+void LevelManager::createWallMesh()
+{
+	Ogre::Plane wall(Ogre::Vector3::UNIT_X,1000);
+	wall.d = 750;
+	Ogre::MeshManager::getSingleton().createPlane(
+		"wall",
+		Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+		wall,
+		750, 1500, 20, 20,
+		true,
+		1, 5, 5,
+		Ogre::Vector3::UNIT_Z);
+
+	return;
+
 }
