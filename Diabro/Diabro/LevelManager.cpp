@@ -1,5 +1,6 @@
 #include "GameManager.h"
 #include "LevelManager.h"
+#include <stdlib.h>
 
 /// <summary>
 /// Initializes a new instance of the <see cref="LevelManager" /> class.
@@ -22,6 +23,11 @@ void LevelManager::initialize()
 	Ogre::SceneNode* playerNode = _levelNode->createChildSceneNode("PlayerNode");
 	_camNode = playerNode->createChildSceneNode("CameraNode");
 
+	// set basichub position
+	basicHubPosition1 = Ogre::Vector3(750, 0, 750);
+	basicHubPosition2 = Ogre::Vector3(-750, 0, -750);
+
+
 	//player
 	_playerEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("ninja.mesh");
 	playerNode->createChildSceneNode()->attachObject(_playerEntity);
@@ -29,9 +35,8 @@ void LevelManager::initialize()
 	playerScript->initialize();
 
 	
-	//creating a NPC object
+	//spawing NPC objects
 	_npcNode = _levelNode->createChildSceneNode("NpcNode");
-
 
 	for(int i = 0; i < 10;i++)
 	{
@@ -45,15 +50,14 @@ void LevelManager::initialize()
 		npcScript->initialize();
 	}
 
-
-	
-	
-	
+    //enemy
 	Ogre::SceneNode* enemyNode = _levelNode->createChildSceneNode("EnemyNode");
 	_basicEnemyEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("robot.mesh");
 	enemyNode->createChildSceneNode()->attachObject(_basicEnemyEntity);
+	enemyNode->setPosition(Ogre::Vector3(Ogre::Math::RangeRandom(basicHubPosition1.x, 3000), 0, Ogre::Math::RangeRandom(basicHubPosition1.y,3000)));
 	enemyScript = new BasicEnemy(enemyNode, _basicEnemyEntity);
 	enemyScript->initialize();
+	
 
 	// ground 
 	createGroundMesh();
@@ -113,6 +117,9 @@ void LevelManager::createGroundMesh()
 
 	return;
 }
+/// <summary>
+///Create the wall mesh.
+/// </summary>
 void LevelManager::createWallMesh()
 {
 	Ogre::Plane wall(Ogre::Vector3::UNIT_X,1000);
@@ -129,3 +136,21 @@ void LevelManager::createWallMesh()
 	return;
 
 }
+/// <summary>
+///Check if point is in basichub.
+/// </summary>
+bool LevelManager::checkIfPositionIsInBasicHub(Ogre::Vector3 *position)
+{
+	if(basicHubPosition1.x > position->x && position->x < basicHubPosition2.y)
+	{
+		if (basicHubPosition1.z > position->z && position->z < basicHubPosition2.z)
+		{
+			return true;
+
+		}
+		
+	}
+	return false;
+}
+
+

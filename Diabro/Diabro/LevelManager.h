@@ -20,6 +20,7 @@ public:
 
 	static void createGroundMesh();
 	static void createWallMesh();
+	static bool checkIfPositionIsInBasicHub(Ogre::Vector3 *position);
 
 	Ogre::SceneNode* getLevelNode() { return _levelNode; }
 	Ogre::SceneNode* getCamNode() { return _camNode; }
@@ -33,6 +34,8 @@ public:
 
 	Ogre::Degree startPitchCam;
 	Ogre::Vector3 playerPosition;
+	static Ogre::Vector3 basicHubPosition1;
+	static Ogre::Vector3 basicHubPosition2;
 
 private:
 	Ogre::Entity* _playerEntity;
