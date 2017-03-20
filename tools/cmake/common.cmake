@@ -112,19 +112,19 @@ set_target_properties(${APP} PROPERTIES DEBUG_POSTFIX _d)
  
 target_link_libraries(${APP} ${OGRE_LIBRARIES} ${OIS_LIBRARIES} ${OGRE_Overlay_LIBRARIES})
  
-file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/dist/bin)
-file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/dist/media)
+file(MAKE_DIRECTORY ${CMAKE_SOURCE_DIR}/build/dist/bin)
+file(MAKE_DIRECTORY ${CMAKE_SOURCE_DIR}/build/dist/media)
  
 # post-build copy for win32
 if(WIN32 AND NOT MINGW)
 	add_custom_command( TARGET ${APP} PRE_BUILD
-		COMMAND if not exist .\\dist\\bin mkdir .\\dist\\bin )
+		COMMAND if not exist .\\build\\dist\\bin mkdir .\\build\\dist\\bin )
 	add_custom_command( TARGET ${APP} POST_BUILD
-		COMMAND copy \"$(TargetPath)\" .\\dist\\bin )
+		COMMAND copy \"$(TargetPath)\" .\\build\\dist\\bin )
 endif(WIN32 AND NOT MINGW)
 
 if(MINGW OR UNIX)
-	set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/dist/bin)
+	set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/build/dist/bin/${CMAKE_SYSTEM_NAME})
 endif(MINGW OR UNIX)
  
 if(WIN32)
@@ -186,17 +186,22 @@ endif(WIN32)
 if(UNIX)
  
 	install(TARGETS ${APP}
-		RUNTIME DESTINATION bin
+		RUNTIME DESTINATION bin/${CMAKE_SYSTEM_NAME}
 		CONFIGURATIONS All)
  
-	install(DIRECTORY ${CMAKE_SOURCE_DIR}/dist/media
+	install(DIRECTORY ${CMAKE_SOURCE_DIR}/Diabro/Diabro/Resources
+		DESTINATION ./
+		CONFIGURATIONS Release RelWithDebInfo Debug
+	)
+	
+	install(DIRECTORY ${CMAKE_SOURCE_DIR}/Diabro/Diabro/media
 		DESTINATION ./
 		CONFIGURATIONS Release RelWithDebInfo Debug
 	)
  
-	install(FILES ${CMAKE_SOURCE_DIR}/dist/bin/plugins.cfg
-		${CMAKE_SOURCE_DIR}/dist/bin/resources.cfg
-		DESTINATION bin
+	install(FILES ${CMAKE_SOURCE_DIR}/Diabro/Diabro/bin/Release/plugins.cfg
+		${CMAKE_SOURCE_DIR}/Diabro/Diabro/bin/Release/resources.cfg
+		DESTINATION bin/${CMAKE_SYSTEM_NAME}
 		CONFIGURATIONS Release RelWithDebInfo Debug
 	)
  
