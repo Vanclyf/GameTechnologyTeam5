@@ -321,8 +321,10 @@ extern "C" {
 #else
     int main(int argc, char *argv[])
 #endif
-    {
+	{
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 		AllocConsole();
+#endif
 
         // Create application object
         GameManager app;
