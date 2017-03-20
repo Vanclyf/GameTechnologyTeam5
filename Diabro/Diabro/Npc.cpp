@@ -39,18 +39,22 @@ bool Npc::dialog(Ogre::Vector3 pPlayerPos)
 
 	if (distance < 200) // needs to be tweaked
 	{
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 		FILE* fp;
 		freopen_s(&fp, "CONOUT$", "w", stdout);
 		printf("dialog on");
-		fclose(fp);		
+		fclose(fp);
+#endif
 		
 		return true;
 	} else
-	{	
+	{
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 		FILE* fp;
 		freopen_s(&fp, "CONOUT$", "w", stdout);
 		printf("out of range for dialog");
-		fclose(fp);	
+		fclose(fp);
+#endif
 		
 		return false;
 	}
