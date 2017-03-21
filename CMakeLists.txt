@@ -40,6 +40,7 @@ set(HDRS
 	./Diabro/Diabro/BaseWeapon.h
 	./Diabro/Diabro/BaseNpc.h
 	./Diabro/Diabro/UIManager.h
+	./Diabro/Diabro/CharacterSpawner.h
 )
  
 set(SRCS
@@ -59,6 +60,7 @@ set(SRCS
 	./Diabro/Diabro/BaseNpc.cpp
 	./Diabro/Diabro/Npc.cpp
 	./Diabro/Diabro/UIManager.cpp
+	./Diabro/Diabro/CharacterSpawner.cpp
 )
  
 include("tools/cmake/common.cmake") 
