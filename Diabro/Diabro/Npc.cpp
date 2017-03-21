@@ -6,9 +6,10 @@
 /// </summary>
 /// <param name="pMyNode">My node.</param>
 /// <param name="pMyEntity">My entity.</param>
-Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : BaseNpc(pMyNode, pMyEntity), _inDialog(false)
+Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity) : BaseNpc(pMyNode, pMyRotationNode, pMyEntity), _inDialog(false)
 {
-	_id = GameManager::getSingletonPtr()->getLevelManager()->subscribeFriendlyNPC(this);
+	id = GameManager::getSingletonPtr()->getLevelManager()->subscribeFriendlyNPC(this);
+	rotatePivot(Ogre::Vector3(0, 90, 0));
 }
 
 /// <summary>
@@ -62,6 +63,6 @@ bool Npc::dialog(Ogre::Vector3 pPlayerPos)
 
 void Npc::die() {
 	Character::die();
-
-	GameManager::getSingletonPtr()->getLevelManager()->detachFriendlyNPC(_id);
+	
+	GameManager::getSingletonPtr()->getLevelManager()->detachFriendlyNPC(id);
 }

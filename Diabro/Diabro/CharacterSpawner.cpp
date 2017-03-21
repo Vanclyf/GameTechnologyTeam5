@@ -2,16 +2,10 @@
 #include "GameManager.h"
 
 template<class T>
-::CharacterSpawner<T>::CharacterSpawner(Ogre::SceneNode* pMyNode, int pNumOfSpawns)
-	: _myNode(pMyNode), _nCharacters(pNumOfSpawns), _leftAlive(0), _spawnInstances(0){
-	FILE* fp;
-	freopen_s(&fp, "CONOUT$", "w", stdout);
-	printf("constructor called of: %s \n", typeid(T).name());
-	fclose(fp);
-	
-	
+::CharacterSpawner<T>::CharacterSpawner(Ogre::SceneNode* pMyNode, int pNumOfSpawns, Ogre::Vector3 pSpawnPosition)
+	: _myNode(pMyNode), _spawnPosition(pSpawnPosition), _nCharacters(pNumOfSpawns){
 	for (int i = 0; i < _nCharacters; ++i) {
-		SpawnInstance();
+		spawnInstance();
 	}
 }
 
@@ -20,40 +14,33 @@ CharacterSpawner<T>::~CharacterSpawner() {
 
 }
 
+/// <summary>
+/// called when an <T> instance dies (does not kill instance).
+/// </summary>
 template<class T>
-void CharacterSpawner<T>::DestroyInstance() {
-	//TODO: destroy enemy
-	FILE* fp;
-	freopen_s(&fp, "CONOUT$", "w", stdout);
-	printf("CharacterSpawner: destroy instance -> %s \n", typeid(T).name());
-	fclose(fp);
+void CharacterSpawner<T>::instanceDeath() {
+	spawnInstance();
 }
 
+/// <summary>
+/// Spawns an instance of <T>.
+/// </summary>
 template<class T>
-void CharacterSpawner<T>::SpawnInstance() {
-	if (_leftAlive < _nCharacters) {
-		++_leftAlive;
+void CharacterSpawner<T>::spawnInstance() {
+	
+	Ogre::SceneNode* instanceNode = _myNode->createChildSceneNode();
+	//random offset
+	int randomX = rand() % (100 - -100 + 1) + -100;
+	int randomZ = rand() % (100 - -100 + 1) + -100;
+	instanceNode->translate(_spawnPosition + Ogre::Vector3(randomX, 0, randomZ), Ogre::Node::TS_WORLD);
+
+	Ogre::Entity* instanceEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity(typeid(T) == typeid(Npc) ? "penguin.mesh" : "robot.mesh");
+	//rotateNode
+	Ogre::SceneNode* rotationNode = instanceNode->createChildSceneNode();
 		
-		Ogre::SceneNode* instanceNode = _myNode->createChildSceneNode();
-		Ogre::Entity* instanceEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity(typeid(T) == typeid(Npc) ? "penguin.mesh" : "robot.mesh");
-		instanceNode->createChildSceneNode()->attachObject(instanceEntity);
-		T* instanceScript = new T(instanceNode, instanceEntity);
-		instanceScript->initialize();
-
-		FILE* fp;
-		freopen_s(&fp, "CONOUT$", "w", stdout);
-		printf("CharacterSpawner: SpawnInstance %s \n", typeid(T).name());
-		fclose(fp);
-
-		//TODO: move character a little
-
-		//_spawnInstances.push_back(instanceScript);
-	} else {
-		FILE* fp;
-		freopen_s(&fp, "CONOUT$", "w", stdout);
-		printf("CharacterSpawner: Already at maximum characters");
-		fclose(fp);
-	}
+	rotationNode->attachObject(instanceEntity);
+	T* instanceScript = new T(instanceNode, rotationNode, instanceEntity);
+	instanceScript->initialize();
 }
 
 template class CharacterSpawner < Npc >;

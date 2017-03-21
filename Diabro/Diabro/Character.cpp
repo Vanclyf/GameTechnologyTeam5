@@ -57,6 +57,10 @@ void Character::update(Ogre::Real pDeltatime)
 
 }
 
+/// <summary>
+/// Finds the target.
+/// </summary>
+/// <param name="pPossibleTargets">The possible targets vector.</param>
 void Character::findTarget(std::vector<Character*> pPossibleTargets)
 {
 	for (int i = 0; i < pPossibleTargets.size(); ++i) {

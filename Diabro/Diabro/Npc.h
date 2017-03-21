@@ -7,7 +7,7 @@
 class Npc : public BaseNpc
 {
 public:
-	Npc(Ogre::SceneNode*, Ogre::Entity*);
+	Npc(Ogre::SceneNode*, Ogre::SceneNode*, Ogre::Entity*);
 	~Npc();
 
 	static Ogre::String getMeshName() { return "penguin.mesh"; }

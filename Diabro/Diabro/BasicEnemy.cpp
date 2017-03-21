@@ -8,9 +8,9 @@
 /// </summary>
 /// <param name="pMyNode">My node.</param>
 /// <param name="pMyEntity">My entity.</param>
-BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : BaseNpc(pMyNode, pMyEntity)
+BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity) : BaseNpc(pMyNode, pMyRotationNode, pMyEntity)
 {
-	_id = GameManager::getSingletonPtr()->getLevelManager()->subscribeHostileNPC(this);
+	id = GameManager::getSingletonPtr()->getLevelManager()->subscribeHostileNPC(this);
 }
 
 void BasicEnemy::update(Ogre::Real pDeltatime)
@@ -52,7 +52,7 @@ bool BasicEnemy::lightAttack()
 void BasicEnemy::die() {
 	Character::die();
 
-	GameManager::getSingletonPtr()->getLevelManager()->detachHostileNPC(_id);
+	GameManager::getSingletonPtr()->getLevelManager()->detachHostileNPC(id);
 	GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->gainXP(10);
 }
 

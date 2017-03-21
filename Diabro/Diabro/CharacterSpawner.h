@@ -7,21 +7,20 @@
 template <class T> 
 class CharacterSpawner {
 public:
-	CharacterSpawner<T>(Ogre::SceneNode*, int);
+	CharacterSpawner<T>(Ogre::SceneNode*, int, Ogre::Vector3);
 	~CharacterSpawner();
 
+	void instanceDeath();
 private:
-	void SpawnInstance();
-	void DestroyInstance();
+	void spawnInstance();
 
 	Ogre::SceneNode* _myNode;
+	Ogre::Vector3 _spawnPosition;
 
+	//amount of characters to spawn
 	int _nCharacters;
-	int _leftAlive;
-
-	std::vector<T>* _spawnInstances;
 };
-
+//declares the possible types
 template class CharacterSpawner < Npc > ;
 template class CharacterSpawner < BasicEnemy >;
 #endif

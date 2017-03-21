@@ -29,23 +29,11 @@ void LevelManager::initialize()
 	playerScript->initialize();
 
 	Ogre::SceneNode* npcSpawnerNode = _levelNode->createChildSceneNode("npcSpawn");
-	npcSpawner = new CharacterSpawner<Npc>(npcSpawnerNode, 3);
+	//0.5f for height difference
+	npcSpawner = new CharacterSpawner<Npc>(npcSpawnerNode, 3, Ogre::Vector3(-1000, 25, -1000));
 
 	Ogre::SceneNode* enemySpawnerNode = _levelNode->createChildSceneNode("enemySpawn");
-	enemySpawner = new CharacterSpawner<BasicEnemy>(enemySpawnerNode, 3);
-	/*
-	//creating a NPC object
-	Ogre::SceneNode* npcNode = _levelNode->createChildSceneNode("NpcNode");
-	_npcEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("penguin.mesh");
-	npcNode->createChildSceneNode()->attachObject(_npcEntity);
-	npcScript = new Npc(npcNode, _npcEntity);
-	npcScript->initialize();
-	
-	Ogre::SceneNode* enemyNode = _levelNode->createChildSceneNode("EnemyNode");
-	_basicEnemyEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("robot.mesh");
-	enemyNode->createChildSceneNode()->attachObject(_basicEnemyEntity);
-	enemyScript = new BasicEnemy(enemyNode, _basicEnemyEntity);
-	enemyScript->initialize();*/
+	enemySpawner = new CharacterSpawner<BasicEnemy>(enemySpawnerNode, 3, Ogre::Vector3(1000, 1, 1000));
 
 	// ground 
 	createGroundMesh();
@@ -86,6 +74,11 @@ int LevelManager::subscribeHostileNPC(BasicEnemy* hostile) {
 /// <param name="id">The identifier.</param>
 void LevelManager::detachFriendlyNPC(int id) {
 	_friendlyNpcScripts.erase(_friendlyNpcScripts.begin() + id);
+	//reset id values
+	for (std::vector<Character*>::iterator it = _friendlyNpcScripts.begin() + id; it < _friendlyNpcScripts.end(); ++it) {
+		(*it)->id -= 1;
+	}
+	npcSpawner->instanceDeath();
 }
 
 /// <summary>
@@ -94,6 +87,11 @@ void LevelManager::detachFriendlyNPC(int id) {
 /// <param name="id">The identifier.</param>
 void LevelManager::detachHostileNPC(int id) {
 	_hostileNpcScripts.erase(_hostileNpcScripts.begin() + id);
+	//reset id values
+	for (std::vector<Character*>::iterator it = _hostileNpcScripts.begin() + id; it < _hostileNpcScripts.end(); ++it) {
+		(*it)->id -= 1;
+	}
+	enemySpawner->instanceDeath();
 }
 
 
