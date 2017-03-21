@@ -60,7 +60,11 @@ void BaseNpc::wander() {
 }
 
 void BaseNpc::walkTo(Ogre::Vector3 targetPos) {
+	/*
 	_dirVec = targetPos - getPosition();
 	_dirVec.normalise();
-	_dirVec.y = 0;
+	_dirVec.y = 0;*/
+	
+	_myNode->lookAt(Ogre::Vector3(targetPos.x, getPosition().y, targetPos.z), Ogre::Node::TS_PARENT, Ogre::Vector3::UNIT_X);
+	_dirVec = Ogre::Vector3(1, 0, 0);
 }

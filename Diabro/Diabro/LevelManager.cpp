@@ -7,7 +7,7 @@
 /// like characters and the environment.
 /// </summary>
 LevelManager::LevelManager() : _playerEntity(0), _npcEntity(0), _basicEnemyEntity(0), _groundEntity(0),
-playerScript(0), npcScript(0), enemyScript(0), _levelNode(0), _camNode(0)
+playerScript(0), npcScript(0), enemyScript(0), _levelNode(0), _camNode(0), npcSpawner(0)
 {
 }
 
@@ -28,7 +28,12 @@ void LevelManager::initialize()
 	playerScript = new Player(playerNode, _playerEntity);
 	playerScript->initialize();
 
-	
+	Ogre::SceneNode* npcSpawnerNode = _levelNode->createChildSceneNode("npcSpawn");
+	npcSpawner = new CharacterSpawner<Npc>(npcSpawnerNode, 3);
+
+	Ogre::SceneNode* enemySpawnerNode = _levelNode->createChildSceneNode("enemySpawn");
+	enemySpawner = new CharacterSpawner<BasicEnemy>(enemySpawnerNode, 3);
+	/*
 	//creating a NPC object
 	Ogre::SceneNode* npcNode = _levelNode->createChildSceneNode("NpcNode");
 	_npcEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("penguin.mesh");
@@ -40,7 +45,7 @@ void LevelManager::initialize()
 	_basicEnemyEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("robot.mesh");
 	enemyNode->createChildSceneNode()->attachObject(_basicEnemyEntity);
 	enemyScript = new BasicEnemy(enemyNode, _basicEnemyEntity);
-	enemyScript->initialize();
+	enemyScript->initialize();*/
 
 	// ground 
 	createGroundMesh();
@@ -122,9 +127,9 @@ void LevelManager::createGroundMesh()
 		"ground",
 		Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
 		plane,
-		1500, 1500, 20, 20,
+		100000, 100000, 20, 20,
 		true,
-		1, 5, 5,
+		1, 200, 200,
 		Ogre::Vector3::UNIT_Z);
 
 	return;

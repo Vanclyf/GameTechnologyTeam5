@@ -7,6 +7,7 @@
 #include "BaseApplication.h"
 #include "BasicEnemy.h"
 #include <OgreSceneManager.h>
+#include "CharacterSpawner.h"
 
 class LevelManager
 {
@@ -42,8 +43,13 @@ public:
 
 private:
 	Ogre::Entity* _playerEntity;
+	//TODO replace all with spawners
 	Ogre::Entity* _npcEntity;
 	Ogre::Entity* _basicEnemyEntity;
+
+	CharacterSpawner<Npc>* npcSpawner;
+	CharacterSpawner<BasicEnemy>* enemySpawner;
+
 	Ogre::Entity* _groundEntity;
 
 	Ogre::SceneNode* _levelNode;

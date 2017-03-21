@@ -11,7 +11,7 @@ public:
 	//~BaseNpc();
 
 	void update(Ogre::Real) override;
-
+	
 protected:
 	int _id;
 
