@@ -42,3 +42,6 @@ void CharacterSpawner<T>::spawnInstance() {
 	T* instanceScript = new T(instanceNode, rotationNode, instanceEntity);
 	instanceScript->initialize();
 }
+
+template class CharacterSpawner < Npc >;
+template class CharacterSpawner < BasicEnemy >;
