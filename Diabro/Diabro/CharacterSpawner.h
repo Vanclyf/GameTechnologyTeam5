@@ -20,7 +20,4 @@ private:
 	//amount of characters to spawn
 	int _nCharacters;
 };
-//declares the possible types
-template class CharacterSpawner < Npc > ;
-template class CharacterSpawner < BasicEnemy >;
 #endif
