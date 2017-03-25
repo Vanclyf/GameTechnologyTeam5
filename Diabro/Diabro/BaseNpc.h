@@ -7,23 +7,24 @@
 class BaseNpc : public Character
 {
 public:
-	BaseNpc(Ogre::SceneNode*, Ogre::Entity*);
+	BaseNpc(Ogre::SceneNode*, Ogre::SceneNode*, Ogre::Entity*);
 	//~BaseNpc();
 
 	void update(Ogre::Real) override;
 
+	void rotatePivot(Ogre::Vector3);
+	
 protected:
-	int _id;
-
 	float _noticeDistance;
 	bool _playerDetected;
 	void detectPlayer(); 
 	void walkTo(Ogre::Vector3);
 
+	//object pivot
+	Ogre::SceneNode* _myRotationNode;
 private:
 	float _timeSince;
 
 	void wander(); 	
 };
-
 #endif

@@ -41,6 +41,7 @@ public:
 	virtual bool adjustStaminaOverTime(Ogre::Real);
 	virtual bool adjustStamina(float);
 	virtual void die();
+	int id; //may only be changed by levelmanager, death scenario 
 
 protected:
 	Ogre::Real _movespeed;

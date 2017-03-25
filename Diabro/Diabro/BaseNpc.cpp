@@ -7,9 +7,9 @@
 /// </summary>
 /// <param name="pMyNode">My node.</param>
 /// <param name="pMyEntity">My entity.</param>
-BaseNpc::BaseNpc(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pMyNode, pMyEntity), _timeSince(0), _noticeDistance(400.0f)
+BaseNpc::BaseNpc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity) : Character(pMyNode, pMyEntity), _timeSince(0), _noticeDistance(400.0f)
 {
-	
+	_myRotationNode = pMyRotationNode;
 }
 
 /// <summary>
@@ -32,6 +32,17 @@ void BaseNpc::update(Ogre::Real pDeltatime)
 		}
 	}
 }
+
+/// <summary>
+/// Rotates the pivot (same as rotating the model, doesnt affect movement).
+/// </summary>
+/// <param name="pRotationDegrees">The rotation degrees.</param>
+void BaseNpc::rotatePivot(Ogre::Vector3 pRotationDegrees) {
+	_myRotationNode->pitch(Ogre::Degree(pRotationDegrees.x), Ogre::Node::TS_LOCAL);
+	_myRotationNode->yaw(Ogre::Degree(pRotationDegrees.y), Ogre::Node::TS_LOCAL);
+	_myRotationNode->roll(Ogre::Degree(pRotationDegrees.z), Ogre::Node::TS_LOCAL);
+}
+
 
 /// <summary>
 /// Detects the player if he is in range.
@@ -60,7 +71,11 @@ void BaseNpc::wander() {
 }
 
 void BaseNpc::walkTo(Ogre::Vector3 targetPos) {
+	/*
 	_dirVec = targetPos - getPosition();
 	_dirVec.normalise();
-	_dirVec.y = 0;
+	_dirVec.y = 0;*/
+	
+	_myNode->lookAt(Ogre::Vector3(targetPos.x, getPosition().y, targetPos.z), Ogre::Node::TS_PARENT, Ogre::Vector3::UNIT_X);
+	_dirVec = Ogre::Vector3(1, 0, 0);
 }

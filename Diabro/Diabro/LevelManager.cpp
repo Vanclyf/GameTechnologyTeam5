@@ -7,7 +7,7 @@
 /// like characters and the environment.
 /// </summary>
 LevelManager::LevelManager() : _playerEntity(0), _npcEntity(0), _basicEnemyEntity(0), _groundEntity(0),
-playerScript(0), npcScript(0), enemyScript(0), _levelNode(0), _camNode(0)
+playerScript(0), npcScript(0), enemyScript(0), _levelNode(0), _camNode(0), npcSpawner(0)
 {
 }
 
@@ -28,19 +28,12 @@ void LevelManager::initialize()
 	playerScript = new Player(playerNode, _playerEntity);
 	playerScript->initialize();
 
-	
-	//creating a NPC object
-	Ogre::SceneNode* npcNode = _levelNode->createChildSceneNode("NpcNode");
-	_npcEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("penguin.mesh");
-	npcNode->createChildSceneNode()->attachObject(_npcEntity);
-	npcScript = new Npc(npcNode, _npcEntity);
-	npcScript->initialize();
-	
-	Ogre::SceneNode* enemyNode = _levelNode->createChildSceneNode("EnemyNode");
-	_basicEnemyEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("robot.mesh");
-	enemyNode->createChildSceneNode()->attachObject(_basicEnemyEntity);
-	enemyScript = new BasicEnemy(enemyNode, _basicEnemyEntity);
-	enemyScript->initialize();
+	Ogre::SceneNode* npcSpawnerNode = _levelNode->createChildSceneNode("npcSpawn");
+	//0.5f for height difference
+	npcSpawner = new CharacterSpawner<Npc>(npcSpawnerNode, 3, Ogre::Vector3(-1000, 25, -1000));
+
+	Ogre::SceneNode* enemySpawnerNode = _levelNode->createChildSceneNode("enemySpawn");
+	enemySpawner = new CharacterSpawner<BasicEnemy>(enemySpawnerNode, 3, Ogre::Vector3(1000, 0, 1000));
 
 	// ground 
 	createGroundMesh();
@@ -81,6 +74,11 @@ int LevelManager::subscribeHostileNPC(BasicEnemy* hostile) {
 /// <param name="id">The identifier.</param>
 void LevelManager::detachFriendlyNPC(int id) {
 	_friendlyNpcScripts.erase(_friendlyNpcScripts.begin() + id);
+	//reset id values
+	for (std::vector<Character*>::iterator it = _friendlyNpcScripts.begin() + id; it < _friendlyNpcScripts.end(); ++it) {
+		(*it)->id -= 1;
+	}
+	npcSpawner->instanceDeath();
 }
 
 /// <summary>
@@ -89,6 +87,11 @@ void LevelManager::detachFriendlyNPC(int id) {
 /// <param name="id">The identifier.</param>
 void LevelManager::detachHostileNPC(int id) {
 	_hostileNpcScripts.erase(_hostileNpcScripts.begin() + id);
+	//reset id values
+	for (std::vector<Character*>::iterator it = _hostileNpcScripts.begin() + id; it < _hostileNpcScripts.end(); ++it) {
+		(*it)->id -= 1;
+	}
+	enemySpawner->instanceDeath();
 }
 
 
@@ -122,9 +125,9 @@ void LevelManager::createGroundMesh()
 		"ground",
 		Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
 		plane,
-		1500, 1500, 20, 20,
+		100000, 100000, 20, 20,
 		true,
-		1, 5, 5,
+		1, 200, 200,
 		Ogre::Vector3::UNIT_Z);
 
 	return;
