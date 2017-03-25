@@ -13,7 +13,6 @@ enum Quality : unsigned int {
 	Legendary
 };
 
-
 class ItemInstance : public BaseItem
 {
 public:

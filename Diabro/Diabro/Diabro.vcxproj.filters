@@ -1,31 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="GameManager.cpp">
+    <ClCompile Include="BaseNpc.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="BasicEnemy.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="FloatRange.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Npc.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="UIManager.cpp">
       <Filter>Sources\Managers</Filter>
     </ClCompile>
     <ClCompile Include="LevelManager.cpp">
       <Filter>Sources\Managers</Filter>
     </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Sources\Managers</Filter>
+    </ClCompile>
     <ClCompile Include="BaseApplication.cpp">
       <Filter>Sources\Managers</Filter>
     </ClCompile>
-    </ClCompile>
-    <ClCompile Include="BasicEnemy.cpp">
-      <Filter>Sources\Characters</Filter>
-    </ClCompile>
-    </ClCompile>
-    <ClCompile Include="Character.cpp">
-      <Filter>Sources\Characters</Filter>
-    </ClCompile>
-    <ClCompile Include="Npc.cpp">
-      <Filter>Sources\Characters</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Sources\Characters</Filter>
-    </ClCompile>
-    <ClCompile Include="FloatRange.cpp">
-      <Filter>Sources\Helpers</Filter>
+    <ClCompile Include="ItemManager.cpp">
+      <Filter>Sources\Managers</Filter>
     </ClCompile>
     <ClCompile Include="BaseEquipment.cpp">
       <Filter>Sources\Items</Filter>
@@ -33,24 +40,39 @@
     <ClCompile Include="BaseItem.cpp">
       <Filter>Sources\Items</Filter>
     </ClCompile>
+    <ClCompile Include="BaseWeapon.cpp">
+      <Filter>Sources\Items</Filter>
+    </ClCompile>
     <ClCompile Include="EquimentInstance.cpp">
       <Filter>Sources\Items</Filter>
     </ClCompile>
-    <ClCompile Include="BaseWeapon.cpp">
+    <ClCompile Include="ItemContainer.cpp">
       <Filter>Sources\Items</Filter>
     </ClCompile>
     <ClCompile Include="ItemInstance.cpp">
       <Filter>Sources\Items</Filter>
     </ClCompile>
-    <ClCompile Include="UIManager.cpp">
-      <Filter>Sources\Managers</Filter>
-    </ClCompile>
-    <ClCompile Include="BaseNpc.cpp">
-      <Filter>Sources\Characters</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameManager.h">
+    <ClInclude Include="BaseNpc.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicEnemy.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterStats.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Npc.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="UIManager.h">
       <Filter>Headers\Managers</Filter>
     </ClInclude>
     <ClInclude Include="LevelManager.h">
@@ -59,106 +81,78 @@
     <ClInclude Include="BaseApplication.h">
       <Filter>Headers\Managers</Filter>
     </ClInclude>
-    <ClInclude Include="StatRange.h">
-      <Filter>Headers\Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="Modifier.h">
-      <Filter>Headers\Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="FloatRange.h">
-      <Filter>Headers\Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="BasicEnemy.h">
-      <Filter>Headers\Characters</Filter>
-    </ClInclude>
-    <ClInclude Include="Character.h">
-      <Filter>Headers\Characters</Filter>
-    </ClInclude>
-    <ClInclude Include="CharacterStats.h">
-      <Filter>Headers\Characters</Filter>
-    </ClInclude>
-    <ClInclude Include="Npc.h">
-      <Filter>Headers\Characters</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Headers\Characters</Filter>
+    <ClInclude Include="GameManager.h">
+      <Filter>Headers\Managers</Filter>
     </ClInclude>
     <ClInclude Include="Affix.h">
       <Filter>Headers\Items</Filter>
     </ClInclude>
-    <ClInclude Include="BaseEquipment.h">
+    <ClInclude Include="FloatRange.h">
+      <Filter>Headers\Stats</Filter>
+    </ClInclude>
+    <ClInclude Include="Modifier.h">
+      <Filter>Headers\Stats</Filter>
+    </ClInclude>
+    <ClInclude Include="StatRange.h">
+      <Filter>Headers\Stats</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemManager.h">
+      <Filter>Headers\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemContainer.h">
       <Filter>Headers\Items</Filter>
     </ClInclude>
     <ClInclude Include="BaseItem.h">
-      <Filter>Headers\Items</Filter>
+      <Filter>Headers\Items\Base</Filter>
     </ClInclude>
     <ClInclude Include="BaseWeapon.h">
-      <Filter>Headers\Items</Filter>
+      <Filter>Headers\Items\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseEquipment.h">
+      <Filter>Headers\Items\Base</Filter>
     </ClInclude>
     <ClInclude Include="EquimentInstance.h">
-      <Filter>Headers\Items</Filter>
+      <Filter>Headers\Items\Instance</Filter>
     </ClInclude>
     <ClInclude Include="ItemInstance.h">
-      <Filter>Headers\Items</Filter>
-    </ClInclude>
-    <ClInclude Include="UIManager.h">
-      <Filter>Headers\Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="BaseNpc.h">
-      <Filter>Headers\Characters</Filter>
+      <Filter>Headers\Items\Instance</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="GameObjStandard.cg" />
-    <None Include="Resources\materials\textures\greyBox.jpg">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="Resources\materials\textures\greenBox.jpg">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="Resources\materials\textures\yellowBox.jpg">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="Resources\materials\scripts\UI.material">
-      <Filter>Resources</Filter>
-    </None>
-    <None Include="testMaterial.material">
-      <Filter>Resources</Filter>
-    </None>
+    <None Include="Resources\materials\scripts\UI.material" />
+    <None Include="Resources\materials\textures\greenBox.jpg" />
+    <None Include="Resources\materials\textures\greyBox.jpg" />
+    <None Include="Resources\materials\textures\yellowBox.jpg" />
+    <None Include="testMaterial.material" />
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Resources">
-      <UniqueIdentifier>{40b63afc-42bd-4fe9-a885-9b258f5f674d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Headers">
-      <UniqueIdentifier>{a1671ac9-cc9c-4748-88f9-d641018e7aeb}</UniqueIdentifier>
+      <UniqueIdentifier>{ba6bcfdd-646e-451c-a5b8-ba792be3b0f3}</UniqueIdentifier>
     </Filter>
     <Filter Include="Sources">
-      <UniqueIdentifier>{638e9f91-62d3-492b-9f08-1f73b037231f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Headers\Managers">
-      <UniqueIdentifier>{36b4c8c2-8e52-4ac4-970f-17276e950e85}</UniqueIdentifier>
+      <UniqueIdentifier>{45d97e07-f55c-450d-9e53-280d9c82188a}</UniqueIdentifier>
     </Filter>
     <Filter Include="Sources\Managers">
-      <UniqueIdentifier>{928b2181-419d-413c-8153-6ce57ebe7a42}</UniqueIdentifier>
+      <UniqueIdentifier>{cd111b08-fc3b-484f-83c8-95e2f1401686}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Characters">
-      <UniqueIdentifier>{4101f07a-50b0-44a0-9802-bb530d8b318d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Headers\Helpers">
-      <UniqueIdentifier>{bd63be0f-78bd-4865-bc5e-ab291a0f6a97}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\Helpers">
-      <UniqueIdentifier>{7e9606b3-61e3-4c65-ae7b-127a0ba694d3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Headers\Characters">
-      <UniqueIdentifier>{70fcb6d6-3fe5-426e-9f13-eb50e895f9dc}</UniqueIdentifier>
+    <Filter Include="Headers\Managers">
+      <UniqueIdentifier>{a6f4ae2c-c966-4d22-a76c-f36d11010b43}</UniqueIdentifier>
     </Filter>
     <Filter Include="Headers\Items">
-      <UniqueIdentifier>{6a0b0d93-158d-4a5c-a05f-ef7c6aa73477}</UniqueIdentifier>
+      <UniqueIdentifier>{6d661253-a345-4a74-a696-ae88ea98d8ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Stats">
+      <UniqueIdentifier>{36bda03a-ea99-4676-aaa1-248a27a8868f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Items\Base">
+      <UniqueIdentifier>{168eedfb-9d6d-4136-87ac-cde48c252a8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Items\Instance">
+      <UniqueIdentifier>{daf12517-5c78-4ce4-9602-7bba858721ba}</UniqueIdentifier>
     </Filter>
     <Filter Include="Sources\Items">
-      <UniqueIdentifier>{958c99ac-1663-49a8-b07f-a1be29de0005}</UniqueIdentifier>
+      <UniqueIdentifier>{18577d69-c1f9-4ddb-bd06-8411856384e5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

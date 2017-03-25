@@ -106,7 +106,9 @@
     <ClCompile Include="EquimentInstance.cpp" />
     <ClCompile Include="FloatRange.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="ItemContainer.cpp" />
     <ClCompile Include="ItemInstance.cpp" />
+    <ClCompile Include="ItemManager.cpp" />
     <ClCompile Include="Npc.cpp" />
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -125,7 +127,9 @@
     <ClInclude Include="EquimentInstance.h" />
     <ClInclude Include="FloatRange.h" />
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="ItemContainer.h" />
     <ClInclude Include="ItemInstance.h" />
+    <ClInclude Include="ItemManager.h" />
     <ClInclude Include="Npc.h" />
     <ClInclude Include="LevelManager.h" />
     <ClInclude Include="Modifier.h" />
