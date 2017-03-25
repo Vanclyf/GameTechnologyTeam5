@@ -63,13 +63,18 @@ void GameManager::createScene(void)
 	// set shadow technique
 	mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 
+	_itemManager = new ItemManager();
+	FILE* fp;
+	freopen_s(&fp, "CONOUT$", "w", stdout);
+	printf("items added.");
+	printf("itemcontainer has %d items", GameManager::getSingletonPtr()->getItemManager()->getItemContianer()->itemAmount());
+	fclose(fp);
 	_levelManager = new LevelManager();
 	_levelManager->initialize();
 
 	_uiManager = new UIManager();
 	_uiManager->init();
 
-	_itemManager = new ItemManager();
 }
 
 /// <summary>

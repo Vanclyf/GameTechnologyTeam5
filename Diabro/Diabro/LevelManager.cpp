@@ -27,7 +27,6 @@ void LevelManager::initialize()
 	playerNode->createChildSceneNode()->attachObject(_playerEntity);
 	playerScript = new Player(playerNode, _playerEntity);
 	playerScript->initialize();
-
 	
 	//creating a NPC object
 	Ogre::SceneNode* npcNode = _levelNode->createChildSceneNode("NpcNode");

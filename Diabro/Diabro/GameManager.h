@@ -32,6 +32,11 @@ public:
 	UIManager* getUIManager(void) { return _uiManager; }
 	ItemManager* getItemManager(void) { return _itemManager; }
 
+	float getRandomInRange(float pLO, float pHI) {
+		//TODO: implement random float function
+		return pLO;
+	}
+
 protected:
     virtual void createScene(void);
 	virtual void createCamera(void);

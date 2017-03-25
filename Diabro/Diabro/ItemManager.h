@@ -1,8 +1,9 @@
-#ifndef BASE_ITEMMANAGER_H
-#define BASE_ITEMMANAGER_H
+#ifndef ITEMMANAGER_H
+#define ITEMMANAGER_H
 
 #pragma once
 #include "ItemContainer.h"
+#include "ItemGenerator.h"
 
 /// <summary>
 /// The ItemManager class is responsible for initializing the
@@ -16,9 +17,11 @@ public:
 	// properties for container + generator
 
 	ItemContainer* getItemContianer() { return _itemContainer; }
+	ItemGenerator* getItemGenerator() { return _itemGenerator; }
 
 private:
 	ItemContainer* _itemContainer;
+	ItemGenerator* _itemGenerator;
 
 	// item generator
 	void readFromDB();

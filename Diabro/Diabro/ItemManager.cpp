@@ -1,4 +1,5 @@
 #include "ItemManager.h"
+#include "GameManager.h"
 
 /// <summary>
 /// Initializes a new instance of the <see cref="ItemManager"/> class.
@@ -7,12 +8,14 @@ ItemManager::ItemManager() {
 	// init itemgen
 	
 	_itemContainer = new ItemContainer();
+	_itemGenerator = new ItemGenerator();
 
 	readFromDB();
 }
 
 ItemManager::~ItemManager() {
 	delete _itemContainer;
+	delete _itemGenerator;
 }
 
 /// <summary>
@@ -36,11 +39,5 @@ void ItemManager::readFromDB() {
 	weapons.push_back(tempWeapon);
 
 	_itemContainer->setWeapons(weapons);
-
-	FILE* fp;
-	freopen_s(&fp, "CONOUT$", "w", stdout);
-	printf("items added.");
-	printf("itemcontainer has %d items", _itemContainer->itemAmount());
-	fclose(fp);
 }
 

@@ -5,7 +5,7 @@
 #include "BaseItem.h"
 #include "CharacterStats.h"
 #include "StatRange.h"
-
+#include "BaseEquipment.h"
 //TODO: implement shield, armor, jewelry
 enum EquipmentType : unsigned int {
 	EquipmentShield = 0,
@@ -23,6 +23,7 @@ public:
 
 	EquipmentType getEquipmentType() { return _equipmentType; }
 	StatType getMainStat() { return _mainStat; }
+	FloatRange getValueOfStat(StatType stat);
 	std::vector<StatRange*> getBaseStats() { return _baseStats; }
 
 private:

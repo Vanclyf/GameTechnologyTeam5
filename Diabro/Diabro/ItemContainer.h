@@ -1,5 +1,5 @@
-#ifndef BASE_ITEMCONTAINER_H
-#define BASE_ITEMCONTAINER_H
+#ifndef ITEMCONTAINER_H
+#define ITEMCONTAINER_H
 
 #pragma once
 #include <vector>

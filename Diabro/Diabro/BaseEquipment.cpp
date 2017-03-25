@@ -13,3 +13,13 @@ BaseEquipment::BaseEquipment(Ogre::String pName, Ogre::String pSpriteName, ItemT
 BaseEquipment::~BaseEquipment()
 {
 }
+
+FloatRange BaseEquipment::getValueOfStat(StatType stat) {
+	for (int i = 0; i < _baseStats.size(); ++i) {
+		if(_baseStats[i]->getStatType() == stat) {
+			return _baseStats[i]->getFloatRange();
+		}
+	}
+
+	return FloatRange(0,0);
+}

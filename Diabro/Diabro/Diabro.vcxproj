@@ -107,12 +107,14 @@
     <ClCompile Include="FloatRange.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="ItemContainer.cpp" />
+    <ClCompile Include="ItemGenerator.cpp" />
     <ClCompile Include="ItemInstance.cpp" />
     <ClCompile Include="ItemManager.cpp" />
     <ClCompile Include="Npc.cpp" />
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="UIManager.cpp" />
+    <ClCompile Include="WeaponInstance.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Affix.h" />
@@ -128,6 +130,7 @@
     <ClInclude Include="FloatRange.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="ItemContainer.h" />
+    <ClInclude Include="ItemGenerator.h" />
     <ClInclude Include="ItemInstance.h" />
     <ClInclude Include="ItemManager.h" />
     <ClInclude Include="Npc.h" />
@@ -136,6 +139,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="StatRange.h" />
     <ClInclude Include="UIManager.h" />
+    <ClInclude Include="WeaponInstance.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

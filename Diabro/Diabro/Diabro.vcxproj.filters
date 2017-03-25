@@ -34,22 +34,28 @@
     <ClCompile Include="ItemManager.cpp">
       <Filter>Sources\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="BaseEquipment.cpp">
-      <Filter>Sources\Items</Filter>
-    </ClCompile>
-    <ClCompile Include="BaseItem.cpp">
-      <Filter>Sources\Items</Filter>
-    </ClCompile>
-    <ClCompile Include="BaseWeapon.cpp">
-      <Filter>Sources\Items</Filter>
-    </ClCompile>
-    <ClCompile Include="EquimentInstance.cpp">
-      <Filter>Sources\Items</Filter>
-    </ClCompile>
     <ClCompile Include="ItemContainer.cpp">
       <Filter>Sources\Items</Filter>
     </ClCompile>
+    <ClCompile Include="BaseEquipment.cpp">
+      <Filter>Sources\Items\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseItem.cpp">
+      <Filter>Sources\Items\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseWeapon.cpp">
+      <Filter>Sources\Items\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="EquimentInstance.cpp">
+      <Filter>Sources\Items\Instance</Filter>
+    </ClCompile>
     <ClCompile Include="ItemInstance.cpp">
+      <Filter>Sources\Items\Instance</Filter>
+    </ClCompile>
+    <ClCompile Include="WeaponInstance.cpp">
+      <Filter>Sources\Items\Instance</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemGenerator.cpp">
       <Filter>Sources\Items</Filter>
     </ClCompile>
   </ItemGroup>
@@ -117,6 +123,12 @@
     <ClInclude Include="ItemInstance.h">
       <Filter>Headers\Items\Instance</Filter>
     </ClInclude>
+    <ClInclude Include="WeaponInstance.h">
+      <Filter>Headers\Items\Instance</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemGenerator.h">
+      <Filter>Headers\Items</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="GameObjStandard.cg" />
@@ -153,6 +165,12 @@
     </Filter>
     <Filter Include="Sources\Items">
       <UniqueIdentifier>{18577d69-c1f9-4ddb-bd06-8411856384e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Items\Base">
+      <UniqueIdentifier>{f9a364ae-74af-42f1-83bb-dd5619d4be85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Items\Instance">
+      <UniqueIdentifier>{42e99e22-4124-4159-9e68-236b2898a3d5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

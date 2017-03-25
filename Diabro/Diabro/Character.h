@@ -6,6 +6,8 @@
 #include "OgreEntity.h"
 #include "CharacterStats.h"
 #include "BaseApplication.h"
+#include "WeaponInstance.h"
+#include "EquimentInstance.h"
 
 class Character
 {
@@ -32,6 +34,7 @@ public:
 
 	int getLevel() { return _currentLevel; }
 
+	WeaponInstance* getCurrentWeapon() { return _weapon; }
 	// -------------------------------------------------------------------------------
 
 	virtual void move(Ogre::Vector3&);
@@ -64,6 +67,14 @@ protected:
 	Ogre::Real _currAttackCooldown;
 	Ogre::Real _lightAttackCooldown;
 	//Ogre::Real _heavyAttackCooldown;
+
+	WeaponInstance* _weapon;
+	void SetHand(WeaponInstance* weapon);
+	void RemoveFromHand();
+
+	//TODO: implement these methods so that the character actually gains stats from wearing items
+	void AddStats(EquipmentInstance* item);
+	void RemoveStats(EquipmentInstance* item);
 
 	Character* _target;
 	virtual void findTarget(std::vector<Character*>);
