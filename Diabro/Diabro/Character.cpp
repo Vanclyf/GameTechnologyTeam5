@@ -57,6 +57,7 @@ void Character::update(Ogre::Real pDeltatime)
 
 }
 
+//TODO: these methods should be generic
 /// <summary>
 /// Finds the target.
 /// </summary>

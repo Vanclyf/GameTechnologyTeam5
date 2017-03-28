@@ -66,3 +66,7 @@ void Npc::die() {
 	
 	GameManager::getSingletonPtr()->getLevelManager()->detachFriendlyNPC(id);
 }
+
+void Npc::toggleDialog() {	
+	_inDialog = false;
+}
