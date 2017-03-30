@@ -15,10 +15,16 @@ public:
 	void update(Ogre::Real) override;
 	bool dialog(Ogre::Vector3);
 	void toggleDialog();
+	void continueDialog();
 	void die() override;
 
 private: 
 	bool _inDialog;
+	int _dialogCount;
+	Ogre::String _startDialogText;
+	Ogre::String _endDialogText;
+
+
 };
 
 #endif

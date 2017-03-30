@@ -196,11 +196,10 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 	//TODO: this code should check whether or not an NPC is in range and if so, start the conversation
 	case OIS::KC_F:
 		dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[0])->dialog(_levelManager->getPlayer()->getPosition());
-		FILE* fp;
-		freopen_s(&fp, "CONOUT$", "w", stdout);
-		printf("dialog on");
-		fclose(fp);
-		//mTrayMgr = new SdkTrayManager("InterfaceName", mWindow, mMouse, this);
+		break;
+
+	case OIS::KC_SPACE:
+		dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[0])->continueDialog();
 		break;
 
 	default:
