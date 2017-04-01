@@ -31,10 +31,12 @@ bool Character::initialize()
 	//for now, it does return a weapon and for testing purposes I need it. Items should be assigned through the inventory and tested for types.
 	_weapon = reinterpret_cast<WeaponInstance*>(GameManager::getSingletonPtr()->getItemManager()->getItemGenerator()->generateRandomItem(_myNode));
 
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	FILE* fp;
 	freopen_s(&fp, "CONOUT$", "w", stdout);
 	std::cout << "I am a " << _myNode->getName() << " and I have a " << _weapon->getName() << std::endl;
 	fclose(fp);
+#endif
 
 	return true;
 }
