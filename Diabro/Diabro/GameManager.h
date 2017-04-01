@@ -11,6 +11,7 @@ Filename:    GameManager.h
 #include "LevelManager.h"
 #include <OgreSingleton.h>
 #include "UIManager.h"
+#include "ItemManager.h"
 
 //---------------------------------------------------------------------------
 
@@ -25,9 +26,16 @@ public:
 
 	Ogre::SceneManager* getSceneManager(void) { return mSceneMgr; }
 	Ogre::Camera* getCamera(void) { return mCamera; }
+	Ogre::Timer* getGameTime(void) { return _gameTimer; }
+
 	LevelManager* getLevelManager(void) { return _levelManager; }
 	UIManager* getUIManager(void) { return _uiManager; }
-	Ogre::Timer* getGameTime(void) { return _gameTimer; }
+	ItemManager* getItemManager(void) { return _itemManager; }
+
+	float getRandomInRange(float pLO, float pHI) {
+		//TODO: implement random float function
+		return pLO;
+	}
 
 protected:
     virtual void createScene(void);
@@ -47,6 +55,7 @@ private:
 
 	LevelManager* _levelManager;
 	UIManager* _uiManager;
+	ItemManager* _itemManager;
 
 	Ogre::Timer* _gameTimer;
 };

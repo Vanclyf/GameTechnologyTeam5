@@ -4,26 +4,28 @@
 #pragma once
 #include <OgrePrerequisites.h>
 
+//TODO: create potion and gold base/instance classes 
 enum ItemType : unsigned int{
-	potion = 0,
-	gold = 1,
-	equipment = 2,
+	Potion = 0,
+	Gold = 1,
+	Equipment = 2,
 };
 
 class BaseItem
 {
 public:
 	BaseItem();
+	BaseItem(Ogre::String, Ogre::String, ItemType, int);
 	~BaseItem();
 
-	std::string getName() { return _name; }
-	std::string getSpriteName() { return  _spriteName; }
+	Ogre::String getName() { return _name; }
+	Ogre::String getSpriteName() { return  _spriteName; }
 	ItemType getItemType() { return _itemType; }
 	int getItemTier() { return _itemTier; }
 
 private:
-	std::string _name;
-	std::string _spriteName;
+	Ogre::String _name;
+	Ogre::String _spriteName;
 	ItemType _itemType;
 	int _itemTier;
 

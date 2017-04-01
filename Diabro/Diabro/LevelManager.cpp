@@ -27,11 +27,11 @@ void LevelManager::initialize()
 	playerNode->createChildSceneNode()->attachObject(_playerEntity);
 	playerScript = new Player(playerNode, _playerEntity);
 	playerScript->initialize();
-
+	
 	Ogre::SceneNode* npcSpawnerNode = _levelNode->createChildSceneNode("npcSpawn");
 	//0.5f for height difference
 	npcSpawner = new CharacterSpawner<Npc>(npcSpawnerNode, 3, Ogre::Vector3(-1000, 25, -1000));
-
+	
 	Ogre::SceneNode* enemySpawnerNode = _levelNode->createChildSceneNode("enemySpawn");
 	enemySpawner = new CharacterSpawner<BasicEnemy>(enemySpawnerNode, 3, Ogre::Vector3(1000, 0, 1000));
 
