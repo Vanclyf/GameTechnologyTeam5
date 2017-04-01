@@ -44,6 +44,7 @@ set(HDRS
 	./Diabro/Diabro/WeaponInstance.h
 	./Diabro/Diabro/ItemContainer.h
 	./Diabro/Diabro/ItemManager.h
+	./Diabro/Diabro/ItemGenerator.h
 )
  
 set(SRCS
@@ -67,6 +68,7 @@ set(SRCS
 	./Diabro/Diabro/WeaponInstance.cpp
 	./Diabro/Diabro/ItemContainer.cpp
 	./Diabro/Diabro/ItemManager.cpp
+	./Diabro/Diabro/ItemGenerator.cpp
 )
  
 include("tools/cmake/common.cmake") 
