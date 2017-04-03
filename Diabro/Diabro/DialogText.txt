@@ -1,0 +1,2 @@
+\nThis is the first sequence of \n the quest dialog\n
+\nThis is the second sequence of \n the quest dialog\n

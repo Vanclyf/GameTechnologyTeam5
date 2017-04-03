@@ -1,6 +1,8 @@
 #include "Npc.h"
 #include "GameManager.h"
 
+
+
 /// <summary>
 /// Creates a new instance of the <see cref="Npc"/> class.
 /// </summary>
@@ -10,14 +12,41 @@ Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entit
 {
 	id = GameManager::getSingletonPtr()->getLevelManager()->subscribeFriendlyNPC(this);
 	rotatePivot(Ogre::Vector3(0, 90, 0));
+	_dialogFile.open("DialogText.txt");
+	if (_dialogFile.fail()) {
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+		FILE* fp;
+		freopen_s(&fp, "CONOUT$", "w", stdout);
+		printf("Error opening text file, file maybe corrupt or unreachable");
+		fclose(fp);
+#endif
+		//exit(1);
+	}
+	else {
+		std::string line;
+		for (int i = 1; !_dialogFile.eof(); i++)
+		{
+			getline(_dialogFile, line);
 
-	_startDialogText =
+			if (i == 1) {
+				_startDialogText = line;
+			}
+			else if (i == 2) {
+				_endDialogText = line;
+			}
+
+		}
+		_dialogFile.close();
+	}
+
+
+	/*_startDialogText =
 		"\nThis is the first sequence of \n"
 		"the quest dialog\n";
 	_endDialogText =
 		"This is the second sequence of \n"
 		"the quest dialog\n";
-
+	*/
 	_dialogCount = 0;
 
 }

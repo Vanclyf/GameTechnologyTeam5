@@ -3,6 +3,7 @@
 
 #pragma once
 #include "BaseNpc.h"
+#include <fstream>
 
 class Npc : public BaseNpc
 {
@@ -20,6 +21,7 @@ public:
 
 private: 
 	bool _inDialog;
+	std::ifstream _dialogFile;
 	int _dialogCount;
 	Ogre::String _startDialogText;
 	Ogre::String _endDialogText;
