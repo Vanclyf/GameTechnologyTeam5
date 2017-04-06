@@ -1,44 +1,140 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="BaseApplication.cpp" />
-    <ClCompile Include="BaseEquipment.cpp" />
-    <ClCompile Include="BaseItem.cpp" />
-    <ClCompile Include="BaseNpc.cpp" />
-    <ClCompile Include="BasicEnemy.cpp" />
-    <ClCompile Include="Character.cpp" />
-    <ClCompile Include="BaseWeapon.cpp" />
-    <ClCompile Include="EquimentInstance.cpp" />
-    <ClCompile Include="FloatRange.cpp" />
-    <ClCompile Include="GameManager.cpp" />
-    <ClCompile Include="ItemInstance.cpp" />
-    <ClCompile Include="Npc.cpp" />
-    <ClCompile Include="LevelManager.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="UIManager.cpp" />
-    <ClCompile Include="CharacterSpawner.cpp" />
+    <ClCompile Include="BaseNpc.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="BasicEnemy.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="FloatRange.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Npc.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="UIManager.cpp">
+      <Filter>Sources\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelManager.cpp">
+      <Filter>Sources\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Sources\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseApplication.cpp">
+      <Filter>Sources\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemManager.cpp">
+      <Filter>Sources\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemContainer.cpp">
+      <Filter>Sources\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseEquipment.cpp">
+      <Filter>Sources\Items\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseItem.cpp">
+      <Filter>Sources\Items\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseWeapon.cpp">
+      <Filter>Sources\Items\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="EquimentInstance.cpp">
+      <Filter>Sources\Items\Instance</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemInstance.cpp">
+      <Filter>Sources\Items\Instance</Filter>
+    </ClCompile>
+    <ClCompile Include="WeaponInstance.cpp">
+      <Filter>Sources\Items\Instance</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemGenerator.cpp">
+      <Filter>Sources\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterSpawner.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Affix.h" />
-    <ClInclude Include="BaseApplication.h" />
-    <ClInclude Include="BaseEquipment.h" />
-    <ClInclude Include="BaseItem.h" />
-    <ClInclude Include="BaseNpc.h" />
-    <ClInclude Include="BasicEnemy.h" />
-    <ClInclude Include="Character.h" />
-    <ClInclude Include="BaseWeapon.h" />
-    <ClInclude Include="CharacterStats.h" />
-    <ClInclude Include="EquimentInstance.h" />
-    <ClInclude Include="FloatRange.h" />
-    <ClInclude Include="GameManager.h" />
-    <ClInclude Include="ItemInstance.h" />
-    <ClInclude Include="Npc.h" />
-    <ClInclude Include="LevelManager.h" />
-    <ClInclude Include="Modifier.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="StatRange.h" />
-    <ClInclude Include="UIManager.h" />
-    <ClInclude Include="CharacterSpawner.h" />
+    <ClInclude Include="BaseNpc.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicEnemy.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterStats.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Npc.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="UIManager.h">
+      <Filter>Headers\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelManager.h">
+      <Filter>Headers\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseApplication.h">
+      <Filter>Headers\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>Headers\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Affix.h">
+      <Filter>Headers\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="FloatRange.h">
+      <Filter>Headers\Stats</Filter>
+    </ClInclude>
+    <ClInclude Include="Modifier.h">
+      <Filter>Headers\Stats</Filter>
+    </ClInclude>
+    <ClInclude Include="StatRange.h">
+      <Filter>Headers\Stats</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemManager.h">
+      <Filter>Headers\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemContainer.h">
+      <Filter>Headers\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseItem.h">
+      <Filter>Headers\Items\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseWeapon.h">
+      <Filter>Headers\Items\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseEquipment.h">
+      <Filter>Headers\Items\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="EquimentInstance.h">
+      <Filter>Headers\Items\Instance</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemInstance.h">
+      <Filter>Headers\Items\Instance</Filter>
+    </ClInclude>
+    <ClInclude Include="WeaponInstance.h">
+      <Filter>Headers\Items\Instance</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemGenerator.h">
+      <Filter>Headers\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterSpawner.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="GameObjStandard.cg" />
@@ -48,5 +144,40 @@
     <None Include="Resources\materials\textures\yellowBox.jpg" />
     <None Include="testMaterial.material" />
     <None Include="DialogText.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{ba6bcfdd-646e-451c-a5b8-ba792be3b0f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{45d97e07-f55c-450d-9e53-280d9c82188a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Managers">
+      <UniqueIdentifier>{cd111b08-fc3b-484f-83c8-95e2f1401686}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Managers">
+      <UniqueIdentifier>{a6f4ae2c-c966-4d22-a76c-f36d11010b43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Items">
+      <UniqueIdentifier>{6d661253-a345-4a74-a696-ae88ea98d8ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Stats">
+      <UniqueIdentifier>{36bda03a-ea99-4676-aaa1-248a27a8868f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Items\Base">
+      <UniqueIdentifier>{168eedfb-9d6d-4136-87ac-cde48c252a8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Items\Instance">
+      <UniqueIdentifier>{daf12517-5c78-4ce4-9602-7bba858721ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Items">
+      <UniqueIdentifier>{18577d69-c1f9-4ddb-bd06-8411856384e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Items\Base">
+      <UniqueIdentifier>{f9a364ae-74af-42f1-83bb-dd5619d4be85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Items\Instance">
+      <UniqueIdentifier>{42e99e22-4124-4159-9e68-236b2898a3d5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

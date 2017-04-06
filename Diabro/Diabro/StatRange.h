@@ -8,11 +8,12 @@
 class StatRange
 {
 public:
-	std::vector<StatType> getStatTypes() { return _statTypes; }
+	StatRange(StatType pStatType, FloatRange pFloatRange) : _statType(pStatType), _range(pFloatRange){}
+	StatType getStatType() { return _statType; }
 	FloatRange getFloatRange() { return _range; }
 
 private:
-	std::vector<StatType> _statTypes;
+	StatType _statType;
 	FloatRange _range;
 };
 

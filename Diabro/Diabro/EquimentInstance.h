@@ -5,47 +5,45 @@
 #include "ItemInstance.h"
 #include "CharacterStats.h"
 #include "Affix.h"
+#include "BaseEquipment.h"
 
-class EquimentInstance :
-	public ItemInstance
+class EquipmentInstance : public ItemInstance
 {
 public:
-	EquimentInstance();
-	~EquimentInstance();
+	EquipmentInstance(BaseEquipment*, Quality, Ogre::Entity*, int, Ogre::String, std::vector<Stat*>);
+	~EquipmentInstance();
 
-	std::string getName()
-	{
-		return _generatedName;
-	}
-	bool getEquipped()
-	{
-		return _equipped;
-	}
-	std::vector<Stat> getBaseStats()
-	{
-		return _baseStats;
-	}
-	std::vector<Affix> getAffixStats()
-	{
-		return _affixStats;
-	}
-	int getLevel()
-	{
-		return _level;
-	}
+	BaseEquipment* getInfo() { return _equipmentInfo; }
+	Ogre::String getName() { return _generatedName; }
+	bool isEquipped() { return _equipped; }
+	int getLevel() { return _level; }
 
-	void mainStatValue();
+	std::vector<Stat*> getBaseStats() { return _baseStats; }
+	float getValueOfStat(StatType stat);
 
+	//std::vector<Affix> getAffixStats() { return _affixStats; }
+	//std::vector<Modifier> getModifiers() { return _modifiers; }
+
+	float mainStatValue();
+
+	//void use() override;
+	//void drop() override;
+	//void onCollision() override;
+	//void addToInventory() override;
 
 private:
-
-	std::string _generatedName;
-	bool _equipped;
-	std::vector<Stat> _baseStats;
-	std::vector<Affix> _affixStats;
-	std::vector<Modifier> _modifiers;
+	Ogre::String _generatedName;
 	int _level;
 
+	BaseEquipment* _equipmentInfo;
+
+	bool _equipped;
+
+	std::vector<Stat*> _baseStats;
+
+	//TODO: implement these variables + properties + generation methods when working on stat gen.
+	//std::vector<Affix> _affixStats;
+	//std::vector<Modifier> _modifiers;
 };
 
 #endif

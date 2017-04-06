@@ -10,7 +10,7 @@
 /// <param name="pMyEntity">My entity.</param>
 Character::Character(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : _myNode(pMyNode), _myEntity(pMyEntity), _stats(0), _dirVec(0, 0, 0),
 _movespeed(100), _runspeed(250), _rotationspeed(0.13), _isRunning(false), _currentLevel(1), _currentHealth(0), _currentStamina(0), _canAttack(true),
-_attackDistance(20), _currAttackCooldown(0), _lightAttackCooldown(5.0f), _hitted(false), _totalHitTime(.5f)
+_attackDistance(20), _currAttackCooldown(0), _lightAttackCooldown(5.0f), _hitted(false), _totalHitTime(.5f), _weapon(0)
 {
 }
 
@@ -26,6 +26,17 @@ bool Character::initialize()
 
 	_currentHealth = _stats->GetStat(MaxHealth);
 	_currentStamina = _stats->GetStat(MaxStamina);
+
+	//TODO: this is THE WORST thing ever, it will never be sure (in the future) that the generator will return a weapon
+	//for now, it does return a weapon and for testing purposes I need it. Items should be assigned through the inventory and tested for types.
+	_weapon = reinterpret_cast<WeaponInstance*>(GameManager::getSingletonPtr()->getItemManager()->getItemGenerator()->generateRandomItem(_myNode));
+
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+	FILE* fp;
+	freopen_s(&fp, "CONOUT$", "w", stdout);
+	std::cout << "I am a " << _myNode->getName() << " and I have a " << _weapon->getName() << std::endl;
+	fclose(fp);
+#endif
 
 	return true;
 }
@@ -216,4 +227,27 @@ void Character::die()
 	//_myNode->removeAndDestroyAllChildren();
 	//GameManager::getSingletonPtr()->getSceneManager()->destroySceneNode(_myNode);
 }
+
+//TODO: call this from the init from NPC's and from the inventory for the player
+//for now: standard weapon assigned in init
+void Character::SetHand(WeaponInstance* pWeapon) {
+	if(_weapon != NULL) {
+		RemoveFromHand();
+	}
+
+	_weapon = pWeapon;
+
+	//TODO: set the weapon entity as child of the character and set it to visible
+}
+
+void Character::RemoveFromHand() {
+	//TODO: un-parent the weapon
+
+	_weapon = NULL;
+}
+
+
+
+
+
 

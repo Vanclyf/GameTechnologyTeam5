@@ -13,7 +13,7 @@ Filename:    GameManager.cpp
 /// This class is the central manager of the game and has therefore the only singleton instance.
 /// It contains all other managers.
 /// </summary>
-GameManager::GameManager() : _levelManager(0), _uiManager(0), _gameTimer(0)
+GameManager::GameManager() : _levelManager(0), _uiManager(0), _itemManager(0), _gameTimer(0)
 {
 }
 //---------------------------------------------------------------------------
@@ -25,6 +25,7 @@ GameManager::~GameManager()
 	delete _gameTimer;
 	delete _levelManager;
 	delete _uiManager;
+	delete _itemManager;
 }
 
 //---------------------------------------------------------------------------
@@ -63,11 +64,20 @@ void GameManager::createScene(void)
 	// set shadow technique
 	mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 
+	_itemManager = new ItemManager();
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+	FILE* fp;
+	freopen_s(&fp, "CONOUT$", "w", stdout);
+	printf("items added.");
+	printf("itemcontainer has %d items", GameManager::getSingletonPtr()->getItemManager()->getItemContianer()->itemAmount());
+	fclose(fp);
+#endif
 	_levelManager = new LevelManager();
 	_levelManager->initialize();
 
 	_uiManager = new UIManager();
 	_uiManager->init();
+
 }
 
 /// <summary>
