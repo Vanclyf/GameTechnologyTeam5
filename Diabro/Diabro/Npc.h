@@ -3,6 +3,7 @@
 
 #pragma once
 #include "BaseNpc.h"
+#include <fstream>
 
 class Npc : public BaseNpc
 {
@@ -12,13 +13,24 @@ public:
 
 	static Ogre::String getMeshName() { return "penguin.mesh"; }
 
+	bool getInDialog() {
+		return _inDialog;
+	}
+
 	void update(Ogre::Real) override;
 	bool dialog(Ogre::Vector3);
-	void toggleDialog(bool pOn) { _inDialog = pOn; }
+	void toggleDialog();
+	void continueDialog();
 	void die() override;
 
 private: 
 	bool _inDialog;
+	std::ifstream _dialogFile;
+	int _dialogCount;
+	Ogre::String _startDialogText;
+	Ogre::String _endDialogText;
+
+
 };
 
 #endif

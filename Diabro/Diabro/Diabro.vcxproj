@@ -88,6 +88,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="DialogText.txt" />
     <None Include="GameObjStandard.cg" />
     <None Include="Resources\materials\scripts\UI.material" />
     <None Include="Resources\materials\textures\greenBox.jpg" />

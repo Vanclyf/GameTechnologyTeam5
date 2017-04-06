@@ -5,6 +5,7 @@ Filename:    GameManager.cpp
 
 */
 #include "GameManager.h"
+#include "SdkTrays.h"
 //---------------------------------------------------------------------------
 
 /// <summary>
@@ -204,7 +205,16 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 
 	//TODO: this code should check whether or not an NPC is in range and if so, start the conversation
 	case OIS::KC_F:
-		_levelManager->npcScript->dialog(_levelManager->getPlayer()->getPosition());
+		if (dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[0])->getInDialog() == false) {
+			dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[0])->dialog(_levelManager->getPlayer()->getPosition());
+		}
+		else {
+			dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[0])->toggleDialog();
+		}
+		break;
+
+	case OIS::KC_SPACE:
+		dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[0])->continueDialog();
 		break;
 
 	default:
@@ -251,8 +261,8 @@ bool GameManager::keyReleased(const OIS::KeyEvent& pKE)
 		break;
 
 	//TODO: this code should end the conversation with the current talking to NPC
+	//TODO: maybe write own casts for character types
 	case OIS::KC_F:
-		_levelManager->npcScript->toggleDialog(false);
 		break;
 
 	default:

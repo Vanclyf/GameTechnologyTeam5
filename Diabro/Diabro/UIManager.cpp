@@ -6,7 +6,7 @@
 /// This class is created by the <see cref="GameManager" /> and contains all UI information, 
 /// e.g. the in-game and menu UI.
 /// </summary>
-UIManager::UIManager() : _uiNode(0), _healthBar(0), _staminaBar(0), _maxWidthBar(0), _heightBar(0)
+UIManager::UIManager() : _uiNode(0), _healthBar(0), _staminaBar(0), _maxWidthBar(0), _heightBar(0), _mSdkTrayMgr(0), _mWindow(0)
 {
 }
 
@@ -15,6 +15,9 @@ UIManager::UIManager() : _uiNode(0), _healthBar(0), _staminaBar(0), _maxWidthBar
 /// </summary>
 void UIManager::init()
 {
+	_mSdkTrayMgr = new OgreBites::SdkTrayManager("DialogInterface", _mWindow, _mInputContext, _mSdkTrayListener);
+	_mSdkTrayMgr->hideCursor();
+
 	setupUI();
 	_healthBar->getOwnWidth();
 
@@ -65,6 +68,26 @@ Ogre::Billboard* UIManager::setupUIBar(Ogre::String pID, Ogre::SceneNode* pNode,
 
 	return(bar);
 }
+
+void UIManager::createDialog(Ogre::String pDialogText) {
+	_mDialogTextArea = _mSdkTrayMgr->createTextBox(OgreBites::TL_CENTER, "DialogTextArea", pDialogText, 400, 400);
+}
+
+/// <summary>
+/// Destroys the dialog.
+/// </summary>
+void UIManager::destroyDialog() {
+	_mSdkTrayMgr->destroyWidget("DialogTextArea");
+}
+
+/// <summary>
+/// Appends the dialog text.
+/// </summary>
+/// <param name="pDialogText">The p dialog text.</param>
+void UIManager::appendDialogText(Ogre::String pDialogText) {
+	_mDialogTextArea->appendText(pDialogText);
+}
+
 
 /// <summary>
 /// Adjusts the health bar pValue.

@@ -143,6 +143,7 @@
     <None Include="Resources\materials\textures\greyBox.jpg" />
     <None Include="Resources\materials\textures\yellowBox.jpg" />
     <None Include="testMaterial.material" />
+    <None Include="DialogText.txt" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Headers">

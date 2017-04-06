@@ -35,8 +35,6 @@ public:
 
 	// for now public so that game manager can access it. 
 	Player* playerScript; 
-	Npc* npcScript;
-	BasicEnemy* enemyScript;
 
 	Ogre::Degree startPitchCam;
 	Ogre::Vector3 playerPosition;

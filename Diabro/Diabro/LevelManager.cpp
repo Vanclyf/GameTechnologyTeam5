@@ -7,7 +7,7 @@
 /// like characters and the environment.
 /// </summary>
 LevelManager::LevelManager() : _playerEntity(0), _npcEntity(0), _basicEnemyEntity(0), _groundEntity(0),
-playerScript(0), npcScript(0), enemyScript(0), _levelNode(0), _camNode(0), npcSpawner(0)
+playerScript(0), _levelNode(0), _camNode(0), npcSpawner(0)
 {
 }
 
@@ -40,6 +40,7 @@ void LevelManager::initialize()
 	_groundEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("ground");
 	_levelNode->createChildSceneNode()->attachObject(_groundEntity);
 	_groundEntity->setMaterialName("Examples/Rockwall");
+
 	// camera
 	_camNode->attachObject(GameManager::getSingletonPtr()->getCamera());
 	_camNode->pitch(Ogre::Degree(10), Ogre::Node::TS_LOCAL);
