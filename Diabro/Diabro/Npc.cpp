@@ -20,7 +20,6 @@ Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entit
 		printf("Error opening text file, file maybe corrupt or unreachable");
 		fclose(fp);
 #endif
-		//exit(1);
 	}
 	else {
 		std::string line;
@@ -38,15 +37,6 @@ Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entit
 		}
 		_dialogFile.close();
 	}
-
-
-	/*_startDialogText =
-		"\nThis is the first sequence of \n"
-		"the quest dialog\n";
-	_endDialogText =
-		"This is the second sequence of \n"
-		"the quest dialog\n";
-	*/
 	_dialogCount = 0;
 
 }
@@ -80,7 +70,7 @@ bool Npc::dialog(Ogre::Vector3 pPlayerPos)
 		_inDialog = true;
 
 
-		GameManager::getSingletonPtr()->getUIManager()->createDialog("Quest Dialog\n\n\tPress Space to Continue\n");
+		GameManager::getSingletonPtr()->getUIManager()->createDialog("Quest Dialog\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress Space to Continue");
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 		FILE* fp;

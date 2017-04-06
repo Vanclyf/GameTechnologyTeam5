@@ -13,6 +13,10 @@ public:
 
 	static Ogre::String getMeshName() { return "penguin.mesh"; }
 
+	bool getInDialog() {
+		return _inDialog;
+	}
+
 	void update(Ogre::Real) override;
 	bool dialog(Ogre::Vector3);
 	void toggleDialog();
