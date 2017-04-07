@@ -61,6 +61,15 @@
     <ClCompile Include="CharacterSpawner.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>Sources\States</Filter>
+    </ClCompile>
+    <ClCompile Include="MotorExample.cpp">
+      <Filter>Sources\States</Filter>
+    </ClCompile>
+    <ClCompile Include="FiniteStateMachine.cpp">
+      <Filter>Sources\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseNpc.h">
@@ -135,6 +144,19 @@
     <ClInclude Include="CharacterSpawner.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Headers\States</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="FiniteStateMachine.h">
+      <Filter>Headers\States</Filter>
+    </ClInclude>
+    <ClInclude Include="EventData.h">
+      <Filter>Headers\States</Filter>
+    </ClInclude>
+    <ClInclude Include="MotorExample.h">
+      <Filter>Headers\States</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="GameObjStandard.cg" />
@@ -179,5 +201,14 @@
     <Filter Include="Sources\Items\Instance">
       <UniqueIdentifier>{42e99e22-4124-4159-9e68-236b2898a3d5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sources\States">
+      <UniqueIdentifier>{73632fde-c065-45a0-9305-62f918fd890a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\States">
+      <UniqueIdentifier>{08a08f48-5a8f-443d-9cc6-cb465548c300}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Diabro.rc" />
   </ItemGroup>
 </Project>
