@@ -16,10 +16,12 @@ public:
 
 
 protected:
+	std::vector<Ogre::SceneNode*> CityManager::nodeIteration(Ogre::SceneNode *);
 	bool checkCollision(Ogre::SceneNode *, int); //Checks if buildings are colliding with one another
 	bool checkEntryWay(Ogre::SceneNode *, int); //Checks if the buildings are blocking entryways
 	int assignBuildingRole(Ogre::SceneNode *, int);
 private:
+	std::vector <Ogre::SceneNode*> detachable;
 	Ogre::SceneManager *manager;
 	Ogre::SceneNode* _cityNode;
 	Ogre::Entity* _signEntity;
