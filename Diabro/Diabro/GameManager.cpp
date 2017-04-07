@@ -75,6 +75,11 @@ void GameManager::createScene(void)
 	_levelManager = new LevelManager();
 	_levelManager->initialize();
 
+	_cityManager = new CityManager();
+	_cityManager->init();
+
+
+	
 	_uiManager = new UIManager();
 	_uiManager->init();
 

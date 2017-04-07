@@ -9,6 +9,7 @@ Filename:    GameManager.h
 
 #include "BaseApplication.h"
 #include "LevelManager.h"
+#include "CityManager.h"
 #include <OgreSingleton.h>
 #include "UIManager.h"
 #include "ItemManager.h"
@@ -54,6 +55,7 @@ private:
 	virtual bool mouseReleased(const OIS::MouseEvent&, OIS::MouseButtonID);
 
 	LevelManager* _levelManager;
+	CityManager* _cityManager;
 	UIManager* _uiManager;
 	ItemManager* _itemManager;
 
