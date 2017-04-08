@@ -9,12 +9,20 @@ public:
 	~State();
 
 	Ogre::String getStateName() { return _stateName; }
-	Ogre::String getReason() { return _reason; }
 	int getId() { return _id; }
+	int getStateType() { return _currentStateType; }
 
 private:
 	int _id;
 	Ogre::String _stateName;
-	Ogre::String _reason;
+	
+	//TODO: Add more state types when necessary
+	enum StateType
+	{
+		Npc,
+		Quest
+	};
+
+	StateType _currentStateType;
 };
 

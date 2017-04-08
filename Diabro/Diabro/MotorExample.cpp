@@ -1,6 +1,9 @@
 #include "MotorExample.h"
 
 
+/**
+ * An External Event 
+ */
 void MotorExample::Halt()
 {
 	BEGIN_TRANSITION_MAP
@@ -11,6 +14,9 @@ void MotorExample::Halt()
 	END_TRANSITION_MAP(NULL)
 }
 
+/**
+ * Again, another external event example
+ */
 void MotorExample::SetSpeed(MotorData* pData)
 {
 	BEGIN_TRANSITION_MAP
@@ -21,20 +27,25 @@ void MotorExample::SetSpeed(MotorData* pData)
 	END_TRANSITION_MAP(pData)
 }
 
+//State. Do stuff in here
 void MotorExample::ST_Idle()
 {
 }
 
+//State. Do stuff in here
 void MotorExample::ST_Start(MotorData*)
 {
 	
 }
 
+//State. Do Stuff here
 void MotorExample::ST_Stop()
 {
+	//An internal event
 	InternalEvent(ST_IDLE);
 }
 
+//State. Do Stuff here
 void MotorExample::ST_ChangeSpeed(MotorData*)
 {
 	
