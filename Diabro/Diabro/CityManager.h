@@ -16,17 +16,16 @@ public:
 
 
 protected:
-	std::vector<Ogre::SceneNode*> CityManager::nodeIteration(Ogre::SceneNode *);
-	bool checkCollision(Ogre::SceneNode *, int); //Checks if buildings are colliding with one another
-	bool checkEntryWay(Ogre::SceneNode *, int); //Checks if the buildings are blocking entryways
-	int assignBuildingRole(Ogre::SceneNode *, int);
+	std::vector<Ogre::SceneNode*> CityManager::nodeIteration(Ogre::SceneNode *); //simple method that will iterate through all child nodes and set them in an array to eb used. (maybe for a "BaseController)
+	bool checkCollision(Ogre::SceneNode *); //Checks if buildings are colliding with one another
+	bool checkEntryWay(Ogre::SceneNode *); //Checks if the buildings are blocking entryways
+	int assignBuildingRole(Ogre::SceneNode *); //Assign roles to buildings in the city
 private:
-	std::vector <Ogre::SceneNode*> detachable;
+	std::vector <Ogre::SceneNode*> buildings;
 	Ogre::SceneManager *manager;
 	Ogre::SceneNode* _cityNode;
 	Ogre::Entity* _signEntity;
 	Ogre::SceneNode* _rootNode;
-	Ogre::SceneNode* _buildings;
 	Ogre::SceneNode* _roleNode;
 	int _numberOfBuildings;
 	int role;

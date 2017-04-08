@@ -59,42 +59,41 @@ void CityManager::generateCity(int sizeX, int sizeZ, int _numberOfBuildings)
 		printf("scale of building nodes %f, %f, %f \n", buildingscale.x, buildingscale.y, buildingscale.z);	
 	}
 	//reposition and roleassignement if needed
-	checkCollision(_cityNode, _numberOfBuildings);
-	checkEntryWay(_cityNode, _numberOfBuildings);
-	assignBuildingRole(_cityNode, _numberOfBuildings);
+	checkCollision(_cityNode);
+	checkEntryWay(_cityNode);
+	assignBuildingRole(_cityNode);
 	fclose(fp);
 #endif
 }
 //TODO: check if buildings are colliding needs collison implemented
-bool CityManager::checkCollision(Ogre::SceneNode *_cityNode, int _numberOfBuildings)
-{
-//TODO: check with other node   	
-	Ogre::SceneNode * previousNode; 
-	Ogre::SceneNode::ChildNodeIterator cNode = _cityNode->getChildIterator();
-	while (cNode.hasMoreElements()) {
-
-		detachable.push_back((Ogre::SceneNode *)cNode.getNext());
-	}
-	for (int i=0; i < detachable.size(); i++)
-	{
-		//Ogre::Node *buildingNode =_cityNode->getChild("buildingNode");
-		
-		
+//for now will simply bebased on distance and removed, later on be replaced.
+bool CityManager::checkCollision(Ogre::SceneNode *_cityNode)
+{	
+	nodeIteration(_cityNode);
+			
+	for (int i = 0; i < buildings.size(); i++) {
+		for (int k = i + 1; k < buildings.size(); k++) {
+			if (buildings[i]->getPosition() == buildings[k]->getPosition() || buildings[i]->getPosition().distance(buildings[k]->getPosition()) < 600) {
+				GameManager::getSingletonPtr()->getSceneManager()->destroySceneNode(buildings[i]);
+			}
+		}	
 	}
 	
 	return true;
 	
 }
 //TODO: check if entryways aren't being blocked needs entryways 
-bool CityManager::checkEntryWay(Ogre::SceneNode *_cityNode, int _numberOfBuildings)
+bool CityManager::checkEntryWay(Ogre::SceneNode *_cityNode)
 {
 	nodeIteration(_cityNode);
 	Ogre::Vector3 entryway =  Ogre::Vector3(5000, 0, 2800);
-	for (int i = 0; i < detachable.size(); i++)
+	for (int i = 0; i < buildings.size(); i++)
 	{
-		while (detachable[i]->getPosition().distance(entryway) < 150) //TODO: compare with entryway positions
+		int distance = buildings[i]->getPosition().distance(entryway);
+		int minumumEntrywayDistance = 300;
+		if (distance < minumumEntrywayDistance) //TODO: compare with entryway positions
 		{
-			detachable[i]->setPosition(detachable[i]->getPosition().x -10,0, detachable[i]->getPosition().z);
+			GameManager::getSingletonPtr()->getSceneManager()->destroySceneNode(buildings[i]);
 		}
 
 	}
@@ -104,52 +103,52 @@ bool CityManager::checkEntryWay(Ogre::SceneNode *_cityNode, int _numberOfBuildin
 
 
 //Source: http://www.ogre3d.org/forums/viewtopic.php?f=2&t=77945 by Kojack
-int CityManager::assignBuildingRole(Ogre::SceneNode * _cityNode, int _numberOfBuildings)
+int CityManager::assignBuildingRole(Ogre::SceneNode * _cityNode)
 {
 	std::stringstream nodename("buildingRoleNode");
 	nodeIteration(_cityNode);
 	FILE* fp;
 	freopen_s(&fp, "CONOUT$", "w", stdout);
 	
-	for (int i = 0; i < detachable.size(); i++) {
+	for (int i = 0; i < buildings.size(); i++) {
 		
 		nodename << childIteration << "_" << parentIteration << "_" << i;
-		int roles = rand() % 5;
+		int roles = rand() % 6;
 	
 		switch (roles) // assign building random professions by giving them a rolenode
 		{
 			
 		case 0:
-			_roleNode = ( Ogre::SceneNode *)detachable[i]->createChild(nodename.str());
+			_roleNode = ( Ogre::SceneNode *)buildings[i]->createChild(nodename.str());
 			_signEntity = manager->createEntity("Barrel.mesh");
 			_roleNode->attachObject(_signEntity);
 			_roleNode->setPosition(0, 100, 0);
 			break;
 		case 1:
-			_roleNode = (Ogre::SceneNode *)detachable[i]->createChild(nodename.str());
+			_roleNode = (Ogre::SceneNode *)buildings[i]->createChild(nodename.str());
 			_signEntity = manager->createEntity("Barrel.mesh");
 			_roleNode->attachObject(_signEntity);
 			_roleNode->setPosition(0, 100, 0);
 			break;
 		case 2:
-			_roleNode = (Ogre::SceneNode *)detachable[i]->createChild(nodename.str());
+			_roleNode = (Ogre::SceneNode *)buildings[i]->createChild(nodename.str());
 			_signEntity = manager->createEntity("Knot.mesh");
 			_roleNode->attachObject(_signEntity);
 			_roleNode->setPosition(0, 100, 0);
 			break;
 		case 3:
-			_roleNode = (Ogre::SceneNode *)detachable[i]->createChild(nodename.str());
+			_roleNode = (Ogre::SceneNode *)buildings[i]->createChild(nodename.str());
 			_signEntity = manager->createEntity("Barrel.mesh");
 			_roleNode->attachObject(_signEntity);
 			_roleNode->setPosition(0, 100, 0);
 			break;
 		case 4:
-			_roleNode = (Ogre::SceneNode *)detachable[i]->createChild(nodename.str());
+			_roleNode = (Ogre::SceneNode *)buildings[i]->createChild(nodename.str());
 			_signEntity = manager->createEntity("Athene.mesh");
 			_roleNode->attachObject(_signEntity);
 			_roleNode->setPosition(0, 100, 0);
 			break;
-		default:
+		case 5:
 			break;
 		}
 		printf("%d", roles);
@@ -163,9 +162,9 @@ std::vector<Ogre::SceneNode*> CityManager::nodeIteration(Ogre::SceneNode *pNodeN
 {
 	Ogre::SceneNode::ChildNodeIterator cNode = pNodeName->getChildIterator();
 	while (cNode.hasMoreElements()) {
-		detachable.push_back((Ogre::SceneNode *)cNode.getNext());
+		buildings.push_back((Ogre::SceneNode *)cNode.getNext());
 	}
-	return detachable;
+	return buildings;
 }
 
 
