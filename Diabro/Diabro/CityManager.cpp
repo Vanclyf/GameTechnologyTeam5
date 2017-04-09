@@ -26,13 +26,9 @@ void CityManager::init()
 
 void CityManager::generateCity(int sizeX, int sizeZ, int _numberOfBuildings)
 {
-	
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	FILE* fp;
-	freopen_s(&fp, "CONOUT$", "w", stdout);
-	
-	printf(" number of buildings: %d \n", _numberOfBuildings);
-	printf(" location of X: %d  location of Z: %d \n", sizeX, sizeZ);
+		
+	//printf(" number of buildings: %d \n", _numberOfBuildings);
+	//printf(" location of X: %d  location of Z: %d \n", sizeX, sizeZ);
 	for (int i = 0; i < _numberOfBuildings; i++)
 	{
 		childIteration = i;
@@ -62,23 +58,20 @@ void CityManager::generateCity(int sizeX, int sizeZ, int _numberOfBuildings)
 	checkCollision(_cityNode);
 	checkEntryWay(_cityNode);
 	assignBuildingRole(_cityNode);
-	fclose(fp);
-#endif
 }
 //TODO: check if buildings are colliding needs collison implemented
 //for now will simply bebased on distance and removed, later on be replaced.
 bool CityManager::checkCollision(Ogre::SceneNode *_cityNode)
 {	
 	nodeIteration(_cityNode);
-	FILE* fp;
-	freopen_s(&fp, "CONOUT$", "w", stdout);
+
 	for (int i = 0; i < buildings.size(); i++) {
 		for (int k = i + 1; k < buildings.size(); k++) {
-			printf("%f", buildings[i]->getPosition().distance(buildings[k]->getPosition()));
+			//printf("%f", buildings[i]->getPosition().distance(buildings[k]->getPosition()));
 			if (buildings[i]->getPosition() == buildings[k]->getPosition() || buildings[i]->getPosition().distance(buildings[k]->getPosition()) < 600) {
 				
 
-				printf("Deleted building \n");
+			//	printf("Deleted building \n");
 				buildings[i]->removeAndDestroyAllChildren();
 				GameManager::getSingletonPtr()->getSceneManager()->destroySceneNode(buildings[i]);
 				buildings.erase(buildings.begin() + i);
@@ -87,7 +80,7 @@ bool CityManager::checkCollision(Ogre::SceneNode *_cityNode)
 				
 			}
 		}	
-		fclose(fp);
+	
 	}
 	
 	return true;
@@ -118,8 +111,6 @@ int CityManager::assignBuildingRole(Ogre::SceneNode * _cityNode)
 {
 	std::stringstream nodename("buildingRoleNode");
 	nodeIteration(_cityNode);
-	FILE* fp;
-	freopen_s(&fp, "CONOUT$", "w", stdout);
 	
 	for (int i = 0; i < buildings.size(); i++) {
 		
@@ -162,9 +153,9 @@ int CityManager::assignBuildingRole(Ogre::SceneNode * _cityNode)
 		case 5:
 			break;
 		}
-		printf("%d", roles);
+		//printf("%d", roles);
 	}
-	fclose(fp);
+
 	return role;
 }
 
