@@ -70,13 +70,24 @@ void CityManager::generateCity(int sizeX, int sizeZ, int _numberOfBuildings)
 bool CityManager::checkCollision(Ogre::SceneNode *_cityNode)
 {	
 	nodeIteration(_cityNode);
-			
+	FILE* fp;
+	freopen_s(&fp, "CONOUT$", "w", stdout);
 	for (int i = 0; i < buildings.size(); i++) {
 		for (int k = i + 1; k < buildings.size(); k++) {
+			printf("%f", buildings[i]->getPosition().distance(buildings[k]->getPosition()));
 			if (buildings[i]->getPosition() == buildings[k]->getPosition() || buildings[i]->getPosition().distance(buildings[k]->getPosition()) < 600) {
+				
+
+				printf("Deleted building \n");
+				buildings[i]->removeAndDestroyAllChildren();
 				GameManager::getSingletonPtr()->getSceneManager()->destroySceneNode(buildings[i]);
+				buildings.erase(buildings.begin() + i);
+				
+				
+				
 			}
 		}	
+		fclose(fp);
 	}
 	
 	return true;
@@ -157,7 +168,7 @@ int CityManager::assignBuildingRole(Ogre::SceneNode * _cityNode)
 	return role;
 }
 
-//will create a array of childNodes can be relatively widely copied
+//will create a vector-array of childNodes can be relatively widely copied
 std::vector<Ogre::SceneNode*> CityManager::nodeIteration(Ogre::SceneNode *pNodeName)
 {
 	Ogre::SceneNode::ChildNodeIterator cNode = pNodeName->getChildIterator();
