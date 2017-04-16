@@ -18,7 +18,8 @@ public:
 
 protected:
 	enum { EVENT_IGNORED = 0xFE, CANNOT_HAPPEN };
-	unsigned char _currentState;
+	State _currentState;
+	//unsigned char _currentState;
 
 	void ExternalEvent(unsigned char, EventData* = NULL);
 	void InternalEvent(unsigned char, EventData* = NULL);
@@ -59,6 +60,6 @@ const StateStruct* GetStateMap() {\
 
 #define END_TRANSITION_MAP(data) \
     0 };\
-    ExternalEvent(TRANSITIONS[_currentState], data);
+    ExternalEvent(TRANSITIONS[_currentState.getStateName()], data);
 
 

@@ -3,7 +3,7 @@
 
 
 FiniteStateMachine::FiniteStateMachine(unsigned char maxStates) :
-_maxStates(maxStates), _currentState(0), _eventGenerated(false), _eventData(NULL)
+_maxStates(maxStates), _currentState(), _eventGenerated(false), _eventData(NULL)
 {
 }
 
@@ -33,7 +33,7 @@ void FiniteStateMachine::InternalEvent(unsigned char newState, EventData* pData)
 
 	_eventData = pData;
 	_eventGenerated = true;
-	_currentState = newState;
+	_currentState.setStateName(newState);
 }
 
 void FiniteStateMachine::StateEngine(void)
@@ -46,10 +46,10 @@ void FiniteStateMachine::StateEngine(void)
 		_eventData = NULL;
 		_eventGenerated = false;
 
-		assert(_currentState < _maxStates);
+		assert(_currentState.getStateName() < _maxStates);
 
 		const StateStruct* pStateMap = GetStateMap();
-		(this->*pStateMap[_currentState]._stateFunc)(pDataTemp);
+		(this->*pStateMap[_currentState.getStateName()]._stateFunc)(pDataTemp);
 	
 		if(pDataTemp)
 	{

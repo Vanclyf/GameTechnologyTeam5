@@ -19,7 +19,7 @@ public:
 	//Special external event of the state machine
 	void Halt();
 	void SetSpeed(MotorData*);
-	int GetCurrentState() { return _currentState; }
+	int GetCurrentState() { return _currentState.getStateName(); }
 
 private:
 	//state machine state functions

@@ -11,6 +11,7 @@ public:
 	unsigned char getStateName() { return _stateName; }
 	int getId() { return _id; }
 	int getStateType() { return _currentStateType; }
+	void setStateName(unsigned stateName) { _stateName = stateName; }
 
 private:
 	int _id;
