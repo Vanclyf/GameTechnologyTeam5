@@ -8,6 +8,7 @@
 #include "BaseApplication.h"
 #include "WeaponInstance.h"
 #include "EquimentInstance.h"
+#include "MotorExample.h"
 
 class Character
 {
@@ -86,6 +87,8 @@ protected:
 
 	// TODO: maybe some NPC's (friendly villagers) will not have _stats then this should be moved to a lower child class. 
 	bool setUpStats();
+
+public:
 };
 
 #endif

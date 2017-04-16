@@ -3,18 +3,23 @@
 #include "EventData.h"
 
 struct StateStruct;
-
+class EventData
+{
+public:
+	virtual ~EventData() {};
+};
 
 //The base class for all state machines
 class FiniteStateMachine
 {
 public:
-	FiniteStateMachine(int maxStates);
+	FiniteStateMachine(unsigned char maxStates);
 	virtual ~FiniteStateMachine() {}
 
 protected:
 	enum { EVENT_IGNORED = 0xFE, CANNOT_HAPPEN };
 	unsigned char _currentState;
+
 	void ExternalEvent(unsigned char, EventData* = NULL);
 	void InternalEvent(unsigned char, EventData* = NULL);
 	virtual const StateStruct* GetStateMap() = 0;
@@ -43,7 +48,6 @@ const StateStruct* GetStateMap() {\
     { reinterpret_cast<StateFunc>(&entry) },
 
 #define END_STATE_MAP \
-    { reinterpret_cast<StateFunc>(NULL) }\
     }; \
     return &StateMap[0]; }
 

@@ -16,9 +16,6 @@
     <ClCompile Include="Npc.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
     <ClCompile Include="UIManager.cpp">
       <Filter>Sources\Managers</Filter>
     </ClCompile>
@@ -70,6 +67,7 @@
     <ClCompile Include="FiniteStateMachine.cpp">
       <Filter>Sources\States</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseNpc.h">
@@ -149,9 +147,6 @@
     </ClInclude>
     <ClInclude Include="resource.h" />
     <ClInclude Include="FiniteStateMachine.h">
-      <Filter>Headers\States</Filter>
-    </ClInclude>
-    <ClInclude Include="EventData.h">
       <Filter>Headers\States</Filter>
     </ClInclude>
     <ClInclude Include="MotorExample.h">

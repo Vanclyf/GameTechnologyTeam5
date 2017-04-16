@@ -1,5 +1,6 @@
 #include "Character.h"
 #include "GameManager.h"
+#include "MotorExample.h"
 
 /// <summary>
 /// Initializes a new instance of the <see cref="Character"/> class.
@@ -47,6 +48,7 @@ bool Character::initialize()
 /// <param name="pDeltatime">The time since last frame.</param>
 void Character::update(Ogre::Real pDeltatime)
 {
+
 	adjustStaminaOverTime(pDeltatime);
 
 	if (_currAttackCooldown > 0) {
@@ -64,7 +66,6 @@ void Character::update(Ogre::Real pDeltatime)
 	}
 
 	_myNode->translate(_dirVec * getSpeed() * pDeltatime, Ogre::Node::TS_LOCAL);
-
 
 }
 

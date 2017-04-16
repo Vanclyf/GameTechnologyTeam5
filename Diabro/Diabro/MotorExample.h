@@ -4,22 +4,27 @@
 #include "EventData.h"
 #include "FiniteStateMachine.h"
 
-struct MotorData : public EventData
+// structure to hold event data passed into state machine
+struct MotorData : EventData
 {
 	int speed;
 };
 
+// the Motor state machine class
 class MotorExample : FiniteStateMachine
 {
 public:
 	MotorExample() : FiniteStateMachine(ST_MAX_STATES){}
 
+	//Special external event of the state machine
 	void Halt();
 	void SetSpeed(MotorData*);
+	int GetCurrentState() { return _currentState; }
 
 private:
-	void ST_Idle();
-	void ST_Stop();
+	//state machine state functions
+	void ST_Idle(EventData*);
+	void ST_Stop(EventData*);
 	void ST_Start(MotorData*);
 	void ST_ChangeSpeed(MotorData*);
 
@@ -33,11 +38,11 @@ private:
 
 	/**
 	 * All the states in the state machine. 
-	 * Always end the enum with ST_MAX_STATES to say how many states the state machine got.
+	 * Always end the enum with ST_MAX_STATES to define how many states the state machine got.
 	 * 
 	 */
 	enum E_States{
-		ST_IDLE,
+		ST_IDLE = 0,
 		ST_STOP,
 		ST_START,
 		ST_CHANGE_SPEED,

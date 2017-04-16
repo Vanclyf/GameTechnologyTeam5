@@ -4,17 +4,17 @@
 class State
 {
 public:
-	State(int, Ogre::String);
+	State(int, unsigned char);
 	State();
 	~State();
 
-	Ogre::String getStateName() { return _stateName; }
+	unsigned char getStateName() { return _stateName; }
 	int getId() { return _id; }
 	int getStateType() { return _currentStateType; }
 
 private:
 	int _id;
-	Ogre::String _stateName;
+	unsigned char _stateName;
 	
 	//TODO: Add more state types when necessary
 	enum StateType

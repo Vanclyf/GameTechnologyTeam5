@@ -2,15 +2,19 @@
 
 
 /**
- * An External Event 
+ * An External Event. 
  */
 void MotorExample::Halt()
 {
-	BEGIN_TRANSITION_MAP
-		TRANSITION_MAP_ENTRY(EVENT_IGNORED)
-		TRANSITION_MAP_ENTRY(CANNOT_HAPPEN)
-		TRANSITION_MAP_ENTRY(ST_STOP)
-		TRANSITION_MAP_ENTRY(ST_STOP)
+	/**
+	 * Given the halt event, transist to another state based upon the 
+	 * current state of the state machine.
+	 */
+	BEGIN_TRANSITION_MAP						//Current state:
+		TRANSITION_MAP_ENTRY(EVENT_IGNORED)		//ST_Idle
+		TRANSITION_MAP_ENTRY(CANNOT_HAPPEN)		//ST_Stop
+		TRANSITION_MAP_ENTRY(ST_STOP)			//ST_Start
+		TRANSITION_MAP_ENTRY(ST_STOP)			//ST_ChangeSpeed
 	END_TRANSITION_MAP(NULL)
 }
 
@@ -19,27 +23,33 @@ void MotorExample::Halt()
  */
 void MotorExample::SetSpeed(MotorData* pData)
 {
-	BEGIN_TRANSITION_MAP
-		TRANSITION_MAP_ENTRY(ST_START)
-		TRANSITION_MAP_ENTRY(CANNOT_HAPPEN)
-		TRANSITION_MAP_ENTRY(ST_CHANGE_SPEED)
-		TRANSITION_MAP_ENTRY(ST_CHANGE_SPEED)
+	/**
+	* Given the speed event, transist to another state based upon the
+	* current state of the state machine.
+	*/
+
+	BEGIN_TRANSITION_MAP						//Current state:
+		TRANSITION_MAP_ENTRY(ST_START)			//ST_Idle
+		TRANSITION_MAP_ENTRY(CANNOT_HAPPEN)		//ST_Stop
+		TRANSITION_MAP_ENTRY(ST_CHANGE_SPEED)	//ST_Start
+		TRANSITION_MAP_ENTRY(ST_CHANGE_SPEED)	//ST_ChangeSpeed
 	END_TRANSITION_MAP(pData)
 }
 
 //State. Do stuff in here
-void MotorExample::ST_Idle()
+void MotorExample::ST_Idle(EventData* pData)
 {
+
 }
 
 //State. Do stuff in here
-void MotorExample::ST_Start(MotorData*)
+void MotorExample::ST_Start(MotorData* pData)
 {
-	
+
 }
 
 //State. Do Stuff here
-void MotorExample::ST_Stop()
+void MotorExample::ST_Stop(EventData* pData)
 {
 	//An internal event
 	InternalEvent(ST_IDLE);
@@ -48,7 +58,7 @@ void MotorExample::ST_Stop()
 //State. Do Stuff here
 void MotorExample::ST_ChangeSpeed(MotorData*)
 {
-	
+
 }
 
 

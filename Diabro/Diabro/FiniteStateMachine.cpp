@@ -2,8 +2,8 @@
 
 
 
-FiniteStateMachine::FiniteStateMachine(int maxStates) :
-_maxStates(maxStates), _currentState(NULL), _eventGenerated(false), _eventData(NULL)
+FiniteStateMachine::FiniteStateMachine(unsigned char maxStates) :
+_maxStates(maxStates), _currentState(0), _eventGenerated(false), _eventData(NULL)
 {
 }
 
@@ -28,6 +28,9 @@ void FiniteStateMachine::ExternalEvent(unsigned char newState, EventData* pData)
 
 void FiniteStateMachine::InternalEvent(unsigned char newState, EventData* pData)
 {
+	if (pData == NULL)
+		pData = new EventData();
+
 	_eventData = pData;
 	_eventGenerated = true;
 	_currentState = newState;
@@ -35,7 +38,7 @@ void FiniteStateMachine::InternalEvent(unsigned char newState, EventData* pData)
 
 void FiniteStateMachine::StateEngine(void)
 {
-	EventData* pDataTemp = NULL;
+	EventData* pDataTemp;
 
 	while (_eventGenerated)
 	{
@@ -47,13 +50,12 @@ void FiniteStateMachine::StateEngine(void)
 
 		const StateStruct* pStateMap = GetStateMap();
 		(this->*pStateMap[_currentState]._stateFunc)(pDataTemp);
-
+	
 		if(pDataTemp)
-		{
+	{
 			delete pDataTemp;
 			pDataTemp = NULL;
 		}
-
 	}
 }
 
