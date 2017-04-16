@@ -1,13 +1,11 @@
-#pragma once
+#ifndef FINITE_STATE_MACHINE_H_
+#define FINITE_STATE_MACHINE_H_
 #include "State.h"
 #include "EventData.h"
+#include <stdio.h>
 
 struct StateStruct;
-class EventData
-{
-public:
-	virtual ~EventData() {};
-};
+
 
 //The base class for all state machines
 class FiniteStateMachine
@@ -62,4 +60,5 @@ const StateStruct* GetStateMap() {\
     0 };\
     ExternalEvent(TRANSITIONS[_currentState.getStateName()], data);
 
+#endif
 

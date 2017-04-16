@@ -1,5 +1,6 @@
-#pragma once
-#include <OgrePrerequisites.h>
+#ifndef STATE_H_
+#define STATE_H_
+
 
 class State
 {
@@ -27,3 +28,4 @@ private:
 	StateType _currentStateType;
 };
 
+#endif

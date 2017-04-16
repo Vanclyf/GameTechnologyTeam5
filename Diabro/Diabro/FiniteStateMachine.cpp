@@ -1,5 +1,5 @@
 #include "FiniteStateMachine.h"
-
+#include <cassert>
 
 
 FiniteStateMachine::FiniteStateMachine(unsigned char maxStates) :
@@ -52,7 +52,7 @@ void FiniteStateMachine::StateEngine(void)
 		(this->*pStateMap[_currentState.getStateName()]._stateFunc)(pDataTemp);
 	
 		if(pDataTemp)
-	{
+		{
 			delete pDataTemp;
 			pDataTemp = NULL;
 		}

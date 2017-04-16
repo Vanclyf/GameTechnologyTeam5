@@ -133,6 +133,7 @@
     <ClInclude Include="CharacterSpawner.h" />
     <ClInclude Include="CharacterStats.h" />
     <ClInclude Include="EquimentInstance.h" />
+    <ClInclude Include="EventData.h" />
     <ClInclude Include="FiniteStateMachine.h" />
     <ClInclude Include="FloatRange.h" />
     <ClInclude Include="GameManager.h" />
