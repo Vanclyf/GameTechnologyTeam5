@@ -4,6 +4,16 @@
 #pragma once
 #include "BaseNpc.h"
 #include <fstream>
+#include "Needs.h"
+
+enum Profession {
+	None = 0,
+	Smith,
+	Knight,
+	Parent,
+
+	AMOUNT_OF_PROFS
+};
 
 class Npc : public BaseNpc
 {
@@ -30,7 +40,9 @@ private:
 	Ogre::String _startDialogText;
 	Ogre::String _endDialogText;
 
-
+	Needs* _needs;
+	Profession _profession;
+	//Location _hometown;
 };
 
 #endif

@@ -136,10 +136,13 @@
     <ClInclude Include="ItemGenerator.h" />
     <ClInclude Include="ItemInstance.h" />
     <ClInclude Include="ItemManager.h" />
+    <ClInclude Include="Needs.h" />
     <ClInclude Include="Npc.h" />
     <ClInclude Include="LevelManager.h" />
     <ClInclude Include="Modifier.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="QuestContentManager.h" />
+    <ClInclude Include="QuestItem.h" />
     <ClInclude Include="StatRange.h" />
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="WeaponInstance.h" />

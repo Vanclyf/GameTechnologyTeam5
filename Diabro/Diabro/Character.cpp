@@ -32,10 +32,10 @@ bool Character::initialize()
 	_weapon = reinterpret_cast<WeaponInstance*>(GameManager::getSingletonPtr()->getItemManager()->getItemGenerator()->generateRandomItem(_myNode));
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	FILE* fp;
-	freopen_s(&fp, "CONOUT$", "w", stdout);
-	std::cout << "I am a " << _myNode->getName() << " and I have a " << _weapon->getName() << std::endl;
-	fclose(fp);
+	//FILE* fp;
+	//freopen_s(&fp, "CONOUT$", "w", stdout);
+	//std::cout << "I am a " << _myNode->getName() << " and I have a " << _weapon->getName() << std::endl;
+	//fclose(fp);
 #endif
 
 	return true;

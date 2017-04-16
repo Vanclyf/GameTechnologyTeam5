@@ -17,11 +17,13 @@ public:
 protected:
 	float _noticeDistance;
 	bool _playerDetected;
+
 	void detectPlayer(); 
 	void walkTo(Ogre::Vector3);
 
 	//object pivot
 	Ogre::SceneNode* _myRotationNode;
+
 private:
 	float _timeSince;
 

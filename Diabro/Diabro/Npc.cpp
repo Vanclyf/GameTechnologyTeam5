@@ -39,7 +39,31 @@ Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entit
 	}
 	_dialogCount = 0;
 
+	//TODO: discuss if this should be moved to some NPC generator class ----------------------------------------
+	// randomly assign a profession
+	int randomRoll = GameManager::getSingletonPtr()->getRandomInRange(0, Profession::AMOUNT_OF_PROFS);
+	_profession = (Profession)randomRoll;
+
+	// randomly assign needs
+	Need tempNeed;
+	std::vector<Need> tempNeeds;
+	for (int i = 0; i < NeedType::AMOUNT_OF_NEEDTYPES; ++i) {
+		tempNeed.type = (NeedType)i;
+
+		randomRoll = GameManager::getSingletonPtr()->getRandomInRange(10, 100);
+		tempNeed.value = randomRoll;
+		tempNeeds.push_back(tempNeed);
+	};
+
+	_needs = new Needs(tempNeeds);
+
+	// ---------------------------------------------------------------------------------------------------------
 }
+
+Npc::~Npc() {
+	delete _needs;
+}
+
 
 /// <summary>
 /// Updates the frame based on the specified deltatime.

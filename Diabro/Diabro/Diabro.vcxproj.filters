@@ -135,6 +135,15 @@
     <ClInclude Include="CharacterSpawner.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="Needs.h">
+      <Filter>Headers\Needs</Filter>
+    </ClInclude>
+    <ClInclude Include="QuestItem.h">
+      <Filter>Headers\QuestContent</Filter>
+    </ClInclude>
+    <ClInclude Include="QuestContentManager.h">
+      <Filter>Headers\QuestContent</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="GameObjStandard.cg" />
@@ -178,6 +187,12 @@
     </Filter>
     <Filter Include="Sources\Items\Instance">
       <UniqueIdentifier>{42e99e22-4124-4159-9e68-236b2898a3d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Needs">
+      <UniqueIdentifier>{6e9bfbbe-52d5-4f0b-b346-6cf303ea85a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\QuestContent">
+      <UniqueIdentifier>{00e4bb5e-9f04-498a-ad5e-7802f8e9a5f2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
