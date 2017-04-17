@@ -25,7 +25,7 @@ struct Need {
 	NeedType type;
 	Ogre::Real value;
 
-	void adjustValue(int pAdjustment) { value = pAdjustment; };
+	void adjustValue(int pAdjustment) { value += pAdjustment; };
 };
 
 class Needs {

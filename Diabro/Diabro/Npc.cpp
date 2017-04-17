@@ -64,7 +64,6 @@ Npc::~Npc() {
 	delete _needs;
 }
 
-
 /// <summary>
 /// Updates the frame based on the specified deltatime.
 /// </summary>
@@ -157,6 +156,10 @@ void Npc::continueDialog() {
 			_dialogCount = 0;
 			_inDialog = false;
 		}
-		
 	}
+}
+
+void Npc::adjustNeed(NeedType pNeedType, int pAdjust) {
+	_needs->adjustValueOf(pAdjust, pNeedType);
+	return;
 }

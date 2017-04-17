@@ -2,14 +2,24 @@
 #define  QUEST_CONTENT_MANAGER_H
 
 #pragma once
+#include "QuestItemContainer.h"
+#include "QuestItemGenerator.h"
 
 class QuestContentManager {
-	//quest item generator
-		// reads xml file
-		// creates possible items
+public:
+	QuestContentManager();
+	~QuestContentManager();
 
+	QuestItemContainer* getItemContainer();
+	QuestItemGenerator* getItemGenerator();
 
+	//std::vector<Location> locations;
 
+private:
+	QuestItemContainer* _itemContainer;
+	QuestItemGenerator* _itemGenerator;
+
+	void readFromXML();
 };
 
 #endif

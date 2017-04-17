@@ -9,8 +9,12 @@
 enum Profession {
 	None = 0,
 	Smith,
-	Knight,
+	Guard,
 	Parent,
+	Dungeoneer,
+	Alchemist,
+	Shopkeeper,
+	Nobleman,
 
 	AMOUNT_OF_PROFS
 };
@@ -43,6 +47,8 @@ private:
 	Needs* _needs;
 	Profession _profession;
 	//Location _hometown;
+
+	void adjustNeed(NeedType, int);
 };
 
 #endif

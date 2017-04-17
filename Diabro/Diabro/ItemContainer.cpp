@@ -13,5 +13,3 @@ ItemContainer::~ItemContainer() {
 int ItemContainer::itemAmount() {
 	return _weapons.size();
 }
-
-

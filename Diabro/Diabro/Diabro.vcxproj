@@ -115,6 +115,8 @@
     <ClCompile Include="Npc.cpp" />
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="QuestItemContainer.cpp" />
+    <ClCompile Include="QuestItemGenerator.cpp" />
     <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="WeaponInstance.cpp" />
   </ItemGroup>
@@ -143,6 +145,8 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="QuestContentManager.h" />
     <ClInclude Include="QuestItem.h" />
+    <ClInclude Include="QuestItemContainer.h" />
+    <ClInclude Include="QuestItemGenerator.h" />
     <ClInclude Include="StatRange.h" />
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="WeaponInstance.h" />

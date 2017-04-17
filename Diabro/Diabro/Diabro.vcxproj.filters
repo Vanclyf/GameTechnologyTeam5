@@ -61,6 +61,12 @@
     <ClCompile Include="CharacterSpawner.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="QuestItemContainer.cpp">
+      <Filter>Sources\QuestContent</Filter>
+    </ClCompile>
+    <ClCompile Include="QuestItemGenerator.cpp">
+      <Filter>Sources\QuestContent</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseNpc.h">
@@ -144,6 +150,12 @@
     <ClInclude Include="QuestContentManager.h">
       <Filter>Headers\QuestContent</Filter>
     </ClInclude>
+    <ClInclude Include="QuestItemGenerator.h">
+      <Filter>Headers\QuestContent</Filter>
+    </ClInclude>
+    <ClInclude Include="QuestItemContainer.h">
+      <Filter>Headers\QuestContent</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="GameObjStandard.cg" />
@@ -193,6 +205,9 @@
     </Filter>
     <Filter Include="Headers\QuestContent">
       <UniqueIdentifier>{00e4bb5e-9f04-498a-ad5e-7802f8e9a5f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\QuestContent">
+      <UniqueIdentifier>{941f42a8-19a0-45a9-9d67-1dba844f3563}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

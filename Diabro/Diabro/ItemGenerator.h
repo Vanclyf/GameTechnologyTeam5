@@ -24,5 +24,4 @@ private:
 	//for now: affixes are ignored. 
 };
 
-
 #endif
