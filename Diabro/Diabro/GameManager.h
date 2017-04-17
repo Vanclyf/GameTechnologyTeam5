@@ -12,6 +12,7 @@ Filename:    GameManager.h
 #include <OgreSingleton.h>
 #include "UIManager.h"
 #include "ItemManager.h"
+#include "QuestContentManager.h"
 
 //---------------------------------------------------------------------------
 
@@ -31,6 +32,7 @@ public:
 	LevelManager* getLevelManager(void) { return _levelManager; }
 	UIManager* getUIManager(void) { return _uiManager; }
 	ItemManager* getItemManager(void) { return _itemManager; }
+	QuestContentManager* getQuestContentManager(void) { return _questContentManager; }
 
 	int getRandomInRange(int pLO, int pHI) {
 		return rand() % pHI + pLO;
@@ -55,6 +57,7 @@ private:
 	LevelManager* _levelManager;
 	UIManager* _uiManager;
 	ItemManager* _itemManager;
+	QuestContentManager* _questContentManager;
 
 	Ogre::Timer* _gameTimer;
 };

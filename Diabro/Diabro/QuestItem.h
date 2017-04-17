@@ -3,23 +3,28 @@
 
 #pragma once
 #include <OgrePrerequisites.h>
+#include "BaseQuestItem.h"
 
-enum QuestItemType {
+enum QuestItemQuality {
 	NormalQI,
 	MysticalQI,
 	ValuableQI,
 
-	AMOUNT_OF_QUEST_ITEM_TYPES
+	AMOUNT_OF_QUEST_ITEM_QUALITIES
 };
 
 class QuestItem {
 public:
-	QuestItem(Ogre::String pName) : _name(pName) {};
+	QuestItem(BaseQuestItem* pBaseItem, QuestItemQuality pQuality) : _info(pBaseItem), _quality(pQuality) {};
+	~QuestItem();
 
-	Ogre::String getName() { return _name; }
+	BaseQuestItem* getInfo() { return _info; }
+	QuestItemQuality getQuality() { return _quality; }
 
 private:
-	Ogre::String _name;
+	BaseQuestItem* _info;
+	QuestItemQuality _quality;
+
 	//Quest _quest; or action?
 };
 

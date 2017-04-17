@@ -10,8 +10,8 @@ public:
 	QuestContentManager();
 	~QuestContentManager();
 
-	QuestItemContainer* getItemContainer();
-	QuestItemGenerator* getItemGenerator();
+	QuestItemContainer* getItemContainer() { return _itemContainer; };
+	QuestItemGenerator* getItemGenerator() { return _itemGenerator; };
 
 	//std::vector<Location> locations;
 

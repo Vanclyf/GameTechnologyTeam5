@@ -12,11 +12,14 @@ public:
 
 	int itemAmount();
 
-	std::vector<QuestItem*> getItems() { return  _items; }
-	void setWeapons(std::vector<QuestItem*> pItems) { _items = pItems; }
+	std::map<QuestItemType, std::vector<BaseQuestItem*>> getItems() { return  _items; }
+	void setItems(std::map<QuestItemType, std::vector<BaseQuestItem*>> pItems) { _items = pItems; }
+
+	std::vector<BaseQuestItem*> getItemsOfType(QuestItemType pType) { return _items.at(pType); }
+	void setItemsOfType(QuestItemType pType, std::vector<BaseQuestItem*> pItems) { _items.at(pType) = pItems; }
 
 private:
-	std::vector<QuestItem*> _items;
+	std::map<QuestItemType, std::vector<BaseQuestItem*>> _items;
 };
 
 #endif 

@@ -13,7 +13,7 @@ Filename:    GameManager.cpp
 /// This class is the central manager of the game and has therefore the only singleton instance.
 /// It contains all other managers.
 /// </summary>
-GameManager::GameManager() : _levelManager(0), _uiManager(0), _itemManager(0), _gameTimer(0)
+GameManager::GameManager() : _levelManager(0), _uiManager(0), _itemManager(0), _questContentManager(0), _gameTimer(0)
 {
 }
 //---------------------------------------------------------------------------
@@ -26,6 +26,7 @@ GameManager::~GameManager()
 	delete _levelManager;
 	delete _uiManager;
 	delete _itemManager;
+	delete _questContentManager;
 }
 
 //---------------------------------------------------------------------------
@@ -68,12 +69,19 @@ void GameManager::createScene(void)
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	FILE* fp;
 	freopen_s(&fp, "CONOUT$", "w", stdout);
-	printf("items added.");
-	printf("itemcontainer has %d items", GameManager::getSingletonPtr()->getItemManager()->getItemContianer()->itemAmount());
+	printf("items added.\n");
+	printf("itemcontainer has %d items\n", GameManager::getSingletonPtr()->getItemManager()->getItemContianer()->itemAmount());
 	fclose(fp);
 #endif
 	_levelManager = new LevelManager();
 	_levelManager->initialize();
+
+	_questContentManager = new QuestContentManager();
+
+	QuestItem* tempItem = _questContentManager->getItemGenerator()->generateRandomItem(_levelManager->getLevelNode());
+	freopen_s(&fp, "CONOUT$", "w", stdout);
+	std::cout << "quest item generated: " << tempItem->getInfo()->getName() << std::endl;
+	fclose(fp);
 
 	_uiManager = new UIManager();
 	_uiManager->init();

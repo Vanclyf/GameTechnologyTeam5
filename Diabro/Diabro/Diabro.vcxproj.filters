@@ -67,6 +67,9 @@
     <ClCompile Include="QuestItemGenerator.cpp">
       <Filter>Sources\QuestContent</Filter>
     </ClCompile>
+    <ClCompile Include="QuestContentManager.cpp">
+      <Filter>Sources\QuestContent</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseNpc.h">
@@ -154,6 +157,9 @@
       <Filter>Headers\QuestContent</Filter>
     </ClInclude>
     <ClInclude Include="QuestItemContainer.h">
+      <Filter>Headers\QuestContent</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseQuestItem.h">
       <Filter>Headers\QuestContent</Filter>
     </ClInclude>
   </ItemGroup>

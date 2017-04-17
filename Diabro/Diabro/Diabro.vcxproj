@@ -28,7 +28,7 @@
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v100</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -42,6 +42,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\Users\Supernat0r\Documents\Common;D:\Program Files %28x86%29\DirectX-SDK\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Program Files %28x86%29\DirectX-SDK\Lib\x86;C:\Users\Supernat0r\Documents\Common;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -115,6 +117,7 @@
     <ClCompile Include="Npc.cpp" />
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="QuestContentManager.cpp" />
     <ClCompile Include="QuestItemContainer.cpp" />
     <ClCompile Include="QuestItemGenerator.cpp" />
     <ClCompile Include="UIManager.cpp" />
@@ -126,6 +129,7 @@
     <ClInclude Include="BaseEquipment.h" />
     <ClInclude Include="BaseItem.h" />
     <ClInclude Include="BaseNpc.h" />
+    <ClInclude Include="BaseQuestItem.h" />
     <ClInclude Include="BasicEnemy.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="BaseWeapon.h" />
