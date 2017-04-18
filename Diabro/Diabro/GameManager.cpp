@@ -80,7 +80,7 @@ void GameManager::createScene(void)
 
 	QuestItem* tempItem = _questContentManager->getItemGenerator()->generateRandomItem(_levelManager->getLevelNode());
 	freopen_s(&fp, "CONOUT$", "w", stdout);
-	std::cout << "quest item generated: " << tempItem->getInfo()->getName() << std::endl;
+	std::cout << "quest item generated: " << _questContentManager->getItemContainer()->getItemsOfType(BookQI)[0]->getName() << std::endl;
 	fclose(fp);
 
 	_uiManager = new UIManager();
@@ -367,7 +367,7 @@ extern "C" {
                 e.getFullDescription().c_str() << std::endl;
 #endif
         }
-
+		
         return 0;
     }
 

@@ -120,6 +120,7 @@
     <ClCompile Include="QuestContentManager.cpp" />
     <ClCompile Include="QuestItemContainer.cpp" />
     <ClCompile Include="QuestItemGenerator.cpp" />
+    <ClCompile Include="tinyxml2.cpp" />
     <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="WeaponInstance.cpp" />
   </ItemGroup>
@@ -152,6 +153,7 @@
     <ClInclude Include="QuestItemContainer.h" />
     <ClInclude Include="QuestItemGenerator.h" />
     <ClInclude Include="StatRange.h" />
+    <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="WeaponInstance.h" />
   </ItemGroup>

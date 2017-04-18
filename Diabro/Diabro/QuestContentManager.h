@@ -20,6 +20,7 @@ private:
 	QuestItemGenerator* _itemGenerator;
 
 	void readFromXML();
+	std::vector<BaseQuestItem*> readFromXMLBooks();
 };
 
 #endif
