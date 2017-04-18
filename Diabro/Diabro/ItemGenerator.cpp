@@ -1,6 +1,9 @@
 #include "ItemGenerator.h"
 #include "GameManager.h"
 #include "WeaponInstance.h"
+#include "ArmorInstance.h"
+
+class BaseArmor;
 
 /// <summary>
 /// Initializes a new instance of the <see cref="ItemGenerator"/> class.
@@ -52,7 +55,7 @@ ItemInstance* ItemGenerator::generateRandomItem(Ogre::SceneNode* pNode) {
 
 	//TODO: this should be a random itemtype
 	int itemType = 2;
-	int randomObj = 0;
+	int randomObj = 3;
 
 	// set the quality by default to poor.
 	Quality quality = Quality::Poor;
@@ -94,12 +97,13 @@ ItemInstance* ItemGenerator::generateRandomItem(Ogre::SceneNode* pNode) {
 	case 2: {
 		// create variables for gen
 		std::vector<Stat*> baseStats;
-		EquipmentType type = EquipmentWeapon;
+		EquipmentType type = EquipmentArmor;
 		Ogre::String genName = "";
 
 		//TODO: these are defined here to enable using them after the following switch case. This is kind of ugly.
 		BaseWeapon* weapon;
-		//BaseArmor* armor;
+		
+		BaseArmor* armor;
 		//BaseShield* shield;
 		//BaseJewelry* jewelry;
 
@@ -135,6 +139,23 @@ ItemInstance* ItemGenerator::generateRandomItem(Ogre::SceneNode* pNode) {
 				// armor
 		case 2: {
 			//TODO: armor gen
+			randomObj = (int)GameManager::getSingletonPtr()->getRandomInRange(0, GameManager::getSingletonPtr()->getItemManager()->getItemContianer()->itemAmount());
+			armor = GameManager::getSingletonPtr()->getItemManager()->getItemContianer()->GetArmors()[3];
+
+			type = EquipmentArmor;
+			genName = armor->getName();
+
+			level *= armor->getItemTier();
+			int numb = armor->getMainStat();
+			int armorValue = (int)armor->getValueOfStat(armor->getMainStat()).randomInRange();
+			int vitalityValue = (int)armor->getValueOfStat(StatType::Vitality).randomInRange();
+			int strengthValue = (int)armor->getValueOfStat(StatType::Strength).randomInRange();
+			Stat* armorStat = new Stat(StatType::Armor, armorValue);
+			Stat* vitalityStat = new Stat(StatType::Vitality, vitalityValue);
+			Stat* strengthStat = new Stat(StatType::Strength, strengthValue);
+			baseStats.push_back(armorStat);
+			baseStats.push_back(vitalityStat);
+			baseStats.push_back(strengthStat);
 			break;
 		}
 
@@ -170,6 +191,7 @@ ItemInstance* ItemGenerator::generateRandomItem(Ogre::SceneNode* pNode) {
 
 		case 2: {
 			//TODO: add armor instance to itemlist
+			returnItem = new ArmorInstance(armor, quality, itemEntity, level, genName, baseStats);
 			break;
 		}
 

@@ -61,11 +61,14 @@
     <ClCompile Include="CharacterSpawner.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="BaseArmor.cpp">
+      <Filter>Sources\Items\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="ArmorInstance.cpp">
+      <Filter>Sources\Items\Instance</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BaseNpc.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="BasicEnemy.h">
       <Filter>Headers</Filter>
     </ClInclude>
@@ -134,6 +137,15 @@
     </ClInclude>
     <ClInclude Include="CharacterSpawner.h">
       <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseArmor.h">
+      <Filter>Headers\Items\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="ArmorInstance.h">
+      <Filter>Headers\Items\Instance</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseNpc.h">
+      <Filter>Headers\Stats</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
