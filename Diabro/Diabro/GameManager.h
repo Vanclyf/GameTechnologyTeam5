@@ -22,6 +22,8 @@ public:
 	GameManager(void);
 	~GameManager(void);
 
+	Ogre::String nodeOfSceneXML;
+
 	static GameManager& getSingleton(void);
 	static GameManager* getSingletonPtr(void);
 

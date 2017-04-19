@@ -1,0 +1,94 @@
+<scene upAxis="y" unitsPerMeter="1" unitType="meters" formatVersion="1.0" minOgreVersion="Latest version" author="EasyOgreExporter">
+    <environment>
+        <colourAmbient r="0" g="0" b="0" />
+        <colourBackground r="0" g="0" b="0" />
+    </environment>
+    <nodes>
+	        <node name="goblinGoblin" id="13" isTarget="false">
+            <position x="0" y="0" z="0" />
+            <rotation qx="-1.11022e-16" qy="-0" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+            <entity name="goblinGoblin" id="14" meshFile="goblinGoblin.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="goblinphong1" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="goblinHeadTop_End" id="0" isTarget="false">
+            <position x="-5.96046e-10" y="0.129786" z="-0.246466" />
+            <rotation qx="-0" qy="-5.2043e-17" qz="-0" qw="-1" />
+            <scale x="1" y="1" z="1" />
+        </node>
+        <node name="goblinLeftHandThumb4" id="1" isTarget="false">
+            <position x="7.80869e-05" y="-0.00112305" z="0.0508653" />
+            <rotation qx="-0.104859" qy="-0.118353" qz="0.0383136" qw="-0.986676" />
+            <scale x="1" y="1" z="1" />
+        </node>
+        <node name="goblinLeftHandIndex4" id="2" isTarget="false">
+            <position x="0.00093256" y="0.000884094" z="0.0440752" />
+            <rotation qx="0.127374" qy="-0.0419806" qz="-0.00119431" qw="-0.990965" />
+            <scale x="1" y="1" z="1" />
+        </node>
+        <node name="goblinLeftHandMiddle4" id="3" isTarget="false">
+            <position x="-0.000566177" y="-0.000700684" z="0.0540261" />
+            <rotation qx="0.0723675" qy="-0.000807386" qz="0.0111268" qw="-0.997316" />
+            <scale x="1" y="1" z="1" />
+        </node>
+        <node name="goblinLeftHandRing4" id="4" isTarget="false">
+            <position x="-0.000500622" y="-0.000153046" z="0.0496545" />
+            <rotation qx="-0.00154123" qy="-0.0120642" qz="1.8598e-05" qw="-0.999926" />
+            <scale x="1" y="1" z="1" />
+        </node>
+        <node name="goblinLeftHandPinky4" id="5" isTarget="false">
+            <position x="0.000295982" y="0.000505066" z="0.0364678" />
+            <rotation qx="0.203639" qy="0.131868" qz="-0.0566487" qw="-0.968469" />
+            <scale x="1" y="1" z="1" />
+        </node>
+        <node name="goblinRightHandThumb4" id="6" isTarget="false">
+            <position x="-0.000470753" y="-0.000222931" z="0.0508752" />
+            <rotation qx="-0.0942586" qy="0.204953" qz="-0.0136664" qw="-0.974127" />
+            <scale x="1" y="1" z="1" />
+        </node>
+        <node name="goblinRightHandIndex4" id="7" isTarget="false">
+            <position x="-7.98416e-05" y="-0.000198212" z="0.0440934" />
+            <rotation qx="0.0881178" qy="0.113603" qz="-0.137015" qw="-0.98008" />
+            <scale x="1" y="1" z="1" />
+        </node>
+        <node name="goblinRightHandMiddle4" id="8" isTarget="false">
+            <position x="-0.000211906" y="0.00108582" z="0.0540224" />
+            <rotation qx="0.0730424" qy="0.0837884" qz="-0.00506671" qw="-0.99379" />
+            <scale x="1" y="1" z="1" />
+        </node>
+        <node name="goblinRightHandRing4" id="9" isTarget="false">
+            <position x="0.0069306" y="0.00111832" z="0.0491585" />
+            <rotation qx="-0.00154123" qy="0.0120642" qz="-1.8598e-05" qw="-0.999926" />
+            <scale x="1" y="1" z="1" />
+        </node>
+        <node name="goblinRightHandPinky4" id="10" isTarget="false">
+            <position x="0.00417913" y="0.00217941" z="0.0361667" />
+            <rotation qx="0.203639" qy="-0.131868" qz="0.0566487" qw="-0.968469" />
+            <scale x="1" y="1" z="1" />
+        </node>
+        <node name="goblinLeftToe_End" id="11" isTarget="false">
+            <position x="3.8147e-08" y="0" z="-0.11669" />
+            <rotation qx="1.86265e-09" qy="7.45058e-09" qz="-9.31323e-10" qw="-1" />
+            <scale x="1" y="1" z="1" />
+        </node>
+        <node name="goblinRightToe_End" id="12" isTarget="false">
+            <position x="1.90735e-08" y="1.19209e-09" z="-0.11669" />
+            <rotation qx="3.46945e-18" qy="7.45058e-09" qz="-4.65661e-10" qw="-1" />
+            <scale x="1" y="1" z="1" />
+        </node>
+
+        <node name="goblinGobiln_eyes" id="15" isTarget="false">
+            <position x="0.0193137" y="0.0218919" z="-0.0639848" />
+            <rotation qx="-0.707107" qy="-0" qz="-0" qw="-0.707107" />
+            <scale x="1" y="1" z="1" />
+            <entity name="goblinGobiln_eyes" id="16" meshFile="goblinGobiln_eyes.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="goblineyes_eyes_lambert" />
+                </subentities>
+            </entity>
+        </node>
+    </nodes>
+</scene>

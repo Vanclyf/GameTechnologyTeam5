@@ -72,6 +72,8 @@ void GameManager::createScene(void)
 
 	_questContentManager = new QuestContentManager();
 
+	Ogre::SceneNode* node = mSceneMgr->getSceneNode(nodeOfSceneXML);
+
 	_uiManager = new UIManager();
 	_uiManager->init();
 }
