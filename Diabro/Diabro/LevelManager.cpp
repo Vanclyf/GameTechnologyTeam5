@@ -132,3 +132,8 @@ void LevelManager::createGroundMesh()
 
 	return;
 }
+
+int LevelManager::testunittwo(int i)
+{
+	return ++i;
+}

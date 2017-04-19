@@ -32,7 +32,8 @@ public:
 
 	void detachHostileNPC(int);
 	void detachFriendlyNPC(int);
-
+	static int testunit(int i) { return ++i; };
+	static int testunittwo(int i);
 	// for now public so that game manager can access it. 
 	Player* playerScript; 
 	Npc* npcScript;
