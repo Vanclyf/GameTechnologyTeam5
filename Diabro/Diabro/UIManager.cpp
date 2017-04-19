@@ -6,7 +6,7 @@
 /// This class is created by the <see cref="GameManager" /> and contains all UI information, 
 /// e.g. the in-game and menu UI.
 /// </summary>
-UIManager::UIManager() : _uiNode(0), _healthBar(0), _staminaBar(0), _maxWidthBar(0), _heightBar(0), _mSdkTrayMgr(0), _mWindow(0)
+UIManager::UIManager() : _uiNode(0), _healthBarWidget(0), _staminaBarWidget(0), _maxWidthBar(0), _heightBar(0), _mSdkTrayMgr(0), _mWindow(0)
 {
 }
 
@@ -19,10 +19,9 @@ void UIManager::init()
 	_mSdkTrayMgr->hideCursor();
 
 	setupUI();
-	_healthBar->getOwnWidth();
 
-	_maxWidthBar = _healthBar->getOwnWidth();
-	_heightBar = _healthBar->getOwnHeight();
+	_maxWidthBar = _healthBarWidget->getOverlayElement()->getWidth();
+	_heightBar = _healthBarWidget->getOverlayElement()->getHeight();
 }
 
 /// <summary>
@@ -34,39 +33,10 @@ void UIManager::setupUI()
 	_uiNode->setPosition(0, 0, 0);
 
 	// create health bar
-	_healthBar = setupUIBar("Health", _uiNode, Ogre::BBO_TOP_LEFT, "UI/Green", Ogre::Vector3(-250, 215, -5), Ogre::Vector3(-4, 2, 5));
-	_staminaBar = setupUIBar("Stamina", _uiNode, Ogre::BBO_TOP_RIGHT, "UI/Yellow", Ogre::Vector3(250, 215, -5), Ogre::Vector3(4, 2, 5));
-}
-
-/// <summary>
-/// Setups the UI bar.
-/// </summary>
-/// <param name="pID">The identifier of the specific bar.</param>
-/// <param name="pNode">The pNode to attach the bar to.</param>
-/// <param name="pOrigin">The pOrigin of the bar.</param>
-/// <param name="pMaterialName">Name of the material.</param>
-/// <param name="pPos">The position.</param>
-/// <param name="pOffset">The pOffset.</param>
-/// <returns></returns>
-Ogre::Billboard* UIManager::setupUIBar(Ogre::String pID, Ogre::SceneNode* pNode, Ogre::BillboardOrigin pOrigin, Ogre::String pMaterialName, Ogre::Vector3 pPos, Ogre::Vector3 pOffset)
-{
-	Ogre::BillboardSet* barbackgroundSet = GameManager::getSingletonPtr()->getSceneManager()->createBillboardSet("Background" + pID + "Set");
-	barbackgroundSet->setMaterialName("UI/Grey");
-	barbackgroundSet->setBillboardOrigin(pOrigin);
-
-	Ogre::Billboard* barbackground = barbackgroundSet->createBillboard(pPos.x + pOffset.x, pPos.y + pOffset.y, pPos.z + pOffset.z);
-	barbackground->setDimensions(206, 26);
-	pNode->attachObject(barbackgroundSet);
-
-	Ogre::BillboardSet* barSet = GameManager::getSingletonPtr()->getSceneManager()->createBillboardSet(pID + "Set");
-	barSet->setMaterialName(pMaterialName);
-	barSet->setBillboardOrigin(pOrigin);
-
-	Ogre::Billboard* bar = barSet->createBillboard(pPos.x, pPos.y, pPos.z + 10);
-	bar->setDimensions(200, 20);
-	pNode->attachObject(barSet);
-
-	return(bar);
+	_healthBarWidget = _mSdkTrayMgr->createDecorWidget(OgreBites::TL_TOPLEFT, "Health", "UI/Green");
+	_staminaBarWidget = _mSdkTrayMgr->createDecorWidget(OgreBites::TL_TOPRIGHT, "Stamina", "UI/Yellow");
+	//_staminaBarWidget->getOverlayElement()->setHorizontalAlignment(Ogre::GuiHorizontalAlignment::GHA_LEFT);
+	_staminaBarWidget->getOverlayElement()->setLeft(-128);
 }
 
 void UIManager::createDialog(Ogre::String pDialogText) {
@@ -88,7 +58,6 @@ void UIManager::appendDialogText(Ogre::String pDialogText) {
 	_mDialogTextArea->appendText(pDialogText);
 }
 
-
 /// <summary>
 /// Adjusts the health bar pValue.
 /// </summary>
@@ -96,7 +65,7 @@ void UIManager::appendDialogText(Ogre::String pDialogText) {
 /// <param name="pMaxValue">The maximum pValue.</param>
 void UIManager::adjustHealthBar(Ogre::Real pValue, Ogre::Real pMaxValue)
 {
-	_healthBar->setDimensions(calcBarSize(pValue, pMaxValue, _maxWidthBar), _heightBar);
+	_healthBarWidget->getOverlayElement()->setWidth(calcBarSize(pValue, pMaxValue, _maxWidthBar));
 }
 
 /// <summary>
@@ -106,7 +75,8 @@ void UIManager::adjustHealthBar(Ogre::Real pValue, Ogre::Real pMaxValue)
 /// <param name="pMaxValue">The maximum pValue.</param>
 void UIManager::adjustStaminaBar(Ogre::Real pValue, Ogre::Real pMaxValue)
 {
-	_staminaBar->setDimensions(calcBarSize(pValue, pMaxValue, _maxWidthBar), _heightBar);
+	_staminaBarWidget->getOverlayElement()->setWidth(calcBarSize(pValue, pMaxValue, _maxWidthBar));
+	_staminaBarWidget->getOverlayElement()->setLeft(pMaxValue - calcBarSize(pValue, pMaxValue, _maxWidthBar) + 1);
 }
 
 /// <summary>
