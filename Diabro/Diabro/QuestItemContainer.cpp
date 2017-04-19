@@ -13,10 +13,9 @@ QuestItemContainer::QuestItemContainer() {
 
 QuestItemContainer::~QuestItemContainer() {
 	for (int i = 0; i < QuestItemType::AMOUNT_OF_QUEST_ITEM_TYPES; ++i) {
-		for (int j = 0; j < _items.size(); ++j) {
+		for (int j = 0; j < _items.at((QuestItemType)i).size(); ++j) {
 			delete _items.at((QuestItemType)i)[j];
 		}
-
 	}
 }
 

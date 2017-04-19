@@ -21,18 +21,18 @@ public:
 	BaseQuestItem() 
 		: _name(""), _sprName(""), _itemType((QuestItemType)0) {}
 	
-	BaseQuestItem(const char* pName, const char* pSprName, QuestItemType pType)
+	BaseQuestItem(std::string pName, std::string pSprName, QuestItemType pType)
 		: _name(pName), _sprName(pSprName), _itemType(pType) {}
 	
 	//~BaseQuestItem();
 
-	const char* getName() { return _name; }
-	const char* getSpriteName() { return _sprName; }
+	std::string getName() { return _name; }
+	std::string getSpriteName() { return _sprName; }
 	QuestItemType getItemType() { return _itemType; }
 
 private:
-	const char* _name;
-	const char* _sprName;
+	std::string _name;
+	std::string _sprName;
 	QuestItemType _itemType;
 };
 
