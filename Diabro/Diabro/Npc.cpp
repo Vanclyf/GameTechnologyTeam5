@@ -1,8 +1,6 @@
 #include "Npc.h"
 #include "GameManager.h"
 
-
-
 /// <summary>
 /// Creates a new instance of the <see cref="Npc"/> class.
 /// </summary>
@@ -92,7 +90,6 @@ bool Npc::dialog(Ogre::Vector3 pPlayerPos)
 	{
 		_inDialog = true;
 
-
 		GameManager::getSingletonPtr()->getUIManager()->createDialog("Quest Dialog\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress Space to Continue");
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
@@ -159,6 +156,11 @@ void Npc::continueDialog() {
 	}
 }
 
+/// <summary>
+/// Adjusts the given need.
+/// </summary>
+/// <param name="pNeedType">Type of the need.</param>
+/// <param name="pAdjust">The adjustment value.</param>
 void Npc::adjustNeed(NeedType pNeedType, int pAdjust) {
 	_needs->adjustValueOf(pAdjust, pNeedType);
 	return;

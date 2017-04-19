@@ -30,8 +30,14 @@ struct Need {
 
 class Needs {
 public:
+	/// <summary>
+	/// Initializes a new instance of the <see cref="Needs"/> class.
+	/// </summary>
 	Needs() {
+		// declare a need instance
 		Need tempNeed;
+
+		// for each need type, set the values of the need instance and push it to my list with needs
 		for (int i = 0; i < NeedType::AMOUNT_OF_NEEDTYPES; ++i) {
 			tempNeed.type = (NeedType)i;
 			tempNeed.value = 100;
@@ -51,6 +57,11 @@ public:
 	int getAbilityValue() { return _needs[(int)NeedType::AbilityNeed].value; };
 	int getEquipmentValue() { return _needs[(int)NeedType::EquipmentNeed].value; };
 
+	/// <summary>
+	/// Adjusts the value of the given need.
+	/// </summary>
+	/// <param name="pAdjustment">The adjustment value.</param>
+	/// <param name="pNeed">The need type.</param>
 	void adjustValueOf(int pAdjustment, NeedType pNeed) { _needs[(int)pNeed].adjustValue(pAdjustment); };
 
 private:

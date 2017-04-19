@@ -45,6 +45,13 @@ set(HDRS
 	./Diabro/Diabro/ItemContainer.h
 	./Diabro/Diabro/ItemManager.h
 	./Diabro/Diabro/ItemGenerator.h
+	./Diabro/Diabro/Needs.h
+	./Diabro/Diabro/BaseQuestItem.h
+	./Diabro/Diabro/QuestContentManager.h 
+	./Diabro/Diabro/QuestItem.h 
+	./Diabro/Diabro/QuestItemContainer.h 
+	./Diabro/Diabro/QuestItemGenerator.h
+	./Diabro/Diabro/tinyxml2.h
 )
  
 set(SRCS
@@ -69,6 +76,10 @@ set(SRCS
 	./Diabro/Diabro/ItemContainer.cpp
 	./Diabro/Diabro/ItemManager.cpp
 	./Diabro/Diabro/ItemGenerator.cpp
+	./Diabro/Diabro/QuestContentManager.cpp
+	./Diabro/Diabro/QuestItemContainer.cpp
+	./Diabro/Diabro/QuestItemGenerator.cpp
+	./Diabro/Diabro/tinyxml2.cpp
 )
  
 include("tools/cmake/common.cmake") 
