@@ -61,6 +61,18 @@
     <ClCompile Include="CharacterSpawner.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="LevelGenerator.cpp">
+      <Filter>Sources\LevelGeneration</Filter>
+    </ClCompile>
+    <ClCompile Include="Zone.cpp">
+      <Filter>Sources\LevelGeneration</Filter>
+    </ClCompile>
+    <ClCompile Include="City.cpp">
+      <Filter>Sources\LevelGeneration</Filter>
+    </ClCompile>
+    <ClCompile Include="Region.cpp">
+      <Filter>Sources\LevelGeneration</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseNpc.h">
@@ -135,6 +147,18 @@
     <ClInclude Include="CharacterSpawner.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="LevelGenerator.h">
+      <Filter>Headers\LevelGeneration</Filter>
+    </ClInclude>
+    <ClInclude Include="Zone.h">
+      <Filter>Headers\LevelGeneration</Filter>
+    </ClInclude>
+    <ClInclude Include="City.h">
+      <Filter>Headers\LevelGeneration</Filter>
+    </ClInclude>
+    <ClInclude Include="Region.h">
+      <Filter>Headers\LevelGeneration</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="GameObjStandard.cg" />
@@ -178,6 +202,12 @@
     </Filter>
     <Filter Include="Sources\Items\Instance">
       <UniqueIdentifier>{42e99e22-4124-4159-9e68-236b2898a3d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\LevelGeneration">
+      <UniqueIdentifier>{188ddccc-92dd-4ba4-af48-2ec6476d7de8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\LevelGeneration">
+      <UniqueIdentifier>{d2bdfdc9-e1db-4648-9be3-e28e2ae9bd00}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

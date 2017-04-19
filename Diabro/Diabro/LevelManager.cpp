@@ -33,7 +33,7 @@ void LevelManager::initialize()
 	npcSpawner = new CharacterSpawner<Npc>(npcSpawnerNode, 3, Ogre::Vector3(-1000, 25, -1000));
 	
 	Ogre::SceneNode* enemySpawnerNode = _levelNode->createChildSceneNode("enemySpawn");
-	enemySpawner = new CharacterSpawner<BasicEnemy>(enemySpawnerNode, 3, Ogre::Vector3(1000, 0, 1000));
+	enemySpawner = new CharacterSpawner<BasicEnemy>(enemySpawnerNode, 3, Ogre::Vector3(2000, 0, 2000));
 
 	// ground 
 	createGroundMesh();

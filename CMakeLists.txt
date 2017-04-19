@@ -45,6 +45,10 @@ set(HDRS
 	./Diabro/Diabro/ItemContainer.h
 	./Diabro/Diabro/ItemManager.h
 	./Diabro/Diabro/ItemGenerator.h
+	./Diabro/Diabro/LevelGenerator.h
+	./Diabro/Diabro/Zone.h
+	./Diabro/Diabro/Region.h
+	./Diabro/Diabro/City.h
 )
  
 set(SRCS
@@ -69,6 +73,10 @@ set(SRCS
 	./Diabro/Diabro/ItemContainer.cpp
 	./Diabro/Diabro/ItemManager.cpp
 	./Diabro/Diabro/ItemGenerator.cpp
+	./Diabro/Diabro/LevelGenerator.cpp
+	./Diabro/Diabro/Zone.cpp
+	./Diabro/Diabro/Region.cpp
+	./Diabro/Diabro/City.cpp
 )
  
 include("tools/cmake/common.cmake") 

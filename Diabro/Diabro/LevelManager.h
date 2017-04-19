@@ -8,6 +8,7 @@
 #include "BasicEnemy.h"
 #include <OgreSceneManager.h>
 #include "CharacterSpawner.h"
+#include "LevelGenerator.h"
 
 class LevelManager
 {
@@ -33,6 +34,7 @@ public:
 	void detachHostileNPC(int);
 	void detachFriendlyNPC(int);
 
+	LevelGenerator levelGenerator;
 	// for now public so that game manager can access it. 
 	Player* playerScript; 
 

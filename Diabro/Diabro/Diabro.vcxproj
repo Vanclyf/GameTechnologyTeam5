@@ -105,6 +105,7 @@
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="BaseWeapon.cpp" />
     <ClCompile Include="CharacterSpawner.cpp" />
+    <ClCompile Include="City.cpp" />
     <ClCompile Include="EquimentInstance.cpp" />
     <ClCompile Include="FloatRange.cpp" />
     <ClCompile Include="GameManager.cpp" />
@@ -112,11 +113,14 @@
     <ClCompile Include="ItemGenerator.cpp" />
     <ClCompile Include="ItemInstance.cpp" />
     <ClCompile Include="ItemManager.cpp" />
+    <ClCompile Include="LevelGenerator.cpp" />
     <ClCompile Include="Npc.cpp" />
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Region.cpp" />
     <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="WeaponInstance.cpp" />
+    <ClCompile Include="Zone.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Affix.h" />
@@ -129,6 +133,7 @@
     <ClInclude Include="BaseWeapon.h" />
     <ClInclude Include="CharacterSpawner.h" />
     <ClInclude Include="CharacterStats.h" />
+    <ClInclude Include="City.h" />
     <ClInclude Include="EquimentInstance.h" />
     <ClInclude Include="FloatRange.h" />
     <ClInclude Include="GameManager.h" />
@@ -136,13 +141,16 @@
     <ClInclude Include="ItemGenerator.h" />
     <ClInclude Include="ItemInstance.h" />
     <ClInclude Include="ItemManager.h" />
+    <ClInclude Include="LevelGenerator.h" />
     <ClInclude Include="Npc.h" />
     <ClInclude Include="LevelManager.h" />
     <ClInclude Include="Modifier.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Region.h" />
     <ClInclude Include="StatRange.h" />
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="WeaponInstance.h" />
+    <ClInclude Include="Zone.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

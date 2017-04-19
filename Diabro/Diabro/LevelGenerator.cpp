@@ -1,0 +1,152 @@
+#include "LevelGenerator.h"
+#include <OgreSceneManager.h>
+#include <OgreMeshManager.h>
+#include <OgreSubMesh.h>
+#include <OgreRoot.h>
+#include <OgreHardwareBufferManager.h>
+#include "GameManager.h"
+
+LevelGenerator::LevelGenerator() 
+{
+	Zone z = Zone(30, 30, 4, 4, 10, 100);
+
+	for (int i = 0; i < z.cities.size(); ++i) {
+		City c = z.cities[i];
+		std::stringstream sstm; 
+		sstm << "city-" << i;
+
+		placeCity(c._x * 1000, 1, c._y * 1000, c._width * 1000, 1000, c._height * 1000, sstm.str(), Ogre::ColourValue(0.5, 0.5, 0.5, 1.0));
+	}
+}
+
+LevelGenerator::~LevelGenerator()
+{
+}
+
+void LevelGenerator::placeCity(int x, int y, int z, int w, int h, int d, std::string name, Ogre::ColourValue colour) const {
+	FILE* fp;
+	freopen_s(&fp, "CONOUT$", "w", stdout);
+	printf("name: %s\n", name.c_str());
+	fclose(fp);
+	createCity(x, y, z, w, h, d, name, colour);
+	Ogre::MaterialPtr material = Ogre::MaterialManager::getSingleton().create(
+		"Test/ColourTest", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
+	material->getTechnique(0)->getPass(0)->setVertexColourTracking(Ogre::TVC_AMBIENT);
+
+	Ogre::Entity* testCity = GameManager::getSingleton().getSceneManager()->createEntity("city - " + name, name);
+	testCity->setMaterialName("Examples/Rockwall");
+
+	Ogre::SceneNode* thisSceneNode = GameManager::getSingleton().getSceneManager()->getRootSceneNode()->createChildSceneNode();
+	thisSceneNode->setPosition(-35, 0, 0);
+	thisSceneNode->attachObject(testCity);
+}
+
+void LevelGenerator::createCity(int x, int y, int z, int w, int h, int d, std::string name, Ogre::ColourValue colour) const {
+	Ogre::MeshPtr mesh = Ogre::MeshManager::getSingleton().createManual(name, "General");
+
+	Ogre::SubMesh* sub = mesh->createSubMesh();
+
+	const float sqrt13 = 0.577350269f; /*sqrt(1/3)*/
+
+	//create vertices
+	const size_t nVertices = 8;
+	const size_t vbufCount = 3 * 2 * nVertices;
+	float vertices[vbufCount] = {
+		x,       y + h,   z,		//0
+		-sqrt13, sqrt13,  -sqrt13,
+		x + w,   y + h,   z,		//1
+		sqrt13,  sqrt13,  -sqrt13,
+		x + w,   y,       z,		//2
+		sqrt13,  -sqrt13, -sqrt13,
+		x,       y,       z,		//3
+		-sqrt13, -sqrt13, -sqrt13,
+		x,       y + h,   z + d,	//4
+		-sqrt13, sqrt13,  sqrt13,
+		x + w,   y + h,   z + d,	//5
+		sqrt13,  sqrt13,  sqrt13,
+		x + w,   y,       z + d,	//6
+		sqrt13,  -sqrt13, sqrt13,
+		x,       y,       z + d,	//7
+		-sqrt13, -sqrt13, sqrt13,
+	};
+
+	Ogre::RenderSystem* rs = Ogre::Root::getSingleton().getRenderSystem();
+	Ogre::RGBA colours[nVertices];
+	Ogre::RGBA* pColour = colours;
+
+	rs->convertColourValue(colour, pColour++); //0
+	rs->convertColourValue(colour, pColour++); //1
+	rs->convertColourValue(colour, pColour++); //2
+	rs->convertColourValue(colour, pColour++); //3
+	rs->convertColourValue(colour, pColour++); //4
+	rs->convertColourValue(colour, pColour++); //5
+	rs->convertColourValue(colour, pColour++); //6
+	rs->convertColourValue(colour, pColour++); //7
+
+	//indices
+	const size_t ibufCount = 36;
+	unsigned short faces[ibufCount] = {
+		0, 3, 2,
+		0, 2, 1,
+		1, 2, 6,
+		1, 6, 5,
+		4, 5, 6,
+		4, 6, 7,
+		0, 4, 7,
+		0, 7, 3,
+		0, 1, 5,
+		0, 5, 4,
+		2, 3, 7,
+		2, 7, 6
+	};
+
+	mesh->sharedVertexData = new Ogre::VertexData();
+	mesh->sharedVertexData->vertexCount = nVertices;
+
+	Ogre::VertexDeclaration* vDeclaration = mesh->sharedVertexData->vertexDeclaration;
+	size_t offset = 0;
+	//1th buffer
+	//vertex description
+	vDeclaration->addElement(0, offset, Ogre::VET_FLOAT3, Ogre::VES_POSITION);
+	offset += Ogre::VertexElement::getTypeSize(Ogre::VET_FLOAT3);
+
+	vDeclaration->addElement(0, offset, Ogre::VET_FLOAT3, Ogre::VES_NORMAL);
+	offset += Ogre::VertexElement::getTypeSize(Ogre::VET_FLOAT3);
+
+	Ogre::HardwareVertexBufferSharedPtr vBuf =
+		Ogre::HardwareBufferManager::getSingleton().createVertexBuffer(
+			offset, mesh->sharedVertexData->vertexCount, Ogre::HardwareBuffer::HBU_STATIC_WRITE_ONLY);
+	vBuf->writeData(0, vBuf->getSizeInBytes(), vertices, true);
+
+	Ogre::VertexBufferBinding* bind = mesh->sharedVertexData->vertexBufferBinding;
+	bind->setBinding(0, vBuf);
+
+	//2nd buffer
+	offset = 0;
+	vDeclaration->addElement(1, offset, Ogre::VET_COLOUR, Ogre::VES_DIFFUSE);
+	offset += Ogre::VertexElement::getTypeSize(Ogre::VET_COLOUR);
+
+	vBuf = Ogre::HardwareBufferManager::getSingleton().createVertexBuffer(
+		offset, mesh->sharedVertexData->vertexCount, Ogre::HardwareBuffer::HBU_STATIC_WRITE_ONLY);
+
+	vBuf->writeData(0, vBuf->getSizeInBytes(), colours, true);
+	bind->setBinding(1, vBuf);
+
+	Ogre::HardwareIndexBufferSharedPtr iBuf = Ogre::HardwareBufferManager::getSingleton().
+		createIndexBuffer(
+			Ogre::HardwareIndexBuffer::IT_16BIT,
+			ibufCount,
+			Ogre::HardwareBuffer::HBU_STATIC_WRITE_ONLY);
+
+	iBuf->writeData(0, iBuf->getSizeInBytes(), faces, true);
+
+	sub->useSharedVertices = true;
+	sub->indexData->indexBuffer = iBuf;
+	sub->indexData->indexCount = ibufCount;
+	sub->indexData->indexStart = 0;
+
+	mesh->_setBounds(Ogre::AxisAlignedBox(x, y, z, x + w, y + h, z + d));
+	//mesh->_setBoundingSphereRadius(Ogre::Math::Sqrt(3 * w*h));
+
+	mesh->load();
+}

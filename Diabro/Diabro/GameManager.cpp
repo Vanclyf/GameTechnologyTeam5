@@ -69,7 +69,7 @@ void GameManager::createScene(void)
 	FILE* fp;
 	freopen_s(&fp, "CONOUT$", "w", stdout);
 	printf("items added.");
-	printf("itemcontainer has %d items", GameManager::getSingletonPtr()->getItemManager()->getItemContianer()->itemAmount());
+	printf("itemcontainer has %d items \n", GameManager::getSingletonPtr()->getItemManager()->getItemContianer()->itemAmount());
 	fclose(fp);
 #endif
 	_levelManager = new LevelManager();
@@ -87,21 +87,21 @@ void GameManager::createScene(void)
 void GameManager::setupLights(Ogre::SceneManager* pSceneMgr)
 {
 	// set ambient lighting
-	pSceneMgr->setAmbientLight(Ogre::ColourValue(0.2, 0.2, 0.5));
+	pSceneMgr->setAmbientLight(Ogre::ColourValue(0.2, 0.2, 0.2));
 
 	// create the main light
 	Ogre::Light* light = pSceneMgr->createLight("MainLight");
 	light->setDiffuseColour(1, 1, 1);
 	light->setSpecularColour(0.5, 0.5, 0.5);
 	light->setType(Ogre::Light::LT_DIRECTIONAL);
-	light->setDirection(-1, -1, 0);
+	light->setDirection(-1, -2, 0);
 
 	Ogre::Light* pointLight = pSceneMgr->createLight("PointLight");
 	light->setDiffuseColour(1, 1, 1);
 	light->setSpecularColour(0.5, 0.5, 0.5);
 	light->setType(Ogre::Light::LT_POINT);
-	light->setDirection(-1, -1, 0);
-	light->setPosition(Ogre::Vector3(300, 300, 0));
+	light->setDirection(-1, -100, 0);
+	light->setPosition(Ogre::Vector3(300, 1000, 0));
 	light->setSpotlightRange(Ogre::Degree(35), Ogre::Degree(50));
 
 	return;
