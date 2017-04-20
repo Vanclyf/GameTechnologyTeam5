@@ -2,21 +2,17 @@
 #include "Player.h"
 
 
-TEST_CASE("test method")
+TEST_CASE("PlayerClassTest")
 {
-	SECTION("test class")
+	SECTION("bool adjustHealth(float) override")
 	{
-		SECTION("test class")
+		SECTION("checks if function doesn’t throw anything")
 		{
 			REQUIRE(1 == 1);
+			REQUIRE_FALSE(1 == 0);
+
 		}
-		
-		REQUIRE(1 == 1);
-	}
-	SECTION("test class")
-	{
-		REQUIRE(1 == 1);
+
 	}
 }
-
 
