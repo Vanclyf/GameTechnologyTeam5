@@ -117,7 +117,6 @@
     <ClCompile Include="Npc.cpp" />
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Region.cpp" />
     <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="WeaponInstance.cpp" />
     <ClCompile Include="Zone.cpp" />
@@ -146,7 +145,6 @@
     <ClInclude Include="LevelManager.h" />
     <ClInclude Include="Modifier.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="Region.h" />
     <ClInclude Include="StatRange.h" />
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="WeaponInstance.h" />

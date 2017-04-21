@@ -15,7 +15,7 @@ LevelGenerator::LevelGenerator()
 		std::stringstream sstm; 
 		sstm << "city-" << i;
 
-		placeCity(c._x * 1000, 1, c._y * 1000, c._width * 1000, 1000, c._height * 1000, sstm.str(), Ogre::ColourValue(0.5, 0.5, 0.5, 1.0));
+		placeCity(c._x * 1000, 1, c._z * 1000, c._width * 1000, 1000, c._depth * 1000, sstm.str(), Ogre::ColourValue(0.5, 0.5, 0.5, 1.0));
 	}
 }
 
@@ -23,25 +23,44 @@ LevelGenerator::~LevelGenerator()
 {
 }
 
+/// <summary>
+/// Places a city-representing mesh.
+/// </summary>
+/// <param name="x">The x position of the city.</param>
+/// <param name="y">The y position of the city.</param>
+/// <param name="z">The z position of the city.</param>
+/// <param name="w">The width of the city.</param>
+/// <param name="h">The height of the city.</param>
+/// <param name="d">The depth of the city.</param>
+/// <param name="name">A unique name for the city.</param>
+/// <param name="colour">The colour of the drawn cube.</param>
 void LevelGenerator::placeCity(int x, int y, int z, int w, int h, int d, std::string name, Ogre::ColourValue colour) const {
-	FILE* fp;
-	freopen_s(&fp, "CONOUT$", "w", stdout);
-	printf("name: %s\n", name.c_str());
-	fclose(fp);
-	createCity(x, y, z, w, h, d, name, colour);
+	createCityMesh(x, y, z, w, h, d, name, colour);
 	Ogre::MaterialPtr material = Ogre::MaterialManager::getSingleton().create(
 		"Test/ColourTest", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
 	material->getTechnique(0)->getPass(0)->setVertexColourTracking(Ogre::TVC_AMBIENT);
 
 	Ogre::Entity* testCity = GameManager::getSingleton().getSceneManager()->createEntity("city - " + name, name);
-	testCity->setMaterialName("Examples/Rockwall");
+	testCity->setMaterialName("Test/ColourTest");
 
 	Ogre::SceneNode* thisSceneNode = GameManager::getSingleton().getSceneManager()->getRootSceneNode()->createChildSceneNode();
 	thisSceneNode->setPosition(-35, 0, 0);
 	thisSceneNode->attachObject(testCity);
 }
 
-void LevelGenerator::createCity(int x, int y, int z, int w, int h, int d, std::string name, Ogre::ColourValue colour) const {
+/// <summary>
+/// Creates the a 3D mesh, representing the space around the city. (will however still be replaced)
+/// </summary>
+/// <param name="x">The x position of the room.</param>
+/// <param name="y">The y position.</param>
+/// <param name="z">The z position.</param>
+/// <param name="w">The width.</param>
+/// <param name="h">The height.</param>
+/// <param name="d">The depth.</param>
+/// <param name="name">The name.</param>
+/// <param name="colour">The colour.</param>
+void LevelGenerator::createCityMesh(int x, int y, int z, int w, int h, int d, std::string name, Ogre::ColourValue colour) const {
+	//TODO: generate as whole zone, so pathways are accounted for
 	Ogre::MeshPtr mesh = Ogre::MeshManager::getSingleton().createManual(name, "General");
 
 	Ogre::SubMesh* sub = mesh->createSubMesh();

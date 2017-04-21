@@ -70,9 +70,6 @@
     <ClCompile Include="City.cpp">
       <Filter>Sources\LevelGeneration</Filter>
     </ClCompile>
-    <ClCompile Include="Region.cpp">
-      <Filter>Sources\LevelGeneration</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseNpc.h">
@@ -154,9 +151,6 @@
       <Filter>Headers\LevelGeneration</Filter>
     </ClInclude>
     <ClInclude Include="City.h">
-      <Filter>Headers\LevelGeneration</Filter>
-    </ClInclude>
-    <ClInclude Include="Region.h">
       <Filter>Headers\LevelGeneration</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,11 +1,13 @@
-#pragma once
+#ifndef ZONE_H_
+#define ZONE_H_
+
 #include "City.h"
 #include <vector>
 
 class Zone
 {
 	int _width;
-	int _height;
+	int _depth;
 	
 	int _maxTries;
 	int _maxCities;
@@ -27,7 +29,7 @@ public:
 
 	void setTile(int x, int y, int value) const;
 	int getTile(int x, int y) const;
-	bool hasCollision(int x, int y, int width, int height);
+	bool hasCollision(City c);
 
 	void printGrid();
 
@@ -36,3 +38,4 @@ private:
 	bool PlaceCity(int x, int y, int width, int height, int roomId);
 };
 
+#endif
