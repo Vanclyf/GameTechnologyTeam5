@@ -73,9 +73,6 @@
     <ClCompile Include="tinyxml2.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="DotSceneLoader.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseNpc.h">
@@ -169,9 +166,6 @@
       <Filter>Headers\QuestContent</Filter>
     </ClInclude>
     <ClInclude Include="tinyxml2.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="DotSceneLoader.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

@@ -36,9 +36,7 @@ public:
 	ItemManager* getItemManager(void) { return _itemManager; }
 	QuestContentManager* getQuestContentManager(void) { return _questContentManager; }
 
-	int getRandomInRange(int pLO, int pHI) {
-		return rand() % pHI + pLO;
-	}
+	int getRandomNumberBetween(int, int);
 
 protected:
     virtual void createScene(void);

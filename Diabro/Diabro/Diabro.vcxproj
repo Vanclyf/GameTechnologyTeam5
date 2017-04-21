@@ -107,7 +107,6 @@
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="BaseWeapon.cpp" />
     <ClCompile Include="CharacterSpawner.cpp" />
-    <ClCompile Include="DotSceneLoader.cpp" />
     <ClCompile Include="EquimentInstance.cpp" />
     <ClCompile Include="FloatRange.cpp" />
     <ClCompile Include="GameManager.cpp" />
@@ -137,7 +136,6 @@
     <ClInclude Include="BaseWeapon.h" />
     <ClInclude Include="CharacterSpawner.h" />
     <ClInclude Include="CharacterStats.h" />
-    <ClInclude Include="DotSceneLoader.h" />
     <ClInclude Include="EquimentInstance.h" />
     <ClInclude Include="FloatRange.h" />
     <ClInclude Include="GameManager.h" />

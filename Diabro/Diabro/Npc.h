@@ -44,7 +44,7 @@ private:
 	Ogre::String _startDialogText;
 	Ogre::String _endDialogText;
 
-	Needs* _needs;
+	NeedSet* _needs;
 	Profession _profession;
 	//Location _hometown;
 

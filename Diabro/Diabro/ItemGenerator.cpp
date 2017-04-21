@@ -58,7 +58,7 @@ ItemInstance* ItemGenerator::generateRandomItem(Ogre::SceneNode* pNode) {
 	Quality quality = Quality::Poor;
 
 	// determine random quality by rolling and checking the probabiliies in the map
-	int randomRoll = (int)GameManager::getSingletonPtr()->getRandomInRange(0, _summedQualityProbability);
+	int randomRoll = (int)GameManager::getSingletonPtr()->getRandomNumberBetween(0, _summedQualityProbability);
 	int counter = 0;
 	for (std::map<Quality, int>::iterator it = _qualityProbablity.begin(); it != _qualityProbablity.end(); ++it) {
 		counter += it->second;
@@ -69,7 +69,7 @@ ItemInstance* ItemGenerator::generateRandomItem(Ogre::SceneNode* pNode) {
 		}
 	}
 
-	int level = (int)((int)(quality + 1) * GameManager::getSingletonPtr()->getRandomInRange(1.0f, 2.5f));
+	int level = (int)((int)(quality + 1) * GameManager::getSingletonPtr()->getRandomNumberBetween(1.0f, 2.5f));
 
 	// switch based on the type of item to generate it
 	switch (itemType) {
@@ -114,7 +114,7 @@ ItemInstance* ItemGenerator::generateRandomItem(Ogre::SceneNode* pNode) {
 
 				// weapon
 		case 1: {
-			randomObj = (int)GameManager::getSingletonPtr()->getRandomInRange(0, GameManager::getSingletonPtr()->getItemManager()->getItemContianer()->getWeapons().size());
+			randomObj = (int)GameManager::getSingletonPtr()->getRandomNumberBetween(0, GameManager::getSingletonPtr()->getItemManager()->getItemContianer()->getWeapons().size());
 			weapon = GameManager::getSingletonPtr()->getItemManager()->getItemContianer()->getWeapons()[randomObj];
 
 			type = EquipmentWeapon;

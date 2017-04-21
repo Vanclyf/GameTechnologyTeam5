@@ -28,7 +28,8 @@ FloatRange::~FloatRange()
 /// <returns>Random integer in range</returns>
 int FloatRange::randomInRange()
 {
-	return GameManager::getSingletonPtr()->getRandomInRange(getMin(), getMax());
+	// todo: this doesn't return a float, I guess it should though. - greetings Rosa
+	return GameManager::getSingletonPtr()->getRandomNumberBetween(getMin(), getMax());
 }
 
 

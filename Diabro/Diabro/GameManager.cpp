@@ -53,6 +53,17 @@ GameManager& GameManager::getSingleton(void)
 //---------------------------------------------------------------------------
 
 /// <summary>
+/// Gets a random in range between.
+/// </summary>
+/// <param name="pLow">The lower bound.</param>
+/// <param name="pHigh">The upper bound.</param>
+/// <returns></returns>
+int GameManager::getRandomNumberBetween(int pLow, int pHigh) {
+	return rand() % pHigh + pLow;
+}
+
+
+/// <summary>
 /// Creates the scene.
 /// </summary>
 void GameManager::createScene(void)
@@ -71,8 +82,6 @@ void GameManager::createScene(void)
 	_levelManager->initialize();
 
 	_questContentManager = new QuestContentManager();
-
-	Ogre::SceneNode* node = mSceneMgr->getSceneNode(nodeOfSceneXML);
 
 	_uiManager = new UIManager();
 	_uiManager->init();

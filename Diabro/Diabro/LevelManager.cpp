@@ -1,6 +1,5 @@
 #include "GameManager.h"
 #include "LevelManager.h"
-#include "DotSceneLoader.h"
 
 /// <summary>
 /// Initializes a new instance of the <see cref="LevelManager" /> class.
@@ -17,9 +16,6 @@ playerScript(0), _levelNode(0), _camNode(0), npcSpawner(0)
 /// </summary>
 void LevelManager::initialize()
 {
-	
-	//GameManager::getSingletonPtr()->getSceneManager()->createEntity("goblinGoblin.mesh");
-
 	// create level node, the root node for everything in the level
 	_levelNode = GameManager::getSingletonPtr()->getSceneManager()->getRootSceneNode()->createChildSceneNode("LevelNode");
 
@@ -44,10 +40,6 @@ void LevelManager::initialize()
 	_groundEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("ground");
 	_levelNode->createChildSceneNode()->attachObject(_groundEntity);
 	_groundEntity->setMaterialName("Examples/Rockwall");
-
-
-	DotSceneLoader loader;
-	loader.parseDotScene("goblin.scene", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, GameManager::getSingletonPtr()->getSceneManager());
 
 	// camera
 	_camNode->attachObject(GameManager::getSingletonPtr()->getCamera());

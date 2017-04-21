@@ -25,18 +25,18 @@ QuestItem* QuestItemGenerator::generateRandomItem(Ogre::SceneNode* pNode) {
 
 	//TODO: shouldn't be a random roll, since certain quests need certain items. 
 	// random roll for the item type.
-	int randomRoll = (int)GameManager::getSingletonPtr()->getRandomInRange(0, QuestItemType::AMOUNT_OF_QUEST_ITEM_TYPES);
+	int randomRoll = (int)GameManager::getSingletonPtr()->getRandomNumberBetween(0, QuestItemType::AMOUNT_OF_QUEST_ITEM_TYPES);
 	int itemType = randomRoll;
 
 	// random roll for the specific quest item.
-	int randomObj = (int)GameManager::getSingletonPtr()->getRandomInRange(0, GameManager::getSingletonPtr()->getQuestContentManager()->getItemContainer()->getItemsOfType((QuestItemType)itemType).size());
+	int randomObj = (int)GameManager::getSingletonPtr()->getRandomNumberBetween(0, GameManager::getSingletonPtr()->getQuestContentManager()->getItemContainer()->getItemsOfType((QuestItemType)itemType).size());
 	baseItem = GameManager::getSingletonPtr()->getQuestContentManager()->getItemContainer()->getItemsOfType((QuestItemType)itemType)[randomObj];
 
 	//TODO: also shouldn't be a random roll, since certain quests need certain items, will be more specific when actions are defined. 
 	// set the quality by default to normal.
 	QuestItemQuality quality = QuestItemQuality::NormalQI;
 	// random roll for the quality of the item.
-	randomRoll = (int)GameManager::getSingletonPtr()->getRandomInRange(0, 3);
+	randomRoll = (int)GameManager::getSingletonPtr()->getRandomNumberBetween(0, 3);
 	quality = (QuestItemQuality)randomRoll;
 
 	// create and return the item. 

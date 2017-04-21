@@ -28,12 +28,12 @@ struct Need {
 	void adjustValue(int pAdjustment) { value += pAdjustment; };
 };
 
-class Needs {
+class NeedSet {
 public:
 	/// <summary>
 	/// Initializes a new instance of the <see cref="Needs"/> class.
 	/// </summary>
-	Needs() {
+	NeedSet() {
 		// declare a need instance
 		Need tempNeed;
 
@@ -45,7 +45,7 @@ public:
 		};
 	};
 
-	Needs(std::vector<Need> pNeeds) : _needs(pNeeds) {};
+	NeedSet(std::vector<Need> pNeeds) : _needs(pNeeds) {};
 
 	int getKnowledgeValue() { return _needs[(int)NeedType::KnowledgeNeed].value; };
 	int getComfortValue() { return _needs[(int)NeedType::ComfortNeed].value; };
