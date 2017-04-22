@@ -16,9 +16,8 @@ public:
 	int getId() { return _id; }
 	int getStateType() { return _currentStateType; }
 
-	void BeginAction();
-	void UpdateAction();
-	void EndAction();
+	void beginAction();
+	void endAction();
 
 
 private:
