@@ -100,10 +100,12 @@ std::vector<BaseQuestItem*> QuestContentManager::readFromXMLQuestItemList(const 
 	}
 	// the rootnode was empty
 	else {
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 		FILE* fp;
 		freopen_s(&fp, "CONOUT$", "w", stdout);
 		printf("Failed loading.\n");
 		fclose(fp);
+#endif
 	}
 
 	// return the list of items 
