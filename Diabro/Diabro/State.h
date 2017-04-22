@@ -16,6 +16,10 @@ public:
 	int getId() { return _id; }
 	int getStateType() { return _currentStateType; }
 
+	void BeginAction();
+	void UpdateAction();
+	void EndAction();
+
 
 private:
 	int _id;

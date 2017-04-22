@@ -12,7 +12,7 @@ TestFSM::~TestFSM()
 	_on = new State(0, "Test");
 	_inBetween = new State(1, "Init");
 	_off = new State(2, "end");
-	BeginState(_on);
+	beginState(_on);
 
 }
 
@@ -21,10 +21,10 @@ TestFSM::~TestFSM()
 /// </summary>
 void TestFSM::Update()
 {
-	GenericFSM::Update();
-	if(GetCurrentState()->getStateName() == "Test")
+	GenericFSM::update();
+	if(getCurrentState()->getStateName() == "Test")
 	{
-		UpdateState(GetCurrentState());
+		updateState(getCurrentState());
 	}
 
 }
@@ -34,7 +34,7 @@ void TestFSM::Update()
 /// </summary>
 void TestFSM::Start()
 {
-	SetState(_on);
+	setState(_on);
 }
 
 

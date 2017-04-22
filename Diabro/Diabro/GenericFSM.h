@@ -10,15 +10,15 @@ public:
 	GenericFSM();
 	~GenericFSM();
 
-	virtual void BeginState(State* state);
-	virtual void UpdateState(State* state);
-	virtual void EndState(State* state);
+	virtual void beginState(State* state);
+	virtual void updateState(State* state);
+	virtual void endState(State* state);
 
-	void SetState(State* state);
+	void setState(State* state);
 
-	virtual void Update();
+	virtual void update();
 
-	State* GetCurrentState() { return _currentState; }
+	State* getCurrentState() { return _currentState; }
 
 
 private:

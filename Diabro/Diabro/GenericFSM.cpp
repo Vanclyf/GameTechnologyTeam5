@@ -16,21 +16,22 @@ GenericFSM::~GenericFSM()
 /// Sets the new state.
 /// </summary>
 /// <param name="state">The state.</param>
-void GenericFSM::SetState(State* state)
+void GenericFSM::setState(State* state)
 {
 	//Ends the current state and switches to the new state
-	EndState(_currentState);
+	endState(_currentState);
 	_currentState = state;
 
-	BeginState(_currentState);
+	beginState(_currentState);
 }
 
 /// <summary>
 /// Begins the action of the new state.
 /// </summary>
 /// <param name="state">The state.</param>
-void GenericFSM::BeginState(State* state)
+void GenericFSM::beginState(State* state)
 {
+	state->BeginAction();
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	FILE* fp;
 
@@ -44,8 +45,9 @@ void GenericFSM::BeginState(State* state)
 /// Does an action when the state has ended.
 /// </summary>
 /// <param name="state">The state.</param>
-void GenericFSM::EndState(State* state)
+void GenericFSM::endState(State* state)
 {
+	state->EndAction();
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	FILE* fp;
 
@@ -59,7 +61,7 @@ void GenericFSM::EndState(State* state)
 /// <summary>
 /// Updates the FSM.
 /// </summary>
-void GenericFSM::Update()
+void GenericFSM::update()
 {
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	FILE* fp;
@@ -74,8 +76,10 @@ void GenericFSM::Update()
 /// When the state updates itself, do an action.
 /// </summary>
 /// <param name="state">The state.</param>
-void GenericFSM::UpdateState(State* state)
+void GenericFSM::updateState(State* state)
 {
+	state->UpdateAction();
+
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	FILE* fp;
 
