@@ -32,13 +32,7 @@ void GenericFSM::setState(State* pState)
 void GenericFSM::beginState(State* pState)
 {
 	pState->beginAction();
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	FILE* fp;
 
-	freopen_s(&fp, "CONOUT$", "w", stdout);
-	printf("The state has begun \n");
-	fclose(fp);
-#endif
 }
 
 /// <summary>
@@ -48,13 +42,7 @@ void GenericFSM::beginState(State* pState)
 void GenericFSM::endState(State* pState)
 {
 	pState->endAction();
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	FILE* fp;
 
-	freopen_s(&fp, "CONOUT$", "w", stdout);
-	printf("The state has ended \n");
-	fclose(fp);
-#endif
 }
 
 
@@ -63,13 +51,7 @@ void GenericFSM::endState(State* pState)
 /// </summary>
 void GenericFSM::update()
 {
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	FILE* fp;
 
-	freopen_s(&fp, "CONOUT$", "w", stdout);
-	printf("Updating");
-	fclose(fp);
-#endif
 }
 
 

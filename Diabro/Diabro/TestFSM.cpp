@@ -21,6 +21,8 @@ TestFSM::~TestFSM()
 /// </summary>
 void TestFSM::Update()
 {
+	getCurrentState()->updateAction();
+
 	GenericFSM::update();
 	if(getCurrentState()->getStateName() == "Test")
 	{

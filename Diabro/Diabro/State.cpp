@@ -20,24 +20,12 @@ State::~State()
 /// </summary>
 void State::beginAction()
 {
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	FILE* fp;
 
-	freopen_s(&fp, "CONOUT$", "w", stdout);
-	printf("This is my first action within the state \n");
-	fclose(fp);
-#endif
 }
 
 void State::updateAction()
 {
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	FILE* fp;
 
-	freopen_s(&fp, "CONOUT$", "w", stdout);
-	printf("This is  the update action \n");
-	fclose(fp);
-#endif
 }
 
 
@@ -46,13 +34,7 @@ void State::updateAction()
 /// </summary>
 void State::endAction()
 {
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	FILE* fp;
 
-	freopen_s(&fp, "CONOUT$", "w", stdout);
-	printf("This is the end action \n");
-	fclose(fp);
-#endif
 }
 
 
