@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -11,24 +11,21 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{4735A15C-15A2-487C-808D-08CD1A74B86D}</ProjectGuid>
+    <ProjectGuid>{ECB3EB13-57B9-44A7-BCFF-8F08CBAA4F6F}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>OgreTest</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <RootNamespace>UnitTest</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v100</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v100</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -52,22 +49,15 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(OGRE_HOME)\include;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\Samples\Common\include;$(OGRE_HOME)\boost;$(OGRE_HOME)\include\OGRE\Overlay;&lt;boost_path&gt;\stage\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(OGRE_HOME)\include;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\Samples\Common\include;$(OGRE_HOME)\boost;$(OGRE_HOME)\include\OGRE\Overlay;$(SolutionDir)Diabro</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(OGRE_HOME)\boost\lib;$(OGRE_HOME)\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>OgreMain_d.lib;OIS_d.lib;OgreOverlay_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <PostBuildEvent>
-      <Command>copy "$(OutDir)\$(TargetFileName)" "$(OGRE_HOME)\Bin\$(Configuration)"</Command>
-    </PostBuildEvent>
-    <PreLinkEvent>
-      <Command>
-      </Command>
-    </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -77,71 +67,32 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(OGRE_HOME)\include;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\Samples\Common\include;$(OGRE_HOME)\boost;$(OGRE_HOME)\include\OGRE\Overlay;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(OGRE_HOME)\include;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\Samples\Common\include;$(OGRE_HOME)\boost;$(OGRE_HOME)\include\OGRE\Overlay;$(SolutionDir)Diabro</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(OGRE_HOME)\boost\lib;$(OGRE_HOME)\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <PostBuildEvent>
-      <Command>copy "$(OutDir)\$(TargetFileName)" "$(OGRE_HOME)\Bin\$(Configuration)"</Command>
-    </PostBuildEvent>
-    <PreLinkEvent>
-      <Command>
-      </Command>
-    </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="GameObjStandard.cg" />
-    <None Include="Resources\materials\scripts\UI.material" />
-    <None Include="Resources\materials\textures\greenBox.jpg" />
-    <None Include="Resources\materials\textures\greyBox.jpg" />
-    <None Include="Resources\materials\textures\yellowBox.jpg" />
-    <None Include="testMaterial.material" />
+    <ClInclude Include="Catch.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BaseApplication.cpp" />
-    <ClCompile Include="BaseEquipment.cpp" />
-    <ClCompile Include="BaseItem.cpp" />
-    <ClCompile Include="BaseNpc.cpp" />
-    <ClCompile Include="BasicEnemy.cpp" />
-    <ClCompile Include="Character.cpp" />
-    <ClCompile Include="BaseWeapon.cpp" />
-    <ClCompile Include="CharacterSpawner.cpp" />
-    <ClCompile Include="EquimentInstance.cpp" />
-    <ClCompile Include="FloatRange.cpp" />
-    <ClCompile Include="GameManager.cpp" />
-    <ClCompile Include="ItemInstance.cpp" />
-    <ClCompile Include="Npc.cpp" />
-    <ClCompile Include="LevelManager.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="UIManager.cpp" />
+    <ClCompile Include="MainTest.cpp" />
+    <ClCompile Include="PlayerClassTest.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Affix.h" />
-    <ClInclude Include="BaseApplication.h" />
-    <ClInclude Include="BaseEquipment.h" />
-    <ClInclude Include="BaseItem.h" />
-    <ClInclude Include="BaseNpc.h" />
-    <ClInclude Include="BasicEnemy.h" />
-    <ClInclude Include="Character.h" />
-    <ClInclude Include="BaseWeapon.h" />
-    <ClInclude Include="CharacterSpawner.h" />
-    <ClInclude Include="CharacterStats.h" />
-    <ClInclude Include="EquimentInstance.h" />
-    <ClInclude Include="FloatRange.h" />
-    <ClInclude Include="GameManager.h" />
-    <ClInclude Include="ItemInstance.h" />
-    <ClInclude Include="Npc.h" />
-    <ClInclude Include="LevelManager.h" />
-    <ClInclude Include="Modifier.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="StatRange.h" />
-    <ClInclude Include="UIManager.h" />
+    <ProjectReference Include="..\..\..\DiabloLib\DiabloLib.vcxproj">
+      <Project>{d6ca3b3f-0ac0-47f7-86ef-6357e303c9aa}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Diabro.vcxproj">
+      <Project>{4735a15c-15a2-487c-808d-08cd1a74b86d}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
