@@ -1,6 +1,5 @@
 #include "Character.h"
 #include "GameManager.h"
-#include "MotorExample.h"
 
 /// <summary>
 /// Initializes a new instance of the <see cref="Character"/> class.

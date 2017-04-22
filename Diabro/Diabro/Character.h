@@ -8,7 +8,6 @@
 #include "BaseApplication.h"
 #include "WeaponInstance.h"
 #include "EquimentInstance.h"
-#include "MotorExample.h"
 
 class Character
 {

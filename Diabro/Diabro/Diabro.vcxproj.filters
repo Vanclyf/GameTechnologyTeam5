@@ -65,6 +65,9 @@
     <ClCompile Include="GenericFSM.cpp">
       <Filter>Sources\States</Filter>
     </ClCompile>
+    <ClCompile Include="TestFSM.cpp">
+      <Filter>Sources\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseNpc.h">
@@ -140,16 +143,13 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />
-    <ClInclude Include="EventData.h">
-      <Filter>Headers\States</Filter>
-    </ClInclude>
     <ClInclude Include="GenericFSM.h">
       <Filter>Headers\States</Filter>
     </ClInclude>
-    <ClInclude Include="Transistion.h">
+    <ClInclude Include="State.h">
       <Filter>Headers\States</Filter>
     </ClInclude>
-    <ClInclude Include="State.h">
+    <ClInclude Include="TestFSM.h">
       <Filter>Headers\States</Filter>
     </ClInclude>
   </ItemGroup>

@@ -6,7 +6,8 @@ Filename:    GameManager.cpp
 */
 #include "GameManager.h"
 #include "SdkTrays.h"
-#include "MotorExample.h"
+#include "TestFSM.h"
+
 //---------------------------------------------------------------------------
 
 /// <summary>
@@ -66,13 +67,9 @@ void GameManager::createScene(void)
 	mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 
 	_itemManager = new ItemManager();
+	TestFSM* testFsm = new TestFSM();
 
-	//TODO remove this code, only to proof it works
-	MotorExample motor;
-	MotorData* data = new MotorData();
-	data->speed = 100;
-	motor.SetSpeed(data);
-
+	testFsm->Start();
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	FILE* fp;
@@ -80,9 +77,6 @@ void GameManager::createScene(void)
 	freopen_s(&fp, "CONOUT$", "w", stdout);
 	printf("items added.");
 	printf("itemcontainer has %d items", GameManager::getSingletonPtr()->getItemManager()->getItemContianer()->itemAmount());
-	printf("Currentstate: %d", motor.GetCurrentState());
-	motor.Halt();
-	printf("Currentstate: %d", motor.GetCurrentState());
 	fclose(fp);
 #endif
 	_levelManager = new LevelManager();

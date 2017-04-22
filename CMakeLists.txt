@@ -45,6 +45,9 @@ set(HDRS
 	./Diabro/Diabro/ItemContainer.h
 	./Diabro/Diabro/ItemManager.h
 	./Diabro/Diabro/ItemGenerator.h
+	./Diabro/Diabro/State.h
+	./Diabro/Diabro/GenericFSM.h
+	./Diabro/Diabro/TestFSM.h
 )
  
 set(SRCS
@@ -69,6 +72,9 @@ set(SRCS
 	./Diabro/Diabro/ItemContainer.cpp
 	./Diabro/Diabro/ItemManager.cpp
 	./Diabro/Diabro/ItemGenerator.cpp
+	./Diabro/Diabro/State.cpp
+	./Diabro/Diabro/GenericFSM.cpp
+	./Diabro/Diabro/TestFSM.cpp
 )
  
 include("tools/cmake/common.cmake") 
