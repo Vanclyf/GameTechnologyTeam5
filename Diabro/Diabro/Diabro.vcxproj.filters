@@ -61,6 +61,9 @@
     <ClCompile Include="CharacterSpawner.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="ResourceManagement.cpp">
+      <Filter>Sources\Managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseNpc.h">
@@ -134,6 +137,9 @@
     </ClInclude>
     <ClInclude Include="CharacterSpawner.h">
       <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManagement.h">
+      <Filter>Headers\Managers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

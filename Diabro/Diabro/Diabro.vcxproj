@@ -115,6 +115,7 @@
     <ClCompile Include="Npc.cpp" />
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="ResourceManagement.cpp" />
     <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="WeaponInstance.cpp" />
   </ItemGroup>
@@ -140,6 +141,7 @@
     <ClInclude Include="LevelManager.h" />
     <ClInclude Include="Modifier.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="ResourceManagement.h" />
     <ClInclude Include="StatRange.h" />
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="WeaponInstance.h" />
