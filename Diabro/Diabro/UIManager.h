@@ -19,7 +19,7 @@ public:
 	void createDialog(Ogre::String);
 	void destroyDialog();
 	void appendDialogText(Ogre::String);
-	Ogre::Real calcBarSize(Ogre::Real, Ogre::Real, Ogre::Real);
+	static Ogre::Real calcBarSize(Ogre::Real, Ogre::Real, Ogre::Real);
 
 private:
 	OgreBites::SdkTrayManager*	_mSdkTrayMgr;
