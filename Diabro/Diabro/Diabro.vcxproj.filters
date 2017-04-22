@@ -139,9 +139,6 @@
     <ClInclude Include="CharacterSpawner.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="State.h">
-      <Filter>Headers\States</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h" />
     <ClInclude Include="EventData.h">
       <Filter>Headers\States</Filter>
@@ -150,6 +147,9 @@
       <Filter>Headers\States</Filter>
     </ClInclude>
     <ClInclude Include="Transistion.h">
+      <Filter>Headers\States</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
       <Filter>Headers\States</Filter>
     </ClInclude>
   </ItemGroup>

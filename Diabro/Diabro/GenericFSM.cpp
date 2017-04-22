@@ -11,6 +11,10 @@ GenericFSM::~GenericFSM()
 {
 }
 
+/// <summary>
+/// Updates the state machine.
+/// </summary>
+/// <returns></returns>
 std::vector<EventData> GenericFSM::update()
 {
 	//We can assume that the transistion is not yet triggered
