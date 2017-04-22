@@ -36,7 +36,7 @@ void GenericFSM::beginState(State* pState)
 	FILE* fp;
 
 	freopen_s(&fp, "CONOUT$", "w", stdout);
-	printf("The state has begun");
+	printf("The state has begun \n");
 	fclose(fp);
 #endif
 }
@@ -52,7 +52,7 @@ void GenericFSM::endState(State* pState)
 	FILE* fp;
 
 	freopen_s(&fp, "CONOUT$", "w", stdout);
-	printf("The state has ended");
+	printf("The state has ended \n");
 	fclose(fp);
 #endif
 }
@@ -72,20 +72,6 @@ void GenericFSM::update()
 #endif
 }
 
-/// <summary>
-/// When the state updates itself, do an action.
-/// </summary>
-/// <param name="state">The state.</param>
-void GenericFSM::updateState(State* state)
-{
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	FILE* fp;
-
-	freopen_s(&fp, "CONOUT$", "w", stdout);
-	printf("Updatisng");
-	fclose(fp);
-#endif
-}
 
 
 

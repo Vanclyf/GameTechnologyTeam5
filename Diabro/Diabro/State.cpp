@@ -24,10 +24,22 @@ void State::beginAction()
 	FILE* fp;
 
 	freopen_s(&fp, "CONOUT$", "w", stdout);
-	printf("This is my first action within the state");
+	printf("This is my first action within the state \n");
 	fclose(fp);
 #endif
 }
+
+void State::updateAction()
+{
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+	FILE* fp;
+
+	freopen_s(&fp, "CONOUT$", "w", stdout);
+	printf("This is  the update action \n");
+	fclose(fp);
+#endif
+}
+
 
 /// <summary>
 /// Ends the action of the current state.
@@ -38,7 +50,7 @@ void State::endAction()
 	FILE* fp;
 
 	freopen_s(&fp, "CONOUT$", "w", stdout);
-	printf("This is the end action");
+	printf("This is the end action \n");
 	fclose(fp);
 #endif
 }

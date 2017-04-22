@@ -11,7 +11,6 @@ public:
 	~GenericFSM();
 
 	virtual void beginState(State* state);
-	virtual void updateState(State* state);
 	virtual void endState(State* state);
 
 	void setState(State* state);

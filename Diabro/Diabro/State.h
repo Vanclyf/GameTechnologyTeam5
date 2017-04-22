@@ -17,6 +17,7 @@ public:
 	int getStateType() { return _currentStateType; }
 
 	void beginAction();
+	void updateAction();
 	void endAction();
 
 
