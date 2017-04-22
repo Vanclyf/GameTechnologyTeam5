@@ -19,11 +19,9 @@ public:
 	void createDialog(Ogre::String);
 	void destroyDialog();
 	void appendDialogText(Ogre::String);
-	Ogre::Real calcBarSize(Ogre::Real, Ogre::Real, Ogre::Real);
+	static Ogre::Real calcBarSize(Ogre::Real, Ogre::Real, Ogre::Real);
 
 private:
-	Ogre::Billboard* setupUIBar(Ogre::String, Ogre::SceneNode*, Ogre::BillboardOrigin, Ogre::String, Ogre::Vector3, Ogre::Vector3);
-
 	OgreBites::SdkTrayManager*	_mSdkTrayMgr;
 	OgreBites::SdkTrayListener* _mSdkTrayListener;
 
@@ -31,11 +29,10 @@ private:
 	OgreBites::InputContext     _mInputContext;
 
 	OgreBites::TextBox*			_mDialogTextArea;
+	OgreBites::DecorWidget*		_healthBarWidget;
+	OgreBites::DecorWidget*		_staminaBarWidget;
 
 	Ogre::SceneNode*			_uiNode;
-
-	Ogre::Billboard*			_healthBar;
-	Ogre::Billboard*			_staminaBar;
 
 	Ogre::Real					_maxWidthBar;
 	Ogre::Real					_heightBar;
