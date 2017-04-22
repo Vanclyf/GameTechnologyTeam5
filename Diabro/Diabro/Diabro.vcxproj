@@ -106,14 +106,13 @@
     <ClCompile Include="BaseWeapon.cpp" />
     <ClCompile Include="CharacterSpawner.cpp" />
     <ClCompile Include="EquimentInstance.cpp" />
-    <ClCompile Include="FiniteStateMachine.cpp" />
     <ClCompile Include="FloatRange.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="GenericFSM.cpp" />
     <ClCompile Include="ItemContainer.cpp" />
     <ClCompile Include="ItemGenerator.cpp" />
     <ClCompile Include="ItemInstance.cpp" />
     <ClCompile Include="ItemManager.cpp" />
-    <ClCompile Include="MotorExample.cpp" />
     <ClCompile Include="Npc.cpp" />
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -134,14 +133,13 @@
     <ClInclude Include="CharacterStats.h" />
     <ClInclude Include="EquimentInstance.h" />
     <ClInclude Include="EventData.h" />
-    <ClInclude Include="FiniteStateMachine.h" />
     <ClInclude Include="FloatRange.h" />
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="GenericFSM.h" />
     <ClInclude Include="ItemContainer.h" />
     <ClInclude Include="ItemGenerator.h" />
     <ClInclude Include="ItemInstance.h" />
     <ClInclude Include="ItemManager.h" />
-    <ClInclude Include="MotorExample.h" />
     <ClInclude Include="Npc.h" />
     <ClInclude Include="LevelManager.h" />
     <ClInclude Include="Modifier.h" />
@@ -149,6 +147,7 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StatRange.h" />
+    <ClInclude Include="Transistion.h" />
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="WeaponInstance.h" />
   </ItemGroup>
