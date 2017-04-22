@@ -3,6 +3,11 @@
 //#include "Zone.h" //needed when bigger grid is spawned
 #include <OgreSceneManager.h>
 #include "Zone.h"
+#include <OgreMeshManager.h>
+#include <OgreSubMesh.h>
+#include <OgreRoot.h>
+#include <OgreHardwareBufferManager.h>
+#include "GameManager.h"
 
 class LevelGenerator
 {

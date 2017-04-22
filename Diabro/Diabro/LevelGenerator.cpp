@@ -1,21 +1,18 @@
 #include "LevelGenerator.h"
-#include <OgreSceneManager.h>
-#include <OgreMeshManager.h>
-#include <OgreSubMesh.h>
-#include <OgreRoot.h>
-#include <OgreHardwareBufferManager.h>
-#include "GameManager.h"
 
 LevelGenerator::LevelGenerator() 
 {
 	Zone z = Zone(30, 30, 4, 4, 10, 100);
 
+	//place geometry for each city
 	for (int i = 0; i < z.cities.size(); ++i) {
 		City c = z.cities[i];
+		
+		//create unique city name (just a number)
 		std::stringstream sstm; 
 		sstm << "city-" << i;
 
-		placeCity(c._x * 1000, 1, c._z * 1000, c._width * 1000, 1000, c._depth * 1000, sstm.str(), Ogre::ColourValue(0.5, 0.5, 0.5, 1.0));
+		placeCity(c.x * 1000, 1, c.z * 1000, c.width * 1000, 1000, c.depth * 1000, sstm.str(), Ogre::ColourValue(0.5, 0.5, 0.5, 1.0));
 	}
 }
 
@@ -60,7 +57,8 @@ void LevelGenerator::placeCity(int x, int y, int z, int w, int h, int d, std::st
 /// <param name="name">The name.</param>
 /// <param name="colour">The colour.</param>
 void LevelGenerator::createCityMesh(int x, int y, int z, int w, int h, int d, std::string name, Ogre::ColourValue colour) const {
-	//TODO: generate as whole zone, so pathways are accounted for
+	//TODO: generate as whole zone, so pathways are accounted for (will be new method)
+
 	Ogre::MeshPtr mesh = Ogre::MeshManager::getSingleton().createManual(name, "General");
 
 	Ogre::SubMesh* sub = mesh->createSubMesh();
@@ -69,8 +67,8 @@ void LevelGenerator::createCityMesh(int x, int y, int z, int w, int h, int d, st
 
 	//create vertices
 	const size_t nVertices = 8;
-	const size_t vbufCount = 3 * 2 * nVertices;
-	float vertices[vbufCount] = {
+	const size_t vBufCount = 3 * 2 * nVertices;
+	float vertices[vBufCount] = {
 		x,       y + h,   z,		//0
 		-sqrt13, sqrt13,  -sqrt13,
 		x + w,   y + h,   z,		//1
@@ -91,20 +89,20 @@ void LevelGenerator::createCityMesh(int x, int y, int z, int w, int h, int d, st
 
 	Ogre::RenderSystem* rs = Ogre::Root::getSingleton().getRenderSystem();
 	Ogre::RGBA colours[nVertices];
-	Ogre::RGBA* pColour = colours;
+	Ogre::RGBA* colorPtr = colours;
 
-	rs->convertColourValue(colour, pColour++); //0
-	rs->convertColourValue(colour, pColour++); //1
-	rs->convertColourValue(colour, pColour++); //2
-	rs->convertColourValue(colour, pColour++); //3
-	rs->convertColourValue(colour, pColour++); //4
-	rs->convertColourValue(colour, pColour++); //5
-	rs->convertColourValue(colour, pColour++); //6
-	rs->convertColourValue(colour, pColour++); //7
+	rs->convertColourValue(colour, colorPtr++); //0
+	rs->convertColourValue(colour, colorPtr++); //1
+	rs->convertColourValue(colour, colorPtr++); //2
+	rs->convertColourValue(colour, colorPtr++); //3
+	rs->convertColourValue(colour, colorPtr++); //4
+	rs->convertColourValue(colour, colorPtr++); //5
+	rs->convertColourValue(colour, colorPtr++); //6
+	rs->convertColourValue(colour, colorPtr++); //7
 
 	//indices
-	const size_t ibufCount = 36;
-	unsigned short faces[ibufCount] = {
+	const size_t iBufCount = 36;
+	unsigned short faces[iBufCount] = {
 		0, 3, 2,
 		0, 2, 1,
 		1, 2, 6,
@@ -154,18 +152,17 @@ void LevelGenerator::createCityMesh(int x, int y, int z, int w, int h, int d, st
 	Ogre::HardwareIndexBufferSharedPtr iBuf = Ogre::HardwareBufferManager::getSingleton().
 		createIndexBuffer(
 			Ogre::HardwareIndexBuffer::IT_16BIT,
-			ibufCount,
+			iBufCount,
 			Ogre::HardwareBuffer::HBU_STATIC_WRITE_ONLY);
 
 	iBuf->writeData(0, iBuf->getSizeInBytes(), faces, true);
 
 	sub->useSharedVertices = true;
 	sub->indexData->indexBuffer = iBuf;
-	sub->indexData->indexCount = ibufCount;
+	sub->indexData->indexCount = iBufCount;
 	sub->indexData->indexStart = 0;
 
 	mesh->_setBounds(Ogre::AxisAlignedBox(x, y, z, x + w, y + h, z + d));
-	//mesh->_setBoundingSphereRadius(Ogre::Math::Sqrt(3 * w*h));
 
 	mesh->load();
 }

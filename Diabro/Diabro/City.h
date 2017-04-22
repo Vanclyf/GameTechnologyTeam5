@@ -4,13 +4,13 @@
 class City
 {
 public:
-	int _x;
-	int _z;
-	int _width;
-	int _depth;
-	int _id;
+	int x;
+	int z;
+	int width;
+	int depth;
+	int id;
 
-	City(int x, int y, int width, int height, int id);
+	City(int pX, int pY, int pWidth, int pHeight, int pId);
 	~City();
 };
 
