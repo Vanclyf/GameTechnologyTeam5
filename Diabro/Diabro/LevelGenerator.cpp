@@ -1,4 +1,9 @@
 #include "LevelGenerator.h"
+#include <OgreMeshManager.h>
+#include <OgreSubMesh.h>
+#include <OgreRoot.h>
+#include <OgreHardwareBufferManager.h>
+#include "GameManager.h"
 
 LevelGenerator::LevelGenerator() 
 {
