@@ -22,28 +22,28 @@ Zone::~Zone()
 	delete[] _tiles;
 }
 
-void Zone::setTile(int x, int y, int value) const {
-	_tiles[x + y * _width] = value;
+void Zone::setTile(int pX, int pY, int pValue) const {
+	_tiles[pX + pY * _width] = pValue;
 }
 
-int Zone::getTile(int x, int y) const {
-	return _tiles[x + y * _width];
+int Zone::getTile(int pX, int pY) const {
+	return _tiles[pX + pY * _width];
 }
 
 /// <summary>
 /// Determines whether the specified city has collision with another city.
 /// </summary>
-/// <param name="c">The city.</param>
+/// <param name="pC">The city.</param>
 /// <returns>
-///   <c>true</c> if the specified c has collision; otherwise, <c>false</c>.
+///   <pC>true</pC> if the specified pC has collision; otherwise, <pC>false</pC>.
 /// </returns>
-bool Zone::hasCollision(City c) {
-	if (c.x + c.width >= _width || c.x <= 0) return true;
-	if (c.z + c.depth >= _depth || c.z <= 0) return true;
+bool Zone::hasCollision(City pC) {
+	if (pC.x + pC.width >= _width || pC.x <= 0) return true;
+	if (pC.z + pC.depth >= _depth || pC.z <= 0) return true;
 
-	for (int ix = (c.x > 0)? -1: 0; ix < c.width + 1; ++ix) {
-		for (int iz = (c.z > 0)? -1: 0; iz < c.depth + 1; ++iz) {
-			if (getTile(c.x + ix, c.z + iz)) return true;
+	for (int ix = (pC.x > 0)? -1: 0; ix < pC.width + 1; ++ix) {
+		for (int iz = (pC.z > 0)? -1: 0; iz < pC.depth + 1; ++iz) {
+			if (getTile(pC.x + ix, pC.z + iz)) return true;
 		}
 	}
 	return false;
@@ -78,10 +78,10 @@ bool Zone::PlaceCity(int pX, int pZ, int pWidth, int pDepth, int pCityId) {
 /// </summary>
 /// <param name="pMaxTries">The maximum amount of tries, before quiting.</param>
 /// <param name="pMaxCities">The maximum amount of cities allowed in the zone.</param>
-void Zone::GenerateCities(int maxTries, int maxCities) {
+void Zone::GenerateCities(int pMaxTries, int pMaxCities) {
 	int nCities = 0;
 	
-	for (int iTry = 0; iTry < maxTries; ++iTry) {
+	for (int iTry = 0; iTry < pMaxTries; ++iTry) {
 		//TODO: generate position not random
 		int x = rand() % (_width - 1) + 1;
 		int z = rand() % (_depth -1) + 1;
@@ -93,7 +93,7 @@ void Zone::GenerateCities(int maxTries, int maxCities) {
 		if (PlaceCity(x, z, width, depth, nCities + 1)) {
 			++nCities;
 		}
-		if (nCities == maxCities) {
+		if (nCities == pMaxCities) {
 			break;
 		}
 	}

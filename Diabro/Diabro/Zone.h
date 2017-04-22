@@ -26,9 +26,9 @@ public:
 	Zone(int pWidth, int pHeight, int pMaxCityWidth, int pMaxCityHeight, int pMaxCities, int pMaxTries);
 	~Zone();
 
-	void setTile(int x, int y, int value) const;
-	int getTile(int x, int y) const;
-	bool hasCollision(City c);
+	void setTile(int pX, int pY, int pValue) const;
+	int getTile(int pX, int pY) const;
+	bool hasCollision(City pC);
 
 	void printGrid();
 
