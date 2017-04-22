@@ -1,7 +1,6 @@
 #include "QuestContentManager.h"
 #include "tinyxml2.h"
 #include <stdio.h>
-#include <direct.h>
 
 /// <summary>
 /// Initializes a new instance of the <see cref="QuestContentManager"/> class.
