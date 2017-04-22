@@ -18,6 +18,7 @@ LevelGenerator::LevelGenerator()
 		sstm << "city-" << i;
 
 		placeCity(c.x * 1000, 1, c.z * 1000, c.width * 1000, 1000, c.depth * 1000, sstm.str(), Ogre::ColourValue(0.5, 0.5, 0.5, 1.0));
+		//TODO: generate city
 	}
 }
 

@@ -82,25 +82,28 @@ void Zone::GenerateCities(int maxTries, int maxCities) {
 	int nCities = 0;
 	
 	for (int iTry = 0; iTry < maxTries; ++iTry) {
-		//TODO: generate position
+		//TODO: generate position not random
 		int x = rand() % (_width - 1) + 1;
 		int z = rand() % (_depth -1) + 1;
 
-		//TODO: generate pWidth, pDepth
+		//TODO: generate pWidth, pDepth not random
 		int width = rand() % (_maxCityWidth - 2) + 2;
 		int depth = rand() % (_maxCityHeight - 2) + 2;
 
 		if (PlaceCity(x, z, width, depth, nCities + 1)) {
 			++nCities;
 		}
+		if (nCities == maxCities) {
+			break;
+		}
 	}
-	printGrid();
 }
 
 /// <summary>
 /// Prints the grid with cities/paths within zone.
 /// </summary>
 void Zone::printGrid() {
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	FILE* fp;
 	freopen_s(&fp, "CONOUT$", "w", stdout);
 	for (int ix = 0; ix < _width; ++ix) {
@@ -110,4 +113,5 @@ void Zone::printGrid() {
 		printf("\n");
 	}
 	fclose(fp);
+#endif
 }
