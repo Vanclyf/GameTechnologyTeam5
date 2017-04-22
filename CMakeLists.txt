@@ -47,7 +47,6 @@ set(HDRS
 	./Diabro/Diabro/ItemGenerator.h
 	./Diabro/Diabro/LevelGenerator.h
 	./Diabro/Diabro/Zone.h
-	./Diabro/Diabro/Region.h
 	./Diabro/Diabro/City.h
 )
  
@@ -75,7 +74,6 @@ set(SRCS
 	./Diabro/Diabro/ItemGenerator.cpp
 	./Diabro/Diabro/LevelGenerator.cpp
 	./Diabro/Diabro/Zone.cpp
-	./Diabro/Diabro/Region.cpp
 	./Diabro/Diabro/City.cpp
 )
  
