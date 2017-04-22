@@ -22,11 +22,11 @@ public:
 	BaseArmor(Ogre::String, Ogre::String, ItemType, int, EquipmentType, StatType, std::vector<StatRange*>, SlotType, Ogre::String);
 	~BaseArmor();
 
-	SlotType getHandedType() { return _handed; }
+	SlotType getSlotType() { return _slot; }
 	Ogre::String getModelPath() { return _modelPath; }
 
 private:
-	SlotType _handed;
+	SlotType _slot;
 	Ogre::String _modelPath;
 };
 

@@ -7,14 +7,21 @@
 #include "Affix.h"
 #include "BaseEquipment.h"
 
+enum EquipmentSlots : unsigned int {
+	Weapon = 0,
+	Gear = 1,
+	Jewelrey = 2,
+};
+
 class EquipmentInstance : public ItemInstance
 {
 public:
-	EquipmentInstance(BaseEquipment*, Quality, Ogre::Entity*, int, Ogre::String, std::vector<Stat*>);
+	EquipmentInstance(BaseEquipment*, Quality, Ogre::Entity*, int, Ogre::String, std::vector<Stat*>, EquipmentSlots);
 	~EquipmentInstance();
 
 	BaseEquipment* getInfo() { return _equipmentInfo; }
 	Ogre::String getName() { return _generatedName; }
+	EquipmentSlots getType() { return _equipmentSlot; }
 	bool isEquipped() { return _equipped; }
 	int getLevel() { return _level; }
 
@@ -36,7 +43,7 @@ private:
 	int _level;
 
 	BaseEquipment* _equipmentInfo;
-
+	EquipmentSlots _equipmentSlot;
 	bool _equipped;
 
 	std::vector<Stat*> _baseStats;

@@ -38,6 +38,21 @@ bool Character::initialize()
 	fclose(fp);
 #endif
 
+
+	for (int i = 0; i < 6; i++)
+	{
+		setEquipmentSlot(GameManager::getSingletonPtr()->getItemManager()->getItemGenerator()->generateRandomItem(_myNode));
+	}
+	//show what is in the gear slots.
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+	freopen_s(&fp, "CONOUT$", "w", stdout);
+	for (int i = 0; i < _armorEquipSlots.size(); i++)
+	{
+		std::cout << "gear slot " << i << " :" << _armorEquipSlots[i]->getName() << " Item Level: " << _armorEquipSlots[i]->getLevel() << std::endl;
+	}
+	fclose(fp);
+#endif
+
 	return true;
 }
 
@@ -244,6 +259,150 @@ void Character::RemoveFromHand() {
 	//TODO: un-parent the weapon
 
 	_weapon = NULL;
+}
+
+/// <summary>
+/// Sets the armor to a equipment slot.
+/// </summary>
+/// <param name="armor">The armor instance that needs to be equiped.</param>
+void Character::SetEquipmentSlot(ArmorInstance* armor)
+{
+	std::vector<ArmorInstance*> armors = _armorEquipSlots;
+	armors.push_back(armor);
+	_armorEquipSlots = armors;
+	AddStats(reinterpret_cast<EquipmentInstance*>(armor));
+}
+
+/// <summary>
+/// Sets the weapon to its equipment slot.
+/// </summary>
+/// <param name="weapon">The weaponn instance that needs to be equiped.</param>
+void Character::SetEquipmentSlot(WeaponInstance* weapon)
+{
+	std::vector<WeaponInstance*> weapons = _weaponEquipSlots;
+	weapons.push_back(weapon);
+	_weaponEquipSlots = weapons;
+	AddStats(reinterpret_cast<EquipmentInstance*>(weapon));
+}
+
+/// <summary>
+/// Replaces the old item in the appropriate equipment slot.
+/// </summary>
+/// <param name="armor">The armor instance that needs to be equiped.</param>
+/// <param name="duplicate">The duplicate is the index of the duplicate item which has to be swaped.</param>
+void Character::SawpEquipmentSlot(ArmorInstance* armor, int duplicate)
+{
+	RemoveStats(reinterpret_cast<EquipmentInstance*>(_armorEquipSlots[duplicate]));
+	AddStats(reinterpret_cast<EquipmentInstance*>(armor));
+	_armorEquipSlots[duplicate] = armor;
+}
+
+/// <summary>
+/// When an item instance needs to be equiped first the equipment type should be found,
+/// then sends the item instance to the appropriate equipe function equipment slot.
+/// </summary>
+/// <param name="item">The item instance that should be checked and equiped.</param>
+void Character::SetEquipmentSlot(ItemInstance* item)
+{
+	if (item->getInfo()->getItemType() == 2)
+	{
+		if (reinterpret_cast<EquipmentInstance*>(item)->getType() == 0)
+		{
+			WeaponInstance* tempWeapon = reinterpret_cast<WeaponInstance*>(item);
+			///Commented out because the level of the items are not accurate atm.
+			//if (tempWeapon->getLevel() <= _currentLevel)
+			//{
+			SetEquipmentSlot(reinterpret_cast<WeaponInstance*>(item));
+			//}
+		}
+		else if (reinterpret_cast<EquipmentInstance*>(item)->getType() == 1)
+		{
+			ArmorInstance* tempArmor = reinterpret_cast<ArmorInstance*>(item);
+			bool noDuplicate = true;
+			///Commented out because the level of the items are not accurate atm.
+			//if (tempArmor->getLevel() <= _currentLevel)
+			//{
+			for (int i = 0; i < _armorEquipSlots.size(); i++)
+			{
+				if (tempArmor->getInfo()->getSlotType() == _armorEquipSlots[i]->getInfo()->getSlotType())
+				{
+					SawpEquipmentSlot(reinterpret_cast<ArmorInstance*>(item), i);
+					noDuplicate = false;
+				}
+			}
+			if (noDuplicate)
+			{
+				SetEquipmentSlot(reinterpret_cast<ArmorInstance*>(item));
+				AddStats(reinterpret_cast<EquipmentInstance*>(item));
+			}
+			//}
+
+		}
+		else
+		{
+			//TODO: jewelrey slots for equipment.
+		}
+	}
+}
+
+/// <summary>
+/// Adds the stats of the appropriate item to the character total stats.
+/// </summary>
+/// <param name="item">The item of which the stats should be added.</param>
+void Character::AddStats(EquipmentInstance* item)
+{
+	std::vector<Stat> tempStats;
+	switch(item->getType())
+	{
+	case 0:
+		//weapon
+		tempStats = _stats->GetStats();
+		for (int i = 0; i < reinterpret_cast<WeaponInstance*>(item)->getBaseStats().size(); i++)
+		{
+			tempStats.at((int)i).value += reinterpret_cast<WeaponInstance*>(item)->getBaseStats().at((int)i)->value;
+		}
+
+		break;
+	case 1:
+		//armor
+		tempStats = _stats->GetStats();
+		for (int i = 0; i < reinterpret_cast<ArmorInstance*>(item)->getBaseStats().size(); i++)
+		{
+			tempStats.at((int)i).value += reinterpret_cast<ArmorInstance*>(item)->getBaseStats().at((int)i)->value;
+		}
+		break;
+
+	}
+
+}
+/// <summary>
+/// Removes the stats of the item being removed.
+/// </summary>
+/// <param name="item">The item of which the stats should be removed.</param>
+void Character::RemoveStats(EquipmentInstance* item)
+{
+	std::vector<Stat> tempStats;
+	switch (item->getType())
+	{
+	case 0:
+		//weapon
+		tempStats = _stats->GetStats();
+		for (int i = 0; i < reinterpret_cast<WeaponInstance*>(item)->getBaseStats().size(); i++)
+		{
+			tempStats.at((int)i).value -= reinterpret_cast<WeaponInstance*>(item)->getBaseStats().at((int)i)->value;
+		}
+
+		break;
+	case 1:
+		//armor
+		tempStats = _stats->GetStats();
+		for (int i = 0; i < reinterpret_cast<ArmorInstance*>(item)->getBaseStats().size(); i++)
+		{
+			tempStats.at((int)i).value -= reinterpret_cast<ArmorInstance*>(item)->getBaseStats().at((int)i)->value;
+		}
+		break;
+
+	}
 }
 
 

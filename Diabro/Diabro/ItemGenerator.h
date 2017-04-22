@@ -19,7 +19,7 @@ private:
 	
 	std::map<Quality, int> _qualityProbablity;
 	int _summedQualityProbability;
-
+	int _slot;
 	//TODO: implement affix container in much the same way as the itemcontainer to hold the possible affixes
 	//for now: affixes are ignored. 
 };

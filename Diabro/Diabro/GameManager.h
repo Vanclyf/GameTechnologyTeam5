@@ -35,7 +35,9 @@ public:
 	UIManager* getUIManager(void) { return _uiManager; }
 	ItemManager* getItemManager(void) { return _itemManager; }
 
-	float getRandomInRange(float pLO, float pHI);
+	int getRandomInRange(int pLO, int pHI) {
+		return rand() % pHI + pLO;
+	}
 
 protected:
     virtual void createScene(void);

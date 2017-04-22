@@ -9,8 +9,8 @@
 /// <param name="pGenName">Generated level.</param>
 /// <param name="pBaseStats">The base stats.</param>
 /// <param name="pAffixStats">The affix stats.</param>
-EquipmentInstance::EquipmentInstance(BaseEquipment* pInfo, Quality pQuality, Ogre::Entity* pDroppedEnity, int pLevel, Ogre::String pGenName, std::vector<Stat*> pBaseStats)
-: ItemInstance(pInfo, pQuality, pDroppedEnity), _equipmentInfo(pInfo), _level(pLevel), _generatedName(pGenName), _baseStats(pBaseStats)
+EquipmentInstance::EquipmentInstance(BaseEquipment* pInfo, Quality pQuality, Ogre::Entity* pDroppedEnity, int pLevel, Ogre::String pGenName, std::vector<Stat*> pBaseStats, EquipmentSlots pEquipType)
+: ItemInstance(pInfo, pQuality, pDroppedEnity), _equipmentInfo(pInfo), _level(pLevel), _generatedName(pGenName), _baseStats(pBaseStats), _equipmentSlot(pEquipType)
 {
 }
 

@@ -120,10 +120,10 @@ ItemInstance* ItemGenerator::generateRandomItem(Ogre::SceneNode* pNode) {
 		case 1: {
 			randomObj = (int)GameManager::getSingletonPtr()->getRandomInRange(0, GameManager::getSingletonPtr()->getItemManager()->getItemContianer()->getWeapons().size());
 			weapon = GameManager::getSingletonPtr()->getItemManager()->getItemContianer()->getWeapons()[randomObj];
-
+			
 			type = EquipmentWeapon;
 			genName = weapon->getName();
-
+			_slot = weapon->getHandedType();
 			level *= weapon->getItemTier();
 			int numb = weapon->getMainStat();
 			int damageValue = (int)weapon->getValueOfStat(weapon->getMainStat()).randomInRange();
@@ -138,12 +138,14 @@ ItemInstance* ItemGenerator::generateRandomItem(Ogre::SceneNode* pNode) {
 
 				// armor
 		case 2: {
-			//TODO: armor gen
+			//TODO: armor gen 
 			randomObj = (int)GameManager::getSingletonPtr()->getRandomInRange(0, GameManager::getSingletonPtr()->getItemManager()->getItemContianer()->itemAmount());
-			armor = GameManager::getSingletonPtr()->getItemManager()->getItemContianer()->GetArmors()[3];
+			armor = GameManager::getSingletonPtr()->getItemManager()->getItemContianer()->GetArmors()[randomObj];
 
 			type = EquipmentArmor;
 			genName = armor->getName();
+			_slot = armor->getSlotType();
+
 
 			level *= armor->getItemTier();
 			int numb = armor->getMainStat();
@@ -185,13 +187,13 @@ ItemInstance* ItemGenerator::generateRandomItem(Ogre::SceneNode* pNode) {
 		}
 
 		case 1: {
-			returnItem = new WeaponInstance(weapon, quality, itemEntity, level, genName, baseStats);
+			returnItem = new WeaponInstance(weapon, quality, itemEntity, level, genName, baseStats, _slot);
 			break;
 		}
 
 		case 2: {
 			//TODO: add armor instance to itemlist
-			returnItem = new ArmorInstance(armor, quality, itemEntity, level, genName, baseStats);
+			returnItem = new ArmorInstance(armor, quality, itemEntity, level, genName, baseStats, _slot);
 			break;
 		}
 

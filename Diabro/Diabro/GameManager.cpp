@@ -164,13 +164,6 @@ bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& pFE)
 	return ret;
 }
 
-float GameManager::getRandomInRange(float pLO, float pHI)
-{
-	//TODO: implement random float function
-	srand(static_cast <unsigned> (time(0)));
-	float r3 = pLO + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / (pHI - pLO)));
-	return r3;
-}
 /// <summary>
 /// Called when a key is pressed.
 /// </summary>

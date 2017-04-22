@@ -7,6 +7,7 @@
 #include "CharacterStats.h"
 #include "BaseApplication.h"
 #include "WeaponInstance.h"
+#include "ArmorInstance.h"
 #include "EquimentInstance.h"
 
 class Character
@@ -39,6 +40,11 @@ public:
 
 	virtual void move(Ogre::Vector3&);
 	void toggleRun(bool pRun) { _isRunning = pRun; }
+	void SetEquipmentSlot(ArmorInstance* armor);
+	void SetEquipmentSlot(WeaponInstance* weapon);
+	void SetEquipmentSlot(ItemInstance* item);
+	void SawpEquipmentSlot(ArmorInstance* armor, int duplicate);
+
 
 	virtual bool adjustHealth(float);
 	virtual bool adjustStaminaOverTime(Ogre::Real);
@@ -77,6 +83,8 @@ protected:
 	void AddStats(EquipmentInstance* item);
 	void RemoveStats(EquipmentInstance* item);
 
+	std::vector<ArmorInstance*> _armorEquipSlots;
+	std::vector<WeaponInstance*> _weaponEquipSlots;
 	Character* _target;
 	virtual void findTarget(std::vector<Character*>);
 	virtual bool lightAttack();
