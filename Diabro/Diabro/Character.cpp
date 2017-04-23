@@ -294,8 +294,10 @@ void Character::setEquipmentSlot(WeaponInstance* pWeapon)
 {
 	int oneHandedWeaponCount = 0;
 	bool duplicate = false;
+	//check if the levelrequirment is met.
 	if (pWeapon->getLevel() <= _currentLevel)
 	{
+		//check if the weapon type is twohanded
 		if(pWeapon->getInfo()->getHandedType() == 1)
 		{
 			swapEquipmentSlot(pWeapon, 0);
@@ -304,17 +306,19 @@ void Character::setEquipmentSlot(WeaponInstance* pWeapon)
 		{
 			for (int i = 0; i < _weaponEquipSlots.size(); i++)
 			{
+				//if a slot contains a onehanded weapon it adds one to the weaponcount
 				if (_weaponEquipSlots[i]->getInfo()->getHandedType() == 1)
 				{
 					oneHandedWeaponCount++;
-					if (oneHandedWeaponCount >= 2)
+					//if the weaponcount is equal to 2 the max ammount of onehanded weapons is reached. 
+					if (oneHandedWeaponCount == 2)
 					{
 						swapEquipmentSlot(pWeapon, i);
 						duplicate = true;
 					}
 				}
 			}
-
+			//if no swap is needed add the weapon to the equipslots.
 			if (!duplicate)
 			{
 				std::vector<WeaponInstance*> weapons = _weaponEquipSlots;
@@ -345,6 +349,7 @@ void Character::swapEquipmentSlot(WeaponInstance* pWeapon, int pDuplicate)
 	//if it is an twohanded weapon remove all the weapons from the list and add the new one.
 	if(pWeapon->getInfo()->getHandedType() == 0)
 	{
+		//remove all the stats of all weapons stored in the weaponEquipSlots.
 		for (int i = 0; i < _weaponEquipSlots.size(); i++)
 		{
 			removeStats(reinterpret_cast<EquipmentInstance*>(_weaponEquipSlots[pDuplicate]));
@@ -352,12 +357,14 @@ void Character::swapEquipmentSlot(WeaponInstance* pWeapon, int pDuplicate)
 		addStats(reinterpret_cast<EquipmentInstance*>(pWeapon));
 		_weaponEquipSlots.clear();
 		_weaponEquipSlots[0] = pWeapon;
+		setHand(pWeapon);
 	}
 	else
 	{
 		removeStats(reinterpret_cast<EquipmentInstance*>(_weaponEquipSlots[pDuplicate]));
 		addStats(reinterpret_cast<EquipmentInstance*>(pWeapon));
 		_weaponEquipSlots[pDuplicate] = pWeapon;
+		setHand(pWeapon);
 	}
 }
 
