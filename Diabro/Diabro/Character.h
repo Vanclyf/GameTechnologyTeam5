@@ -44,6 +44,7 @@ public:
 	void setEquipmentSlot(WeaponInstance*);
 	void setEquipmentSlot(ItemInstance*);
 	void swapEquipmentSlot(ArmorInstance*, int);
+	void swapEquipmentSlot(WeaponInstance*, int);
 
 
 	virtual bool adjustHealth(float);

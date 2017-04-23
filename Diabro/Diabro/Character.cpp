@@ -292,13 +292,38 @@ void Character::setEquipmentSlot(ArmorInstance* pArmor)
 /// <param name="pWeapon">The weaponn instance that needs to be equiped.</param>
 void Character::setEquipmentSlot(WeaponInstance* pWeapon)
 {
+	int oneHandedWeaponCount = 0;
+	bool duplicate = false;
 	if (pWeapon->getLevel() <= _currentLevel)
 	{
-		std::vector<WeaponInstance*> weapons = _weaponEquipSlots;
-		weapons.push_back(pWeapon);
-		_weaponEquipSlots = weapons;
-		setHand(pWeapon);
-		addStats(reinterpret_cast<EquipmentInstance*>(pWeapon));
+		if(pWeapon->getInfo()->getHandedType() == 1)
+		{
+			swapEquipmentSlot(pWeapon, 0);
+		}
+		else
+		{
+			for (int i = 0; i < _weaponEquipSlots.size(); i++)
+			{
+				if (_weaponEquipSlots[i]->getInfo()->getHandedType() == 1)
+				{
+					oneHandedWeaponCount++;
+					if (oneHandedWeaponCount >= 2)
+					{
+						swapEquipmentSlot(pWeapon, i);
+						duplicate = true;
+					}
+				}
+			}
+
+			if (!duplicate)
+			{
+				std::vector<WeaponInstance*> weapons = _weaponEquipSlots;
+				weapons.push_back(pWeapon);
+				_weaponEquipSlots = weapons;
+				setHand(pWeapon);
+				addStats(reinterpret_cast<EquipmentInstance*>(pWeapon));
+			}
+		}
 	}
 }
 
@@ -313,6 +338,27 @@ void Character::swapEquipmentSlot(ArmorInstance* pArmor, int pDuplicate)
 	removeStats(reinterpret_cast<EquipmentInstance*>(_armorEquipSlots[pDuplicate]));
 	addStats(reinterpret_cast<EquipmentInstance*>(pArmor));
 	_armorEquipSlots[pDuplicate] = pArmor;
+}
+
+void Character::swapEquipmentSlot(WeaponInstance* pWeapon, int pDuplicate)
+{
+	//if it is an twohanded weapon remove all the weapons from the list and add the new one.
+	if(pWeapon->getInfo()->getHandedType() == 0)
+	{
+		for (int i = 0; i < _weaponEquipSlots.size(); i++)
+		{
+			removeStats(reinterpret_cast<EquipmentInstance*>(_weaponEquipSlots[pDuplicate]));
+		}
+		addStats(reinterpret_cast<EquipmentInstance*>(pWeapon));
+		_weaponEquipSlots.clear();
+		_weaponEquipSlots[0] = pWeapon;
+	}
+	else
+	{
+		removeStats(reinterpret_cast<EquipmentInstance*>(_weaponEquipSlots[pDuplicate]));
+		addStats(reinterpret_cast<EquipmentInstance*>(pWeapon));
+		_weaponEquipSlots[pDuplicate] = pWeapon;
+	}
 }
 
 /// <summary>
