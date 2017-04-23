@@ -75,21 +75,21 @@ void LevelGenerator::createCityMesh(int pX, int pY, int pZ, int pW, int pH, int 
 	const size_t nVertices = 8;
 	const size_t vBufCount = 3 * 2 * nVertices;
 	float vertices[vBufCount] = {
-		pX,       pY + pH,   pZ,		//0
+		static_cast<float>(pX), static_cast<float>(pY + pH), static_cast<float>(pZ),           //0
 		-sqrt13, sqrt13,  -sqrt13,
-		pX + pW,   pY + pH,   pZ,		//1
+		static_cast<float>(pX + pW), static_cast<float>(pY + pH), static_cast<float>(pZ),      //1
 		sqrt13,  sqrt13,  -sqrt13,
-		pX + pW,   pY,       pZ,		//2
+		static_cast<float>(pX + pW), static_cast<float>(pY), static_cast<float>(pZ),           //2
 		sqrt13,  -sqrt13, -sqrt13,
-		pX,       pY,       pZ,		//3
+		static_cast<float>(pX), static_cast<float>(pY), static_cast<float>(pZ),		           //3
 		-sqrt13, -sqrt13, -sqrt13,
-		pX,       pY + pH,   pZ + pD,	//4
+		static_cast<float>(pX), static_cast<float>(pY + pH), static_cast<float>(pZ + pD),      //4
 		-sqrt13, sqrt13,  sqrt13,
-		pX + pW,   pY + pH,   pZ + pD,	//5
+		static_cast<float>(pX + pW), static_cast<float>(pY + pH), static_cast<float>(pZ + pD), //5
 		sqrt13,  sqrt13,  sqrt13,
-		pX + pW,   pY,       pZ + pD,	//6
+		static_cast<float>(pX + pW), static_cast<float>(pY), static_cast<float>(pZ + pD),	   //6
 		sqrt13,  -sqrt13, sqrt13,
-		pX,       pY,       pZ + pD,	//7
+		static_cast<float>(pX), static_cast<float>(pY), static_cast<float>(pZ + pD),	       //7
 		-sqrt13, -sqrt13, sqrt13,
 	};
 
