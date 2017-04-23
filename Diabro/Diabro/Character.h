@@ -40,10 +40,10 @@ public:
 
 	virtual void move(Ogre::Vector3&);
 	void toggleRun(bool pRun) { _isRunning = pRun; }
-	void SetEquipmentSlot(ArmorInstance* armor);
-	void SetEquipmentSlot(WeaponInstance* weapon);
-	void SetEquipmentSlot(ItemInstance* item);
-	void SawpEquipmentSlot(ArmorInstance* armor, int duplicate);
+	void setEquipmentSlot(ArmorInstance*);
+	void setEquipmentSlot(WeaponInstance*);
+	void setEquipmentSlot(ItemInstance*);
+	void swapEquipmentSlot(ArmorInstance*, int);
 
 
 	virtual bool adjustHealth(float);
@@ -76,12 +76,12 @@ protected:
 	//Ogre::Real _heavyAttackCooldown;
 
 	WeaponInstance* _weapon;
-	void SetHand(WeaponInstance* weapon);
-	void RemoveFromHand();
+	void setHand(WeaponInstance*);
+	void removeFromHand();
 
 	//TODO: implement these methods so that the character actually gains stats from wearing items
-	void AddStats(EquipmentInstance* item);
-	void RemoveStats(EquipmentInstance* item);
+	void addStats(EquipmentInstance*);
+	void removeStats(EquipmentInstance*);
 
 	std::vector<ArmorInstance*> _armorEquipSlots;
 	std::vector<WeaponInstance*> _weaponEquipSlots;
