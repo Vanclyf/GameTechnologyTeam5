@@ -45,6 +45,7 @@ set(HDRS
 	./Diabro/Diabro/ItemContainer.h
 	./Diabro/Diabro/ItemManager.h
 	./Diabro/Diabro/ItemGenerator.h
+	./Diarbro/Diabro/ResourceManagement.h
 )
  
 set(SRCS
@@ -54,6 +55,7 @@ set(SRCS
 	./Diabro/Diabro/Npc.cpp
 	./Diabro/Diabro/LevelManager.cpp
 	./Diabro/Diabro/BaseItem.cpp
+	./Diarbro/Diabro/ResourceManagement.cpp
 	./Diabro/Diabro/BasicEnemy.cpp
 	./Diabro/Diabro/ItemInstance.cpp
 	./Diabro/Diabro/Character.cpp
