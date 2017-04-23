@@ -73,6 +73,15 @@
     <ClCompile Include="tinyxml2.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="LevelGenerator.cpp">
+      <Filter>Sources\LevelGeneration</Filter>
+    </ClCompile>
+    <ClCompile Include="City.cpp">
+      <Filter>Sources\LevelGeneration</Filter>
+    </ClCompile>
+    <ClCompile Include="Zone.cpp">
+      <Filter>Sources\LevelGeneration</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseNpc.h">
@@ -168,6 +177,15 @@
     <ClInclude Include="tinyxml2.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="Zone.h">
+      <Filter>Headers\LevelGeneration</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelGenerator.h">
+      <Filter>Headers\LevelGeneration</Filter>
+    </ClInclude>
+    <ClInclude Include="City.h">
+      <Filter>Headers\LevelGeneration</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="GameObjStandard.cg" />
@@ -220,6 +238,12 @@
     </Filter>
     <Filter Include="Sources\QuestContent">
       <UniqueIdentifier>{941f42a8-19a0-45a9-9d67-1dba844f3563}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\LevelGeneration">
+      <UniqueIdentifier>{4496d5fd-f0d4-4d38-823d-210e643542b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\LevelGeneration">
+      <UniqueIdentifier>{1a4bad47-ce67-4c37-a4af-db1eb930b8c5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

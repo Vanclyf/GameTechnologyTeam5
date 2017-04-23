@@ -45,6 +45,9 @@ set(HDRS
 	./Diabro/Diabro/ItemContainer.h
 	./Diabro/Diabro/ItemManager.h
 	./Diabro/Diabro/ItemGenerator.h
+	./Diabro/Diabro/LevelGenerator.h
+	./Diabro/Diabro/Zone.h
+	./Diabro/Diabro/City.h
 	./Diabro/Diabro/Needs.h
 	./Diabro/Diabro/BaseQuestItem.h
 	./Diabro/Diabro/QuestContentManager.h 
@@ -79,6 +82,9 @@ set(SRCS
 	./Diabro/Diabro/QuestContentManager.cpp
 	./Diabro/Diabro/QuestItemContainer.cpp
 	./Diabro/Diabro/QuestItemGenerator.cpp
+	./Diabro/Diabro/LevelGenerator.cpp
+	./Diabro/Diabro/Zone.cpp
+	./Diabro/Diabro/City.cpp
 	./Diabro/Diabro/tinyxml2.cpp
 )
  
