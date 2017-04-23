@@ -269,20 +269,23 @@ void Character::setEquipmentSlot(ArmorInstance* pArmor)
 {
 	bool duplicate = false;
 
-	for (int i = 0; i < _armorEquipSlots.size(); i++)
+	if (pArmor->getLevel() <= _currentLevel)
 	{
-		if (pArmor->getInfo()->getSlotType() == _armorEquipSlots[i]->getInfo()->getSlotType())
+		for (int i = 0; i < _armorEquipSlots.size(); i++)
 		{
-			swapEquipmentSlot(pArmor, i);
-			duplicate = true;
+			if (pArmor->getInfo()->getSlotType() == _armorEquipSlots[i]->getInfo()->getSlotType())
+			{
+				swapEquipmentSlot(pArmor, i);
+				duplicate = true;
+			}
 		}
-	}
-	if (!duplicate)
-	{
-		std::vector<ArmorInstance*> armors = _armorEquipSlots;
-		armors.push_back(pArmor);
-		_armorEquipSlots = armors;
-		addStats(reinterpret_cast<EquipmentInstance*>(pArmor));
+		if (!duplicate)
+		{
+			std::vector<ArmorInstance*> armors = _armorEquipSlots;
+			armors.push_back(pArmor);
+			_armorEquipSlots = armors;
+			addStats(reinterpret_cast<EquipmentInstance*>(pArmor));
+		}
 	}
 }
 
@@ -440,11 +443,11 @@ void Character::addStats(EquipmentInstance* pItem)
 			tempStats.at((int)i).value += reinterpret_cast<ArmorInstance*>(pItem)->getBaseStats().at((int)i)->value;
 			_stats->GetStats().at((int)i) = tempStats.at((int)i);
 		}
+
 		break;
-
 	}
-
 }
+
 /// <summary>
 /// Removes the stats of the item being removed.
 /// </summary>
@@ -474,12 +477,5 @@ void Character::removeStats(EquipmentInstance* pItem)
 		}
 		
 		break;
-
 	}
 }
-
-
-
-
-
-

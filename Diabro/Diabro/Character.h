@@ -36,6 +36,7 @@ public:
 	int getLevel() { return _currentLevel; }
 
 	WeaponInstance* getCurrentWeapon() { return _weapon; }
+
 	// -------------------------------------------------------------------------------
 
 	virtual void move(Ogre::Vector3&);
@@ -45,7 +46,6 @@ public:
 	void setEquipmentSlot(ItemInstance*);
 	void swapEquipmentSlot(ArmorInstance*, int);
 	void swapEquipmentSlot(WeaponInstance*, int);
-
 
 	virtual bool adjustHealth(float);
 	virtual bool adjustStaminaOverTime(Ogre::Real);
