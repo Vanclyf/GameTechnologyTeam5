@@ -20,6 +20,8 @@ private:
 	
 	//pX + pY * pWidth
 	int *_tiles;
+
+
 public:
 	std::vector<City> cities;
 

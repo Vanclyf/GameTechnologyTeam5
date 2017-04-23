@@ -1,4 +1,8 @@
 #include "Zone.h"
+#include <ctime>
+
+#include <OgreConfigFile.h>
+
 
 Zone::Zone(int pWidth, int pDepth, int pMaxCityWidth, int pMaxCityHeight, int pMaxCities, int pMaxTries):
 _width(pWidth), _depth(pDepth), _maxCityWidth(pMaxCityWidth), _maxCityHeight(pMaxCityHeight),
@@ -80,12 +84,13 @@ bool Zone::PlaceCity(int pX, int pZ, int pWidth, int pDepth, int pCityId) {
 /// <param name="pMaxCities">The maximum amount of cities allowed in the zone.</param>
 void Zone::GenerateCities(int pMaxTries, int pMaxCities) {
 	int nCities = 0;
-	
+	srand(time(NULL));
+
 	for (int iTry = 0; iTry < pMaxTries; ++iTry) {
 		//TODO: generate position not random
 		int x = rand() % (_width - 1) + 1;
 		int z = rand() % (_depth -1) + 1;
-
+		
 		//TODO: generate pWidth, pDepth not random
 		int width = rand() % (_maxCityWidth - 2) + 2;
 		int depth = rand() % (_maxCityHeight - 2) + 2;
