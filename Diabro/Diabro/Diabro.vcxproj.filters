@@ -186,6 +186,9 @@
     <ClInclude Include="City.h">
       <Filter>Headers\LevelGeneration</Filter>
     </ClInclude>
+    <ClInclude Include="Tree.h">
+      <Filter>Headers\TreeDatastructure</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="GameObjStandard.cg" />
@@ -244,6 +247,9 @@
     </Filter>
     <Filter Include="Headers\LevelGeneration">
       <UniqueIdentifier>{1a4bad47-ce67-4c37-a4af-db1eb930b8c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\TreeDatastructure">
+      <UniqueIdentifier>{f6751de5-7943-4b62-9e2a-36ed8343b8f6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
