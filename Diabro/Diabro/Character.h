@@ -86,6 +86,8 @@ protected:
 
 	// TODO: maybe some NPC's (friendly villagers) will not have _stats then this should be moved to a lower child class. 
 	bool setUpStats();
+
+public:
 };
 
 #endif

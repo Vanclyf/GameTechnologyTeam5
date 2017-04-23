@@ -16,9 +16,6 @@
     <ClCompile Include="Npc.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
     <ClCompile Include="UIManager.cpp">
       <Filter>Sources\Managers</Filter>
     </ClCompile>
@@ -60,6 +57,19 @@
     </ClCompile>
     <ClCompile Include="CharacterSpawner.cpp">
       <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="GenericFSM.cpp">
+      <Filter>Sources\Finite State Machines</Filter>
+    </ClCompile>
+    <ClCompile Include="TestFSM.cpp">
+      <Filter>Sources\Finite State Machines</Filter>
+    </ClCompile>
+    <ClCompile Include="IdleState.cpp">
+      <Filter>Sources\Finite State Machines\States</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>Sources\Finite State Machines\States</Filter>
     </ClCompile>
     <ClCompile Include="QuestItemContainer.cpp">
       <Filter>Sources\QuestContent</Filter>
@@ -156,6 +166,19 @@
     <ClInclude Include="CharacterSpawner.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="GenericFSM.h">
+      <Filter>Headers\States</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Headers\States</Filter>
+    </ClInclude>
+    <ClInclude Include="TestFSM.h">
+      <Filter>Headers\States</Filter>
+    </ClInclude>
+    <ClInclude Include="IdleState.h">
+      <Filter>Headers\States</Filter>
+    </ClInclude>
     <ClInclude Include="Needs.h">
       <Filter>Headers\Needs</Filter>
     </ClInclude>
@@ -245,5 +268,17 @@
     <Filter Include="Headers\LevelGeneration">
       <UniqueIdentifier>{1a4bad47-ce67-4c37-a4af-db1eb930b8c5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headers\States">
+      <UniqueIdentifier>{08a08f48-5a8f-443d-9cc6-cb465548c300}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Finite State Machines">
+      <UniqueIdentifier>{73632fde-c065-45a0-9305-62f918fd890a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Finite State Machines\States">
+      <UniqueIdentifier>{102eacb0-6164-45d4-a63e-7666afb991ca}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Diabro.rc" />
   </ItemGroup>
 </Project>

@@ -6,6 +6,8 @@ Filename:    GameManager.cpp
 */
 #include "GameManager.h"
 #include "SdkTrays.h"
+#include "TestFSM.h"
+
 //---------------------------------------------------------------------------
 
 /// <summary>
@@ -77,6 +79,7 @@ void GameManager::createScene(void)
 	mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 
 	_itemManager = new ItemManager();
+
 
 	_levelManager = new LevelManager();
 	_levelManager->initialize();

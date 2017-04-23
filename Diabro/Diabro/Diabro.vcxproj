@@ -61,7 +61,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(OGRE_HOME)\boost\lib;$(OGRE_HOME)\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>OgreMain_d.lib;OIS_d.lib;OgreOverlay_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>OgreMain_d.lib;OIS_d.lib;OgreOverlay_d.lib;libboost_thread-vc100-mt-gd-1_55.lib;libboost_system-vc100-mt-gd-1_55.lib;libboost_date_time-vc100-mt-gd-1_55.lib;libboost_chrono-vc100-mt-gd-1_55.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy "$(OutDir)\$(TargetFileName)" "$(OGRE_HOME)\Bin\$(Configuration)"</Command>
@@ -119,6 +119,8 @@
     <ClCompile Include="EquimentInstance.cpp" />
     <ClCompile Include="FloatRange.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="GenericFSM.cpp" />
+    <ClCompile Include="IdleState.cpp" />
     <ClCompile Include="ItemContainer.cpp" />
     <ClCompile Include="ItemGenerator.cpp" />
     <ClCompile Include="ItemInstance.cpp" />
@@ -129,6 +131,8 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="QuestContentManager.cpp" />
     <ClCompile Include="QuestItemContainer.cpp" />
+    <ClCompile Include="State.cpp" />
+    <ClCompile Include="TestFSM.cpp" />
     <ClCompile Include="QuestItemGenerator.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
     <ClCompile Include="UIManager.cpp" />
@@ -151,6 +155,8 @@
     <ClInclude Include="EquimentInstance.h" />
     <ClInclude Include="FloatRange.h" />
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="GenericFSM.h" />
+    <ClInclude Include="IdleState.h" />
     <ClInclude Include="ItemContainer.h" />
     <ClInclude Include="ItemGenerator.h" />
     <ClInclude Include="ItemInstance.h" />
@@ -161,15 +167,21 @@
     <ClInclude Include="LevelManager.h" />
     <ClInclude Include="Modifier.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="State.h" />
     <ClInclude Include="QuestContentManager.h" />
     <ClInclude Include="QuestItem.h" />
     <ClInclude Include="QuestItemContainer.h" />
     <ClInclude Include="QuestItemGenerator.h" />
     <ClInclude Include="StatRange.h" />
+    <ClInclude Include="TestFSM.h" />
     <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="WeaponInstance.h" />
     <ClInclude Include="Zone.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Diabro.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

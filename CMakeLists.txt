@@ -48,6 +48,9 @@ set(HDRS
 	./Diabro/Diabro/LevelGenerator.h
 	./Diabro/Diabro/Zone.h
 	./Diabro/Diabro/City.h
+	./Diabro/Diabro/State.h
+	./Diabro/Diabro/GenericFSM.h
+	./Diabro/Diabro/TestFSM.h
 	./Diabro/Diabro/Needs.h
 	./Diabro/Diabro/BaseQuestItem.h
 	./Diabro/Diabro/QuestContentManager.h 
