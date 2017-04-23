@@ -67,9 +67,6 @@ void GameManager::createScene(void)
 	mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 
 	_itemManager = new ItemManager();
-	TestFSM* testFsm = new TestFSM();
-
-	testFsm->Start();
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	FILE* fp;

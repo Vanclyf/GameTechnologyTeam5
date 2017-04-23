@@ -109,6 +109,7 @@
     <ClCompile Include="FloatRange.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GenericFSM.cpp" />
+    <ClCompile Include="IdleState.cpp" />
     <ClCompile Include="ItemContainer.cpp" />
     <ClCompile Include="ItemGenerator.cpp" />
     <ClCompile Include="ItemInstance.cpp" />
@@ -136,6 +137,7 @@
     <ClInclude Include="FloatRange.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GenericFSM.h" />
+    <ClInclude Include="IdleState.h" />
     <ClInclude Include="ItemContainer.h" />
     <ClInclude Include="ItemGenerator.h" />
     <ClInclude Include="ItemInstance.h" />

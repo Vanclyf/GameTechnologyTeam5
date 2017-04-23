@@ -1,12 +1,18 @@
 #include "GenericFSM.h"
-#include "GameManager.h"
+#include "IdleState.h"
 
+GenericFSM::GenericFSM(State* pInitstate) :
+_initialState(pInitstate)
+{
+	beginState(pInitstate);
+}
 
 GenericFSM::GenericFSM()
 {
-
+	_initialState = new IdleState(0, "Idle");
+	_currentState = _initialState;
+	beginState(_currentState);
 }
-
 
 GenericFSM::~GenericFSM()
 {
@@ -32,7 +38,7 @@ void GenericFSM::setState(State* pState)
 void GenericFSM::beginState(State* pState)
 {
 	pState->beginAction();
-
+	
 }
 
 /// <summary>
@@ -45,25 +51,10 @@ void GenericFSM::endState(State* pState)
 
 }
 
-
 /// <summary>
 /// Updates the FSM.
 /// </summary>
 void GenericFSM::update()
 {
-
+	_currentState->updateAction();
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
