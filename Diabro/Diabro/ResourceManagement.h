@@ -19,11 +19,11 @@ class ResourceManagement : public BaseApplication, public Ogre::Singleton<Resour
 public:
 	ResourceManagement(void);
 	~ResourceManagement(void);
-	 void createResource(std::string, std::string, std::string, std::string);
-	 void unloadResource(std::string);
-	 void loadResource(std::string);
-	 void unloadResourceGoup(std::string);
-	 void reloadResource(std::string);
+	void createResource(std::string, std::string, std::string, std::string);
+	void unloadResource(std::string, std::string);
+	void loadResource(std::string);
+	void unloadResourceGoup(std::string);
+	void reloadResource(std::string, std::string);
 
 	
 
@@ -34,9 +34,10 @@ protected:
 	 
 	
 private:
-	std::string pLocation;
-	Ogre::Resource* resource;
-	Ogre::ResourceGroupManager* manager = new Ogre::ResourceGroupManager;
+	
+	Ogre::Resource* _resource;
+	Ogre::ResourceManager* _resourceMgr;
+	Ogre::ResourceGroupManager* _groupManager = new Ogre::ResourceGroupManager;
 	
 };
 
