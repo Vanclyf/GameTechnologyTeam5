@@ -4,8 +4,9 @@
 
 template<typename T>
 class TreeNode {
+public:
 	TreeNode<T>();
-	TreeNode<T>(T data) : _data(data) {};
+	TreeNode<T>(T pData, TreeNode<T>* pParent) : _data(pData), _myParent(pParent) {};
 	~TreeNode();
 
 	// get node methods
@@ -14,6 +15,7 @@ class TreeNode {
 		if (_childs.size() < pIndex) return _childs[pIndex];
 		else return nullptr;
 	}
+	TreeNode<T>* getParent() { return _myParent; }
 
 	// set node methods
 	void setChildren(std::vector<TreeNode<T>*> pNodes) {
@@ -31,7 +33,7 @@ class TreeNode {
 			_childs.push_back(pNode);
 		}
 		else {
-			std::vector<int>::iterator it;
+			std::vector<TreeNode<T>*>::iterator it;
 			it = _childs.begin();
 			_childs.insert(it+pIndex, pNode);
 			resultingIndex = pIndex;
@@ -43,31 +45,52 @@ class TreeNode {
 	// remove nodes
 	void removeChildren() {
 		for(int i = 0; i < _childs.size(); ++i) {
-			_childs[i]->destory();
+			_childs[i]->destroy();
 		}
 
-		_childs.earse(_childs.begin(), _childs.end());
+		_childs.erase(_childs.begin(), _childs.end());
 	}
 	void removeChild(int pIndex) {
-		if(_childs.size() >= pIndex) return;
+		if(_childs.size() <= pIndex) return;
 
-		_childs[pIndex]->destroy;
+		_childs[pIndex]->destroy();
+		std::vector<TreeNode<T>*>::iterator it;
+		it = _childs.begin();
+		_childs.erase(it + pIndex);
 	}
 
 	// last node?
 	bool isLeafNode() { return _childs.size() == 0; }
 
 	// get its data
-	T* getData() { return _data; }
+	T getData() { return _data; }
 
 	void destroy() {
-		removeChildren();
-		delete _data;
+		if(_childs.size() > 0) removeChildren();
+
+		int index;
+		for (int i = 0; i < _myParent->getChildren().size(); ++i) {
+			if(_myParent->getChildren()[i] == this) {
+				index = i;
+				break;
+			}
+		}
+		_myParent->removeChildFromDestroy(index);
+		//delete _data;
 	}
 
 protected:
 	std::vector<TreeNode<T>*> _childs;
-	T* _data;
+	TreeNode<T>* _myParent;
+	T _data;
+
+	void removeChildFromDestroy(int pIndex) {
+		if (_childs.size() <= pIndex) return;
+
+		std::vector<TreeNode<T>*>::iterator it;
+		it = _childs.begin();
+		_childs.erase(it + pIndex);
+	}
 };
 
 // TODO: remove this class if it seems to be unnessacery 
@@ -80,45 +103,60 @@ class TreeRoot : TreeNode<T> {
 // TODO: possibly two templates needed (action and strat), but maybe solvable with super class or interface
 template<typename T>
 class Tree {
-	Tree<T>();
+public:
+	Tree<T>() {};
 	~Tree();
 
 	int size() const { return _size; }
 
-	T* getRootData() { return _root->getData(); }
+	TreeNode<T>* getRoot() { return _root; }
+	T getRootData() { return _root->getData(); }
 	
-	void setRoot(TreeNode<T>* pRoot) {
+	void setRoot(T pData) {
 		++_size;
-		_root = pRoot;
+		TreeNode<T>* node = new TreeNode<T>(pData, nullptr);
+		_root = node;
 	}
 
-	void addNode(T pData, TreeNode<T>* pLeaf = _root) {
+	void addNode(T pData, TreeNode<T>* pLeaf = nullptr) {
+		if (!pLeaf) pLeaf = _root;
+
 		++_size;
 		if (_root == NULL) {
-			TreeNode<T>* node = new TreeNode<T>(pData);
+			TreeNode<T>* node = new TreeNode<T>(pData, nullptr);
 			_root = node;
 		}
 		else {
-			TreeNode<T>* node = new TreeNode<T>(pData);
+			std::vector<TreeNode<T>*> nodes;
+			TreeNode<T>* node = new TreeNode<T>(pData, pLeaf);
+			nodes.push_back(node);
 			if(pLeaf->getChildren().size() == 0) {
-				pLeaf->setChildren(node);
+				pLeaf->setChildren(nodes);
 			}
 			else {
-				pLeaf->addChildren(node);
+				pLeaf->addChildren(nodes);
 			}
 		}
 	}
 
-	void addNodes(std::vector<T> pData, TreeNode<T> pNode) {
+	void addNodes(std::vector<T> pData, TreeNode<T>* pNode = nullptr) {
+		if (!pNode) pNode = _root;
+
 		_size += pData.size();
 		if (_root == NULL) {
 			// error occured, as long as the root is null you cant add multiple children.
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+			FILE* fp;
+			freopen_s(&fp, "CONOUT$", "w", stdout);
+			std::cout << "ERROR occured, as long as the root is null you cant add multiple children." << std::endl;
+			fclose(fp);
+#endif
 			return;
 		}
 
 		std::vector<TreeNode<T>*> nodes;
 		for (int i = 0; i < pData.size(); ++i) {
-			TreeNode<T>* node = new TreeNode<T>(pData);
+			TreeNode<T>* node = new TreeNode<T>(pData[i], pNode);
 			nodes.push_back(node);
 		}
 
@@ -132,26 +170,36 @@ class Tree {
 	}
 
 	void removeNode(TreeNode<T>* pNode) {
-		if(pNode != NULL) {
+		if(pNode) {
 			pNode->destroy();
 		}
 	}
 
-	std::vector<TreeNode<T>*> preorder(TreeNode<T>* pNode) {
+	std::vector<TreeNode<T>*> preorder(TreeNode<T>* pNode = nullptr){
+		if (!pNode) pNode = _root;
+
 		std::vector<TreeNode<T>*> returnList;
 		if(pNode != NULL) {
 			returnList.push_back(pNode);
 			for (int i = 0; i < pNode->getChildren().size(); ++i) {
-				preorder(pNode->getChildren()[i]);
+				std::vector<TreeNode<T>*> nodes = preorder(pNode->getChildren()[i]);
+				for (int j = 0; j < nodes.size(); ++j) {
+					returnList.push_back(nodes[j]);
+				}
 			}
 		}
 		return returnList;
 	}
-	std::vector<TreeNode<T>*> postorder(TreeNode<T>* pNode) {
+	std::vector<TreeNode<T>*> postorder(TreeNode<T>* pNode = nullptr) {
+		if (!pNode) pNode = _root;
+
 		std::vector<TreeNode<T>*> returnList;
 		if (pNode != NULL) {
 			for (int i = 0; i < pNode->getChildren().size(); ++i) {
-				postorder(pNode->getChildren()[i]);
+				std::vector<TreeNode<T>*> nodes = postorder(pNode->getChildren()[i]);
+				for (int j = 0; j < nodes.size(); ++j) {
+					returnList.push_back(nodes[j]);
+				}
 			}
 			returnList.push_back(pNode);
 		}
@@ -163,4 +211,6 @@ private:
 	int _size;
 };
 
+template class Tree < int >;
+template class TreeNode < int >;
 #endif
