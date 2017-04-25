@@ -19,7 +19,7 @@ class ResourceManagement : public BaseApplication, public Ogre::Singleton<Resour
 public:
 	ResourceManagement(void);
 	~ResourceManagement(void);
-	void createResource(std::string, std::string, std::string, std::string);
+	void createResource(std::string, std::string, std::string, std::string, std::string);
 	void unloadResource(std::string, std::string);
 	void loadResource(std::string);
 	void unloadResourceGoup(std::string);

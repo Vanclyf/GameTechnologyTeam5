@@ -1,4 +1,5 @@
 #include "GameManager.h"
+#include "ResourceManagement.h"
 #include "LevelManager.h"
 
 /// <summary>
@@ -18,12 +19,18 @@ void LevelManager::initialize()
 {
 	// create level node, the root node for everything in the level
 	_levelNode = GameManager::getSingletonPtr()->getSceneManager()->getRootSceneNode()->createChildSceneNode("LevelNode");
-
+	
+	
 	Ogre::SceneNode* playerNode = _levelNode->createChildSceneNode("PlayerNode");
 	_camNode = playerNode->createChildSceneNode("CameraNode");
 
 	//player
 	_playerEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("ninja.mesh");
+	mgr->createResource("Diabro\Diabro\media\models", "MESH", "ninja.mesh",  "Mesh", "meshes"); //location of file, codeType of resourcetype, name of resource, type of resource, resourcegroup
+	mgr->loadResource("meshes");
+	mgr->reloadResource("ninja.mesh", "meshes");
+	mgr->unloadResource("ninja.mesh", "meshes");
+	
 	playerNode->createChildSceneNode()->attachObject(_playerEntity);
 	playerScript = new Player(playerNode, _playerEntity);
 	playerScript->initialize();

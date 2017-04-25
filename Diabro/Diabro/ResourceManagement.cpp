@@ -28,9 +28,9 @@ Filename:    ResourceManagement.cpp
  /// <param name="pResourceName">Name of the p resource.</param>
  /// <param name="pResourceType">Type of the p resource.</param>
  /// <param name="pGroupName">Name of the p group.</param>
-void ResourceManagement::createResource(std::string pLocation, std::string pResourceName, std::string pResourceType, std::string pGroupName)
+void ResourceManagement::createResource(std::string pLocation, std::string pLocType, std::string pResourceName, std::string pResourceType, std::string pGroupName)
 {
-	_groupManager->getSingleton().addResourceLocation(pLocation , "Mesh");
+	_groupManager->getSingleton().addResourceLocation(pLocation , pLocType);
 	_groupManager->getSingleton().declareResource(pResourceName, pResourceType, pGroupName);
 	_groupManager->getSingleton().initialiseResourceGroup(pGroupName);
 	// Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups(); can be used to just load all, need decision which we want

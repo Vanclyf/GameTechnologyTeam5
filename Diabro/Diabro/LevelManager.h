@@ -8,6 +8,7 @@
 #include "BasicEnemy.h"
 #include <OgreSceneManager.h>
 #include "CharacterSpawner.h"
+#include "ResourceManagement.h"
 
 class LevelManager
 {
@@ -45,6 +46,7 @@ private:
 	Ogre::Entity* _npcEntity;
 	Ogre::Entity* _basicEnemyEntity;
 
+	ResourceManagement* mgr;
 	CharacterSpawner<Npc>* npcSpawner;
 	CharacterSpawner<BasicEnemy>* enemySpawner;
 
