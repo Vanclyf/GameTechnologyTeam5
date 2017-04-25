@@ -9,8 +9,8 @@ TreeNode<T>::TreeNode() { }
 /// <summary>
 /// Initializes a new instance of the <see cref="TreeNode"/> class.
 /// </summary>
-/// <param name="pData">The data.</param>
-/// <param name="pParent">The parent.</param>
+/// <param name="pData">The data (which is generic so it can be of any type) for the node.</param>
+/// <param name="pParent">The parent for the node.</param>
 template<typename T>
 TreeNode<T>::TreeNode(T pData, TreeNode<T>* pParent) : _data(pData), _parent(pParent) { }
 
