@@ -131,6 +131,8 @@
     <ClCompile Include="QuestItemContainer.cpp" />
     <ClCompile Include="QuestItemGenerator.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
+    <ClCompile Include="Tree.cpp" />
+    <ClCompile Include="TreeNode.cpp" />
     <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="WeaponInstance.cpp" />
     <ClCompile Include="Zone.cpp" />
@@ -168,6 +170,7 @@
     <ClInclude Include="StatRange.h" />
     <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="Tree.h" />
+    <ClInclude Include="TreeNode.h" />
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="WeaponInstance.h" />
     <ClInclude Include="Zone.h" />
