@@ -6,7 +6,7 @@
 /// This class is created by the <see cref="GameManager" /> and contains all level information
 /// like characters and the environment.
 /// </summary>
-LevelManager::LevelManager() : _playerEntity(0), _npcEntity(0), _basicEnemyEntity(0), _groundEntity(0),
+LevelManager::LevelManager() : _playerEntity(0), _npcEntity(0), _swordEntity(0), _basicEnemyEntity(0), _groundEntity(0),
 playerScript(0), _levelNode(0), _camNode(0), npcSpawner(0)
 {
 }
@@ -27,6 +27,38 @@ void LevelManager::initialize()
 	playerNode->createChildSceneNode()->attachObject(_playerEntity);
 	playerScript = new Player(playerNode, _playerEntity);
 	playerScript->initialize();
+
+	//Sword
+	Ogre::SceneNode* sowrdNode = playerNode->createChildSceneNode("SwordNode");
+	_swordEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("Sword.mesh");
+	sowrdNode->scale(Ogre::Vector3(10,10,10));
+	sowrdNode->translate(Ogre::Vector3(50, 100, 0));
+	sowrdNode->yaw(Ogre::Degree(180), Ogre::Node::TS_LOCAL);
+	sowrdNode->createChildSceneNode()->attachObject(_swordEntity); 
+
+	//TestModels
+	Ogre::SceneNode* playerModelNode = _levelNode->createChildSceneNode("playerModelNode");
+	_playerModelEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("Player_1.mesh");
+	playerModelNode->translate(Ogre::Vector3(200, 0, -200));
+	playerModelNode->scale(Ogre::Vector3(20, 20, 20));
+	playerModelNode->pitch(Ogre::Degree(90), Ogre::Node::TS_LOCAL);
+	playerModelNode->createChildSceneNode()->attachObject(_playerModelEntity);
+
+	Ogre::SceneNode* npcModelNode = _levelNode->createChildSceneNode("npcModelNode");
+	_npcModelEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("lumberJack.mesh");
+	npcModelNode->translate(Ogre::Vector3(-200, 100, -200));
+	npcModelNode->scale(Ogre::Vector3(100, 100, 100));
+	npcModelNode->yaw(Ogre::Degree(180), Ogre::Node::TS_LOCAL);
+	npcModelNode->createChildSceneNode()->attachObject(_npcModelEntity);
+
+	Ogre::SceneNode* enemyModelNode = _levelNode->createChildSceneNode("enemyModelNode");
+	_enemyModelEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("wolf___jN.mesh");
+	enemyModelNode->translate(Ogre::Vector3(0, 0, 100));
+	enemyModelNode->scale(Ogre::Vector3(10, 10, 10));
+	enemyModelNode->yaw(Ogre::Degree(90), Ogre::Node::TS_LOCAL);
+	enemyModelNode->createChildSceneNode()->attachObject(_enemyModelEntity);
+
+
 	
 	Ogre::SceneNode* npcSpawnerNode = _levelNode->createChildSceneNode("npcSpawn");
 	//0.5f for height difference

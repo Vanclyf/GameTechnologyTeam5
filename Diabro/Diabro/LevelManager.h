@@ -44,6 +44,10 @@ public:
 
 private:
 	Ogre::Entity* _playerEntity;
+	Ogre::Entity* _swordEntity;
+	Ogre::Entity* _playerModelEntity;
+	Ogre::Entity* _npcModelEntity;
+	Ogre::Entity* _enemyModelEntity;
 	//TODO replace all with spawners
 	Ogre::Entity* _npcEntity;
 	Ogre::Entity* _basicEnemyEntity;
