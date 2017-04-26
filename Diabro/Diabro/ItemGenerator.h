@@ -4,6 +4,7 @@
 #pragma once
 #include <OgreEntity.h>
 #include "ItemInstance.h"
+#include "LevelManager.h"
 
 class ItemGenerator {
 public:
@@ -13,10 +14,11 @@ public:
 	//TODO: implement loottable system
 	std::vector<ItemInstance*> generateRandomItem(Ogre::SceneNode*, int amount);
 	ItemInstance* generateRandomItem(Ogre::SceneNode*);
+	LevelManager* levelManager;
 
 private:
 	Ogre::String _dropEntity;
-	
+
 	std::map<Quality, int> _qualityProbablity;
 	int _summedQualityProbability;
 	int _slot;

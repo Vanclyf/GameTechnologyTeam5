@@ -30,6 +30,7 @@ bool Character::initialize()
 	//TODO: this is THE WORST thing ever, it will never be sure (in the future) that the generator will return a weapon
 	//for now, it does return a weapon and for testing purposes I need it. Items should be assigned through the inventory and tested for types.
 	_weapon = reinterpret_cast<WeaponInstance*>(GameManager::getSingletonPtr()->getItemManager()->getItemGenerator()->generateRandomItem(_myNode));
+	
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	FILE* fp;

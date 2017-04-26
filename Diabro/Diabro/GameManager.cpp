@@ -57,7 +57,7 @@ GameManager& GameManager::getSingleton(void)
 void GameManager::createScene(void)
 {
 	_gameTimer = new Ogre::Timer();
-
+	_itemInstanceNumber = 0;
     // set lights
 	setupLights(mSceneMgr);
 	
@@ -77,7 +77,6 @@ void GameManager::createScene(void)
 
 	_uiManager = new UIManager();
 	_uiManager->init();
-
 }
 
 /// <summary>

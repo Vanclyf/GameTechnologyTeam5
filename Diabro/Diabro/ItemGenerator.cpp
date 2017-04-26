@@ -51,7 +51,14 @@ std::vector<ItemInstance*> ItemGenerator::generateRandomItem(Ogre::SceneNode* pN
 ItemInstance* ItemGenerator::generateRandomItem(Ogre::SceneNode* pNode) {
 	ItemInstance* returnItem;
 
+	GameManager::getSingletonPtr()->addItemNumber();
+	int itemnumber = GameManager::getSingleton().getItemNumber();
 	Ogre::Entity* itemEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("sphere.mesh");
+	Ogre::SceneNode* itemNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode("itemNode" + itemnumber);
+	itemNode->createChildSceneNode()->attachObject(itemEntity);
+	itemNode->setPosition(pNode->getPosition());
+
+
 
 	//TODO: this should be a random itemtype
 	int itemType = 2;

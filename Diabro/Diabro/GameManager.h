@@ -30,6 +30,8 @@ public:
 	Ogre::SceneManager* getSceneManager(void) { return mSceneMgr; }
 	Ogre::Camera* getCamera(void) { return mCamera; }
 	Ogre::Timer* getGameTime(void) { return _gameTimer; }
+	int getItemNumber() { return _itemInstanceNumber; }
+	void addItemNumber() { _itemInstanceNumber++; }
 
 	LevelManager* getLevelManager(void) { return _levelManager; }
 	UIManager* getUIManager(void) { return _uiManager; }
@@ -55,6 +57,7 @@ private:
 	virtual bool mousePressed(const OIS::MouseEvent&, OIS::MouseButtonID);
 	virtual bool mouseReleased(const OIS::MouseEvent&, OIS::MouseButtonID);
 
+	int _itemInstanceNumber;
 	LevelManager* _levelManager;
 	UIManager* _uiManager;
 	ItemManager* _itemManager;
