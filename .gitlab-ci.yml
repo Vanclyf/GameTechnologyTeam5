@@ -1,5 +1,0 @@
-ogre-1-9:
-  script:
-    - OGRE_VERSION="1.9" tools/ci/before-install.sh
-    - OGRE_VERSION="1.9" tools/ci/install.sh
-    - OGRE_VERSION="1.9" tools/ci/build.sh
