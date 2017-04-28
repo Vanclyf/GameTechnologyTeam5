@@ -2,7 +2,11 @@ var searchData=
 [
   ['randominrange',['randomInRange',['../class_float_range.html#af0879b00e98971bee66a25422a3ef204',1,'FloatRange']]],
   ['readbom',['ReadBOM',['../classtinyxml2_1_1_x_m_l_util.html#ae9bcb2bc3cd6475fdc644c8c17790555',1,'tinyxml2::XMLUtil']]],
+  ['removechild',['removeChild',['../class_tree_node.html#aa52093f74eb785f6decdc49a3ff77f61',1,'TreeNode']]],
+  ['removechildfromdestroy',['removeChildFromDestroy',['../class_tree_node.html#a6f7dcefcc3dbb5393d88055027a0648e',1,'TreeNode']]],
+  ['removechildren',['removeChildren',['../class_tree_node.html#a598e8cfe8194b3c3e8f839843531be99',1,'TreeNode']]],
   ['removefromhand',['RemoveFromHand',['../class_character.html#a8cb8d915a9868b668ec71d15f9d6c620',1,'Character']]],
+  ['removenode',['removeNode',['../class_tree.html#a160748f54a17f1cb5852f999435958fe',1,'Tree']]],
   ['removestats',['RemoveStats',['../class_character.html#a106c571377ccf725d7f5243b81f15b6f',1,'Character']]],
   ['reset',['Reset',['../classtinyxml2_1_1_str_pair.html#a80c1b3bd99bf62ae85c94a29ce537125',1,'tinyxml2::StrPair']]],
   ['resistancetoughnessfactor',['ResistanceToughnessFactor',['../class_character_stats.html#a7e63d179907cfb14c2d19226786071f6',1,'CharacterStats']]],

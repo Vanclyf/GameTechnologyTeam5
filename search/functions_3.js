@@ -4,6 +4,7 @@ var searchData=
   ['deletechild',['DeleteChild',['../classtinyxml2_1_1_x_m_l_node.html#a363b6edbd6ebd55f8387d2b89f2b0921',1,'tinyxml2::XMLNode']]],
   ['deletechildren',['DeleteChildren',['../classtinyxml2_1_1_x_m_l_node.html#a0360085cc54df5bff85d5c5da13afdce',1,'tinyxml2::XMLNode']]],
   ['deletenode',['DeleteNode',['../classtinyxml2_1_1_x_m_l_document.html#ac1d6e2c7fcc1a660624ac4f68e96380d',1,'tinyxml2::XMLDocument']]],
+  ['destroy',['destroy',['../class_tree_node.html#a8969f8e688f61b279d86721266b52d70',1,'TreeNode']]],
   ['destroydialog',['destroyDialog',['../class_u_i_manager.html#a5f8745b19ef1bacac736e6941d618b89',1,'UIManager']]],
   ['destroyscene',['destroyScene',['../class_base_application.html#a365146059b25391fe400f5fdb94f011e',1,'BaseApplication']]],
   ['detachfriendlynpc',['detachFriendlyNPC',['../class_level_manager.html#a220ee53531702e960b56ab380f61055a',1,'LevelManager']]],

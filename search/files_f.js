@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['uimanager_2ecpp',['UIManager.cpp',['../_u_i_manager_8cpp.html',1,'']]],
-  ['uimanager_2eh',['UIManager.h',['../_u_i_manager_8h.html',1,'']]]
+  ['weaponinstance_2ecpp',['WeaponInstance.cpp',['../_weapon_instance_8cpp.html',1,'']]],
+  ['weaponinstance_2eh',['WeaponInstance.h',['../_weapon_instance_8h.html',1,'']]]
 ];

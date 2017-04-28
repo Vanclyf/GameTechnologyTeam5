@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['end_5fstate_5fmap',['END_STATE_MAP',['../_finite_state_machine_8h.html#a19fb86c52b45382a7648deb66dafd104',1,'FiniteStateMachine.h']]],
-  ['end_5ftransition_5fmap',['END_TRANSITION_MAP',['../_finite_state_machine_8h.html#af8cee359bd063c53df3a770f4618acd1',1,'FiniteStateMachine.h']]]
+  ['win32_5flean_5fand_5fmean',['WIN32_LEAN_AND_MEAN',['../_game_manager_8cpp.html#ac7bef5d85e3dcd73eef56ad39ffc84a9',1,'GameManager.cpp']]]
 ];

@@ -23,6 +23,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Diabro
    </div>
+   <div id="projectbrief">This project is currently developed by team 5 for Project Game Technology. Most of the design is inspired by Diablo III and the main challange in developing this game is the combination between different procedural content generation for items, dungeons and quests.</div>
   </td>
  </tr>
  </tbody>
@@ -69,14 +70,27 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="_character_8h_source.html">Character.h</a>&gt;</code></p>
+<p>The <a class="el" href="class_character.html" title="The Character class is the superclass for all different kinds of characters. It contains methods and ...">Character</a> class is the superclass for all different kinds of characters. It contains methods and variables for movement and combat. <a class="el" href="class_player.html">Player</a> and BaseNPC both inherit from this class.  
+ <a href="class_character.html#details">More...</a></p>
 
-<p>Inherited by <a class="el" href="class_base_npc.html">BaseNpc</a>, and <a class="el" href="class_player.html">Player</a>.</p>
+<p><code>#include &lt;<a class="el" href="_character_8h_source.html">Character.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Character:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="class_character.png" usemap="#Character_map" alt=""/>
+  <map id="Character_map" name="Character_map">
+<area href="class_base_npc.html" alt="BaseNpc" shape="rect" coords="45,56,126,80"/>
+<area href="class_player.html" alt="Player" shape="rect" coords="136,56,217,80"/>
+<area href="class_basic_enemy.html" alt="BasicEnemy" shape="rect" coords="0,112,81,136"/>
+<area href="class_npc.html" alt="Npc" shape="rect" coords="91,112,172,136"/>
+</map>
+ </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:abeceff67d90e513641f0d56f95713e7a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#abeceff67d90e513641f0d56f95713e7a">Character</a> (Ogre::SceneNode *, Ogre::Entity *)</td></tr>
-<tr class="memdesc:abeceff67d90e513641f0d56f95713e7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a new instance of the <a class="el" href="class_character.html">Character</a> class. This class is contained by the <a class="el" href="class_level_manager.html">LevelManager</a>, which manages all instances in the level. All characters in the game, NPC's and the player, inherit from this base class.  <a href="#abeceff67d90e513641f0d56f95713e7a">More...</a><br /></td></tr>
+<tr class="memdesc:abeceff67d90e513641f0d56f95713e7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a new instance of the <a class="el" href="class_character.html" title="The Character class is the superclass for all different kinds of characters. It contains methods and ...">Character</a> class. This class is contained by the <a class="el" href="class_level_manager.html">LevelManager</a>, which manages all instances in the level. All characters in the game, NPC's and the player, inherit from this base class.  <a href="#abeceff67d90e513641f0d56f95713e7a">More...</a><br /></td></tr>
 <tr class="separator:abeceff67d90e513641f0d56f95713e7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e9be564d05ded80962b2045aa70b3fc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a9e9be564d05ded80962b2045aa70b3fc">~Character</a> ()</td></tr>
 <tr class="separator:a9e9be564d05ded80962b2045aa70b3fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -119,7 +133,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a51e7b093bda706bf4f5dd392f683b257"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adjusts the stamina.  <a href="#a51e7b093bda706bf4f5dd392f683b257">More...</a><br /></td></tr>
 <tr class="separator:a51e7b093bda706bf4f5dd392f683b257"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a112ffb75592be9e1e9cf78b1428ffedf"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a112ffb75592be9e1e9cf78b1428ffedf">die</a> ()</td></tr>
-<tr class="memdesc:a112ffb75592be9e1e9cf78b1428ffedf"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_character.html">Character</a> dies.  <a href="#a112ffb75592be9e1e9cf78b1428ffedf">More...</a><br /></td></tr>
+<tr class="memdesc:a112ffb75592be9e1e9cf78b1428ffedf"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_character.html" title="The Character class is the superclass for all different kinds of characters. It contains methods and ...">Character</a> dies.  <a href="#a112ffb75592be9e1e9cf78b1428ffedf">More...</a><br /></td></tr>
 <tr class="separator:a112ffb75592be9e1e9cf78b1428ffedf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
@@ -189,7 +203,9 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a56357ebea1a08ed4305d911c12406568"><td class="memItemLeft" align="right" valign="top">Ogre::Entity *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a56357ebea1a08ed4305d911c12406568">_myEntity</a></td></tr>
 <tr class="separator:a56357ebea1a08ed4305d911c12406568"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The <a class="el" href="class_character.html" title="The Character class is the superclass for all different kinds of characters. It contains methods and ...">Character</a> class is the superclass for all different kinds of characters. It contains methods and variables for movement and combat. <a class="el" href="class_player.html">Player</a> and BaseNPC both inherit from this class. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="abeceff67d90e513641f0d56f95713e7a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abeceff67d90e513641f0d56f95713e7a">&#9670;&nbsp;</a></span>Character()</h2>
 
@@ -216,7 +232,7 @@ Protected Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Initializes a new instance of the <a class="el" href="class_character.html">Character</a> class. This class is contained by the <a class="el" href="class_level_manager.html">LevelManager</a>, which manages all instances in the level. All characters in the game, NPC's and the player, inherit from this base class. </p>
+<p>Initializes a new instance of the <a class="el" href="class_character.html" title="The Character class is the superclass for all different kinds of characters. It contains methods and ...">Character</a> class. This class is contained by the <a class="el" href="class_level_manager.html">LevelManager</a>, which manages all instances in the level. All characters in the game, NPC's and the player, inherit from this base class. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">pMyNode</td><td>My node.</td></tr>
@@ -413,7 +429,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="class_character.html">Character</a> dies. </p>
+<p><a class="el" href="class_character.html" title="The Character class is the superclass for all different kinds of characters. It contains methods and ...">Character</a> dies. </p>
 
 <p>Reimplemented in <a class="el" href="class_npc.html#ab22c553f6ac5d6b5caaa2a8794c57540">Npc</a>, and <a class="el" href="class_basic_enemy.html#a1f55ea22a449f7289df10f8272ac9ff0">BasicEnemy</a>.</p>
 

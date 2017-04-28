@@ -11,7 +11,7 @@ var searchData=
   ['areadamage',['AreaDamage',['../_character_stats_8h.html#a0377d05acdea63cda6e20a360dd447f7a4d4bc5e79d64713faebe0f8c82d688bd',1,'CharacterStats.h']]],
   ['armor',['Armor',['../_character_stats_8h.html#a0377d05acdea63cda6e20a360dd447f7a43bcad4425be124260429d8d741a2344',1,'CharacterStats.h']]],
   ['attackspeed',['AttackSpeed',['../_character_stats_8h.html#a0377d05acdea63cda6e20a360dd447f7a347994ad6008fc3f976b41c01cc4f56e',1,'CharacterStats.h']]],
-  ['attribute_5fname',['ATTRIBUTE_NAME',['../classtinyxml2_1_1_str_pair.html#a476a92d76f24486c3ae4731916b12aaeaaab1cbefaa977e6f772b4e2575417aeb',1,'tinyxml2::StrPair']]],
-  ['attribute_5fvalue',['ATTRIBUTE_VALUE',['../classtinyxml2_1_1_str_pair.html#a476a92d76f24486c3ae4731916b12aaea6d72f9ce15f50e8bcd680edf66235dfd',1,'tinyxml2::StrPair']]],
-  ['attribute_5fvalue_5fleave_5fentities',['ATTRIBUTE_VALUE_LEAVE_ENTITIES',['../classtinyxml2_1_1_str_pair.html#a476a92d76f24486c3ae4731916b12aaea2decbd2513ac14f8befa987938326399',1,'tinyxml2::StrPair']]]
+  ['attribute_5fname',['ATTRIBUTE_NAME',['../classtinyxml2_1_1_str_pair.html#a0301ef962e15dd94574431f1c61266c5aaab1cbefaa977e6f772b4e2575417aeb',1,'tinyxml2::StrPair']]],
+  ['attribute_5fvalue',['ATTRIBUTE_VALUE',['../classtinyxml2_1_1_str_pair.html#a0301ef962e15dd94574431f1c61266c5a6d72f9ce15f50e8bcd680edf66235dfd',1,'tinyxml2::StrPair']]],
+  ['attribute_5fvalue_5fleave_5fentities',['ATTRIBUTE_VALUE_LEAVE_ENTITIES',['../classtinyxml2_1_1_str_pair.html#a0301ef962e15dd94574431f1c61266c5a2decbd2513ac14f8befa987938326399',1,'tinyxml2::StrPair']]]
 ];
