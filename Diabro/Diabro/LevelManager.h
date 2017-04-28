@@ -9,12 +9,12 @@
 #include <OgreSceneManager.h>
 #include "CharacterSpawner.h"
 #include "ResourceManagement.h"
-	
+
 class LevelManager
 {
 public:
 	LevelManager();
-
+	
 	void initialize();
 
 	void update(const Ogre::FrameEvent&);
@@ -25,6 +25,8 @@ public:
 	Ogre::SceneNode* getCamNode() { return _camNode; }
 
 	Player* getPlayer() { return playerScript; }
+	
+	//ResourceManagement* getResourceManagement() { return _rManager; }
 	std::vector<Character*> getFriendlyNpcs() { return _friendlyNpcScripts; }
 	std::vector<Character*> getHostileNpcs() { return _hostileNpcScripts; }
 
@@ -46,6 +48,7 @@ private:
 	Ogre::Entity* _npcEntity;
 	Ogre::Entity* _basicEnemyEntity;
 
+	//ResourceManagement* _rManager;
 	CharacterSpawner<Npc>* npcSpawner;
 	CharacterSpawner<BasicEnemy>* enemySpawner;
 	 
