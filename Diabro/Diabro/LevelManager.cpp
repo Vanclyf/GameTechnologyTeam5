@@ -17,19 +17,21 @@ playerScript(0), _levelNode(0), _camNode(0), npcSpawner(0)
 /// </summary>
 void LevelManager::initialize()
 {
+	
 	// create level node, the root node for everything in the level
 	_levelNode = GameManager::getSingletonPtr()->getSceneManager()->getRootSceneNode()->createChildSceneNode("LevelNode");
-	
-	
 	Ogre::SceneNode* playerNode = _levelNode->createChildSceneNode("PlayerNode");
 	_camNode = playerNode->createChildSceneNode("CameraNode");
 
 	//player
+	ResourceManagement*_rManager = new ResourceManagement();
+	_rManager->createGroup("meshes");
+	_rManager->createResource("Diabro\Diabro\media\models", "FileSystem", "ninja.mesh", "Mesh", "General"); //location of file, codeType of resourcetype, name of resource, type of resource, resourcegroup
+	_rManager->loadResource("General");
+	_rManager->reloadResource("ninja.mesh", "General");
+	_rManager->unloadResource("ninja.mesh", "General");
 	_playerEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("ninja.mesh");
-	mgr->createResource("Diabro\Diabro\media\models", "MESH", "ninja.mesh",  "Mesh", "meshes"); //location of file, codeType of resourcetype, name of resource, type of resource, resourcegroup
-	mgr->loadResource("meshes");
-	mgr->reloadResource("ninja.mesh", "meshes");
-	mgr->unloadResource("ninja.mesh", "meshes");
+
 	
 	playerNode->createChildSceneNode()->attachObject(_playerEntity);
 	playerScript = new Player(playerNode, _playerEntity);

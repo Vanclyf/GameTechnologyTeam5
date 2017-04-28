@@ -20,6 +20,18 @@ Filename:    ResourceManagement.cpp
  *
  */
 
+ResourceManagement::ResourceManagement(): _groupManager(), _resourceMgr()
+{
+}
+
+void ResourceManagement::initialize()
+{
+	_groupManager = new Ogre::ResourceGroupManager;
+		
+
+
+}
+
  /// <summary>
  /// Creates the resource.
  /// reference material go here http://www.ogre3d.org/tikiwiki/Resources+and+ResourceManagers 
@@ -30,6 +42,7 @@ Filename:    ResourceManagement.cpp
  /// <param name="pGroupName">Name of the p group.</param>
 void ResourceManagement::createResource(std::string pLocation, std::string pLocType, std::string pResourceName, std::string pResourceType, std::string pGroupName)
 {
+	
 	_groupManager->getSingleton().addResourceLocation(pLocation , pLocType);
 	_groupManager->getSingleton().declareResource(pResourceName, pResourceType, pGroupName);
 	_groupManager->getSingleton().initialiseResourceGroup(pGroupName);
@@ -58,13 +71,23 @@ void ResourceManagement::unloadResourceGoup(std::string pGroupName)
 	
 }
 
+
+
 /// <summary>
 /// Loads the resource.
 /// </summary>
 /// <param name="pGroupName">Name of the p group.</param>
 void ResourceManagement::loadResource(std::string pGroupName)
 {
+	
 	_groupManager->getSingleton().loadResourceGroup(pGroupName);
+
+	
+}
+
+void ResourceManagement::createGroup(std::string pGroupName)
+{
+	_groupManager->getSingleton().createResourceGroup(pGroupName);
 }
 
 /// <summary>

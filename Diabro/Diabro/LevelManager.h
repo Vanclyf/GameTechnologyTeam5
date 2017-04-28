@@ -9,7 +9,7 @@
 #include <OgreSceneManager.h>
 #include "CharacterSpawner.h"
 #include "ResourceManagement.h"
-
+	
 class LevelManager
 {
 public:
@@ -36,7 +36,7 @@ public:
 
 	// for now public so that game manager can access it. 
 	Player* playerScript; 
-
+	
 	Ogre::Degree startPitchCam;
 	Ogre::Vector3 playerPosition;
 
@@ -46,14 +46,15 @@ private:
 	Ogre::Entity* _npcEntity;
 	Ogre::Entity* _basicEnemyEntity;
 
-	ResourceManagement* mgr;
 	CharacterSpawner<Npc>* npcSpawner;
 	CharacterSpawner<BasicEnemy>* enemySpawner;
+	 
 
 	Ogre::Entity* _groundEntity;
 
 	Ogre::SceneNode* _levelNode;
 	Ogre::SceneNode* _camNode;
+	
 	
 	std::vector<Character*> _friendlyNpcScripts;
 	std::vector<Character*> _hostileNpcScripts;

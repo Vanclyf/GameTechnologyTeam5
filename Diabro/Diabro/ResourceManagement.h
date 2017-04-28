@@ -14,16 +14,20 @@ Filename:    ResourceManagement.h
 
 //---------------------------------------------------------------------------
 
-class ResourceManagement : public BaseApplication, public Ogre::Singleton<ResourceManagement>
+class ResourceManagement 
 {
 public:
-	ResourceManagement(void);
-	~ResourceManagement(void);
+	ResourceManagement();
+	~ResourceManagement();
+	
+	void  initialize();
 	void createResource(std::string, std::string, std::string, std::string, std::string);
 	void unloadResource(std::string, std::string);
 	void loadResource(std::string);
 	void unloadResourceGoup(std::string);
 	void reloadResource(std::string, std::string);
+	void createGroup(std::string);
+	void createRoot();
 
 	
 
@@ -31,13 +35,12 @@ public:
 
 
 protected:
-	 
+	//ResourceManagement* rManager;
 	
 private:
-	
 	Ogre::Resource* _resource;
 	Ogre::ResourceManager* _resourceMgr;
-	Ogre::ResourceGroupManager* _groupManager = new Ogre::ResourceGroupManager;
+	Ogre::ResourceGroupManager* _groupManager ;
 	
 };
 
