@@ -5,6 +5,11 @@
 #include "TreeNode.h"
 
 // TODO: possibly two templates needed (action and strat), but maybe solvable with super class or interface
+/// <summary>
+/// The Tree class can store any kind of data in a n-child tree.
+/// This generic class is used for building a quest out of actions, 
+/// but can also be used for other data types.
+/// </summary>
 template<typename T>
 class Tree {
 public:
@@ -38,8 +43,8 @@ public:
 	std::vector<TreeNode<T>*> postorder(TreeNode<T>* pNode = nullptr);
 
 private:
-	TreeNode<T>* _root;
-	int _size;
+	TreeNode<T>* _root;		//!< The root node of the tree of the given type.
+	int _size;				//!< The total amount of nodes contained by the tree. This value is stored to avoid counting nodes. 
 };
 
 #endif
