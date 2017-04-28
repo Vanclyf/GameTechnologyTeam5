@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['id',['id',['../class_character.html#a13f1da42b79a25988f203c53600cfb95',1,'Character::id()'],['../class_city.html#aef9846a5f7e0653bf951576cc17670f3',1,'City::id()']]]
+  ['enemyspawner',['enemySpawner',['../class_level_manager.html#a9a535ed77cefe694ca5607fe7e0d15ed',1,'LevelManager']]],
+  ['entities',['entities',['../namespacetinyxml2.html#ae132483871eeb55d7b5ddda3d2396e81',1,'tinyxml2']]]
 ];

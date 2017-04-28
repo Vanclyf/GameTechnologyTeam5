@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['pattern',['pattern',['../structtinyxml2_1_1_entity.html#ab330f5d665d29bfc811ecfa76315894b',1,'tinyxml2::Entity']]],
-  ['playerposition',['playerPosition',['../class_level_manager.html#ad9f8e48e4754fb397835091ff984beca',1,'LevelManager']]],
-  ['playerscript',['playerScript',['../class_level_manager.html#ac007306935f94d5a35e83dd35528d100',1,'LevelManager']]]
+  ['next',['next',['../uniontinyxml2_1_1_mem_pool_t_1_1_item.html#a5620107f518c60d6619e8662d4c9d643',1,'tinyxml2::MemPoolT::Item']]],
+  ['nodeofscenexml',['nodeOfSceneXML',['../class_game_manager.html#ac4127d864f5cfcacd6ae043c7a522df5',1,'GameManager']]],
+  ['npcspawner',['npcSpawner',['../class_level_manager.html#ab377d36086ca0d95d0f5b303cff15019',1,'LevelManager']]],
+  ['num_5fentities',['NUM_ENTITIES',['../namespacetinyxml2.html#aef74bfad4850ed3181f00f86b03c7b45',1,'tinyxml2']]]
 ];

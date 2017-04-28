@@ -23,7 +23,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Diabro
    </div>
-   <div id="projectbrief">This project is currently developed by team 5 for Project Game Technology. Most of the design is inspired by Diablo III and the main challange in developing this game is the combination between different procedural content generation for items, dungeons and quests.</div>
+   <div id="projectbrief">This project is developed by team 5 for Project Game Technology.</div>
   </td>
  </tr>
  </tbody>
@@ -61,6 +61,8 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="class_character_spawner-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">CharacterSpawner&lt; T &gt; Class Template Reference</div>  </div>
@@ -78,6 +80,21 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:abfbed9af55093be89faf4783475fc373"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character_spawner.html#abfbed9af55093be89faf4783475fc373">instanceDeath</a> ()</td></tr>
 <tr class="memdesc:abfbed9af55093be89faf4783475fc373"><td class="mdescLeft">&#160;</td><td class="mdescRight">called when an &lt;T&gt; instance dies (does not kill instance).  <a href="#abfbed9af55093be89faf4783475fc373">More...</a><br /></td></tr>
 <tr class="separator:abfbed9af55093be89faf4783475fc373"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:aa88d94f883574b4faa573e0bcd10e6d6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character_spawner.html#aa88d94f883574b4faa573e0bcd10e6d6">spawnInstance</a> ()</td></tr>
+<tr class="memdesc:aa88d94f883574b4faa573e0bcd10e6d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Spawns an instance of &lt;T&gt;.  <a href="#aa88d94f883574b4faa573e0bcd10e6d6">More...</a><br /></td></tr>
+<tr class="separator:aa88d94f883574b4faa573e0bcd10e6d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a05ea14190fc95990068fbb55cc309acb"><td class="memItemLeft" align="right" valign="top">Ogre::SceneNode *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character_spawner.html#a05ea14190fc95990068fbb55cc309acb">_myNode</a></td></tr>
+<tr class="separator:a05ea14190fc95990068fbb55cc309acb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb682d027065cc1d4f66636977a92fdb"><td class="memItemLeft" align="right" valign="top">Ogre::Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character_spawner.html#acb682d027065cc1d4f66636977a92fdb">_spawnPosition</a></td></tr>
+<tr class="separator:acb682d027065cc1d4f66636977a92fdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a0e89c84547f82a855934e1801a93c8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character_spawner.html#a7a0e89c84547f82a855934e1801a93c8">_nCharacters</a></td></tr>
+<tr class="separator:a7a0e89c84547f82a855934e1801a93c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="acdbe2abd553ebef181f03b84cc5bdab9"></a>
@@ -154,6 +171,108 @@ template&lt;class T &gt; </div>
 </div><div class="memdoc">
 
 <p>called when an &lt;T&gt; instance dies (does not kill instance). </p>
+
+</div>
+</div>
+<a id="aa88d94f883574b4faa573e0bcd10e6d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa88d94f883574b4faa573e0bcd10e6d6">&#9670;&nbsp;</a></span>spawnInstance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="class_character_spawner.html">CharacterSpawner</a>&lt; T &gt;::spawnInstance </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Spawns an instance of &lt;T&gt;. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a05ea14190fc95990068fbb55cc309acb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05ea14190fc95990068fbb55cc309acb">&#9670;&nbsp;</a></span>_myNode</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Ogre::SceneNode* <a class="el" href="class_character_spawner.html">CharacterSpawner</a>&lt; T &gt;::_myNode</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7a0e89c84547f82a855934e1801a93c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a0e89c84547f82a855934e1801a93c8">&#9670;&nbsp;</a></span>_nCharacters</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="class_character_spawner.html">CharacterSpawner</a>&lt; T &gt;::_nCharacters</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acb682d027065cc1d4f66636977a92fdb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb682d027065cc1d4f66636977a92fdb">&#9670;&nbsp;</a></span>_spawnPosition</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Ogre::Vector3 <a class="el" href="class_character_spawner.html">CharacterSpawner</a>&lt; T &gt;::_spawnPosition</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>

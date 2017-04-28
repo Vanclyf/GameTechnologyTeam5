@@ -23,7 +23,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Diabro
    </div>
-   <div id="projectbrief">This project is currently developed by team 5 for Project Game Technology. Most of the design is inspired by Diablo III and the main challange in developing this game is the combination between different procedural content generation for items, dungeons and quests.</div>
+   <div id="projectbrief">This project is developed by team 5 for Project Game Technology.</div>
   </td>
  </tr>
  </tbody>
@@ -67,7 +67,8 @@ $(function() {
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
 <a href="#define-members">Macros</a> &#124;
-<a href="#enum-members">Enumerations</a>  </div>
+<a href="#enum-members">Enumerations</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">tinyxml2.h File Reference</div>  </div>
 </div><!--header-->
@@ -90,6 +91,10 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_mem_pool.html">tinyxml2::MemPool</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_mem_pool_t.html">tinyxml2::MemPoolT&lt; ITEM_SIZE &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">union &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="uniontinyxml2_1_1_mem_pool_t_1_1_item.html">tinyxml2::MemPoolT&lt; ITEM_SIZE &gt;::Item</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structtinyxml2_1_1_mem_pool_t_1_1_block.html">tinyxml2::MemPoolT&lt; ITEM_SIZE &gt;::Block</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_x_m_l_visitor.html">tinyxml2::XMLVisitor</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -166,6 +171,15 @@ Enumerations</h2></td></tr>
 <a class="el" href="namespacetinyxml2.html#a7f91d00f77360f850fd5da0861e27dd5a9a4a309029a6f5e636e20ef5e0b65136">tinyxml2::COLLAPSE_WHITESPACE</a>
  }</td></tr>
 <tr class="separator:a7f91d00f77360f850fd5da0861e27dd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a53acdb84a871ed12b99d5f4aff209bf4"><td class="memItemLeft" align="right" valign="top">static const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tinyxml2_8h.html#a53acdb84a871ed12b99d5f4aff209bf4">TIXML2_MAJOR_VERSION</a> = 4</td></tr>
+<tr class="separator:a53acdb84a871ed12b99d5f4aff209bf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac94d4b856d14f3c3a8c1dcdbd6ee13b4"><td class="memItemLeft" align="right" valign="top">static const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tinyxml2_8h.html#ac94d4b856d14f3c3a8c1dcdbd6ee13b4">TIXML2_MINOR_VERSION</a> = 0</td></tr>
+<tr class="separator:ac94d4b856d14f3c3a8c1dcdbd6ee13b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1406cb43e9d84251509e069b6cb21781"><td class="memItemLeft" align="right" valign="top">static const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tinyxml2_8h.html#a1406cb43e9d84251509e069b6cb21781">TIXML2_PATCH_VERSION</a> = 1</td></tr>
+<tr class="separator:a1406cb43e9d84251509e069b6cb21781"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a8953517b8490d756ad0bfef40fe5811f"></a>
@@ -196,6 +210,73 @@ Enumerations</h2></td></tr>
           <td>&#160;&#160;&#160;{}</td>
         </tr>
       </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a53acdb84a871ed12b99d5f4aff209bf4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53acdb84a871ed12b99d5f4aff209bf4">&#9670;&nbsp;</a></span>TIXML2_MAJOR_VERSION</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int TIXML2_MAJOR_VERSION = 4</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac94d4b856d14f3c3a8c1dcdbd6ee13b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac94d4b856d14f3c3a8c1dcdbd6ee13b4">&#9670;&nbsp;</a></span>TIXML2_MINOR_VERSION</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int TIXML2_MINOR_VERSION = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1406cb43e9d84251509e069b6cb21781"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1406cb43e9d84251509e069b6cb21781">&#9670;&nbsp;</a></span>TIXML2_PATCH_VERSION</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int TIXML2_PATCH_VERSION = 1</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>

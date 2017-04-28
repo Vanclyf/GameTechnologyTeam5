@@ -1,10 +1,10 @@
 var searchData=
 [
   ['damage',['Damage',['../_character_stats_8h.html#a0377d05acdea63cda6e20a360dd447f7a5c92456d9eeeaf69f06e8e768044694c',1,'CharacterStats.h']]],
-  ['deleteattribute',['DeleteAttribute',['../classtinyxml2_1_1_x_m_l_element.html#aebd45aa7118964c30b32fe12e944628a',1,'tinyxml2::XMLElement']]],
+  ['deleteattribute',['DeleteAttribute',['../classtinyxml2_1_1_x_m_l_element.html#aebd45aa7118964c30b32fe12e944628a',1,'tinyxml2::XMLElement::DeleteAttribute(const char *name)'],['../classtinyxml2_1_1_x_m_l_element.html#afaab6a1f32caed4d37e6d7f130d277ac',1,'tinyxml2::XMLElement::DeleteAttribute(XMLAttribute *attribute)']]],
   ['deletechild',['DeleteChild',['../classtinyxml2_1_1_x_m_l_node.html#a363b6edbd6ebd55f8387d2b89f2b0921',1,'tinyxml2::XMLNode']]],
   ['deletechildren',['DeleteChildren',['../classtinyxml2_1_1_x_m_l_node.html#a0360085cc54df5bff85d5c5da13afdce',1,'tinyxml2::XMLNode']]],
-  ['deletenode',['DeleteNode',['../classtinyxml2_1_1_x_m_l_document.html#ac1d6e2c7fcc1a660624ac4f68e96380d',1,'tinyxml2::XMLDocument']]],
+  ['deletenode',['DeleteNode',['../classtinyxml2_1_1_x_m_l_node.html#ab0b21951f2343534c5c67f23dffdc7e6',1,'tinyxml2::XMLNode::DeleteNode()'],['../classtinyxml2_1_1_x_m_l_document.html#ac1d6e2c7fcc1a660624ac4f68e96380d',1,'tinyxml2::XMLDocument::DeleteNode()']]],
   ['depth',['depth',['../class_city.html#a78d51b4f59cc59394c91f6103023ca5c',1,'City']]],
   ['destroy',['destroy',['../class_tree_node.html#a8969f8e688f61b279d86721266b52d70',1,'TreeNode']]],
   ['destroydialog',['destroyDialog',['../class_u_i_manager.html#a5f8745b19ef1bacac736e6941d618b89',1,'UIManager']]],
@@ -21,12 +21,13 @@ var searchData=
   ['die',['die',['../class_basic_enemy.html#a1f55ea22a449f7289df10f8272ac9ff0',1,'BasicEnemy::die()'],['../class_character.html#a112ffb75592be9e1e9cf78b1428ffedf',1,'Character::die()'],['../class_npc.html#ab22c553f6ac5d6b5caaa2a8794c57540',1,'Npc::die()']]],
   ['dodgechance',['DodgeChance',['../_character_stats_8h.html#a0377d05acdea63cda6e20a360dd447f7a8f205431c600940a0183d7717077db49',1,'CharacterStats.h']]],
   ['dogdetoughnessfactor',['DogdeToughnessFactor',['../class_character_stats.html#a618998572675e429bc5e6955930bcdfd',1,'CharacterStats']]],
+  ['double_5fquote',['DOUBLE_QUOTE',['../tinyxml2_8cpp.html#a2e3bbd17c0f4134dbd5bd8cfc5d0c3b2',1,'tinyxml2.cpp']]],
   ['doubleattribute',['DoubleAttribute',['../classtinyxml2_1_1_x_m_l_element.html#a10a90c505aea716bf073eea1c97f33b5',1,'tinyxml2::XMLElement']]],
   ['doubletext',['DoubleText',['../classtinyxml2_1_1_x_m_l_element.html#a81b1ff0cf2f2cd09be8badc08b39a2b7',1,'tinyxml2::XMLElement']]],
   ['doublevalue',['DoubleValue',['../classtinyxml2_1_1_x_m_l_attribute.html#a4aa73513f54ff0087d3e804f0f54e30f',1,'tinyxml2::XMLAttribute']]],
   ['dungeoneer',['Dungeoneer',['../_npc_8h.html#a1698c91a11e2aa9dae386a206abf6ca1a0fd63319886fab438b16e351a10218c7',1,'Npc.h']]],
-  ['dynarray',['DynArray',['../classtinyxml2_1_1_dyn_array.html',1,'tinyxml2::DynArray&lt; T, INITIAL_SIZE &gt;'],['../classtinyxml2_1_1_dyn_array.html#aaad72f384e761c70a4519183eb8fea17',1,'tinyxml2::DynArray::DynArray()']]],
-  ['dynarray_3c_20block_20_2a_2c_2010_20_3e',['DynArray&lt; Block *, 10 &gt;',['../classtinyxml2_1_1_dyn_array.html',1,'tinyxml2']]],
+  ['dynarray',['DynArray',['../classtinyxml2_1_1_dyn_array.html',1,'tinyxml2::DynArray&lt; T, INITIAL_SIZE &gt;'],['../classtinyxml2_1_1_dyn_array.html#aaad72f384e761c70a4519183eb8fea17',1,'tinyxml2::DynArray::DynArray()'],['../classtinyxml2_1_1_dyn_array.html#a8e2251588f079f2e7a4080b2c53dabea',1,'tinyxml2::DynArray::DynArray(const DynArray &amp;)']]],
   ['dynarray_3c_20char_2c_2020_20_3e',['DynArray&lt; char, 20 &gt;',['../classtinyxml2_1_1_dyn_array.html',1,'tinyxml2']]],
-  ['dynarray_3c_20const_20char_20_2a_2c_2010_20_3e',['DynArray&lt; const char *, 10 &gt;',['../classtinyxml2_1_1_dyn_array.html',1,'tinyxml2']]]
+  ['dynarray_3c_20const_20char_20_2a_2c_2010_20_3e',['DynArray&lt; const char *, 10 &gt;',['../classtinyxml2_1_1_dyn_array.html',1,'tinyxml2']]],
+  ['dynarray_3c_20tinyxml2_3a_3amempoolt_3a_3ablock_20_2a_2c_2010_20_3e',['DynArray&lt; tinyxml2::MemPoolT::Block *, 10 &gt;',['../classtinyxml2_1_1_dyn_array.html',1,'tinyxml2']]]
 ];

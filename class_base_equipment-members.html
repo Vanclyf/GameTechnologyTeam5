@@ -23,7 +23,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Diabro
    </div>
-   <div id="projectbrief">This project is currently developed by team 5 for Project Game Technology. Most of the design is inspired by Diablo III and the main challange in developing this game is the combination between different procedural content generation for items, dungeons and quests.</div>
+   <div id="projectbrief">This project is developed by team 5 for Project Game Technology.</div>
   </td>
  </tr>
  </tbody>
@@ -66,20 +66,23 @@ $(function() {
 
 <p>This is the complete list of members for <a class="el" href="class_base_equipment.html">BaseEquipment</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="class_base_equipment.html#a11217398dfd3ae45a90b02dd58db5aee">BaseEquipment</a>()</td><td class="entry"><a class="el" href="class_base_equipment.html">BaseEquipment</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_base_equipment.html#afd008998bfb022023ad4fad747b9d65c">BaseEquipment</a>(Ogre::String, Ogre::String, ItemType, int, EquipmentType, StatType, std::vector&lt; StatRange *&gt;)</td><td class="entry"><a class="el" href="class_base_equipment.html">BaseEquipment</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_base_item.html#a3579a8a4ba057d87f12e19febff5cf14">BaseItem</a>()</td><td class="entry"><a class="el" href="class_base_item.html">BaseItem</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_base_item.html#a487aeec9cc60df40cd3198190f42f17b">BaseItem</a>(Ogre::String, Ogre::String, ItemType, int)</td><td class="entry"><a class="el" href="class_base_item.html">BaseItem</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_base_equipment.html#abd0794f1a53a5cc27f3ba780adf4b555">getBaseStats</a>()</td><td class="entry"><a class="el" href="class_base_equipment.html">BaseEquipment</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_base_equipment.html#aa17108b0674325e2a0d6e575f8a76ae8">getEquipmentType</a>()</td><td class="entry"><a class="el" href="class_base_equipment.html">BaseEquipment</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_base_item.html#aa02081a0e9fd6a6b97af57fe9a72742b">getItemTier</a>()</td><td class="entry"><a class="el" href="class_base_item.html">BaseItem</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_base_item.html#a9385e434eadeb88ae3fe54329cd27560">getItemType</a>()</td><td class="entry"><a class="el" href="class_base_item.html">BaseItem</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_base_equipment.html#ac0de0da054e6bf13e4056472c27efa29">getMainStat</a>()</td><td class="entry"><a class="el" href="class_base_equipment.html">BaseEquipment</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_base_item.html#a3d0ade665ad649f6b4eb3da4e38f19ef">getName</a>()</td><td class="entry"><a class="el" href="class_base_item.html">BaseItem</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_base_item.html#a90996b91fcc53627ae743f52a77bead2">getSpriteName</a>()</td><td class="entry"><a class="el" href="class_base_item.html">BaseItem</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_base_equipment.html#a795b6e0f21c3c3e85a1840d605afa522">getValueOfStat</a>(StatType stat)</td><td class="entry"><a class="el" href="class_base_equipment.html">BaseEquipment</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_base_equipment.html#af83b738f16a757ad15a6751d5048674b">~BaseEquipment</a>()</td><td class="entry"><a class="el" href="class_base_equipment.html">BaseEquipment</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_base_item.html#a7b56f9c0aaa0be8362e02811f2cae524">~BaseItem</a>()</td><td class="entry"><a class="el" href="class_base_item.html">BaseItem</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_base_equipment.html#a5cc17d17c3a514fc63830ef77e3eb263">_baseStats</a></td><td class="entry"><a class="el" href="class_base_equipment.html">BaseEquipment</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_base_equipment.html#aba57e9716c7396f30bb3b63017c47e97">_equipmentType</a></td><td class="entry"><a class="el" href="class_base_equipment.html">BaseEquipment</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_base_equipment.html#abcb54f7ad0063d6ef3eea76a5ec05432">_mainStat</a></td><td class="entry"><a class="el" href="class_base_equipment.html">BaseEquipment</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_base_equipment.html#a11217398dfd3ae45a90b02dd58db5aee">BaseEquipment</a>()</td><td class="entry"><a class="el" href="class_base_equipment.html">BaseEquipment</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_base_equipment.html#afd008998bfb022023ad4fad747b9d65c">BaseEquipment</a>(Ogre::String, Ogre::String, ItemType, int, EquipmentType, StatType, std::vector&lt; StatRange *&gt;)</td><td class="entry"><a class="el" href="class_base_equipment.html">BaseEquipment</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_base_item.html#a3579a8a4ba057d87f12e19febff5cf14">BaseItem</a>()</td><td class="entry"><a class="el" href="class_base_item.html">BaseItem</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_base_item.html#a487aeec9cc60df40cd3198190f42f17b">BaseItem</a>(Ogre::String, Ogre::String, ItemType, int)</td><td class="entry"><a class="el" href="class_base_item.html">BaseItem</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_base_equipment.html#abd0794f1a53a5cc27f3ba780adf4b555">getBaseStats</a>()</td><td class="entry"><a class="el" href="class_base_equipment.html">BaseEquipment</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_base_equipment.html#aa17108b0674325e2a0d6e575f8a76ae8">getEquipmentType</a>()</td><td class="entry"><a class="el" href="class_base_equipment.html">BaseEquipment</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_base_item.html#aa02081a0e9fd6a6b97af57fe9a72742b">getItemTier</a>()</td><td class="entry"><a class="el" href="class_base_item.html">BaseItem</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_base_item.html#a9385e434eadeb88ae3fe54329cd27560">getItemType</a>()</td><td class="entry"><a class="el" href="class_base_item.html">BaseItem</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_base_equipment.html#ac0de0da054e6bf13e4056472c27efa29">getMainStat</a>()</td><td class="entry"><a class="el" href="class_base_equipment.html">BaseEquipment</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_base_item.html#a3d0ade665ad649f6b4eb3da4e38f19ef">getName</a>()</td><td class="entry"><a class="el" href="class_base_item.html">BaseItem</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_base_item.html#a90996b91fcc53627ae743f52a77bead2">getSpriteName</a>()</td><td class="entry"><a class="el" href="class_base_item.html">BaseItem</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_base_equipment.html#a795b6e0f21c3c3e85a1840d605afa522">getValueOfStat</a>(StatType stat)</td><td class="entry"><a class="el" href="class_base_equipment.html">BaseEquipment</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_base_equipment.html#af83b738f16a757ad15a6751d5048674b">~BaseEquipment</a>()</td><td class="entry"><a class="el" href="class_base_equipment.html">BaseEquipment</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_base_item.html#a7b56f9c0aaa0be8362e02811f2cae524">~BaseItem</a>()</td><td class="entry"><a class="el" href="class_base_item.html">BaseItem</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

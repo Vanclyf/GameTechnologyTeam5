@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['findattribute',['FindAttribute',['../classtinyxml2_1_1_x_m_l_element.html#a157750dac8037a316fd1af1a973dfa2c',1,'tinyxml2::XMLElement']]],
+  ['findattribute',['FindAttribute',['../classtinyxml2_1_1_x_m_l_element.html#a157750dac8037a316fd1af1a973dfa2c',1,'tinyxml2::XMLElement::FindAttribute(const char *name) const'],['../classtinyxml2_1_1_x_m_l_element.html#ac2415a711ab18516cd7a8eb8eea01cd6',1,'tinyxml2::XMLElement::FindAttribute(const char *name)']]],
+  ['findorcreateattribute',['FindOrCreateAttribute',['../classtinyxml2_1_1_x_m_l_element.html#ac9d8fc849ec8acf46678217de011e896',1,'tinyxml2::XMLElement']]],
   ['findtarget',['findTarget',['../class_character.html#aa825a4536d3f788acb5db8622e1d3a13',1,'Character']]],
   ['firstattribute',['FirstAttribute',['../classtinyxml2_1_1_x_m_l_element.html#a3e191704c8d499906ec11fe2f60c6686',1,'tinyxml2::XMLElement']]],
   ['firstchild',['FirstChild',['../classtinyxml2_1_1_x_m_l_node.html#ae7dc225e1018cdd685f7563593a1fe08',1,'tinyxml2::XMLNode::FirstChild() const'],['../classtinyxml2_1_1_x_m_l_node.html#a2d6c70c475146b48bc93a7fafdeff5e0',1,'tinyxml2::XMLNode::FirstChild()'],['../classtinyxml2_1_1_x_m_l_handle.html#a536447dc7f54c0cd11e031dad94795ae',1,'tinyxml2::XMLHandle::FirstChild()'],['../classtinyxml2_1_1_x_m_l_const_handle.html#aef06bd16cb308652a32b864b0a743136',1,'tinyxml2::XMLConstHandle::FirstChild()']]],
@@ -10,6 +11,6 @@ var searchData=
   ['floatrange',['FloatRange',['../class_float_range.html#a1ff3fd1dfbb164df8bfedfd363f39ea5',1,'FloatRange']]],
   ['floattext',['FloatText',['../classtinyxml2_1_1_x_m_l_element.html#a45444eb21f99ca46101545992dc2e927',1,'tinyxml2::XMLElement']]],
   ['floatvalue',['FloatValue',['../classtinyxml2_1_1_x_m_l_attribute.html#a27797b45d21c981257720db94f5f8801',1,'tinyxml2::XMLAttribute']]],
-  ['framerenderingqueued',['frameRenderingQueued',['../class_base_application.html#a03912a0f38b38fede7f08a2571e8fc56',1,'BaseApplication']]],
+  ['framerenderingqueued',['frameRenderingQueued',['../class_base_application.html#a03912a0f38b38fede7f08a2571e8fc56',1,'BaseApplication::frameRenderingQueued()'],['../class_game_manager.html#a7582845dfd5cf3a902ec2930b400f98b',1,'GameManager::frameRenderingQueued()']]],
   ['free',['Free',['../classtinyxml2_1_1_mem_pool.html#a49e3bfac2cba2ebd6776b31e571f64f7',1,'tinyxml2::MemPool::Free()'],['../classtinyxml2_1_1_mem_pool_t.html#a408ce0918e9d3d5e5e1cc4896944875f',1,'tinyxml2::MemPoolT::Free()']]]
 ];

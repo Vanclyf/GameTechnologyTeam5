@@ -23,7 +23,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Diabro
    </div>
-   <div id="projectbrief">This project is currently developed by team 5 for Project Game Technology. Most of the design is inspired by Diablo III and the main challange in developing this game is the combination between different procedural content generation for items, dungeons and quests.</div>
+   <div id="projectbrief">This project is developed by team 5 for Project Game Technology.</div>
   </td>
  </tr>
  </tbody>
@@ -67,6 +67,9 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#pri-types">Private Types</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classtinyxml2_1_1_x_m_l_printer-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">tinyxml2::XMLPrinter Class Reference</div>  </div>
@@ -189,6 +192,39 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:ac07169d58b465214a2b1fa306e617c26"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99d59e67e084714541bee3ae43884bef"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtinyxml2_1_1_dyn_array.html">DynArray</a>&lt; const char *, 10 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_x_m_l_printer.html#a99d59e67e084714541bee3ae43884bef">_stack</a></td></tr>
 <tr class="separator:a99d59e67e084714541bee3ae43884bef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-types"></a>
+Private Types</h2></td></tr>
+<tr class="memitem:ac9049bee10d230eb31ff7d146d538f7a"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom">{ <a class="el" href="classtinyxml2_1_1_x_m_l_printer.html#ac9049bee10d230eb31ff7d146d538f7aa2ddc02813235fe451809606959166db5">ENTITY_RANGE</a> = 64, 
+<a class="el" href="classtinyxml2_1_1_x_m_l_printer.html#ac9049bee10d230eb31ff7d146d538f7aa1f747a8fb39ceb2e711c3798058fb632">BUF_SIZE</a> = 200
+ }</td></tr>
+<tr class="separator:ac9049bee10d230eb31ff7d146d538f7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a5495e504053f63f2c4d603327314fa91"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_x_m_l_printer.html#a5495e504053f63f2c4d603327314fa91">PrintString</a> (const char *, bool restrictedEntitySet)</td></tr>
+<tr class="separator:a5495e504053f63f2c4d603327314fa91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:abbd7ac45d97ae5eceec12d6c058119f9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_x_m_l_printer.html#abbd7ac45d97ae5eceec12d6c058119f9">_firstElement</a></td></tr>
+<tr class="separator:abbd7ac45d97ae5eceec12d6c058119f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79d91decf17990f7ce18b592f3fdf44e"><td class="memItemLeft" align="right" valign="top">FILE *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_x_m_l_printer.html#a79d91decf17990f7ce18b592f3fdf44e">_fp</a></td></tr>
+<tr class="separator:a79d91decf17990f7ce18b592f3fdf44e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19cd59a9dbe4b666264803fb91ac8ec1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_x_m_l_printer.html#a19cd59a9dbe4b666264803fb91ac8ec1">_depth</a></td></tr>
+<tr class="separator:a19cd59a9dbe4b666264803fb91ac8ec1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c5a442e57131faefde97188e92144f3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_x_m_l_printer.html#a3c5a442e57131faefde97188e92144f3">_textDepth</a></td></tr>
+<tr class="separator:a3c5a442e57131faefde97188e92144f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e27c4b4fe791a96e4e139b5034e190b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_x_m_l_printer.html#a3e27c4b4fe791a96e4e139b5034e190b">_processEntities</a></td></tr>
+<tr class="separator:a3e27c4b4fe791a96e4e139b5034e190b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bc067aa3f0dcee68e4ac75e19117bd0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_x_m_l_printer.html#a7bc067aa3f0dcee68e4ac75e19117bd0">_compactMode</a></td></tr>
+<tr class="separator:a7bc067aa3f0dcee68e4ac75e19117bd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a334eb34c43f21daebef9341b4768c275"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_x_m_l_printer.html#a334eb34c43f21daebef9341b4768c275">_entityFlag</a> [<a class="el" href="classtinyxml2_1_1_x_m_l_printer.html#ac9049bee10d230eb31ff7d146d538f7aa2ddc02813235fe451809606959166db5">ENTITY_RANGE</a>]</td></tr>
+<tr class="separator:a334eb34c43f21daebef9341b4768c275"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5df242509d42ae1c9128924121ebe093"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_x_m_l_printer.html#a5df242509d42ae1c9128924121ebe093">_restrictedEntityFlag</a> [<a class="el" href="classtinyxml2_1_1_x_m_l_printer.html#ac9049bee10d230eb31ff7d146d538f7aa2ddc02813235fe451809606959166db5">ENTITY_RANGE</a>]</td></tr>
+<tr class="separator:a5df242509d42ae1c9128924121ebe093"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19fca2e934576a892fefe2f602874d59"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtinyxml2_1_1_dyn_array.html">DynArray</a>&lt; char, 20 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_x_m_l_printer.html#a19fca2e934576a892fefe2f602874d59">_buffer</a></td></tr>
+<tr class="separator:a19fca2e934576a892fefe2f602874d59"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Printing functionality. The <a class="el" href="classtinyxml2_1_1_x_m_l_printer.html">XMLPrinter</a> gives you more options than the <a class="el" href="classtinyxml2_1_1_x_m_l_document.html#a867cf5fa3e3ff6ae4847a8b7ee8ec083">XMLDocument::Print()</a> method.</p>
@@ -211,7 +247,34 @@ doc.Print( &amp;printer );
 printer.OpenElement( "foo" );
 printer.PushAttribute( "foo", "bar" );
 printer.CloseElement();
-</pre> </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+</pre> </div><h2 class="groupheader">Member Enumeration Documentation</h2>
+<a id="ac9049bee10d230eb31ff7d146d538f7a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9049bee10d230eb31ff7d146d538f7a">&#9670;&nbsp;</a></span>anonymous enum</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">anonymous enum</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ac9049bee10d230eb31ff7d146d538f7aa2ddc02813235fe451809606959166db5"></a>ENTITY_RANGE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ac9049bee10d230eb31ff7d146d538f7aa1f747a8fb39ceb2e711c3798058fb632"></a>BUF_SIZE&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aa6d3841c069085f5b8a27bc7103c04f7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa6d3841c069085f5b8a27bc7103c04f7">&#9670;&nbsp;</a></span>XMLPrinter()</h2>
 
@@ -494,6 +557,42 @@ printer.CloseElement();
 </table>
 </div><div class="memdoc">
 <p>Prints out the space before an element. You may override to change the space and tabs used. A <a class="el" href="classtinyxml2_1_1_x_m_l_printer.html#a1c4b2ccbe4fdb316d54f5a93f3559260">PrintSpace()</a> override should call <a class="el" href="classtinyxml2_1_1_x_m_l_printer.html#ab30210a7f32e45634e7a45137bf6fdf6">Print()</a>. </p>
+
+</div>
+</div>
+<a id="a5495e504053f63f2c4d603327314fa91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5495e504053f63f2c4d603327314fa91">&#9670;&nbsp;</a></span>PrintString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tinyxml2::XMLPrinter::PrintString </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>p</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>restrictedEntitySet</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -1178,6 +1277,72 @@ printer.CloseElement();
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a19fca2e934576a892fefe2f602874d59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19fca2e934576a892fefe2f602874d59">&#9670;&nbsp;</a></span>_buffer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtinyxml2_1_1_dyn_array.html">DynArray</a>&lt; char, 20 &gt; tinyxml2::XMLPrinter::_buffer</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7bc067aa3f0dcee68e4ac75e19117bd0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7bc067aa3f0dcee68e4ac75e19117bd0">&#9670;&nbsp;</a></span>_compactMode</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tinyxml2::XMLPrinter::_compactMode</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a19cd59a9dbe4b666264803fb91ac8ec1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19cd59a9dbe4b666264803fb91ac8ec1">&#9670;&nbsp;</a></span>_depth</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int tinyxml2::XMLPrinter::_depth</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ac07169d58b465214a2b1fa306e617c26"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac07169d58b465214a2b1fa306e617c26">&#9670;&nbsp;</a></span>_elementJustOpened</h2>
 
@@ -1200,6 +1365,116 @@ printer.CloseElement();
 
 </div>
 </div>
+<a id="a334eb34c43f21daebef9341b4768c275"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a334eb34c43f21daebef9341b4768c275">&#9670;&nbsp;</a></span>_entityFlag</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tinyxml2::XMLPrinter::_entityFlag[<a class="el" href="classtinyxml2_1_1_x_m_l_printer.html#ac9049bee10d230eb31ff7d146d538f7aa2ddc02813235fe451809606959166db5">ENTITY_RANGE</a>]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abbd7ac45d97ae5eceec12d6c058119f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbd7ac45d97ae5eceec12d6c058119f9">&#9670;&nbsp;</a></span>_firstElement</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tinyxml2::XMLPrinter::_firstElement</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a79d91decf17990f7ce18b592f3fdf44e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79d91decf17990f7ce18b592f3fdf44e">&#9670;&nbsp;</a></span>_fp</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">FILE* tinyxml2::XMLPrinter::_fp</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3e27c4b4fe791a96e4e139b5034e190b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e27c4b4fe791a96e4e139b5034e190b">&#9670;&nbsp;</a></span>_processEntities</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tinyxml2::XMLPrinter::_processEntities</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5df242509d42ae1c9128924121ebe093"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5df242509d42ae1c9128924121ebe093">&#9670;&nbsp;</a></span>_restrictedEntityFlag</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tinyxml2::XMLPrinter::_restrictedEntityFlag[<a class="el" href="classtinyxml2_1_1_x_m_l_printer.html#ac9049bee10d230eb31ff7d146d538f7aa2ddc02813235fe451809606959166db5">ENTITY_RANGE</a>]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a99d59e67e084714541bee3ae43884bef"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a99d59e67e084714541bee3ae43884bef">&#9670;&nbsp;</a></span>_stack</h2>
 
@@ -1216,6 +1491,28 @@ printer.CloseElement();
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3c5a442e57131faefde97188e92144f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c5a442e57131faefde97188e92144f3">&#9670;&nbsp;</a></span>_textDepth</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int tinyxml2::XMLPrinter::_textDepth</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

@@ -23,7 +23,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Diabro
    </div>
-   <div id="projectbrief">This project is currently developed by team 5 for Project Game Technology. Most of the design is inspired by Diablo III and the main challange in developing this game is the combination between different procedural content generation for items, dungeons and quests.</div>
+   <div id="projectbrief">This project is developed by team 5 for Project Game Technology.</div>
   </td>
  </tr>
  </tbody>
@@ -61,6 +61,8 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="class_item_manager-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">ItemManager Class Reference</div>  </div>
@@ -83,6 +85,19 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ae9ea95656b6f822b57b88a2b6108817b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7e584a30d935ddb4704ede4b20177f7b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_item_generator.html">ItemGenerator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_item_manager.html#a7e584a30d935ddb4704ede4b20177f7b">getItemGenerator</a> ()</td></tr>
 <tr class="separator:a7e584a30d935ddb4704ede4b20177f7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a487abb3221b4de0292c7e1578915b2bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_item_manager.html#a487abb3221b4de0292c7e1578915b2bc">readFromDB</a> ()</td></tr>
+<tr class="memdesc:a487abb3221b4de0292c7e1578915b2bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads item information from database.  <a href="#a487abb3221b4de0292c7e1578915b2bc">More...</a><br /></td></tr>
+<tr class="separator:a487abb3221b4de0292c7e1578915b2bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a3b5e3b6dcd3af6ba019da34fecc96a85"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_item_container.html">ItemContainer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_item_manager.html#a3b5e3b6dcd3af6ba019da34fecc96a85">_itemContainer</a></td></tr>
+<tr class="separator:a3b5e3b6dcd3af6ba019da34fecc96a85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a902457d0e9b44cd527d8fefb057f8ff9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_item_generator.html">ItemGenerator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_item_manager.html#a902457d0e9b44cd527d8fefb057f8ff9">_itemGenerator</a></td></tr>
+<tr class="separator:a902457d0e9b44cd527d8fefb057f8ff9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="class_item_manager.html" title="The ItemManager class is responsible for initializing the ItemContainer and ItemGenerator. All communication regarding items passes through this manager. ">ItemManager</a> class is responsible for initializing the <a class="el" href="class_item_container.html">ItemContainer</a> and <a class="el" href="class_item_generator.html">ItemGenerator</a>. All communication regarding items passes through this manager. </p>
@@ -168,6 +183,78 @@ Public Member Functions</h2></td></tr>
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a487abb3221b4de0292c7e1578915b2bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a487abb3221b4de0292c7e1578915b2bc">&#9670;&nbsp;</a></span>readFromDB()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ItemManager::readFromDB </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reads item information from database. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a3b5e3b6dcd3af6ba019da34fecc96a85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b5e3b6dcd3af6ba019da34fecc96a85">&#9670;&nbsp;</a></span>_itemContainer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_item_container.html">ItemContainer</a>* ItemManager::_itemContainer</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a902457d0e9b44cd527d8fefb057f8ff9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a902457d0e9b44cd527d8fefb057f8ff9">&#9670;&nbsp;</a></span>_itemGenerator</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_item_generator.html">ItemGenerator</a>* ItemManager::_itemGenerator</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

@@ -23,7 +23,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Diabro
    </div>
-   <div id="projectbrief">This project is currently developed by team 5 for Project Game Technology. Most of the design is inspired by Diablo III and the main challange in developing this game is the combination between different procedural content generation for items, dungeons and quests.</div>
+   <div id="projectbrief">This project is developed by team 5 for Project Game Technology.</div>
   </td>
  </tr>
  </tbody>
@@ -66,6 +66,9 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="#pri-static-attribs">Static Private Attributes</a> &#124;
 <a href="#friends">Friends</a> &#124;
 <a href="classtinyxml2_1_1_x_m_l_document-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -274,6 +277,52 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a639f7c295c38dc5a4aafeb2fff93da03"><td class="memItemLeft" align="right" valign="top">static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_x_m_l_document.html#a639f7c295c38dc5a4aafeb2fff93da03">ErrorIDToName</a> (<a class="el" href="namespacetinyxml2.html#a1fbf88509c3ac88c09117b1947414e08">XMLError</a> errorID)</td></tr>
 <tr class="separator:a639f7c295c38dc5a4aafeb2fff93da03"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:adcea490db02a099d99440cd14a87d9e4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_x_m_l_document.html#adcea490db02a099d99440cd14a87d9e4">XMLDocument</a> (const <a class="el" href="classtinyxml2_1_1_x_m_l_document.html">XMLDocument</a> &amp;)</td></tr>
+<tr class="separator:adcea490db02a099d99440cd14a87d9e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa542c2cf1276ee4bd778f16d196fe222"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_x_m_l_document.html#aa542c2cf1276ee4bd778f16d196fe222">operator=</a> (const <a class="el" href="classtinyxml2_1_1_x_m_l_document.html">XMLDocument</a> &amp;)</td></tr>
+<tr class="separator:aa542c2cf1276ee4bd778f16d196fe222"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb556e0e2bed02a73a6c5aaf19759e9a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_x_m_l_document.html#aeb556e0e2bed02a73a6c5aaf19759e9a">Parse</a> ()</td></tr>
+<tr class="separator:aeb556e0e2bed02a73a6c5aaf19759e9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acda2123b71a6e6534be9f48e75ea680a"><td class="memTemplParams" colspan="2">template&lt;class NodeType , int PoolElementSize&gt; </td></tr>
+<tr class="memitem:acda2123b71a6e6534be9f48e75ea680a"><td class="memTemplItemLeft" align="right" valign="top">NodeType *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_x_m_l_document.html#acda2123b71a6e6534be9f48e75ea680a">CreateUnlinkedNode</a> (<a class="el" href="classtinyxml2_1_1_mem_pool_t.html">MemPoolT</a>&lt; PoolElementSize &gt; &amp;pool)</td></tr>
+<tr class="separator:acda2123b71a6e6534be9f48e75ea680a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a1dbdc7feaa58007403c20243ac5abbd3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_x_m_l_document.html#a1dbdc7feaa58007403c20243ac5abbd3">_writeBOM</a></td></tr>
+<tr class="separator:a1dbdc7feaa58007403c20243ac5abbd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f768cb74fb5ccbadeffa436916f0194"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_x_m_l_document.html#a9f768cb74fb5ccbadeffa436916f0194">_processEntities</a></td></tr>
+<tr class="separator:a9f768cb74fb5ccbadeffa436916f0194"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61270d643f810975656da2054e1e1622"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacetinyxml2.html#a1fbf88509c3ac88c09117b1947414e08">XMLError</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_x_m_l_document.html#a61270d643f810975656da2054e1e1622">_errorID</a></td></tr>
+<tr class="separator:a61270d643f810975656da2054e1e1622"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afec08bf4b1c57b487ba3c6855cfe5478"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacetinyxml2.html#a7f91d00f77360f850fd5da0861e27dd5">Whitespace</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_x_m_l_document.html#afec08bf4b1c57b487ba3c6855cfe5478">_whitespaceMode</a></td></tr>
+<tr class="separator:afec08bf4b1c57b487ba3c6855cfe5478"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abce9c3309f0ac2cc6186c19fa84b5ff6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtinyxml2_1_1_str_pair.html">StrPair</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_x_m_l_document.html#abce9c3309f0ac2cc6186c19fa84b5ff6">_errorStr1</a></td></tr>
+<tr class="separator:abce9c3309f0ac2cc6186c19fa84b5ff6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb014df551fc08f2fa69eeb9b9686e6f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtinyxml2_1_1_str_pair.html">StrPair</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_x_m_l_document.html#afb014df551fc08f2fa69eeb9b9686e6f">_errorStr2</a></td></tr>
+<tr class="separator:afb014df551fc08f2fa69eeb9b9686e6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7865f254baf1f615c5250aa31bb262d1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_x_m_l_document.html#a7865f254baf1f615c5250aa31bb262d1">_errorLineNum</a></td></tr>
+<tr class="separator:a7865f254baf1f615c5250aa31bb262d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7913ff24220a40e2e2b49a5137b43d29"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_x_m_l_document.html#a7913ff24220a40e2e2b49a5137b43d29">_charBuffer</a></td></tr>
+<tr class="separator:a7913ff24220a40e2e2b49a5137b43d29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a802c62efacc325f1acb9cfd331b59ea5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_x_m_l_document.html#a802c62efacc325f1acb9cfd331b59ea5">_parseCurLineNum</a></td></tr>
+<tr class="separator:a802c62efacc325f1acb9cfd331b59ea5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21574fba363a0d23bfc820d1652ab8bc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtinyxml2_1_1_mem_pool_t.html">MemPoolT</a>&lt; sizeof(<a class="el" href="classtinyxml2_1_1_x_m_l_element.html">XMLElement</a>) &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_x_m_l_document.html#a21574fba363a0d23bfc820d1652ab8bc">_elementPool</a></td></tr>
+<tr class="separator:a21574fba363a0d23bfc820d1652ab8bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a57ebeba23bc6cfce88f12b4a946aac"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtinyxml2_1_1_mem_pool_t.html">MemPoolT</a>&lt; sizeof(<a class="el" href="classtinyxml2_1_1_x_m_l_attribute.html">XMLAttribute</a>) &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_x_m_l_document.html#a0a57ebeba23bc6cfce88f12b4a946aac">_attributePool</a></td></tr>
+<tr class="separator:a0a57ebeba23bc6cfce88f12b4a946aac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe8ac410aaa53cf1f2142a4c2fd958c7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtinyxml2_1_1_mem_pool_t.html">MemPoolT</a>&lt; sizeof(<a class="el" href="classtinyxml2_1_1_x_m_l_text.html">XMLText</a>) &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_x_m_l_document.html#afe8ac410aaa53cf1f2142a4c2fd958c7">_textPool</a></td></tr>
+<tr class="separator:afe8ac410aaa53cf1f2142a4c2fd958c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2e73ccbc037dee917c3163158180398"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtinyxml2_1_1_mem_pool_t.html">MemPoolT</a>&lt; sizeof(<a class="el" href="classtinyxml2_1_1_x_m_l_comment.html">XMLComment</a>) &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_x_m_l_document.html#ac2e73ccbc037dee917c3163158180398">_commentPool</a></td></tr>
+<tr class="separator:ac2e73ccbc037dee917c3163158180398"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
+Static Private Attributes</h2></td></tr>
+<tr class="memitem:af006d806fd8e1f6e74933ee9c062de4a"><td class="memItemLeft" align="right" valign="top">static const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_x_m_l_document.html#af006d806fd8e1f6e74933ee9c062de4a">_errorNames</a> [<a class="el" href="namespacetinyxml2.html#a1fbf88509c3ac88c09117b1947414e08a9ebb2775c56387353f5b2de94f6ab71d">XML_ERROR_COUNT</a>]</td></tr>
+<tr class="separator:af006d806fd8e1f6e74933ee9c062de4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
 <tr class="memitem:ac2fba9b6e452829dd892f7392c24e0eb"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_x_m_l_document.html#ac2fba9b6e452829dd892f7392c24e0eb">XMLElement</a></td></tr>
@@ -312,7 +361,7 @@ Additional Inherited Members</h2></td></tr>
 <div class="textblock"><p>A Document binds together all the functionality. It can be saved, loaded, and printed to the screen. All Nodes are connected and allocated to a Document. If the Document is deleted, all its Nodes are also deleted. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a57ddf17b6e054dda10af98991b1b8f70"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a57ddf17b6e054dda10af98991b1b8f70">&#9670;&nbsp;</a></span>XMLDocument()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a57ddf17b6e054dda10af98991b1b8f70">&#9670;&nbsp;</a></span>XMLDocument() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -354,6 +403,32 @@ Additional Inherited Members</h2></td></tr>
           <td></td>
         </tr>
       </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adcea490db02a099d99440cd14a87d9e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adcea490db02a099d99440cd14a87d9e4">&#9670;&nbsp;</a></span>XMLDocument() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tinyxml2::XMLDocument::XMLDocument </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classtinyxml2_1_1_x_m_l_document.html">XMLDocument</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>
@@ -436,6 +511,34 @@ const char* xmlcstr = printer.CStr();
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acda2123b71a6e6534be9f48e75ea680a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acda2123b71a6e6534be9f48e75ea680a">&#9670;&nbsp;</a></span>CreateUnlinkedNode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class NodeType , int PoolElementSize&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">NodeType * tinyxml2::XMLDocument::CreateUnlinkedNode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtinyxml2_1_1_mem_pool_t.html">MemPoolT</a>&lt; PoolElementSize &gt; &amp;&#160;</td>
+          <td class="paramname"><em>pool</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -829,8 +932,34 @@ const char* xmlcstr = printer.CStr();
 
 </div>
 </div>
+<a id="aa542c2cf1276ee4bd778f16d196fe222"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa542c2cf1276ee4bd778f16d196fe222">&#9670;&nbsp;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tinyxml2::XMLDocument::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classtinyxml2_1_1_x_m_l_document.html">XMLDocument</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a1819bd34f540a7304c105a6232d25a1f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1819bd34f540a7304c105a6232d25a1f">&#9670;&nbsp;</a></span>Parse()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a1819bd34f540a7304c105a6232d25a1f">&#9670;&nbsp;</a></span>Parse() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -856,6 +985,31 @@ const char* xmlcstr = printer.CStr();
 </div><div class="memdoc">
 <p>Parse an XML file from a character string. Returns XML_SUCCESS (0) on success, or an errorID.</p>
 <p>You may optionally pass in the 'nBytes', which is the number of bytes which will be parsed. If not specified, TinyXML-2 will assume 'xml' points to a null terminated string. </p>
+
+</div>
+</div>
+<a id="aeb556e0e2bed02a73a6c5aaf19759e9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb556e0e2bed02a73a6c5aaf19759e9a">&#9670;&nbsp;</a></span>Parse() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tinyxml2::XMLDocument::Parse </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -1261,6 +1415,315 @@ doc.Print( &amp;printer );
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a0a57ebeba23bc6cfce88f12b4a946aac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a57ebeba23bc6cfce88f12b4a946aac">&#9670;&nbsp;</a></span>_attributePool</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtinyxml2_1_1_mem_pool_t.html">MemPoolT</a>&lt; sizeof(<a class="el" href="classtinyxml2_1_1_x_m_l_attribute.html">XMLAttribute</a>) &gt; tinyxml2::XMLDocument::_attributePool</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7913ff24220a40e2e2b49a5137b43d29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7913ff24220a40e2e2b49a5137b43d29">&#9670;&nbsp;</a></span>_charBuffer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* tinyxml2::XMLDocument::_charBuffer</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac2e73ccbc037dee917c3163158180398"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac2e73ccbc037dee917c3163158180398">&#9670;&nbsp;</a></span>_commentPool</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtinyxml2_1_1_mem_pool_t.html">MemPoolT</a>&lt; sizeof(<a class="el" href="classtinyxml2_1_1_x_m_l_comment.html">XMLComment</a>) &gt; tinyxml2::XMLDocument::_commentPool</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a21574fba363a0d23bfc820d1652ab8bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21574fba363a0d23bfc820d1652ab8bc">&#9670;&nbsp;</a></span>_elementPool</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtinyxml2_1_1_mem_pool_t.html">MemPoolT</a>&lt; sizeof(<a class="el" href="classtinyxml2_1_1_x_m_l_element.html">XMLElement</a>) &gt; tinyxml2::XMLDocument::_elementPool</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a61270d643f810975656da2054e1e1622"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61270d643f810975656da2054e1e1622">&#9670;&nbsp;</a></span>_errorID</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacetinyxml2.html#a1fbf88509c3ac88c09117b1947414e08">XMLError</a> tinyxml2::XMLDocument::_errorID</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7865f254baf1f615c5250aa31bb262d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7865f254baf1f615c5250aa31bb262d1">&#9670;&nbsp;</a></span>_errorLineNum</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int tinyxml2::XMLDocument::_errorLineNum</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af006d806fd8e1f6e74933ee9c062de4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af006d806fd8e1f6e74933ee9c062de4a">&#9670;&nbsp;</a></span>_errorNames</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const char * tinyxml2::XMLDocument::_errorNames</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div><div class="line">    <span class="stringliteral">&quot;XML_SUCCESS&quot;</span>,</div><div class="line">    <span class="stringliteral">&quot;XML_NO_ATTRIBUTE&quot;</span>,</div><div class="line">    <span class="stringliteral">&quot;XML_WRONG_ATTRIBUTE_TYPE&quot;</span>,</div><div class="line">    <span class="stringliteral">&quot;XML_ERROR_FILE_NOT_FOUND&quot;</span>,</div><div class="line">    <span class="stringliteral">&quot;XML_ERROR_FILE_COULD_NOT_BE_OPENED&quot;</span>,</div><div class="line">    <span class="stringliteral">&quot;XML_ERROR_FILE_READ_ERROR&quot;</span>,</div><div class="line">    <span class="stringliteral">&quot;XML_ERROR_ELEMENT_MISMATCH&quot;</span>,</div><div class="line">    <span class="stringliteral">&quot;XML_ERROR_PARSING_ELEMENT&quot;</span>,</div><div class="line">    <span class="stringliteral">&quot;XML_ERROR_PARSING_ATTRIBUTE&quot;</span>,</div><div class="line">    <span class="stringliteral">&quot;XML_ERROR_IDENTIFYING_TAG&quot;</span>,</div><div class="line">    <span class="stringliteral">&quot;XML_ERROR_PARSING_TEXT&quot;</span>,</div><div class="line">    <span class="stringliteral">&quot;XML_ERROR_PARSING_CDATA&quot;</span>,</div><div class="line">    <span class="stringliteral">&quot;XML_ERROR_PARSING_COMMENT&quot;</span>,</div><div class="line">    <span class="stringliteral">&quot;XML_ERROR_PARSING_DECLARATION&quot;</span>,</div><div class="line">    <span class="stringliteral">&quot;XML_ERROR_PARSING_UNKNOWN&quot;</span>,</div><div class="line">    <span class="stringliteral">&quot;XML_ERROR_EMPTY_DOCUMENT&quot;</span>,</div><div class="line">    <span class="stringliteral">&quot;XML_ERROR_MISMATCHED_ELEMENT&quot;</span>,</div><div class="line">    <span class="stringliteral">&quot;XML_ERROR_PARSING&quot;</span>,</div><div class="line">    <span class="stringliteral">&quot;XML_CAN_NOT_CONVERT_TEXT&quot;</span>,</div><div class="line">    <span class="stringliteral">&quot;XML_NO_TEXT_NODE&quot;</span></div><div class="line">}</div></div><!-- fragment -->
+</div>
+</div>
+<a id="abce9c3309f0ac2cc6186c19fa84b5ff6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abce9c3309f0ac2cc6186c19fa84b5ff6">&#9670;&nbsp;</a></span>_errorStr1</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtinyxml2_1_1_str_pair.html">StrPair</a> tinyxml2::XMLDocument::_errorStr1</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">mutable</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afb014df551fc08f2fa69eeb9b9686e6f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb014df551fc08f2fa69eeb9b9686e6f">&#9670;&nbsp;</a></span>_errorStr2</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtinyxml2_1_1_str_pair.html">StrPair</a> tinyxml2::XMLDocument::_errorStr2</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">mutable</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a802c62efacc325f1acb9cfd331b59ea5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a802c62efacc325f1acb9cfd331b59ea5">&#9670;&nbsp;</a></span>_parseCurLineNum</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int tinyxml2::XMLDocument::_parseCurLineNum</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9f768cb74fb5ccbadeffa436916f0194"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f768cb74fb5ccbadeffa436916f0194">&#9670;&nbsp;</a></span>_processEntities</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tinyxml2::XMLDocument::_processEntities</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afe8ac410aaa53cf1f2142a4c2fd958c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe8ac410aaa53cf1f2142a4c2fd958c7">&#9670;&nbsp;</a></span>_textPool</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtinyxml2_1_1_mem_pool_t.html">MemPoolT</a>&lt; sizeof(<a class="el" href="classtinyxml2_1_1_x_m_l_text.html">XMLText</a>) &gt; tinyxml2::XMLDocument::_textPool</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afec08bf4b1c57b487ba3c6855cfe5478"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afec08bf4b1c57b487ba3c6855cfe5478">&#9670;&nbsp;</a></span>_whitespaceMode</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacetinyxml2.html#a7f91d00f77360f850fd5da0861e27dd5">Whitespace</a> tinyxml2::XMLDocument::_whitespaceMode</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1dbdc7feaa58007403c20243ac5abbd3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1dbdc7feaa58007403c20243ac5abbd3">&#9670;&nbsp;</a></span>_writeBOM</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tinyxml2::XMLDocument::_writeBOM</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

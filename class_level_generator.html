@@ -23,7 +23,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Diabro
    </div>
-   <div id="projectbrief">This project is currently developed by team 5 for Project Game Technology. Most of the design is inspired by Diablo III and the main challange in developing this game is the combination between different procedural content generation for items, dungeons and quests.</div>
+   <div id="projectbrief">This project is developed by team 5 for Project Game Technology.</div>
   </td>
  </tr>
  </tbody>
@@ -61,6 +61,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="class_level_generator-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">LevelGenerator Class Reference</div>  </div>
@@ -75,6 +76,15 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a6fe1f8c5d09aa5f044485770ffe2d818"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9bd612e10a3d769537ba042a76c0cb5f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_generator.html#a9bd612e10a3d769537ba042a76c0cb5f">~LevelGenerator</a> ()</td></tr>
 <tr class="separator:a9bd612e10a3d769537ba042a76c0cb5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a87b5ddb736a324669f5aec6b02b5dfc1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_generator.html#a87b5ddb736a324669f5aec6b02b5dfc1">createCityMesh</a> (int pX, int pY, int pZ, int pWidth, int pHeight, int pDepth, std::string pName, Ogre::ColourValue pColour) const</td></tr>
+<tr class="memdesc:a87b5ddb736a324669f5aec6b02b5dfc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates the a 3D mesh, representing the space around the city. (will however still be replaced)  <a href="#a87b5ddb736a324669f5aec6b02b5dfc1">More...</a><br /></td></tr>
+<tr class="separator:a87b5ddb736a324669f5aec6b02b5dfc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca711ca8de5317d46100ab54fb4bfb4a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_generator.html#aca711ca8de5317d46100ab54fb4bfb4a">placeCity</a> (int pX, int pY, int pZ, int pWidth, int pHeight, int pDepth, std::string pName, Ogre::ColourValue pColour) const</td></tr>
+<tr class="memdesc:aca711ca8de5317d46100ab54fb4bfb4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Places a city-representing mesh.  <a href="#aca711ca8de5317d46100ab54fb4bfb4a">More...</a><br /></td></tr>
+<tr class="separator:aca711ca8de5317d46100ab54fb4bfb4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a6fe1f8c5d09aa5f044485770ffe2d818"></a>
@@ -108,6 +118,171 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a87b5ddb736a324669f5aec6b02b5dfc1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87b5ddb736a324669f5aec6b02b5dfc1">&#9670;&nbsp;</a></span>createCityMesh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LevelGenerator::createCityMesh </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pX</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pY</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pZ</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pW</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pH</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pD</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>pName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Ogre::ColourValue&#160;</td>
+          <td class="paramname"><em>pColour</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates the a 3D mesh, representing the space around the city. (will however still be replaced) </p>
+<p>The pX position of the room.</p>
+<p>The pY position.</p>
+<p>The pZ position.</p>
+<p>The width.</p>
+<p>The height.</p>
+<p>The depth.</p>
+<p>The pName.</p>
+<p>The pColour.</p>
+
+</div>
+</div>
+<a id="aca711ca8de5317d46100ab54fb4bfb4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca711ca8de5317d46100ab54fb4bfb4a">&#9670;&nbsp;</a></span>placeCity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void LevelGenerator::placeCity </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pX</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pY</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pZ</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pW</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pH</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pD</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>pName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Ogre::ColourValue&#160;</td>
+          <td class="paramname"><em>pColour</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Places a city-representing mesh. </p>
+<p>The pX position of the city.</p>
+<p>The pY position of the city.</p>
+<p>The pZ position of the city.</p>
+<p>The width of the city.</p>
+<p>The height of the city.</p>
+<p>The depth of the city.</p>
+<p>A unique pName for the city.</p>
+<p>The pColour of the drawn cube.</p>
 
 </div>
 </div>

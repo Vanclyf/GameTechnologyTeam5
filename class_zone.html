@@ -23,7 +23,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Diabro
    </div>
-   <div id="projectbrief">This project is currently developed by team 5 for Project Game Technology. Most of the design is inspired by Diablo III and the main challange in developing this game is the combination between different procedural content generation for items, dungeons and quests.</div>
+   <div id="projectbrief">This project is developed by team 5 for Project Game Technology.</div>
   </td>
  </tr>
  </tbody>
@@ -62,6 +62,8 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="class_zone-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Zone Class Reference</div>  </div>
@@ -91,6 +93,34 @@ Public Member Functions</h2></td></tr>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a8d45c69143283308a7ae0e591a340875"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_city.html">City</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_zone.html#a8d45c69143283308a7ae0e591a340875">cities</a></td></tr>
 <tr class="separator:a8d45c69143283308a7ae0e591a340875"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a97171069b181161776b5c701d45328ad"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_zone.html#a97171069b181161776b5c701d45328ad">GenerateCities</a> (int pMaxTries, int pMaxCities)</td></tr>
+<tr class="memdesc:a97171069b181161776b5c701d45328ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates city positions within the grid. All cities are at least one block away from the sides and one block away from the edges.  <a href="#a97171069b181161776b5c701d45328ad">More...</a><br /></td></tr>
+<tr class="separator:a97171069b181161776b5c701d45328ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88eff937dfc80d6eafab6e870bf8eaa5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_zone.html#a88eff937dfc80d6eafab6e870bf8eaa5">PlaceCity</a> (int pX, int pZ, int pWidth, int pDepth, int pCityId)</td></tr>
+<tr class="memdesc:a88eff937dfc80d6eafab6e870bf8eaa5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Places a city in the grid and in the city list, if that city has no collisions at that location.  <a href="#a88eff937dfc80d6eafab6e870bf8eaa5">More...</a><br /></td></tr>
+<tr class="separator:a88eff937dfc80d6eafab6e870bf8eaa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a514ad22179741bbd10c1332c0706a4eb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_zone.html#a514ad22179741bbd10c1332c0706a4eb">_width</a></td></tr>
+<tr class="separator:a514ad22179741bbd10c1332c0706a4eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88ab39c51c55200c49d9a639f4988161"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_zone.html#a88ab39c51c55200c49d9a639f4988161">_depth</a></td></tr>
+<tr class="separator:a88ab39c51c55200c49d9a639f4988161"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae44f633a479ea10af89bf23ac4bddd1c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_zone.html#ae44f633a479ea10af89bf23ac4bddd1c">_maxTries</a></td></tr>
+<tr class="separator:ae44f633a479ea10af89bf23ac4bddd1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cde1fe2ac93c4e62d18a53bcd59b6ff"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_zone.html#a7cde1fe2ac93c4e62d18a53bcd59b6ff">_maxCities</a></td></tr>
+<tr class="separator:a7cde1fe2ac93c4e62d18a53bcd59b6ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a460231305435ce3620e59393c6487337"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_zone.html#a460231305435ce3620e59393c6487337">_numberOfRegions</a></td></tr>
+<tr class="separator:a460231305435ce3620e59393c6487337"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab32385a68e626cc573d41e00ffe6e72"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_zone.html#aab32385a68e626cc573d41e00ffe6e72">_maxCityWidth</a></td></tr>
+<tr class="separator:aab32385a68e626cc573d41e00ffe6e72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af222a8486e69ae937fcbeba253f5a483"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_zone.html#af222a8486e69ae937fcbeba253f5a483">_maxCityHeight</a></td></tr>
+<tr class="separator:af222a8486e69ae937fcbeba253f5a483"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1f2cab40c4a6601d50e936cfd129e81"><td class="memItemLeft" align="right" valign="top">int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_zone.html#ae1f2cab40c4a6601d50e936cfd129e81">_tiles</a></td></tr>
+<tr class="separator:ae1f2cab40c4a6601d50e936cfd129e81"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a58253e7a61c85b5efc7b5c14659068a9"></a>
@@ -163,6 +193,51 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a97171069b181161776b5c701d45328ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97171069b181161776b5c701d45328ad">&#9670;&nbsp;</a></span>GenerateCities()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Zone::GenerateCities </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pMaxTries</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pMaxCities</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Generates city positions within the grid. All cities are at least one block away from the sides and one block away from the edges. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pMaxTries</td><td>The maximum amount of tries, before quiting.</td></tr>
+    <tr><td class="paramname">pMaxCities</td><td>The maximum amount of cities allowed in the zone.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ae3ee34bca9bc6b7fdd74ee933cea2bc2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae3ee34bca9bc6b7fdd74ee933cea2bc2">&#9670;&nbsp;</a></span>getTile()</h2>
 
@@ -215,6 +290,73 @@ Public Attributes</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>&lt;pC&gt;true&lt;/pC&gt; if the specified pC has collision; otherwise, &lt;pC&gt;false&lt;/pC&gt;. </dd></dl>
+
+</div>
+</div>
+<a id="a88eff937dfc80d6eafab6e870bf8eaa5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88eff937dfc80d6eafab6e870bf8eaa5">&#9670;&nbsp;</a></span>PlaceCity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Zone::PlaceCity </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pX</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pZ</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pWidth</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pDepth</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pCityId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Places a city in the grid and in the city list, if that city has no collisions at that location. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pX</td><td>The pX position of the city.</td></tr>
+    <tr><td class="paramname">pZ</td><td>The pZ position of the city.</td></tr>
+    <tr><td class="paramname">pWidth</td><td>The pWidth of the city.</td></tr>
+    <tr><td class="paramname">pDepth</td><td>The pDepth of the city.</td></tr>
+    <tr><td class="paramname">cityId</td><td>The city identifier.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
 </div>
 </div>
@@ -272,6 +414,182 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a88ab39c51c55200c49d9a639f4988161"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88ab39c51c55200c49d9a639f4988161">&#9670;&nbsp;</a></span>_depth</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Zone::_depth</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7cde1fe2ac93c4e62d18a53bcd59b6ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7cde1fe2ac93c4e62d18a53bcd59b6ff">&#9670;&nbsp;</a></span>_maxCities</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Zone::_maxCities</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af222a8486e69ae937fcbeba253f5a483"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af222a8486e69ae937fcbeba253f5a483">&#9670;&nbsp;</a></span>_maxCityHeight</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Zone::_maxCityHeight</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aab32385a68e626cc573d41e00ffe6e72"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab32385a68e626cc573d41e00ffe6e72">&#9670;&nbsp;</a></span>_maxCityWidth</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Zone::_maxCityWidth</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae44f633a479ea10af89bf23ac4bddd1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae44f633a479ea10af89bf23ac4bddd1c">&#9670;&nbsp;</a></span>_maxTries</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Zone::_maxTries</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a460231305435ce3620e59393c6487337"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a460231305435ce3620e59393c6487337">&#9670;&nbsp;</a></span>_numberOfRegions</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Zone::_numberOfRegions</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae1f2cab40c4a6601d50e936cfd129e81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1f2cab40c4a6601d50e936cfd129e81">&#9670;&nbsp;</a></span>_tiles</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int* Zone::_tiles</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a514ad22179741bbd10c1332c0706a4eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a514ad22179741bbd10c1332c0706a4eb">&#9670;&nbsp;</a></span>_width</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Zone::_width</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a8d45c69143283308a7ae0e591a340875"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8d45c69143283308a7ae0e591a340875">&#9670;&nbsp;</a></span>cities</h2>
 

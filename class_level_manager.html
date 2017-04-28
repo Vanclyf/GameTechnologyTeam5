@@ -23,7 +23,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Diabro
    </div>
-   <div id="projectbrief">This project is currently developed by team 5 for Project Game Technology. Most of the design is inspired by Diablo III and the main challange in developing this game is the combination between different procedural content generation for items, dungeons and quests.</div>
+   <div id="projectbrief">This project is developed by team 5 for Project Game Technology.</div>
   </td>
  </tr>
  </tbody>
@@ -63,6 +63,7 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="class_level_manager-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">LevelManager Class Reference</div>  </div>
@@ -125,6 +126,29 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a4c2788c81c1761f9c0b69f790be8c1d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9f8e48e4754fb397835091ff984beca"><td class="memItemLeft" align="right" valign="top">Ogre::Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_manager.html#ad9f8e48e4754fb397835091ff984beca">playerPosition</a></td></tr>
 <tr class="separator:ad9f8e48e4754fb397835091ff984beca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a7d7335abaa090aa8a94637440c5eeebe"><td class="memItemLeft" align="right" valign="top">Ogre::Entity *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_manager.html#a7d7335abaa090aa8a94637440c5eeebe">_playerEntity</a></td></tr>
+<tr class="separator:a7d7335abaa090aa8a94637440c5eeebe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34716152b27ea41fc034fe725b79134e"><td class="memItemLeft" align="right" valign="top">Ogre::Entity *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_manager.html#a34716152b27ea41fc034fe725b79134e">_npcEntity</a></td></tr>
+<tr class="separator:a34716152b27ea41fc034fe725b79134e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1806760c82bf4e36ed38430a8714aef"><td class="memItemLeft" align="right" valign="top">Ogre::Entity *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_manager.html#ab1806760c82bf4e36ed38430a8714aef">_basicEnemyEntity</a></td></tr>
+<tr class="separator:ab1806760c82bf4e36ed38430a8714aef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab377d36086ca0d95d0f5b303cff15019"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_character_spawner.html">CharacterSpawner</a>&lt; <a class="el" href="class_npc.html">Npc</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_manager.html#ab377d36086ca0d95d0f5b303cff15019">npcSpawner</a></td></tr>
+<tr class="separator:ab377d36086ca0d95d0f5b303cff15019"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a535ed77cefe694ca5607fe7e0d15ed"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_character_spawner.html">CharacterSpawner</a>&lt; <a class="el" href="class_basic_enemy.html">BasicEnemy</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_manager.html#a9a535ed77cefe694ca5607fe7e0d15ed">enemySpawner</a></td></tr>
+<tr class="separator:a9a535ed77cefe694ca5607fe7e0d15ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8171d3d47a20f4085a1b1a296d1905eb"><td class="memItemLeft" align="right" valign="top">Ogre::Entity *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_manager.html#a8171d3d47a20f4085a1b1a296d1905eb">_groundEntity</a></td></tr>
+<tr class="separator:a8171d3d47a20f4085a1b1a296d1905eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0499eb77ed0c8bea000cceb1170b7327"><td class="memItemLeft" align="right" valign="top">Ogre::SceneNode *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_manager.html#a0499eb77ed0c8bea000cceb1170b7327">_levelNode</a></td></tr>
+<tr class="separator:a0499eb77ed0c8bea000cceb1170b7327"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40fa2b3657aa61f925e30454366c1edc"><td class="memItemLeft" align="right" valign="top">Ogre::SceneNode *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_manager.html#a40fa2b3657aa61f925e30454366c1edc">_camNode</a></td></tr>
+<tr class="separator:a40fa2b3657aa61f925e30454366c1edc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab76ad0daa3e2e84adf44da91b8a127b"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_character.html">Character</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_manager.html#aab76ad0daa3e2e84adf44da91b8a127b">_friendlyNpcScripts</a></td></tr>
+<tr class="separator:aab76ad0daa3e2e84adf44da91b8a127b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60fec7fcb8b03ea59f14d702bd9167e6"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_character.html">Character</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_level_manager.html#a60fec7fcb8b03ea59f14d702bd9167e6">_hostileNpcScripts</a></td></tr>
+<tr class="separator:a60fec7fcb8b03ea59f14d702bd9167e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a5e12bdcc49e300a4e9f982e3c589f4fe"></a>
@@ -503,6 +527,204 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="ab1806760c82bf4e36ed38430a8714aef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1806760c82bf4e36ed38430a8714aef">&#9670;&nbsp;</a></span>_basicEnemyEntity</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Ogre::Entity* LevelManager::_basicEnemyEntity</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a40fa2b3657aa61f925e30454366c1edc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40fa2b3657aa61f925e30454366c1edc">&#9670;&nbsp;</a></span>_camNode</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Ogre::SceneNode* LevelManager::_camNode</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aab76ad0daa3e2e84adf44da91b8a127b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab76ad0daa3e2e84adf44da91b8a127b">&#9670;&nbsp;</a></span>_friendlyNpcScripts</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="class_character.html">Character</a>*&gt; LevelManager::_friendlyNpcScripts</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8171d3d47a20f4085a1b1a296d1905eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8171d3d47a20f4085a1b1a296d1905eb">&#9670;&nbsp;</a></span>_groundEntity</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Ogre::Entity* LevelManager::_groundEntity</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a60fec7fcb8b03ea59f14d702bd9167e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60fec7fcb8b03ea59f14d702bd9167e6">&#9670;&nbsp;</a></span>_hostileNpcScripts</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="class_character.html">Character</a>*&gt; LevelManager::_hostileNpcScripts</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0499eb77ed0c8bea000cceb1170b7327"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0499eb77ed0c8bea000cceb1170b7327">&#9670;&nbsp;</a></span>_levelNode</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Ogre::SceneNode* LevelManager::_levelNode</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a34716152b27ea41fc034fe725b79134e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34716152b27ea41fc034fe725b79134e">&#9670;&nbsp;</a></span>_npcEntity</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Ogre::Entity* LevelManager::_npcEntity</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7d7335abaa090aa8a94637440c5eeebe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d7335abaa090aa8a94637440c5eeebe">&#9670;&nbsp;</a></span>_playerEntity</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Ogre::Entity* LevelManager::_playerEntity</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9a535ed77cefe694ca5607fe7e0d15ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a535ed77cefe694ca5607fe7e0d15ed">&#9670;&nbsp;</a></span>enemySpawner</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_character_spawner.html">CharacterSpawner</a>&lt;<a class="el" href="class_basic_enemy.html">BasicEnemy</a>&gt;* LevelManager::enemySpawner</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a5d29c64019e4fe64f6ea4ba0a19d7f6b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5d29c64019e4fe64f6ea4ba0a19d7f6b">&#9670;&nbsp;</a></span>levelGenerator</h2>
 
@@ -513,6 +735,28 @@ Public Attributes</h2></td></tr>
           <td class="memname"><a class="el" href="class_level_generator.html">LevelGenerator</a> LevelManager::levelGenerator</td>
         </tr>
       </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab377d36086ca0d95d0f5b303cff15019"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab377d36086ca0d95d0f5b303cff15019">&#9670;&nbsp;</a></span>npcSpawner</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_character_spawner.html">CharacterSpawner</a>&lt;<a class="el" href="class_npc.html">Npc</a>&gt;* LevelManager::npcSpawner</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>

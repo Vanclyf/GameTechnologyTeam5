@@ -23,7 +23,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Diabro
    </div>
-   <div id="projectbrief">This project is currently developed by team 5 for Project Game Technology. Most of the design is inspired by Diablo III and the main challange in developing this game is the combination between different procedural content generation for items, dungeons and quests.</div>
+   <div id="projectbrief">This project is developed by team 5 for Project Game Technology.</div>
   </td>
  </tr>
  </tbody>
@@ -62,6 +62,8 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="class_player-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Player Class Reference</div>  </div>
@@ -150,6 +152,24 @@ Public Attributes</h2></td></tr>
 <tr class="inherit_header pub_attribs_class_character"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_class_character')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="class_character.html">Character</a></td></tr>
 <tr class="memitem:a13f1da42b79a25988f203c53600cfb95 inherit pub_attribs_class_character"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a13f1da42b79a25988f203c53600cfb95">id</a></td></tr>
 <tr class="separator:a13f1da42b79a25988f203c53600cfb95 inherit pub_attribs_class_character"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a604d2e7c1925033214c9e62906cb32a8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#a604d2e7c1925033214c9e62906cb32a8">calcXpTillLevel</a> (int)</td></tr>
+<tr class="memdesc:a604d2e7c1925033214c9e62906cb32a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the pXP need to reach the next pLevel.  <a href="#a604d2e7c1925033214c9e62906cb32a8">More...</a><br /></td></tr>
+<tr class="separator:a604d2e7c1925033214c9e62906cb32a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5bda3bad89f797546360636deb154fbb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#a5bda3bad89f797546360636deb154fbb">levelUp</a> ()</td></tr>
+<tr class="memdesc:a5bda3bad89f797546360636deb154fbb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Levels up the player.  <a href="#a5bda3bad89f797546360636deb154fbb">More...</a><br /></td></tr>
+<tr class="separator:a5bda3bad89f797546360636deb154fbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:ab57814db344961cfd97e203abdb62c66"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#ab57814db344961cfd97e203abdb62c66">_currentXP</a></td></tr>
+<tr class="separator:ab57814db344961cfd97e203abdb62c66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7e0c4e387bed01056a46499aa0f269e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#aa7e0c4e387bed01056a46499aa0f269e">_xpTillNextLevel</a></td></tr>
+<tr class="separator:aa7e0c4e387bed01056a46499aa0f269e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ea80b29302efef7b4dd8821d6e9e365"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player.html#a5ea80b29302efef7b4dd8821d6e9e365">_canAttack</a></td></tr>
+<tr class="separator:a5ea80b29302efef7b4dd8821d6e9e365"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -385,6 +405,41 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a id="a604d2e7c1925033214c9e62906cb32a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a604d2e7c1925033214c9e62906cb32a8">&#9670;&nbsp;</a></span>calcXpTillLevel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Player::calcXpTillLevel </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pLevel</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calculates the pXP need to reach the next pLevel. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pLevel</td><td>The next pLevel.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
 <a id="ae8c60853e928e6f147020087f611b98d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae8c60853e928e6f147020087f611b98d">&#9670;&nbsp;</a></span>gainXP()</h2>
 
@@ -438,6 +493,33 @@ Additional Inherited Members</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
 <p>Reimplemented from <a class="el" href="class_character.html#a7904d80b64f8d880cd64fdf95e228f76">Character</a>.</p>
+
+</div>
+</div>
+<a id="a5bda3bad89f797546360636deb154fbb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5bda3bad89f797546360636deb154fbb">&#9670;&nbsp;</a></span>levelUp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Player::levelUp </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Levels up the player. </p>
 
 </div>
 </div>
@@ -507,6 +589,72 @@ Additional Inherited Members</h2></td></tr>
           <td class="memname"><a class="el" href="class_basic_enemy.html">BasicEnemy</a>* Player::_BasicEnemy</td>
         </tr>
       </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5ea80b29302efef7b4dd8821d6e9e365"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ea80b29302efef7b4dd8821d6e9e365">&#9670;&nbsp;</a></span>_canAttack</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Player::_canAttack</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab57814db344961cfd97e203abdb62c66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab57814db344961cfd97e203abdb62c66">&#9670;&nbsp;</a></span>_currentXP</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Player::_currentXP</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa7e0c4e387bed01056a46499aa0f269e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7e0c4e387bed01056a46499aa0f269e">&#9670;&nbsp;</a></span>_xpTillNextLevel</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Player::_xpTillNextLevel</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>

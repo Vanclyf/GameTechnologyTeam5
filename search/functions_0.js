@@ -7,6 +7,7 @@ var searchData=
   ['addstats',['AddStats',['../class_character.html#a77852dcf9049fec0310fea7b38c995cb',1,'Character']]],
   ['adjusthealth',['adjustHealth',['../class_character.html#ac2ed7770303bc5ae537aa83cf3ce917c',1,'Character::adjustHealth()'],['../class_player.html#ab8ff8eefffcdf3efad5458f8a45346ee',1,'Player::adjustHealth()']]],
   ['adjusthealthbar',['adjustHealthBar',['../class_u_i_manager.html#ac683e1d5e18af90857be2595f771e6d1',1,'UIManager']]],
+  ['adjustneed',['adjustNeed',['../class_npc.html#a1aded316ff23d323d4d33588a3517ad7',1,'Npc']]],
   ['adjuststamina',['adjustStamina',['../class_character.html#a51e7b093bda706bf4f5dd392f683b257',1,'Character::adjustStamina()'],['../class_player.html#aa79412b2614823bf5f3c934e2ba82855',1,'Player::adjustStamina()']]],
   ['adjuststaminabar',['adjustStaminaBar',['../class_u_i_manager.html#aaec824bc79167bd9d640fde8e2fc58be',1,'UIManager']]],
   ['adjuststaminaovertime',['adjustStaminaOverTime',['../class_character.html#aefeb5586e03d03fab13896672697db28',1,'Character::adjustStaminaOverTime()'],['../class_player.html#a16b0d94018b01ad6c8fa3a5f1e394be3',1,'Player::adjustStaminaOverTime()']]],

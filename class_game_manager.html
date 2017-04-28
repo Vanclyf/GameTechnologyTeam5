@@ -23,7 +23,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Diabro
    </div>
-   <div id="projectbrief">This project is currently developed by team 5 for Project Game Technology. Most of the design is inspired by Diablo III and the main challange in developing this game is the combination between different procedural content generation for items, dungeons and quests.</div>
+   <div id="projectbrief">This project is developed by team 5 for Project Game Technology.</div>
   </td>
  </tr>
  </tbody>
@@ -65,6 +65,8 @@ $(function() {
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="class_game_manager-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">GameManager Class Reference</div>  </div>
@@ -168,6 +170,40 @@ Static Protected Member Functions</h2></td></tr>
 <tr class="memitem:a83963fb2d34ee84e1a0c14bac4e9df9a"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_manager.html#a83963fb2d34ee84e1a0c14bac4e9df9a">setupLights</a> (Ogre::SceneManager *)</td></tr>
 <tr class="memdesc:a83963fb2d34ee84e1a0c14bac4e9df9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setups the lights.  <a href="#a83963fb2d34ee84e1a0c14bac4e9df9a">More...</a><br /></td></tr>
 <tr class="separator:a83963fb2d34ee84e1a0c14bac4e9df9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a7582845dfd5cf3a902ec2930b400f98b"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_manager.html#a7582845dfd5cf3a902ec2930b400f98b">frameRenderingQueued</a> (const Ogre::FrameEvent &amp;)</td></tr>
+<tr class="memdesc:a7582845dfd5cf3a902ec2930b400f98b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the frame based on the specified pFE.  <a href="#a7582845dfd5cf3a902ec2930b400f98b">More...</a><br /></td></tr>
+<tr class="separator:a7582845dfd5cf3a902ec2930b400f98b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b40c23446371dfa44c4cc2714b9aa4e"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_manager.html#a5b40c23446371dfa44c4cc2714b9aa4e">keyPressed</a> (const OIS::KeyEvent &amp;)</td></tr>
+<tr class="memdesc:a5b40c23446371dfa44c4cc2714b9aa4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when a key is pressed.  <a href="#a5b40c23446371dfa44c4cc2714b9aa4e">More...</a><br /></td></tr>
+<tr class="separator:a5b40c23446371dfa44c4cc2714b9aa4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57e4834ec72b7f82af6d571f678ff26e"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_manager.html#a57e4834ec72b7f82af6d571f678ff26e">keyReleased</a> (const OIS::KeyEvent &amp;)</td></tr>
+<tr class="memdesc:a57e4834ec72b7f82af6d571f678ff26e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when a key is released.  <a href="#a57e4834ec72b7f82af6d571f678ff26e">More...</a><br /></td></tr>
+<tr class="separator:a57e4834ec72b7f82af6d571f678ff26e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a332474c266ce254cb024b4eaed464990"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_manager.html#a332474c266ce254cb024b4eaed464990">mouseMoved</a> (const OIS::MouseEvent &amp;)</td></tr>
+<tr class="memdesc:a332474c266ce254cb024b4eaed464990"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when the mouse is moved.  <a href="#a332474c266ce254cb024b4eaed464990">More...</a><br /></td></tr>
+<tr class="separator:a332474c266ce254cb024b4eaed464990"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c3c846b47a899fe6dd25834719dd7f8"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_manager.html#a3c3c846b47a899fe6dd25834719dd7f8">mousePressed</a> (const OIS::MouseEvent &amp;, OIS::MouseButtonID)</td></tr>
+<tr class="memdesc:a3c3c846b47a899fe6dd25834719dd7f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when the mouse is pressed.  <a href="#a3c3c846b47a899fe6dd25834719dd7f8">More...</a><br /></td></tr>
+<tr class="separator:a3c3c846b47a899fe6dd25834719dd7f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace4a668c228e95090fa37a03dd7b253b"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_manager.html#ace4a668c228e95090fa37a03dd7b253b">mouseReleased</a> (const OIS::MouseEvent &amp;, OIS::MouseButtonID)</td></tr>
+<tr class="memdesc:ace4a668c228e95090fa37a03dd7b253b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when the mouse is released.  <a href="#ace4a668c228e95090fa37a03dd7b253b">More...</a><br /></td></tr>
+<tr class="separator:ace4a668c228e95090fa37a03dd7b253b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a001b2bf19a0a34f8a5fb066793579177"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_level_manager.html">LevelManager</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_manager.html#a001b2bf19a0a34f8a5fb066793579177">_levelManager</a></td></tr>
+<tr class="separator:a001b2bf19a0a34f8a5fb066793579177"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d577e81a6099e225f3cd68cbf5c3fb2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_u_i_manager.html">UIManager</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_manager.html#a9d577e81a6099e225f3cd68cbf5c3fb2">_uiManager</a></td></tr>
+<tr class="separator:a9d577e81a6099e225f3cd68cbf5c3fb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3fa4ce40a89c8367e827660cdbf1358"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_item_manager.html">ItemManager</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_manager.html#ac3fa4ce40a89c8367e827660cdbf1358">_itemManager</a></td></tr>
+<tr class="separator:ac3fa4ce40a89c8367e827660cdbf1358"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e6a093c19a2e8839fe6a386af274284"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_quest_content_manager.html">QuestContentManager</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_manager.html#a0e6a093c19a2e8839fe6a386af274284">_questContentManager</a></td></tr>
+<tr class="separator:a0e6a093c19a2e8839fe6a386af274284"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9965da4967a5c98b5faedc879aa20e95"><td class="memItemLeft" align="right" valign="top">Ogre::Timer *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_manager.html#a9965da4967a5c98b5faedc879aa20e95">_gameTimer</a></td></tr>
+<tr class="separator:a9965da4967a5c98b5faedc879aa20e95"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -368,6 +404,42 @@ Additional Inherited Members</h2></td></tr>
 <p>Creates the viewports. </p>
 
 <p>Reimplemented from <a class="el" href="class_base_application.html#a1f8f6730cae6ec769d8730b1af48486e">BaseApplication</a>.</p>
+
+</div>
+</div>
+<a id="a7582845dfd5cf3a902ec2930b400f98b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7582845dfd5cf3a902ec2930b400f98b">&#9670;&nbsp;</a></span>frameRenderingQueued()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool GameManager::frameRenderingQueued </td>
+          <td>(</td>
+          <td class="paramtype">const Ogre::FrameEvent &amp;&#160;</td>
+          <td class="paramname"><em>pFE</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Updates the frame based on the specified pFE. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pFE</td><td>The frame event.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented from <a class="el" href="class_base_application.html#a03912a0f38b38fede7f08a2571e8fc56">BaseApplication</a>.</p>
 
 </div>
 </div>
@@ -649,6 +721,213 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a id="a5b40c23446371dfa44c4cc2714b9aa4e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b40c23446371dfa44c4cc2714b9aa4e">&#9670;&nbsp;</a></span>keyPressed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool GameManager::keyPressed </td>
+          <td>(</td>
+          <td class="paramtype">const OIS::KeyEvent &amp;&#160;</td>
+          <td class="paramname"><em>pKE</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Called when a key is pressed. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pKE</td><td>The key event.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+<p>Reimplemented from <a class="el" href="class_base_application.html#acfa977f04e435f18018ece805c1277ec">BaseApplication</a>.</p>
+
+</div>
+</div>
+<a id="a57e4834ec72b7f82af6d571f678ff26e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57e4834ec72b7f82af6d571f678ff26e">&#9670;&nbsp;</a></span>keyReleased()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool GameManager::keyReleased </td>
+          <td>(</td>
+          <td class="paramtype">const OIS::KeyEvent &amp;&#160;</td>
+          <td class="paramname"><em>pKE</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Called when a key is released. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pKE</td><td>The key event.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+<p>Reimplemented from <a class="el" href="class_base_application.html#aba5c7c9dea7a0efc58b89310bae547e5">BaseApplication</a>.</p>
+
+</div>
+</div>
+<a id="a332474c266ce254cb024b4eaed464990"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a332474c266ce254cb024b4eaed464990">&#9670;&nbsp;</a></span>mouseMoved()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool GameManager::mouseMoved </td>
+          <td>(</td>
+          <td class="paramtype">const OIS::MouseEvent &amp;&#160;</td>
+          <td class="paramname"><em>pME</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Called when the mouse is moved. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">me</td><td>The mouse event.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+<p>Reimplemented from <a class="el" href="class_base_application.html#a126e59cb246b061e51eb6ce06a2ee8f4">BaseApplication</a>.</p>
+
+</div>
+</div>
+<a id="a3c3c846b47a899fe6dd25834719dd7f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c3c846b47a899fe6dd25834719dd7f8">&#9670;&nbsp;</a></span>mousePressed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool GameManager::mousePressed </td>
+          <td>(</td>
+          <td class="paramtype">const OIS::MouseEvent &amp;&#160;</td>
+          <td class="paramname"><em>pME</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">OIS::MouseButtonID&#160;</td>
+          <td class="paramname"><em>pID</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Called when the mouse is pressed. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">me</td><td>The mouse event.</td></tr>
+    <tr><td class="paramname">id</td><td>The identifier of the mouse button.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+<p>Reimplemented from <a class="el" href="class_base_application.html#a9255dfc1eabefd11c474ec45a6622504">BaseApplication</a>.</p>
+
+</div>
+</div>
+<a id="ace4a668c228e95090fa37a03dd7b253b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace4a668c228e95090fa37a03dd7b253b">&#9670;&nbsp;</a></span>mouseReleased()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool GameManager::mouseReleased </td>
+          <td>(</td>
+          <td class="paramtype">const OIS::MouseEvent &amp;&#160;</td>
+          <td class="paramname"><em>pME</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">OIS::MouseButtonID&#160;</td>
+          <td class="paramname"><em>pID</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Called when the mouse is released. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">me</td><td>The mouse event.</td></tr>
+    <tr><td class="paramname">id</td><td>The identifier of the mouse button.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+<p>Reimplemented from <a class="el" href="class_base_application.html#aa102c5859c14c0690c749994a446b53d">BaseApplication</a>.</p>
+
+</div>
+</div>
 <a id="a83963fb2d34ee84e1a0c14bac4e9df9a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a83963fb2d34ee84e1a0c14bac4e9df9a">&#9670;&nbsp;</a></span>setupLights()</h2>
 
@@ -684,6 +963,116 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a9965da4967a5c98b5faedc879aa20e95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9965da4967a5c98b5faedc879aa20e95">&#9670;&nbsp;</a></span>_gameTimer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Ogre::Timer* GameManager::_gameTimer</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac3fa4ce40a89c8367e827660cdbf1358"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3fa4ce40a89c8367e827660cdbf1358">&#9670;&nbsp;</a></span>_itemManager</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_item_manager.html">ItemManager</a>* GameManager::_itemManager</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a001b2bf19a0a34f8a5fb066793579177"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a001b2bf19a0a34f8a5fb066793579177">&#9670;&nbsp;</a></span>_levelManager</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_level_manager.html">LevelManager</a>* GameManager::_levelManager</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0e6a093c19a2e8839fe6a386af274284"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e6a093c19a2e8839fe6a386af274284">&#9670;&nbsp;</a></span>_questContentManager</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_quest_content_manager.html">QuestContentManager</a>* GameManager::_questContentManager</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9d577e81a6099e225f3cd68cbf5c3fb2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d577e81a6099e225f3cd68cbf5c3fb2">&#9670;&nbsp;</a></span>_uiManager</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_u_i_manager.html">UIManager</a>* GameManager::_uiManager</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ac4127d864f5cfcacd6ae043c7a522df5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac4127d864f5cfcacd6ae043c7a522df5">&#9670;&nbsp;</a></span>nodeOfSceneXML</h2>
 

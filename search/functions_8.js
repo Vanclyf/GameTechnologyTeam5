@@ -5,6 +5,7 @@ var searchData=
   ['initialize',['initialize',['../class_character.html#a7904d80b64f8d880cd64fdf95e228f76',1,'Character::initialize()'],['../class_level_manager.html#a18f308c20a36c34c4c694881f5fe89e0',1,'LevelManager::initialize()'],['../class_player.html#ad3051939df992c34b64c121bf4cbbdca',1,'Player::initialize()']]],
   ['insertafterchild',['InsertAfterChild',['../classtinyxml2_1_1_x_m_l_node.html#a9275138a1b8dd5d8e2c26789bdc23ac8',1,'tinyxml2::XMLNode']]],
   ['insertchild',['insertChild',['../class_tree_node.html#aad902f14068c28a08c8a21c6d7e6ce0d',1,'TreeNode']]],
+  ['insertchildpreamble',['InsertChildPreamble',['../classtinyxml2_1_1_x_m_l_node.html#a0fd4d2e88fb22d46b5b1474b5b786e35',1,'tinyxml2::XMLNode']]],
   ['insertendchild',['InsertEndChild',['../classtinyxml2_1_1_x_m_l_node.html#ae3b422e98914d6002ca99bb1d2837103',1,'tinyxml2::XMLNode']]],
   ['insertfirstchild',['InsertFirstChild',['../classtinyxml2_1_1_x_m_l_node.html#ac609a8f3ea949027f439280c640bbaf2',1,'tinyxml2::XMLNode']]],
   ['instancedeath',['instanceDeath',['../class_character_spawner.html#abfbed9af55093be89faf4783475fc373',1,'CharacterSpawner']]],

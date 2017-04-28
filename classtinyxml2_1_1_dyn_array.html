@@ -23,7 +23,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Diabro
    </div>
-   <div id="projectbrief">This project is currently developed by team 5 for Project Game Technology. Most of the design is inspired by Diablo III and the main challange in developing this game is the combination between different procedural content generation for items, dungeons and quests.</div>
+   <div id="projectbrief">This project is developed by team 5 for Project Game Technology.</div>
   </td>
  </tr>
  </tbody>
@@ -65,6 +65,8 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classtinyxml2_1_1_dyn_array-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">tinyxml2::DynArray&lt; T, INITIAL_SIZE &gt; Class Template Reference</div>  </div>
@@ -105,10 +107,30 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a60b33e61cf10b3fd900ee46692dc0fe9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2f0842cd666e2ad951f1a8bd6561fa40"><td class="memItemLeft" align="right" valign="top">T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_dyn_array.html#a2f0842cd666e2ad951f1a8bd6561fa40">Mem</a> ()</td></tr>
 <tr class="separator:a2f0842cd666e2ad951f1a8bd6561fa40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a8e2251588f079f2e7a4080b2c53dabea"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_dyn_array.html#a8e2251588f079f2e7a4080b2c53dabea">DynArray</a> (const <a class="el" href="classtinyxml2_1_1_dyn_array.html">DynArray</a> &amp;)</td></tr>
+<tr class="separator:a8e2251588f079f2e7a4080b2c53dabea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46fa3bff1a6abe7cafad46707d0bb890"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_dyn_array.html#a46fa3bff1a6abe7cafad46707d0bb890">operator=</a> (const <a class="el" href="classtinyxml2_1_1_dyn_array.html">DynArray</a> &amp;)</td></tr>
+<tr class="separator:a46fa3bff1a6abe7cafad46707d0bb890"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30f2dec82744b45667452e6ce3d51e32"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_dyn_array.html#a30f2dec82744b45667452e6ce3d51e32">EnsureCapacity</a> (int cap)</td></tr>
+<tr class="separator:a30f2dec82744b45667452e6ce3d51e32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:ac8511e876d55f3ec64277516273434fd"><td class="memItemLeft" align="right" valign="top">T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_dyn_array.html#ac8511e876d55f3ec64277516273434fd">_mem</a></td></tr>
+<tr class="separator:ac8511e876d55f3ec64277516273434fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26ed1f7dab98229d2ed867a07ee427df"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_dyn_array.html#a26ed1f7dab98229d2ed867a07ee427df">_pool</a> [INITIAL_SIZE]</td></tr>
+<tr class="separator:a26ed1f7dab98229d2ed867a07ee427df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee2522b771ca30bc09bff4d5b3176bfc"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_dyn_array.html#aee2522b771ca30bc09bff4d5b3176bfc">_allocated</a></td></tr>
+<tr class="separator:aee2522b771ca30bc09bff4d5b3176bfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40f0578cc1912eed17fb29f64daf6ae9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_dyn_array.html#a40f0578cc1912eed17fb29f64daf6ae9">_size</a></td></tr>
+<tr class="separator:a40f0578cc1912eed17fb29f64daf6ae9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aaad72f384e761c70a4519183eb8fea17"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaad72f384e761c70a4519183eb8fea17">&#9670;&nbsp;</a></span>DynArray()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aaad72f384e761c70a4519183eb8fea17">&#9670;&nbsp;</a></span>DynArray() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -155,6 +177,34 @@ template&lt;class T, int INITIAL_SIZE&gt; </div>
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8e2251588f079f2e7a4080b2c53dabea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e2251588f079f2e7a4080b2c53dabea">&#9670;&nbsp;</a></span>DynArray() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T, int INITIAL_SIZE&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtinyxml2_1_1_dyn_array.html">tinyxml2::DynArray</a>&lt; T, INITIAL_SIZE &gt;::<a class="el" href="classtinyxml2_1_1_dyn_array.html">DynArray</a> </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classtinyxml2_1_1_dyn_array.html">DynArray</a>&lt; T, INITIAL_SIZE &gt; &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -243,6 +293,34 @@ template&lt;class T, int INITIAL_SIZE&gt; </div>
 
 </div>
 </div>
+<a id="a30f2dec82744b45667452e6ce3d51e32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30f2dec82744b45667452e6ce3d51e32">&#9670;&nbsp;</a></span>EnsureCapacity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T, int INITIAL_SIZE&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classtinyxml2_1_1_dyn_array.html">tinyxml2::DynArray</a>&lt; T, INITIAL_SIZE &gt;::EnsureCapacity </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>cap</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a60b33e61cf10b3fd900ee46692dc0fe9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a60b33e61cf10b3fd900ee46692dc0fe9">&#9670;&nbsp;</a></span>Mem() <span class="overload">[1/2]</span></h2>
 
@@ -291,6 +369,34 @@ template&lt;class T, int INITIAL_SIZE&gt; </div>
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a46fa3bff1a6abe7cafad46707d0bb890"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46fa3bff1a6abe7cafad46707d0bb890">&#9670;&nbsp;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T, int INITIAL_SIZE&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classtinyxml2_1_1_dyn_array.html">tinyxml2::DynArray</a>&lt; T, INITIAL_SIZE &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classtinyxml2_1_1_dyn_array.html">DynArray</a>&lt; T, INITIAL_SIZE &gt; &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -512,6 +618,103 @@ template&lt;class T, int INITIAL_SIZE&gt; </div>
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="aee2522b771ca30bc09bff4d5b3176bfc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee2522b771ca30bc09bff4d5b3176bfc">&#9670;&nbsp;</a></span>_allocated</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T, int INITIAL_SIZE&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="classtinyxml2_1_1_dyn_array.html">tinyxml2::DynArray</a>&lt; T, INITIAL_SIZE &gt;::_allocated</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac8511e876d55f3ec64277516273434fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8511e876d55f3ec64277516273434fd">&#9670;&nbsp;</a></span>_mem</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T, int INITIAL_SIZE&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T* <a class="el" href="classtinyxml2_1_1_dyn_array.html">tinyxml2::DynArray</a>&lt; T, INITIAL_SIZE &gt;::_mem</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a26ed1f7dab98229d2ed867a07ee427df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26ed1f7dab98229d2ed867a07ee427df">&#9670;&nbsp;</a></span>_pool</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T, int INITIAL_SIZE&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T <a class="el" href="classtinyxml2_1_1_dyn_array.html">tinyxml2::DynArray</a>&lt; T, INITIAL_SIZE &gt;::_pool[INITIAL_SIZE]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a40f0578cc1912eed17fb29f64daf6ae9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40f0578cc1912eed17fb29f64daf6ae9">&#9670;&nbsp;</a></span>_size</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T, int INITIAL_SIZE&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="classtinyxml2_1_1_dyn_array.html">tinyxml2::DynArray</a>&lt; T, INITIAL_SIZE &gt;::_size</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

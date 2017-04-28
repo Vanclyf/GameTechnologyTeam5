@@ -23,7 +23,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Diabro
    </div>
-   <div id="projectbrief">This project is currently developed by team 5 for Project Game Technology. Most of the design is inspired by Diablo III and the main challange in developing this game is the combination between different procedural content generation for items, dungeons and quests.</div>
+   <div id="projectbrief">This project is developed by team 5 for Project Game Technology.</div>
   </td>
  </tr>
  </tbody>
@@ -66,6 +66,8 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="#friends">Friends</a> &#124;
 <a href="classtinyxml2_1_1_x_m_l_text-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -219,6 +221,18 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a8f41e898cdd4da4cdbb7f05b0c7d9f69 inherit pro_methods_classtinyxml2_1_1_x_m_l_node"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_x_m_l_node.html#a8f41e898cdd4da4cdbb7f05b0c7d9f69">~XMLNode</a> ()</td></tr>
 <tr class="separator:a8f41e898cdd4da4cdbb7f05b0c7d9f69 inherit pro_methods_classtinyxml2_1_1_x_m_l_node"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a002156e1f61ee6d48e5368b7cca25582"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_x_m_l_text.html#a002156e1f61ee6d48e5368b7cca25582">XMLText</a> (const <a class="el" href="classtinyxml2_1_1_x_m_l_text.html">XMLText</a> &amp;)</td></tr>
+<tr class="separator:a002156e1f61ee6d48e5368b7cca25582"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8c9f398d92fa472e213b89d8483ae8f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtinyxml2_1_1_x_m_l_text.html">XMLText</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_x_m_l_text.html#ad8c9f398d92fa472e213b89d8483ae8f">operator=</a> (const <a class="el" href="classtinyxml2_1_1_x_m_l_text.html">XMLText</a> &amp;)</td></tr>
+<tr class="separator:ad8c9f398d92fa472e213b89d8483ae8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:aae1a8b4117e8c8bb107900a0560d5ab5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_x_m_l_text.html#aae1a8b4117e8c8bb107900a0560d5ab5">_isCData</a></td></tr>
+<tr class="separator:aae1a8b4117e8c8bb107900a0560d5ab5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
 <tr class="memitem:a4eee3bda60c60a30e4e8cd4ea91c4c6e"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtinyxml2_1_1_x_m_l_text.html#a4eee3bda60c60a30e4e8cd4ea91c4c6e">XMLDocument</a></td></tr>
@@ -252,7 +266,7 @@ Additional Inherited Members</h2></td></tr>
 </pre><p>A text node can have 2 ways to output the next. "normal" output and CDATA. It will default to the mode it was parsed from the XML file and you generally want to leave it alone, but you can change the output mode with <a class="el" href="classtinyxml2_1_1_x_m_l_text.html#ad080357d76ab7cc59d7651249949329d" title="Declare whether this should be CDATA or standard text. ">SetCData()</a> and query it with <a class="el" href="classtinyxml2_1_1_x_m_l_text.html#ac1bb5ea4166c320882d9e0ad16fd385b" title="Returns true if this is a CDATA text element. ">CData()</a>. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad9f46d70e61e5386ead93728d8b90267"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad9f46d70e61e5386ead93728d8b90267">&#9670;&nbsp;</a></span>XMLText()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9f46d70e61e5386ead93728d8b90267">&#9670;&nbsp;</a></span>XMLText() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -296,6 +310,32 @@ Additional Inherited Members</h2></td></tr>
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a002156e1f61ee6d48e5368b7cca25582"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a002156e1f61ee6d48e5368b7cca25582">&#9670;&nbsp;</a></span>XMLText() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tinyxml2::XMLText::XMLText </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classtinyxml2_1_1_x_m_l_text.html">XMLText</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -366,6 +406,32 @@ const char* xmlcstr = printer.CStr();
 </div><div class="memdoc">
 
 <p>Returns true if this is a CDATA text element. </p>
+
+</div>
+</div>
+<a id="ad8c9f398d92fa472e213b89d8483ae8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8c9f398d92fa472e213b89d8483ae8f">&#9670;&nbsp;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classtinyxml2_1_1_x_m_l_text.html">XMLText</a>&amp; tinyxml2::XMLText::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classtinyxml2_1_1_x_m_l_text.html">XMLText</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -574,6 +640,29 @@ const char* xmlcstr = printer.CStr();
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="aae1a8b4117e8c8bb107900a0560d5ab5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae1a8b4117e8c8bb107900a0560d5ab5">&#9670;&nbsp;</a></span>_isCData</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool tinyxml2::XMLText::_isCData</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

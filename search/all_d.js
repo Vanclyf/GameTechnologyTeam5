@@ -3,7 +3,9 @@ var searchData=
   ['name',['Name',['../classtinyxml2_1_1_x_m_l_attribute.html#a5a5c135d24cce7abda6f17301c6274d8',1,'tinyxml2::XMLAttribute::Name()'],['../classtinyxml2_1_1_x_m_l_element.html#a63e057fb5baee1dd29f323cb85907b35',1,'tinyxml2::XMLElement::Name()']]],
   ['need',['Need',['../struct_need.html',1,'Need'],['../struct_need.html#a70ab8478c6870ee331499f4231067a5f',1,'Need::Need()'],['../struct_need.html#af965c0fbf566df8e0e1cb90a97fd1c38',1,'Need::Need(NeedType pType, Ogre::Real pValue)']]],
   ['needs_2eh',['Needs.h',['../_needs_8h.html',1,'']]],
+  ['needs_5fdelete',['NEEDS_DELETE',['../classtinyxml2_1_1_str_pair.html#a476a92d76f24486c3ae4731916b12aaeab9a3152ce5df9e7f4bbf3774fe862c75',1,'tinyxml2::StrPair']]],
   ['needs_5fentity_5fprocessing',['NEEDS_ENTITY_PROCESSING',['../classtinyxml2_1_1_str_pair.html#a0301ef962e15dd94574431f1c61266c5a4f1e01a55f8efe4ca72c32d454060237',1,'tinyxml2::StrPair']]],
+  ['needs_5fflush',['NEEDS_FLUSH',['../classtinyxml2_1_1_str_pair.html#a476a92d76f24486c3ae4731916b12aaea2d8841daedc3955ed20ec9f760318434',1,'tinyxml2::StrPair']]],
   ['needs_5fnewline_5fnormalization',['NEEDS_NEWLINE_NORMALIZATION',['../classtinyxml2_1_1_str_pair.html#a0301ef962e15dd94574431f1c61266c5a8f2045d56e70745d718672c0da91d0e0',1,'tinyxml2::StrPair']]],
   ['needs_5fwhitespace_5fcollapsing',['NEEDS_WHITESPACE_COLLAPSING',['../classtinyxml2_1_1_str_pair.html#a0301ef962e15dd94574431f1c61266c5a13996e9d4ed18fd2d6af59bbab291b63',1,'tinyxml2::StrPair']]],
   ['needset',['NeedSet',['../class_need_set.html',1,'NeedSet'],['../class_need_set.html#a8971debd20e40dd3e320ddda632a2db6',1,'NeedSet::NeedSet()'],['../class_need_set.html#a5756a69a4e1ee704598e59e78084aaa8',1,'NeedSet::NeedSet(std::vector&lt; Need &gt; pNeeds)']]],
@@ -14,7 +16,7 @@ var searchData=
   ['newelement',['NewElement',['../classtinyxml2_1_1_x_m_l_document.html#a3c335a700a43d7c363a393142a23f234',1,'tinyxml2::XMLDocument']]],
   ['newtext',['NewText',['../classtinyxml2_1_1_x_m_l_document.html#acece5de77a0819f2341b08c1e1ed9987',1,'tinyxml2::XMLDocument']]],
   ['newunknown',['NewUnknown',['../classtinyxml2_1_1_x_m_l_document.html#a4954f502c5fd7f49de54c3c0c99bb73d',1,'tinyxml2::XMLDocument']]],
-  ['next',['Next',['../classtinyxml2_1_1_x_m_l_attribute.html#aee53571b21e7ce5421eb929523a8bbe6',1,'tinyxml2::XMLAttribute']]],
+  ['next',['next',['../uniontinyxml2_1_1_mem_pool_t_1_1_item.html#a5620107f518c60d6619e8662d4c9d643',1,'tinyxml2::MemPoolT::Item::next()'],['../classtinyxml2_1_1_x_m_l_attribute.html#aee53571b21e7ce5421eb929523a8bbe6',1,'tinyxml2::XMLAttribute::Next()']]],
   ['nextsibling',['NextSibling',['../classtinyxml2_1_1_x_m_l_node.html#a79db9ef0fe014d27790f2218b87bcbb5',1,'tinyxml2::XMLNode::NextSibling() const'],['../classtinyxml2_1_1_x_m_l_node.html#aeb7d4dfd8fb924ef86e7cb72183acbac',1,'tinyxml2::XMLNode::NextSibling()'],['../classtinyxml2_1_1_x_m_l_handle.html#aad2eccc7c7c7b18145877c978c3850b5',1,'tinyxml2::XMLHandle::NextSibling()'],['../classtinyxml2_1_1_x_m_l_const_handle.html#aec3710e455f41014026ef17fbbb0efb3',1,'tinyxml2::XMLConstHandle::NextSibling()']]],
   ['nextsiblingelement',['NextSiblingElement',['../classtinyxml2_1_1_x_m_l_node.html#a14ea560df31110ff07a9f566171bf797',1,'tinyxml2::XMLNode::NextSiblingElement(const char *name=0) const'],['../classtinyxml2_1_1_x_m_l_node.html#af1225412584d4a2126f55e96a12e0ec0',1,'tinyxml2::XMLNode::NextSiblingElement(const char *name=0)'],['../classtinyxml2_1_1_x_m_l_handle.html#ae41d88ee061f3c49a081630ff753b2c5',1,'tinyxml2::XMLHandle::NextSiblingElement()'],['../classtinyxml2_1_1_x_m_l_const_handle.html#a3c9e6b48b02d3d5232e1e8780753d8a5',1,'tinyxml2::XMLConstHandle::NextSiblingElement()']]],
   ['nobleman',['Nobleman',['../_npc_8h.html#a1698c91a11e2aa9dae386a206abf6ca1a5e19c04ab3657ef7735c249bc7d57827',1,'Npc.h']]],
@@ -24,5 +26,7 @@ var searchData=
   ['normalqi',['NormalQI',['../_quest_item_8h.html#a98cd980d61a569ef9dd81fb04de18612ad0977dfecc2b878171d14b5148538d48',1,'QuestItem.h']]],
   ['npc',['Npc',['../class_npc.html',1,'Npc'],['../class_npc.html#ac5a651d2b43150c464eede672b23a25a',1,'Npc::Npc()']]],
   ['npc_2ecpp',['Npc.cpp',['../_npc_8cpp.html',1,'']]],
-  ['npc_2eh',['Npc.h',['../_npc_8h.html',1,'']]]
+  ['npc_2eh',['Npc.h',['../_npc_8h.html',1,'']]],
+  ['npcspawner',['npcSpawner',['../class_level_manager.html#ab377d36086ca0d95d0f5b303cff15019',1,'LevelManager']]],
+  ['num_5fentities',['NUM_ENTITIES',['../namespacetinyxml2.html#aef74bfad4850ed3181f00f86b03c7b45',1,'tinyxml2']]]
 ];

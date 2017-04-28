@@ -23,7 +23,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Diabro
    </div>
-   <div id="projectbrief">This project is currently developed by team 5 for Project Game Technology. Most of the design is inspired by Diablo III and the main challange in developing this game is the combination between different procedural content generation for items, dungeons and quests.</div>
+   <div id="projectbrief">This project is developed by team 5 for Project Game Technology.</div>
   </td>
  </tr>
  </tbody>
@@ -61,6 +61,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="class_item_generator-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">ItemGenerator Class Reference</div>  </div>
@@ -82,6 +83,15 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:af06fe699d9a464eeeb25d04c38a70e4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8ad649269aedde8d72e92c81fd82b233"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_item_instance.html">ItemInstance</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_item_generator.html#a8ad649269aedde8d72e92c81fd82b233">generateRandomItem</a> (Ogre::SceneNode *)</td></tr>
 <tr class="separator:a8ad649269aedde8d72e92c81fd82b233"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a2e6663b4611dee7eb0b3dad875cbd52f"><td class="memItemLeft" align="right" valign="top">Ogre::String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_item_generator.html#a2e6663b4611dee7eb0b3dad875cbd52f">_dropEntity</a></td></tr>
+<tr class="separator:a2e6663b4611dee7eb0b3dad875cbd52f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a035204471018f6e624edd59cc3cd8dff"><td class="memItemLeft" align="right" valign="top">std::map&lt; <a class="el" href="_item_instance_8h.html#a657120cb7a3dcdf3af9bd7c6a53d01ab">Quality</a>, int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_item_generator.html#a035204471018f6e624edd59cc3cd8dff">_qualityProbablity</a></td></tr>
+<tr class="separator:a035204471018f6e624edd59cc3cd8dff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc6bc636d81b33a6bb9b4e8d7e4a6a17"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_item_generator.html#afc6bc636d81b33a6bb9b4e8d7e4a6a17">_summedQualityProbability</a></td></tr>
+<tr class="separator:afc6bc636d81b33a6bb9b4e8d7e4a6a17"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a73bef79b532fe771c8c409fbd1b3f783"></a>
@@ -174,6 +184,73 @@ Public Member Functions</h2></td></tr>
           <td></td>
         </tr>
       </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a2e6663b4611dee7eb0b3dad875cbd52f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e6663b4611dee7eb0b3dad875cbd52f">&#9670;&nbsp;</a></span>_dropEntity</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Ogre::String ItemGenerator::_dropEntity</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a035204471018f6e624edd59cc3cd8dff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a035204471018f6e624edd59cc3cd8dff">&#9670;&nbsp;</a></span>_qualityProbablity</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::map&lt;<a class="el" href="_item_instance_8h.html#a657120cb7a3dcdf3af9bd7c6a53d01ab">Quality</a>, int&gt; ItemGenerator::_qualityProbablity</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afc6bc636d81b33a6bb9b4e8d7e4a6a17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc6bc636d81b33a6bb9b4e8d7e4a6a17">&#9670;&nbsp;</a></span>_summedQualityProbability</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ItemGenerator::_summedQualityProbability</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>

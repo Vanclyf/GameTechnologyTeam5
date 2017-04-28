@@ -23,7 +23,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Diabro
    </div>
-   <div id="projectbrief">This project is currently developed by team 5 for Project Game Technology. Most of the design is inspired by Diablo III and the main challange in developing this game is the combination between different procedural content generation for items, dungeons and quests.</div>
+   <div id="projectbrief">This project is developed by team 5 for Project Game Technology.</div>
   </td>
  </tr>
  </tbody>
@@ -61,6 +61,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="class_equipment_instance-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">EquipmentInstance Class Reference</div>  </div>
@@ -115,6 +116,19 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a307eb48af3e383b10dbe3990bcbbf5d4 inherit pub_methods_class_item_instance"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae38692f3178a8297c1f5236a38463cab inherit pub_methods_class_item_instance"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_item_instance_8h.html#a657120cb7a3dcdf3af9bd7c6a53d01ab">Quality</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_item_instance.html#ae38692f3178a8297c1f5236a38463cab">getQuality</a> ()</td></tr>
 <tr class="separator:ae38692f3178a8297c1f5236a38463cab inherit pub_methods_class_item_instance"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a618cd0daa14c6ee00c2eac6875b4b3e7"><td class="memItemLeft" align="right" valign="top">Ogre::String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_equipment_instance.html#a618cd0daa14c6ee00c2eac6875b4b3e7">_generatedName</a></td></tr>
+<tr class="separator:a618cd0daa14c6ee00c2eac6875b4b3e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3bfd72b9e677e4a14507c9fb5ebaf3df"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_equipment_instance.html#a3bfd72b9e677e4a14507c9fb5ebaf3df">_level</a></td></tr>
+<tr class="separator:a3bfd72b9e677e4a14507c9fb5ebaf3df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2369138313337ce810b38d42db92a498"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_base_equipment.html">BaseEquipment</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_equipment_instance.html#a2369138313337ce810b38d42db92a498">_equipmentInfo</a></td></tr>
+<tr class="separator:a2369138313337ce810b38d42db92a498"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f2e1f3202fe668abe0f59d8f0f560b4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_equipment_instance.html#a7f2e1f3202fe668abe0f59d8f0f560b4">_equipped</a></td></tr>
+<tr class="separator:a7f2e1f3202fe668abe0f59d8f0f560b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4638d68fe091e45367150a1719e593ce"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="struct_stat.html">Stat</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_equipment_instance.html#a4638d68fe091e45367150a1719e593ce">_baseStats</a></td></tr>
+<tr class="separator:a4638d68fe091e45367150a1719e593ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -367,6 +381,117 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Get the value of the main stat. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a4638d68fe091e45367150a1719e593ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4638d68fe091e45367150a1719e593ce">&#9670;&nbsp;</a></span>_baseStats</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="struct_stat.html">Stat</a>*&gt; EquipmentInstance::_baseStats</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2369138313337ce810b38d42db92a498"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2369138313337ce810b38d42db92a498">&#9670;&nbsp;</a></span>_equipmentInfo</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_base_equipment.html">BaseEquipment</a>* EquipmentInstance::_equipmentInfo</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7f2e1f3202fe668abe0f59d8f0f560b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f2e1f3202fe668abe0f59d8f0f560b4">&#9670;&nbsp;</a></span>_equipped</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool EquipmentInstance::_equipped</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a618cd0daa14c6ee00c2eac6875b4b3e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a618cd0daa14c6ee00c2eac6875b4b3e7">&#9670;&nbsp;</a></span>_generatedName</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Ogre::String EquipmentInstance::_generatedName</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3bfd72b9e677e4a14507c9fb5ebaf3df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3bfd72b9e677e4a14507c9fb5ebaf3df">&#9670;&nbsp;</a></span>_level</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int EquipmentInstance::_level</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>

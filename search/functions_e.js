@@ -1,11 +1,13 @@
 var searchData=
 [
   ['parent',['Parent',['../classtinyxml2_1_1_x_m_l_node.html#ae0f62bc186c56c2e0483ebd52dbfbe34',1,'tinyxml2::XMLNode::Parent() const'],['../classtinyxml2_1_1_x_m_l_node.html#a76029693a5a54fbb721a41d7a0ca8a97',1,'tinyxml2::XMLNode::Parent()']]],
-  ['parse',['Parse',['../classtinyxml2_1_1_x_m_l_document.html#a1819bd34f540a7304c105a6232d25a1f',1,'tinyxml2::XMLDocument']]],
-  ['parsedeep',['ParseDeep',['../classtinyxml2_1_1_x_m_l_node.html#a916e498914baecbc9a1f012352ef7c69',1,'tinyxml2::XMLNode::ParseDeep()'],['../classtinyxml2_1_1_x_m_l_text.html#af3b93344f1183482e1683f5922ac9c68',1,'tinyxml2::XMLText::ParseDeep()'],['../classtinyxml2_1_1_x_m_l_comment.html#a3430281eed8d1023bafa9e633f44f509',1,'tinyxml2::XMLComment::ParseDeep()'],['../classtinyxml2_1_1_x_m_l_declaration.html#a42a2a36f4d78dc745063b79c16538b9b',1,'tinyxml2::XMLDeclaration::ParseDeep()'],['../classtinyxml2_1_1_x_m_l_unknown.html#aefc332cc1e6e25736f364d1e5eeb31fe',1,'tinyxml2::XMLUnknown::ParseDeep()'],['../classtinyxml2_1_1_x_m_l_element.html#a072998100b7d0ba5e8aeac6dd6dfb31b',1,'tinyxml2::XMLElement::ParseDeep()']]],
+  ['parse',['Parse',['../classtinyxml2_1_1_x_m_l_document.html#a1819bd34f540a7304c105a6232d25a1f',1,'tinyxml2::XMLDocument::Parse(const char *xml, size_t nBytes=(size_t)(-1))'],['../classtinyxml2_1_1_x_m_l_document.html#aeb556e0e2bed02a73a6c5aaf19759e9a',1,'tinyxml2::XMLDocument::Parse()']]],
+  ['parseattributes',['ParseAttributes',['../classtinyxml2_1_1_x_m_l_element.html#a1e679b60e191ad79bfcefcd49ca66fa2',1,'tinyxml2::XMLElement']]],
+  ['parsedeep',['ParseDeep',['../classtinyxml2_1_1_x_m_l_node.html#a916e498914baecbc9a1f012352ef7c69',1,'tinyxml2::XMLNode::ParseDeep()'],['../classtinyxml2_1_1_x_m_l_text.html#af3b93344f1183482e1683f5922ac9c68',1,'tinyxml2::XMLText::ParseDeep()'],['../classtinyxml2_1_1_x_m_l_comment.html#a3430281eed8d1023bafa9e633f44f509',1,'tinyxml2::XMLComment::ParseDeep()'],['../classtinyxml2_1_1_x_m_l_declaration.html#a42a2a36f4d78dc745063b79c16538b9b',1,'tinyxml2::XMLDeclaration::ParseDeep()'],['../classtinyxml2_1_1_x_m_l_unknown.html#aefc332cc1e6e25736f364d1e5eeb31fe',1,'tinyxml2::XMLUnknown::ParseDeep()'],['../classtinyxml2_1_1_x_m_l_attribute.html#a4952364c1f0260c737ac3fcac756f5a5',1,'tinyxml2::XMLAttribute::ParseDeep()'],['../classtinyxml2_1_1_x_m_l_element.html#a072998100b7d0ba5e8aeac6dd6dfb31b',1,'tinyxml2::XMLElement::ParseDeep()']]],
   ['parsename',['ParseName',['../classtinyxml2_1_1_str_pair.html#aa6d8998efceba41d87ec2300c70a6085',1,'tinyxml2::StrPair']]],
   ['parsetext',['ParseText',['../classtinyxml2_1_1_str_pair.html#a68e6999b7677fa711287ececb9ba317e',1,'tinyxml2::StrPair']]],
   ['peektop',['PeekTop',['../classtinyxml2_1_1_dyn_array.html#a5e4e1e408e646688503dec77c77c9d59',1,'tinyxml2::DynArray']]],
+  ['placecity',['PlaceCity',['../class_zone.html#a88eff937dfc80d6eafab6e870bf8eaa5',1,'Zone::PlaceCity()'],['../class_level_generator.html#aca711ca8de5317d46100ab54fb4bfb4a',1,'LevelGenerator::placeCity()']]],
   ['player',['Player',['../class_player.html#a598c37952a1622611475521c18bdad3d',1,'Player']]],
   ['pop',['Pop',['../classtinyxml2_1_1_dyn_array.html#a27a3f2f6f869815b6eabb3ea40cf0712',1,'tinyxml2::DynArray']]],
   ['poparr',['PopArr',['../classtinyxml2_1_1_dyn_array.html#ab8b8c94a2312ab27e2846f0d61ef677a',1,'tinyxml2::DynArray']]],
@@ -21,6 +23,7 @@ var searchData=
   ['printerror',['PrintError',['../classtinyxml2_1_1_x_m_l_document.html#a1d033945b42e125d933d6231e4571552',1,'tinyxml2::XMLDocument']]],
   ['printgrid',['printGrid',['../class_zone.html#a3731f66b80d985e541393191ba5c206d',1,'Zone']]],
   ['printspace',['PrintSpace',['../classtinyxml2_1_1_x_m_l_printer.html#a1c4b2ccbe4fdb316d54f5a93f3559260',1,'tinyxml2::XMLPrinter']]],
+  ['printstring',['PrintString',['../classtinyxml2_1_1_x_m_l_printer.html#a5495e504053f63f2c4d603327314fa91',1,'tinyxml2::XMLPrinter']]],
   ['processentities',['ProcessEntities',['../classtinyxml2_1_1_x_m_l_document.html#a53e6c035b1b539563fef8c817fb30469',1,'tinyxml2::XMLDocument']]],
   ['push',['Push',['../classtinyxml2_1_1_dyn_array.html#aea7ffe983b5d3284bd43171afd7c99d0',1,'tinyxml2::DynArray']]],
   ['pusharr',['PushArr',['../classtinyxml2_1_1_dyn_array.html#ad289abee8cd02b26e215f1b63d2043f1',1,'tinyxml2::DynArray']]],

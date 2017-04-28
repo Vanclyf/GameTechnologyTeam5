@@ -23,7 +23,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Diabro
    </div>
-   <div id="projectbrief">This project is currently developed by team 5 for Project Game Technology. Most of the design is inspired by Diablo III and the main challange in developing this game is the combination between different procedural content generation for items, dungeons and quests.</div>
+   <div id="projectbrief">This project is developed by team 5 for Project Game Technology.</div>
   </td>
  </tr>
  </tbody>
@@ -61,6 +61,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="class_base_equipment-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">BaseEquipment Class Reference</div>  </div>
@@ -112,6 +113,15 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9385e434eadeb88ae3fe54329cd27560 inherit pub_methods_class_base_item"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa02081a0e9fd6a6b97af57fe9a72742b inherit pub_methods_class_base_item"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base_item.html#aa02081a0e9fd6a6b97af57fe9a72742b">getItemTier</a> ()</td></tr>
 <tr class="separator:aa02081a0e9fd6a6b97af57fe9a72742b inherit pub_methods_class_base_item"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:aba57e9716c7396f30bb3b63017c47e97"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_base_equipment_8h.html#a5e2e8942ef9590fbe927c5786bb767f6">EquipmentType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base_equipment.html#aba57e9716c7396f30bb3b63017c47e97">_equipmentType</a></td></tr>
+<tr class="separator:aba57e9716c7396f30bb3b63017c47e97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abcb54f7ad0063d6ef3eea76a5ec05432"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_character_stats_8h.html#a0377d05acdea63cda6e20a360dd447f7">StatType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base_equipment.html#abcb54f7ad0063d6ef3eea76a5ec05432">_mainStat</a></td></tr>
+<tr class="separator:abcb54f7ad0063d6ef3eea76a5ec05432"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5cc17d17c3a514fc63830ef77e3eb263"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_stat_range.html">StatRange</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_base_equipment.html#a5cc17d17c3a514fc63830ef77e3eb263">_baseStats</a></td></tr>
+<tr class="separator:a5cc17d17c3a514fc63830ef77e3eb263"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a11217398dfd3ae45a90b02dd58db5aee"></a>
@@ -296,6 +306,73 @@ Public Member Functions</h2></td></tr>
           <td></td>
         </tr>
       </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a5cc17d17c3a514fc63830ef77e3eb263"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5cc17d17c3a514fc63830ef77e3eb263">&#9670;&nbsp;</a></span>_baseStats</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="class_stat_range.html">StatRange</a>*&gt; BaseEquipment::_baseStats</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aba57e9716c7396f30bb3b63017c47e97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba57e9716c7396f30bb3b63017c47e97">&#9670;&nbsp;</a></span>_equipmentType</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="_base_equipment_8h.html#a5e2e8942ef9590fbe927c5786bb767f6">EquipmentType</a> BaseEquipment::_equipmentType</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abcb54f7ad0063d6ef3eea76a5ec05432"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abcb54f7ad0063d6ef3eea76a5ec05432">&#9670;&nbsp;</a></span>_mainStat</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="_character_stats_8h.html#a0377d05acdea63cda6e20a360dd447f7">StatType</a> BaseEquipment::_mainStat</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>

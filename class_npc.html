@@ -23,7 +23,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Diabro
    </div>
-   <div id="projectbrief">This project is currently developed by team 5 for Project Game Technology. Most of the design is inspired by Diablo III and the main challange in developing this game is the combination between different procedural content generation for items, dungeons and quests.</div>
+   <div id="projectbrief">This project is developed by team 5 for Project Game Technology.</div>
   </td>
  </tr>
  </tbody>
@@ -62,6 +62,8 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="class_npc-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Npc Class Reference</div>  </div>
@@ -157,6 +159,34 @@ Public Member Functions</h2></td></tr>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a177dcaca30670cedf2c4b2b0015e9f63"><td class="memItemLeft" align="right" valign="top">static Ogre::String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_npc.html#a177dcaca30670cedf2c4b2b0015e9f63">getMeshName</a> ()</td></tr>
 <tr class="separator:a177dcaca30670cedf2c4b2b0015e9f63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a1aded316ff23d323d4d33588a3517ad7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_npc.html#a1aded316ff23d323d4d33588a3517ad7">adjustNeed</a> (<a class="el" href="_needs_8h.html#aee14a8d366fdd1aea93a64ac6aad9dc3">NeedType</a>, int)</td></tr>
+<tr class="memdesc:a1aded316ff23d323d4d33588a3517ad7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adjusts the given need.  <a href="#a1aded316ff23d323d4d33588a3517ad7">More...</a><br /></td></tr>
+<tr class="separator:a1aded316ff23d323d4d33588a3517ad7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a120bb498c8bec886c6eda0a337276bda"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_npc.html#a120bb498c8bec886c6eda0a337276bda">_inDialog</a></td></tr>
+<tr class="memdesc:a120bb498c8bec886c6eda0a337276bda"><td class="mdescLeft">&#160;</td><td class="mdescRight">True if the player is currently talking with this NPC.  <a href="#a120bb498c8bec886c6eda0a337276bda">More...</a><br /></td></tr>
+<tr class="separator:a120bb498c8bec886c6eda0a337276bda"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46937ac88c58b1551e7ecca7cfd4c862"><td class="memItemLeft" align="right" valign="top">std::ifstream&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_npc.html#a46937ac88c58b1551e7ecca7cfd4c862">_dialogFile</a></td></tr>
+<tr class="memdesc:a46937ac88c58b1551e7ecca7cfd4c862"><td class="mdescLeft">&#160;</td><td class="mdescRight">File containing the dialog text for this NPC.  <a href="#a46937ac88c58b1551e7ecca7cfd4c862">More...</a><br /></td></tr>
+<tr class="separator:a46937ac88c58b1551e7ecca7cfd4c862"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa232234bb3189f1d4055c30c37facc3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_npc.html#afa232234bb3189f1d4055c30c37facc3">_dialogCount</a></td></tr>
+<tr class="memdesc:afa232234bb3189f1d4055c30c37facc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">The amount of different parts the dialog consists of.  <a href="#afa232234bb3189f1d4055c30c37facc3">More...</a><br /></td></tr>
+<tr class="separator:afa232234bb3189f1d4055c30c37facc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6606fe91bf07a86516244cd1b989b1cc"><td class="memItemLeft" align="right" valign="top">Ogre::String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_npc.html#a6606fe91bf07a86516244cd1b989b1cc">_startDialogText</a></td></tr>
+<tr class="separator:a6606fe91bf07a86516244cd1b989b1cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20a5c125bfe4648511673fc874ba24f3"><td class="memItemLeft" align="right" valign="top">Ogre::String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_npc.html#a20a5c125bfe4648511673fc874ba24f3">_endDialogText</a></td></tr>
+<tr class="separator:a20a5c125bfe4648511673fc874ba24f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84151278a1814e13fba9f02eb4b6211c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_need_set.html">NeedSet</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_npc.html#a84151278a1814e13fba9f02eb4b6211c">_needs</a></td></tr>
+<tr class="memdesc:a84151278a1814e13fba9f02eb4b6211c"><td class="mdescLeft">&#160;</td><td class="mdescRight">A set of needs, when the value of a need is low, this NPC wants something.  <a href="#a84151278a1814e13fba9f02eb4b6211c">More...</a><br /></td></tr>
+<tr class="separator:a84151278a1814e13fba9f02eb4b6211c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a666098454d29557bff5aac443b2339fb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_npc_8h.html#a1698c91a11e2aa9dae386a206abf6ca1">Profession</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_npc.html#a666098454d29557bff5aac443b2339fb">_profession</a></td></tr>
+<tr class="memdesc:a666098454d29557bff5aac443b2339fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">The profession of the NPC, used to generate relevant quests.  <a href="#a666098454d29557bff5aac443b2339fb">More...</a><br /></td></tr>
+<tr class="separator:a666098454d29557bff5aac443b2339fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -297,6 +327,51 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a1aded316ff23d323d4d33588a3517ad7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1aded316ff23d323d4d33588a3517ad7">&#9670;&nbsp;</a></span>adjustNeed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Npc::adjustNeed </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="_needs_8h.html#aee14a8d366fdd1aea93a64ac6aad9dc3">NeedType</a>&#160;</td>
+          <td class="paramname"><em>pNeedType</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pAdjust</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Adjusts the given need. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pNeedType</td><td>Type of the need.</td></tr>
+    <tr><td class="paramname">pAdjust</td><td>The adjustment value.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="aaa36873f8f8545bbcd1e12edd1b877e2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aaa36873f8f8545bbcd1e12edd1b877e2">&#9670;&nbsp;</a></span>continueDialog()</h2>
 
@@ -474,6 +549,171 @@ Additional Inherited Members</h2></td></tr>
 </dl>
 
 <p>Reimplemented from <a class="el" href="class_base_npc.html#a5da40fcc9bde57f0ed8eb95719c96648">BaseNpc</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="afa232234bb3189f1d4055c30c37facc3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa232234bb3189f1d4055c30c37facc3">&#9670;&nbsp;</a></span>_dialogCount</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Npc::_dialogCount</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The amount of different parts the dialog consists of. </p>
+
+</div>
+</div>
+<a id="a46937ac88c58b1551e7ecca7cfd4c862"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46937ac88c58b1551e7ecca7cfd4c862">&#9670;&nbsp;</a></span>_dialogFile</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::ifstream Npc::_dialogFile</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>File containing the dialog text for this NPC. </p>
+
+</div>
+</div>
+<a id="a20a5c125bfe4648511673fc874ba24f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20a5c125bfe4648511673fc874ba24f3">&#9670;&nbsp;</a></span>_endDialogText</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Ogre::String Npc::_endDialogText</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a120bb498c8bec886c6eda0a337276bda"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a120bb498c8bec886c6eda0a337276bda">&#9670;&nbsp;</a></span>_inDialog</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Npc::_inDialog</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>True if the player is currently talking with this NPC. </p>
+
+</div>
+</div>
+<a id="a84151278a1814e13fba9f02eb4b6211c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84151278a1814e13fba9f02eb4b6211c">&#9670;&nbsp;</a></span>_needs</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_need_set.html">NeedSet</a>* Npc::_needs</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>A set of needs, when the value of a need is low, this NPC wants something. </p>
+
+</div>
+</div>
+<a id="a666098454d29557bff5aac443b2339fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a666098454d29557bff5aac443b2339fb">&#9670;&nbsp;</a></span>_profession</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="_npc_8h.html#a1698c91a11e2aa9dae386a206abf6ca1">Profession</a> Npc::_profession</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The profession of the NPC, used to generate relevant quests. </p>
+
+</div>
+</div>
+<a id="a6606fe91bf07a86516244cd1b989b1cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6606fe91bf07a86516244cd1b989b1cc">&#9670;&nbsp;</a></span>_startDialogText</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Ogre::String Npc::_startDialogText</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>

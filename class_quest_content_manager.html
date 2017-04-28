@@ -23,7 +23,7 @@
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Diabro
    </div>
-   <div id="projectbrief">This project is currently developed by team 5 for Project Game Technology. Most of the design is inspired by Diablo III and the main challange in developing this game is the combination between different procedural content generation for items, dungeons and quests.</div>
+   <div id="projectbrief">This project is developed by team 5 for Project Game Technology.</div>
   </td>
  </tr>
  </tbody>
@@ -61,6 +61,8 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="class_quest_content_manager-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">QuestContentManager Class Reference</div>  </div>
@@ -81,6 +83,22 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ae76173c2d3451daa957a9229c1434a07"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e356dc4f8d8cea47734a15d938a3cfc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_quest_item_generator.html">QuestItemGenerator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_quest_content_manager.html#a8e356dc4f8d8cea47734a15d938a3cfc">getItemGenerator</a> ()</td></tr>
 <tr class="separator:a8e356dc4f8d8cea47734a15d938a3cfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a95fa15246c3c4972709ceb224b749d62"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_quest_content_manager.html#a95fa15246c3c4972709ceb224b749d62">readFromXML</a> ()</td></tr>
+<tr class="memdesc:a95fa15246c3c4972709ceb224b749d62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads from QuestItems.XML to fill the quest item container.  <a href="#a95fa15246c3c4972709ceb224b749d62">More...</a><br /></td></tr>
+<tr class="separator:a95fa15246c3c4972709ceb224b749d62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf9fbf52169af51c52142f73e85f4207"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_base_quest_item.html">BaseQuestItem</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_quest_content_manager.html#aaf9fbf52169af51c52142f73e85f4207">readFromXMLQuestItemList</a> (const char *, <a class="el" href="_base_quest_item_8h.html#a31b1a7cde307edbb3ccce3497dd08069">QuestItemType</a>, <a class="el" href="classtinyxml2_1_1_x_m_l_element.html">tinyxml2::XMLElement</a> *)</td></tr>
+<tr class="memdesc:aaf9fbf52169af51c52142f73e85f4207"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads from QuestItems.XML the specified type of items.  <a href="#aaf9fbf52169af51c52142f73e85f4207">More...</a><br /></td></tr>
+<tr class="separator:aaf9fbf52169af51c52142f73e85f4207"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:ac941645a8dd629cdcfd3e98b132feb05"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_quest_item_container.html">QuestItemContainer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_quest_content_manager.html#ac941645a8dd629cdcfd3e98b132feb05">_itemContainer</a></td></tr>
+<tr class="separator:ac941645a8dd629cdcfd3e98b132feb05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af695c790004f04d51d8660b276f32705"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_quest_item_generator.html">QuestItemGenerator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_quest_content_manager.html#af695c790004f04d51d8660b276f32705">_itemGenerator</a></td></tr>
+<tr class="separator:af695c790004f04d51d8660b276f32705"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a7070d5b748e6ecc7c97bc5d58c2137ad"></a>
@@ -166,6 +184,131 @@ Public Member Functions</h2></td></tr>
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a95fa15246c3c4972709ceb224b749d62"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a95fa15246c3c4972709ceb224b749d62">&#9670;&nbsp;</a></span>readFromXML()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void QuestContentManager::readFromXML </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reads from QuestItems.XML to fill the quest item container. </p>
+
+</div>
+</div>
+<a id="aaf9fbf52169af51c52142f73e85f4207"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf9fbf52169af51c52142f73e85f4207">&#9670;&nbsp;</a></span>readFromXMLQuestItemList()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="class_base_quest_item.html">BaseQuestItem</a> * &gt; QuestContentManager::readFromXMLQuestItemList </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>pQuestItemType</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="_base_quest_item_8h.html#a31b1a7cde307edbb3ccce3497dd08069">QuestItemType</a>&#160;</td>
+          <td class="paramname"><em>pType</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtinyxml2_1_1_x_m_l_element.html">tinyxml2::XMLElement</a> *&#160;</td>
+          <td class="paramname"><em>pRootNode</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reads from QuestItems.XML the specified type of items. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pQuestItemType</td><td>Quest item type to load in string form.</td></tr>
+    <tr><td class="paramname">pType</td><td>Quest item type to load in enum form.</td></tr>
+    <tr><td class="paramname">pRootNode</td><td>The root node of the XML.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ac941645a8dd629cdcfd3e98b132feb05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac941645a8dd629cdcfd3e98b132feb05">&#9670;&nbsp;</a></span>_itemContainer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_quest_item_container.html">QuestItemContainer</a>* QuestContentManager::_itemContainer</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af695c790004f04d51d8660b276f32705"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af695c790004f04d51d8660b276f32705">&#9670;&nbsp;</a></span>_itemGenerator</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_quest_item_generator.html">QuestItemGenerator</a>* QuestContentManager::_itemGenerator</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
