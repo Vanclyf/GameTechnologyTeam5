@@ -9,6 +9,11 @@
 #include "WeaponInstance.h"
 #include "EquimentInstance.h"
 
+/// <summary>
+/// The Character class is the superclass for all different kinds of characters.
+/// It contains methods and variables for movement and combat.
+/// Player and BaseNPC both inherit from this class. 
+/// </summary>
 class Character
 {
 public:
