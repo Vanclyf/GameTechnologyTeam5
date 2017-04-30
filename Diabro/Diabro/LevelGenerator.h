@@ -11,8 +11,8 @@ public:
 	~LevelGenerator();
 
 private:
-	void createCityMesh(int pX, int pY, int pZ, int pWidth, int pHeight, int pDepth, std::string pName, Ogre::ColourValue pColour) const;
-	void placeCity(int pX, int pY, int pZ, int pWidth, int pHeight, int pDepth, std::string pName, Ogre::ColourValue pColour) const;
+	void createCityMesh(City pCity, int scalar, std::string pName, Ogre::ColourValue pColour) const;
+	void placeCity(City pCity, std::string pName, Ogre::ColourValue pColour) const;
 };
 
 #endif

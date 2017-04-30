@@ -7,18 +7,18 @@
 
 LevelGenerator::LevelGenerator() 
 {
-	Zone z = Zone(30, 30, 4, 4, 10, 100);
+	Zone z = Zone(19, 19, 7, 7, 8, 100);
 
-	//place geometry for each city
+	//place geometry for each pCity
 	for (int i = 0; i < z.cities.size(); ++i) {
 		City c = z.cities[i];
 		
-		//create unique city pName (just a number)
+		//create unique pCity pName (just a number)
 		std::stringstream sstm; 
-		sstm << "city-" << i;
+		sstm << "pCity-" << i;
 
-		placeCity(c.x * 1000, 1, c.z * 1000, c.width * 1000, 1000, c.depth * 1000, sstm.str(), Ogre::ColourValue(0.5, 0.5, 0.5, 1.0));
-		//TODO: generate city
+		placeCity(c, sstm.str(), Ogre::ColourValue(0.5, 0.5, 0.5, 1.0));
+		//TODO: generate pCity
 	}
 }
 
@@ -26,24 +26,13 @@ LevelGenerator::~LevelGenerator()
 {
 }
 
-/// <summary>
-/// Places a city-representing mesh.
-/// </summary>
-/// <param pName="pX">The pX position of the city.</param>
-/// <param pName="pY">The pY position of the city.</param>
-/// <param pName="pZ">The pZ position of the city.</param>
-/// <param pName="pW">The width of the city.</param>
-/// <param pName="pH">The height of the city.</param>
-/// <param pName="pD">The depth of the city.</param>
-/// <param pName="pName">A unique pName for the city.</param>
-/// <param pName="pColour">The pColour of the drawn cube.</param>
-void LevelGenerator::placeCity(int pX, int pY, int pZ, int pW, int pH, int pD, std::string pName, Ogre::ColourValue pColour) const {
-	createCityMesh(pX, pY, pZ, pW, pH, pD, pName, pColour);
+void LevelGenerator::placeCity(City pCity, std::string pName, Ogre::ColourValue pColour) const {
+	createCityMesh(pCity, 1000, pName, pColour);//scalar set to 1000 for size
 	Ogre::MaterialPtr material = Ogre::MaterialManager::getSingleton().create(
 		"Test/ColourTest", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
 	material->getTechnique(0)->getPass(0)->setVertexColourTracking(Ogre::TVC_AMBIENT);
 
-	Ogre::Entity* testCity = GameManager::getSingleton().getSceneManager()->createEntity("city - " + pName, pName);
+	Ogre::Entity* testCity = GameManager::getSingleton().getSceneManager()->createEntity("pCity - " + pName, pName);
 	testCity->setMaterialName("Test/ColourTest");
 
 	Ogre::SceneNode* thisSceneNode = GameManager::getSingleton().getSceneManager()->getRootSceneNode()->createChildSceneNode();
@@ -52,7 +41,7 @@ void LevelGenerator::placeCity(int pX, int pY, int pZ, int pW, int pH, int pD, s
 }
 
 /// <summary>
-/// Creates the a 3D mesh, representing the space around the city. (will however still be replaced)
+/// Creates the a 3D mesh, representing the space around the pCity. (will however still be replaced)
 /// </summary>
 /// <param pName="pX">The pX position of the room.</param>
 /// <param pName="pY">The pY position.</param>
@@ -62,7 +51,7 @@ void LevelGenerator::placeCity(int pX, int pY, int pZ, int pW, int pH, int pD, s
 /// <param pName="pD">The depth.</param>
 /// <param pName="pName">The pName.</param>
 /// <param pName="pColour">The pColour.</param>
-void LevelGenerator::createCityMesh(int pX, int pY, int pZ, int pW, int pH, int pD, std::string pName, Ogre::ColourValue pColour) const {
+void LevelGenerator::createCityMesh(City pCity, int scalar, std::string pName, Ogre::ColourValue pColour) const {
 	//TODO: generate as whole zone, so pathways are accounted for (will be new method)
 
 	Ogre::MeshPtr mesh = Ogre::MeshManager::getSingleton().createManual(pName, "General");
@@ -70,26 +59,33 @@ void LevelGenerator::createCityMesh(int pX, int pY, int pZ, int pW, int pH, int 
 	Ogre::SubMesh* sub = mesh->createSubMesh();
 
 	const float sqrt13 = 0.577350269f; /*sqrt(1/3)*/
+	int x = pCity.position.x * scalar;
+	int y = 1;
+	int z = pCity.position.z * scalar;
+
+	int w = pCity.width * scalar;
+	int h = 1 * scalar;
+	int d = pCity.depth * scalar;
 
 	//create vertices
 	const size_t nVertices = 8;
 	const size_t vBufCount = 3 * 2 * nVertices;
 	float vertices[vBufCount] = {
-		static_cast<float>(pX), static_cast<float>(pY + pH), static_cast<float>(pZ),           //0
+		static_cast<float>(x), static_cast<float>(y + h), static_cast<float>(z),         //0
 		-sqrt13, sqrt13,  -sqrt13,
-		static_cast<float>(pX + pW), static_cast<float>(pY + pH), static_cast<float>(pZ),      //1
+		static_cast<float>(x + w), static_cast<float>(y + h), static_cast<float>(z),     //1
 		sqrt13,  sqrt13,  -sqrt13,
-		static_cast<float>(pX + pW), static_cast<float>(pY), static_cast<float>(pZ),           //2
+		static_cast<float>(x + w), static_cast<float>(y), static_cast<float>(z),         //2
 		sqrt13,  -sqrt13, -sqrt13,
-		static_cast<float>(pX), static_cast<float>(pY), static_cast<float>(pZ),		           //3
+		static_cast<float>(x), static_cast<float>(y), static_cast<float>(z),		     //3
 		-sqrt13, -sqrt13, -sqrt13,
-		static_cast<float>(pX), static_cast<float>(pY + pH), static_cast<float>(pZ + pD),      //4
+		static_cast<float>(x), static_cast<float>(y + h), static_cast<float>(z + d),     //4
 		-sqrt13, sqrt13,  sqrt13,
-		static_cast<float>(pX + pW), static_cast<float>(pY + pH), static_cast<float>(pZ + pD), //5
+		static_cast<float>(x + w), static_cast<float>(y + h), static_cast<float>(z + d), //5
 		sqrt13,  sqrt13,  sqrt13,
-		static_cast<float>(pX + pW), static_cast<float>(pY), static_cast<float>(pZ + pD),	   //6
+		static_cast<float>(x + w), static_cast<float>(y), static_cast<float>(z + d),	 //6
 		sqrt13,  -sqrt13, sqrt13,
-		static_cast<float>(pX), static_cast<float>(pY), static_cast<float>(pZ + pD),	       //7
+		static_cast<float>(x), static_cast<float>(y), static_cast<float>(z + d),	     //7
 		-sqrt13, -sqrt13, sqrt13,
 	};
 
@@ -168,7 +164,7 @@ void LevelGenerator::createCityMesh(int pX, int pY, int pZ, int pW, int pH, int 
 	sub->indexData->indexCount = iBufCount;
 	sub->indexData->indexStart = 0;
 
-	mesh->_setBounds(Ogre::AxisAlignedBox(pX, pY, pZ, pX + pW, pY + pH, pZ + pD));
+	mesh->_setBounds(Ogre::AxisAlignedBox(x, y, z, x + w, y + h, z + d));
 
 	mesh->load();
 }
