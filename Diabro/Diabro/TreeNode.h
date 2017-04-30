@@ -22,7 +22,7 @@ public:
 	/// </summary>
 	/// <param name="pIndex">Index of the child.</param>
 	/// <returns></returns>
-	TreeNode<T>* getChildAt(int pIndex) { return _children.size() < pIndex ? _children[pIndex] : nullptr; }
+	TreeNode<T>* getChildAt(int pIndex) { return _children.size() > pIndex ? _children[pIndex] : nullptr; }
 
 	/// <summary>
 	/// Returns the parent of this node.
@@ -48,10 +48,10 @@ public:
 	void addChildren(std::vector<TreeNode<T>*>);
 	int insertChild(TreeNode<T>*, int);
 
-	void removeChildren();
+	int removeChildren();
 	void removeChild(int);
 
-	void destroy();
+	int destroy();
 
 protected:
 	std::vector<TreeNode<T>*> _children;

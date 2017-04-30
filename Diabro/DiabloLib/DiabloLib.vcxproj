@@ -159,6 +159,8 @@
     <ClInclude Include="..\Diabro\Npc.h" />
     <ClInclude Include="..\Diabro\Player.h" />
     <ClInclude Include="..\Diabro\StatRange.h" />
+    <ClInclude Include="..\Diabro\Tree.h" />
+    <ClInclude Include="..\Diabro\TreeNode.h" />
     <ClInclude Include="..\Diabro\UIManager.h" />
   </ItemGroup>
   <ItemGroup>
@@ -177,6 +179,8 @@
     <ClCompile Include="..\Diabro\LevelManager.cpp" />
     <ClCompile Include="..\Diabro\Npc.cpp" />
     <ClCompile Include="..\Diabro\Player.cpp" />
+    <ClCompile Include="..\Diabro\Tree.cpp" />
+    <ClCompile Include="..\Diabro\TreeNode.cpp" />
     <ClCompile Include="..\Diabro\UIManager.cpp" />
   </ItemGroup>
   <ItemGroup>

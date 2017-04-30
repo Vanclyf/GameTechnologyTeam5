@@ -89,40 +89,6 @@ void GameManager::createScene(void)
 
 	_uiManager = new UIManager();
 	_uiManager->init();
-
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	Tree<int>* myTree = new Tree<int>();
-	myTree->setRoot(1);
-
-	std::vector<int> data;
-	data.push_back(1);
-	data.push_back(2);
-	data.push_back(3);
-	myTree->addNodes(data);
-
-	std::vector<int> datanode2;
-	datanode2.push_back(100);
-	datanode2.push_back(200);
-	myTree->addNodes(datanode2, myTree->getRoot()->getChildren()[1]);
-
-	FILE* fp;
-	freopen_s(&fp, "CONOUT$", "w", stdout);
-	std::cout << "root node " << myTree->getRootData() << std::endl;
-	std::vector<TreeNode<int>*> preorderTree = myTree->preorder();
-	for (int i = 0; i < preorderTree.size(); ++i) {
-		std::cout << preorderTree[i]->getData() << std::endl;
-	}
-	std::cout << std::endl;
-
-	myTree->removeNode(myTree->getRoot()->getChildren()[2]);
-	
-	preorderTree = myTree->preorder();
-	for (int i = 0; i < preorderTree.size(); ++i) {
-		std::cout << preorderTree[i]->getData() << std::endl;
-	}
-
-	fclose(fp);
-#endif
 }
 
 /// <summary>

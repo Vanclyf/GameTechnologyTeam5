@@ -77,14 +77,18 @@ int TreeNode<T>::insertChild(TreeNode<T>* pNode, int pIndex) {
 /// Removes all children.
 /// </summary>
 template<typename T>
-void TreeNode<T>::removeChildren() {
+int TreeNode<T>::removeChildren() {
+	int removedChildren = 0;
+
 	// destroy each child
 	for (int i = 0; i < _children.size(); ++i) {
-		_children[i]->destroy();
+		removedChildren += _children[i]->destroy();
 	}
 
 	// erase the children from the list
 	_children.erase(_children.begin(), _children.end());
+
+	return removedChildren;
 }
 
 /// <summary>
@@ -109,25 +113,31 @@ void TreeNode<T>::removeChild(int pIndex) {
 /// Destroys this instance.
 /// </summary>
 template<typename T>
-void TreeNode<T>::destroy() {
+int TreeNode<T>::destroy() {
 	// if this node is going to be destroyed, but it still has children,
 	// remove the children first
-	if (_children.size() > 0) removeChildren();
+	int removedNodes = 1;
+
+	if (_children.size() > 0) removedNodes += removeChildren();
 
 	// find the index of this node in the children of this parent
-	int index;
-	for (int i = 0; i < _parent->getChildren().size(); ++i) {
-		if (_parent->getChildren()[i] == this) {
-			index = i;
-			break;
+	if(_parent != nullptr) {
+		int index;
+		for (int i = 0; i < _parent->getChildren().size(); ++i) {
+			if (_parent->getChildren()[i] == this) {
+				index = i;
+				break;
+			}
 		}
-	}
 
-	// remove this node from its parent
-	_parent->removeChildFromDestroy(index);
+		// remove this node from its parent
+		_parent->removeChildFromDestroy(index);
+	}
 
 	//TODO: find a way to delete the data in a generic way
 	//delete _data;
+
+	return removedNodes;
 }
 
 /// <summary>

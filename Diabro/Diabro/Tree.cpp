@@ -115,7 +115,8 @@ void Tree<T>::removeNode(TreeNode<T>* pNode) {
 	// if the node exists
 	if (pNode) {
 		// call its destory method
-		pNode->destroy();
+		int removedNodes = pNode->destroy();
+		_size -= removedNodes;
 	}
 }
 
