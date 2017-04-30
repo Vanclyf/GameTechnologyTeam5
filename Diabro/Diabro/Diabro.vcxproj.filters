@@ -25,9 +25,6 @@
     <ClCompile Include="GameManager.cpp">
       <Filter>Sources\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="BaseApplication.cpp">
-      <Filter>Sources\Managers</Filter>
-    </ClCompile>
     <ClCompile Include="ItemManager.cpp">
       <Filter>Sources\Managers</Filter>
     </ClCompile>
@@ -92,6 +89,9 @@
     <ClCompile Include="Zone.cpp">
       <Filter>Sources\LevelGeneration</Filter>
     </ClCompile>
+    <ClCompile Include="OgreManager.cpp">
+      <Filter>Sources\Managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseNpc.h">
@@ -116,9 +116,6 @@
       <Filter>Headers\Managers</Filter>
     </ClInclude>
     <ClInclude Include="LevelManager.h">
-      <Filter>Headers\Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="BaseApplication.h">
       <Filter>Headers\Managers</Filter>
     </ClInclude>
     <ClInclude Include="GameManager.h">
@@ -208,6 +205,9 @@
     </ClInclude>
     <ClInclude Include="City.h">
       <Filter>Headers\LevelGeneration</Filter>
+    </ClInclude>
+    <ClInclude Include="OgreManager.h">
+      <Filter>Headers\Managers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

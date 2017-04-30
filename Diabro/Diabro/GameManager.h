@@ -7,28 +7,31 @@ Filename:    GameManager.h
 #ifndef GAMEMANAGER_H_
 #define GAMEMANAGER_H_
 
-#include "BaseApplication.h"
-#include "LevelManager.h"
 #include <OgreSingleton.h>
+#include "OgreManager.h"
 #include "UIManager.h"
 #include "ItemManager.h"
 #include "QuestContentManager.h"
+#include "LevelManager.h"
 
 //---------------------------------------------------------------------------
 
-class GameManager : public BaseApplication, public Ogre::Singleton<GameManager>
+class GameManager : public OgreManager, public Ogre::Singleton<GameManager>
 {
 public:
 	GameManager(void);
-	~GameManager(void);
+	virtual ~GameManager(void);
+
+	//virtual void go();
 
 	Ogre::String nodeOfSceneXML;
 
 	static GameManager& getSingleton(void);
 	static GameManager* getSingletonPtr(void);
+	
 
-	Ogre::SceneManager* getSceneManager(void) { return mSceneMgr; }
-	Ogre::Camera* getCamera(void) { return mCamera; }
+	Ogre::SceneManager* getSceneManager(void) { return _mSceneMgr; }
+	Ogre::Camera* getCamera(void) { return _mCamera; }
 	Ogre::Timer* getGameTime(void) { return _gameTimer; }
 
 	LevelManager* getLevelManager(void) { return _levelManager; }
@@ -36,30 +39,33 @@ public:
 	ItemManager* getItemManager(void) { return _itemManager; }
 	QuestContentManager* getQuestContentManager(void) { return _questContentManager; }
 
-	int getRandomNumberBetween(int, int);
+	static int getRandomNumberBetween(int, int);
 
 protected:
-    virtual void createScene(void);
-	virtual void createCamera(void);
-	virtual void createViewports(void);
-	virtual void createFrameListener(void);
-	
+	void createScene(void) override;
+	void destroyScene(void) override;
+	void createCamera(void) override;
+	void createViewports(void) override;
+
 	static void setupLights(Ogre::SceneManager*);
+
+	bool frameRenderingQueued(const Ogre::FrameEvent&) override;
+	bool keyPressed(const OIS::KeyEvent&) override;
+	bool keyReleased(const OIS::KeyEvent&) override;
+	bool mouseMoved(const OIS::MouseEvent&) override;
+	bool mousePressed(const OIS::MouseEvent&, OIS::MouseButtonID) override;
+	bool mouseReleased(const OIS::MouseEvent&, OIS::MouseButtonID) override;
+
 	
 private:
-	virtual bool frameRenderingQueued(const Ogre::FrameEvent&);
-	virtual bool keyPressed(const OIS::KeyEvent&);
-	virtual bool keyReleased(const OIS::KeyEvent&);
-	virtual bool mouseMoved(const OIS::MouseEvent&);
-	virtual bool mousePressed(const OIS::MouseEvent&, OIS::MouseButtonID);
-	virtual bool mouseReleased(const OIS::MouseEvent&, OIS::MouseButtonID);
-
 	LevelManager* _levelManager;
 	UIManager* _uiManager;
 	ItemManager* _itemManager;
 	QuestContentManager* _questContentManager;
-
 	Ogre::Timer* _gameTimer;
+
+	
+
 };
 
 //---------------------------------------------------------------------------

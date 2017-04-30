@@ -56,6 +56,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(OGRE_HOME)\include;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\Samples\Common\include;$(OGRE_HOME)\boost;$(OGRE_HOME)\include\OGRE\Overlay;&lt;boost_path&gt;\stage\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -70,6 +71,9 @@
       <Command>
       </Command>
     </PreLinkEvent>
+    <Bscmake>
+      <PreserveSBR>true</PreserveSBR>
+    </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -107,7 +111,6 @@
     <None Include="testMaterial.material" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BaseApplication.cpp" />
     <ClCompile Include="BaseEquipment.cpp" />
     <ClCompile Include="BaseItem.cpp" />
     <ClCompile Include="BaseNpc.cpp" />
@@ -128,6 +131,7 @@
     <ClCompile Include="LevelGenerator.cpp" />
     <ClCompile Include="Npc.cpp" />
     <ClCompile Include="LevelManager.cpp" />
+    <ClCompile Include="OgreManager.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="QuestContentManager.cpp" />
     <ClCompile Include="QuestItemContainer.cpp" />
@@ -141,7 +145,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Affix.h" />
-    <ClInclude Include="BaseApplication.h" />
     <ClInclude Include="BaseEquipment.h" />
     <ClInclude Include="BaseItem.h" />
     <ClInclude Include="BaseNpc.h" />
@@ -166,6 +169,7 @@
     <ClInclude Include="Npc.h" />
     <ClInclude Include="LevelManager.h" />
     <ClInclude Include="Modifier.h" />
+    <ClInclude Include="OgreManager.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="State.h" />

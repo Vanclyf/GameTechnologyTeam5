@@ -5,8 +5,7 @@ Filename:    GameManager.cpp
 
 */
 #include "GameManager.h"
-#include "SdkTrays.h"
-#include "TestFSM.h"
+
 
 //---------------------------------------------------------------------------
 
@@ -15,7 +14,12 @@ Filename:    GameManager.cpp
 /// This class is the central manager of the game and has therefore the only singleton instance.
 /// It contains all other managers.
 /// </summary>
-GameManager::GameManager() : _levelManager(0), _uiManager(0), _itemManager(0), _questContentManager(0), _gameTimer(0)
+GameManager::GameManager(void)
+	: _levelManager(0),
+	_uiManager(0),
+	_itemManager(0),
+	_questContentManager(0),
+	_gameTimer(0)
 {
 }
 //---------------------------------------------------------------------------
@@ -24,11 +28,12 @@ GameManager::GameManager() : _levelManager(0), _uiManager(0), _itemManager(0), _
 /// </summary>
 GameManager::~GameManager()
 {
-	delete _gameTimer;
-	delete _levelManager;
-	delete _uiManager;
-	delete _itemManager;
-	delete _questContentManager;
+	if (_gameTimer) delete _gameTimer;
+	if (_levelManager) delete _levelManager;
+	if (_uiManager) delete _uiManager;
+	if (_itemManager) delete _itemManager;
+	if (_questContentManager) delete _questContentManager;
+
 }
 
 //---------------------------------------------------------------------------
@@ -65,6 +70,7 @@ int GameManager::getRandomNumberBetween(int pLow, int pHigh) {
 }
 
 
+
 /// <summary>
 /// Creates the scene.
 /// </summary>
@@ -72,14 +78,14 @@ void GameManager::createScene(void)
 {
 	_gameTimer = new Ogre::Timer();
 
-    // set lights
-	setupLights(mSceneMgr);
-	
+	// set lights
+	setupLights(_mSceneMgr);
+
 	// set shadow technique
-	mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
+	_mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 
+    
 	_itemManager = new ItemManager();
-
 
 	_levelManager = new LevelManager();
 	_levelManager->initialize();
@@ -88,8 +94,14 @@ void GameManager::createScene(void)
 
 	_uiManager = new UIManager();
 	_uiManager->init();
+
+	
+
 }
 
+void GameManager::destroyScene()
+{
+}
 /// <summary>
 /// Setups the lights.
 /// </summary>
@@ -123,15 +135,16 @@ void GameManager::setupLights(Ogre::SceneManager* pSceneMgr)
 void GameManager::createCamera()
 {
 	// create the camera
-	mCamera = mSceneMgr->createCamera("MainCam");
+	_mCamera = _mSceneMgr->createCamera("MainCam");
 
 	// set pos and rot
-	mCamera->setPosition(Ogre::Vector3(0, 300, 500));
-	mCamera->lookAt(Ogre::Vector3(0, 0, 0));
-	mCamera->setNearClipDistance(5);
+	_mCamera->setPosition(Ogre::Vector3(0, 300, 500));
+	_mCamera->lookAt(Ogre::Vector3(0, 0, 0));
+	_mCamera->setNearClipDistance(5);
 
 	// create the camera man
-	mCameraMan = new OgreBites::SdkCameraMan(mCamera);
+	//can be removed
+	_mCameraMan = new OgreBites::SdkCameraMan(_mCamera);
 }
 
 /// <summary>
@@ -140,25 +153,15 @@ void GameManager::createCamera()
 void GameManager::createViewports()
 {
 	// add a viewport
-	Ogre::Viewport* vp = mWindow->addViewport(mCamera);
+	Ogre::Viewport* vp = _mWindow->addViewport(_mCamera);
 
 	// set background viewport
 	vp->setBackgroundColour(Ogre::ColourValue(0, 0, 0));
 
 	// as aspect ratio to avoid distortion
-	mCamera->setAspectRatio(
+	_mCamera->setAspectRatio(
 		Ogre::Real(vp->getActualWidth()) /
 		Ogre::Real(vp->getActualHeight()));
-}
-
-/// <summary>
-/// Creates the frame listener.
-/// </summary>
-void GameManager::createFrameListener(void)
-{
-	BaseApplication::createFrameListener();
-
-	return;
 }
 
 /// <summary>
@@ -167,13 +170,25 @@ void GameManager::createFrameListener(void)
 /// <param name="pFE">The frame event.</param>
 bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& pFE)
 {
-	bool ret = BaseApplication::frameRenderingQueued(pFE);
+	if (_mWindow->isClosed())
+	{
+		return false;
+	}
+	if (_mShutDown)
+	{
+		return false;
+	}
+
+	_mKeyboard->capture();
+	_mMouse->capture();
 
 	_levelManager->update(pFE);
- 
-	return ret;
+	return true;
 }
 
+
+
+//--------------------------------------------------------------------------
 /// <summary>
 /// Called when a key is pressed.
 /// </summary>
@@ -185,9 +200,9 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 
 	switch (pKE.key)
 	{
-		// on esc close app
+		/*on esc close app*/
 	case OIS::KC_ESCAPE:
-		mShutDown = true;
+		_mShutDown = true;
 		break;
 	case OIS::KC_UP:
 	case OIS::KC_W:
@@ -208,12 +223,12 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 	case OIS::KC_D:
 		dirVec.x = 1;
 		break;
-	
+
 	case OIS::KC_LSHIFT:
 		_levelManager->playerScript->toggleRun(true);
 		break;
-
-	//TODO: this code should check whether or not an NPC is in range and if so, start the conversation
+		/*
+		TODO: this code should check whether or not an NPC is in range and if so, start the conversation*/
 	case OIS::KC_F:
 		if (dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[0])->getInDialog() == false) {
 			dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[0])->dialog(_levelManager->getPlayer()->getPosition());
@@ -270,8 +285,8 @@ bool GameManager::keyReleased(const OIS::KeyEvent& pKE)
 		_levelManager->playerScript->toggleRun(false);
 		break;
 
-	//TODO: this code should end the conversation with the current talking to NPC
-	//TODO: maybe write own casts for character types
+		//TODO: this code should end the conversation with the current talking to NPC
+		//TODO: maybe write own casts for character types
 	case OIS::KC_F:
 		break;
 
@@ -291,19 +306,20 @@ bool GameManager::keyReleased(const OIS::KeyEvent& pKE)
 /// <returns></returns>
 bool GameManager::mouseMoved(const OIS::MouseEvent& pME)
 {
-	Ogre::Degree rotX = Ogre::Degree(-_levelManager->playerScript->getRotationspeed()/2 * pME.state.Y.rel);
-	Ogre::Degree originalPitch = mSceneMgr->getSceneNode("CameraNode")->getOrientation().getPitch();
+	Ogre::Degree rotX = Ogre::Degree(-_levelManager->playerScript->getRotationspeed() / 2 * pME.state.Y.rel);
+	Ogre::Degree originalPitch = _mSceneMgr->getSceneNode("CameraNode")->getOrientation().getPitch();
 	Ogre::Degree degreeFrmStartPitch = (rotX + originalPitch) - _levelManager->startPitchCam;
 
-	mSceneMgr->getSceneNode("PlayerNode")->yaw(Ogre::Degree(-_levelManager->playerScript->getRotationspeed() * pME.state.X.rel), Ogre::Node::TS_WORLD);
+	_mSceneMgr->getSceneNode("PlayerNode")->yaw(Ogre::Degree(-_levelManager->playerScript->getRotationspeed() * pME.state.X.rel), Ogre::Node::TS_WORLD);
 
 	if (degreeFrmStartPitch < Ogre::Degree(10) && degreeFrmStartPitch > Ogre::Degree(-40))
 	{
-		mSceneMgr->getSceneNode("CameraNode")->pitch(rotX, Ogre::Node::TS_LOCAL);
+		_mSceneMgr->getSceneNode("CameraNode")->pitch(rotX, Ogre::Node::TS_LOCAL);
 	}
 
 	return true;
 }
+
 
 /// <summary>
 /// Called when the mouse is pressed.
@@ -347,31 +363,32 @@ extern "C" {
 #endif
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-    INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR strCmdLine, INT)
+	INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR strCmdLine, INT)
 #else
-    int main(int argc, char *argv[])
+	int main(int argc, char *argv[])
 #endif
 	{
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 		AllocConsole();
 #endif
 
-        // Create application object
-        GameManager app;
+		// Create application object
+		GameManager app;
 
-        try {
-            app.go();
-        } catch(Ogre::Exception& e)  {
+		try {
+			app.go();
+		}
+		catch (Ogre::Exception& e) {
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-            MessageBox(NULL, e.getFullDescription().c_str(), "An exception has occurred!", MB_OK | MB_ICONERROR | MB_TASKMODAL);
+			MessageBox(NULL, e.getFullDescription().c_str(), "An exception has occurred!", MB_OK | MB_ICONERROR | MB_TASKMODAL);
 #else
-            std::cerr << "An exception has occurred: " <<
-                e.getFullDescription().c_str() << std::endl;
+			std::cerr << "An exception has occurred: " <<
+				e.getFullDescription().c_str() << std::endl;
 #endif
-        }
-		
-        return 0;
-    }
+		}
+
+		return 0;
+	}
 
 #ifdef __cplusplus
 }

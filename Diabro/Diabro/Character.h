@@ -5,7 +5,7 @@
 #include <OgrePrerequisites.h>
 #include "OgreEntity.h"
 #include "CharacterStats.h"
-#include "BaseApplication.h"
+#include "OgreManager.h"
 #include "WeaponInstance.h"
 #include "EquimentInstance.h"
 

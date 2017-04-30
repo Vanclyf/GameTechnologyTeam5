@@ -18,6 +18,8 @@ ItemManager::~ItemManager() {
 	delete _itemGenerator;
 }
 
+
+
 /// <summary>
 /// Reads item information from database.
 /// </summary>
@@ -40,4 +42,6 @@ void ItemManager::readFromDB() {
 
 	_itemContainer->setWeapons(weapons);
 }
+
+
 

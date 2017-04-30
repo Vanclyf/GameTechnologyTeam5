@@ -6,10 +6,12 @@
 #include "QuestItemGenerator.h"
 #include "tinyxml2.h"
 
-class QuestContentManager {
+
+class QuestContentManager  {
 public:
 	QuestContentManager();
 	~QuestContentManager();
+
 
 	QuestItemContainer* getItemContainer() { return _itemContainer; };
 	QuestItemGenerator* getItemGenerator() { return _itemGenerator; };

@@ -2,15 +2,16 @@
 #define LEVEL_MANAGER_H_
 
 #pragma once
+
 #include "Player.h"
 #include "Npc.h"
-#include "BaseApplication.h"
+#include "OgreManager.h"
 #include "BasicEnemy.h"
 #include <OgreSceneManager.h>
 #include "CharacterSpawner.h"
 #include "LevelGenerator.h"
 
-class LevelManager
+class LevelManager 
 {
 public:
 	LevelManager();
@@ -33,8 +34,6 @@ public:
 
 	void detachHostileNPC(int);
 	void detachFriendlyNPC(int);
-	static int testunit(int i) { return ++i; };
-	static int testunittwo(int i);
 	LevelGenerator levelGenerator;
 	// for now public so that game manager can access it. 
 	Player* playerScript; 

@@ -1,5 +1,5 @@
-#include "GameManager.h"
 #include "LevelManager.h"
+#include "GameManager.h"
 
 /// <summary>
 /// Initializes a new instance of the <see cref="LevelManager" /> class.
@@ -134,7 +134,4 @@ void LevelManager::createGroundMesh()
 	return;
 }
 
-int LevelManager::testunittwo(int i)
-{
-	return ++i;
-}
+

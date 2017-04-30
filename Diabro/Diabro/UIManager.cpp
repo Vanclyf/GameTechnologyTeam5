@@ -10,6 +10,7 @@ UIManager::UIManager() : _uiNode(0), _healthBarWidget(0), _staminaBarWidget(0), 
 {
 }
 
+
 /// <summary>
 /// Initializes this instance and sets up UI.
 /// </summary>
