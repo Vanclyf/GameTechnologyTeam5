@@ -91,6 +91,7 @@ void GameManager::createScene(void)
 	_uiManager->init();
 }
 
+
 /// <summary>
 /// Setups the lights.
 /// </summary>

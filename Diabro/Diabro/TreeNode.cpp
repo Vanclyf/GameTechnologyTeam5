@@ -81,8 +81,8 @@ int TreeNode<T>::removeChildren() {
 	int removedChildren = 0;
 
 	// destroy each child
-	for (int i = 0; i < _children.size(); ++i) {
-		removedChildren += _children[i]->destroy();
+	while(_children.size() > 0){
+		removedChildren += _children[0]->destroy();
 	}
 
 	// erase the children from the list
@@ -157,3 +157,7 @@ void TreeNode<T>::removeChildFromDestroy(int pIndex) {
 }
 
 template class TreeNode < int >;
+template class TreeNode < char >;
+template class TreeNode < float >;
+template class TreeNode < bool >;
+template class TreeNode < double >;
