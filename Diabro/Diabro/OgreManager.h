@@ -64,12 +64,12 @@ protected:
 	virtual void createViewports(void){};//override by gamemanager
 	virtual void createFrameListener(void);
 
-	virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
-	bool keyPressed(const OIS::KeyEvent&arg) override { return true; };
-	bool keyReleased(const OIS::KeyEvent&arg) override { return true; };
-	bool mouseMoved(const OIS::MouseEvent&arg) override { return true; };
-	bool mousePressed(const OIS::MouseEvent&arg, OIS::MouseButtonID id) override { return true; };
-	bool mouseReleased(const OIS::MouseEvent&arg, OIS::MouseButtonID id) override { return true; };
+	virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt); 
+	bool keyPressed(const OIS::KeyEvent&arg) override { return true; }; //override by gamemanager
+	bool keyReleased(const OIS::KeyEvent&arg) override { return true; }; //override by gamemanager
+	bool mouseMoved(const OIS::MouseEvent&arg) override { return true; }; //override by gamemanager
+	bool mousePressed(const OIS::MouseEvent&arg, OIS::MouseButtonID id) override { return true; };//override by gamemanager
+	bool mouseReleased(const OIS::MouseEvent&arg, OIS::MouseButtonID id) override { return true; };//override by gamemanager
 
 	void windowResized(Ogre::RenderWindow* renderWindow) override;
 	void windowClosed(Ogre::RenderWindow* renderWindow) override;

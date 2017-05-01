@@ -6,10 +6,18 @@ Filename:    GameInputManager.cpp
 #include "GameInputManager.h"
 #include "GameManager.h"
 
+/// <summary>
+/// Initializes a new instance of the <see cref="GameInputManager"/> class.
+/// This class is the manager of the input of the game.
+/// </summary>
 GameInputManager::GameInputManager()
 {
 }
 
+/// <summary>
+/// Called when key is pressed.
+/// </summary>
+/// <param name="pKE">The key event.</param>
 void GameInputManager::keyPressed(const OIS::KeyEvent& pKE)
 {
 	Ogre::Vector3 dirVec = GameManager::getSingletonPtr()->getLevelManager()->playerScript->getDirVector();
@@ -67,6 +75,10 @@ void GameInputManager::keyPressed(const OIS::KeyEvent& pKE)
 	GameManager::getSingletonPtr()->getLevelManager()->playerScript->setDirVector(dirVec);
 }
 
+/// <summary>
+/// Called when key is released.
+/// </summary>
+/// <param name="pKE">The Key event.</param>
 void GameInputManager::keyReleased(const OIS::KeyEvent& pKE)
 {
 	Ogre::Vector3 dirVec = GameManager::getSingletonPtr()->getLevelManager()->playerScript->getDirVector();
@@ -108,7 +120,11 @@ void GameInputManager::keyReleased(const OIS::KeyEvent& pKE)
 
 	GameManager::getSingletonPtr()->getLevelManager()->playerScript->setDirVector(dirVec);
 }
-
+//TODO: where/how should the turning be handled? 
+/// <summary>
+/// Called when the mouse is moved.
+/// </summary>
+/// <param name="pME">The p me.</param>
 void GameInputManager::mouseMoved(const OIS::MouseEvent& pME)
 {
 	Ogre::Degree rotX = Ogre::Degree(-GameManager::getSingletonPtr()->getLevelManager()->playerScript->getRotationspeed() / 2 * pME.state.Y.rel);
@@ -123,10 +139,20 @@ void GameInputManager::mouseMoved(const OIS::MouseEvent& pME)
 	}
 }
 
+/// <summary>
+/// Called when the mouse is pressed.
+/// </summary>
+/// <param name="pME">The mouse event</param>
+/// <param name="pID">The identifier of the mouse button.</param>
 void GameInputManager::mousePressed(const OIS::MouseEvent& pME, OIS::MouseButtonID pID)
 {
 }
 
+/// <summary>
+/// Called when the mouse is released.
+/// </summary>
+/// <param name="pME">The mouse event</param>
+/// <param name="pID">The identifier of the mouse button.</param>
 void GameInputManager::mouseReleased(const OIS::MouseEvent& pME, OIS::MouseButtonID pID)
 {
 	switch (pID)

@@ -23,7 +23,6 @@ public:
 	GameManager(void);
 	virtual ~GameManager(void);
 
-	//virtual void go();
 
 	Ogre::String nodeOfSceneXML;
 

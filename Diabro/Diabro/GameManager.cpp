@@ -100,6 +100,9 @@ void GameManager::createScene(void)
 
 }
 
+/// <summary>
+/// Destroys the scene.
+/// </summary>
 void GameManager::destroyScene()
 {
 }
@@ -212,7 +215,6 @@ bool GameManager::keyReleased(const OIS::KeyEvent& pKE)
 	return true;
 }
 
-//TODO: where/how should the turning be handled? 
 /// <summary>
 /// Called when the mouse is moved.
 /// </summary>

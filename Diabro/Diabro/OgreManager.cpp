@@ -8,6 +8,10 @@ Filename:    OgreManager.cpp
 
 //---------------------------------------------------------------------------
 
+/// <summary>
+/// Initializes a new instance of the <see cref="OgreManager"/> class.
+/// This Manager start a new ogre application
+/// </summary>
 OgreManager::OgreManager(void)
 	:_mRoot(0),
 	_mResourcesCfg(Ogre::StringUtil::BLANK),
@@ -26,6 +30,9 @@ OgreManager::OgreManager(void)
 	_mKeyboard(0)
 	{
 	}
+/// <summary>
+/// Finalizes an instance of the <see cref="OgreManager"/> class.
+/// </summary>
 OgreManager::~OgreManager()
 {
 	if (_mTrayMgr) delete _mTrayMgr;
@@ -36,6 +43,9 @@ OgreManager::~OgreManager()
 	windowClosed(_mWindow);
 	delete _mRoot;
 }
+/// <summary>
+/// Start the stetup of the application.
+/// </summary>
 void OgreManager::go(void)
 {
 #ifdef _DEBUG
@@ -57,6 +67,10 @@ void OgreManager::go(void)
 
 }
 
+/// <summary>
+/// Setups this the ogre application.
+/// </summary>
+/// <returns></returns>
 bool OgreManager::setup(void)
 {
 	_mRoot = new Ogre::Root(_mPluginsCfg);
@@ -83,6 +97,9 @@ bool OgreManager::setup(void)
 	return true;
 }
 
+/// <summary>
+/// Setups the resources for ogre.
+/// </summary>
 void OgreManager::setupResources(void)
 {
 	Ogre::ConfigFile cf;
@@ -105,6 +122,10 @@ void OgreManager::setupResources(void)
 		}
 	}
 }
+/// <summary>
+/// Configures the windows of ogre.
+/// </summary>
+/// <returns></returns>
 bool OgreManager::configure()
 {
 	if (!(_mRoot->restoreConfig() || _mRoot->showConfigDialog()))
@@ -115,6 +136,9 @@ bool OgreManager::configure()
 	return true;
 }
 
+/// <summary>
+/// Chooses the scene manager.
+/// </summary>
 void OgreManager::chooseSceneManager(void)
 {
 	_mSceneMgr = _mRoot->createSceneManager(Ogre::ST_GENERIC);
@@ -123,11 +147,17 @@ void OgreManager::chooseSceneManager(void)
 	_mSceneMgr->addRenderQueueListener(_mOverlaySystem);
 }
 
+/// <summary>
+/// Loads the resources.
+/// </summary>
 void OgreManager::loadResources(void)
 {
 	Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
 }
 
+/// <summary>
+/// Creates the frame listener.
+/// </summary>
 void OgreManager::createFrameListener(void)
 {
 	Ogre::LogManager::getSingletonPtr()->logMessage("*** Initializing OIS ***");
@@ -164,6 +194,11 @@ void OgreManager::createFrameListener(void)
 
 }
 
+/// <summary>
+/// The RenderingQueued.
+/// </summary>
+/// <param name="evt">The FrameEvent.</param>
+/// <returns></returns>
 bool OgreManager::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
 	if (_mWindow->isClosed())
@@ -187,6 +222,10 @@ bool OgreManager::frameRenderingQueued(const Ogre::FrameEvent& evt)
 
 //---------------------------------------------------------------------------
 
+/// <summary>
+/// Called when windows is resized.
+/// </summary>
+/// <param name="rw">The RenderWindow.</param>
 void OgreManager::windowResized(Ogre::RenderWindow* rw)
 {
 	int left, top;
@@ -200,6 +239,10 @@ void OgreManager::windowResized(Ogre::RenderWindow* rw)
 }
 
 
+/// <summary>
+/// Called when windows is closed.
+/// </summary>
+/// <param name="rw">The RenderWindow.</param>
 void OgreManager::windowClosed(Ogre::RenderWindow* rw)
 {
 	if (rw == _mWindow)
