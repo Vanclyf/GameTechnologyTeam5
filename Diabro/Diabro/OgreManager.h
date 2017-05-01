@@ -65,11 +65,11 @@ protected:
 	virtual void createFrameListener(void);
 
 	virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
-	bool keyPressed(const OIS::KeyEvent&arg) override;
-	bool keyReleased(const OIS::KeyEvent&arg) override;
-	bool mouseMoved(const OIS::MouseEvent&arg) override;
-	bool mousePressed(const OIS::MouseEvent&arg, OIS::MouseButtonID id) override;
-	bool mouseReleased(const OIS::MouseEvent&arg, OIS::MouseButtonID id) override;
+	bool keyPressed(const OIS::KeyEvent&arg) override { return true; };
+	bool keyReleased(const OIS::KeyEvent&arg) override { return true; };
+	bool mouseMoved(const OIS::MouseEvent&arg) override { return true; };
+	bool mousePressed(const OIS::MouseEvent&arg, OIS::MouseButtonID id) override { return true; };
+	bool mouseReleased(const OIS::MouseEvent&arg, OIS::MouseButtonID id) override { return true; };
 
 	void windowResized(Ogre::RenderWindow* renderWindow) override;
 	void windowClosed(Ogre::RenderWindow* renderWindow) override;

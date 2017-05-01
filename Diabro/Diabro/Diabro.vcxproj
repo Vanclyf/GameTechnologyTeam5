@@ -121,6 +121,7 @@
     <ClCompile Include="City.cpp" />
     <ClCompile Include="EquimentInstance.cpp" />
     <ClCompile Include="FloatRange.cpp" />
+    <ClCompile Include="GameInputManager.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GenericFSM.cpp" />
     <ClCompile Include="IdleState.cpp" />
@@ -157,6 +158,7 @@
     <ClInclude Include="City.h" />
     <ClInclude Include="EquimentInstance.h" />
     <ClInclude Include="FloatRange.h" />
+    <ClInclude Include="GameInputManager.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GenericFSM.h" />
     <ClInclude Include="IdleState.h" />

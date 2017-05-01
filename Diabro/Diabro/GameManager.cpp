@@ -95,6 +95,7 @@ void GameManager::createScene(void)
 	_uiManager = new UIManager();
 	_uiManager->init();
 
+	_gameInputManager = new GameInputManager();
 	
 
 }
@@ -196,57 +197,7 @@ bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& pFE)
 /// <returns></returns>
 bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 {
-	Ogre::Vector3 dirVec = _levelManager->playerScript->getDirVector();
-
-	switch (pKE.key)
-	{
-		/*on esc close app*/
-	case OIS::KC_ESCAPE:
-		_mShutDown = true;
-		break;
-	case OIS::KC_UP:
-	case OIS::KC_W:
-		dirVec.z = -1;
-		break;
-
-	case OIS::KC_DOWN:
-	case OIS::KC_S:
-		dirVec.z = 1;
-		break;
-
-	case OIS::KC_LEFT:
-	case OIS::KC_A:
-		dirVec.x = -1;
-		break;
-
-	case OIS::KC_RIGHT:
-	case OIS::KC_D:
-		dirVec.x = 1;
-		break;
-
-	case OIS::KC_LSHIFT:
-		_levelManager->playerScript->toggleRun(true);
-		break;
-		/*
-		TODO: this code should check whether or not an NPC is in range and if so, start the conversation*/
-	case OIS::KC_F:
-		if (dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[0])->getInDialog() == false) {
-			dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[0])->dialog(_levelManager->getPlayer()->getPosition());
-		}
-		else {
-			dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[0])->toggleDialog();
-		}
-		break;
-
-	case OIS::KC_SPACE:
-		dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[0])->continueDialog();
-		break;
-
-	default:
-		break;
-	}
-
-	_levelManager->playerScript->setDirVector(dirVec);
+	_gameInputManager->keyPressed(pKE);
 	return true;
 }
 
@@ -257,44 +208,7 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 /// <returns></returns>
 bool GameManager::keyReleased(const OIS::KeyEvent& pKE)
 {
-	Ogre::Vector3 dirVec = _levelManager->playerScript->getDirVector();
-
-	switch (pKE.key)
-	{
-	case OIS::KC_UP:
-	case OIS::KC_W:
-		dirVec.z = 0;
-		break;
-
-	case OIS::KC_DOWN:
-	case OIS::KC_S:
-		dirVec.z = 0;
-		break;
-
-	case OIS::KC_LEFT:
-	case OIS::KC_A:
-		dirVec.x = 0;
-		break;
-
-	case OIS::KC_RIGHT:
-	case OIS::KC_D:
-		dirVec.x = 0;
-		break;
-
-	case OIS::KC_LSHIFT:
-		_levelManager->playerScript->toggleRun(false);
-		break;
-
-		//TODO: this code should end the conversation with the current talking to NPC
-		//TODO: maybe write own casts for character types
-	case OIS::KC_F:
-		break;
-
-	default:
-		break;
-	}
-
-	_levelManager->playerScript->setDirVector(dirVec);
+	_gameInputManager->keyReleased(pKE);
 	return true;
 }
 
@@ -306,17 +220,7 @@ bool GameManager::keyReleased(const OIS::KeyEvent& pKE)
 /// <returns></returns>
 bool GameManager::mouseMoved(const OIS::MouseEvent& pME)
 {
-	Ogre::Degree rotX = Ogre::Degree(-_levelManager->playerScript->getRotationspeed() / 2 * pME.state.Y.rel);
-	Ogre::Degree originalPitch = _mSceneMgr->getSceneNode("CameraNode")->getOrientation().getPitch();
-	Ogre::Degree degreeFrmStartPitch = (rotX + originalPitch) - _levelManager->startPitchCam;
-
-	_mSceneMgr->getSceneNode("PlayerNode")->yaw(Ogre::Degree(-_levelManager->playerScript->getRotationspeed() * pME.state.X.rel), Ogre::Node::TS_WORLD);
-
-	if (degreeFrmStartPitch < Ogre::Degree(10) && degreeFrmStartPitch > Ogre::Degree(-40))
-	{
-		_mSceneMgr->getSceneNode("CameraNode")->pitch(rotX, Ogre::Node::TS_LOCAL);
-	}
-
+	_gameInputManager->mouseMoved(pME);
 	return true;
 }
 
@@ -329,6 +233,7 @@ bool GameManager::mouseMoved(const OIS::MouseEvent& pME)
 /// <returns></returns>
 bool GameManager::mousePressed(const OIS::MouseEvent& pME, OIS::MouseButtonID pID)
 {
+	_gameInputManager->mousePressed(pME, pID);
 	return true;
 }
 
@@ -340,14 +245,7 @@ bool GameManager::mousePressed(const OIS::MouseEvent& pME, OIS::MouseButtonID pI
 /// <returns></returns>
 bool GameManager::mouseReleased(const OIS::MouseEvent& pME, OIS::MouseButtonID pID)
 {
-	switch (pID)
-	{
-	case OIS::MB_Left:
-		_levelManager->playerScript->lightAttack();
-		break;
-	default:
-		break;
-	}
+	_gameInputManager->mouseReleased(pME, pID);
 	return true;
 }
 

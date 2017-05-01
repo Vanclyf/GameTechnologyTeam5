@@ -92,6 +92,9 @@
     <ClCompile Include="OgreManager.cpp">
       <Filter>Sources\Managers</Filter>
     </ClCompile>
+    <ClCompile Include="GameInputManager.cpp">
+      <Filter>Sources\Managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseNpc.h">
@@ -207,6 +210,9 @@
       <Filter>Headers\LevelGeneration</Filter>
     </ClInclude>
     <ClInclude Include="OgreManager.h">
+      <Filter>Headers\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="GameInputManager.h">
       <Filter>Headers\Managers</Filter>
     </ClInclude>
   </ItemGroup>

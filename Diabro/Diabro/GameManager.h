@@ -13,6 +13,7 @@ Filename:    GameManager.h
 #include "ItemManager.h"
 #include "QuestContentManager.h"
 #include "LevelManager.h"
+#include "GameInputManager.h"
 
 //---------------------------------------------------------------------------
 
@@ -28,7 +29,7 @@ public:
 
 	static GameManager& getSingleton(void);
 	static GameManager* getSingletonPtr(void);
-	
+
 
 	Ogre::SceneManager* getSceneManager(void) { return _mSceneMgr; }
 	Ogre::Camera* getCamera(void) { return _mCamera; }
@@ -39,7 +40,9 @@ public:
 	ItemManager* getItemManager(void) { return _itemManager; }
 	QuestContentManager* getQuestContentManager(void) { return _questContentManager; }
 
+
 	static int getRandomNumberBetween(int, int);
+	void setShutDownTrue() { _mShutDown = true; }
 
 protected:
 	void createScene(void) override;
@@ -56,16 +59,14 @@ protected:
 	bool mousePressed(const OIS::MouseEvent&, OIS::MouseButtonID) override;
 	bool mouseReleased(const OIS::MouseEvent&, OIS::MouseButtonID) override;
 
-	
+
 private:
 	LevelManager* _levelManager;
 	UIManager* _uiManager;
 	ItemManager* _itemManager;
 	QuestContentManager* _questContentManager;
+	GameInputManager* _gameInputManager;
 	Ogre::Timer* _gameTimer;
-
-	
-
 };
 
 //---------------------------------------------------------------------------
