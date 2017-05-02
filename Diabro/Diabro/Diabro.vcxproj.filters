@@ -94,6 +94,11 @@
     </ClCompile>
     <ClCompile Include="GameInputManager.cpp">
       <Filter>Sources\Managers</Filter>
+    <ClCompile Include="Tree.cpp">
+      <Filter>Sources\TreeDatastructure</Filter>
+    </ClCompile>
+    <ClCompile Include="TreeNode.cpp">
+      <Filter>Sources\TreeDatastructure</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -214,6 +219,11 @@
     </ClInclude>
     <ClInclude Include="GameInputManager.h">
       <Filter>Headers\Managers</Filter>
+    <ClInclude Include="Tree.h">
+      <Filter>Headers\TreeDatastructure</Filter>
+    </ClInclude>
+    <ClInclude Include="TreeNode.h">
+      <Filter>Headers\TreeDatastructure</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -273,6 +283,12 @@
     </Filter>
     <Filter Include="Headers\LevelGeneration">
       <UniqueIdentifier>{1a4bad47-ce67-4c37-a4af-db1eb930b8c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\TreeDatastructure">
+      <UniqueIdentifier>{f6751de5-7943-4b62-9e2a-36ed8343b8f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\TreeDatastructure">
+      <UniqueIdentifier>{99432b15-230d-40ae-8f8d-eb742dc805a4}</UniqueIdentifier>
     </Filter>
     <Filter Include="Headers\States">
       <UniqueIdentifier>{08a08f48-5a8f-443d-9cc6-cb465548c300}</UniqueIdentifier>
