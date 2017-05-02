@@ -27,25 +27,10 @@ bool Character::initialize()
 	_currentHealth = _stats->GetStat(MaxHealth);
 	_currentStamina = _stats->GetStat(MaxStamina);
 
-	//TODO: this is THE WORST thing ever, it will never be sure (in the future) that the generator will return a weapon
-	//for now, it does return a weapon and for testing purposes I need it. Items should be assigned through the inventory and tested for types.
-	_weapon = reinterpret_cast<WeaponInstance*>(GameManager::getSingletonPtr()->getItemManager()->getItemGenerator()->generateRandomItem(_myNode));
-	
 
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	FILE* fp;
-	freopen_s(&fp, "CONOUT$", "w", stdout);
-	std::cout << "I am a " << _myNode->getName() << " and I have a " << _weapon->getName() << std::endl;
-	fclose(fp);
-#endif
-
-
-	for (int i = 0; i < 6; i++)
-	{
-		setEquipmentSlot(GameManager::getSingletonPtr()->getItemManager()->getItemGenerator()->generateRandomItem(_myNode));
-	}
 	//show what is in the gear slots.
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+	FILE* fp;
 	freopen_s(&fp, "CONOUT$", "w", stdout);
 	for (int i = 0; i < _armorEquipSlots.size(); i++)
 	{
@@ -286,7 +271,25 @@ void Character::setEquipmentSlot(ArmorInstance* pArmor)
 			armors.push_back(pArmor);
 			_armorEquipSlots = armors;
 			addStats(reinterpret_cast<EquipmentInstance*>(pArmor));
+
+			#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+				FILE* fp;
+				freopen_s(&fp, "CONOUT$", "w", stdout);
+				std::cout << "I equiped the following item: " << pArmor->getInfo()->getName() << "in Slot: " << pArmor->getInfo()->getSlotType() << std::endl;
+				fclose(fp);
+			#endif
 		}
+
+	}
+	else
+	{
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+		FILE* fp;
+		freopen_s(&fp, "CONOUT$", "w", stdout);
+		std::cout << "Cannot equip item too high level: " << reinterpret_cast<EquipmentInstance*>(pArmor)->getLevel() << " current level: " << GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getLevel() << std::endl;
+		fclose(fp);
+#endif
+
 	}
 }
 
@@ -311,7 +314,7 @@ void Character::setEquipmentSlot(WeaponInstance* pWeapon)
 			for (int i = 0; i < _weaponEquipSlots.size(); i++)
 			{
 				//if a slot contains a onehanded weapon it adds one to the weaponcount
-				if (_weaponEquipSlots[i]->getInfo()->getHandedType() == 1)
+				if (_weaponEquipSlots[i]->getInfo()->getHandedType() == 0)
 				{
 					oneHandedWeaponCount++;
 					//if the weaponcount is equal to 2 the max ammount of onehanded weapons is reached. 
@@ -330,8 +333,26 @@ void Character::setEquipmentSlot(WeaponInstance* pWeapon)
 				_weaponEquipSlots = weapons;
 				setHand(pWeapon);
 				addStats(reinterpret_cast<EquipmentInstance*>(pWeapon));
+
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+				FILE* fp;
+				freopen_s(&fp, "CONOUT$", "w", stdout);
+				std::cout << "I equiped the following item: " << pWeapon->getInfo()->getName() << "in Slot: " << pWeapon->getInfo()->getHandedType() << std::endl;
+				fclose(fp);
+#endif
 			}
 		}
+
+	}
+	else
+	{
+		#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+			FILE* fp;
+			freopen_s(&fp, "CONOUT$", "w", stdout);
+			std::cout << "Cannot equip item too high level: " << reinterpret_cast<EquipmentInstance*>(pWeapon)->getLevel() << " current level: " << GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getLevel() << std::endl;
+			fclose(fp);
+		#endif
+
 	}
 }
 
@@ -345,13 +366,39 @@ void Character::swapEquipmentSlot(ArmorInstance* pArmor, int pDuplicate)
 	//you can address the old item by _armorEquipSlots[pDuplicate]
 	removeStats(reinterpret_cast<EquipmentInstance*>(_armorEquipSlots[pDuplicate]));
 	addStats(reinterpret_cast<EquipmentInstance*>(pArmor));
+	
+	///Ignore this ATM work in progress.
+	/*Ogre::Entity* itemEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("sphere.mesh");
+	GameManager::getSingletonPtr()->addItemNumber();
+	int itemnumber = GameManager::getSingleton().getItemNumber();
+	std::stringstream nodename("_itemNode");
+	nodename << itemnumber << "_" << "0";
+	Ogre::SceneNode* itemNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode(nodename.str());
+	itemNode->createChildSceneNode()->attachObject(itemEntity);
+	itemNode->setPosition(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition());
+	itemNode->setScale(.2, .5, .2);
+	reinterpret_cast<ItemInstance*>(_armorEquipSlots[pDuplicate])->setNodeAndEntity(itemNode, itemEntity);
+	reinterpret_cast<ItemInstance*>(_armorEquipSlots[pDuplicate])->id = GameManager::getSingletonPtr()->getLevelManager()->subscribeItemInstance(reinterpret_cast<ItemInstance*>(_armorEquipSlots[pDuplicate]));*/
+
 	_armorEquipSlots[pDuplicate] = pArmor;
+
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+	FILE* fp;
+	freopen_s(&fp, "CONOUT$", "w", stdout);
+	std::cout << "I swapped the following item: " << _armorEquipSlots[pDuplicate]->getInfo()->getName() << "with: " << pArmor->getInfo()->getName() << " in Slot: " << pArmor->getInfo()->getSlotType() << std::endl;
+	fclose(fp);
+#endif
 }
 
+/// <summary>
+/// Swaps weapons in the weapon slot.
+/// </summary>
+/// <param name="pWeapon">The new weapon.</param>
+/// <param name="pDuplicate">The index of the duplicate weapon.</param>
 void Character::swapEquipmentSlot(WeaponInstance* pWeapon, int pDuplicate)
 {
 	//if it is an twohanded weapon remove all the weapons from the list and add the new one.
-	if(pWeapon->getInfo()->getHandedType() == 0)
+	if(pWeapon->getInfo()->getHandedType() == 1)
 	{
 		//remove all the stats of all weapons stored in the weaponEquipSlots.
 		for (int i = 0; i < _weaponEquipSlots.size(); i++)
@@ -360,8 +407,16 @@ void Character::swapEquipmentSlot(WeaponInstance* pWeapon, int pDuplicate)
 		}
 		addStats(reinterpret_cast<EquipmentInstance*>(pWeapon));
 		_weaponEquipSlots.clear();
-		_weaponEquipSlots[0] = pWeapon;
+		std::vector<WeaponInstance*> weapons = _weaponEquipSlots;
+		weapons.push_back(pWeapon);
 		setHand(pWeapon);
+
+		#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+				FILE* fp;
+				freopen_s(&fp, "CONOUT$", "w", stdout);
+				std::cout << "I swapped the following weapon: " << _weaponEquipSlots[pDuplicate]->getInfo()->getName() << "with: " << pWeapon->getInfo()->getName() << " in Slot: " << pWeapon->getInfo()->getHandedType() << std::endl;
+				fclose(fp);
+		#endif
 	}
 	else
 	{
@@ -369,6 +424,13 @@ void Character::swapEquipmentSlot(WeaponInstance* pWeapon, int pDuplicate)
 		addStats(reinterpret_cast<EquipmentInstance*>(pWeapon));
 		_weaponEquipSlots[pDuplicate] = pWeapon;
 		setHand(pWeapon);
+
+		#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+				FILE* fp;
+				freopen_s(&fp, "CONOUT$", "w", stdout);
+				std::cout << "I swapped the following weapon: " << _armorEquipSlots[pDuplicate]->getInfo()->getName() << "with: " << pWeapon->getInfo()->getName() << " in Slot: " << pWeapon->getInfo()->getHandedType() << std::endl;
+				fclose(fp);
+		#endif
 	}
 }
 
@@ -413,6 +475,17 @@ void Character::setEquipmentSlot(ItemInstance* pItem)
 			{
 				//TODO: jewelrey slots for equipment.
 			}
+
+		}
+		else
+		{
+			#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+				FILE* fp;
+				freopen_s(&fp, "CONOUT$", "w", stdout);
+				std::cout << "Cannot equip item too high level: " << reinterpret_cast<EquipmentInstance*>(pItem)->getLevel() << " current level: " << GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getLevel() << std::endl;
+				fclose(fp);
+			#endif
+
 		}
 	}
 }

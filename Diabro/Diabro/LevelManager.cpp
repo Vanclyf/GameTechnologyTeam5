@@ -70,6 +70,30 @@ int LevelManager::subscribeHostileNPC(BasicEnemy* hostile) {
 }
 
 /// <summary>
+/// Subscribes the item instance.
+/// </summary>
+/// <param name="item">The item instance.</param>
+/// <returns></returns>
+int LevelManager::subscribeItemInstance(ItemInstance* item)
+{
+	//TODO: add item id to instances of items
+	_instanceScripts.push_back(item);
+	return _instanceScripts.size() - 1;
+}
+
+/// <summary>
+/// Detaches the item instance.
+/// </summary>
+/// <param name="id">The identifier.</param>
+void LevelManager::detachItemInstance(int id) {
+	_instanceScripts.erase(_instanceScripts.begin() + id);
+	//reset id values
+	for (std::vector<ItemInstance*>::iterator it = _instanceScripts.begin() + id; it < _instanceScripts.end(); ++it) {
+		(*it)->id -= 1;
+	}
+}
+
+/// <summary>
 /// Detaches the friendly NPC.
 /// </summary>
 /// <param name="id">The identifier.</param>

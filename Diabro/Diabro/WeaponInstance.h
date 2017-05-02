@@ -7,7 +7,7 @@
 
 class WeaponInstance : public EquipmentInstance {
 public:
-	WeaponInstance(BaseWeapon*, Quality, Ogre::Entity*, int, Ogre::String, std::vector<Stat*>, int);
+	WeaponInstance(BaseWeapon*, Quality, Ogre::Entity*, int, Ogre::String, std::vector<Stat*>, int, Ogre::SceneNode*);
 	~WeaponInstance();
 
 	BaseWeapon* getInfo() { return _weaponInfo; }
@@ -18,6 +18,7 @@ private:
 	BaseWeapon* _weaponInfo;
 	int _slotNumber;
 	Ogre::Entity* _weaponObject;
+	Ogre::SceneNode* _weaponNode;
 };
 
 #endif

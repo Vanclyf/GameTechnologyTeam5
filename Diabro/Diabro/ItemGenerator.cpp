@@ -51,14 +51,20 @@ std::vector<ItemInstance*> ItemGenerator::generateRandomItem(Ogre::SceneNode* pN
 ItemInstance* ItemGenerator::generateRandomItem(Ogre::SceneNode* pNode) {
 	ItemInstance* returnItem;
 
+
+
+
 	GameManager::getSingletonPtr()->addItemNumber();
 	int itemnumber = GameManager::getSingleton().getItemNumber();
 	Ogre::Entity* itemEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("sphere.mesh");
-	Ogre::SceneNode* itemNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode("itemNode" + itemnumber);
-	itemNode->createChildSceneNode()->attachObject(itemEntity);
-	itemNode->setPosition(pNode->getPosition());
 
-
+	
+	std::stringstream nodename("_itemNode");
+	nodename << itemnumber << "_" << "0";
+	_itemNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode(nodename.str());
+	_itemNode->createChildSceneNode()->attachObject(itemEntity);
+	_itemNode->setPosition(pNode->getPosition());
+	_itemNode->setScale(.2, .5, .2);
 
 	//TODO: this should be a random itemtype
 	int itemType = 2;
@@ -79,7 +85,10 @@ ItemInstance* ItemGenerator::generateRandomItem(Ogre::SceneNode* pNode) {
 		}
 	}
 
-	int level = (int)((int)(quality + 1) * GameManager::getSingletonPtr()->getRandomInRange(1.0f, 2.5f));
+	//int level = (int)((int)(quality + 1) * GameManager::getSingletonPtr()->getRandomInRange(1.0f, 2.5f));
+	int offset = GameManager::getSingletonPtr()->getRandomInRange(2, 7);
+	int playerLevel = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getLevel();
+	int level = GameManager::getSingletonPtr()->getRandomInRange((playerLevel - offset) + quality, playerLevel + quality);
 
 	// switch based on the type of item to generate it
 	switch (itemType) {
@@ -104,7 +113,7 @@ ItemInstance* ItemGenerator::generateRandomItem(Ogre::SceneNode* pNode) {
 	case 2: {
 		// create variables for gen
 		std::vector<Stat*> baseStats;
-		EquipmentType type = EquipmentArmor;
+		int typeSelection = GameManager::getSingletonPtr()->getRandomInRange(1, 2);;
 		Ogre::String genName = "";
 
 		//TODO: these are defined here to enable using them after the following switch case. This is kind of ugly.
@@ -115,8 +124,7 @@ ItemInstance* ItemGenerator::generateRandomItem(Ogre::SceneNode* pNode) {
 		//BaseJewelry* jewelry;
 
 		//TODO: randomly pick an equipment type
-		switch (type) {
-
+		switch (typeSelection) {
 			// shield
 		case 0: {
 			//TODO: shield gen
@@ -128,10 +136,9 @@ ItemInstance* ItemGenerator::generateRandomItem(Ogre::SceneNode* pNode) {
 			randomObj = (int)GameManager::getSingletonPtr()->getRandomInRange(0, GameManager::getSingletonPtr()->getItemManager()->getItemContianer()->getWeapons().size());
 			weapon = GameManager::getSingletonPtr()->getItemManager()->getItemContianer()->getWeapons()[randomObj];
 			
-			type = EquipmentWeapon;
+			_type = EquipmentWeapon;
 			genName = weapon->getName();
 			_slot = weapon->getHandedType();
-			level *= weapon->getItemTier();
 			int numb = weapon->getMainStat();
 			int damageValue = (int)weapon->getValueOfStat(weapon->getMainStat()).randomInRange();
 			float attackSpeedValue = (float)weapon->getValueOfStat(StatType::AttackSpeed).randomInRange();
@@ -149,12 +156,10 @@ ItemInstance* ItemGenerator::generateRandomItem(Ogre::SceneNode* pNode) {
 			randomObj = (int)GameManager::getSingletonPtr()->getRandomInRange(0, GameManager::getSingletonPtr()->getItemManager()->getItemContianer()->itemAmount());
 			armor = GameManager::getSingletonPtr()->getItemManager()->getItemContianer()->GetArmors()[randomObj];
 
-			type = EquipmentArmor;
+			_type = EquipmentArmor;
 			genName = armor->getName();
 			_slot = armor->getSlotType();
 
-
-			level *= armor->getItemTier();
 			int numb = armor->getMainStat();
 			int armorValue = (int)armor->getValueOfStat(armor->getMainStat()).randomInRange();
 			int vitalityValue = (int)armor->getValueOfStat(StatType::Vitality).randomInRange();
@@ -187,20 +192,23 @@ ItemInstance* ItemGenerator::generateRandomItem(Ogre::SceneNode* pNode) {
 		// - choose random values for the chosen affixes
 		// - add the affixes that are the same type but from a different tier (same in stattype and modifier)
 
-		switch (type) {
+		switch (typeSelection) {
 		case 0: {
 			//TODO: add shield instance to itemlist
 			break;
 		}
 
 		case 1: {
-			returnItem = new WeaponInstance(weapon, quality, itemEntity, level, genName, baseStats, _slot);
+			returnItem = new WeaponInstance(weapon, quality, itemEntity, level, genName, baseStats, _slot, _itemNode);
+			//TODO: add set subID to all instances so i cann add subid after creating the returnitem.
+			returnItem->id = GameManager::getSingletonPtr()->getLevelManager()->subscribeItemInstance(returnItem);
 			break;
 		}
 
 		case 2: {
 			//TODO: add armor instance to itemlist
-			returnItem = new ArmorInstance(armor, quality, itemEntity, level, genName, baseStats, _slot);
+			returnItem = new ArmorInstance(armor, quality, itemEntity, level, genName, baseStats, _slot, _itemNode);
+			returnItem->id = GameManager::getSingletonPtr()->getLevelManager()->subscribeItemInstance(returnItem);
 			break;
 		}
 

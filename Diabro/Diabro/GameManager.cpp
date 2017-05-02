@@ -202,6 +202,29 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 		_levelManager->playerScript->toggleRun(true);
 		break;
 
+	case OIS::KC_E:
+		//check if the item is within pickup range.
+		if (_levelManager->getItemInstances()[0]->getNode()->getPosition().distance(_levelManager->getPlayer()->getPosition()) < 500)
+		{
+			//TODO: equipitem player for now, later on we should use inventory system.
+			switch (reinterpret_cast<EquipmentInstance*>(_levelManager->getItemInstances()[0])->getType())
+			{
+			case 0:
+				//weapon
+				_levelManager->getPlayer()->setEquipmentSlot(reinterpret_cast<WeaponInstance*>(_levelManager->getItemInstances()[0]));
+				_levelManager->getItemInstances()[0]->destroyItemInWorld();
+				break;
+			case 1:
+				//gear
+				_levelManager->getPlayer()->setEquipmentSlot(reinterpret_cast<ArmorInstance*>(_levelManager->getItemInstances()[0]));
+				_levelManager->getItemInstances()[0]->destroyItemInWorld();
+				break;
+			case 2:
+				//jewelry
+				break;
+			}
+		}
+		break;
 	//TODO: this code should check whether or not an NPC is in range and if so, start the conversation
 	case OIS::KC_F:
 		if (dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[0])->getInDialog() == false) {
@@ -210,6 +233,9 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 		else {
 			dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[0])->toggleDialog();
 		}
+
+		//check if the item is within pickup range.
+
 		break;
 
 	case OIS::KC_SPACE:
