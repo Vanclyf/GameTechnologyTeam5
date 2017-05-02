@@ -133,9 +133,9 @@ TEST_CASE("Obtaining data character tree test", "[Tree]") {
 		}
 
 		THEN("The parent of each child of the root is the root") {
-			REQUIRE(myTree->getRoot()->getChildAt(0) == myTree->getRoot());
-			REQUIRE(myTree->getRoot()->getChildAt(1) == myTree->getRoot());
-			REQUIRE(myTree->getRoot()->getChildAt(2) == myTree->getRoot());
+			REQUIRE(myTree->getRoot()->getChildAt(0)->getParent() == myTree->getRoot());
+			REQUIRE(myTree->getRoot()->getChildAt(1)->getParent() == myTree->getRoot());
+			REQUIRE(myTree->getRoot()->getChildAt(2)->getParent() == myTree->getRoot());
 		}
 	}
 }
