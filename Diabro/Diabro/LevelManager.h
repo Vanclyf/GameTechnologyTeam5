@@ -7,7 +7,6 @@
 #include "Npc.h"
 #include "OgreManager.h"
 #include "BasicEnemy.h"
-#include <OgreSceneManager.h>
 #include "CharacterSpawner.h"
 #include "LevelGenerator.h"
 

@@ -64,7 +64,7 @@ protected:
 	virtual void createViewports(void){};//override by gamemanager
 	virtual void createFrameListener(void);
 
-	virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt); 
+	bool frameRenderingQueued(const Ogre::FrameEvent& evt) override; 
 	bool keyPressed(const OIS::KeyEvent&arg) override { return true; }; //override by gamemanager
 	bool keyReleased(const OIS::KeyEvent&arg) override { return true; }; //override by gamemanager
 	bool mouseMoved(const OIS::MouseEvent&arg) override { return true; }; //override by gamemanager
