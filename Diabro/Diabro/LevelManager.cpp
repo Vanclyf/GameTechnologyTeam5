@@ -36,10 +36,10 @@ void LevelManager::initialize()
 	enemySpawner = new CharacterSpawner<BasicEnemy>(enemySpawnerNode, 3, Ogre::Vector3(2000, 0, 2000));
 
 	// ground 
-	createGroundMesh();
+	/*createGroundMesh();
 	_groundEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("ground");
 	_levelNode->createChildSceneNode()->attachObject(_groundEntity);
-	_groundEntity->setMaterialName("Examples/Rockwall");
+	_groundEntity->setMaterialName("Examples/Rockwall");*/
 
 	// camera
 	_camNode->attachObject(GameManager::getSingletonPtr()->getCamera());

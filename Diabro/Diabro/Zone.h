@@ -23,12 +23,14 @@ public:
 	std::vector<City> cities;
 
 	Zone(int pWidth, int pHeight, int pMaxCityWidth, int pMaxCityHeight, int pMaxCities, int pMaxTries);
+	Zone();
 	~Zone();
 
 	void setTile(int pX, int pY, int pValue) const;
 	void setTile(coordinate pCoord, int pValue) const;
 	int getTile(int pX, int pY) const;
 	int getTile(coordinate pCoord) const;
+	coordinate getResolution() const;
 	
 	void printGrid();
 
@@ -36,6 +38,7 @@ private:
 	void connectDungeon(int id, float pChance);
 	int getPossibleConnections(City pCity, std::vector<std::pair<coordinate, int>> *pConnections);
 	int changeTileValues(int pMaxIndex);
+	void printValues();
 	
 	int generatePathways(int pPathId);
 	std::vector<coordinate> getNeighbours(coordinate pCell);

@@ -1,8 +1,12 @@
 #include "Zone.h"
 #include <ctime>
-#include "math.h"
 #include <OgreConfigFile.h>
 #include <OgreMath.h>
+#include <stack>
+
+Zone::Zone() {
+	
+}
 
 
 Zone::Zone(int pWidth, int pDepth, int pMaxCityWidth, int pMaxCityHeight, int pMaxCities, int pMaxTries):
@@ -20,14 +24,14 @@ _width(pWidth), _depth(pDepth), _maxCityWidth(pMaxCityWidth), _maxCityHeight(pMa
 	generateCities(pMaxTries, pMaxCities);
 
 	int n = generatePathways(cities.size() + 1);
-
+	
 	connectDungeon(cities.size() + 1 + n, 0.5f);
 }
 
 Zone::~Zone()
 {
 	//remove pointer array
-	delete[] _tiles;
+	//delete[] _tiles;
 }
 
 void Zone::setTile(int pX, int pY, int pValue) const {
@@ -86,14 +90,24 @@ void Zone::connectDungeon(int pId, float pChance) {
 	//connect rooms to path 1
 	//if more than one path excists, connect other paths to
 	std::vector<std::pair<coordinate, int>> connections;
-	connections.push_back(std::make_pair(coordinate(1, 1), 1));
+
 	for (int i = 0; i < cities.size(); ++i) {
 
 		int rndIndex[2] = { 0,0 };
 		int start = connections.size();
 
 		int length = getPossibleConnections(cities[i], &connections);
-	
+
+		if (length < 1) {
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+			FILE* fp;
+			freopen_s(&fp, "CONOUT$", "w", stdout);
+			printf("length < 1 (%d)", i);
+			fclose(fp);
+			printGrid();
+#endif	
+			continue;
+		}
 		rndIndex[0] = rand() % length + start;
 
 		//TODO: open some connections, so that all of the dungeon is connected
@@ -113,92 +127,147 @@ void Zone::connectDungeon(int pId, float pChance) {
 				}
 				setTile(connections[rndIndex[1]].first, connections[rndIndex[1]].second);
 				cities[i].connections.push_back(connections[rndIndex[1]].first);
+				FILE* fp;
+				freopen_s(&fp, "CONOUT$", "w", stdout);
+				printf("created connection (%d, %d) for city [%d] \n", connections[rndIndex[1]].first.x, connections[rndIndex[1]].first.z, connections[rndIndex[1]].second);
+				fclose(fp);
 				connections.erase(connections.begin() + rndIndex[1]);
 			}
 		}
 	}
-	
-	int regions = changeTileValues(pId); 
-	printGrid();
-	
-	if (regions > 1) {
+	int regions = changeTileValues(pId);
+	if (!connections.empty() && regions > 1){
 		std::vector<std::pair<coordinate, int>> options;
-		
+		FILE* tp;
+		freopen_s(&tp, "CONOUT$", "w", stdout);
+		printf("connection size: %d\n", connections.size());
+		fclose(tp);
 		for (int i = 0; i < connections.size(); ++i) {
 			if ((getTile(connections[i].first.x, connections[i].first.z + 1) > 2 && getTile(connections[i].first.x, connections[i].first.z - 1) == 2) ||
 				(getTile(connections[i].first.x, connections[i].first.z + 1) == 2 && getTile(connections[i].first.x, connections[i].first.z - 1) > 2)) {
 				options.push_back(std::make_pair(connections[i].first, connections[i].second));
-			}
-			if ((getTile(connections[i].first.x + 1, connections[i].first.z) > 2 && getTile(connections[i].first.x - 1, connections[i].first.z) == 2) ||
+				connections.erase(connections.begin() + i);
+			} else if ((getTile(connections[i].first.x + 1, connections[i].first.z) > 2 && getTile(connections[i].first.x - 1, connections[i].first.z) == 2) ||
 				(getTile(connections[i].first.x + 1, connections[i].first.z) == 2 && getTile(connections[i].first.x - 1, connections[i].first.z) > 2)) {
 				options.push_back(std::make_pair(connections[i].first, connections[i].second));
+				connections.erase(connections.begin() + i);
 			}
 		}
 
-		if (options.size() < 1) {
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-			FILE* fp;
-			freopen_s(&fp, "CONOUT$", "w", stdout);
-			printf("no options found \n");
-			fclose(fp);
-#endif
-		}
-		if (options.size() >= 1) {
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-			FILE* fp;
-			freopen_s(&fp, "CONOUT$", "w", stdout);
-			printf("options: %d, %d \n", options[0].first.z, options[0].first.x);
-			fclose(fp);
-#endif
-		}
-		/*else {
-			int n = (3 > options.size()) ? 3 : options.size();
-			for (int i = 0; i < n; ++i) {
-				int rnd = rand() % options.size();
-				setTile(options[rnd].first, 1);
-				cities[options[rnd].second].connections.push_back(options[rnd].first);
-			}
-		}*/
-		regions = changeTileValues(regions);
+		FILE* fp;
+		freopen_s(&fp, "CONOUT$", "w", stdout);
+		printf("options size before (%d) \n", options.size());
+		fclose(fp);
+		int regions = changeTileValues(pId);
 		printGrid();
+		while (regions > 1 && options.size() > 0) {
+			//TODO: open options
+			int rnd = rand() % options.size();
+			setTile(options[rnd].first, 1);
+			cities[options[rnd].second].connections.push_back(options[rnd].first);
+
+			options.erase(options.begin() + rnd);
+			regions = changeTileValues(pId);
+		}
+
+		FILE* fp2;
+		freopen_s(&fp2, "CONOUT$", "w", stdout);
+		printf("options size after (%d) \n", options.size());
+		fclose(fp2);
+
+		//TODO: check if whole dungeon is reachable
+		
 	}
-	//TODO: check if whole dungeon is reachable
+	printGrid();
 }
+
+void Zone::printValues() {
+	int values[100];
+
+	for (int ix = 0; ix < _width; ++ix) {
+		for (int iz = 0; iz < _depth; ++iz) {
+			int n = getTile(ix, iz);
+			if (n > 0) {
+				values[n] = n;
+			}
+		}
+	}
+	for (int i = 1; i < 100; ++i) {
+		if (values[i] > 0) {
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+			FILE* fp;
+			freopen_s(&fp, "CONOUT$", "w", stdout);
+			printf("%d, ", values[i]);
+			fclose(fp);
+#endif
+		}
+		
+	}
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+	FILE* fp;
+	freopen_s(&fp, "CONOUT$", "w", stdout);
+	printf("\n");
+	fclose(fp);
+#endif
+}
+
+coordinate Zone::getResolution() const {
+	return(coordinate(_width, _depth));
+}
+
 
 int Zone::changeTileValues(int pMaxIndex) {
 	
 	int currentRegion = 1;
-	int amountOfRegions = 1;
+	int amountOfRegions = 0;
 	for (int i = 1; i <= pMaxIndex; ++i) {
 		std::vector<coordinate> positions;
 		//pick random cell for current region
 		positions.push_back(getPosition(currentRegion, false));
+		
+		if (getTile(positions[0]) != currentRegion) {
+			positions.clear();
+			currentRegion++;
+			continue;
+		}
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+		FILE* fp;
+		freopen_s(&fp, "CONOUT$", "w", stdout);
+		printf("position = %d, %d (%d) \n", positions[0].x, positions[0].z, getTile(positions[0]));
+		fclose(fp);
+#endif
 
 		if (positions[0].x >= 0 && positions[0].z >= 0) {
 			while(!positions.empty()) {
 				//find all neighbours (which are >0)
 				//and add them to the list
-				if (getTile(positions[0].x, positions[0].z + 1) > 0) positions.push_back(coordinate(positions[0].x, positions[0].z + 1));
-				if (getTile(positions[0].x + 1, positions[0].z) > 0) positions.push_back(coordinate(positions[0].x + 1, positions[0].z));
-				if (getTile(positions[0].x, positions[0].z - 1) > 0) positions.push_back(coordinate(positions[0].x, positions[0].z - 1));
-				if (getTile(positions[0].x - 1, positions[0].z) > 0) positions.push_back(coordinate(positions[0].x - 1, positions[0].z));
+				if (positions[0].z + 1 < _depth - 1) {
+					if (getTile(positions[0].x, positions[0].z + 1) > 0) positions.push_back(coordinate(positions[0].x, positions[0].z + 1));
+				}
+				if (positions[0].x + 1 < _width - 1) {
+					if (getTile(positions[0].x + 1, positions[0].z) > 0) positions.push_back(coordinate(positions[0].x + 1, positions[0].z));
+				}
+				if (positions[0].z > 0) {
+					if (getTile(positions[0].x, positions[0].z - 1) > 0) positions.push_back(coordinate(positions[0].x, positions[0].z - 1));
+				}
+				if (positions[0].x - 1 > 0) {
+					if (getTile(positions[0].x - 1, positions[0].z) > 0) positions.push_back(coordinate(positions[0].x - 1, positions[0].z));
+				}
 				
 				//cr value to cell
-				setTile(positions[0], -(amountOfRegions + 1));
+				setTile(positions[0], -(amountOfRegions + 2));
 				positions.erase(positions.begin());
 			}
-			currentRegion++;
 			amountOfRegions++;
 		}
-		else {
-			positions.clear();
-			currentRegion++;
-			//remove last position
-		}
+		positions.clear();
+		currentRegion++;
+		//remove last position
 	}
 	for (int ix = 0; ix < _width; ++ix) {
 		for (int iz = 0; iz < _depth; ++iz) {
-			if (getTile(ix, iz) < 0 && getTile(ix, iz) != -1) {
+			int n = getTile(ix, iz);
+			if (n < 0 && n != -1) {
 				setTile(ix, iz, getTile(ix, iz) * -1);
 			}
 		}
@@ -206,10 +275,10 @@ int Zone::changeTileValues(int pMaxIndex) {
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	FILE* fp;
 	freopen_s(&fp, "CONOUT$", "w", stdout);
-	printf("amount of regions: %d \n", amountOfRegions - 1);
+	printf("amount of regions: %d \n", amountOfRegions);
 	fclose(fp);
 #endif
-	return amountOfRegions - 1;
+	return amountOfRegions;
 }
 
 
@@ -437,5 +506,6 @@ void Zone::printGrid() {
 	}
 	printf("\n");
 	fclose(fp);
+	printValues();
 #endif
 }
