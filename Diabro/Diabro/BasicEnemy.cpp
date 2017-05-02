@@ -8,7 +8,7 @@
 /// </summary>
 /// <param name="pMyNode">My node.</param>
 /// <param name="pMyEntity">My entity.</param>
-BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity) : BaseNpc(pMyNode, pMyRotationNode, pMyEntity)
+BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity, Ogre::Vector3 spawnLocation) : BaseNpc(pMyNode, pMyRotationNode, pMyEntity, spawnLocation)
 {
 	id = GameManager::getSingletonPtr()->getLevelManager()->subscribeHostileNPC(this);
 }

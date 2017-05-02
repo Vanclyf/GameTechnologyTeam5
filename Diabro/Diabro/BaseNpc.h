@@ -7,7 +7,7 @@
 class BaseNpc : public Character
 {
 public:
-	BaseNpc(Ogre::SceneNode*, Ogre::SceneNode*, Ogre::Entity*);
+	BaseNpc(Ogre::SceneNode*, Ogre::SceneNode*, Ogre::Entity*,Ogre::Vector3);
 	//~BaseNpc();
 
 	void update(Ogre::Real) override;
@@ -26,6 +26,7 @@ protected:
 
 private:
 	float _timeSince;
+	Ogre::Vector3 _mySpawnLocation;
 
 	void wander(); 	
 };
