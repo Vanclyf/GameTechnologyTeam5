@@ -58,6 +58,12 @@
     <ClCompile Include="CharacterSpawner.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="BaseArmor.cpp">
+      <Filter>Sources\Items\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="ArmorInstance.cpp">
+      <Filter>Sources\Items\Instance</Filter>
+    </ClCompile>
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="GenericFSM.cpp">
       <Filter>Sources\Finite State Machines</Filter>
@@ -100,9 +106,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BaseNpc.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="BasicEnemy.h">
       <Filter>Headers</Filter>
     </ClInclude>
@@ -171,6 +174,15 @@
     </ClInclude>
     <ClInclude Include="CharacterSpawner.h">
       <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseArmor.h">
+      <Filter>Headers\Items\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="ArmorInstance.h">
+      <Filter>Headers\Items\Instance</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseNpc.h">
+      <Filter>Headers\Stats</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />
     <ClInclude Include="GenericFSM.h">

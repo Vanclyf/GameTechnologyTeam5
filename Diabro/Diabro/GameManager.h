@@ -13,6 +13,7 @@ Filename:    GameManager.h
 #include "UIManager.h"
 #include "ItemManager.h"
 #include "QuestContentManager.h"
+#include <ctime>
 
 //---------------------------------------------------------------------------
 
@@ -27,16 +28,21 @@ public:
 	static GameManager& getSingleton(void);
 	static GameManager* getSingletonPtr(void);
 
+
 	Ogre::SceneManager* getSceneManager(void) { return mSceneMgr; }
 	Ogre::Camera* getCamera(void) { return mCamera; }
 	Ogre::Timer* getGameTime(void) { return _gameTimer; }
+	int getItemNumber() { return _itemInstanceNumber; }
+	void addItemNumber() { _itemInstanceNumber++; }
 
 	LevelManager* getLevelManager(void) { return _levelManager; }
 	UIManager* getUIManager(void) { return _uiManager; }
 	ItemManager* getItemManager(void) { return _itemManager; }
 	QuestContentManager* getQuestContentManager(void) { return _questContentManager; }
 
-	int getRandomNumberBetween(int, int);
+	int getRandomInRange(int pLO, int pHI) {
+		return rand() % pHI + pLO;
+	}
 
 protected:
     virtual void createScene(void);
@@ -54,6 +60,7 @@ private:
 	virtual bool mousePressed(const OIS::MouseEvent&, OIS::MouseButtonID);
 	virtual bool mouseReleased(const OIS::MouseEvent&, OIS::MouseButtonID);
 
+	int _itemInstanceNumber;
 	LevelManager* _levelManager;
 	UIManager* _uiManager;
 	ItemManager* _itemManager;

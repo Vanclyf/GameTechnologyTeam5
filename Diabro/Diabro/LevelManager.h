@@ -6,6 +6,7 @@
 #include "Npc.h"
 #include "BaseApplication.h"
 #include "BasicEnemy.h"
+#include "EquimentInstance.h"
 #include <OgreSceneManager.h>
 #include "CharacterSpawner.h"
 #include "LevelGenerator.h"
@@ -27,12 +28,15 @@ public:
 	Player* getPlayer() { return playerScript; }
 	std::vector<Character*> getFriendlyNpcs() { return _friendlyNpcScripts; }
 	std::vector<Character*> getHostileNpcs() { return _hostileNpcScripts; }
+	std::vector<ItemInstance*> getItemInstances() { return _instanceScripts; }
 
 	int subscribeHostileNPC(BasicEnemy*);
 	int subscribeFriendlyNPC(Npc*);
+	int subscribeItemInstance(ItemInstance*);
 
 	void detachHostileNPC(int);
 	void detachFriendlyNPC(int);
+	void detachItemInstance(int);
 	static int testunit(int i) { return ++i; };
 	static int testunittwo(int i);
 	LevelGenerator levelGenerator;
@@ -58,6 +62,7 @@ private:
 	
 	std::vector<Character*> _friendlyNpcScripts;
 	std::vector<Character*> _hostileNpcScripts;
+	std::vector<ItemInstance*> _instanceScripts;
 	// TODO: lists of different scripts (NPC's, enemies, e.d.) 
 };
 

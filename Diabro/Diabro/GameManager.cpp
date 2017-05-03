@@ -55,15 +55,6 @@ GameManager& GameManager::getSingleton(void)
 
 //---------------------------------------------------------------------------
 
-/// <summary>
-/// Gets a random in range between.
-/// </summary>
-/// <param name="pLow">The lower bound.</param>
-/// <param name="pHigh">The upper bound.</param>
-/// <returns></returns>
-int GameManager::getRandomNumberBetween(int pLow, int pHigh) {
-	return rand() % pHigh + pLow;
-}
 
 
 /// <summary>
@@ -72,7 +63,7 @@ int GameManager::getRandomNumberBetween(int pLow, int pHigh) {
 void GameManager::createScene(void)
 {
 	_gameTimer = new Ogre::Timer();
-
+	_itemInstanceNumber = 0;
     // set lights
 	setupLights(mSceneMgr);
 	
@@ -89,7 +80,6 @@ void GameManager::createScene(void)
 
 	_uiManager = new UIManager();
 	_uiManager->init();
-
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	Tree<int>* myTree = new Tree<int>();
 	myTree->setRoot(1);
@@ -248,6 +238,33 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 		_levelManager->playerScript->toggleRun(true);
 		break;
 
+	case OIS::KC_E:
+		for each (ItemInstance* item in _levelManager->getItemInstances())
+		{
+			//check if the item is within pickup range.
+			if (item->getNode()->getPosition().distance(_levelManager->getPlayer()->getPosition()) < 500)
+			{
+				//TODO: equipitem player for now, later on we should use inventory system.
+				switch (reinterpret_cast<EquipmentInstance*>(item)->getType())
+				{
+				case 0:
+					//weapon
+					_levelManager->getPlayer()->setEquipmentSlot(reinterpret_cast<WeaponInstance*>(item));
+					item->destroyItemInWorld();
+					break;
+				case 1:
+					//gear
+					_levelManager->getPlayer()->setEquipmentSlot(reinterpret_cast<ArmorInstance*>(item));
+					item->destroyItemInWorld();
+					break;
+				case 2:
+					//jewelry
+					break;
+				}
+				break;
+			}
+		}
+		break;
 	//TODO: this code should check whether or not an NPC is in range and if so, start the conversation
 	case OIS::KC_F:
 		if (dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[0])->getInDialog() == false) {
@@ -256,6 +273,9 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 		else {
 			dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[0])->toggleDialog();
 		}
+
+		//check if the item is within pickup range.
+
 		break;
 
 	case OIS::KC_SPACE:
