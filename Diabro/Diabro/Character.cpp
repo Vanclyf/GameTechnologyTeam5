@@ -255,16 +255,20 @@ void Character::setEquipmentSlot(ArmorInstance* pArmor)
 {
 	bool duplicate = false;
 
+	//check to see if the item level matches the player level
 	if (pArmor->getLevel() <= _currentLevel)
 	{
+		//looping trough the armor slotst to see if there is an item with the same slot
 		for (int i = 0; i < _armorEquipSlots.size(); i++)
 		{
+			//when an item is found with the same slot it swaps the items.
 			if (pArmor->getInfo()->getSlotType() == _armorEquipSlots[i]->getInfo()->getSlotType())
 			{
 				swapEquipmentSlot(pArmor, i);
 				duplicate = true;
 			}
 		}
+		//when no duplicate is detected we can just equip the item.
 		if (!duplicate)
 		{
 			std::vector<ArmorInstance*> armors = _armorEquipSlots;
@@ -301,16 +305,20 @@ void Character::setEquipmentSlot(WeaponInstance* pWeapon)
 {
 	int oneHandedWeaponCount = 0;
 	bool duplicate = false;
-	//check if the levelrequirment is met.
+
+	//check if the levelrequirment is met this is the most important aspect of an item,
+	//if the level is too high the player can never equip it.
 	if (pWeapon->getLevel() <= _currentLevel)
 	{
-		//check if the weapon type is twohanded
+		//check if the weapon type is twohanded because a twohanded needs all the weapon slots,
+		//to be equiped so it always has to be swaped. 
 		if(pWeapon->getInfo()->getHandedType() == 1)
 		{
 			swapEquipmentSlot(pWeapon, 0);
 		}
 		else
 		{
+			//loops trough the weaponslots to see if the player has weapons equiped.
 			for (int i = 0; i < _weaponEquipSlots.size(); i++)
 			{
 				//if a slot contains a onehanded weapon it adds one to the weaponcount
@@ -318,6 +326,7 @@ void Character::setEquipmentSlot(WeaponInstance* pWeapon)
 				{
 					oneHandedWeaponCount++;
 					//if the weaponcount is equal to 2 the max ammount of onehanded weapons is reached. 
+					//so the weapon needs to be swaped, this way it only swaps the weapon when there are two other onehanded weapons.
 					if (oneHandedWeaponCount == 2)
 					{
 						swapEquipmentSlot(pWeapon, i);
@@ -401,6 +410,8 @@ void Character::swapEquipmentSlot(WeaponInstance* pWeapon, int pDuplicate)
 	if(pWeapon->getInfo()->getHandedType() == 1)
 	{
 		//remove all the stats of all weapons stored in the weaponEquipSlots.
+		//becasue if the player has 2 onehanded weapons and needs to equip a two handed we need to remove them both,
+		//so it is safe to say for a twohanded weapon you need to remove all the other weapons for the slots.
 		for (int i = 0; i < _weaponEquipSlots.size(); i++)
 		{
 			removeStats(reinterpret_cast<EquipmentInstance*>(_weaponEquipSlots[pDuplicate]));
@@ -420,6 +431,7 @@ void Character::swapEquipmentSlot(WeaponInstance* pWeapon, int pDuplicate)
 	}
 	else
 	{
+		//if it is an onehanded weapon we just replace the existing item with the new one.
 		removeStats(reinterpret_cast<EquipmentInstance*>(_weaponEquipSlots[pDuplicate]));
 		addStats(reinterpret_cast<EquipmentInstance*>(pWeapon));
 		_weaponEquipSlots[pDuplicate] = pWeapon;
