@@ -78,6 +78,15 @@
     <ClInclude Include="..\Diabro\UIManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\Diabro\City.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Diabro\LevelGenerator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Diabro\Zone.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Diabro\BaseApplication.cpp">
@@ -126,6 +135,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\Diabro\UIManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Diabro\City.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Diabro\Zone.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
