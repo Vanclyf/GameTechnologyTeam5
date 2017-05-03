@@ -98,6 +98,15 @@
     <ClCompile Include="TreeNode.cpp">
       <Filter>Sources\TreeDatastructure</Filter>
     </ClCompile>
+    <ClCompile Include="DatabaseManager.cpp">
+      <Filter>Sources\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="shell.c">
+      <Filter>Sources\Database</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite3.c">
+      <Filter>Sources\Database</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseNpc.h">
@@ -221,6 +230,15 @@
     <ClInclude Include="TreeNode.h">
       <Filter>Headers\TreeDatastructure</Filter>
     </ClInclude>
+    <ClInclude Include="DatabaseManager.h">
+      <Filter>Headers\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite3.h">
+      <Filter>Headers\Database</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite3ext.h">
+      <Filter>Headers\Database</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="GameObjStandard.cg" />
@@ -230,6 +248,8 @@
     <None Include="Resources\materials\textures\yellowBox.jpg" />
     <None Include="testMaterial.material" />
     <None Include="DialogText.txt" />
+    <None Include="sqlite3.def" />
+    <None Include="sqlite3.dll" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Headers">
@@ -294,6 +314,12 @@
     </Filter>
     <Filter Include="Sources\Finite State Machines\States">
       <UniqueIdentifier>{102eacb0-6164-45d4-a63e-7666afb991ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Database">
+      <UniqueIdentifier>{4a5d1c44-47a9-4aa4-8cfc-b7748543d0ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Database">
+      <UniqueIdentifier>{d75a83f5-1ce8-45a4-b67e-0bbc7158aa87}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

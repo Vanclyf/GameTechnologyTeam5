@@ -55,7 +55,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(OGRE_HOME)\include;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\Samples\Common\include;$(OGRE_HOME)\boost;$(OGRE_HOME)\include\OGRE\Overlay;&lt;boost_path&gt;\stage\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(OGRE_HOME)\include;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\Samples\Common\include;$(OGRE_HOME)\boost;$(OGRE_HOME)\include\OGRE\Overlay;$(sqlite);&lt;boost_path&gt;\stage\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -104,6 +104,8 @@
     <None Include="Resources\materials\textures\greenBox.jpg" />
     <None Include="Resources\materials\textures\greyBox.jpg" />
     <None Include="Resources\materials\textures\yellowBox.jpg" />
+    <None Include="sqlite3.def" />
+    <None Include="sqlite3.dll" />
     <None Include="testMaterial.material" />
   </ItemGroup>
   <ItemGroup>
@@ -116,6 +118,7 @@
     <ClCompile Include="BaseWeapon.cpp" />
     <ClCompile Include="CharacterSpawner.cpp" />
     <ClCompile Include="City.cpp" />
+    <ClCompile Include="DatabaseManager.cpp" />
     <ClCompile Include="EquimentInstance.cpp" />
     <ClCompile Include="FloatRange.cpp" />
     <ClCompile Include="GameManager.cpp" />
@@ -131,6 +134,8 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="QuestContentManager.cpp" />
     <ClCompile Include="QuestItemContainer.cpp" />
+    <ClCompile Include="shell.c" />
+    <ClCompile Include="sqlite3.c" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="TestFSM.cpp" />
     <ClCompile Include="QuestItemGenerator.cpp" />
@@ -154,6 +159,7 @@
     <ClInclude Include="CharacterSpawner.h" />
     <ClInclude Include="CharacterStats.h" />
     <ClInclude Include="City.h" />
+    <ClInclude Include="DatabaseManager.h" />
     <ClInclude Include="EquimentInstance.h" />
     <ClInclude Include="FloatRange.h" />
     <ClInclude Include="GameManager.h" />
@@ -170,6 +176,8 @@
     <ClInclude Include="Modifier.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="sqlite3.h" />
+    <ClInclude Include="sqlite3ext.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="QuestContentManager.h" />
     <ClInclude Include="QuestItem.h" />
