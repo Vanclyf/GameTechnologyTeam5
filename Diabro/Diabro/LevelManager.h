@@ -1,7 +1,6 @@
 #ifndef LEVEL_MANAGER_H_
 #define LEVEL_MANAGER_H_
 
-#pragma once
 #include "Player.h"
 #include "Npc.h"
 #include "BaseApplication.h"
@@ -40,7 +39,7 @@ public:
 	static int testunit(int i) { return ++i; };
 	static int testunittwo(int i);
 	
-	LevelGenerator levelGenerator;
+	LevelGenerator* levelGenerator;
 	// for now public so that game manager can access it. 
 	Player* playerScript; 
 

@@ -1,13 +1,13 @@
 #ifndef BASE_NPC_H_
 #define BASE_NPC_H_
 
-#pragma once
 #include "Character.h"
+#include "City.h"
 
 class BaseNpc : public Character
 {
 public:
-	BaseNpc(Ogre::SceneNode*, Ogre::SceneNode*, Ogre::Entity*);
+	BaseNpc(Ogre::SceneNode*, Ogre::SceneNode*, Ogre::Entity*, City* );
 	//~BaseNpc();
 
 	void update(Ogre::Real) override;
@@ -23,6 +23,9 @@ protected:
 
 	//object pivot
 	Ogre::SceneNode* _myRotationNode;
+	
+	// temporary vars for spawning, spawning should be handled by some content placer script
+	City* _myCity;
 
 private:
 	float _timeSince;

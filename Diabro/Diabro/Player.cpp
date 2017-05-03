@@ -10,7 +10,7 @@ Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pM
 {
 	// override default speeds
 	_movespeed = 250;
-	_runspeed = 850;
+	_runspeed = 550;
 
 	// initialize pLevel vars
 	_currentLevel = 1;

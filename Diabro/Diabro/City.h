@@ -32,6 +32,8 @@ public:
 	void init();
 	City(int pX, int pZ, int pWidth, int pHeight, int pId, int scalar);
 	
+	Coordinate getRandomPoint();
+
 	std::vector<Coordinate> connections;
 	~City();
 
@@ -53,7 +55,7 @@ private:
 	int buildingId;
 	int parentIteration;
 	int childIteration;
-	void generateBuildings(int id, int x, int z, int width, int depth);
+	void generateBuildings();
 	int _scaledWidth;
 	int _scaledDepth;
 	int *_tiles2;

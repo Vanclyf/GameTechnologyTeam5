@@ -11,7 +11,7 @@ position(Coordinate(pX, pZ)), width(pWidth), depth(pDepth), id(pId), scalar(pSca
 
 void City::init()
 {
-	generateBuildings(id, position.x, position.z, width, depth);
+	generateBuildings();
 }
 
 City::~City()
@@ -25,24 +25,23 @@ void City::setRndType()
 	typeFlag = static_cast<RoomType> (rand() % static_cast<int>(RoomType::sizeRT));
 }
 
-void City::generateBuildings(int id, int x, int z, int width, int depth)
+void City::generateBuildings()
 {
 	_rootNode = GameManager::getSingletonPtr()->getSceneManager()->getRootSceneNode();
 	manager = GameManager::getSingletonPtr()->getSceneManager();
 		
 	std::vector<Ogre::Entity*> buildingEntities;
-	for (int i = 0; i < std::rand() % 10 + 1; i++)
+	int random = GameManager::getSingletonPtr()->getRandomInRange(5, 15);
+	for (int i = 0; i < random; i++)
 	{
-		printf(" buildingsnumber: %d \n", i);
-		std::stringstream nodename("citybuildingNode");
 		//TODO: make it an ID
 		Ogre::SceneNode* buildingNode = _rootNode->createChildSceneNode();
 		Ogre::Entity* _buildingEntity = manager->createEntity("cube.mesh");
 		buildingNode->setScale(2, 2, 2);
 		buildingNode->attachObject(_buildingEntity);
 		//TODO: Change the numbers here to match those provided by levelgen CHECK
-		int xPos = GameManager::getSingletonPtr()->getRandomInRange(x * 1000, (width - 1) * 1000);
-		int zPos = GameManager::getSingletonPtr()->getRandomInRange(z * 1000, (depth - 1) * 1000);
+		int xPos = GameManager::getSingletonPtr()->getRandomInRange(position.x * 1000, (width - 1) * 1000);
+		int zPos = GameManager::getSingletonPtr()->getRandomInRange(position.z * 1000, (depth - 1) * 1000);
 		buildingNode->setPosition(xPos, 100, zPos);//GameManager::getSingletonPtr()->getRandomInRange(x * 1000, (x + width) * 1000), 50, GameManager::getSingletonPtr()->getRandomInRange(z * 1000, (z + depth) * 1000));
 
 		nodeList(buildingNode);
@@ -66,41 +65,26 @@ int City::assignBuildingRole(std::vector<Ogre::SceneNode *>  buildings, std::vec
 		{
 
 		case 0:
-			_roleNode = (Ogre::SceneNode *)buildings[i]->createChild();
-			_signEntity = manager->createEntity("Barrel.mesh");
-			_roleNode->attachObject(_signEntity);
-			_roleNode->setPosition(0, 100, 0);
+			pEntities[i]->setMaterialName("Houses/Red");
 			break;
 		case 1:
-			_roleNode = (Ogre::SceneNode *)buildings[i]->createChild();
-			_signEntity = manager->createEntity("Barrel.mesh");
-			_roleNode->attachObject(_signEntity);
-			_roleNode->setPosition(0, 100, 0);
+			pEntities[i]->setMaterialName("Houses/Yellow");
 			break;
 		case 2:
-			_roleNode = (Ogre::SceneNode *)buildings[i]->createChild();
-			_signEntity = manager->createEntity("Knot.mesh");
-			_roleNode->attachObject(_signEntity);
-			_roleNode->setPosition(0, 100, 0);
+			pEntities[i]->setMaterialName("Houses/Pink");
 			break;
 		case 3:
-			_roleNode = (Ogre::SceneNode *)buildings[i]->createChild();
-			_signEntity = manager->createEntity("Barrel.mesh");
-			_roleNode->attachObject(_signEntity);
-			_roleNode->setPosition(0, 100, 0);
+			pEntities[i]->setMaterialName("Houses/Green");
 			break;
 		case 4:
-			_roleNode = (Ogre::SceneNode *)buildings[i]->createChild();
-			_signEntity = manager->createEntity("Athene.mesh");
-			_roleNode->attachObject(_signEntity);
-			_roleNode->setPosition(0, 100, 0);
+			pEntities[i]->setMaterialName("Houses/Purple");
 			break;
 		case 5:
+			pEntities[i]->setMaterialName("Houses/Blue");
 			break;
 		default:
 			break;
 		}
-		//printf("%d", roles);
 	}
 
 	return role;
@@ -132,4 +116,11 @@ int City::getScaladWidth(int width, int scalar)
 int City::getScaladDepth(int depth, int scalar)
 {
 	return depth*scalar;
+}
+
+Coordinate City::getRandomPoint(){
+	int xPos = GameManager::getSingletonPtr()->getRandomInRange(position.x * 1000, (width - 1) * 1000);
+	int zPos = GameManager::getSingletonPtr()->getRandomInRange(position.z * 1000, (depth - 1) * 1000);
+
+	return Coordinate(xPos, zPos);
 }

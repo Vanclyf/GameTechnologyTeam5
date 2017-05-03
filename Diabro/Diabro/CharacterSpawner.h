@@ -1,5 +1,6 @@
 #ifndef CHARACTER_SPAWNER_H_
 #define CHARACTER_SPAWNER_H_
+
 #include "Character.h"
 #include "Npc.h"
 #include "BasicEnemy.h"
@@ -7,7 +8,7 @@
 template <class T> 
 class CharacterSpawner {
 public:
-	CharacterSpawner<T>(Ogre::SceneNode*, int, Ogre::Vector3);
+	CharacterSpawner<T>(Ogre::SceneNode*, int, Ogre::Vector3, City*);
 	~CharacterSpawner();
 
 	void instanceDeath();
@@ -19,5 +20,7 @@ private:
 
 	//amount of characters to spawn
 	int _nCharacters;
+
+	City* _myCity;
 };
 #endif

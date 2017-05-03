@@ -9,14 +9,8 @@ LevelGenerator::LevelGenerator():
 scalar(1000)
 {
 	_zone[0] = Zone(19, 19, 5, 5, 5, 100);
-	//place geometry for each pCity
-	FILE* fp;
-	freopen_s(&fp, "CONOUT$", "w", stdout);
-	printf("%d", _zone[0].cities.size());
-	printf("\n");
-	fclose(fp);
 	for (int i = 0; i < _zone[0].cities.size(); ++i) {
-	City c = _zone[0].cities[i];
+		City c = _zone[0].cities[i];
 		
 		//create unique pCity pName (just a number)
 		std::stringstream sstm; 
@@ -24,6 +18,18 @@ scalar(1000)
 
 		//TODO: generate city
 		_zone[0].cities[i].init();
+
+		//place spawner
+		if (GameManager::getSingletonPtr()->getRandomInRange(0,10) < 5){
+			Ogre::SceneNode* npcSpawnerNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode("npcSpawn" + i);
+			//0.5f for height difference
+			CharacterSpawner<Npc>* npcSpawner = new CharacterSpawner<Npc>(npcSpawnerNode, 3, Ogre::Vector3((c.position.x + c.width / 2) * 1000, 25, (c.position.z + c.depth / 2) * 1000), &_zone[0].cities[i]);
+		}
+		else
+		{
+			Ogre::SceneNode* enemySpawnerNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode("enemySpawn" + i);
+			CharacterSpawner<BasicEnemy>* enemySpawner = new CharacterSpawner<BasicEnemy>(enemySpawnerNode, 3, Ogre::Vector3((c.position.x + c.width / 2) * 1000, 0, (c.position.z + c.depth / 2) * 1000), &_zone[0].cities[i]);
+		}
 	}
 	drawDungeonFloor(scalar, _zone[0]);
 }
