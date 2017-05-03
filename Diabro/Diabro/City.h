@@ -2,24 +2,38 @@
 #define CITY_H_
 #include <vector>
 
-struct connection {
+struct Coordinate {
 	int x;
-	int y;
+	int z;
+	Coordinate(int x, int z) : x(x), z(z) {	}
+};
+
+enum RoomType
+{
+	EmptyRT,
+	CityRT,
+	HideoutRT,
+	HubRT,
+	sizeRT
 };
 
 class City
 {
 public:
-	int x;
-	int z;
+	Coordinate position;
+	RoomType typeFlag;
 	int width;
 	int depth;
 	int id;
 
-	std::vector<connection> connections;
+	std::vector<Coordinate> connections;
 
-	City(int pX, int pY, int pWidth, int pHeight, int pId);
+	City(int pX, int pZ, int pWidth, int pDepth, int pId);
 	~City();
+
+private:
+	void setRndType();
+
 };
 
 #endif
