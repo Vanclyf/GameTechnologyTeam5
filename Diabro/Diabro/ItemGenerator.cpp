@@ -34,13 +34,13 @@ ItemGenerator::~ItemGenerator() {
 /// </summary>
 /// <param name="pItemList">The item list to put the items in.</param>
 /// <param name="pAmount">The pAmount.</param>
-std::vector<ItemInstance*> ItemGenerator::generateRandomItem(Ogre::SceneNode* pNode, int pAmount) {
+std::vector<ItemInstance*> ItemGenerator::generateRandomItem(Ogre::SceneNode* pNode, int pAmount, Ogre::Vector3 position) {
 	std::vector<ItemInstance*> returnList;
 
 	// generate the x items
 	//TODO: test with lists, may not working because pointer deleted after execution of method.
 	for (int i = 0; i < pAmount; ++i) {
-		ItemInstance* item = generateRandomItem(pNode);
+		ItemInstance* item = generateRandomItem(pNode, position);
 		returnList.push_back(item);
 	}
 
@@ -48,7 +48,7 @@ std::vector<ItemInstance*> ItemGenerator::generateRandomItem(Ogre::SceneNode* pN
 }
 
 //TODO: create the item drop and set pNode as parent
-ItemInstance* ItemGenerator::generateRandomItem(Ogre::SceneNode* pNode) {
+ItemInstance* ItemGenerator::generateRandomItem(Ogre::SceneNode* pNode, Ogre::Vector3 position) {
 	ItemInstance* returnItem;
 
 
@@ -63,8 +63,11 @@ ItemInstance* ItemGenerator::generateRandomItem(Ogre::SceneNode* pNode) {
 	nodename << itemnumber << "_" << "0";
 	_itemNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode(nodename.str());
 	_itemNode->createChildSceneNode()->attachObject(itemEntity);
-	_itemNode->setPosition(pNode->getPosition());
-	_itemNode->setScale(.2, .5, .2);
+	position.x += GameManager::getSingletonPtr()->getRandomInRange(0, 200) - 100;
+	position.z += GameManager::getSingletonPtr()->getRandomInRange(0, 200) - 100;
+	position.y += 10;
+	_itemNode->setPosition(position);
+	_itemNode->setScale(.2, .2, .2);
 
 	//TODO: this should be a random itemtype
 	int itemType = 2;

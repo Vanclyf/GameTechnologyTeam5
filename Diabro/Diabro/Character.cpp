@@ -154,7 +154,7 @@ bool Character::adjustHealth(float pAdjust)
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	FILE* fp;
 	freopen_s(&fp, "CONOUT$", "w", stdout);
-	printf("I got hit... %f", _currentHealth);
+	printf("I got hit... %f \n", _currentHealth);
 	fclose(fp);
 #endif
 
