@@ -1,5 +1,6 @@
 #include "Zone.h"
 #include <ctime>
+#include "GameManager.h"
 
 #include <OgreConfigFile.h>
 
@@ -63,7 +64,7 @@ bool Zone::hasCollision(City pC) {
 /// <param name="cityId">The city identifier.</param>
 /// <returns></returns>
 bool Zone::PlaceCity(int pX, int pZ, int pWidth, int pDepth, int pCityId) {
-	City c = City(pX, pZ, pWidth, pDepth, pCityId);
+	City c = City(pX, pZ, pWidth, pDepth, pCityId, 1000);
 	if (!hasCollision(c)) {
 		for (int ix = 0; ix < pWidth; ++ix) {
 			for (int iz = 0; iz < pDepth; ++iz) {
