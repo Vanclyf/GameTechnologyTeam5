@@ -1,5 +1,6 @@
 #include "Zone.h"
 #include <ctime>
+#include "GameManager.h"
 #include <OgreConfigFile.h>
 #include <OgreMath.h>
 
@@ -11,6 +12,7 @@ Zone::Zone() {
 Zone::Zone(int pWidth, int pDepth, int pMaxCityWidth, int pMaxCityHeight, int pMaxCities, int pMaxTries):
 _width(pWidth), _depth(pDepth), _maxCityWidth(pMaxCityWidth), _maxCityHeight(pMaxCityHeight)
 {	
+	
 	// create grid for spawning
 	_tiles = new int[pWidth * pDepth];
 	//set values to 0
@@ -418,8 +420,8 @@ bool Zone::checkGrid() {
 /// <summary>
 /// Places a city in the grid and in the city list, if that city has no collisions at that location.
 /// </summary>
-/// <param name="pX">The pX pPosition of the city.</param>
-/// <param name="pZ">The pZ pPosition of the city.</param>
+/// <param name="pX">The pX position of the city.</param>
+/// <param name="pZ">The pZ position of the city.</param>
 /// <param name="pWidth">The pWidth of the city.</param>
 /// <param name="pDepth">The pDepth of the city.</param>
 /// <param name="cityId">The city identifier.</param>
@@ -436,7 +438,6 @@ bool Zone::placeCity(City pC) {
 	}
 	return false;
 }
-
 
 /// <summary>
 /// Generates city positions within the grid. All cities are at least one block away from the sides and one block away from the edges.
@@ -462,7 +463,7 @@ void Zone::generateCities(int pMaxTries, int pMaxCities) {
 		(x % 2 == 0) ? x++ : x;
 		(z % 2 == 0) ? z++ : z;
 
-		if (placeCity(City(x, z, width, depth, nCities + 1))) {
+		if (placeCity(City(x, z, width, depth, nCities + 1, 1000))) {
 			++nCities;
 		}
 		if (nCities >= pMaxCities) {
@@ -486,6 +487,6 @@ void Zone::printGrid() {
 		printf("\n");
 	}
 	fclose(fp);
-	printValues();
+	//printValues();
 #endif
 }

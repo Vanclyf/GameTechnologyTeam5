@@ -22,6 +22,12 @@ void LevelManager::initialize()
 	Ogre::SceneNode* playerNode = _levelNode->createChildSceneNode("PlayerNode");
 	_camNode = playerNode->createChildSceneNode("CameraNode");
 
+	FILE* fp;
+	freopen_s(&fp, "CONOUT$", "w", stdout);
+	printf("one");
+	printf("\n");
+	fclose(fp);
+
 	//player
 	_playerEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("ninja.mesh");
 	playerNode->createChildSceneNode()->attachObject(_playerEntity);

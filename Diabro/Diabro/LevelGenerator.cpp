@@ -10,14 +10,20 @@ scalar(1000)
 {
 	_zone[0] = Zone(19, 19, 5, 5, 5, 100);
 	//place geometry for each pCity
+	FILE* fp;
+	freopen_s(&fp, "CONOUT$", "w", stdout);
+	printf("%d", _zone[0].cities.size());
+	printf("\n");
+	fclose(fp);
 	for (int i = 0; i < _zone[0].cities.size(); ++i) {
-		City c = _zone[0].cities[i];
+	City c = _zone[0].cities[i];
 		
 		//create unique pCity pName (just a number)
 		std::stringstream sstm; 
 		sstm << "pCity-" << i;
 
 		//TODO: generate city
+		_zone[0].cities[i].init();
 	}
 	drawDungeonFloor(scalar, _zone[0]);
 }

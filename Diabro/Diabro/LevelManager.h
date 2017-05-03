@@ -39,6 +39,7 @@ public:
 	void detachItemInstance(int);
 	static int testunit(int i) { return ++i; };
 	static int testunittwo(int i);
+	
 	LevelGenerator levelGenerator;
 	// for now public so that game manager can access it. 
 	Player* playerScript; 
