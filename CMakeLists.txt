@@ -59,7 +59,7 @@ set(HDRS
 	./Diabro/Diabro/QuestItemGenerator.h
 	./Diabro/Diabro/tinyxml2.h
 	./Diabro/Diabro/BuildingType.h
-	./Diabro/Diabro/CiryManager.h
+	./Diabro/Diabro/CityManager.h
 )
  
 set(SRCS
@@ -92,7 +92,7 @@ set(SRCS
 	./Diabro/Diabro/City.cpp
 	./Diabro/Diabro/tinyxml2.cpp
 	./Diabro/Diabro/BuildingType.cpp
-	./Diabro/Diabro/CiryManager.cpp
+	./Diabro/Diabro/CityManager.cpp
 )
  
 include("tools/cmake/common.cmake") 
