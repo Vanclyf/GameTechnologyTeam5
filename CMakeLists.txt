@@ -58,6 +58,8 @@ set(HDRS
 	./Diabro/Diabro/QuestItemContainer.h 
 	./Diabro/Diabro/QuestItemGenerator.h
 	./Diabro/Diabro/tinyxml2.h
+	./Diabro/Diabro/ArmorInstance.h
+	./Diabro/Diabro/BaseArmor.h
 )
  
 set(SRCS
@@ -89,6 +91,8 @@ set(SRCS
 	./Diabro/Diabro/Zone.cpp
 	./Diabro/Diabro/City.cpp
 	./Diabro/Diabro/tinyxml2.cpp
+	./Diabro/Diabro/ArmorInstance.cpp
+	./Diabro/Diabro/BaseArmor.cpp
 )
  
 include("tools/cmake/common.cmake") 
