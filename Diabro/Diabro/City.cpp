@@ -30,6 +30,7 @@ void City::generateBuildings(int id, int x, int z, int width, int depth)
 	_rootNode = GameManager::getSingletonPtr()->getSceneManager()->getRootSceneNode();
 	manager = GameManager::getSingletonPtr()->getSceneManager();
 		
+	std::vector<Ogre::Entity*> buildingEntities;
 	for (int i = 0; i < std::rand() % 10 + 1; i++)
 	{
 		printf(" buildingsnumber: %d \n", i);
@@ -37,21 +38,22 @@ void City::generateBuildings(int id, int x, int z, int width, int depth)
 		//TODO: make it an ID
 		Ogre::SceneNode* buildingNode = _rootNode->createChildSceneNode();
 		Ogre::Entity* _buildingEntity = manager->createEntity("cube.mesh");
-
-		buildingNode->setPosition(Ogre::Vector3(0, 0, 0));
+		buildingNode->setScale(2, 2, 2);
 		buildingNode->attachObject(_buildingEntity);
 		//TODO: Change the numbers here to match those provided by levelgen CHECK
-		int xPos = GameManager::getSingletonPtr()->getRandomInRange(x, width - 1);
-		int zPos = GameManager::getSingletonPtr()->getRandomInRange(z, depth - 1);
-		buildingNode->setPosition(xPos * 1000, 50, zPos * 1000);//GameManager::getSingletonPtr()->getRandomInRange(x * 1000, (x + width) * 1000), 50, GameManager::getSingletonPtr()->getRandomInRange(z * 1000, (z + depth) * 1000));
+		int xPos = GameManager::getSingletonPtr()->getRandomInRange(x * 1000, (width - 1) * 1000);
+		int zPos = GameManager::getSingletonPtr()->getRandomInRange(z * 1000, (depth - 1) * 1000);
+		buildingNode->setPosition(xPos, 100, zPos);//GameManager::getSingletonPtr()->getRandomInRange(x * 1000, (x + width) * 1000), 50, GameManager::getSingletonPtr()->getRandomInRange(z * 1000, (z + depth) * 1000));
 
 		nodeList(buildingNode);
-		assignBuildingRole(buildings);	
+		buildingEntities.push_back(_buildingEntity);
 	}
+
+	assignBuildingRole(buildings, buildingEntities);
 }
 
 
-int City::assignBuildingRole(std::vector<Ogre::SceneNode *>  buildings)
+int City::assignBuildingRole(std::vector<Ogre::SceneNode *>  buildings, std::vector<Ogre::Entity*> pEntities)
 {
 	std::stringstream nodename("buildingRoleNode");
 	
@@ -94,6 +96,8 @@ int City::assignBuildingRole(std::vector<Ogre::SceneNode *>  buildings)
 			_roleNode->setPosition(0, 100, 0);
 			break;
 		case 5:
+			break;
+		default:
 			break;
 		}
 		//printf("%d", roles);

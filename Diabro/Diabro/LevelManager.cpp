@@ -22,17 +22,13 @@ void LevelManager::initialize()
 	Ogre::SceneNode* playerNode = _levelNode->createChildSceneNode("PlayerNode");
 	_camNode = playerNode->createChildSceneNode("CameraNode");
 
-	FILE* fp;
-	freopen_s(&fp, "CONOUT$", "w", stdout);
-	printf("one");
-	printf("\n");
-	fclose(fp);
 
 	//player
 	_playerEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("ninja.mesh");
 	playerNode->createChildSceneNode()->attachObject(_playerEntity);
 	Ogre::Vector3 position = Ogre::Vector3((levelGenerator.GetZone(0, 0).cities[0].position.x + (levelGenerator.GetZone(0, 0).cities[0].width / 2.0f))* levelGenerator.scalar, 0, (levelGenerator.GetZone(0, 0).cities[0].position.z + (levelGenerator.GetZone(0, 0).cities[0].depth / 2.0f)) * levelGenerator.scalar);
 	playerNode->setPosition(position);
+	playerNode->setScale(0.5f, 0.5f, 0.5f);
 	playerScript = new Player(playerNode, _playerEntity);
 	playerScript->initialize();
 	
