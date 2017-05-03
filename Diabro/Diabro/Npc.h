@@ -22,7 +22,7 @@ enum Profession {
 class Npc : public BaseNpc
 {
 public:
-	Npc(Ogre::SceneNode*, Ogre::SceneNode*, Ogre::Entity*);
+	Npc(Ogre::SceneNode*, Ogre::SceneNode*, Ogre::Entity*, Ogre::Vector3);
 	~Npc();
 
 	static Ogre::String getMeshName() { return "penguin.mesh"; }

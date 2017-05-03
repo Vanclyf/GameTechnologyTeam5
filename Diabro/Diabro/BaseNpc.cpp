@@ -7,9 +7,10 @@
 /// </summary>
 /// <param name="pMyNode">My node.</param>
 /// <param name="pMyEntity">My entity.</param>
-BaseNpc::BaseNpc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity) : Character(pMyNode, pMyEntity), _timeSince(0), _noticeDistance(400.0f)
+BaseNpc::BaseNpc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity, Ogre::Vector3 spawnLocation) : Character(pMyNode, pMyEntity), _timeSince(0), _noticeDistance(400.0f)
 {
 	_myRotationNode = pMyRotationNode;
+	_mySpawnLocation = spawnLocation;
 }
 
 /// <summary>
@@ -66,8 +67,24 @@ void BaseNpc::wander() {
 	int randomX = rand() % (10 - -10 + 1) + -10;
 	int randomZ = rand() % (10 - -10 + 1) + -10;
 
+	//targer position
+	Ogre::Vector3 targetPosition = Ogre::Vector3(getPosition().x + randomX, getPosition().y, getPosition().z + randomZ);
+
+	//TODO: this code below have to delete after demo
+	int SpawnX = _mySpawnLocation.x;
+	int SpawnZ = _mySpawnLocation.z;
+
+	if(targetPosition.x >(SpawnX + 50) || targetPosition.x <(SpawnX - 50))
+	{
+		targetPosition.x = -targetPosition.x;
+	}
+	if (targetPosition.z >(SpawnZ + 50) || targetPosition.z <(SpawnZ - 50))
+	{
+		targetPosition.z = -targetPosition.z;
+	}
+
 	//TODO: shouldn't be able to walk out of the level, clamp
-	walkTo(Ogre::Vector3(getPosition().x + randomX, getPosition().y, getPosition().z + randomZ));
+	walkTo(Ogre::Vector3(targetPosition));
 }
 
 void BaseNpc::walkTo(Ogre::Vector3 targetPos) {
