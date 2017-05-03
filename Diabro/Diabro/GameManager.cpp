@@ -7,6 +7,7 @@ Filename:    GameManager.cpp
 #include "GameManager.h"
 #include "SdkTrays.h"
 #include "Tree.h"
+#include "OgreManager.h"
 
 //---------------------------------------------------------------------------
 
