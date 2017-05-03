@@ -5,9 +5,10 @@
 #include <OgreHardwareBufferManager.h>
 #include "GameManager.h"
 
-LevelGenerator::LevelGenerator()
+LevelGenerator::LevelGenerator():
+scalar(1000)
 {
-	_zone[0] = Zone(19, 19, 7, 7, 2, 100);
+	_zone[0] = Zone(19, 19, 5, 5, 5, 100);
 	//place geometry for each pCity
 	for (int i = 0; i < _zone[0].cities.size(); ++i) {
 		City c = _zone[0].cities[i];
@@ -16,10 +17,9 @@ LevelGenerator::LevelGenerator()
 		std::stringstream sstm; 
 		sstm << "pCity-" << i;
 
-		//placeCity(c, sstm.str(), Ogre::ColourValue(0.5, 0.5, 0.5, 1.0));
 		//TODO: generate city
 	}
-	drawDungeonFloor(1000, _zone[0]);
+	drawDungeonFloor(scalar, _zone[0]);
 }
 
 LevelGenerator::~LevelGenerator()
@@ -33,28 +33,42 @@ Zone LevelGenerator::GetZone(int pX, int pZ) {
 
 
 void LevelGenerator::drawDungeonFloor(int pScalar, Zone pZone) {
-	Ogre::SceneNode* thisSceneNode = GameManager::getSingleton().getSceneManager()->getRootSceneNode()->createChildSceneNode();
-	thisSceneNode->setPosition(0, 0, 0);
+	
 
 	for (int ix = 0; ix < pZone.getResolution().x; ++ix) {
 		for (int iz = 0; iz < pZone.getResolution().z; ++iz) {
 			if (pZone.getTile(ix, iz) > 0) {
-				
+				Ogre::SceneNode* thisSceneNode = GameManager::getSingleton().getSceneManager()->getRootSceneNode()->createChildSceneNode();
+				thisSceneNode->setPosition(ix * pScalar, 0, iz * pScalar);
 
 				std::stringstream name;
 				name << "tile_" << ix << "-" << iz;
 
-				createTileMesh(pScalar, coordinate(ix, iz), name.str());
+				createPlane(pScalar, name.str());
 
 				Ogre::Entity* zoneEntity = GameManager::getSingleton().getSceneManager()->createEntity("entity: " + name.str(), name.str());
-				zoneEntity->setMaterialName("Test/ColourTest");
+				zoneEntity->setMaterialName("Examples/Rockwall");
 				thisSceneNode->attachObject(zoneEntity);
 			}
 		}
 	}
 }
 
-void LevelGenerator::createTileMesh(int pScalar, coordinate pPosition, std::string pName) {
+void LevelGenerator::createPlane(int pScalar, std::string pName)
+{
+	Ogre::Plane plane(Ogre::Vector3::UNIT_Y, 0);
+	Ogre::MeshManager::getSingleton().createPlane(
+		pName,
+		Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+		plane,
+		pScalar, pScalar, 2, 2,
+		true,
+		1, 5, 5,
+		Ogre::Vector3::UNIT_Z);
+}
+
+
+void LevelGenerator::createTileMesh(int pScalar, Coordinate pPosition, std::string pName) {
 	//TODO: add uv coordinates
 
 	Ogre::MeshPtr mesh = Ogre::MeshManager::getSingleton().createManual(pName, "General");

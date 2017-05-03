@@ -27,28 +27,30 @@ public:
 	~Zone();
 
 	void setTile(int pX, int pY, int pValue) const;
-	void setTile(coordinate pCoord, int pValue) const;
+	void setTile(Coordinate pCoord, int pValue) const;
 	int getTile(int pX, int pY) const;
-	int getTile(coordinate pCoord) const;
-	coordinate getResolution() const;
+	int getTile(Coordinate pCoord) const;
+	Coordinate getResolution() const;
 	
 	void printGrid();
 
 private:
+	void cleanGrid();
+
 	void connectDungeon(int id, float pChance);
-	int getPossibleConnections(City pCity, std::vector<std::pair<coordinate, int>> *pConnections);
+	int getPossibleConnections(City pCity, std::vector<std::pair<Coordinate, int>> *pConnections);
 	int changeTileValues(int pMaxIndex);
 	void printValues();
 	
 	int generatePathways(int pPathId);
-	std::vector<coordinate> getNeighbours(coordinate pCell);
-	coordinate getRndNeighbour(coordinate pCell, int nPathId);
-	bool hasNeighBours(coordinate pCell);
+	std::vector<Coordinate> getNeighbours(Coordinate pCell);
+	Coordinate getRndNeighbour(Coordinate pCell, int nPathId);
+	bool hasNeighBours(Coordinate pCell);
 	bool checkGrid();
-	coordinate getPosition(int pId, bool pCheckNeighbours);
+	Coordinate getPosition(int pId, bool pCheckNeighbours);
 
 	void generateCities(int pMaxTries, int pMaxCities);
-	bool hasCollision(coordinate pPosition);
+	bool hasCollision(Coordinate pPosition);
 	bool hasCollision(City pC);
 	bool placeCity(City pC);
 };
