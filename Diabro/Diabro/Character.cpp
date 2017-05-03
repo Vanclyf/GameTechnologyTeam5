@@ -321,7 +321,7 @@ void Character::setEquipmentSlot(WeaponInstance* pWeapon)
 					//if the weaponcount is equal to 2 the max ammount of onehanded weapons is reached. 
 					if (oneHandedWeaponCount == 2)
 					{
-						swapEquipmentSlot(pWeapon, i);
+						//swapEquipmentSlot(pWeapon, i);
 						duplicate = true;
 					}
 				}
