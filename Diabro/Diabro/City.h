@@ -23,7 +23,7 @@ public:
 	~City();
 
 protected:
-	std::vector<Ogre::SceneNode*> City::nodeIteration(Ogre::SceneNode *); //simple method that will iterate through all child nodes and set them in an array to eb used. (maybe for a "BaseController)
+	//std::vector<Ogre::SceneNode*> City::nodeIteration(Ogre::SceneNode *); //simple method that will iterate through all child nodes and set them in an array to eb used. (maybe for a "BaseController)
 	bool checkCollision(Ogre::SceneNode *); //Checks if buildings are colliding with one another
 	bool checkEntryWay(Ogre::SceneNode *); //Checks if the buildings are blocking entryways
 	int assignBuildingRole(std::vector<Ogre::SceneNode*> ); //Assign roles to buildings in the city
