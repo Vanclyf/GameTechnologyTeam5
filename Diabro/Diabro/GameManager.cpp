@@ -239,8 +239,9 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 		break;
 
 	case OIS::KC_E:
-		for each (ItemInstance* item in _levelManager->getItemInstances())
+		for (int i = 0; i < _levelManager->getItemInstances().size(); i++)
 		{
+			ItemInstance* item = _levelManager->getItemInstances()[i];
 			//check if the item is within pickup range.
 			if (item->getNode()->getPosition().distance(_levelManager->getPlayer()->getPosition()) < 500)
 			{
