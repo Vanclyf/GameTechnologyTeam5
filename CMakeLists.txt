@@ -21,7 +21,6 @@ set (CMAKE_CXX_STANDARD 11)
 set(APP "Diabro")
  
 set(HDRS
-	./Diabro/Diabro/BaseApplication.h
 	./Diabro/Diabro/GameManager.h
 	./Diabro/Diabro/Player.h
 	./Diabro/Diabro/Npc.h
@@ -61,7 +60,6 @@ set(HDRS
 )
  
 set(SRCS
-	./Diabro/Diabro/BaseApplication.cpp
 	./Diabro/Diabro/GameManager.cpp
 	./Diabro/Diabro/Player.cpp
 	./Diabro/Diabro/Npc.cpp
