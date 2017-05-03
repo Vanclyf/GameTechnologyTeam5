@@ -29,7 +29,7 @@ protected:
 	int assignBuildingRole(std::vector<Ogre::SceneNode*> ); //Assign roles to buildings in the city
 	int getScaladWidth(int width, int scalar);
 	int getScaladDepth(int depth, int scalar);
-	std::vector<Ogre::SceneNode*>nodeList(Ogre::SceneNode* pBuildingNode);
+	std::vector<Ogre::SceneNode*> nodeList(Ogre::SceneNode* pBuildingNode);
 	
 private:
 	
