@@ -2,7 +2,6 @@
 #include <ctime>
 #include <OgreConfigFile.h>
 #include <OgreMath.h>
-#include <stack>
 
 Zone::Zone() {
 	
