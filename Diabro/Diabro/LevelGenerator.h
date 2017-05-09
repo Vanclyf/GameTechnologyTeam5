@@ -10,18 +10,19 @@ public:
 	LevelGenerator();
 	~LevelGenerator();
 
-	Zone GetZone(int pX, int pZ);
+	Zone getZone(int pX, int pZ);
 	int scalar;
 
 private:
 	Zone _zone[1];
-	//Await further implementtation
-	//void createCityMesh(City pCity, int scalar, std::string pName, Ogre::ColourValue pColour) const;
-	//void placeCity(City pCity, std::string pName, Ogre::ColourValue pColour) const;
 
 	void drawDungeonFloor(int pScalar, Zone pZone);
-	void createTileMesh(int pScalar, Coordinate pPosition, std::string pName);
 	void createPlane(int pScalar, std::string pName);
+
+	//Await further implementtation
+	//void createTileMesh(int pScalar, Coordinate pPosition, std::string pName);
+	//void createCityMesh(City pCity, int scalar, std::string pName, Ogre::ColourValue pColour) const;
+	//void placeCity(City pCity, std::string pName, Ogre::ColourValue pColour) const;
 };
 
 #endif

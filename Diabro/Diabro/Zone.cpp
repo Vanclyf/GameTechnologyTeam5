@@ -68,9 +68,15 @@ void Zone::cleanGrid()
 	}
 }
 
+bool Zone::inGrid(Coordinate pCoord) {
+	if (pCoord.x >= _width && pCoord.z >= _depth) return false;
+	if (pCoord.x < 0 && pCoord.z < 0) return false;
+	return true;
+}
 
-void Zone::setTile(int pX, int pY, int pValue) const {
-	_tiles[pX + pY * _width] = pValue;
+
+void Zone::setTile(int pX, int pZ, int pValue) const {
+	_tiles[pX + pZ * _width] = pValue;
 }
 
 void Zone::setTile(Coordinate pCoord, int pValue) const {
@@ -78,8 +84,8 @@ void Zone::setTile(Coordinate pCoord, int pValue) const {
 }
 
 
-int Zone::getTile(int pX, int pY) const {
-	return _tiles[pX + pY * _width];
+int Zone::getTile(int pX, int pZ) const {
+	return _tiles[pX + pZ * _width];
 }
 
 int Zone::getTile(Coordinate pCoord) const {
@@ -94,14 +100,14 @@ Coordinate Zone::getPosition(int pId, bool pCheckNeighbours) {
 		for (int iz = 1; iz < _depth - 1; ++iz) {
 			if(getTile(ix, iz) == pId) {
 				if (pCheckNeighbours) {
-					if( getTile(ix - 1, iz - 1) == pId &&
-						getTile(ix    , iz - 1) == pId &&
-						getTile(ix + 1, iz - 1) == pId &&
-						getTile(ix - 1, iz    ) == pId &&
-						getTile(ix + 1, iz    ) == pId &&
-						getTile(ix - 1, iz + 1) == pId &&
-						getTile(ix    , iz + 1) == pId &&
-						getTile(ix + 1, iz + 1) == pId) {
+					if( (inGrid(Coordinate(ix - 1, iz - 1)) && getTile(ix - 1, iz - 1) == pId) &&
+						(inGrid(Coordinate(ix    , iz - 1)) && getTile(ix    , iz - 1) == pId) &&
+						(inGrid(Coordinate(ix + 1, iz - 1)) && getTile(ix + 1, iz - 1) == pId) &&
+						(inGrid(Coordinate(ix - 1, iz    )) && getTile(ix - 1, iz    ) == pId) &&
+						(inGrid(Coordinate(ix + 1, iz    )) && getTile(ix + 1, iz    ) == pId) &&
+						(inGrid(Coordinate(ix - 1, iz + 1)) && getTile(ix - 1, iz + 1) == pId) &&
+						(inGrid(Coordinate(ix    , iz + 1)) && getTile(ix    , iz + 1) == pId) &&
+						(inGrid(Coordinate(ix + 1, iz + 1)) && getTile(ix + 1, iz + 1) == pId)) {
 						positions.push_back(Coordinate(ix, iz));
 					}
 				}
@@ -126,7 +132,7 @@ void Zone::connectDungeon(int pId, float pChance) {
 	freopen_s(&fp, "CONOUT$", "w", stdout);
 	printf("start connectDungeon : \n");
 
-	//TODO find all possible connections
+	//TODO find all possible pConnections
 	//connect rooms to path 1
 	//if more than one path excists, connect other paths to
 	std::vector<std::pair<Coordinate, int>> connections;
@@ -136,20 +142,20 @@ void Zone::connectDungeon(int pId, float pChance) {
 		int rndIndex[2] = { 0,0 };
 		int start = connections.size();
 		int length = getPossibleConnections(cities[i], &connections);
-		printf(">> city: %d connections{ start:%d, length:%d }  \n", i, start, length);
+		printf(">> city: %d pConnections{ start:%d, length:%d }  \n", i, start, length);
 
 		if (length < 1) continue;
 
 		rndIndex[0] = rand() % length + start;
 		printf(">> generated random %d, list size %d  \n", rndIndex[0], connections.size());
-		//TODO: open some connections, so that all of the dungeon is connected
+		//TODO: open some pConnections, so that all of the dungeon is connected
 		setTile(connections[rndIndex[0]].first, connections[rndIndex[0]].second);
 		cities[i].connections.push_back(connections[rndIndex[0]].first);
 		connections.erase(connections.begin() + rndIndex[0]);
 		printf(">> removed carved connection\n");
 		length--;
 
-		//TODO: open random connections, so that the dungeon is not perfect anymore
+		//TODO: open random pConnections, so that the dungeon is not perfect anymore
 		if (length > 1) {
 			float rndPercent = (rand() % 100 + 1) / 100.0f;
 			if (rndPercent <= pChance) {
@@ -161,7 +167,7 @@ void Zone::connectDungeon(int pId, float pChance) {
 				setTile(connections[rndIndex[1]].first, connections[rndIndex[1]].second);
 				cities[i].connections.push_back(connections[rndIndex[1]].first);
 				connections.erase(connections.begin() + rndIndex[1]);
-				printf(">>> removed second carved connections\n");
+				printf(">>> removed second carved pConnections\n");
 			}
 		}
 	}
@@ -238,17 +244,19 @@ int Zone::changeTileValues(int pMaxIndex) {
 		//pick random cell for current region
 		positions.push_back(getPosition(currentRegion, false));
 		
-		if (getTile(positions[0]) != currentRegion) {
-			positions.clear();
-			currentRegion++;
-			continue;
-		}
+		if (inGrid(positions[0])) {
+			if (getTile(positions[0]) != currentRegion) {
+				positions.clear();
+				currentRegion++;
+				continue;
+			}
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-		FILE* fp;
-		freopen_s(&fp, "CONOUT$", "w", stdout);
-		printf("position = %d, %d (%d) \n", positions[0].x, positions[0].z, getTile(positions[0]));
-		fclose(fp);
+			FILE* fp;
+			freopen_s(&fp, "CONOUT$", "w", stdout);
+			printf("position = %d, %d (%d) \n", positions[0].x, positions[0].z, getTile(positions[0]));
+			fclose(fp);
 #endif
+		}
 
 		if (positions[0].x >= 0 && positions[0].z >= 0) {
 			while(!positions.empty()) {
@@ -295,14 +303,14 @@ int Zone::changeTileValues(int pMaxIndex) {
 }
 
 
-int Zone::getPossibleConnections(City pCity, std::vector<std::pair<Coordinate, int>> *connections) {
+int Zone::getPossibleConnections(City pCity, std::vector<std::pair<Coordinate, int>> *pConnections) {
 	int connectionAmount = 0;
 	for (int ix = 0; ix < pCity.width; ++ix) {
 		for (int iz = 0; iz < pCity.depth; ++iz) {
 			//north
 			if (getTile(pCity.position.x + ix, pCity.position.z + iz - 1) == 0 && pCity.position.z + iz - 2 > 0) {
 				if (getTile(pCity.position.x + ix, pCity.position.z + iz - 2) > 0) {
-					connections->push_back(std::make_pair(Coordinate(pCity.position.x + ix, pCity.position.z + iz - 1), pCity.id));
+					pConnections->push_back(std::make_pair(Coordinate(pCity.position.x + ix, pCity.position.z + iz - 1), pCity.id));
 					setTile(pCity.position.x + ix, pCity.position.z + iz - 1, -1);
 					connectionAmount++;
 				}
@@ -310,7 +318,7 @@ int Zone::getPossibleConnections(City pCity, std::vector<std::pair<Coordinate, i
 			//east
 			if (getTile(pCity.position.x + ix + 1, pCity.position.z + iz) == 0 && pCity.position.x + ix + 2 < _width) {
 				if (getTile(pCity.position.x + ix + 2, pCity.position.z + iz) > 0) {
-					connections->push_back(std::make_pair(Coordinate(pCity.position.x + ix + 1, pCity.position.z + iz), pCity.id));
+					pConnections->push_back(std::make_pair(Coordinate(pCity.position.x + ix + 1, pCity.position.z + iz), pCity.id));
 					setTile(pCity.position.x + ix + 1, pCity.position.z + iz, -1);
 					connectionAmount++;
 				}
@@ -318,7 +326,7 @@ int Zone::getPossibleConnections(City pCity, std::vector<std::pair<Coordinate, i
 			//south
 			if (getTile(pCity.position.x + ix, pCity.position.z + iz + 1) == 0 && pCity.position.z + iz + 2 < _depth) {
 				if (getTile(pCity.position.x + ix, pCity.position.z + iz + 2) > 0) {
-					connections->push_back(std::make_pair(Coordinate(pCity.position.x + ix, pCity.position.z + iz + 1), pCity.id));
+					pConnections->push_back(std::make_pair(Coordinate(pCity.position.x + ix, pCity.position.z + iz + 1), pCity.id));
 					setTile(pCity.position.x + ix, pCity.position.z + iz + 1, -1);
 					connectionAmount++;
 				}
@@ -326,7 +334,7 @@ int Zone::getPossibleConnections(City pCity, std::vector<std::pair<Coordinate, i
 			//west
 			if (getTile(pCity.position.x + ix - 1, pCity.position.z + iz) == 0 && pCity.position.x + ix - 2 > 0) {
 				if (getTile(pCity.position.x + ix - 2, pCity.position.z + iz) > 0) {
-					connections->push_back(std::make_pair(Coordinate(pCity.position.x + ix - 1, pCity.position.z + iz), pCity.id));
+					pConnections->push_back(std::make_pair(Coordinate(pCity.position.x + ix - 1, pCity.position.z + iz), pCity.id));
 					setTile(pCity.position.x + ix - 1, pCity.position.z + iz, -1);
 					connectionAmount++;
 				}
@@ -339,21 +347,35 @@ int Zone::getPossibleConnections(City pCity, std::vector<std::pair<Coordinate, i
 
 int Zone::generatePathways(int pPathId) {
 	int nIterations = 0;
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+	FILE* fp;
+	freopen_s(&fp, "CONOUT$", "w", stdout);
+	printf("initializing paths...\n");
+
 	while (!checkGrid()) {
 		std::vector<Coordinate> cellList;
 
 		//Possible improvement: pass startpos to method to use heuristic for shapes
 		//generate random empty pPosition
 		Coordinate position = getPosition(0, true);
+		
+		if (position.x % 2 == 0) {
+			(position.x + 2 >= _width) ? position.x-- : position.x++;
+		}
+		if (position.z % 2 == 0) {
+			(position.z % 2 == 0) ? position.z-- : position.z;
+		}
+
 		(position.x % 2 == 0) ? position.x++ : position.x;
 		(position.z % 2 == 0) ? position.z++ : position.z;
 
+		printf("saving first position (%d, %d)\n", position.x, position.z);
 		cellList.push_back(Coordinate(position.x, position.z));
 		int current = 0;
 		setTile(cellList[current].x, cellList[current].z, -1); // all cells in celllist are marked as -1
 
 		while (!cellList.empty()) {
-			if (hasNeighBours(cellList[current])) {
+			if (hasNeighBours(cellList[current], 2)) {
 				cellList.push_back(getRndNeighbour(cellList[current], pPathId + nIterations));
 				++current;
 				setTile(cellList[current].x, cellList[current].z, -1);
@@ -368,6 +390,8 @@ int Zone::generatePathways(int pPathId) {
 		nIterations++;
 	}
 	return nIterations;
+	fclose(fp);
+#endif
 }
 
 Coordinate Zone::getRndNeighbour(Coordinate pCell, int nPathId) {
@@ -391,22 +415,23 @@ Coordinate Zone::getRndNeighbour(Coordinate pCell, int nPathId) {
 
 std::vector<Coordinate> Zone::getNeighbours(Coordinate pCell) {
 	std::vector<Coordinate> neighbours;
-	if (!getTile(pCell.x, pCell.z + 2) && !(pCell.z + 2 >= _depth - 1)) neighbours.push_back(Coordinate(pCell.x, pCell.z + 2));
-	if (!getTile(pCell.x + 2, pCell.z) && !(pCell.x + 2 >= _width - 1)) neighbours.push_back(Coordinate(pCell.x + 2, pCell.z));
-	if (!getTile(pCell.x - 2, pCell.z) && !(pCell.x - 2 <= 0)) neighbours.push_back(Coordinate(pCell.x - 2, pCell.z));
-	if (!getTile(pCell.x, pCell.z - 2) && !(pCell.z - 2 <= 0)) neighbours.push_back(Coordinate(pCell.x, pCell.z - 2));
+	if (pCell.z + 2 < _depth && !getTile(pCell.x, pCell.z + 2)) neighbours.push_back(Coordinate(pCell.x, pCell.z + 2));
+	if (pCell.x + 2 < _width && !getTile(pCell.x + 2, pCell.z)) neighbours.push_back(Coordinate(pCell.x + 2, pCell.z));
+	if (pCell.x - 2 >= 0 && !getTile(pCell.x - 2, pCell.z)) neighbours.push_back(Coordinate(pCell.x - 2, pCell.z));
+	if (pCell.z - 2 >= 0 && !getTile(pCell.x, pCell.z - 2)) neighbours.push_back(Coordinate(pCell.x, pCell.z - 2));
 	return (neighbours);
 }
 
-bool Zone::hasNeighBours(Coordinate pCell) {
-	if (!getTile(pCell.x, pCell.z + 2) && !(pCell.z + 2 >= _depth - 1)) return true;
-	if (!getTile(pCell.x + 2, pCell.z) && !(pCell.x + 2 >= _width - 1)) return true;
-	if (!getTile(pCell.x - 2, pCell.z) && !(pCell.x - 2 <= 0)) return true;
-	if (!getTile(pCell.x, pCell.z - 2) && !(pCell.z - 2 <= 0)) return true;
+bool Zone::hasNeighBours(Coordinate pCell, int pDistance) {
+	if (pCell.z + pDistance < _depth - 1 && !getTile(pCell.x, pCell.z + pDistance)) return true;
+	if (pCell.x + pDistance < _width - 1 && !getTile(pCell.x + pDistance, pCell.z)) return true;
+	if (pCell.x - pDistance >= 0 && !getTile(pCell.x - pDistance, pCell.z)) return true;
+	if (pCell.z - pDistance >= 0 && !getTile(pCell.x, pCell.z - pDistance)) return true;
 	return false;
 }
 
 bool Zone::hasCollision(Coordinate pPosition) {
+	if (inGrid(pPosition))return true;
 	return(getTile(pPosition.x, pPosition.z) ? true : false);
 }
 
@@ -431,7 +456,7 @@ bool Zone::hasCollision(City pC) {
 
 bool Zone::checkGrid() {
 	for (int iX = 1; iX < _width; iX += 2) {
-		for (int iZ = 1; iZ < _depth; iZ +=2) {
+		for (int iZ = 1; iZ < _depth; iZ += 2) {
 			if (getTile(iX, iZ) == 0) {
 				return false;
 			}

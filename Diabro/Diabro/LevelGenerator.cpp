@@ -1,20 +1,12 @@
 #include "LevelGenerator.h"
 #include <OgreMeshManager.h>
 #include <OgreSubMesh.h>
-#include <OgreRoot.h>
-#include <OgreHardwareBufferManager.h>
 #include "GameManager.h"
 
 LevelGenerator::LevelGenerator():
 scalar(1000)
 {
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	FILE* fp;
-	freopen_s(&fp, "CONOUT$", "w", stdout);
-	printf("CREATING ZONE...");
-	fclose(fp);
-#endif
-	_zone[0] = Zone(19, 19, 5, 5, 5, 100);
+	_zone[0] = Zone(21, 21, 5, 5, 30, 1000);
 	//place geometry for each pCity
 	for (int i = 0; i < _zone[0].cities.size(); ++i) {
 		City c = _zone[0].cities[i];
@@ -32,7 +24,7 @@ LevelGenerator::~LevelGenerator()
 {
 }
 
-Zone LevelGenerator::GetZone(int pX, int pZ) {
+Zone LevelGenerator::getZone(int pX, int pZ) {
 	//TODO:implement multiple zones
 	return _zone[0];
 }
@@ -72,7 +64,7 @@ void LevelGenerator::createPlane(int pScalar, std::string pName)
 		1, 5, 5,
 		Ogre::Vector3::UNIT_Z);
 }
-
+/*
 
 void LevelGenerator::createTileMesh(int pScalar, Coordinate pPosition, std::string pName) {
 	//TODO: add uv coordinates
@@ -81,7 +73,7 @@ void LevelGenerator::createTileMesh(int pScalar, Coordinate pPosition, std::stri
 
 	Ogre::SubMesh* sub = mesh->createSubMesh();
 
-	const float sqrt13 = 0.577350269f; /*sqrt(1/3)*/
+	const float sqrt13 = 0.577350269f; /*sqrt(1/3)#1#
 	int x = pPosition.x * pScalar;
 	int y = 1;
 	int z = pPosition.z * pScalar;
@@ -169,8 +161,6 @@ void LevelGenerator::createTileMesh(int pScalar, Coordinate pPosition, std::stri
 	mesh->load();
 }
 
-
-/*
 void LevelGenerator::placeCity(City pCity, std::string pName, Ogre::ColourValue pColour) const {
 	createCityMesh(pCity, 1000, pName, pColour);//scalar set to 1000 for size
 	Ogre::MaterialPtr material = Ogre::MaterialManager::getSingleton().create(

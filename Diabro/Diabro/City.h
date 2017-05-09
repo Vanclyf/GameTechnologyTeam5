@@ -5,7 +5,7 @@
 struct Coordinate {
 	int x;
 	int z;
-	Coordinate(int x, int z) : x(x), z(z) {	}
+	Coordinate(int pX, int pZ) : x(pX), z(pZ) {	}
 };
 
 enum RoomType

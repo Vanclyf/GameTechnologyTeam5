@@ -10,14 +10,13 @@ private:
 	int _width;
 	int _depth;
 	
-	int _numberOfRegions;
+	
 
 	int _maxCityWidth;
 	int _maxCityHeight;
-	
-	//pX + pY * pWidth
-	int *_tiles;
 
+	int* _tiles;
+	int _numberOfRegions;
 
 public:
 	std::vector<City> cities;
@@ -26,9 +25,9 @@ public:
 	Zone();
 	~Zone();
 
-	void setTile(int pX, int pY, int pValue) const;
+	void setTile(int pX, int pZ, int pValue) const;
 	void setTile(Coordinate pCoord, int pValue) const;
-	int getTile(int pX, int pY) const;
+	int getTile(int pX, int pZ) const;
 	int getTile(Coordinate pCoord) const;
 	Coordinate getResolution() const;
 	
@@ -36,8 +35,9 @@ public:
 
 private:
 	void cleanGrid();
+	bool inGrid(Coordinate pCoord);
 
-	void connectDungeon(int id, float pChance);
+	void connectDungeon(int pId, float pChance);
 	int getPossibleConnections(City pCity, std::vector<std::pair<Coordinate, int>> *pConnections);
 	int changeTileValues(int pMaxIndex);
 	void printValues();
@@ -45,7 +45,7 @@ private:
 	int generatePathways(int pPathId);
 	std::vector<Coordinate> getNeighbours(Coordinate pCell);
 	Coordinate getRndNeighbour(Coordinate pCell, int nPathId);
-	bool hasNeighBours(Coordinate pCell);
+	bool hasNeighBours(Coordinate pCell, int pDistance);
 	bool checkGrid();
 	Coordinate getPosition(int pId, bool pCheckNeighbours);
 
