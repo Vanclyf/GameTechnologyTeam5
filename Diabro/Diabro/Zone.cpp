@@ -7,47 +7,38 @@ Zone::Zone() {
 	
 }
 
-
 Zone::Zone(int pWidth, int pDepth, int pMaxCityWidth, int pMaxCityHeight, int pMaxCities, int pMaxTries):
 _width(pWidth), _depth(pDepth), _maxCityWidth(pMaxCityWidth), _maxCityHeight(pMaxCityHeight)
 {	
-	// create grid for spawning
+	if (pWidth % 2 == 0 || pDepth % 2 == 0) {
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	FILE* fp;
-	freopen_s(&fp, "CONOUT$", "w", stdout);
-	printf("create tile component...");
+		FILE* fp;
+		freopen_s(&fp, "CONOUT$", "w", stdout);
+		printf("Zone sizes should be uneven! {W: %d, H: %d} used \n", _width, _depth);
+		fclose(fp);
+		_width++;
+		_depth++;
 #endif
-	_tiles = new int[pWidth * pDepth];
-	//set values to 0
-	for (int ix = 0; ix < pWidth; ++ix) {
-		for (int iy = 0; iy < pDepth; ++iy) {
+	}
+	// create an empty grid for dungeon tiles
+	_tiles = new int[_width * _depth];
+	for (int ix = 0; ix < _width; ++ix) {
+		for (int iy = 0; iy < _depth; ++iy) {
 			setTile(ix, iy, 0);
 		}
 	}
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	printf("generate cities...");
-#endif
+
 	generateCities(pMaxTries, pMaxCities);
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	printf("generate paths...");
-#endif
 	int n = generatePathways(cities.size() + 1);
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	printf("connecting dungeon...");
-#endif
 	connectDungeon(cities.size() + 1 + n, 0.5f);
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	printf("cleaning and printing...\n");
-	fclose(fp);
-#endif
+
 	cleanGrid();
 	printGrid();
 }
 
 Zone::~Zone()
 {
-	//remove pointer array
-	//delete[] _tiles;
+
 }
 
 void Zone::cleanGrid()
@@ -56,14 +47,8 @@ void Zone::cleanGrid()
 	{
 		for (int iz = 0; iz < _depth; ++iz)
 		{
-			if (getTile(ix, iz) <= 0)
-			{
-				setTile(ix, iz, 0);
-			}
-			else
-			{
-				setTile(ix, iz, 1);
-			}
+			if (getTile(ix, iz) <= 0) setTile(ix, iz, 0);
+			else setTile(ix, iz, 1);
 		}
 	}
 }
@@ -127,10 +112,6 @@ Coordinate Zone::getPosition(int pId, bool pCheckNeighbours) {
 }
 
 void Zone::connectDungeon(int pId, float pChance) {
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	FILE* fp;
-	freopen_s(&fp, "CONOUT$", "w", stdout);
-	printf("start connectDungeon : \n");
 
 	//TODO find all possible pConnections
 	//connect rooms to path 1
@@ -142,17 +123,14 @@ void Zone::connectDungeon(int pId, float pChance) {
 		int rndIndex[2] = { 0,0 };
 		int start = connections.size();
 		int length = getPossibleConnections(cities[i], &connections);
-		printf(">> city: %d pConnections{ start:%d, length:%d }  \n", i, start, length);
 
 		if (length < 1) continue;
 
 		rndIndex[0] = rand() % length + start;
-		printf(">> generated random %d, list size %d  \n", rndIndex[0], connections.size());
 		//TODO: open some pConnections, so that all of the dungeon is connected
 		setTile(connections[rndIndex[0]].first, connections[rndIndex[0]].second);
 		cities[i].connections.push_back(connections[rndIndex[0]].first);
 		connections.erase(connections.begin() + rndIndex[0]);
-		printf(">> removed carved connection\n");
 		length--;
 
 		//TODO: open random pConnections, so that the dungeon is not perfect anymore
@@ -162,16 +140,13 @@ void Zone::connectDungeon(int pId, float pChance) {
 				rndIndex[1] = rndIndex[0];
 				while (rndIndex[1] == rndIndex[0]) {
 					rndIndex[1] = rand() % length + start;
-					printf(">>> generated new second random %d \n", rndIndex[1]);
 				}
 				setTile(connections[rndIndex[1]].first, connections[rndIndex[1]].second);
 				cities[i].connections.push_back(connections[rndIndex[1]].first);
 				connections.erase(connections.begin() + rndIndex[1]);
-				printf(">>> removed second carved pConnections\n");
 			}
 		}
 	}
-	printf("\n regions:");
 	int regions = changeTileValues(pId);
 	if (!connections.empty() && regions > 1){
 		std::vector<std::pair<Coordinate, int>> options;
@@ -201,8 +176,6 @@ void Zone::connectDungeon(int pId, float pChance) {
 		}
 	}
 	//printGrid();
-	fclose(fp);
-#endif
 }
 
 void Zone::printValues() {
@@ -250,12 +223,6 @@ int Zone::changeTileValues(int pMaxIndex) {
 				currentRegion++;
 				continue;
 			}
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-			FILE* fp;
-			freopen_s(&fp, "CONOUT$", "w", stdout);
-			printf("position = %d, %d (%d) \n", positions[0].x, positions[0].z, getTile(positions[0]));
-			fclose(fp);
-#endif
 		}
 
 		if (positions[0].x >= 0 && positions[0].z >= 0) {
@@ -293,12 +260,6 @@ int Zone::changeTileValues(int pMaxIndex) {
 			}
 		}
 	}
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	FILE* fp;
-	freopen_s(&fp, "CONOUT$", "w", stdout);
-	printf("amount of regions: %d \n", amountOfRegions);
-	fclose(fp);
-#endif
 	return amountOfRegions;
 }
 
@@ -347,10 +308,6 @@ int Zone::getPossibleConnections(City pCity, std::vector<std::pair<Coordinate, i
 
 int Zone::generatePathways(int pPathId) {
 	int nIterations = 0;
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	FILE* fp;
-	freopen_s(&fp, "CONOUT$", "w", stdout);
-	printf("initializing paths...\n");
 
 	while (!checkGrid()) {
 		std::vector<Coordinate> cellList;
@@ -363,13 +320,9 @@ int Zone::generatePathways(int pPathId) {
 			(position.x + 2 >= _width) ? position.x-- : position.x++;
 		}
 		if (position.z % 2 == 0) {
-			(position.z % 2 == 0) ? position.z-- : position.z;
+			(position.z + 2 >= _depth) ? position.z-- : position.z++;
 		}
 
-		(position.x % 2 == 0) ? position.x++ : position.x;
-		(position.z % 2 == 0) ? position.z++ : position.z;
-
-		printf("saving first position (%d, %d)\n", position.x, position.z);
 		cellList.push_back(Coordinate(position.x, position.z));
 		int current = 0;
 		setTile(cellList[current].x, cellList[current].z, -1); // all cells in celllist are marked as -1
@@ -390,8 +343,6 @@ int Zone::generatePathways(int pPathId) {
 		nIterations++;
 	}
 	return nIterations;
-	fclose(fp);
-#endif
 }
 
 Coordinate Zone::getRndNeighbour(Coordinate pCell, int nPathId) {

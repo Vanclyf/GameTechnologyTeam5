@@ -11,6 +11,11 @@ public:
 	~LevelGenerator();
 
 	Zone getZone(int pX, int pZ);
+	
+	Coordinate getWorldPosition(Coordinate pWorldCoord);
+	Coordinate getGridPosition(Coordinate pGridCoord);
+	Coordinate getEmptyPosition(bool pEmptyNeighbours);
+	
 	int scalar;
 
 private:

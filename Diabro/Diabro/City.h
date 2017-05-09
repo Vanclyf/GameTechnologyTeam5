@@ -31,6 +31,8 @@ public:
 	City(int pX, int pZ, int pWidth, int pDepth, int pId);
 	~City();
 
+	Coordinate getCenterTile();
+	Coordinate getRandomTile();
 private:
 	void setRndType();
 

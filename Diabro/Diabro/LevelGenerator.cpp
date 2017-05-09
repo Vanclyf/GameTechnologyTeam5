@@ -2,11 +2,12 @@
 #include <OgreMeshManager.h>
 #include <OgreSubMesh.h>
 #include "GameManager.h"
+#include "math.h"
 
 LevelGenerator::LevelGenerator():
 scalar(1000)
 {
-	_zone[0] = Zone(21, 21, 5, 5, 30, 1000);
+	_zone[0] = Zone(18, 18, 5, 5, 10, 100);
 	//place geometry for each pCity
 	for (int i = 0; i < _zone[0].cities.size(); ++i) {
 		City c = _zone[0].cities[i];
@@ -24,11 +25,28 @@ LevelGenerator::~LevelGenerator()
 {
 }
 
+Coordinate LevelGenerator::getEmptyPosition(bool pEmptyNeighbours) {
+	return _zone[0].getPosition(1, pEmptyNeighbours);
+}
+
+
+Coordinate LevelGenerator::getGridPosition(Coordinate pWorldCoord) {
+	int x = static_cast<int>(std::ceil(pWorldCoord.x / scalar + 0.0f));
+	int z = static_cast<int>(std::ceil(pWorldCoord.z / scalar + 0.0f));
+
+	return Coordinate(x,z);
+}
+
+Coordinate LevelGenerator::getWorldPosition(Coordinate pGridCoord) {
+	return Coordinate(pGridCoord.x * scalar, pGridCoord.z * scalar);
+}
+
+
+
 Zone LevelGenerator::getZone(int pX, int pZ) {
 	//TODO:implement multiple zones
 	return _zone[0];
 }
-
 
 void LevelGenerator::drawDungeonFloor(int pScalar, Zone pZone) {
 	
@@ -65,7 +83,6 @@ void LevelGenerator::createPlane(int pScalar, std::string pName)
 		Ogre::Vector3::UNIT_Z);
 }
 /*
-
 void LevelGenerator::createTileMesh(int pScalar, Coordinate pPosition, std::string pName) {
 	//TODO: add uv coordinates
 

@@ -31,6 +31,7 @@ public:
 	int getTile(Coordinate pCoord) const;
 	Coordinate getResolution() const;
 	
+	Coordinate getPosition(int pId, bool pCheckNeighbours);
 	void printGrid();
 
 private:
@@ -47,7 +48,7 @@ private:
 	Coordinate getRndNeighbour(Coordinate pCell, int nPathId);
 	bool hasNeighBours(Coordinate pCell, int pDistance);
 	bool checkGrid();
-	Coordinate getPosition(int pId, bool pCheckNeighbours);
+	
 
 	void generateCities(int pMaxTries, int pMaxCities);
 	bool hasCollision(Coordinate pPosition);
