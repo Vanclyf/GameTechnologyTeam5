@@ -8,6 +8,12 @@
 LevelGenerator::LevelGenerator():
 scalar(1000)
 {
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+	FILE* fp;
+	freopen_s(&fp, "CONOUT$", "w", stdout);
+	printf("CREATING ZONE...");
+	fclose(fp);
+#endif
 	_zone[0] = Zone(19, 19, 5, 5, 5, 100);
 	//place geometry for each pCity
 	for (int i = 0; i < _zone[0].cities.size(); ++i) {
