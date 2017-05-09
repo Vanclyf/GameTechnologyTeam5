@@ -12,8 +12,8 @@ City::~City()
 }
 
 Coordinate City::getCenterTile() {
-	int x = std::ceil(position.x + width / 2.0f);
-	int z = std::ceil(position.z + depth / 2.0f);
+	int x = ceil(position.x + width / 2.0f);
+	int z = ceil(position.z + depth / 2.0f);
 	return Coordinate(x, z);
 }
 

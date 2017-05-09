@@ -31,8 +31,8 @@ Coordinate LevelGenerator::getEmptyPosition(bool pEmptyNeighbours) {
 
 
 Coordinate LevelGenerator::getGridPosition(Coordinate pWorldCoord) {
-	int x = static_cast<int>(std::ceil(pWorldCoord.x / scalar + 0.0f));
-	int z = static_cast<int>(std::ceil(pWorldCoord.z / scalar + 0.0f));
+	int x = static_cast<int>(ceil(pWorldCoord.x / scalar + 0.0f));
+	int z = static_cast<int>(ceil(pWorldCoord.z / scalar + 0.0f));
 
 	return Coordinate(x,z);
 }
