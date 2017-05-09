@@ -22,6 +22,10 @@ private:
 	void drawDungeonFloor(int pScalar, Zone pZone);
 	void createTileMesh(int pScalar, Coordinate pPosition, std::string pName);
 	void createPlane(int pScalar, std::string pName);
+
+	void spawnCityContent();
+	void placeEnemySpawnNode(City*, int);
+	void placeNPCSpawnNode(City*, int);
 };
 
 #endif

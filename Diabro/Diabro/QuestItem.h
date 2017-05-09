@@ -4,6 +4,7 @@
 #pragma once
 #include <OgrePrerequisites.h>
 #include "BaseQuestItem.h"
+#include "IQuestContent.h"
 
 enum QuestItemQuality {
 	NormalQI,
@@ -13,7 +14,7 @@ enum QuestItemQuality {
 	AMOUNT_OF_QUEST_ITEM_QUALITIES
 };
 
-class QuestItem {
+class QuestItem : public IQuestContent {
 public:
 	QuestItem(BaseQuestItem* pBaseItem, QuestItemQuality pQuality) : _info(pBaseItem), _quality(pQuality) {};
 	~QuestItem();

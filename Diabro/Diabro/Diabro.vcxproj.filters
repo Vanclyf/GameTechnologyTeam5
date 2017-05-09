@@ -106,21 +106,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BasicEnemy.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Character.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="CharacterStats.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Npc.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="UIManager.h">
       <Filter>Headers\Managers</Filter>
     </ClInclude>
@@ -172,17 +157,11 @@
     <ClInclude Include="ItemGenerator.h">
       <Filter>Headers\Items</Filter>
     </ClInclude>
-    <ClInclude Include="CharacterSpawner.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="BaseArmor.h">
       <Filter>Headers\Items\Base</Filter>
     </ClInclude>
     <ClInclude Include="ArmorInstance.h">
       <Filter>Headers\Items\Instance</Filter>
-    </ClInclude>
-    <ClInclude Include="BaseNpc.h">
-      <Filter>Headers\Stats</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />
     <ClInclude Include="GenericFSM.h">
@@ -201,19 +180,19 @@
       <Filter>Headers\Needs</Filter>
     </ClInclude>
     <ClInclude Include="QuestItem.h">
-      <Filter>Headers\QuestContent</Filter>
+      <Filter>Headers\Quests\QuestContent</Filter>
     </ClInclude>
     <ClInclude Include="QuestContentManager.h">
-      <Filter>Headers\QuestContent</Filter>
+      <Filter>Headers\Quests\QuestContent</Filter>
     </ClInclude>
     <ClInclude Include="QuestItemGenerator.h">
-      <Filter>Headers\QuestContent</Filter>
+      <Filter>Headers\Quests\QuestContent</Filter>
     </ClInclude>
     <ClInclude Include="QuestItemContainer.h">
-      <Filter>Headers\QuestContent</Filter>
+      <Filter>Headers\Quests\QuestContent</Filter>
     </ClInclude>
     <ClInclude Include="BaseQuestItem.h">
-      <Filter>Headers\QuestContent</Filter>
+      <Filter>Headers\Quests\QuestContent</Filter>
     </ClInclude>
     <ClInclude Include="tinyxml2.h">
       <Filter>Headers</Filter>
@@ -232,6 +211,36 @@
     </ClInclude>
     <ClInclude Include="TreeNode.h">
       <Filter>Headers\TreeDatastructure</Filter>
+    </ClInclude>
+    <ClInclude Include="QuestManager.h">
+      <Filter>Headers\Quests</Filter>
+    </ClInclude>
+    <ClInclude Include="Action.h">
+      <Filter>Headers\Quests</Filter>
+    </ClInclude>
+    <ClInclude Include="IQuestContent.h">
+      <Filter>Headers\Quests\QuestContent</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseNpc.h">
+      <Filter>Headers\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicEnemy.h">
+      <Filter>Headers\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>Headers\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterSpawner.h">
+      <Filter>Headers\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterStats.h">
+      <Filter>Headers\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="Npc.h">
+      <Filter>Headers\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Headers\Characters</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -280,9 +289,6 @@
     <Filter Include="Headers\Needs">
       <UniqueIdentifier>{6e9bfbbe-52d5-4f0b-b346-6cf303ea85a3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Headers\QuestContent">
-      <UniqueIdentifier>{00e4bb5e-9f04-498a-ad5e-7802f8e9a5f2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\QuestContent">
       <UniqueIdentifier>{941f42a8-19a0-45a9-9d67-1dba844f3563}</UniqueIdentifier>
     </Filter>
@@ -306,6 +312,15 @@
     </Filter>
     <Filter Include="Sources\Finite State Machines\States">
       <UniqueIdentifier>{102eacb0-6164-45d4-a63e-7666afb991ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Quests">
+      <UniqueIdentifier>{951eede9-628a-441b-864b-128e3329c271}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Quests\QuestContent">
+      <UniqueIdentifier>{00e4bb5e-9f04-498a-ad5e-7802f8e9a5f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Characters">
+      <UniqueIdentifier>{1b52370f-9b0e-4558-ac66-2da619f60e8d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

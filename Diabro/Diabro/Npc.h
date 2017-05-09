@@ -9,11 +9,12 @@ enum Profession {
 	None = 0,
 	Smith,
 	Guard,
-	Parent,
-	Dungeoneer,
+	Priest,
 	Alchemist,
 	Shopkeeper,
 	Nobleman,
+
+	Dungeoneer,
 
 	AMOUNT_OF_PROFS
 };
@@ -45,10 +46,9 @@ private:
 
 	NeedSet* _needs;				//!< A set of needs, when the value of a need is low, this NPC wants something.
 	Profession _profession;			//!< The profession of the NPC, used to generate relevant quests.
-	//Location _hometown;
+	City _hometown;
 
 	void adjustNeed(NeedType, int);
-
 };
 
 #endif

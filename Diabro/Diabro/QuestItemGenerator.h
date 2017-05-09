@@ -7,8 +7,8 @@
 
 class QuestItemGenerator {
 public:
-	QuestItemGenerator();
-	~QuestItemGenerator();
+	QuestItemGenerator(){}
+	~QuestItemGenerator(){}
 
 	//TODO: implement items are put in either inventory or a scenenode
 	std::vector<QuestItem*> generateRandomItem(Ogre::SceneNode*, int amount);

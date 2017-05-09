@@ -4,7 +4,7 @@
 /// <summary>
 /// Initializes a new instance of the <see cref="QuestItemGenerator"/> class.
 /// </summary>
-QuestItemGenerator::QuestItemGenerator() : _dropEntity("sphere.mesh") { }
+/*QuestItemGenerator::QuestItemGenerator() : _dropEntity("sphere.mesh") { }
 
 /// <summary>
 /// Finalizes an instance of the <see cref="QuestItemGenerator"/> class.
@@ -63,6 +63,6 @@ std::vector<QuestItem*> QuestItemGenerator::generateRandomItem(Ogre::SceneNode* 
 	// return the list
 	return returnList;
 }
-
+*/
 
 

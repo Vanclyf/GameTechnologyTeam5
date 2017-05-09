@@ -463,7 +463,7 @@ void Zone::generateCities(int pMaxTries, int pMaxCities) {
 		(x % 2 == 0) ? x++ : x;
 		(z % 2 == 0) ? z++ : z;
 
-		if (placeCity(City(x, z, width, depth, nCities + 1, 1000))) {
+		if (placeCity(City(x, z, width, depth, nCities + 1, 500))) {
 			++nCities;
 		}
 		if (nCities >= pMaxCities) {

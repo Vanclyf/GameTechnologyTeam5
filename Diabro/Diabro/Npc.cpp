@@ -6,8 +6,10 @@
 /// </summary>
 /// <param name="pMyNode">My node.</param>
 /// <param name="pMyEntity">My entity.</param>
-Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity, City* pMyCity) : BaseNpc(pMyNode, pMyRotationNode, pMyEntity, pMyCity), _inDialog(false)
+Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity, City* pMyCity) : BaseNpc(pMyNode, pMyRotationNode, pMyEntity, pMyCity), _inDialog(false), _hometown()
 {
+	//GameManager::getSingletonPtr()->getLevelManager()->levelGenerator->GetZone(1,1).cities[0]
+
 	id = GameManager::getSingletonPtr()->getLevelManager()->subscribeFriendlyNPC(this);
 	rotatePivot(Ogre::Vector3(0, 90, 0));
 	_dialogFile.open("DialogText.txt");
@@ -37,7 +39,6 @@ Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entit
 	}
 	_dialogCount = 0;
 
-	//TODO: discuss if this should be moved to some NPC generator class ----------------------------------------
 	// randomly assign a profession
 	int randomRoll = GameManager::getSingletonPtr()->getRandomInRange(0, Profession::AMOUNT_OF_PROFS);
 	_profession = (Profession)randomRoll;
@@ -54,8 +55,6 @@ Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entit
 	};
 
 	_needs = new NeedSet(tempNeeds);
-
-	// ---------------------------------------------------------------------------------------------------------
 }
 
 Npc::~Npc() {

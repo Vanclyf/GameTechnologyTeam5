@@ -4,7 +4,7 @@
 #include "Character.h"
 #include "City.h"
 
-class BaseNpc : public Character
+class BaseNpc : public Character, public IQuestContent
 {
 public:
 	BaseNpc(Ogre::SceneNode*, Ogre::SceneNode*, Ogre::Entity*, City* );

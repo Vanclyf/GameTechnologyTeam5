@@ -1,3 +1,19 @@
+material Houses/Grey
+{
+   technique
+   {
+      pass
+      {
+	  	lighting off
+        
+         texture_unit
+         {
+			texture greyBox.jpg
+         }
+      }
+   }
+}
+
 material Houses/Pink
 {
    technique
@@ -71,7 +87,7 @@ material Houses/Green
         
          texture_unit
          {
-			texture greenBox.jpg
+			texture green2Box.jpg
          }
       }
    }
