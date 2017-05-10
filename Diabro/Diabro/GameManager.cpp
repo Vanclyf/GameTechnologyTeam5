@@ -204,23 +204,29 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 
 	case OIS::KC_E:
 		//check if the item is within pickup range.
-		if (_levelManager->getItemInstances()[0]->getNode()->getPosition().distance(_levelManager->getPlayer()->getPosition()) < 500)
+		for (int i = 0; i < _levelManager->getItemInstances().size(); i++)
 		{
-			//TODO: equipitem player for now, later on we should use inventory system.
-			switch (reinterpret_cast<EquipmentInstance*>(_levelManager->getItemInstances()[0])->getType())
+			ItemInstance* item = _levelManager->getItemInstances()[i];
+			//check if the item is within pickup range.
+			if (item->getNode()->getPosition().distance(_levelManager->getPlayer()->getPosition()) < 500)
 			{
-			case 0:
-				//weapon
-				_levelManager->getPlayer()->setEquipmentSlot(reinterpret_cast<WeaponInstance*>(_levelManager->getItemInstances()[0]));
-				_levelManager->getItemInstances()[0]->destroyItemInWorld();
-				break;
-			case 1:
-				//gear
-				_levelManager->getPlayer()->setEquipmentSlot(reinterpret_cast<ArmorInstance*>(_levelManager->getItemInstances()[0]));
-				_levelManager->getItemInstances()[0]->destroyItemInWorld();
-				break;
-			case 2:
-				//jewelry
+				//TODO: equipitem player for now, later on we should use inventory system.
+				switch (reinterpret_cast<EquipmentInstance*>(item)->getType())
+				{
+				case 0:
+					//weapon
+					_levelManager->getPlayer()->setEquipmentSlot(reinterpret_cast<WeaponInstance*>(item));
+					item->destroyItemInWorld();
+					break;
+				case 1:
+					//gear
+					_levelManager->getPlayer()->setEquipmentSlot(reinterpret_cast<ArmorInstance*>(item));
+					item->destroyItemInWorld();
+					break;
+				case 2:
+					//jewelry
+					break;
+				}
 				break;
 			}
 		}

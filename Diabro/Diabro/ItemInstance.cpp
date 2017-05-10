@@ -33,6 +33,23 @@ void ItemInstance::destroyItemInWorld()
 	GameManager::getSingletonPtr()->getLevelManager()->detachItemInstance(id);
 }
 
+void ItemInstance::addItemToWorld()
+{
+	std::stringstream nodename(_nodeName);
+	Ogre::Entity* itemEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("sphere.mesh");
+	Ogre::SceneNode* itemNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode(nodename.str());
+	itemNode->createChildSceneNode()->attachObject(itemEntity);
+	_position = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition();
+	_position.x += GameManager::getSingletonPtr()->getRandomInRange(-200,200);
+	_position.z += GameManager::getSingletonPtr()->getRandomInRange(-200, 200);
+	_position.y += 10;
+
+	itemNode->setPosition(_position);
+	itemNode->setScale(.2, .5, .2);
+	setNodeAndEntity(itemNode, itemEntity);
+
+}
+
 /// <summary>
 /// Finalizes an instance of the <see cref="ItemInstance"/> class.
 /// </summary>

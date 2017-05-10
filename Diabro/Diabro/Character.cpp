@@ -27,7 +27,10 @@ bool Character::initialize()
 	_currentHealth = _stats->GetStat(MaxHealth);
 	_currentStamina = _stats->GetStat(MaxStamina);
 
-
+	for(int i = 0; i < 7; i++)
+	{
+		GameManager::getSingletonPtr()->getItemManager()->getItemGenerator()->generateRandomItem(_myNode);
+	}
 	//show what is in the gear slots.
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	FILE* fp;
@@ -377,17 +380,8 @@ void Character::swapEquipmentSlot(ArmorInstance* pArmor, int pDuplicate)
 	addStats(reinterpret_cast<EquipmentInstance*>(pArmor));
 	
 	///Ignore this ATM work in progress.
-	/*Ogre::Entity* itemEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("sphere.mesh");
-	GameManager::getSingletonPtr()->addItemNumber();
-	int itemnumber = GameManager::getSingleton().getItemNumber();
-	std::stringstream nodename("_itemNode");
-	nodename << itemnumber << "_" << "0";
-	Ogre::SceneNode* itemNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode(nodename.str());
-	itemNode->createChildSceneNode()->attachObject(itemEntity);
-	itemNode->setPosition(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition());
-	itemNode->setScale(.2, .5, .2);
-	reinterpret_cast<ItemInstance*>(_armorEquipSlots[pDuplicate])->setNodeAndEntity(itemNode, itemEntity);
-	reinterpret_cast<ItemInstance*>(_armorEquipSlots[pDuplicate])->id = GameManager::getSingletonPtr()->getLevelManager()->subscribeItemInstance(reinterpret_cast<ItemInstance*>(_armorEquipSlots[pDuplicate]));*/
+	reinterpret_cast<ItemInstance*>(_armorEquipSlots[pDuplicate])->addItemToWorld();
+	reinterpret_cast<ItemInstance*>(_armorEquipSlots[pDuplicate])->id = GameManager::getSingletonPtr()->getLevelManager()->subscribeItemInstance(reinterpret_cast<ItemInstance*>(_armorEquipSlots[pDuplicate]));
 
 	_armorEquipSlots[pDuplicate] = pArmor;
 

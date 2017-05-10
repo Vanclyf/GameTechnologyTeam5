@@ -27,6 +27,7 @@ public:
 	Ogre::SceneNode* getNode() { return _itemNode; }
 	std::string getNodeName() { return _nodeName; }
 	void destroyItemInWorld();
+	void addItemToWorld();
 	void setNodeAndEntity(Ogre::SceneNode*, Ogre::Entity*);
 	int id;
 
@@ -46,6 +47,7 @@ private:
 	std::string _nodeName;
 	Quality _quality;
 	Ogre::SceneNode* _itemNode;
+	Ogre::Vector3 _position;
 };
 
 #endif
