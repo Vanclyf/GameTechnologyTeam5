@@ -42,6 +42,10 @@ struct Building {
 	BuildingType type;
 	int residents;
 	Ogre::Vector2 position;
+
+	Ogre::Vector3 getPositionInFrontOf() {
+		return Ogre::Vector3(position.x, 0, position.y);
+	}
 };
 
 class City : public IQuestContent

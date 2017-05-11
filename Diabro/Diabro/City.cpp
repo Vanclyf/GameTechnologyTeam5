@@ -42,10 +42,10 @@ void City::generateBuildings()
 		//TODO: Change the numbers here to match those provided by levelgen CHECK
 		int xPos = GameManager::getSingletonPtr()->getRandomInRange(position.x * scalar, (width - 1) * scalar);
 		int zPos = GameManager::getSingletonPtr()->getRandomInRange(position.z * scalar, (depth - 1) * scalar);
-		buildingNode->setPosition(xPos, 100, zPos); //GameManager::getSingletonPtr()->getRandomInRange(x * 1000, (x + width) * 1000), 50, GameManager::getSingletonPtr()->getRandomInRange(z * 1000, (z + depth) * 1000));
+		buildingNode->setPosition(xPos, 100, zPos); 
 
 		int buildingType = typeFlag == HideoutRT ? HideOutHouse : GameManager::getSingletonPtr()->getRandomInRange(0, AMOUNT_OF_BUILDINGTYPES-1);
-		int residents = GameManager::getSingletonPtr()->getRandomInRange(1, 3);
+		int residents = GameManager::getSingletonPtr()->getRandomInRange(0, 3);
 		Building thisBuilding = Building((BuildingType)buildingType, residents, Ogre::Vector2(xPos, zPos));
 		_buildingStructs.push_back(thisBuilding);
 

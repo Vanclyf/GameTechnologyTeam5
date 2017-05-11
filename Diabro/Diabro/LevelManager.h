@@ -45,6 +45,7 @@ public:
 
 	Ogre::Degree startPitchCam;
 	Ogre::Vector3 playerPosition;
+	std::string npcNames[8];
 
 private:
 	Ogre::Entity* _playerEntity;

@@ -25,7 +25,7 @@ private:
 
 	void spawnCityContent();
 	void placeEnemySpawnNode(City*, int);
-	void placeNPCSpawnNode(City*, int);
+	void spawnNPCs(City*, Building*);
 };
 
 #endif

@@ -1,6 +1,7 @@
 #include "GameManager.h"
 #include "LevelManager.h"
 
+
 /// <summary>
 /// Initializes a new instance of the <see cref="LevelManager" /> class.
 /// This class is created by the <see cref="GameManager" /> and contains all level information
@@ -9,6 +10,7 @@
 LevelManager::LevelManager() : _playerEntity(0), _npcEntity(0), _basicEnemyEntity(0), _groundEntity(0),
 playerScript(0), _levelNode(0), _camNode(0), npcSpawner(0)
 {
+
 }
 
 /// <summary>

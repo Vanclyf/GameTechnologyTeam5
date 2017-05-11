@@ -8,7 +8,7 @@
 LevelGenerator::LevelGenerator():
 scalar(500)
 {
-	_zone[0] = Zone(29, 29, 5, 5, 7, 100);
+	_zone[0] = Zone(29, 29, 5, 5, 15, 100);
 	for (int i = 0; i < _zone[0].cities.size(); ++i) {
 		City c = _zone[0].cities[i];
 		
@@ -45,9 +45,10 @@ void LevelGenerator::spawnCityContent() {
 		// switch on the city type
 		switch(thisCity->typeFlag) {
 		case CityRT:
-			// spawn npcs in front of their houses
-			//for (int j = 0; j < thisCity->Buildings().size(); ++j) {	}
-			placeNPCSpawnNode(thisCity, i);
+			for (int j = 0; j < thisCity->Buildings().size(); ++j) { // for each building
+				spawnNPCs(thisCity, &thisCity->Buildings()[j]);
+			}
+			
 			break;
 
 		case HideoutRT:
@@ -62,10 +63,29 @@ void LevelGenerator::spawnCityContent() {
 	return;
 }
 
-void LevelGenerator::placeNPCSpawnNode(City* thisCity, int i) {
-	Ogre::SceneNode* npcSpawnerNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode("npcSpawnhi" + i);
-	CharacterSpawner<Npc>* npcSpawner = new CharacterSpawner<Npc>(npcSpawnerNode, 3, Ogre::Vector3((thisCity->position.x + thisCity->width / 2) * scalar, 25, (thisCity->position.z + thisCity->depth / 2) * scalar), &_zone[0].cities[i]);
+void LevelGenerator::spawnNPCs(City* pCity, Building* pThisBuilding) {
+	// catch the buildings position
+	Ogre::Vector3 buildingPosition = pThisBuilding->getPositionInFrontOf();
+	Ogre::Vector3 offsets[3];
+	offsets[0] = Ogre::Vector3(-100, 25, -50);
+	offsets[1] = Ogre::Vector3(-100, 25, 0);
+	offsets[2] = Ogre::Vector3(-100, 25, 50);
+
+	// for each resident
+	for (int i = 0; i < pThisBuilding->residents; ++i) {
+		// the scene node for the resident
+		Ogre::SceneNode* instanceNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode();
+		instanceNode->translate(buildingPosition + offsets[i], Ogre::Node::TS_WORLD);
+
+		Ogre::Entity* instanceEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("penguin.mesh");
+		Ogre::SceneNode* rotationNode = instanceNode->createChildSceneNode();
+		rotationNode->attachObject(instanceEntity);
+
+		Npc* instanceScript = new Npc(instanceNode, rotationNode, instanceEntity, pCity, pThisBuilding);
+		instanceScript->initialize();
+	}
 }
+
 
 void LevelGenerator::placeEnemySpawnNode(City* thisCity, int i) {
 	Ogre::SceneNode* enemySpawnerNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode("enemySpawn" + i);
