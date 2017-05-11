@@ -10,16 +10,14 @@ private:
 	int _width;
 	int _depth;
 	
-	
-
 	int _maxCityWidth;
 	int _maxCityHeight;
 
-	int* _tiles;
-	int _numberOfRegions;
+	int* _tiles; ///< holds the zone grid, filled with all zone positions
+	int _numberOfRegions; ///< not yet implemented, decides the amount of closed of regions within the zone
 
 public:
-	std::vector<City> cities;
+	std::vector<City> cities; ///< vector containing all cities within the zone
 
 	Zone(int pWidth, int pHeight, int pMaxCityWidth, int pMaxCityHeight, int pMaxCities, int pMaxTries);
 	Zone();

@@ -7,29 +7,23 @@
 LevelGenerator::LevelGenerator():
 scalar(1000)
 {
-	_zone[0] = Zone(18, 18, 5, 5, 10, 100);
-	//place geometry for each pCity
-	for (int i = 0; i < _zone[0].cities.size(); ++i) {
-		City c = _zone[0].cities[i];
-		
-		//create unique pCity pName (just a number)
-		std::stringstream sstm; 
-		sstm << "pCity-" << i;
-
-		//TODO: generate city
-	}
-	drawDungeonFloor(scalar, _zone[0]);
+	//create zone and generate dungeon
+	_zone[0] = Zone(18, 18, 5, 5, 10, 500);
+	
+	drawDungeonFloor(_zone[0]);
 }
 
 LevelGenerator::~LevelGenerator()
 {
 }
-
+/// returns empty position within dungeon
+/// \param pEmptyNeighbours only returns positions with 8 emty neighbours
 Coordinate LevelGenerator::getEmptyPosition(bool pEmptyNeighbours) {
 	return _zone[0].getPosition(1, pEmptyNeighbours);
 }
 
-
+/// transfroms a world position to a grid coordinate
+/// \param pWorldCoord coordinate in world position
 Coordinate LevelGenerator::getGridPosition(Coordinate pWorldCoord) {
 	int x = static_cast<int>(ceil(pWorldCoord.x / scalar + 0.0f));
 	int z = static_cast<int>(ceil(pWorldCoord.z / scalar + 0.0f));
@@ -37,30 +31,42 @@ Coordinate LevelGenerator::getGridPosition(Coordinate pWorldCoord) {
 	return Coordinate(x,z);
 }
 
+/// transforms a grid coordinate to a world position
+/// \param pGridCoord grid coordinate
 Coordinate LevelGenerator::getWorldPosition(Coordinate pGridCoord) {
 	return Coordinate(pGridCoord.x * scalar, pGridCoord.z * scalar);
 }
 
-
-
-Zone LevelGenerator::getZone(int pX, int pZ) {
+/// retrieve zone
+/// \param pZoneId coordinate of zone, within zone grid
+Zone LevelGenerator::getZone(Coordinate pZoneId) {
 	//TODO:implement multiple zones
 	return _zone[0];
 }
 
-void LevelGenerator::drawDungeonFloor(int pScalar, Zone pZone) {
+/// retrieve zone
+/// \param pX x position of the zone
+/// \param pZ z position of the zone
+Zone LevelGenerator::getZone(int pX, int pZ) {
+	//TODO:implement multiple zones
+	return _zone[0];
+}
+/// creates a tile for each position in the zone
+
+/// \param pZone zone from which to draw the tiles
+void LevelGenerator::drawDungeonFloor(Zone pZone) {
 	
 
 	for (int ix = 0; ix < pZone.getResolution().x; ++ix) {
 		for (int iz = 0; iz < pZone.getResolution().z; ++iz) {
 			if (pZone.getTile(ix, iz) > 0) {
 				Ogre::SceneNode* thisSceneNode = GameManager::getSingleton().getSceneManager()->getRootSceneNode()->createChildSceneNode();
-				thisSceneNode->setPosition(ix * pScalar, 0, iz * pScalar);
+				thisSceneNode->setPosition(ix * scalar, 0, iz * scalar);
 
 				std::stringstream name;
 				name << "tile_" << ix << "-" << iz;
 
-				createPlane(pScalar, name.str());
+				createPlane(name.str());
 
 				Ogre::Entity* zoneEntity = GameManager::getSingleton().getSceneManager()->createEntity("entity: " + name.str(), name.str());
 				zoneEntity->setMaterialName("Examples/Rockwall");
@@ -70,14 +76,16 @@ void LevelGenerator::drawDungeonFloor(int pScalar, Zone pZone) {
 	}
 }
 
-void LevelGenerator::createPlane(int pScalar, std::string pName)
+/// creates a plane mesh using Ogre's Mesh manager
+/// \param pName name of the plane (in format tile_x-z)
+void LevelGenerator::createPlane(std::string pName)
 {
 	Ogre::Plane plane(Ogre::Vector3::UNIT_Y, 0);
 	Ogre::MeshManager::getSingleton().createPlane(
 		pName,
 		Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
 		plane,
-		pScalar, pScalar, 2, 2,
+		scalar, scalar, 2, 2,
 		true,
 		1, 5, 5,
 		Ogre::Vector3::UNIT_Z);

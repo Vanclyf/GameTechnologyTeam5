@@ -10,19 +10,20 @@ public:
 	LevelGenerator();
 	~LevelGenerator();
 
+	Zone getZone(Coordinate pZoneId);
 	Zone getZone(int pX, int pZ);
 	
 	Coordinate getWorldPosition(Coordinate pWorldCoord);
 	Coordinate getGridPosition(Coordinate pGridCoord);
 	Coordinate getEmptyPosition(bool pEmptyNeighbours);
 	
-	int scalar;
+	int scalar; ///< scales grid position to world positions
 
 private:
-	Zone _zone[1];
+	Zone _zone[1]; ///<holds differnt zones in level
 
-	void drawDungeonFloor(int pScalar, Zone pZone);
-	void createPlane(int pScalar, std::string pName);
+	void drawDungeonFloor(Zone pZone);
+	void createPlane(std::string pName);
 
 	//Await further implementtation
 	//void createTileMesh(int pScalar, Coordinate pPosition, std::string pName);

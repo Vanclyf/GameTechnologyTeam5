@@ -24,7 +24,6 @@ TEST_CASE("level generator : city spaces", "[level-generation][cities]") {
 					}
 					REQUIRE(maxX <= 3);
 					REQUIRE(maxZ <= 3);
-					
 				}
 			}
 		}
