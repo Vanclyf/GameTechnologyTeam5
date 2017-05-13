@@ -11,19 +11,22 @@ City::~City()
 {
 }
 
+/// returns the center tile of the room
 Coordinate City::getCenterTile() {
 	int x = ceil(position.x + width / 2.0f);
 	int z = ceil(position.z + depth / 2.0f);
 	return Coordinate(x, z);
 }
 
+/// returns a random tile coordinate within the city
 Coordinate City::getRandomTile() {
+	//TODO: prevent collision with buildings
 	int x = rand() % width;
 	int z = rand() % depth;
 	return Coordinate(position.x + x, position.z + z);
 }
 
-
+/// assigns the city a random type
 void City::setRndType()
 {
 	//TODO:improve picking method
