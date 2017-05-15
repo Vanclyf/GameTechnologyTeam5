@@ -9,6 +9,7 @@
 #include <OgreSceneManager.h>
 #include "CharacterSpawner.h"
 #include "LevelGenerator.h"
+#include <btBulletDynamicsCommon.h>
 
 class LevelManager
 {
@@ -18,7 +19,9 @@ public:
 	void initialize();
 
 	void update(const Ogre::FrameEvent&);
-
+	void initPhysicsWorld();
+	void simulatePhysicsWorld();
+	void destroyPhysicsWorld();
 	static void createGroundMesh();
 
 	Ogre::SceneNode* getLevelNode() { return _levelNode; }
@@ -64,6 +67,22 @@ private:
 	std::vector<Character*> _hostileNpcScripts;
 	std::vector<ItemInstance*> _instanceScripts;
 	// TODO: lists of different scripts (NPC's, enemies, e.d.) 
+
+
+	//Physics engine
+	btBroadphaseInterface* broadphase;
+	btDefaultCollisionConfiguration* collisionConfiguration;
+	btCollisionDispatcher* dispatcher;
+	btSequentialImpulseConstraintSolver* solver;
+	btDiscreteDynamicsWorld* dynamicsWorld;
+	btCollisionShape* groundShape;
+	btCollisionShape* fallShape;
+	btDefaultMotionState* groundMotionState;
+	btRigidBody* groundRigidBody;
+	btDefaultMotionState* fallMotionState;
+	btScalar mass;
+	btVector3 fallInertia;
+	btRigidBody* fallRigidBody;
 };
 
 #endif
