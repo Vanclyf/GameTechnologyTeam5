@@ -51,6 +51,9 @@ public:
 
 private:
 	Ogre::Entity* _playerEntity;
+	//Test physics engine entity
+	Ogre::Entity* _testEntity;
+	Ogre::SceneNode* testNode;
 	//TODO replace all with spawners
 	Ogre::Entity* _npcEntity;
 	Ogre::Entity* _basicEnemyEntity;

@@ -29,20 +29,29 @@ void LevelManager::initialize()
 	_camNode = playerNode->createChildSceneNode("CameraNode");
 
 
+	//physics engine test enetity
+	testNode = _levelNode->createChildSceneNode("TestNode");
+	_testEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("ogrehead.mesh");
+	testNode->createChildSceneNode()->attachObject(_testEntity);
+	testNode->setPosition(100,10,-150);
+	//testNode->setScale(10.0f,10.0f,10.0f);
+	
+	testNode->setPosition(Ogre::Vector3(0, 0, 0));
+
 	//player
 	_playerEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("ninja.mesh");
 	playerNode->createChildSceneNode()->attachObject(_playerEntity);
-	Ogre::Vector3 position = Ogre::Vector3((levelGenerator->GetZone(0, 0).cities[0].position.x + (levelGenerator->GetZone(0, 0).cities[0].width / 2.0f))* levelGenerator->scalar, 0, (levelGenerator->GetZone(0, 0).cities[0].position.z + (levelGenerator->GetZone(0, 0).cities[0].depth / 2.0f)) * levelGenerator->scalar);
+	Ogre::Vector3 position = Ogre::Vector3(0, 0, 0);/*Ogre::Vector3((levelGenerator->GetZone(0, 0).cities[0].position.x + (levelGenerator->GetZone(0, 0).cities[0].width / 2.0f))* levelGenerator->scalar, 0, (levelGenerator->GetZone(0, 0).cities[0].position.z + (levelGenerator->GetZone(0, 0).cities[0].depth / 2.0f)) * levelGenerator->scalar);*/
 	playerNode->setPosition(position);
 	playerNode->setScale(0.5f, 0.5f, 0.5f);
 	playerScript = new Player(playerNode, _playerEntity);
 	playerScript->initialize();
 
 	// ground 
-	/*createGroundMesh();
+	createGroundMesh();
 	_groundEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("ground");
 	_levelNode->createChildSceneNode()->attachObject(_groundEntity);
-	_groundEntity->setMaterialName("Examples/Rockwall");*/
+	_groundEntity->setMaterialName("Examples/Rockwall");
 
 	// camera
 	_camNode->attachObject(GameManager::getSingletonPtr()->getCamera());
@@ -139,6 +148,9 @@ void LevelManager::update(const Ogre::FrameEvent& pFE)
 	btTransform trans;
 	fallRigidBody->getMotionState()->getWorldTransform(trans);
 
+	testNode->setPosition(Ogre::Vector3(0,trans.getOrigin().getY()+20, 0));
+
+
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	FILE* fp;
 	freopen_s(&fp, "CONOUT$", "w", stdout);
@@ -212,8 +224,8 @@ void LevelManager::initPhysicsWorld() {
 
 
 	fallMotionState =
-		new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 50, 0)));
-	mass = 1;
+		new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 100, 0)));
+	mass = 10;
 	fallInertia = btVector3(0, 0, 0);
 	fallShape->calculateLocalInertia(mass, fallInertia);
 	btRigidBody::btRigidBodyConstructionInfo fallRigidBodyCI(mass, fallMotionState, fallShape, fallInertia);
