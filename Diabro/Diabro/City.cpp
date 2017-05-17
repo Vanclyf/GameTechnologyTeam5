@@ -1,5 +1,6 @@
 #include "City.h"
 #include <stdlib.h>
+#include <OgreMath.h>
 
 City::City(int pX, int pZ, int pWidth, int pDepth, int pId) :
 position(Coordinate(pX, pZ)), width(pWidth), depth(pDepth), id(pId)
@@ -13,8 +14,8 @@ City::~City()
 
 /// returns the center tile of the room
 Coordinate City::getCenterTile() {
-	int x = ceil(position.x + width / 2.0f);
-	int z = ceil(position.z + depth / 2.0f);
+	int x = Ogre::Math::Ceil(position.x + width / 2.0f);
+	int z = Ogre::Math::Ceil(position.z + depth / 2.0f);
 	return Coordinate(x, z);
 }
 
