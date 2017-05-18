@@ -26,6 +26,8 @@ public:
 	std::vector<Character*> getHostileNpcs() { return _hostileNpcScripts; }
 	std::vector<ItemInstance*> getItemInstances() { return _instanceScripts; }
 
+	void LevelManager::detachItemInstance(int id);
+
 	int subscribeHostileNPC(BasicEnemy*);
 	int subscribeFriendlyNPC(Npc*);
 	int subscribeItemInstance(ItemInstance*);
@@ -34,6 +36,7 @@ public:
 	void detachFriendlyNPC(int);
 	// for now public so that game manager can access it. 
 	Player* playerScript; 
+	LevelGenerator* levelGenerator;
 
 	Ogre::Degree startPitchCam;
 	Ogre::Vector3 playerPosition;

@@ -72,7 +72,7 @@ void GameManager::createScene(void)
 	_gameTimer = new Ogre::Timer();
 	_itemInstanceNumber = 0;
     // set lights
-	setupLights(mSceneMgr);
+	setupLights(_mSceneMgr);
 	
 	// set shadow technique
 	_mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
@@ -167,9 +167,9 @@ void GameManager::createCamera()
 	_mCamera = _mSceneMgr->createCamera("MainCam");
 
 	// set pos and rot
-	mCamera->setPosition(Ogre::Vector3(0, 150, 300));
-	mCamera->lookAt(Ogre::Vector3(0, 0, 0));
-	mCamera->setNearClipDistance(5);
+	_mCamera->setPosition(Ogre::Vector3(0, 150, 300));
+	_mCamera->lookAt(Ogre::Vector3(0, 0, 0));
+	_mCamera->setNearClipDistance(5);
 
 	// create the camera man
 	//can be removed
