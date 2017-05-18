@@ -1,0 +1,94 @@
+material Houses/Pink
+{
+   technique
+   {
+      pass
+      {
+	  	lighting off
+        
+         texture_unit
+         {
+			texture pinkBox.jpg
+         }
+      }
+   }
+}
+
+material Houses/Red
+{
+   technique
+   {
+      pass
+      {
+	  	lighting off
+        
+         texture_unit
+         {
+			texture redBox.jpg
+         }
+      }
+   }
+}
+
+material Houses/Yellow
+{
+   technique
+   {
+      pass
+      {
+	  	lighting off
+         texture_unit
+         {
+			texture yellowBox.jpg
+         }
+      }
+   }
+}
+
+material Houses/Blue
+{
+   technique
+   {
+      pass
+      {
+	  	lighting off
+        
+         texture_unit
+         {
+			texture blueBox.jpg
+         }
+      }
+   }
+}
+
+material Houses/Green
+{
+   technique
+   {
+      pass
+      {
+	  	lighting off
+        
+         texture_unit
+         {
+			texture greenBox.jpg
+         }
+      }
+   }
+}
+
+material Houses/Purple
+{
+   technique
+   {
+      pass
+      {
+	  	lighting off
+        
+         texture_unit
+         {
+			texture purpleBox.jpg
+         }
+      }
+   }
+}

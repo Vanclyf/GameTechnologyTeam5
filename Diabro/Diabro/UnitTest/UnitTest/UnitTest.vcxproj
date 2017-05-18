@@ -87,6 +87,7 @@
     <ClInclude Include="Catch.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="LevelGenerationTest.cpp" />
     <ClCompile Include="MainTest.cpp" />
     <ClCompile Include="PlayerClassTest.cpp" />
   </ItemGroup>

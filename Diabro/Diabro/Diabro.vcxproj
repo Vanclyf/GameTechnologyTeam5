@@ -111,6 +111,8 @@
     <None Include="testMaterial.material" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ArmorInstance.cpp" />
+    <ClCompile Include="BaseArmor.cpp" />
     <ClCompile Include="BaseEquipment.cpp" />
     <ClCompile Include="BaseItem.cpp" />
     <ClCompile Include="BaseNpc.cpp" />
@@ -148,6 +150,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Affix.h" />
+    <ClInclude Include="ArmorInstance.h" />
+    <ClInclude Include="BaseArmor.h" />
     <ClInclude Include="BaseEquipment.h" />
     <ClInclude Include="BaseItem.h" />
     <ClInclude Include="BaseNpc.h" />

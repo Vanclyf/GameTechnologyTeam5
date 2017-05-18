@@ -14,6 +14,7 @@ Filename:    GameManager.h
 #include "QuestContentManager.h"
 #include "LevelManager.h"
 #include "GameInputManager.h"
+#include <ctime>
 
 //---------------------------------------------------------------------------
 
@@ -29,19 +30,21 @@ public:
 	static GameManager& getSingleton(void);
 	static GameManager* getSingletonPtr(void);
 
-
 	Ogre::SceneManager* getSceneManager(void) { return _mSceneMgr; }
 	Ogre::Camera* getCamera(void) { return _mCamera; }
 	Ogre::Timer* getGameTime(void) { return _gameTimer; }
+	int getItemNumber() { return _itemInstanceNumber; }
+	void addItemNumber() { _itemInstanceNumber++; }
 
 	LevelManager* getLevelManager(void) { return _levelManager; }
 	UIManager* getUIManager(void) { return _uiManager; }
 	ItemManager* getItemManager(void) { return _itemManager; }
 	QuestContentManager* getQuestContentManager(void) { return _questContentManager; }
 
-
-	static int getRandomNumberBetween(int, int);
 	void setShutDownTrue() { _mShutDown = true; }
+	int getRandomInRange(int pLO, int pHI) {
+		return rand() % pHI + pLO;
+	};
 
 protected:
 	void createScene(void) override;
@@ -50,6 +53,7 @@ protected:
 	void createViewports(void) override;
 
 	static void setupLights(Ogre::SceneManager*);
+
 
 	bool frameRenderingQueued(const Ogre::FrameEvent&) override;
 	bool keyPressed(const OIS::KeyEvent&) override;
@@ -60,6 +64,7 @@ protected:
 
 
 private:
+	int _itemInstanceNumber;
 	LevelManager* _levelManager;
 	UIManager* _uiManager;
 	ItemManager* _itemManager;

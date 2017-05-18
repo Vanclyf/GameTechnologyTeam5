@@ -59,6 +59,10 @@ set(HDRS
 	./Diabro/Diabro/QuestItemGenerator.h
 	./Diabro/Diabro/tinyxml2.h
 	./Diabro/Diabro/GameInputManager.h
+	./Diabro/Diabro/ArmorInstance.h
+	./Diabro/Diabro/BaseArmor.h
+	./Diabro/Diabro/BuildingType.h
+	./Diabro/Diabro/CityManager.h
 )
  
 set(SRCS
@@ -91,6 +95,10 @@ set(SRCS
 	./Diabro/Diabro/City.cpp
 	./Diabro/Diabro/tinyxml2.cpp
 	./Diabro/Diabro/GameInputManager.cpp
+	./Diabro/Diabro/ArmorInstance.cpp
+	./Diabro/Diabro/BaseArmor.cpp
+	./Diabro/Diabro/BuildingType.cpp
+	./Diabro/Diabro/CityManager.cpp
 )
  
 include("tools/cmake/common.cmake") 

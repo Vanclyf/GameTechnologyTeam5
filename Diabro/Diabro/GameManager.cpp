@@ -61,15 +61,6 @@ GameManager& GameManager::getSingleton(void)
 
 //---------------------------------------------------------------------------
 
-/// <summary>
-/// Gets a random in range between.
-/// </summary>
-/// <param name="pLow">The lower bound.</param>
-/// <param name="pHigh">The upper bound.</param>
-/// <returns></returns>
-int GameManager::getRandomNumberBetween(int pLow, int pHigh) {
-	return rand() % pHigh + pLow;
-}
 
 
 
@@ -79,10 +70,10 @@ int GameManager::getRandomNumberBetween(int pLow, int pHigh) {
 void GameManager::createScene(void)
 {
 	_gameTimer = new Ogre::Timer();
-
-	// set lights
-	setupLights(_mSceneMgr);
-
+	_itemInstanceNumber = 0;
+    // set lights
+	setupLights(mSceneMgr);
+	
 	// set shadow technique
 	_mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 
@@ -176,9 +167,9 @@ void GameManager::createCamera()
 	_mCamera = _mSceneMgr->createCamera("MainCam");
 
 	// set pos and rot
-	_mCamera->setPosition(Ogre::Vector3(0, 300, 500));
-	_mCamera->lookAt(Ogre::Vector3(0, 0, 0));
-	_mCamera->setNearClipDistance(5);
+	mCamera->setPosition(Ogre::Vector3(0, 150, 300));
+	mCamera->lookAt(Ogre::Vector3(0, 0, 0));
+	mCamera->setNearClipDistance(5);
 
 	// create the camera man
 	//can be removed
@@ -235,6 +226,7 @@ bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& pFE)
 bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 {
 	_gameInputManager->keyPressed(pKE);
+
 	return true;
 }
 

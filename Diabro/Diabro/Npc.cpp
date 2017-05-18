@@ -6,7 +6,7 @@
 /// </summary>
 /// <param name="pMyNode">My node.</param>
 /// <param name="pMyEntity">My entity.</param>
-Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity) : BaseNpc(pMyNode, pMyRotationNode, pMyEntity), _inDialog(false)
+Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity, City* pMyCity) : BaseNpc(pMyNode, pMyRotationNode, pMyEntity, pMyCity), _inDialog(false)
 {
 	id = GameManager::getSingletonPtr()->getLevelManager()->subscribeFriendlyNPC(this);
 	rotatePivot(Ogre::Vector3(0, 90, 0));
@@ -39,7 +39,7 @@ Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entit
 
 	//TODO: discuss if this should be moved to some NPC generator class ----------------------------------------
 	// randomly assign a profession
-	int randomRoll = GameManager::getSingletonPtr()->getRandomNumberBetween(0, Profession::AMOUNT_OF_PROFS);
+	int randomRoll = GameManager::getSingletonPtr()->getRandomInRange(0, Profession::AMOUNT_OF_PROFS);
 	_profession = (Profession)randomRoll;
 
 	// randomly assign needs
@@ -48,7 +48,7 @@ Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entit
 	for (int i = 0; i < NeedType::AMOUNT_OF_NEEDTYPES; ++i) {
 		tempNeed.type = (NeedType)i;
 
-		randomRoll = GameManager::getSingletonPtr()->getRandomNumberBetween(10, 100);
+		randomRoll = GameManager::getSingletonPtr()->getRandomInRange(10, 100);
 		tempNeed.value = randomRoll;
 		tempNeeds.push_back(tempNeed);
 	};

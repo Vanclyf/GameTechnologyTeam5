@@ -1,7 +1,6 @@
 #ifndef NPC_H_
 #define NPC_H_
 
-#pragma once
 #include "BaseNpc.h"
 #include <fstream>
 #include "Needs.h"
@@ -22,7 +21,7 @@ enum Profession {
 class Npc : public BaseNpc
 {
 public:
-	Npc(Ogre::SceneNode*, Ogre::SceneNode*, Ogre::Entity*);
+	Npc(Ogre::SceneNode*, Ogre::SceneNode*, Ogre::Entity*, City*);
 	~Npc();
 
 	static Ogre::String getMeshName() { return "penguin.mesh"; }
@@ -49,6 +48,7 @@ private:
 	//Location _hometown;
 
 	void adjustNeed(NeedType, int);
+
 };
 
 #endif

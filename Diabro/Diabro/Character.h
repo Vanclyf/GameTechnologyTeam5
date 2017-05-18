@@ -7,6 +7,7 @@
 #include "CharacterStats.h"
 #include "OgreManager.h"
 #include "WeaponInstance.h"
+#include "ArmorInstance.h"
 #include "EquimentInstance.h"
 
 /// <summary>
@@ -40,10 +41,16 @@ public:
 	int getLevel() { return _currentLevel; }
 
 	WeaponInstance* getCurrentWeapon() { return _weapon; }
+
 	// -------------------------------------------------------------------------------
 
 	virtual void move(Ogre::Vector3&);
 	void toggleRun(bool pRun) { _isRunning = pRun; }
+	void setEquipmentSlot(ArmorInstance*);
+	void setEquipmentSlot(WeaponInstance*);
+	void setEquipmentSlot(ItemInstance*);
+	void swapEquipmentSlot(ArmorInstance*, int);
+	void swapEquipmentSlot(WeaponInstance*, int);
 
 	virtual bool adjustHealth(float);
 	virtual bool adjustStaminaOverTime(Ogre::Real);
@@ -75,13 +82,15 @@ protected:
 	//Ogre::Real _heavyAttackCooldown;
 
 	WeaponInstance* _weapon;
-	void SetHand(WeaponInstance* weapon);
-	void RemoveFromHand();
+	void setHand(WeaponInstance*);
+	void removeFromHand();
 
 	//TODO: implement these methods so that the character actually gains stats from wearing items
-	void AddStats(EquipmentInstance* item);
-	void RemoveStats(EquipmentInstance* item);
+	void addStats(EquipmentInstance*);
+	void removeStats(EquipmentInstance*);
 
+	std::vector<ArmorInstance*> _armorEquipSlots;
+	std::vector<WeaponInstance*> _weaponEquipSlots;
 	Character* _target;
 	virtual void findTarget(std::vector<Character*>);
 	virtual bool lightAttack();
@@ -91,8 +100,9 @@ protected:
 
 	// TODO: maybe some NPC's (friendly villagers) will not have _stats then this should be moved to a lower child class. 
 	bool setUpStats();
-
-public:
+private:
+	Ogre::Entity* _weaponEntity;
+	Ogre::SceneNode* _weaponNode;
 };
 
 #endif
