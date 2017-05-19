@@ -14,22 +14,40 @@ BasicPrincess::BasicPrincess(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotat
 	setHealth(1);
 }
 
-BasicPrincess::~BasicPrincess() {
+/// <summary>
+/// Finalizes an instance of the <see cref="BasicPrincess"/> class.
+/// </summary>
+BasicPrincess::~BasicPrincess()
+{
 }
 
+/// <summary>
+/// Updates the specified p deltatime.
+/// </summary>
+/// <param name="pDeltatime">The p deltatime.</param>
 void BasicPrincess::update(Ogre::Real pDeltatime)
 {
 	BaseNpc::update(pDeltatime);
 
-	if (_playerDetected) {
-		
+	if (_playerDetected)
+	{
 	}
 }
 
-void BasicPrincess::die() {
+/// <summary>
+/// Is called when the princess is dead.
+/// </summary>
+void BasicPrincess::die()
+{
 	Character::die();
-      //TODO: create game over method.
+	//TODO: create game over method.
 }
+
+/// <summary>
+/// Show the dialog when the player is close to the princess.
+/// </summary>
+/// <param name="pPlayerPos">The player position.</param>
+/// <returns></returns>
 bool BasicPrincess::dialog(Ogre::Vector3 pPlayerPos)
 {
 	Ogre::Real distance = _myNode->getPosition().distance(pPlayerPos);
@@ -49,28 +67,25 @@ bool BasicPrincess::dialog(Ogre::Vector3 pPlayerPos)
 
 		return true;
 	}
-	else
-	{
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-		FILE* fp;
-		freopen_s(&fp, "CONOUT$", "w", stdout);
-		printf("out of range for dialog\n");
-		fclose(fp);
+	FILE* fp;
+	freopen_s(&fp, "CONOUT$", "w", stdout);
+	printf("out of range for dialog\n");
+	fclose(fp);
 #endif
 
-		return false;
-	}
+	return false;
 }
+
 /// <summary>
 /// Continues the dialog.
 /// </summary>
-void BasicPrincess::continueDialog() {
-	if (_inDialog == true) {
-			GameManager::getSingletonPtr()->getUIManager()->destroyDialog();
-			_inDialog = false;
+void BasicPrincess::continueDialog()
+{
+	if (_inDialog == true)
+	{
+		GameManager::getSingletonPtr()->getUIManager()->destroyDialog();
+		_inDialog = false;
 		//TODO: create ending sequence
-		}
 	}
-
-
-
+}

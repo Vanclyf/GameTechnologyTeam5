@@ -23,16 +23,20 @@ public:
 
 	static void createGroundMesh();
 
-	Ogre::SceneNode* getLevelNode() { return _levelNode; }
-	Ogre::SceneNode* getCamNode() { return _camNode; }
+	// -------------------------------------------------------------------------------
+	// Properties
 
-	Player* getPlayer() { return playerScript; }
+	Ogre::SceneNode* getLevelNode() const { return _levelNode; }
+	Ogre::SceneNode* getCamNode() const { return _camNode; }
+
+	Player* getPlayer() const { return playerScript; }
 	std::vector<Character*> getFriendlyNpcs() const { return _friendlyNpcScripts; }
 	std::vector<Character*> getHostileNpcs() const { return _hostileNpcScripts; }
 	std::vector<Character*> getPrincessNpcs() const { return _basicPrincessScripts; }
 	std::vector<ItemInstance*> getItemInstances() const { return _instanceScripts; }
 	std::vector<Character*> getPrincessInstance() const { return _basicPrincessScripts; }
 
+	//---------------------------------------------------------------------------------
 	int subscribeHostileNPC(BasicEnemy*);
 	int subscribeFriendlyNPC(Npc*);
 	int subscribeItemInstance(ItemInstance*);
@@ -44,10 +48,10 @@ public:
 	void detachBasicPrincess(int);
 	static int testunit(int i) { return ++i; };
 	static int testunittwo(int i);
-	
+
 	LevelGenerator* levelGenerator;
 	// for now public so that game manager can access it. 
-	Player* playerScript; 
+	Player* playerScript;
 	BasicPrincess* princessScript;
 
 	Ogre::Degree startPitchCam;
@@ -68,6 +72,7 @@ private:
 	Ogre::SceneNode* _levelNode;
 	Ogre::SceneNode* _camNode;
 	
+	//arrays of all the objects in the game.
 	std::vector<Character*> _friendlyNpcScripts;
 	std::vector<Character*> _hostileNpcScripts;
 	std::vector<ItemInstance*> _instanceScripts;

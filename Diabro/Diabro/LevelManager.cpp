@@ -6,8 +6,8 @@
 /// This class is created by the <see cref="GameManager" /> and contains all level information
 /// like characters and the environment.
 /// </summary>
-LevelManager::LevelManager() : _playerEntity(0), _npcEntity(0), _basicEnemyEntity(0), _groundEntity(0),
-playerScript(0), _levelNode(0), _camNode(0), npcSpawner(0)
+LevelManager::LevelManager() : playerScript(nullptr), _playerEntity(nullptr), _npcEntity(nullptr), _basicEnemyEntity(nullptr),
+                               npcSpawner(nullptr), _groundEntity(nullptr), _levelNode(nullptr), _camNode(nullptr)
 {
 }
 
@@ -28,13 +28,11 @@ void LevelManager::initialize()
 	//player
 	_playerEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("ninja.mesh");
 	playerNode->createChildSceneNode()->attachObject(_playerEntity);
-	Ogre::Vector3 position = Ogre::Vector3((levelGenerator->GetZone(0, 0).cities[0].position.x + (levelGenerator->GetZone(0, 0).cities[0].width / 2.0f))* levelGenerator->scalar, 0, (levelGenerator->GetZone(0, 0).cities[0].position.z + (levelGenerator->GetZone(0, 0).cities[0].depth / 2.0f)) * levelGenerator->scalar);
+	Ogre::Vector3 position = Ogre::Vector3((levelGenerator->GetZone(0, 0).cities[0].position.x + (levelGenerator->GetZone(0, 0).cities[0].width / 2.0f)) * levelGenerator->scalar, 0, (levelGenerator->GetZone(0, 0).cities[0].position.z + (levelGenerator->GetZone(0, 0).cities[0].depth / 2.0f)) * levelGenerator->scalar);
 	playerNode->setPosition(position);
 	playerNode->setScale(0.5f, 0.5f, 0.5f);
 	playerScript = new Player(playerNode, _playerEntity);
 	playerScript->initialize();
-
-	
 
 
 	// ground 
@@ -54,8 +52,9 @@ void LevelManager::initialize()
 /// </summary>
 /// <param name="friendly">The friendly.</param>
 /// <returns></returns>
-int LevelManager::subscribeFriendlyNPC(Npc* friendly) {
-	_friendlyNpcScripts.push_back(friendly); 
+int LevelManager::subscribeFriendlyNPC(Npc* friendly)
+{
+	_friendlyNpcScripts.push_back(friendly);
 
 	return _friendlyNpcScripts.size() - 1;
 }
@@ -65,7 +64,8 @@ int LevelManager::subscribeFriendlyNPC(Npc* friendly) {
 /// </summary>
 /// <param name="hostile">The hostile.</param>
 /// <returns></returns>
-int LevelManager::subscribeHostileNPC(BasicEnemy* hostile) {
+int LevelManager::subscribeHostileNPC(BasicEnemy* hostile)
+{
 	_hostileNpcScripts.push_back(hostile);
 
 	return _hostileNpcScripts.size() - 1;
@@ -90,7 +90,6 @@ int LevelManager::subscribeItemInstance(ItemInstance* item)
 /// <returns></returns>
 int LevelManager::subscribePrincessInstance(BasicPrincess* princess)
 {
-	
 	_basicPrincessScripts.push_back(princess);
 	return _basicPrincessScripts.size() - 1;
 }
@@ -99,10 +98,12 @@ int LevelManager::subscribePrincessInstance(BasicPrincess* princess)
 /// Detaches the item instance.
 /// </summary>
 /// <param name="id">The identifier.</param>
-void LevelManager::detachItemInstance(int id) {
+void LevelManager::detachItemInstance(int id)
+{
 	_instanceScripts.erase(_instanceScripts.begin() + id);
 	//reset id values
-	for (std::vector<ItemInstance*>::iterator it = _instanceScripts.begin() + id; it < _instanceScripts.end(); ++it) {
+	for (std::vector<ItemInstance*>::iterator it = _instanceScripts.begin() + id; it < _instanceScripts.end(); ++it)
+	{
 		(*it)->id -= 1;
 	}
 }
@@ -115,7 +116,8 @@ void LevelManager::detachBasicPrincess(int id)
 {
 	_basicPrincessScripts.erase(_basicPrincessScripts.begin() + id);
 	//reset id values
-	for (std::vector<Character*>::iterator it = _basicPrincessScripts.begin() + id; it < _basicPrincessScripts.end(); ++it) {
+	for (std::vector<Character*>::iterator it = _basicPrincessScripts.begin() + id; it < _basicPrincessScripts.end(); ++it)
+	{
 		(*it)->id -= 1;
 	}
 }
@@ -124,12 +126,14 @@ void LevelManager::detachBasicPrincess(int id)
 /// Detaches the friendly NPC.
 /// </summary>
 /// <param name="id">The identifier.</param>
-void LevelManager::detachFriendlyNPC(int id) {
+void LevelManager::detachFriendlyNPC(int id)
+{
 	//reinterpret_cast<Npc*>(_friendlyNpcScripts[id])->_mySpawner->instanceDeath();
-	
+
 	_friendlyNpcScripts.erase(_friendlyNpcScripts.begin() + id);
 	//reset id values
-	for (std::vector<Character*>::iterator it = _friendlyNpcScripts.begin() + id; it < _friendlyNpcScripts.end(); ++it) {
+	for (std::vector<Character*>::iterator it = _friendlyNpcScripts.begin() + id; it < _friendlyNpcScripts.end(); ++it)
+	{
 		(*it)->id -= 1;
 	}
 	//npcSpawner->instanceDeath();
@@ -139,12 +143,14 @@ void LevelManager::detachFriendlyNPC(int id) {
 /// Detaches the hostile NPC.
 /// </summary>
 /// <param name="id">The identifier.</param>
-void LevelManager::detachHostileNPC(int id) {
+void LevelManager::detachHostileNPC(int id)
+{
 	//reinterpret_cast<BasicEnemy*>(_friendlyNpcScripts[id])->_mySpawner->instanceDeath();
 
 	_hostileNpcScripts.erase(_hostileNpcScripts.begin() + id);
 	//reset id values
-	for (std::vector<Character*>::iterator it = _hostileNpcScripts.begin() + id; it < _hostileNpcScripts.end(); ++it) {
+	for (std::vector<Character*>::iterator it = _hostileNpcScripts.begin() + id; it < _hostileNpcScripts.end(); ++it)
+	{
 		(*it)->id -= 1;
 	}
 	//enemySpawner->instanceDeath();
@@ -160,7 +166,7 @@ void LevelManager::update(const Ogre::FrameEvent& pFE)
 	// update characters
 	playerScript->update(pFE.timeSinceLastFrame);
 
-	for(int i = 0; i < _friendlyNpcScripts.size(); i++)
+	for (int i = 0; i < _friendlyNpcScripts.size(); i++)
 	{
 		_friendlyNpcScripts[i]->update(pFE.timeSinceLastFrame);
 	}
@@ -185,8 +191,6 @@ void LevelManager::createGroundMesh()
 		true,
 		1, 200, 200,
 		Ogre::Vector3::UNIT_Z);
-
-	return;
 }
 
 int LevelManager::testunittwo(int i)
