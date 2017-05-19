@@ -21,9 +21,6 @@
     <ClInclude Include="..\Diabro\Affix.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Diabro\BaseApplication.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\Diabro\BaseEquipment.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -78,11 +75,14 @@
     <ClInclude Include="..\Diabro\UIManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\Diabro\GameInputManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Diabro\OgreManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Diabro\BaseApplication.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\Diabro\BaseEquipment.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -126,6 +126,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\Diabro\UIManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Diabro\GameInputManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Diabro\OgreManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

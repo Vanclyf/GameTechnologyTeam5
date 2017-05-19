@@ -78,6 +78,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(OGRE_HOME)\include;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\Samples\Common\include;$(OGRE_HOME)\boost;$(OGRE_HOME)\include\OGRE\Overlay;$(OGRE_HOME)\include;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\Samples\Common\include;$(OGRE_HOME)\boost;$(OGRE_HOME)\include\OGRE\Overlay</AdditionalIncludeDirectories>
+      <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -86,6 +87,9 @@
       <AdditionalLibraryDirectories>$(OGRE_HOME)\boost\lib;$(OGRE_HOME)\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>OgreMain_d.lib;OIS_d.lib;OgreOverlay_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
+    <Bscmake>
+      <PreserveSBR>true</PreserveSBR>
+    </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -141,7 +145,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Diabro\Affix.h" />
-    <ClInclude Include="..\Diabro\BaseApplication.h" />
     <ClInclude Include="..\Diabro\BaseEquipment.h" />
     <ClInclude Include="..\Diabro\BaseItem.h" />
     <ClInclude Include="..\Diabro\BaseNpc.h" />
@@ -152,17 +155,18 @@
     <ClInclude Include="..\Diabro\CharacterStats.h" />
     <ClInclude Include="..\Diabro\EquimentInstance.h" />
     <ClInclude Include="..\Diabro\FloatRange.h" />
+    <ClInclude Include="..\Diabro\GameInputManager.h" />
     <ClInclude Include="..\Diabro\GameManager.h" />
     <ClInclude Include="..\Diabro\ItemInstance.h" />
     <ClInclude Include="..\Diabro\LevelManager.h" />
     <ClInclude Include="..\Diabro\Modifier.h" />
     <ClInclude Include="..\Diabro\Npc.h" />
+    <ClInclude Include="..\Diabro\OgreManager.h" />
     <ClInclude Include="..\Diabro\Player.h" />
     <ClInclude Include="..\Diabro\StatRange.h" />
     <ClInclude Include="..\Diabro\UIManager.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Diabro\BaseApplication.cpp" />
     <ClCompile Include="..\Diabro\BaseEquipment.cpp" />
     <ClCompile Include="..\Diabro\BaseItem.cpp" />
     <ClCompile Include="..\Diabro\BaseNpc.cpp" />
@@ -172,10 +176,12 @@
     <ClCompile Include="..\Diabro\CharacterSpawner.cpp" />
     <ClCompile Include="..\Diabro\EquimentInstance.cpp" />
     <ClCompile Include="..\Diabro\FloatRange.cpp" />
+    <ClCompile Include="..\Diabro\GameInputManager.cpp" />
     <ClCompile Include="..\Diabro\GameManager.cpp" />
     <ClCompile Include="..\Diabro\ItemInstance.cpp" />
     <ClCompile Include="..\Diabro\LevelManager.cpp" />
     <ClCompile Include="..\Diabro\Npc.cpp" />
+    <ClCompile Include="..\Diabro\OgreManager.cpp" />
     <ClCompile Include="..\Diabro\Player.cpp" />
     <ClCompile Include="..\Diabro\UIManager.cpp" />
   </ItemGroup>

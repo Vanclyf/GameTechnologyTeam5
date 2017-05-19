@@ -3,17 +3,16 @@
 
 #pragma once
 #include <OgreBillboardSet.h>
-#include "BaseApplication.h"
+#include "OgreManager.h"
 #include "SdkTrays.h"
 
-class UIManager
+class UIManager 
 {
 public:
 	UIManager();
-	
+
 	void init();
 	void setupUI();
-
 	void adjustHealthBar(Ogre::Real, Ogre::Real);
 	void adjustStaminaBar(Ogre::Real, Ogre::Real);
 	void createDialog(Ogre::String);

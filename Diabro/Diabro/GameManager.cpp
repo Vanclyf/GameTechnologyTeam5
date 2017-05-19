@@ -6,8 +6,8 @@ Filename:    GameManager.cpp
 */
 #include "GameManager.h"
 #include "SdkTrays.h"
-#include "TestFSM.h"
 #include "Tree.h"
+#include "OgreManager.h"
 
 //---------------------------------------------------------------------------
 
@@ -16,7 +16,12 @@ Filename:    GameManager.cpp
 /// This class is the central manager of the game and has therefore the only singleton instance.
 /// It contains all other managers.
 /// </summary>
-GameManager::GameManager() : _levelManager(0), _uiManager(0), _itemManager(0), _questContentManager(0), _gameTimer(0)
+GameManager::GameManager(void)
+	: _levelManager(0),
+	_uiManager(0),
+	_itemManager(0),
+	_questContentManager(0),
+	_gameTimer(0)
 {
 }
 //---------------------------------------------------------------------------
@@ -25,11 +30,12 @@ GameManager::GameManager() : _levelManager(0), _uiManager(0), _itemManager(0), _
 /// </summary>
 GameManager::~GameManager()
 {
-	delete _gameTimer;
-	delete _levelManager;
-	delete _uiManager;
-	delete _itemManager;
-	delete _questContentManager;
+	if (_gameTimer) delete _gameTimer;
+	if (_levelManager) delete _levelManager;
+	if (_uiManager) delete _uiManager;
+	if (_itemManager) delete _itemManager;
+	if (_questContentManager) delete _questContentManager;
+
 }
 
 //---------------------------------------------------------------------------
@@ -57,6 +63,7 @@ GameManager& GameManager::getSingleton(void)
 
 
 
+
 /// <summary>
 /// Creates the scene.
 /// </summary>
@@ -65,11 +72,12 @@ void GameManager::createScene(void)
 	_gameTimer = new Ogre::Timer();
 	_itemInstanceNumber = 0;
     // set lights
-	setupLights(mSceneMgr);
+	setupLights(_mSceneMgr);
 	
 	// set shadow technique
-	mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
+	_mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 
+    
 	_itemManager = new ItemManager();
 
 	_levelManager = new LevelManager();
@@ -79,8 +87,50 @@ void GameManager::createScene(void)
 
 	_uiManager = new UIManager();
 	_uiManager->init();
+
+	_gameInputManager = new GameInputManager();
+	
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+	Tree<int>* myTree = new Tree<int>();
+	myTree->setRoot(1);
+
+	std::vector<int> data;
+	data.push_back(1);
+	data.push_back(2);
+	data.push_back(3);
+	myTree->addNodes(data);
+
+	std::vector<int> datanode2;
+	datanode2.push_back(100);
+	datanode2.push_back(200);
+	myTree->addNodes(datanode2, myTree->getRoot()->getChildren()[1]);
+
+	FILE* fp;
+	freopen_s(&fp, "CONOUT$", "w", stdout);
+	std::cout << "root node " << myTree->getRootData() << std::endl;
+	std::vector<TreeNode<int>*> preorderTree = myTree->preorder();
+	for (int i = 0; i < preorderTree.size(); ++i) {
+		std::cout << preorderTree[i]->getData() << std::endl;
+	}
+	std::cout << std::endl;
+
+	myTree->removeNode(myTree->getRoot()->getChildren()[2]);
+	
+	preorderTree = myTree->preorder();
+	for (int i = 0; i < preorderTree.size(); ++i) {
+		std::cout << preorderTree[i]->getData() << std::endl;
+	}
+
+	fclose(fp);
+#endif
 }
 
+/// <summary>
+/// Destroys the scene.
+/// </summary>
+void GameManager::destroyScene()
+{
+}
 /// <summary>
 /// Setups the lights.
 /// </summary>
@@ -114,15 +164,16 @@ void GameManager::setupLights(Ogre::SceneManager* pSceneMgr)
 void GameManager::createCamera()
 {
 	// create the camera
-	mCamera = mSceneMgr->createCamera("MainCam");
+	_mCamera = _mSceneMgr->createCamera("MainCam");
 
 	// set pos and rot
-	mCamera->setPosition(Ogre::Vector3(0, 150, 300));
-	mCamera->lookAt(Ogre::Vector3(0, 0, 0));
-	mCamera->setNearClipDistance(5);
+	_mCamera->setPosition(Ogre::Vector3(0, 150, 300));
+	_mCamera->lookAt(Ogre::Vector3(0, 0, 0));
+	_mCamera->setNearClipDistance(5);
 
 	// create the camera man
-	mCameraMan = new OgreBites::SdkCameraMan(mCamera);
+	//can be removed
+	_mCameraMan = new OgreBites::SdkCameraMan(_mCamera);
 }
 
 /// <summary>
@@ -131,25 +182,15 @@ void GameManager::createCamera()
 void GameManager::createViewports()
 {
 	// add a viewport
-	Ogre::Viewport* vp = mWindow->addViewport(mCamera);
+	Ogre::Viewport* vp = _mWindow->addViewport(_mCamera);
 
 	// set background viewport
 	vp->setBackgroundColour(Ogre::ColourValue(0, 0, 0));
 
 	// as aspect ratio to avoid distortion
-	mCamera->setAspectRatio(
+	_mCamera->setAspectRatio(
 		Ogre::Real(vp->getActualWidth()) /
 		Ogre::Real(vp->getActualHeight()));
-}
-
-/// <summary>
-/// Creates the frame listener.
-/// </summary>
-void GameManager::createFrameListener(void)
-{
-	BaseApplication::createFrameListener();
-
-	return;
 }
 
 /// <summary>
@@ -158,13 +199,25 @@ void GameManager::createFrameListener(void)
 /// <param name="pFE">The frame event.</param>
 bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& pFE)
 {
-	bool ret = BaseApplication::frameRenderingQueued(pFE);
+	if (_mWindow->isClosed())
+	{
+		return false;
+	}
+	if (_mShutDown)
+	{
+		return false;
+	}
+
+	_mKeyboard->capture();
+	_mMouse->capture();
 
 	_levelManager->update(pFE);
- 
-	return ret;
+	return true;
 }
 
+
+
+//--------------------------------------------------------------------------
 /// <summary>
 /// Called when a key is pressed.
 /// </summary>
@@ -172,88 +225,8 @@ bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& pFE)
 /// <returns></returns>
 bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 {
-	Ogre::Vector3 dirVec = _levelManager->playerScript->getDirVector();
+	_gameInputManager->keyPressed(pKE);
 
-	switch (pKE.key)
-	{
-		// on esc close app
-	case OIS::KC_ESCAPE:
-		mShutDown = true;
-		break;
-	case OIS::KC_UP:
-	case OIS::KC_W:
-		dirVec.z = -1;
-		break;
-
-	case OIS::KC_DOWN:
-	case OIS::KC_S:
-		dirVec.z = 1;
-		break;
-
-	case OIS::KC_LEFT:
-	case OIS::KC_A:
-		dirVec.x = -1;
-		break;
-
-	case OIS::KC_RIGHT:
-	case OIS::KC_D:
-		dirVec.x = 1;
-		break;
-	
-	case OIS::KC_LSHIFT:
-		_levelManager->playerScript->toggleRun(true);
-		break;
-
-	case OIS::KC_E:
-		for (int i = 0; i < _levelManager->getItemInstances().size(); i++)
-		{
-			ItemInstance* item = _levelManager->getItemInstances()[i];
-			//check if the item is within pickup range.
-			if (item->getNode()->getPosition().distance(_levelManager->getPlayer()->getPosition()) < 500)
-			{
-				//TODO: equipitem player for now, later on we should use inventory system.
-				switch (reinterpret_cast<EquipmentInstance*>(item)->getType())
-				{
-				case 0:
-					//weapon
-					_levelManager->getPlayer()->setEquipmentSlot(reinterpret_cast<WeaponInstance*>(item));
-					item->destroyItemInWorld();
-					break;
-				case 1:
-					//gear
-					_levelManager->getPlayer()->setEquipmentSlot(reinterpret_cast<ArmorInstance*>(item));
-					item->destroyItemInWorld();
-					break;
-				case 2:
-					//jewelry
-					break;
-				}
-				break;
-			}
-		}
-		break;
-	//TODO: this code should check whether or not an NPC is in range and if so, start the conversation
-	case OIS::KC_F:
-		if (dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[0])->getInDialog() == false) {
-			dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[0])->dialog(_levelManager->getPlayer()->getPosition());
-		}
-		else {
-			dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[0])->toggleDialog();
-		}
-
-		//check if the item is within pickup range.
-
-		break;
-
-	case OIS::KC_SPACE:
-		dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[0])->continueDialog();
-		break;
-
-	default:
-		break;
-	}
-
-	_levelManager->playerScript->setDirVector(dirVec);
 	return true;
 }
 
@@ -264,48 +237,10 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 /// <returns></returns>
 bool GameManager::keyReleased(const OIS::KeyEvent& pKE)
 {
-	Ogre::Vector3 dirVec = _levelManager->playerScript->getDirVector();
-
-	switch (pKE.key)
-	{
-	case OIS::KC_UP:
-	case OIS::KC_W:
-		dirVec.z = 0;
-		break;
-
-	case OIS::KC_DOWN:
-	case OIS::KC_S:
-		dirVec.z = 0;
-		break;
-
-	case OIS::KC_LEFT:
-	case OIS::KC_A:
-		dirVec.x = 0;
-		break;
-
-	case OIS::KC_RIGHT:
-	case OIS::KC_D:
-		dirVec.x = 0;
-		break;
-
-	case OIS::KC_LSHIFT:
-		_levelManager->playerScript->toggleRun(false);
-		break;
-
-	//TODO: this code should end the conversation with the current talking to NPC
-	//TODO: maybe write own casts for character types
-	case OIS::KC_F:
-		break;
-
-	default:
-		break;
-	}
-
-	_levelManager->playerScript->setDirVector(dirVec);
+	_gameInputManager->keyReleased(pKE);
 	return true;
 }
 
-//TODO: where/how should the turning be handled? 
 /// <summary>
 /// Called when the mouse is moved.
 /// </summary>
@@ -313,19 +248,10 @@ bool GameManager::keyReleased(const OIS::KeyEvent& pKE)
 /// <returns></returns>
 bool GameManager::mouseMoved(const OIS::MouseEvent& pME)
 {
-	Ogre::Degree rotX = Ogre::Degree(-_levelManager->playerScript->getRotationspeed()/2 * pME.state.Y.rel);
-	Ogre::Degree originalPitch = mSceneMgr->getSceneNode("CameraNode")->getOrientation().getPitch();
-	Ogre::Degree degreeFrmStartPitch = (rotX + originalPitch) - _levelManager->startPitchCam;
-
-	mSceneMgr->getSceneNode("PlayerNode")->yaw(Ogre::Degree(-_levelManager->playerScript->getRotationspeed() * pME.state.X.rel), Ogre::Node::TS_WORLD);
-
-	if (degreeFrmStartPitch < Ogre::Degree(10) && degreeFrmStartPitch > Ogre::Degree(-40))
-	{
-		mSceneMgr->getSceneNode("CameraNode")->pitch(rotX, Ogre::Node::TS_LOCAL);
-	}
-
+	_gameInputManager->mouseMoved(pME);
 	return true;
 }
+
 
 /// <summary>
 /// Called when the mouse is pressed.
@@ -335,6 +261,7 @@ bool GameManager::mouseMoved(const OIS::MouseEvent& pME)
 /// <returns></returns>
 bool GameManager::mousePressed(const OIS::MouseEvent& pME, OIS::MouseButtonID pID)
 {
+	_gameInputManager->mousePressed(pME, pID);
 	return true;
 }
 
@@ -346,14 +273,7 @@ bool GameManager::mousePressed(const OIS::MouseEvent& pME, OIS::MouseButtonID pI
 /// <returns></returns>
 bool GameManager::mouseReleased(const OIS::MouseEvent& pME, OIS::MouseButtonID pID)
 {
-	switch (pID)
-	{
-	case OIS::MB_Left:
-		_levelManager->playerScript->lightAttack();
-		break;
-	default:
-		break;
-	}
+	_gameInputManager->mouseReleased(pME, pID);
 	return true;
 }
 
@@ -369,31 +289,32 @@ extern "C" {
 #endif
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-    INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR strCmdLine, INT)
+	INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR strCmdLine, INT)
 #else
-    int main(int argc, char *argv[])
+	int main(int argc, char *argv[])
 #endif
 	{
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 		AllocConsole();
 #endif
 
-        // Create application object
-        GameManager app;
+		// Create application object
+		GameManager app;
 
-        try {
-            app.go();
-        } catch(Ogre::Exception& e)  {
+		try {
+			app.go();
+		}
+		catch (Ogre::Exception& e) {
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-            MessageBox(NULL, e.getFullDescription().c_str(), "An exception has occurred!", MB_OK | MB_ICONERROR | MB_TASKMODAL);
+			MessageBox(NULL, e.getFullDescription().c_str(), "An exception has occurred!", MB_OK | MB_ICONERROR | MB_TASKMODAL);
 #else
-            std::cerr << "An exception has occurred: " <<
-                e.getFullDescription().c_str() << std::endl;
+			std::cerr << "An exception has occurred: " <<
+				e.getFullDescription().c_str() << std::endl;
 #endif
-        }
-		
-        return 0;
-    }
+		}
+
+		return 0;
+	}
 
 #ifdef __cplusplus
 }

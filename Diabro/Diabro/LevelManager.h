@@ -1,16 +1,13 @@
 #ifndef LEVEL_MANAGER_H_
 #define LEVEL_MANAGER_H_
-
 #include "Player.h"
 #include "Npc.h"
-#include "BaseApplication.h"
+#include "OgreManager.h"
 #include "BasicEnemy.h"
-#include "EquimentInstance.h"
-#include <OgreSceneManager.h>
 #include "CharacterSpawner.h"
 #include "LevelGenerator.h"
 
-class LevelManager
+class LevelManager 
 {
 public:
 	LevelManager();
@@ -35,13 +32,10 @@ public:
 
 	void detachHostileNPC(int);
 	void detachFriendlyNPC(int);
-	void detachItemInstance(int);
-	static int testunit(int i) { return ++i; };
-	static int testunittwo(int i);
-	
-	LevelGenerator* levelGenerator;
+	void detachItemInstance(int id);
 	// for now public so that game manager can access it. 
 	Player* playerScript; 
+	LevelGenerator* levelGenerator;
 
 	Ogre::Degree startPitchCam;
 	Ogre::Vector3 playerPosition;

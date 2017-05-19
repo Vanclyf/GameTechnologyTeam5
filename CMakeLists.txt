@@ -21,7 +21,7 @@ set (CMAKE_CXX_STANDARD 11)
 set(APP "Diabro")
  
 set(HDRS
-	./Diabro/Diabro/BaseApplication.h
+    ./Diabro/Diabro/OgreManager.h
 	./Diabro/Diabro/GameManager.h
 	./Diabro/Diabro/Player.h
 	./Diabro/Diabro/Npc.h
@@ -58,6 +58,7 @@ set(HDRS
 	./Diabro/Diabro/QuestItemContainer.h 
 	./Diabro/Diabro/QuestItemGenerator.h
 	./Diabro/Diabro/tinyxml2.h
+	./Diabro/Diabro/GameInputManager.h
 	./Diabro/Diabro/ArmorInstance.h
 	./Diabro/Diabro/BaseArmor.h
 	./Diabro/Diabro/BuildingType.h
@@ -65,7 +66,7 @@ set(HDRS
 )
  
 set(SRCS
-	./Diabro/Diabro/BaseApplication.cpp
+    ./Diabro/Diabro/OgreManager.cpp
 	./Diabro/Diabro/GameManager.cpp
 	./Diabro/Diabro/Player.cpp
 	./Diabro/Diabro/Npc.cpp
@@ -93,6 +94,7 @@ set(SRCS
 	./Diabro/Diabro/Zone.cpp
 	./Diabro/Diabro/City.cpp
 	./Diabro/Diabro/tinyxml2.cpp
+	./Diabro/Diabro/GameInputManager.cpp
 	./Diabro/Diabro/ArmorInstance.cpp
 	./Diabro/Diabro/BaseArmor.cpp
 	./Diabro/Diabro/BuildingType.cpp
