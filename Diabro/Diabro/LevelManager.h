@@ -26,14 +26,13 @@ public:
 	std::vector<Character*> getHostileNpcs() { return _hostileNpcScripts; }
 	std::vector<ItemInstance*> getItemInstances() { return _instanceScripts; }
 
-	void LevelManager::detachItemInstance(int id);
-
 	int subscribeHostileNPC(BasicEnemy*);
 	int subscribeFriendlyNPC(Npc*);
 	int subscribeItemInstance(ItemInstance*);
 
 	void detachHostileNPC(int);
 	void detachFriendlyNPC(int);
+	void detachItemInstance(int id);
 	// for now public so that game manager can access it. 
 	Player* playerScript; 
 	LevelGenerator* levelGenerator;
