@@ -21,6 +21,7 @@ private:
 
 	//amount of characters to spawn
 	int _nCharacters;
+	Ogre::String _entityMeshName; //name of the resource of the mesh for the entity.
 
 	City* _myCity;
 };

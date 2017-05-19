@@ -34,15 +34,19 @@ void CharacterSpawner<T>::spawnInstance() {
 	int randomZ = rand() % (100 - -100 + 1) + -100;
 	instanceNode->translate(_spawnPosition + Ogre::Vector3(randomX, 0, randomZ), Ogre::Node::TS_WORLD);
 	//set 
-	Ogre::Entity* instanceEntity;
+	
 	if(std::is_same<T,BasicPrincess>::value)
 	{
-		instanceEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("sphere.mesh");
+		_entityMeshName = "sphere.mesh";
 		instanceNode->setScale(10, 10, 10);
+	}else if(std::is_same<T, Npc>::value)
+	{
+		_entityMeshName = "penguin.mesh";
 	}else
 	{
-		instanceEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity(typeid(T) == typeid(Npc) ? "penguin.mesh" : "robot.mesh");
+		_entityMeshName = "robot.mesh";
 	}
+	Ogre::Entity* instanceEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity(_entityMeshName);
 	//rotateNode
 	Ogre::SceneNode* rotationNode = instanceNode->createChildSceneNode();
 		
