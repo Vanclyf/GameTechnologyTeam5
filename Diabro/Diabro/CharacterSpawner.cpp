@@ -35,7 +35,7 @@ void CharacterSpawner<T>::spawnInstance() {
 	instanceNode->translate(_spawnPosition + Ogre::Vector3(randomX, 0, randomZ), Ogre::Node::TS_WORLD);
 	//set 
 	Ogre::Entity* instanceEntity;
-	if(typeid(T)==typeid(BasicPrincess))
+	if(std::is_same<T,BasicPrincess>::value)
 	{
 		instanceEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("sphere.mesh");
 		instanceNode->setScale(10, 10, 10);
