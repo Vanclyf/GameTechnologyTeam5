@@ -12,8 +12,8 @@ public:
 	~ItemGenerator();
 
 	//TODO: implement loottable system
-	std::vector<ItemInstance*> generateRandomItem(Ogre::SceneNode*, int amount, Ogre::Vector3 position);
-	ItemInstance* generateRandomItem(Ogre::SceneNode*, Ogre::Vector3 position);
+	std::vector<ItemInstance*> generateRandomItem(Ogre::SceneNode*, int amount, Ogre::Vector3 position, int);
+	ItemInstance* generateRandomItem(Ogre::SceneNode*, Ogre::Vector3 position, int);
 	LevelManager* levelManager;
 
 private:

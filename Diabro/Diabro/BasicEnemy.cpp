@@ -52,7 +52,7 @@ bool BasicEnemy::lightAttack()
 void BasicEnemy::die() {
 	Character::die();
 	
-	GameManager::getSingletonPtr()->getItemManager()->getItemGenerator()->generateRandomItem(GameManager::getSingletonPtr()->getLevelManager()->getLevelNode(), GameManager::getSingletonPtr()->getRandomInRange(1, 5), getPosition());
+	GameManager::getSingletonPtr()->getItemManager()->getItemGenerator()->generateRandomItem(GameManager::getSingletonPtr()->getLevelManager()->getLevelNode(), GameManager::getSingletonPtr()->getRandomInRange(1, 5), getPosition(), getLevel());
 	GameManager::getSingletonPtr()->getLevelManager()->detachHostileNPC(id);
 	GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->gainXP(10);
 }

@@ -28,6 +28,7 @@ void ItemInstance::destroyItemInWorld()
 {
 	_itemNode->removeAndDestroyAllChildren();
 	_nodeName = _itemNode->getName();
+	_meshName =_myDroppedEntity->getMesh()->getName();
 	GameManager::getSingletonPtr()->getSceneManager()->destroyEntity(_myDroppedEntity);
 	GameManager::getSingletonPtr()->getSceneManager()->destroySceneNode(_itemNode);
 	GameManager::getSingletonPtr()->getLevelManager()->detachItemInstance(id);
@@ -36,7 +37,7 @@ void ItemInstance::destroyItemInWorld()
 void ItemInstance::addItemToWorld()
 {
 	std::stringstream nodename(_nodeName);
-	Ogre::Entity* itemEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("sphere.mesh");
+	Ogre::Entity* itemEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity(_meshName + ".mesh");
 	Ogre::SceneNode* itemNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode(nodename.str());
 	itemNode->createChildSceneNode()->attachObject(itemEntity);
 	_position = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition();

@@ -34,13 +34,13 @@ ItemGenerator::~ItemGenerator() {
 /// </summary>
 /// <param name="pItemList">The item list to put the items in.</param>
 /// <param name="pAmount">The pAmount.</param>
-std::vector<ItemInstance*> ItemGenerator::generateRandomItem(Ogre::SceneNode* pNode, int pAmount, Ogre::Vector3 position) {
+std::vector<ItemInstance*> ItemGenerator::generateRandomItem(Ogre::SceneNode* pNode, int pAmount, Ogre::Vector3 position, int pMonLevel) {
 	std::vector<ItemInstance*> returnList;
 
 	// generate the x items
 	//TODO: test with lists, may not working because pointer deleted after execution of method.
 	for (int i = 0; i < pAmount; ++i) {
-		ItemInstance* item = generateRandomItem(pNode, position);
+		ItemInstance* item = generateRandomItem(pNode, position, pMonLevel);
 		returnList.push_back(item);
 	}
 
@@ -48,26 +48,8 @@ std::vector<ItemInstance*> ItemGenerator::generateRandomItem(Ogre::SceneNode* pN
 }
 
 //TODO: create the item drop and set pNode as parent
-ItemInstance* ItemGenerator::generateRandomItem(Ogre::SceneNode* pNode, Ogre::Vector3 position) {
+ItemInstance* ItemGenerator::generateRandomItem(Ogre::SceneNode* pNode, Ogre::Vector3 position, int pMonLevel) {
 	ItemInstance* returnItem;
-
-
-
-
-	GameManager::getSingletonPtr()->addItemNumber();
-	int itemnumber = GameManager::getSingleton().getItemNumber();
-	Ogre::Entity* itemEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("sphere.mesh");
-
-	
-	std::stringstream nodename("_itemNode");
-	nodename << itemnumber << "_" << "0";
-	_itemNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode(nodename.str());
-	_itemNode->createChildSceneNode()->attachObject(itemEntity);
-	position.x += GameManager::getSingletonPtr()->getRandomInRange(0, 200) - 100;
-	position.z += GameManager::getSingletonPtr()->getRandomInRange(0, 200) - 100;
-	position.y += 10;
-	_itemNode->setPosition(position);
-	_itemNode->setScale(.2, .2, .2);
 
 	//TODO: this should be a random itemtype
 	int itemType = 2;
@@ -89,9 +71,46 @@ ItemInstance* ItemGenerator::generateRandomItem(Ogre::SceneNode* pNode, Ogre::Ve
 	}
 
 	//int level = (int)((int)(quality + 1) * GameManager::getSingletonPtr()->getRandomInRange(1.0f, 2.5f));
-	int offset = GameManager::getSingletonPtr()->getRandomInRange(2, 7);
+	int offset = GameManager::getSingletonPtr()->getRandomInRange(-5, 5);
 	int playerLevel = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getLevel();
 	int level = GameManager::getSingletonPtr()->getRandomInRange((playerLevel - offset) + quality, playerLevel + quality);
+
+	GameManager::getSingletonPtr()->addItemNumber();
+	int itemnumber = GameManager::getSingleton().getItemNumber();
+	//TODO: change color of the entity dont know how yet.
+	Ogre::Entity* itemEntity;
+	switch(quality)
+	{
+	case Quality::Poor:
+		itemEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("cube.mesh");
+		break;
+	case Quality::Common:
+		 itemEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("sphere.mesh");
+		break;
+	case Quality::UnCommon:
+		itemEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("cube.mesh");
+		break;
+	case Quality::Rare:
+		itemEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("sphere.mesh");
+		break;
+	case Quality::Epic:
+		itemEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("cube.mesh");
+		break;
+	case Quality::Legendary:
+		itemEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("sphere.mesh");
+		break;
+	}
+	//Ogre::Entity* itemEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("sphere.mesh");
+	std::stringstream nodename("_itemNode");
+	nodename << itemnumber << "_" << "0";
+	_itemNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode(nodename.str());
+	_itemNode->createChildSceneNode()->attachObject(itemEntity);
+	position.x += GameManager::getSingletonPtr()->getRandomInRange(0, 200) - 100;
+	position.z += GameManager::getSingletonPtr()->getRandomInRange(0, 200) - 100;
+	position.y += 10;
+	_itemNode->setPosition(position);
+	_itemNode->setScale(.2, .2, .2);
+
 
 	// switch based on the type of item to generate it
 	switch (itemType) {
@@ -108,7 +127,7 @@ ItemInstance* ItemGenerator::generateRandomItem(Ogre::SceneNode* pNode, Ogre::Ve
 		//TODO: generate the gold 
 		// - create a new basegold instance
 		// - pick a random value based on the choosen quality and lvl
-		// - create enw gold instance
+		// - create new gold instance
 		break;
 	}
 
@@ -145,8 +164,8 @@ ItemInstance* ItemGenerator::generateRandomItem(Ogre::SceneNode* pNode, Ogre::Ve
 			int numb = weapon->getMainStat();
 			int damageValue = (int)weapon->getValueOfStat(weapon->getMainStat()).randomInRange();
 			float attackSpeedValue = (float)weapon->getValueOfStat(StatType::AttackSpeed).randomInRange();
-			Stat* damage = new Stat(StatType::WeaponDamage, damageValue);
-			Stat* attackSpeed = new Stat(StatType::AttackSpeed, attackSpeedValue);
+			Stat* damage = new Stat(StatType::WeaponDamage, damageValue + (0.97 * pMonLevel) * (quality * (pMonLevel/level)));
+			Stat* attackSpeed = new Stat(StatType::AttackSpeed, attackSpeedValue + (0.01 * pMonLevel) * (quality * (pMonLevel / level)));
 			baseStats.push_back(damage);
 			baseStats.push_back(attackSpeed);
 
@@ -167,9 +186,9 @@ ItemInstance* ItemGenerator::generateRandomItem(Ogre::SceneNode* pNode, Ogre::Ve
 			int armorValue = (int)armor->getValueOfStat(armor->getMainStat()).randomInRange();
 			int vitalityValue = (int)armor->getValueOfStat(StatType::Vitality).randomInRange();
 			int strengthValue = (int)armor->getValueOfStat(StatType::Strength).randomInRange();
-			Stat* armorStat = new Stat(StatType::Armor, armorValue);
-			Stat* vitalityStat = new Stat(StatType::Vitality, vitalityValue);
-			Stat* strengthStat = new Stat(StatType::Strength, strengthValue);
+			Stat* armorStat = new Stat(StatType::Armor, armorValue + (0.7 * pMonLevel) * (quality *  (pMonLevel / level)));
+			Stat* vitalityStat = new Stat(StatType::Vitality, vitalityValue + (0.5 * pMonLevel) * (quality *  (pMonLevel / level)));
+			Stat* strengthStat = new Stat(StatType::Strength, strengthValue + (0.9 * pMonLevel) * (quality *  (pMonLevel / level)));
 			baseStats.push_back(armorStat);
 			baseStats.push_back(vitalityStat);
 			baseStats.push_back(strengthStat);

@@ -45,6 +45,7 @@ private:
 	BaseItem* _info;
 	bool _dropped;
 	std::string _nodeName;
+	std::string _meshName;
 	Quality _quality;
 	Ogre::SceneNode* _itemNode;
 	Ogre::Vector3 _position;

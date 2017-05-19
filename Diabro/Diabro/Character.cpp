@@ -29,7 +29,7 @@ bool Character::initialize()
 
 	for(int i = 0; i < 7; i++)
 	{
-		GameManager::getSingletonPtr()->getItemManager()->getItemGenerator()->generateRandomItem(_myNode);
+		GameManager::getSingletonPtr()->getItemManager()->getItemGenerator()->generateRandomItem(_myNode,_myNode->getPosition(), this->getLevel());
 	}
 	//show what is in the gear slots.
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
