@@ -11,8 +11,10 @@
 BasicPrincess::BasicPrincess(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity, City* pMyCity) : BaseNpc(pMyNode, pMyRotationNode, pMyEntity, pMyCity)
 {
 	id = GameManager::getSingletonPtr()->getLevelManager()->subscribePrincessInstance(this);
+	setHealth(1);
+}
 
-	this->_stats->GetStats().at(StatType::MaxHealth).value = 1;
+BasicPrincess::~BasicPrincess() {
 }
 
 void BasicPrincess::update(Ogre::Real pDeltatime)
@@ -28,7 +30,7 @@ void BasicPrincess::die() {
 	Character::die();
       //TODO: create game over method.
 }
-bool Npc::dialog(Ogre::Vector3 pPlayerPos)
+bool BasicPrincess::dialog(Ogre::Vector3 pPlayerPos)
 {
 	Ogre::Real distance = _myNode->getPosition().distance(pPlayerPos);
 
@@ -62,7 +64,7 @@ bool Npc::dialog(Ogre::Vector3 pPlayerPos)
 /// <summary>
 /// Continues the dialog.
 /// </summary>
-void Npc::continueDialog() {
+void BasicPrincess::continueDialog() {
 	if (_inDialog == true) {
 			GameManager::getSingletonPtr()->getUIManager()->destroyDialog();
 			_inDialog = false;

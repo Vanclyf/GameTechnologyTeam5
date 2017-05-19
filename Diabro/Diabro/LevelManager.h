@@ -29,6 +29,7 @@ public:
 	Player* getPlayer() { return playerScript; }
 	std::vector<Character*> getFriendlyNpcs() const { return _friendlyNpcScripts; }
 	std::vector<Character*> getHostileNpcs() const { return _hostileNpcScripts; }
+	std::vector<Character*> getPrincessNpcs() const { return _basicPrincessScripts; }
 	std::vector<ItemInstance*> getItemInstances() const { return _instanceScripts; }
 	std::vector<Character*> getPrincessInstance() const { return _basicPrincessScripts; }
 

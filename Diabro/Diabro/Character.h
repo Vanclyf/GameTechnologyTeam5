@@ -51,6 +51,7 @@ public:
 	void setEquipmentSlot(ItemInstance*);
 	void swapEquipmentSlot(ArmorInstance*, int);
 	void swapEquipmentSlot(WeaponInstance*, int);
+	void setHealth(int health) { _currentHealth = health; }
 
 	virtual bool adjustHealth(float);
 	virtual bool adjustStaminaOverTime(Ogre::Real);

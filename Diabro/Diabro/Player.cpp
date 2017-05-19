@@ -67,14 +67,21 @@ bool Player::lightAttack()
 
 	std::vector<Character*> targets = GameManager::getSingletonPtr()->getLevelManager()->getHostileNpcs();
 	findTarget(targets);
-
-	if (_target == nullptr) {
-		return false;
+	if (_target != nullptr) {
+		_target->adjustHealth(_stats->DeterminedDamage());
 	}
 
+
+
+
 	//deal damage 
-	_target->adjustHealth(_stats->DeterminedDamage());
-	
+	std::vector<Character*>princessTargets = GameManager::getSingletonPtr()->getLevelManager()->getPrincessNpcs();
+	findTarget(princessTargets);
+	if (_target != nullptr) {
+		_target->adjustHealth(_stats->DeterminedDamage());
+	}
+
+
 	_canAttack = false;
 	_currAttackCooldown = _lightAttackCooldown;
 
