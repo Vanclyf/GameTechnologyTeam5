@@ -33,8 +33,16 @@ void CharacterSpawner<T>::spawnInstance() {
 	int randomX = rand() % (100 - -100 + 1) + -100;
 	int randomZ = rand() % (100 - -100 + 1) + -100;
 	instanceNode->translate(_spawnPosition + Ogre::Vector3(randomX, 0, randomZ), Ogre::Node::TS_WORLD);
-
-	Ogre::Entity* instanceEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity(typeid(T) == typeid(Npc) ? "penguin.mesh" : "robot.mesh");
+	//set 
+	Ogre::Entity* instanceEntity;
+	if(typeid(T)==typeid(BasicPrincess))
+	{
+		instanceEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("sphere.mesh");
+		instanceNode->setScale(10, 10, 10);
+	}else
+	{
+		instanceEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity(typeid(T) == typeid(Npc) ? "penguin.mesh" : "robot.mesh");
+	}
 	//rotateNode
 	Ogre::SceneNode* rotationNode = instanceNode->createChildSceneNode();
 		
@@ -45,3 +53,4 @@ void CharacterSpawner<T>::spawnInstance() {
 
 template class CharacterSpawner < Npc >;
 template class CharacterSpawner < BasicEnemy >;
+template class CharacterSpawner < BasicPrincess>;

@@ -34,6 +34,9 @@ void LevelManager::initialize()
 	playerScript = new Player(playerNode, _playerEntity);
 	playerScript->initialize();
 
+	
+
+
 	// ground 
 	/*createGroundMesh();
 	_groundEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("ground");
@@ -81,6 +84,18 @@ int LevelManager::subscribeItemInstance(ItemInstance* item)
 }
 
 /// <summary>
+/// Subscribes the princess instance.
+/// </summary>
+/// <param name="princess">The princess.</param>
+/// <returns></returns>
+int LevelManager::subscribePrincessInstance(BasicPrincess* princess)
+{
+	
+	_basicPrincessScripts.push_back(princess);
+	return _basicPrincessScripts.size() - 1;
+}
+
+/// <summary>
 /// Detaches the item instance.
 /// </summary>
 /// <param name="id">The identifier.</param>
@@ -88,6 +103,19 @@ void LevelManager::detachItemInstance(int id) {
 	_instanceScripts.erase(_instanceScripts.begin() + id);
 	//reset id values
 	for (std::vector<ItemInstance*>::iterator it = _instanceScripts.begin() + id; it < _instanceScripts.end(); ++it) {
+		(*it)->id -= 1;
+	}
+}
+
+/// <summary>
+/// Detaches the basic princess.
+/// </summary>
+/// <param name="id">The identifier.</param>
+void LevelManager::detachBasicPrincess(int id)
+{
+	_basicPrincessScripts.erase(_basicPrincessScripts.begin() + id);
+	//reset id values
+	for (std::vector<Character*>::iterator it = _basicPrincessScripts.begin() + id; it < _basicPrincessScripts.end(); ++it) {
 		(*it)->id -= 1;
 	}
 }

@@ -24,6 +24,7 @@ scalar(1000)
 			Ogre::SceneNode* npcSpawnerNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode("npcSpawn" + i);
 			//0.5f for height difference
 			CharacterSpawner<Npc>* npcSpawner = new CharacterSpawner<Npc>(npcSpawnerNode, 3, Ogre::Vector3((c.position.x + c.width / 2) * 1000, 25, (c.position.z + c.depth / 2) * 1000), &_zone[0].cities[i]);
+			CharacterSpawner<BasicPrincess>* princessSpawner = new CharacterSpawner<BasicPrincess>(npcSpawnerNode, 1, Ogre::Vector3((c.position.x + c.width / 2) * 1000, 25, (c.position.z + c.depth / 2) * 1000), &_zone[0].cities[i]);
 		}
 		else
 		{

@@ -4,6 +4,7 @@
 #include "Character.h"
 #include "Npc.h"
 #include "BasicEnemy.h"
+#include "BasicPrincess.h"
 
 template <class T> 
 class CharacterSpawner {
