@@ -40,6 +40,10 @@ void UIManager::setupUI()
 }
 
 void UIManager::createDialog(Ogre::String pDialogText) {
+	try {
+		destroyDialog();
+	}
+	catch (...) {}
 	_mDialogTextArea = _mSdkTrayMgr->createTextBox(OgreBites::TL_CENTER, "DialogTextArea", pDialogText, 400, 400);
 }
 
