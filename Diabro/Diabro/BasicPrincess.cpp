@@ -10,7 +10,7 @@
 /// <param name="pMyEntity">My entity.</param>
 BasicPrincess::BasicPrincess(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity, City* pMyCity) : BaseNpc(pMyNode, pMyRotationNode, pMyEntity, pMyCity)
 {
-	id = GameManager::getSingletonPtr()->getLevelManager()->subscribePrincessInstance(this);
+	id = GameManager::getSingletonPtr()->getLevelManager()->subscribeHostileNPC(this);
 	setHealth(1);
 }
 
@@ -22,12 +22,24 @@ BasicPrincess::~BasicPrincess()
 }
 
 /// <summary>
+/// Overrides the adjusthealth so we can start the ending sequence and instant kill the princess.
+/// </summary>
+/// <param name="pAdjust">The p adjust.</param>
+/// <returns></returns>
+bool BasicPrincess::adjustHealth(float pAdjust)
+{
+	//TODO: add bad karma ending sequence.
+	die();
+	return false;
+}
+
+/// <summary>
 /// Updates the specified p deltatime.
 /// </summary>
 /// <param name="pDeltatime">The p deltatime.</param>
 void BasicPrincess::update(Ogre::Real pDeltatime)
 {
-	BaseNpc::update(pDeltatime);
+	//BaseNpc::update(pDeltatime);
 
 	if (_playerDetected)
 	{

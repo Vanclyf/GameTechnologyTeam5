@@ -38,14 +38,13 @@ public:
 
 	//---------------------------------------------------------------------------------
 	int subscribeHostileNPC(BasicEnemy*);
+	int subscribeHostileNPC(BasicPrincess*);
 	int subscribeFriendlyNPC(Npc*);
 	int subscribeItemInstance(ItemInstance*);
-	int subscribePrincessInstance(BasicPrincess*);
 
 	void detachHostileNPC(int);
 	void detachFriendlyNPC(int);
 	void detachItemInstance(int);
-	void detachBasicPrincess(int);
 	static int testunit(int i) { return ++i; };
 	static int testunittwo(int i);
 

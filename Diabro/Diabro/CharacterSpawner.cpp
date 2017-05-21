@@ -38,7 +38,7 @@ void CharacterSpawner<T>::spawnInstance() {
 	if(std::is_same<T,BasicPrincess>::value)
 	{
 		_entityMeshName = "sphere.mesh";
-		instanceNode->setScale(10, 10, 10);
+		instanceNode->setScale(1, 1, 1);
 	}else if(std::is_same<T, Npc>::value)
 	{
 		_entityMeshName = "penguin.mesh";

@@ -15,6 +15,8 @@ public:
 	//-------------------------------------------------------------------------------
 	void update(Ogre::Real) override;
 	void die() override;
+	bool adjustHealth(float pAdjust) override;
+	
 
 	bool dialog(Ogre::Vector3);
 	void continueDialog();
