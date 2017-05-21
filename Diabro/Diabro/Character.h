@@ -15,6 +15,12 @@
 /// It contains methods and variables for movement and combat.
 /// Player and BaseNPC both inherit from this class. 
 /// </summary>
+enum NpcType : unsigned int {
+	Good,
+	Bad,
+	Princess
+};
+
 class Character
 {
 public:
@@ -37,6 +43,8 @@ public:
 	Ogre::Real setCurrHealth(Ogre::Real pHP) { return _currentHealth = pHP; }
 
 	Ogre::Vector3 getPosition() { return _myNode->getPosition(); }
+	NpcType getTypeNpc() { return _typeNpc; }
+	void setTypeNpc(NpcType pType) { _typeNpc = pType; }
 
 	int getLevel() { return _currentLevel; }
 
@@ -104,6 +112,7 @@ protected:
 private:
 	Ogre::Entity* _weaponEntity;
 	Ogre::SceneNode* _weaponNode;
+	NpcType _typeNpc;
 };
 
 #endif

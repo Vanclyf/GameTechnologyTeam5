@@ -12,6 +12,7 @@ BasicPrincess::BasicPrincess(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotat
 {
 	id = GameManager::getSingletonPtr()->getLevelManager()->subscribeHostileNPC(this);
 	setHealth(1);
+	setTypeNpc(NpcType::Princess);
 }
 
 /// <summary>
@@ -62,31 +63,31 @@ void BasicPrincess::die()
 /// <returns></returns>
 bool BasicPrincess::dialog(Ogre::Vector3 pPlayerPos)
 {
-	Ogre::Real distance = _myNode->getPosition().distance(pPlayerPos);
+		Ogre::Real distance = _myNode->getPosition().distance(pPlayerPos);
 
-	if (distance < 500) // needs to be tweaked
-	{
-		_inDialog = true;
+		if (distance < 500) // needs to be tweaked
+		{
+			_inDialog = true;
 
-		GameManager::getSingletonPtr()->getUIManager()->createDialog("You found me\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress Space to Continue");
+			GameManager::getSingletonPtr()->getUIManager()->createDialog("You found the princess\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress Space to Continue");
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-		FILE* fp;
-		freopen_s(&fp, "CONOUT$", "w", stdout);
-		printf("dialog on\n");
-		fclose(fp);
+			FILE* fpr;
+			freopen_s(&fpr, "CONOUT$", "w", stdout);
+			printf("dialog on\n");
+			fclose(fpr);
 #endif
 
-		return true;
-	}
+			return true;
+		}
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	FILE* fp;
-	freopen_s(&fp, "CONOUT$", "w", stdout);
-	printf("out of range for dialog\n");
-	fclose(fp);
+		FILE* fpr;
+		freopen_s(&fpr, "CONOUT$", "w", stdout);
+		printf("out of range for dialog\n");
+		fclose(fpr);
 #endif
 
-	return false;
+		return false;
 }
 
 /// <summary>
@@ -101,3 +102,17 @@ void BasicPrincess::continueDialog()
 		//TODO: create ending sequence
 	}
 }
+
+/// <summary>
+/// Toggles the dialog.
+/// </summary>
+void BasicPrincess::toggleDialog() {
+	_inDialog = false;
+	try {
+		GameManager::getSingletonPtr()->getUIManager()->destroyDialog();
+	}
+	catch (...) {
+		return;
+	};
+}
+

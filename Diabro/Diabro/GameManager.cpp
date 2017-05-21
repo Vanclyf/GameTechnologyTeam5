@@ -240,6 +240,34 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 		else {
 			dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[0])->toggleDialog();
 		}
+		switch(_levelManager->getHostileNpcs()[0]->getTypeNpc())
+		{
+		case NpcType::Good:
+			break;
+		case NpcType::Bad:
+			if (dynamic_cast<BasicEnemy*>(_levelManager->getHostileNpcs()[0])->getInDialog() == false)
+			{
+				dynamic_cast<BasicEnemy*>(_levelManager->getHostileNpcs()[0])->dialog(_levelManager->getPlayer()->getPosition());
+			}
+			else
+			{
+				dynamic_cast<BasicEnemy*>(_levelManager->getHostileNpcs()[0])->toggleDialog();
+			}
+			break;
+		case NpcType::Princess:
+			if (dynamic_cast<BasicPrincess*>(_levelManager->getHostileNpcs()[0])->getInDialog() == false)
+			{
+				dynamic_cast<BasicPrincess*>(_levelManager->getHostileNpcs()[0])->dialog(_levelManager->getPlayer()->getPosition());
+			}
+			else
+			{
+				dynamic_cast<BasicPrincess*>(_levelManager->getHostileNpcs()[0])->toggleDialog();
+			}
+			break;
+		}
+
+
+
 
 		//check if the item is within pickup range.
 

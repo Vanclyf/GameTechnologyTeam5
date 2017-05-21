@@ -17,7 +17,7 @@ Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pM
 	_currentXP = 0;
 	_xpTillNextLevel = calcXpTillLevel(_currentLevel + 1);
 
-	_attackDistance = 35;
+	_attackDistance = 100;
 	_lightAttackCooldown = 1.2f;
 }
 

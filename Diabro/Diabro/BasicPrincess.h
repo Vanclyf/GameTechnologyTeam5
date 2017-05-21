@@ -15,11 +15,12 @@ public:
 	//-------------------------------------------------------------------------------
 	void update(Ogre::Real) override;
 	void die() override;
-	bool adjustHealth(float pAdjust) override;
+	bool adjustHealth(float) override;
 	
 
 	bool dialog(Ogre::Vector3);
 	void continueDialog();
+	void toggleDialog();
 
 private:
 	bool _inDialog;

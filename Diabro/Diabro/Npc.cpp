@@ -55,6 +55,7 @@ Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entit
 
 	_needs = new NeedSet(tempNeeds);
 
+	setTypeNpc(NpcType::Good);
 	// ---------------------------------------------------------------------------------------------------------
 }
 
