@@ -79,15 +79,15 @@ void LevelGenerator::createPlane(int pScalar, std::string pName)
 		Ogre::Vector3::UNIT_Z);
 }
 
-
+/*
 void LevelGenerator::createTileMesh(int pScalar, Coordinate pPosition, std::string pName) {
-	//TODO: add uv coordinates
+	TODO: add uv coordinates
 
 	Ogre::MeshPtr mesh = Ogre::MeshManager::getSingleton().createManual(pName, "General");
 
 	Ogre::SubMesh* sub = mesh->createSubMesh();
 
-	const float sqrt13 = 0.577350269f; /*sqrt(1/3)*/
+	const float sqrt13 = 0.577350269f; //sqrt(1/3)
 	int x = pPosition.x * pScalar;
 	int y = 1;
 	int z = pPosition.z * pScalar;
@@ -171,6 +171,108 @@ void LevelGenerator::createTileMesh(int pScalar, Coordinate pPosition, std::stri
 	sub->indexData->indexStart = 0;
 
 	mesh->_setBounds(Ogre::AxisAlignedBox(x, y, z, x + pScalar, y + pScalar, z + pScalar));
+
+	mesh->load();
+}
+*/
+
+
+void LevelGenerator::createTileMesh(Coordinate pPosition, std::string pName, Ogre::ColourValue pCol) const {
+	Ogre::MeshPtr mesh = Ogre::MeshManager::getSingleton().createManual(pName, "General");
+
+	Ogre::SubMesh* sub = mesh->createSubMesh();
+
+	const float sqrt13(1 / 3);
+	int x = pPosition.x * scalar;
+	int y = 0;
+	int z = pPosition.z * scalar;
+
+	//create vertices
+	const size_t nVertices = 4;
+	const size_t vBufCount = 8 * nVertices;
+	float vertices[vBufCount] = {
+		static_cast<float>(1000), static_cast<float>(0), static_cast<float>(0),          //1
+		sqrt13,  -sqrt13, -sqrt13,
+		0,0,
+		static_cast<float>(0), static_cast<float>(0), static_cast<float>(0),             //2
+		-sqrt13, -sqrt13, -sqrt13,
+		0,1,
+		static_cast<float>(1000), static_cast<float>(0), static_cast<float>(1000),       //3
+		sqrt13,  -sqrt13, sqrt13,
+		1,0,
+		static_cast<float>(0), static_cast<float>(0), static_cast<float>(1000),          //4
+		-sqrt13, -sqrt13, sqrt13,
+		1,1
+	};
+
+	Ogre::RenderSystem* rs = Ogre::Root::getSingleton().getRenderSystem();
+	Ogre::RGBA colours[nVertices];
+	Ogre::RGBA* colorPtr = colours;
+
+	//TODO: add colour per zone
+	Ogre::ColourValue col = Ogre::ColourValue(1.0f, 0.0f, 0.0f, 1.0f);
+
+	rs->convertColourValue(pCol, colorPtr++); //0
+	rs->convertColourValue(pCol, colorPtr++); //1
+	rs->convertColourValue(pCol, colorPtr++); //2
+	rs->convertColourValue(pCol, colorPtr); //3
+
+											//indices
+	const size_t iBufCount = 6;
+	unsigned short faces[iBufCount] = {
+		0, 3, 2,
+		1, 3, 0
+	};
+
+	mesh->sharedVertexData = new Ogre::VertexData();
+	mesh->sharedVertexData->vertexCount = nVertices;
+
+	Ogre::VertexDeclaration* vDeclaration = mesh->sharedVertexData->vertexDeclaration;
+	size_t offset = 0;
+	//1th buffer
+	//vertex description
+	vDeclaration->addElement(0, offset, Ogre::VET_FLOAT3, Ogre::VES_POSITION);
+	offset += Ogre::VertexElement::getTypeSize(Ogre::VET_FLOAT3);
+
+	vDeclaration->addElement(0, offset, Ogre::VET_FLOAT3, Ogre::VES_NORMAL);
+	offset += Ogre::VertexElement::getTypeSize(Ogre::VET_FLOAT3);
+
+	vDeclaration->addElement(0, offset, Ogre::VET_FLOAT2, Ogre::VES_TEXTURE_COORDINATES);
+	offset += Ogre::VertexElement::getTypeSize(Ogre::VET_FLOAT2);
+
+	Ogre::HardwareVertexBufferSharedPtr vBuf =
+		Ogre::HardwareBufferManager::getSingleton().createVertexBuffer(
+			offset, mesh->sharedVertexData->vertexCount, Ogre::HardwareBuffer::HBU_STATIC_WRITE_ONLY);
+	vBuf->writeData(0, vBuf->getSizeInBytes(), vertices, true);
+
+	Ogre::VertexBufferBinding* bind = mesh->sharedVertexData->vertexBufferBinding;
+	bind->setBinding(0, vBuf);
+
+	//2nd buffer
+	offset = 0;
+	vDeclaration->addElement(1, offset, Ogre::VET_COLOUR, Ogre::VES_DIFFUSE);
+	offset += Ogre::VertexElement::getTypeSize(Ogre::VET_COLOUR);
+
+	vBuf = Ogre::HardwareBufferManager::getSingleton().createVertexBuffer(
+		offset, mesh->sharedVertexData->vertexCount, Ogre::HardwareBuffer::HBU_STATIC_WRITE_ONLY);
+
+	vBuf->writeData(0, vBuf->getSizeInBytes(), colours, true);
+	bind->setBinding(1, vBuf);
+
+	Ogre::HardwareIndexBufferSharedPtr iBuf = Ogre::HardwareBufferManager::getSingleton().
+		createIndexBuffer(
+			Ogre::HardwareIndexBuffer::IT_16BIT,
+			iBufCount,
+			Ogre::HardwareBuffer::HBU_STATIC_WRITE_ONLY);
+
+	iBuf->writeData(0, iBuf->getSizeInBytes(), faces, true);
+
+	sub->useSharedVertices = true;
+	sub->indexData->indexBuffer = iBuf;
+	sub->indexData->indexCount = iBufCount;
+	sub->indexData->indexStart = 0;
+
+	mesh->_setBounds(Ogre::AxisAlignedBox(x, y, z, x + scalar, y + scalar, z + scalar));
 
 	mesh->load();
 }

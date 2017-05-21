@@ -20,9 +20,9 @@ public:
 
 	void update(const Ogre::FrameEvent&);
 	void initPhysicsWorld();
-	void simulatePhysicsWorld();
 	void destroyPhysicsWorld();
 	static void createGroundMesh();
+	void setupWalls();
 
 	Ogre::SceneNode* getLevelNode() { return _levelNode; }
 	Ogre::SceneNode* getCamNode() { return _camNode; }
@@ -41,6 +41,9 @@ public:
 	void detachItemInstance(int);
 	static int testunit(int i) { return ++i; };
 	static int testunittwo(int i);
+
+	//Creating a wall model
+	void createCube(Ogre::Entity* pMyEntity, Ogre::SceneNode* pMyNode, Ogre::Vector3 pMyPosition, Ogre::Vector3 pMyScale, Ogre::Degree pMyRotation,  Ogre::String pMyNodeName);
 	
 	LevelGenerator* levelGenerator;
 	// for now public so that game manager can access it. 
@@ -54,6 +57,11 @@ private:
 	//Test physics engine entity
 	Ogre::Entity* _testEntity;
 	Ogre::SceneNode* testNode;
+	//test mesh entity
+	Ogre::Entity* _testEntity2;
+	Ogre::SceneNode* testNode2;
+	//test wall setup
+
 	//TODO replace all with spawners
 	Ogre::Entity* _npcEntity;
 	Ogre::Entity* _basicEnemyEntity;
@@ -86,6 +94,12 @@ private:
 	btScalar mass;
 	btVector3 fallInertia;
 	btRigidBody* fallRigidBody;
+
+	//Wall nodes and entities
+	Ogre::Entity* TestEntity3;
+	Ogre::SceneNode* TestNode3;
+	Ogre::Entity* TestEntity4;
+	Ogre::SceneNode* TestSceneNode4;
 };
 
 #endif

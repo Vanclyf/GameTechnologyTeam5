@@ -23,19 +23,24 @@ void LevelManager::initialize()
 	// create level node, the root node for everything in the level
 	_levelNode = GameManager::getSingletonPtr()->getSceneManager()->getRootSceneNode()->createChildSceneNode("LevelNode");
 
+	//wall test model
+	setupWalls();
 	levelGenerator = new LevelGenerator();
+
+	//creating a tilemesh
+	std::string name = "Tile One";
+	levelGenerator->createTileMesh(Coordinate(0, 0), name, Ogre::ColourValue(0, 0, 1, 1));
+	Ogre::Entity* entity = GameManager::getSingleton().getSceneManager()->createEntity("entity: " + name, name);
+	entity->setMaterialName("Examples/Rockwall");
+	_levelNode->attachObject(entity);
 
 	Ogre::SceneNode* playerNode = _levelNode->createChildSceneNode("PlayerNode");
 	_camNode = playerNode->createChildSceneNode("CameraNode");
 
-
-	//physics engine test enetity
+	//physics engine test entity
 	testNode = _levelNode->createChildSceneNode("TestNode");
 	_testEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("ogrehead.mesh");
 	testNode->createChildSceneNode()->attachObject(_testEntity);
-	testNode->setPosition(100,10,-150);
-	//testNode->setScale(10.0f,10.0f,10.0f);
-	
 	testNode->setPosition(Ogre::Vector3(0, 0, 0));
 
 	//player
@@ -48,10 +53,11 @@ void LevelManager::initialize()
 	playerScript->initialize();
 
 	// ground 
-	createGroundMesh();
+	/*createGroundMesh();
 	_groundEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("ground");
 	_levelNode->createChildSceneNode()->attachObject(_groundEntity);
 	_groundEntity->setMaterialName("Examples/Rockwall");
+	*/
 
 	// camera
 	_camNode->attachObject(GameManager::getSingletonPtr()->getCamera());
@@ -65,7 +71,7 @@ void LevelManager::initialize()
 /// <param name="friendly">The friendly.</param>
 /// <returns></returns>
 int LevelManager::subscribeFriendlyNPC(Npc* friendly) {
-	_friendlyNpcScripts.push_back(friendly); 
+	_friendlyNpcScripts.push_back(friendly);
 
 	return _friendlyNpcScripts.size() - 1;
 }
@@ -111,7 +117,7 @@ void LevelManager::detachItemInstance(int id) {
 /// <param name="id">The identifier.</param>
 void LevelManager::detachFriendlyNPC(int id) {
 	//reinterpret_cast<Npc*>(_friendlyNpcScripts[id])->_mySpawner->instanceDeath();
-	
+
 	_friendlyNpcScripts.erase(_friendlyNpcScripts.begin() + id);
 	//reset id values
 	for (std::vector<Character*>::iterator it = _friendlyNpcScripts.begin() + id; it < _friendlyNpcScripts.end(); ++it) {
@@ -148,7 +154,7 @@ void LevelManager::update(const Ogre::FrameEvent& pFE)
 	btTransform trans;
 	fallRigidBody->getMotionState()->getWorldTransform(trans);
 
-	testNode->setPosition(Ogre::Vector3(0,trans.getOrigin().getY()+20, 0));
+	testNode->setPosition(Ogre::Vector3(0, trans.getOrigin().getY() + 20, 0));
 
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
@@ -162,7 +168,7 @@ void LevelManager::update(const Ogre::FrameEvent& pFE)
 	// update characters
 	playerScript->update(pFE.timeSinceLastFrame);
 
-	for(int i = 0; i < _friendlyNpcScripts.size(); i++)
+	for (int i = 0; i < _friendlyNpcScripts.size(); i++)
 	{
 		_friendlyNpcScripts[i]->update(pFE.timeSinceLastFrame);
 	}
@@ -256,5 +262,24 @@ void LevelManager::destroyPhysicsWorld() {
 	delete dispatcher;
 	delete broadphase;
 }
+
+void LevelManager::createCube(Ogre::Entity* pMyEntity, Ogre::SceneNode* pMyNode, Ogre::Vector3 pMyPosition, Ogre::Vector3 pMyScale, Ogre::Degree pMyRotation, Ogre::String pMyNodeName) {
+	pMyNode = _levelNode->createChildSceneNode(pMyNodeName);
+	pMyEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("wall.mesh");
+	pMyNode->createChildSceneNode()->attachObject(pMyEntity);
+	pMyNode->setScale(pMyScale);
+	pMyNode->setPosition(pMyPosition);
+	pMyNode->yaw(pMyRotation);
+	pMyEntity->setMaterialName("Examples/Rockwall");
+
+};
+
+void::LevelManager::setupWalls() {
+	createCube(TestEntity3, TestNode3, Ogre::Vector3(0, 0, 150), Ogre::Vector3(50, 50, 100), Ogre::Degree(0), "TestWallNode3");
+	createCube(TestEntity4, TestSceneNode4, Ogre::Vector3(150, 0, 0), Ogre::Vector3(50, 50, 100), Ogre::Degree(90), "TestWallNode4");
+}
+
+
+
 
 
