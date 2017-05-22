@@ -104,6 +104,7 @@
     <ClCompile Include="TreeNode.cpp">
       <Filter>Sources\TreeDatastructure</Filter>
     </ClCompile>
+    <ClCompile Include="SoundManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicEnemy.h">
@@ -233,6 +234,7 @@
     <ClInclude Include="TreeNode.h">
       <Filter>Headers\TreeDatastructure</Filter>
     </ClInclude>
+    <ClInclude Include="SoundManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GameObjStandard.cg" />
