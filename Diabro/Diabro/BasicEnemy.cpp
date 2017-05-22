@@ -1,6 +1,7 @@
 #include "BasicEnemy.h"
 #include "GameManager.h"
 #include "Player.h"
+#include "SoundManager.h"
 
 /// <summary>
 /// Creates a new instance of the <see cref="BasicEnemy"/> class.
@@ -32,7 +33,7 @@ bool BasicEnemy::lightAttack()
 	if (!Character::lightAttack()) {
 		return false;
 	}
-
+	SoundManager::PlaySmallSound("EnemyHit.wav");
 	std::vector<Character*> targets;
 	targets.push_back(GameManager::getSingletonPtr()->getLevelManager()->getPlayer());
 	findTarget(targets);
@@ -50,6 +51,7 @@ bool BasicEnemy::lightAttack()
 }
 
 void BasicEnemy::die() {
+	SoundManager::PlaySmallSound("EnemyDead.wav");
 	Character::die();
 	
 	GameManager::getSingletonPtr()->getItemManager()->getItemGenerator()->generateRandomItem(GameManager::getSingletonPtr()->getLevelManager()->getLevelNode(), GameManager::getSingletonPtr()->getRandomInRange(1, 5), getPosition());
