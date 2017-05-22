@@ -17,6 +17,7 @@ Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pM
 	_currentXP = 0;
 	_xpTillNextLevel = calcXpTillLevel(_currentLevel + 1);
 
+	_karmaPoints = 0;
 	_attackDistance = 100;
 	_lightAttackCooldown = 1.2f;
 }
@@ -52,9 +53,9 @@ bool Player::adjustHealth(float pAdjust)
 /// <returns>False if the player runs out of statina.</returns>
 bool Player::adjustStaminaOverTime(Ogre::Real pDeltaTime)
 {
-	Character::adjustStaminaOverTime(pDeltaTime);
+	//Character::adjustStaminaOverTime(pDeltaTime);
 
-	GameManager::getSingleton().getUIManager()->adjustStaminaBar(_currentStamina, _stats->GetStat(StatType::MaxStamina));
+	GameManager::getSingleton().getUIManager()->adjustStaminaBar(_karmaPoints, Ogre::Real(200));
 
 	return true;
 }
@@ -85,9 +86,9 @@ bool Player::lightAttack()
 /// <returns>False if the player runs out of statina.</returns>
 bool Player::adjustStamina(float pAdjust)
 {
-	Character::adjustStamina(pAdjust);
+	//Character::adjustStamina(pAdjust);
 
-	GameManager::getSingleton().getUIManager()->adjustStaminaBar(_currentStamina, _stats->GetStat(StatType::MaxStamina));
+	GameManager::getSingleton().getUIManager()->adjustStaminaBar(_karmaPoints, Ogre::Real(200));
 
 	return true;
 }
@@ -121,6 +122,11 @@ void Player::gainXP(int pXP)
 	{
 		levelUp();
 	}
+}
+
+void Player::adjustKarma(int pKarma)
+{
+	_karmaPoints += pKarma;
 }
 
 /// <summary>

@@ -80,7 +80,8 @@ void UIManager::adjustHealthBar(Ogre::Real pValue, Ogre::Real pMaxValue)
 void UIManager::adjustStaminaBar(Ogre::Real pValue, Ogre::Real pMaxValue)
 {
 	_staminaBarWidget->getOverlayElement()->setWidth(calcBarSize(pValue, pMaxValue, _maxWidthBar));
-	_staminaBarWidget->getOverlayElement()->setLeft(pMaxValue - calcBarSize(pValue, pMaxValue, _maxWidthBar) + 1);
+	//_staminaBarWidget->getOverlayElement()->setLeft(pMaxValue - calcBarSize(pValue, pMaxValue, _maxWidthBar) + 1);
+	_staminaBarWidget->getOverlayElement()->setLeft(0.5);
 }
 
 /// <summary>
@@ -92,5 +93,12 @@ void UIManager::adjustStaminaBar(Ogre::Real pValue, Ogre::Real pMaxValue)
 /// <returns></returns>
 Ogre::Real UIManager::calcBarSize(Ogre::Real pValue, Ogre::Real pMaxValue, Ogre::Real pMaxSize)
 {
-	return((pValue / pMaxValue) * pMaxSize);
+	if (pValue > 0)
+	{
+		return((pValue / pMaxValue) * pMaxSize);
+	}else
+	{
+		return((pMaxValue / pValue) * pMaxSize);
+	}
+
 }

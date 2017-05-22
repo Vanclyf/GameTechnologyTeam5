@@ -227,6 +227,18 @@ void Character::die()
 	//GameManager::getSingletonPtr()->getSceneManager()->destroyEntity(_myEntity);
 	//TODO: clean up the memory.. 
 
+	switch(getTypeNpc())
+	{
+	case NpcType::Good:
+		GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->adjustKarma(-10);
+		break;
+	case NpcType::Bad:
+		GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->adjustKarma(10);
+		break;
+	case NpcType::Princess:
+		GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->adjustKarma(-100);
+		break;
+	}
 	//TODO: actually destroy the node and its children
 	//_myNode->removeAndDestroyAllChildren();
 	//GameManager::getSingletonPtr()->getSceneManager()->destroySceneNode(_myNode);
