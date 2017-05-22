@@ -6,7 +6,7 @@
 class BasicPrincess : public BaseNpc
 {
 public:
-	BasicPrincess(Ogre::SceneNode*, Ogre::SceneNode*, Ogre::Entity*, City*);
+	BasicPrincess(Ogre::SceneNode*, Ogre::SceneNode*, Ogre::Entity*);
 	~BasicPrincess();
 	// -------------------------------------------------------------------------------
 	// Properties

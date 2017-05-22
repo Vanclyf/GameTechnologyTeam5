@@ -6,8 +6,17 @@ template<class T>
 	: _myNode(pMyNode), _spawnPosition(pSpawnPosition), _nCharacters(pNumOfSpawns), _myCity(pMyCity){
 	for (int i = 0; i < _nCharacters; ++i) {
 		spawnInstance();
+
 	}
 }
+template<class T>
+::CharacterSpawner<T>::CharacterSpawner(Ogre::SceneNode* pMyNode, int pNumOfSpawns, Ogre::Vector3 pSpawnPosition)
+	: _myNode(pMyNode), _spawnPosition(pSpawnPosition), _nCharacters(pNumOfSpawns) {
+	for (int i = 0; i < _nCharacters; ++i) {
+		spawnInstance();
+	}
+}
+
 
 template<class T>
 CharacterSpawner<T>::~CharacterSpawner() {
@@ -51,7 +60,7 @@ void CharacterSpawner<T>::spawnInstance() {
 	Ogre::SceneNode* rotationNode = instanceNode->createChildSceneNode();
 		
 	rotationNode->attachObject(instanceEntity);
-	T* instanceScript = new T(instanceNode, rotationNode, instanceEntity, _myCity);
+	T* instanceScript = new T(instanceNode, rotationNode, instanceEntity);
 	instanceScript->initialize();
 }
 

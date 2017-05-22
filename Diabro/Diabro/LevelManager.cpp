@@ -33,13 +33,15 @@ void LevelManager::initialize()
 	playerNode->setScale(0.5f, 0.5f, 0.5f);
 	playerScript = new Player(playerNode, _playerEntity);
 	playerScript->initialize();
-
-
+	
 	// ground 
 	/*createGroundMesh();
 	_groundEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("ground");
 	_levelNode->createChildSceneNode()->attachObject(_groundEntity);
 	_groundEntity->setMaterialName("Examples/Rockwall");*/
+
+	Ogre::SceneNode* princessSpawnerNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode("princessSpawn");
+	CharacterSpawner<BasicPrincess>* princessSpawner = new CharacterSpawner<BasicPrincess>(princessSpawnerNode, 1, Ogre::Vector3(1000, 25, 500));
 
 	// camera
 	_camNode->attachObject(GameManager::getSingletonPtr()->getCamera());

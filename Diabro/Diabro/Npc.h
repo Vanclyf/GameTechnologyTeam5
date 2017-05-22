@@ -22,7 +22,7 @@ enum Profession
 class Npc : public BaseNpc
 {
 public:
-	Npc(Ogre::SceneNode*, Ogre::SceneNode*, Ogre::Entity*, City*);
+	Npc(Ogre::SceneNode*, Ogre::SceneNode*, Ogre::Entity*);
 	~Npc();
 	// -------------------------------------------------------------------------------
 	// Properties

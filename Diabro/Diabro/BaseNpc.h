@@ -7,7 +7,7 @@
 class BaseNpc : public Character
 {
 public:
-	BaseNpc(Ogre::SceneNode*, Ogre::SceneNode*, Ogre::Entity*, City* );
+	BaseNpc(Ogre::SceneNode*, Ogre::SceneNode*, Ogre::Entity*);
 	//~BaseNpc();
 
 	void update(Ogre::Real) override;
@@ -25,7 +25,6 @@ protected:
 	Ogre::SceneNode* _myRotationNode;
 	
 	// temporary vars for spawning, spawning should be handled by some content placer script
-	City* _myCity;
 
 private:
 	float _timeSince;

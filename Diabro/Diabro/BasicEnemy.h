@@ -6,7 +6,7 @@
 class BasicEnemy : public BaseNpc
 {
 public:
-	BasicEnemy(Ogre::SceneNode*, Ogre::SceneNode*, Ogre::Entity*, City*);
+	BasicEnemy(Ogre::SceneNode*, Ogre::SceneNode*, Ogre::Entity*);
 	~BasicEnemy() {}
 	bool getInDialog() const { return _inDialog; }
 	int getTypeNpc() { return _typeNpc; }

@@ -10,6 +10,7 @@ template <class T>
 class CharacterSpawner {
 public:
 	CharacterSpawner<T>(Ogre::SceneNode*, int, Ogre::Vector3, City*);
+	CharacterSpawner<T>(Ogre::SceneNode*, int, Ogre::Vector3);
 	~CharacterSpawner();
 
 	void instanceDeath();

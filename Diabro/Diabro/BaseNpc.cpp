@@ -7,7 +7,7 @@
 /// </summary>
 /// <param name="pMyNode">My node.</param>
 /// <param name="pMyEntity">My entity.</param>
-BaseNpc::BaseNpc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity, City* pMyCity) : Character(pMyNode, pMyEntity), _timeSince(0), _noticeDistance(400.0f), _myCity(pMyCity)
+BaseNpc::BaseNpc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity) : Character(pMyNode, pMyEntity), _timeSince(0), _noticeDistance(400.0f)
 {
 	_myRotationNode = pMyRotationNode;
 	wander();
@@ -64,10 +64,10 @@ void BaseNpc::wander() {
 
 	//Switch direction
 	//generate a random integer value 1-4 every second
-	Coordinate coord = _myCity->getRandomPoint();
+	//Coordinate coord = _myCity->getRandomPoint();
 
 	//TODO: shouldn't be able to walk out of the level, clamp
-	walkTo(Ogre::Vector3(coord.x, getPosition().y, coord.z));
+	//walkTo(Ogre::Vector3(coord.x, getPosition().y, coord.z));
 }
 
 void BaseNpc::walkTo(Ogre::Vector3 targetPos) {
