@@ -17,7 +17,7 @@ Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pM
 	_currentXP = 0;
 	_xpTillNextLevel = calcXpTillLevel(_currentLevel + 1);
 
-	_attackDistance = 35;
+	_attackDistance = 100;
 	_lightAttackCooldown = 1.2f;
 }
 
@@ -67,14 +67,11 @@ bool Player::lightAttack()
 
 	std::vector<Character*> targets = GameManager::getSingletonPtr()->getLevelManager()->getHostileNpcs();
 	findTarget(targets);
-
 	if (_target == nullptr) {
 		return false;
 	}
 
-	//deal damage 
 	_target->adjustHealth(_stats->DeterminedDamage());
-	
 	_canAttack = false;
 	_currAttackCooldown = _lightAttackCooldown;
 

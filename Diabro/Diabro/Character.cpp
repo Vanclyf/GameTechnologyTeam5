@@ -222,7 +222,9 @@ bool Character::adjustStamina(float pAdjust)
 void Character::die()
 {
 	_myNode->setVisible(false);
-
+	//_myNode->removeAndDestroyAllChildren();
+	//GameManager::getSingletonPtr()->getSceneManager()->destroySceneNode(_myNode);
+	//GameManager::getSingletonPtr()->getSceneManager()->destroyEntity(_myEntity);
 	//TODO: clean up the memory.. 
 
 	//TODO: actually destroy the node and its children

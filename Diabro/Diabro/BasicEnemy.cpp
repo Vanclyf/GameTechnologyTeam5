@@ -8,9 +8,10 @@
 /// </summary>
 /// <param name="pMyNode">My node.</param>
 /// <param name="pMyEntity">My entity.</param>
-BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity, City* pMyCity) : BaseNpc(pMyNode, pMyRotationNode, pMyEntity, pMyCity)
+BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity) : BaseNpc(pMyNode, pMyRotationNode, pMyEntity)
 {
 	id = GameManager::getSingletonPtr()->getLevelManager()->subscribeHostileNPC(this);
+	setTypeNpc(NpcType::Bad);
 }
 
 void BasicEnemy::update(Ogre::Real pDeltatime)
@@ -26,6 +27,50 @@ void BasicEnemy::update(Ogre::Real pDeltatime)
 	}
 }
 
+bool BasicEnemy::dialog(Ogre::Vector3 pPlayerPos)
+{
+	if (getInDialog() == true)
+	{
+		toggleDialog();
+		return false;
+	}
+	//TODO: add dialog for enemys.
+	return false;
+}
+
+/// <summary>
+/// Toggles the dialog.
+/// </summary>
+void BasicEnemy::toggleDialog() {
+	_inDialog = false;
+	try {
+		GameManager::getSingletonPtr()->getUIManager()->destroyDialog();
+	}
+	catch (...) {
+		return;
+	};
+}
+
+//TODO fix this ugly quickfix
+/// <summary>
+/// Continues the dialog.
+/// </summary>
+void BasicEnemy::continueDialog() {
+	if (_inDialog == true) {
+		_dialogCount++;
+		if (_dialogCount == 1) {
+			GameManager::getSingletonPtr()->getUIManager()->appendDialogText(_startDialogText);
+		}
+		else if (_dialogCount == 2) {
+			GameManager::getSingletonPtr()->getUIManager()->appendDialogText(_endDialogText);
+		}
+		else if (_dialogCount >= 3) {
+			GameManager::getSingletonPtr()->getUIManager()->destroyDialog();
+			_dialogCount = 0;
+			_inDialog = false;
+		}
+	}
+}
 
 bool BasicEnemy::lightAttack()
 {
