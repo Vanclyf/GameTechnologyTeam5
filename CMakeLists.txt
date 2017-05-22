@@ -47,6 +47,7 @@ set(HDRS
 	./Diabro/Diabro/ItemGenerator.h
 	./Diabro/Diabro/LevelGenerator.h
 	./Diabro/Diabro/Zone.h
+	./Diabro/Diabro/SoundManager.h
 	./Diabro/Diabro/City.h
 	./Diabro/Diabro/State.h
 	./Diabro/Diabro/GenericFSM.h
@@ -65,6 +66,7 @@ set(HDRS
 )
  
 set(SRCS
+	./Diabro/Diabro/SoundManager.cpp
 	./Diabro/Diabro/BaseApplication.cpp
 	./Diabro/Diabro/GameManager.cpp
 	./Diabro/Diabro/Player.cpp
