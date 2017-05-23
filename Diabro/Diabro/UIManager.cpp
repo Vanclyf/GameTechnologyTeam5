@@ -34,9 +34,7 @@ void UIManager::setupUI()
 
 	// create health bar
 	_healthBarWidget = _mSdkTrayMgr->createDecorWidget(OgreBites::TL_TOPLEFT, "Health", "UI/Green");
-	_staminaBarWidget = _mSdkTrayMgr->createDecorWidget(OgreBites::TL_TOPRIGHT, "Stamina", "UI/Yellow");
-	//_staminaBarWidget->getOverlayElement()->setHorizontalAlignment(Ogre::GuiHorizontalAlignment::GHA_LEFT);
-	_staminaBarWidget->getOverlayElement()->setLeft(-128);
+	_karmaBarWidget = _mSdkTrayMgr->createLongSlider(OgreBites::TL_TOPRIGHT, "Karma", "Karma",200,50,-300,300, 60);
 }
 
 void UIManager::createDialog(Ogre::String pDialogText) {
@@ -79,9 +77,7 @@ void UIManager::adjustHealthBar(Ogre::Real pValue, Ogre::Real pMaxValue)
 /// <param name="pMaxValue">The maximum pValue.</param>
 void UIManager::adjustStaminaBar(Ogre::Real pValue, Ogre::Real pMaxValue)
 {
-	_staminaBarWidget->getOverlayElement()->setWidth(calcBarSize(pValue, pMaxValue, _maxWidthBar));
-	//_staminaBarWidget->getOverlayElement()->setLeft(pMaxValue - calcBarSize(pValue, pMaxValue, _maxWidthBar) + 1);
-	_staminaBarWidget->getOverlayElement()->setLeft(0.5);
+	_karmaBarWidget->setValue(Ogre::Real(pValue), false);
 }
 
 /// <summary>
@@ -93,12 +89,5 @@ void UIManager::adjustStaminaBar(Ogre::Real pValue, Ogre::Real pMaxValue)
 /// <returns></returns>
 Ogre::Real UIManager::calcBarSize(Ogre::Real pValue, Ogre::Real pMaxValue, Ogre::Real pMaxSize)
 {
-	if (pValue > 0)
-	{
-		return((pValue / pMaxValue) * pMaxSize);
-	}else
-	{
-		return((pMaxValue / pValue) * pMaxSize);
-	}
-
+return((pValue / pMaxValue) * pMaxSize);
 }

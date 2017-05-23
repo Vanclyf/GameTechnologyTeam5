@@ -239,6 +239,7 @@ void Character::die()
 		GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->adjustKarma(-100);
 		break;
 	}
+	GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->gainXP(10);
 	//TODO: actually destroy the node and its children
 	//_myNode->removeAndDestroyAllChildren();
 	//GameManager::getSingletonPtr()->getSceneManager()->destroySceneNode(_myNode);

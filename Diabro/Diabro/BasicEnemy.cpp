@@ -99,8 +99,6 @@ void BasicEnemy::die() {
 	
 	GameManager::getSingletonPtr()->getItemManager()->getItemGenerator()->generateRandomItem(GameManager::getSingletonPtr()->getLevelManager()->getLevelNode(), GameManager::getSingletonPtr()->getRandomInRange(1, 5), getPosition());
 	GameManager::getSingletonPtr()->getLevelManager()->detachHostileNPC(id);
-	GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->gainXP(10);
-	GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->adjustKarma(-10);
 }
 
 

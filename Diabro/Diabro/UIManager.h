@@ -31,7 +31,7 @@ private:
 	OgreBites::TextBox*			_mDialogTextArea;
 	OgreBites::DecorWidget*		_healthBarWidget;
 	OgreBites::DecorWidget*		_staminaBarWidget;
-
+	OgreBites::Slider*		_karmaBarWidget;
 	Ogre::SceneNode*			_uiNode;
 
 	Ogre::Real					_maxWidthBar;
