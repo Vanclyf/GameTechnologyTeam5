@@ -278,6 +278,15 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 		{
 			dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[i])->toggleDialog();
 		}
+
+		for (int i = 0; i < _levelManager->getHostileNpcs().size(); i++)
+		{
+			if (_levelManager->getHostileNpcs()[i]->getTypeNpc() == NpcType::Bad)
+			{
+				dynamic_cast<BasicEnemy*>(_levelManager->getHostileNpcs()[i])->toggleDialog();
+			}
+		}
+		_levelManager->getPrincess()->continueDialog();
 		break;
 
 	default:

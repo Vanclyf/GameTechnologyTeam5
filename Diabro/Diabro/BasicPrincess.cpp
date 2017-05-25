@@ -98,7 +98,12 @@ void BasicPrincess::continueDialog()
 {
 	if (_inDialog == true)
 	{
-		GameManager::getSingletonPtr()->getUIManager()->destroyPrincessDialog();
+		try {
+			GameManager::getSingletonPtr()->getUIManager()->destroyPrincessDialog();
+		}
+		catch (...) {
+			return;
+		};
 		_inDialog = false;
 		//TODO: create ending sequence
 	}
