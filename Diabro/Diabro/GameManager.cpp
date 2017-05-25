@@ -234,47 +234,50 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 		break;
 	//TODO: this code should check whether or not an NPC is in range and if so, start the conversation
 	case OIS::KC_F:
-		if (dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[0])->getInDialog() == false) {
-			dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[0])->dialog(_levelManager->getPlayer()->getPosition());
-		}
-		else {
-			dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[0])->toggleDialog();
-		}
-		switch(_levelManager->getHostileNpcs()[0]->getTypeNpc())
+		
+		for (int i = 0; i < _levelManager->getHostileNpcs().size(); i++)
 		{
-		case NpcType::Good:
-			break;
-		case NpcType::Bad:
-			if (dynamic_cast<BasicEnemy*>(_levelManager->getHostileNpcs()[0])->getInDialog() == false)
+			if (_levelManager->getHostileNpcs()[i]->getTypeNpc() == NpcType::Bad)
 			{
-				dynamic_cast<BasicEnemy*>(_levelManager->getHostileNpcs()[0])->dialog(_levelManager->getPlayer()->getPosition());
+				if (dynamic_cast<BasicEnemy*>(_levelManager->getHostileNpcs()[i])->getInDialog() == false)
+				{
+					dynamic_cast<BasicEnemy*>(_levelManager->getHostileNpcs()[i])->dialog(_levelManager->getPlayer()->getPosition());
+				}
+				else
+				{
+					dynamic_cast<BasicEnemy*>(_levelManager->getHostileNpcs()[i])->toggleDialog();
+				}
 			}
-			else
-			{
-				dynamic_cast<BasicEnemy*>(_levelManager->getHostileNpcs()[0])->toggleDialog();
-			}
-			break;
-		case NpcType::Princess:
-			if (dynamic_cast<BasicPrincess*>(_levelManager->getHostileNpcs()[0])->getInDialog() == false)
-			{
-				dynamic_cast<BasicPrincess*>(_levelManager->getHostileNpcs()[0])->dialog(_levelManager->getPlayer()->getPosition());
-			}
-			else
-			{
-				dynamic_cast<BasicPrincess*>(_levelManager->getHostileNpcs()[0])->toggleDialog();
-			}
-			break;
+		}
+		
+		if (_levelManager->getPrincess()->getInDialog() == false)
+		{
+			_levelManager->getPrincess()->dialog(_levelManager->getPlayer()->getPosition());
+		}
+		else
+		{
+			_levelManager->getPrincess()->toggleDialog();
 		}
 
-
-
+		for (int i = 0; i < _levelManager->getFriendlyNpcs().size(); i++)
+		{
+			if (dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[i])->getInDialog() == false) {
+				dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[i])->dialog(_levelManager->getPlayer()->getPosition());
+			}
+			else {
+				dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[i])->toggleDialog();
+			}
+		}
 
 		//check if the item is within pickup range.
 
 		break;
 
 	case OIS::KC_SPACE:
-		dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[0])->continueDialog();
+		for (int i = 0; i < _levelManager->getFriendlyNpcs().size(); i++)
+		{
+			dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[i])->toggleDialog();
+		}
 		break;
 
 	default:

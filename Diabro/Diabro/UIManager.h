@@ -17,7 +17,11 @@ public:
 	void adjustHealthBar(Ogre::Real, Ogre::Real);
 	void adjustStaminaBar(Ogre::Real, Ogre::Real);
 	void createDialog(Ogre::String);
+	void createPrincessDialog(Ogre::String);
+	void createEnemyDialog(Ogre::String);
 	void destroyDialog();
+	void destroyPrincessDialog();
+	void destroyEnemyDialog();
 	void appendDialogText(Ogre::String);
 	static Ogre::Real calcBarSize(Ogre::Real, Ogre::Real, Ogre::Real);
 

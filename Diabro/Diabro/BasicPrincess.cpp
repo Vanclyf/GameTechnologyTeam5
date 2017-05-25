@@ -13,6 +13,7 @@ BasicPrincess::BasicPrincess(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotat
 	id = GameManager::getSingletonPtr()->getLevelManager()->subscribeHostileNPC(this);
 	setHealth(1);
 	setTypeNpc(NpcType::Princess);
+	GameManager::getSingletonPtr()->getLevelManager()->princessScript = this;
 }
 
 /// <summary>
@@ -69,7 +70,7 @@ bool BasicPrincess::dialog(Ogre::Vector3 pPlayerPos)
 		{
 			_inDialog = true;
 
-			GameManager::getSingletonPtr()->getUIManager()->createDialog("You found the princess\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress Space to Continue");
+			GameManager::getSingletonPtr()->getUIManager()->createPrincessDialog("You found the princess\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress Space to Continue");
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 			FILE* fpr;
@@ -97,7 +98,7 @@ void BasicPrincess::continueDialog()
 {
 	if (_inDialog == true)
 	{
-		GameManager::getSingletonPtr()->getUIManager()->destroyDialog();
+		GameManager::getSingletonPtr()->getUIManager()->destroyPrincessDialog();
 		_inDialog = false;
 		//TODO: create ending sequence
 	}
@@ -109,7 +110,7 @@ void BasicPrincess::continueDialog()
 void BasicPrincess::toggleDialog() {
 	_inDialog = false;
 	try {
-		GameManager::getSingletonPtr()->getUIManager()->destroyDialog();
+		GameManager::getSingletonPtr()->getUIManager()->destroyPrincessDialog();
 	}
 	catch (...) {
 		return;

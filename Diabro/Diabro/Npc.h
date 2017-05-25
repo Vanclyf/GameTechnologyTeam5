@@ -34,9 +34,9 @@ public:
 	void toggleDialog();
 	void continueDialog();
 	void die() override;
-
+	bool _inDialog;
 private:
-	bool _inDialog; //!< True if the player is currently talking with this NPC.
+		 //!< True if the player is currently talking with this NPC.
 	std::ifstream _dialogFile; //!< File containing the dialog text for this NPC.
 	int _dialogCount; //!< The amount of different parts the dialog consists of.
 	Ogre::String _startDialogText;

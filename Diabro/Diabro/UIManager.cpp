@@ -45,11 +45,33 @@ void UIManager::createDialog(Ogre::String pDialogText) {
 	_mDialogTextArea = _mSdkTrayMgr->createTextBox(OgreBites::TL_CENTER, "DialogTextArea", pDialogText, 400, 400);
 }
 
+void UIManager::createPrincessDialog(Ogre::String pDialogText) {
+	try {
+		destroyPrincessDialog();
+	}
+	catch (...) {}
+	_mDialogTextArea = _mSdkTrayMgr->createTextBox(OgreBites::TL_CENTER, "PrincessDialogTextArea", pDialogText, 400, 400);
+}
+
+void UIManager::createEnemyDialog(Ogre::String pDialogText) {
+	try {
+		destroyEnemyDialog();
+	}
+	catch (...) {}
+	_mDialogTextArea = _mSdkTrayMgr->createTextBox(OgreBites::TL_CENTER, "EnemyDialogTextArea", pDialogText, 400, 400);
+}
+
 /// <summary>
 /// Destroys the dialog.
 /// </summary>
 void UIManager::destroyDialog() {
 	_mSdkTrayMgr->destroyWidget("DialogTextArea");
+}
+void UIManager::destroyPrincessDialog() {
+	_mSdkTrayMgr->destroyWidget("PrincessDialogTextArea");
+}
+void UIManager::destroyEnemyDialog() {
+	_mSdkTrayMgr->destroyWidget("EnemyDialogTextArea");
 }
 
 /// <summary>
