@@ -28,11 +28,11 @@ void LevelManager::initialize()
 	levelGenerator = new LevelGenerator();
 
 	//creating a tilemesh
-	std::string name = "Tile One";
-	levelGenerator->createTileMesh(Coordinate(0, 0), name, Ogre::ColourValue(0, 0, 1, 1));
-	Ogre::Entity* entity = GameManager::getSingleton().getSceneManager()->createEntity("entity: " + name, name);
-	entity->setMaterialName("Examples/Rockwall");
-	_levelNode->attachObject(entity);
+	//std::string name = "Tile One";
+	//levelGenerator->createTileMesh(Coordinate(0, 0), name, Ogre::ColourValue(0, 0, 1, 1));
+	//Ogre::Entity* entity = GameManager::getSingleton().getSceneManager()->createEntity("entity: " + name, name);
+	//entity->setMaterialName("Examples/Rockwall");
+	//_levelNode->attachObject(entity);
 
 	Ogre::SceneNode* playerNode = _levelNode->createChildSceneNode("PlayerNode");
 	_camNode = playerNode->createChildSceneNode("CameraNode");
@@ -151,19 +151,36 @@ void LevelManager::update(const Ogre::FrameEvent& pFE)
 	//simulate physics world
 	dynamicsWorld->stepSimulation(pFE.timeSinceLastFrame, 10);
 
-	btTransform trans;
 	fallRigidBody->getMotionState()->getWorldTransform(trans);
 
-	testNode->setPosition(Ogre::Vector3(0, trans.getOrigin().getY() + 20, 0));
+	testNode->setPosition(Ogre::Vector3(trans.getOrigin().getX(), trans.getOrigin().getY() + 20, trans.getOrigin().getZ()));
 
+	if (fallRigidBody->checkCollideWith(boxRigidBody) == false) {
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+		FILE* fp;
+		freopen_s(&fp, "CONOUT$", "w", stdout);
+		std::cout<< "kankerjaaaaa" << std::endl;
+		fclose(fp);
+#endif
+	};
+	
+	_playerPosition = playerScript->getPosition();
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	FILE* fp;
 	freopen_s(&fp, "CONOUT$", "w", stdout);
-	//printf("Error opening text file, file maybe corrupt or unreachable");
-	std::cout << "sphere height: " << trans.getOrigin().getY() << std::endl;
+	std::cout << "sphere y: " << trans.getOrigin().getY() << std::endl << "sphere x: " << trans.getOrigin().getX() << std::endl << "sphere z: " << trans.getOrigin().getZ() << std::endl;
 	fclose(fp);
 #endif
+
+/*
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+	FILE* fp;
+	freopen_s(&fp, "CONOUT$", "w", stdout);
+	std::cout << "player z: " << _playerPosition.z << std::endl << "player x: " << _playerPosition.x << std::endl;
+	fclose(fp);
+#endif
+*/
 
 	// update characters
 	playerScript->update(pFE.timeSinceLastFrame);
@@ -219,16 +236,18 @@ void LevelManager::initPhysicsWorld() {
 
 	groundShape = new btStaticPlaneShape(btVector3(0, 1, 0), 1);
 
+	boxShape = new btBoxShape(btVector3(10,10,10));
+
 	fallShape = new btSphereShape(1);
 
-
+	//ground
 	groundMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -1, 0)));
 	btRigidBody::btRigidBodyConstructionInfo
 		groundRigidBodyCI(0, groundMotionState, groundShape, btVector3(0, 0, 0));
 	groundRigidBody = new btRigidBody(groundRigidBodyCI);
 	dynamicsWorld->addRigidBody(groundRigidBody);
 
-
+	//ball
 	fallMotionState =
 		new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 100, 0)));
 	mass = 10;
@@ -237,6 +256,13 @@ void LevelManager::initPhysicsWorld() {
 	btRigidBody::btRigidBodyConstructionInfo fallRigidBodyCI(mass, fallMotionState, fallShape, fallInertia);
 	fallRigidBody = new btRigidBody(fallRigidBodyCI);
 	dynamicsWorld->addRigidBody(fallRigidBody);
+
+	//box
+	btDefaultMotionState* boxMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
+	btRigidBody::btRigidBodyConstructionInfo
+		boxRigidBodyCI(0, boxMotionState, boxShape, btVector3(0, 0, 0));
+	boxRigidBody = new btRigidBody(boxRigidBodyCI);
+	dynamicsWorld->addRigidBody(boxRigidBody);
 
 }
 
@@ -269,14 +295,26 @@ void LevelManager::createCube(Ogre::Entity* pMyEntity, Ogre::SceneNode* pMyNode,
 	pMyNode->createChildSceneNode()->attachObject(pMyEntity);
 	pMyNode->setScale(pMyScale);
 	pMyNode->setPosition(pMyPosition);
-	pMyNode->yaw(pMyRotation);
+	pMyNode->pitch(Ogre::Degree(90));
+	pMyNode->roll(pMyRotation);
 	pMyEntity->setMaterialName("Examples/Rockwall");
-
 };
 
 void::LevelManager::setupWalls() {
-	createCube(TestEntity3, TestNode3, Ogre::Vector3(0, 0, 150), Ogre::Vector3(50, 50, 100), Ogre::Degree(0), "TestWallNode3");
-	createCube(TestEntity4, TestSceneNode4, Ogre::Vector3(150, 0, 0), Ogre::Vector3(50, 50, 100), Ogre::Degree(90), "TestWallNode4");
+	createCube(TestEntity3, TestSceneNode3, Ogre::Vector3(0, 1500, 500), Ogre::Vector3(50, 500, 500), Ogre::Degree(0), "TestWallNode3");
+	createCube(TestEntity4, TestSceneNode4, Ogre::Vector3(500, 1500, 0), Ogre::Vector3(50, 500, 500), Ogre::Degree(90), "TestWallNode4");
+	createCube(TestEntity5, TestSceneNode5, Ogre::Vector3(1000, 1500, 500), Ogre::Vector3(50, 500, 500), Ogre::Degree(0), "TestWallNode5");
+	createCube(TestEntity6, TestSceneNode6, Ogre::Vector3(150, 1500, 1000), Ogre::Vector3(50, 500, 500), Ogre::Degree(90), "TestWallNode6");
+	createCube(TestEntity7, TestSceneNode7, Ogre::Vector3(0, 0, 0), Ogre::Vector3(10, 10, 10), Ogre::Degree(90), "TestWallNode7");
+}
+
+void::LevelManager::applyForce() {
+	//fallRigidBody->applyCentralForce(btVector3(0,1000,1000));
+	//fallRigidBody->translate(btVector3(0,0,500));
+}
+
+void::LevelManager::stopForce() {
+	fallRigidBody->applyCentralForce(btVector3(0, 0, 0));
 }
 
 

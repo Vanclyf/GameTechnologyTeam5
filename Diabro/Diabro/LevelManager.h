@@ -9,7 +9,11 @@
 #include <OgreSceneManager.h>
 #include "CharacterSpawner.h"
 #include "LevelGenerator.h"
-#include <btBulletDynamicsCommon.h>
+
+//bulletphysics
+#include "btBulletDynamicsCommon.h"
+#include "LinearMath/btVector3.h"
+#include "LinearMath/btAlignedObjectArray.h" 
 
 class LevelManager
 {
@@ -41,6 +45,10 @@ public:
 	void detachItemInstance(int);
 	static int testunit(int i) { return ++i; };
 	static int testunittwo(int i);
+
+	//physics engine test
+	void applyForce();
+	void stopForce();
 
 	//Creating a wall model
 	void createCube(Ogre::Entity* pMyEntity, Ogre::SceneNode* pMyNode, Ogre::Vector3 pMyPosition, Ogre::Vector3 pMyScale, Ogre::Degree pMyRotation,  Ogre::String pMyNodeName);
@@ -88,18 +96,28 @@ private:
 	btDiscreteDynamicsWorld* dynamicsWorld;
 	btCollisionShape* groundShape;
 	btCollisionShape* fallShape;
+	btCollisionShape* boxShape;
 	btDefaultMotionState* groundMotionState;
-	btRigidBody* groundRigidBody;
 	btDefaultMotionState* fallMotionState;
 	btScalar mass;
 	btVector3 fallInertia;
+	btRigidBody* groundRigidBody;
 	btRigidBody* fallRigidBody;
+	btRigidBody* boxRigidBody;
+	btTransform trans;
+	Ogre::Vector3 _playerPosition;
 
 	//Wall nodes and entities
 	Ogre::Entity* TestEntity3;
-	Ogre::SceneNode* TestNode3;
+	Ogre::SceneNode* TestSceneNode3;
 	Ogre::Entity* TestEntity4;
 	Ogre::SceneNode* TestSceneNode4;
+	Ogre::Entity* TestEntity5;
+	Ogre::SceneNode* TestSceneNode5;
+	Ogre::Entity* TestEntity6;
+	Ogre::SceneNode* TestSceneNode6;
+	Ogre::Entity* TestEntity7;
+	Ogre::SceneNode* TestSceneNode7;
 };
 
 #endif

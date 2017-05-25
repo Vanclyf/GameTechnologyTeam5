@@ -248,7 +248,8 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 	case OIS::KC_SPACE:
 		dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[0])->continueDialog();
 		break;
-
+	case OIS::KC_K:
+		_levelManager->applyForce();
 	default:
 		break;
 	}
@@ -296,7 +297,8 @@ bool GameManager::keyReleased(const OIS::KeyEvent& pKE)
 	//TODO: maybe write own casts for character types
 	case OIS::KC_F:
 		break;
-
+	case OIS::KC_K:
+		_levelManager->stopForce();
 	default:
 		break;
 	}
