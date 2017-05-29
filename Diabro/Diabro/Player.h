@@ -12,6 +12,7 @@ public:
 	~Player(){}
 
 	void gainXP(int);
+	void adjustKarma(int);
 	bool lightAttack() override;
 
 	bool initialize() override;
@@ -27,6 +28,7 @@ public:
 private:
 	int _currentXP;
 	int _xpTillNextLevel;
+	int _karmaPoints;
 
 	int calcXpTillLevel(int);
 	void levelUp();
