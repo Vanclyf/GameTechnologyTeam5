@@ -47,8 +47,11 @@ public:
 	static int testunittwo(int i);
 
 	//physics engine test
-	void applyForce();
-	void stopForce();
+
+	void forwardForce();
+	void backwardForce();
+	void leftForce();
+	void rightForce();
 
 	//Creating a wall model
 	void createCube(Ogre::Entity* pMyEntity, Ogre::SceneNode* pMyNode, Ogre::Vector3 pMyPosition, Ogre::Vector3 pMyScale, Ogre::Degree pMyRotation,  Ogre::String pMyNodeName);
@@ -118,6 +121,16 @@ private:
 	Ogre::SceneNode* TestSceneNode6;
 	Ogre::Entity* TestEntity7;
 	Ogre::SceneNode* TestSceneNode7;
+	Ogre::Entity* TestEntity8;
+	Ogre::SceneNode* TestSceneNode8;
+	Ogre::Entity* TestEntity9;
+	Ogre::SceneNode* TestSceneNode9;
+	Ogre::Entity* TestEntity10;
+	Ogre::SceneNode* TestSceneNode10;
+	Ogre::Entity* TestEntity11;
+	Ogre::SceneNode* TestSceneNode11;
+	Ogre::Entity* TestEntity12;
+	Ogre::SceneNode* TestSceneNode12;
 };
 
 #endif

@@ -23,8 +23,9 @@ void LevelManager::initialize()
 	// create level node, the root node for everything in the level
 	_levelNode = GameManager::getSingletonPtr()->getSceneManager()->getRootSceneNode()->createChildSceneNode("LevelNode");
 
-	//wall test model
+	//setup the level
 	setupWalls();
+
 	levelGenerator = new LevelGenerator();
 
 	//creating a tilemesh
@@ -155,17 +156,6 @@ void LevelManager::update(const Ogre::FrameEvent& pFE)
 
 	testNode->setPosition(Ogre::Vector3(trans.getOrigin().getX(), trans.getOrigin().getY() + 20, trans.getOrigin().getZ()));
 
-	if (fallRigidBody->checkCollideWith(boxRigidBody) == false) {
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-		FILE* fp;
-		freopen_s(&fp, "CONOUT$", "w", stdout);
-		std::cout<< "kankerjaaaaa" << std::endl;
-		fclose(fp);
-#endif
-	};
-	
-	_playerPosition = playerScript->getPosition();
-
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	FILE* fp;
 	freopen_s(&fp, "CONOUT$", "w", stdout);
@@ -173,6 +163,8 @@ void LevelManager::update(const Ogre::FrameEvent& pFE)
 	fclose(fp);
 #endif
 
+
+	//_playerPosition = playerScript->getPosition();
 /*
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	FILE* fp;
@@ -301,23 +293,37 @@ void LevelManager::createCube(Ogre::Entity* pMyEntity, Ogre::SceneNode* pMyNode,
 };
 
 void::LevelManager::setupWalls() {
-	createCube(TestEntity3, TestSceneNode3, Ogre::Vector3(0, 1500, 500), Ogre::Vector3(50, 500, 500), Ogre::Degree(0), "TestWallNode3");
-	createCube(TestEntity4, TestSceneNode4, Ogre::Vector3(500, 1500, 0), Ogre::Vector3(50, 500, 500), Ogre::Degree(90), "TestWallNode4");
-	createCube(TestEntity5, TestSceneNode5, Ogre::Vector3(1000, 1500, 500), Ogre::Vector3(50, 500, 500), Ogre::Degree(0), "TestWallNode5");
-	createCube(TestEntity6, TestSceneNode6, Ogre::Vector3(150, 1500, 1000), Ogre::Vector3(50, 500, 500), Ogre::Degree(90), "TestWallNode6");
+	//createCube(TestEntity4, TestSceneNode4, Ogre::Vector3(0, 0, 0), Ogre::Vector3(50, 50, 50), Ogre::Degree(90), "TestWallNode4");
+	//room 1
+	//createCube(TestEntity3, TestSceneNode3, Ogre::Vector3(0, 0, 500), Ogre::Vector3(50, 500, 500), Ogre::Degree(0), "TestWallNode3");
+	//createCube(TestEntity4, TestSceneNode4, Ogre::Vector3(500, 0, 0), Ogre::Vector3(50, 500, 500), Ogre::Degree(90), "TestWallNode4");
+	//createCube(TestEntity5, TestSceneNode5, Ogre::Vector3(1000, 0, 500), Ogre::Vector3(50, 500, 500), Ogre::Degree(0), "TestWallNode5");
+	//createCube(TestEntity6, TestSceneNode6, Ogre::Vector3(150, 0, 1000), Ogre::Vector3(50, 500, 500), Ogre::Degree(90), "TestWallNode6");
 	createCube(TestEntity7, TestSceneNode7, Ogre::Vector3(0, 0, 0), Ogre::Vector3(10, 10, 10), Ogre::Degree(90), "TestWallNode7");
+
+	//room 2
+	createCube(TestEntity8, TestSceneNode8, Ogre::Vector3(1500, 0, 500), Ogre::Vector3(50, 500, 500), Ogre::Degree(0), "TestWallNode8");
+	createCube(TestEntity9, TestSceneNode9, Ogre::Vector3(2000, 0, 0), Ogre::Vector3(50, 500, 500), Ogre::Degree(90), "TestWallNode9");
+	createCube(TestEntity10, TestSceneNode10, Ogre::Vector3(2500, 0, 500), Ogre::Vector3(50, 500, 500), Ogre::Degree(0), "TestWallNode10");
+	createCube(TestEntity11, TestSceneNode11, Ogre::Vector3(1650, 0, 1000), Ogre::Vector3(50, 500, 500), Ogre::Degree(90), "TestWallNode11");
+
 }
 
-void::LevelManager::applyForce() {
-	//fallRigidBody->applyCentralForce(btVector3(0,1000,1000));
-	//fallRigidBody->translate(btVector3(0,0,500));
+void::LevelManager::forwardForce() {
+	fallRigidBody->applyCentralForce(btVector3(0,1000,1000));
 }
 
-void::LevelManager::stopForce() {
-	fallRigidBody->applyCentralForce(btVector3(0, 0, 0));
+void::LevelManager::backwardForce() {
+	fallRigidBody->applyCentralForce(btVector3(0, 1000, 0));
 }
 
+void::LevelManager::leftForce() {
+	fallRigidBody->applyCentralForce(btVector3(1000, 1000, 0));
+}
 
+void::LevelManager::rightForce() {
+	fallRigidBody->applyCentralForce(btVector3(-1000, 1000, 0));
+}
 
 
 
