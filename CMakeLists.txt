@@ -22,6 +22,7 @@ set(APP "Diabro")
  
 set(HDRS
 	./Diabro/Diabro/BaseApplication.h
+	./tools/bullet-2.81-rev2613/src/btBulletDynamicsCommon.h
 	./Diabro/Diabro/GameManager.h
 	./Diabro/Diabro/Player.h
 	./Diabro/Diabro/Npc.h
@@ -62,7 +63,6 @@ set(HDRS
 	./Diabro/Diabro/BaseArmor.h
 	./Diabro/Diabro/BuildingType.h
 	./Diabro/Diabro/CityManager.h
-	./tools/bullet-2.81-rev2613/src/btBulletDynamicsCommon.h
 )
  
 set(SRCS
