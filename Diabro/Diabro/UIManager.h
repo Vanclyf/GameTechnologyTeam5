@@ -4,6 +4,7 @@
 #pragma once
 #include <OgreBillboardSet.h>
 #include "BaseApplication.h"
+#include "SdkTrays.h"
 
 class UIManager
 {
@@ -15,18 +16,30 @@ public:
 
 	void adjustHealthBar(Ogre::Real, Ogre::Real);
 	void adjustStaminaBar(Ogre::Real, Ogre::Real);
-	Ogre::Real calcBarSize(Ogre::Real, Ogre::Real, Ogre::Real);
+	void createDialog(Ogre::String);
+	void createPrincessDialog(Ogre::String);
+	void createEnemyDialog(Ogre::String);
+	void destroyDialog();
+	void destroyPrincessDialog();
+	void destroyEnemyDialog();
+	void appendDialogText(Ogre::String);
+	static Ogre::Real calcBarSize(Ogre::Real, Ogre::Real, Ogre::Real);
 
 private:
-	Ogre::Billboard* setupUIBar(Ogre::String, Ogre::SceneNode*, Ogre::BillboardOrigin, Ogre::String, Ogre::Vector3, Ogre::Vector3);
-	
-	Ogre::SceneNode* _uiNode;
+	OgreBites::SdkTrayManager*	_mSdkTrayMgr;
+	OgreBites::SdkTrayListener* _mSdkTrayListener;
 
-	Ogre::Billboard* _healthBar;
-	Ogre::Billboard* _staminaBar;
+	Ogre::RenderWindow*			_mWindow;
+	OgreBites::InputContext     _mInputContext;
 
-	Ogre::Real _maxWidthBar;
-	Ogre::Real _heightBar;
+	OgreBites::TextBox*			_mDialogTextArea;
+	OgreBites::DecorWidget*		_healthBarWidget;
+	OgreBites::DecorWidget*		_staminaBarWidget;
+	OgreBites::Slider*		_karmaBarWidget;
+	Ogre::SceneNode*			_uiNode;
+
+	Ogre::Real					_maxWidthBar;
+	Ogre::Real					_heightBar;
 };
 
 #endif

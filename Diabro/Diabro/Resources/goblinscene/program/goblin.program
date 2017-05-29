@@ -1,0 +1,186 @@
+vertex_program goblinvsLightGENNORM0_CG cg
+{
+	source goblin.cg
+	profiles vs_4_0 vs_1_1 arbvp1
+	entry_point goblinvsLightGENNORM0
+	default_params
+	{
+		param_named_auto wMat world_matrix
+		param_named_auto wvpMat worldviewproj_matrix
+		param_named_auto fogParams fog_params
+		param_named_auto spotlightDir0 light_direction_object_space 0
+		param_named_auto spotlightDir1 light_direction_object_space 1
+		param_named_auto spotlightDir2 light_direction_object_space 2
+	}
+}
+vertex_program goblinvsLightGENNORM0_GLSLES glsles
+{
+	source goblinvsLightGENNORM0VP.glsles
+	profiles glsles
+	default_params
+	{
+		param_named_auto wMat world_matrix
+		param_named_auto wvpMat worldviewproj_matrix
+		param_named_auto fogParams fog_params
+		param_named_auto spotlightDir0 light_direction_object_space 0
+		param_named_auto spotlightDir1 light_direction_object_space 1
+		param_named_auto spotlightDir2 light_direction_object_space 2
+	}
+}
+vertex_program goblinvsLightGENNORM0 unified
+{
+	delegate goblinvsLightGENNORM0_CG
+	delegate goblinvsLightGENNORM0_GLSLES
+}
+
+fragment_program goblinfpLightGENDIFF0SPEC0NORM0_CG cg
+{
+	source goblin.cg
+	profiles ps_4_0 ps_3_0 arbfp1
+	entry_point goblinfpLightGENDIFF0SPEC0NORM0
+	default_params
+	{
+		param_named_auto fogColor fog_colour
+		param_named_auto ambient ambient_light_colour
+		param_named_auto lightDif0 light_diffuse_colour 0
+		param_named_auto lightPos0 light_position 0
+		param_named_auto lightAtt0 light_attenuation 0
+		param_named_auto lightSpec0 light_specular_colour 0
+		param_named_auto lightDif1 light_diffuse_colour 1
+		param_named_auto lightPos1 light_position 1
+		param_named_auto lightAtt1 light_attenuation 1
+		param_named_auto lightSpec1 light_specular_colour 1
+		param_named_auto lightDif2 light_diffuse_colour 2
+		param_named_auto lightPos2 light_position 2
+		param_named_auto lightAtt2 light_attenuation 2
+		param_named_auto lightSpec2 light_specular_colour 2
+		param_named_auto camPos camera_position
+		param_named_auto matAmb surface_ambient_colour
+		param_named_auto matEmissive surface_emissive_colour
+		param_named_auto matDif surface_diffuse_colour
+		param_named_auto matSpec surface_specular_colour
+		param_named_auto matShininess surface_shininess
+		param_named_auto spotlightParams0 spotlight_params 0
+		param_named_auto spotlightParams1 spotlight_params 1
+		param_named_auto spotlightParams2 spotlight_params 2
+		param_named_auto iTWMat inverse_transpose_world_matrix
+		param_named normalMul float 1
+	}
+}
+fragment_program goblinfpLightGENDIFF0SPEC0NORM0_GLSLES glsles
+{
+	source goblinfpLightGENDIFF0SPEC0NORM0FP.glsles
+	profiles glsles
+	default_params
+	{
+		param_named_auto fogColor fog_colour
+		param_named_auto ambient ambient_light_colour
+		param_named_auto lightDif0 light_diffuse_colour 0
+		param_named_auto lightPos0 light_position 0
+		param_named_auto lightAtt0 light_attenuation 0
+		param_named_auto lightSpec0 light_specular_colour 0
+		param_named_auto lightDif1 light_diffuse_colour 1
+		param_named_auto lightPos1 light_position 1
+		param_named_auto lightAtt1 light_attenuation 1
+		param_named_auto lightSpec1 light_specular_colour 1
+		param_named_auto lightDif2 light_diffuse_colour 2
+		param_named_auto lightPos2 light_position 2
+		param_named_auto lightAtt2 light_attenuation 2
+		param_named_auto lightSpec2 light_specular_colour 2
+		param_named_auto camPos camera_position
+		param_named_auto matAmb surface_ambient_colour
+		param_named_auto matEmissive surface_emissive_colour
+		param_named_auto matDif surface_diffuse_colour
+		param_named_auto matSpec surface_specular_colour
+		param_named_auto matShininess surface_shininess
+		param_named_auto spotlightParams0 spotlight_params 0
+		param_named_auto spotlightParams1 spotlight_params 1
+		param_named_auto spotlightParams2 spotlight_params 2
+		param_named_auto iTWMat inverse_transpose_world_matrix
+		param_named normalMul float 1
+		param_named diffuseMap int 0
+		param_named specMap int 1
+		param_named normalMap int 2
+	}
+}
+fragment_program goblinfpLightGENDIFF0SPEC0NORM0 unified
+{
+	delegate goblinfpLightGENDIFF0SPEC0NORM0_CG
+	delegate goblinfpLightGENDIFF0SPEC0NORM0_GLSLES
+}
+
+fragment_program goblinfpLightGENDIFF0NORM0_CG cg
+{
+	source goblin.cg
+	profiles ps_4_0 ps_3_0 arbfp1
+	entry_point goblinfpLightGENDIFF0NORM0
+	default_params
+	{
+		param_named_auto fogColor fog_colour
+		param_named_auto ambient ambient_light_colour
+		param_named_auto lightDif0 light_diffuse_colour 0
+		param_named_auto lightPos0 light_position 0
+		param_named_auto lightAtt0 light_attenuation 0
+		param_named_auto lightSpec0 light_specular_colour 0
+		param_named_auto lightDif1 light_diffuse_colour 1
+		param_named_auto lightPos1 light_position 1
+		param_named_auto lightAtt1 light_attenuation 1
+		param_named_auto lightSpec1 light_specular_colour 1
+		param_named_auto lightDif2 light_diffuse_colour 2
+		param_named_auto lightPos2 light_position 2
+		param_named_auto lightAtt2 light_attenuation 2
+		param_named_auto lightSpec2 light_specular_colour 2
+		param_named_auto camPos camera_position
+		param_named_auto matAmb surface_ambient_colour
+		param_named_auto matEmissive surface_emissive_colour
+		param_named_auto matDif surface_diffuse_colour
+		param_named_auto matSpec surface_specular_colour
+		param_named_auto matShininess surface_shininess
+		param_named_auto spotlightParams0 spotlight_params 0
+		param_named_auto spotlightParams1 spotlight_params 1
+		param_named_auto spotlightParams2 spotlight_params 2
+		param_named_auto iTWMat inverse_transpose_world_matrix
+		param_named normalMul float 1
+	}
+}
+fragment_program goblinfpLightGENDIFF0NORM0_GLSLES glsles
+{
+	source goblinfpLightGENDIFF0NORM0FP.glsles
+	profiles glsles
+	default_params
+	{
+		param_named_auto fogColor fog_colour
+		param_named_auto ambient ambient_light_colour
+		param_named_auto lightDif0 light_diffuse_colour 0
+		param_named_auto lightPos0 light_position 0
+		param_named_auto lightAtt0 light_attenuation 0
+		param_named_auto lightSpec0 light_specular_colour 0
+		param_named_auto lightDif1 light_diffuse_colour 1
+		param_named_auto lightPos1 light_position 1
+		param_named_auto lightAtt1 light_attenuation 1
+		param_named_auto lightSpec1 light_specular_colour 1
+		param_named_auto lightDif2 light_diffuse_colour 2
+		param_named_auto lightPos2 light_position 2
+		param_named_auto lightAtt2 light_attenuation 2
+		param_named_auto lightSpec2 light_specular_colour 2
+		param_named_auto camPos camera_position
+		param_named_auto matAmb surface_ambient_colour
+		param_named_auto matEmissive surface_emissive_colour
+		param_named_auto matDif surface_diffuse_colour
+		param_named_auto matSpec surface_specular_colour
+		param_named_auto matShininess surface_shininess
+		param_named_auto spotlightParams0 spotlight_params 0
+		param_named_auto spotlightParams1 spotlight_params 1
+		param_named_auto spotlightParams2 spotlight_params 2
+		param_named_auto iTWMat inverse_transpose_world_matrix
+		param_named normalMul float 1
+		param_named diffuseMap int 0
+		param_named normalMap int 1
+	}
+}
+fragment_program goblinfpLightGENDIFF0NORM0 unified
+{
+	delegate goblinfpLightGENDIFF0NORM0_CG
+	delegate goblinfpLightGENDIFF0NORM0_GLSLES
+}
+

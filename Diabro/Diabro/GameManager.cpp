@@ -5,6 +5,10 @@ Filename:    GameManager.cpp
 
 */
 #include "GameManager.h"
+#include "SdkTrays.h"
+#include "TestFSM.h"
+#include "Tree.h"
+
 //---------------------------------------------------------------------------
 
 /// <summary>
@@ -12,7 +16,7 @@ Filename:    GameManager.cpp
 /// This class is the central manager of the game and has therefore the only singleton instance.
 /// It contains all other managers.
 /// </summary>
-GameManager::GameManager() : _levelManager(0), _uiManager(0), _gameTimer(0)
+GameManager::GameManager() : _levelManager(0), _uiManager(0), _itemManager(0), _questContentManager(0), _gameTimer(0)
 {
 }
 //---------------------------------------------------------------------------
@@ -24,6 +28,8 @@ GameManager::~GameManager()
 	delete _gameTimer;
 	delete _levelManager;
 	delete _uiManager;
+	delete _itemManager;
+	delete _questContentManager;
 }
 
 //---------------------------------------------------------------------------
@@ -49,21 +55,27 @@ GameManager& GameManager::getSingleton(void)
 
 //---------------------------------------------------------------------------
 
+
+
 /// <summary>
 /// Creates the scene.
 /// </summary>
 void GameManager::createScene(void)
 {
 	_gameTimer = new Ogre::Timer();
-
+	_itemInstanceNumber = 0;
     // set lights
 	setupLights(mSceneMgr);
 	
 	// set shadow technique
 	mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 
+	_itemManager = new ItemManager();
+
 	_levelManager = new LevelManager();
 	_levelManager->initialize();
+
+	_questContentManager = new QuestContentManager();
 
 	_uiManager = new UIManager();
 	_uiManager->init();
@@ -76,21 +88,21 @@ void GameManager::createScene(void)
 void GameManager::setupLights(Ogre::SceneManager* pSceneMgr)
 {
 	// set ambient lighting
-	pSceneMgr->setAmbientLight(Ogre::ColourValue(0.2, 0.2, 0.5));
+	pSceneMgr->setAmbientLight(Ogre::ColourValue(0.2, 0.2, 0.2));
 
 	// create the main light
 	Ogre::Light* light = pSceneMgr->createLight("MainLight");
 	light->setDiffuseColour(1, 1, 1);
 	light->setSpecularColour(0.5, 0.5, 0.5);
 	light->setType(Ogre::Light::LT_DIRECTIONAL);
-	light->setDirection(-1, -1, 0);
+	light->setDirection(-1, -2, 0);
 
 	Ogre::Light* pointLight = pSceneMgr->createLight("PointLight");
 	light->setDiffuseColour(1, 1, 1);
 	light->setSpecularColour(0.5, 0.5, 0.5);
 	light->setType(Ogre::Light::LT_POINT);
-	light->setDirection(-1, -1, 0);
-	light->setPosition(Ogre::Vector3(300, 300, 0));
+	light->setDirection(-1, -100, 0);
+	light->setPosition(Ogre::Vector3(300, 1000, 0));
 	light->setSpotlightRange(Ogre::Degree(35), Ogre::Degree(50));
 
 	return;
@@ -105,7 +117,7 @@ void GameManager::createCamera()
 	mCamera = mSceneMgr->createCamera("MainCam");
 
 	// set pos and rot
-	mCamera->setPosition(Ogre::Vector3(0, 300, 500));
+	mCamera->setPosition(Ogre::Vector3(0, 150, 300));
 	mCamera->lookAt(Ogre::Vector3(0, 0, 0));
 	mCamera->setNearClipDistance(5);
 
@@ -192,9 +204,89 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 		_levelManager->playerScript->toggleRun(true);
 		break;
 
+	case OIS::KC_E:
+		for (int i = 0; i < _levelManager->getItemInstances().size(); i++)
+		{
+			ItemInstance* item = _levelManager->getItemInstances()[i];
+			//check if the item is within pickup range.
+			if (item->getNode()->getPosition().distance(_levelManager->getPlayer()->getPosition()) < 500)
+			{
+				//TODO: equipitem player for now, later on we should use inventory system.
+				switch (reinterpret_cast<EquipmentInstance*>(item)->getType())
+				{
+				case 0:
+					//weapon
+					_levelManager->getPlayer()->setEquipmentSlot(reinterpret_cast<WeaponInstance*>(item));
+					item->destroyItemInWorld();
+					break;
+				case 1:
+					//gear
+					_levelManager->getPlayer()->setEquipmentSlot(reinterpret_cast<ArmorInstance*>(item));
+					item->destroyItemInWorld();
+					break;
+				case 2:
+					//jewelry
+					break;
+				}
+				break;
+			}
+		}
+		break;
 	//TODO: this code should check whether or not an NPC is in range and if so, start the conversation
 	case OIS::KC_F:
-		_levelManager->npcScript->dialog(_levelManager->getPlayer()->getPosition());
+		
+		for (int i = 0; i < _levelManager->getHostileNpcs().size(); i++)
+		{
+			if (_levelManager->getHostileNpcs()[i]->getTypeNpc() == NpcType::Bad)
+			{
+				if (dynamic_cast<BasicEnemy*>(_levelManager->getHostileNpcs()[i])->getInDialog() == false)
+				{
+					dynamic_cast<BasicEnemy*>(_levelManager->getHostileNpcs()[i])->dialog(_levelManager->getPlayer()->getPosition());
+				}
+				else
+				{
+					dynamic_cast<BasicEnemy*>(_levelManager->getHostileNpcs()[i])->toggleDialog();
+				}
+			}
+		}
+		
+		if (_levelManager->getPrincess()->getInDialog() == false)
+		{
+			_levelManager->getPrincess()->dialog(_levelManager->getPlayer()->getPosition());
+		}
+		else
+		{
+			_levelManager->getPrincess()->toggleDialog();
+		}
+
+		for (int i = 0; i < _levelManager->getFriendlyNpcs().size(); i++)
+		{
+			if (dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[i])->getInDialog() == false) {
+				dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[i])->dialog(_levelManager->getPlayer()->getPosition());
+			}
+			else {
+				dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[i])->toggleDialog();
+			}
+		}
+
+		//check if the item is within pickup range.
+
+		break;
+
+	case OIS::KC_SPACE:
+		for (int i = 0; i < _levelManager->getFriendlyNpcs().size(); i++)
+		{
+			dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[i])->toggleDialog();
+		}
+
+		for (int i = 0; i < _levelManager->getHostileNpcs().size(); i++)
+		{
+			if (_levelManager->getHostileNpcs()[i]->getTypeNpc() == NpcType::Bad)
+			{
+				dynamic_cast<BasicEnemy*>(_levelManager->getHostileNpcs()[i])->toggleDialog();
+			}
+		}
+		_levelManager->getPrincess()->continueDialog();
 		break;
 
 	default:
@@ -241,8 +333,8 @@ bool GameManager::keyReleased(const OIS::KeyEvent& pKE)
 		break;
 
 	//TODO: this code should end the conversation with the current talking to NPC
+	//TODO: maybe write own casts for character types
 	case OIS::KC_F:
-		_levelManager->npcScript->toggleDialog(false);
 		break;
 
 	default:
@@ -339,7 +431,7 @@ extern "C" {
                 e.getFullDescription().c_str() << std::endl;
 #endif
         }
-
+		
         return 0;
     }
 

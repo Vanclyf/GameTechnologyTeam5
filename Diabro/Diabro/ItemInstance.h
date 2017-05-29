@@ -3,6 +3,7 @@
 
 #pragma once
 #include "BaseItem.h"
+#include <OgreSceneNode.h>
 
 enum Quality : unsigned int {
 	Poor,
@@ -13,25 +14,38 @@ enum Quality : unsigned int {
 	Legendary
 };
 
-
-class ItemInstance : public BaseItem
+//TODO: implement potioninstance and goldinstance
+class ItemInstance
 {
 public:
-	ItemInstance();
+	ItemInstance(BaseItem*, Quality, Ogre::Entity*, Ogre::SceneNode*);
 	~ItemInstance();
-	BaseItem getInfo() { return _info; }
+
+	BaseItem* getInfo() { return _info; }
 	bool getDropped() { return _dropped; }
 	Quality getQuality() { return _quality; }
-	void use();
-	void drop();
-	void onCollision();
-	void addToInventory();
-	void initialize(BaseItem, Quality);
+	Ogre::SceneNode* getNode() { return _itemNode; }
+	std::string getNodeName() { return _nodeName; }
+	void destroyItemInWorld();
+	void setNodeAndEntity(Ogre::SceneNode*, Ogre::Entity*);
+	int id;
+
+	//TODO: implement these methods as soon as the player can manage and use his items. 
+	//virtual void use();
+	//virtual void drop();
+	//virtual void onCollision();
+	//virtual void addToInventory();
+
+protected:
+	//TODO: assign an ingame entity to this variable through the constructor. 
+	Ogre::Entity* _myDroppedEntity;
 
 private:
-	BaseItem _info;
+	BaseItem* _info;
 	bool _dropped;
+	std::string _nodeName;
 	Quality _quality;
+	Ogre::SceneNode* _itemNode;
 };
 
 #endif

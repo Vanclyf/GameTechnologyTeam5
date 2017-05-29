@@ -1,5 +1,6 @@
 #include "FloatRange.h"
 #include <cstdlib>
+#include "GameManager.h"
 
 /// <summary>
 /// Initializes a new instance of the <see cref="FloatRange"/> .
@@ -27,7 +28,8 @@ FloatRange::~FloatRange()
 /// <returns>Random integer in range</returns>
 int FloatRange::randomInRange()
 {
-	return rand() % getMax() + getMin();
+	// todo: this doesn't return a float, I guess it should though. - greetings Rosa
+	return GameManager::getSingletonPtr()->getRandomInRange(getMin(), getMax());
 }
 
 

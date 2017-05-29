@@ -10,6 +10,7 @@
 BaseNpc::BaseNpc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity) : Character(pMyNode, pMyEntity), _timeSince(0), _noticeDistance(400.0f)
 {
 	_myRotationNode = pMyRotationNode;
+	wander();
 }
 
 /// <summary>
@@ -63,11 +64,10 @@ void BaseNpc::wander() {
 
 	//Switch direction
 	//generate a random integer value 1-4 every second
-	int randomX = rand() % (10 - -10 + 1) + -10;
-	int randomZ = rand() % (10 - -10 + 1) + -10;
+	//Coordinate coord = _myCity->getRandomPoint();
 
 	//TODO: shouldn't be able to walk out of the level, clamp
-	walkTo(Ogre::Vector3(getPosition().x + randomX, getPosition().y, getPosition().z + randomZ));
+	//walkTo(Ogre::Vector3(coord.x, getPosition().y, coord.z));
 }
 
 void BaseNpc::walkTo(Ogre::Vector3 targetPos) {
@@ -76,6 +76,6 @@ void BaseNpc::walkTo(Ogre::Vector3 targetPos) {
 	_dirVec.normalise();
 	_dirVec.y = 0;*/
 	
-	_myNode->lookAt(Ogre::Vector3(targetPos.x, getPosition().y, targetPos.z), Ogre::Node::TS_PARENT, Ogre::Vector3::UNIT_X);
+	_myNode->lookAt(Ogre::Vector3(targetPos.x, getPosition().y, targetPos.z), Ogre::Node::TS_WORLD, Ogre::Vector3::UNIT_X);
 	_dirVec = Ogre::Vector3(1, 0, 0);
 }

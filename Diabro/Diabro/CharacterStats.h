@@ -58,7 +58,6 @@ class CharacterStats
 public:
 	CharacterStats();
 	CharacterStats(std::vector<Stat> pStats) : _stats(pStats){};
-	//TODO: add modifiers for items. 
 
 	std::vector<Stat> GetStats() { return _stats; }
 	Ogre::Real GetStat(StatType pID) { return _stats.at((int)pID).value; }
@@ -77,13 +76,14 @@ public:
 
 	Ogre::Real PotentialDamagePerSec() { return (int)(CritFactor() * GetStat(AttackSpeed) * (DeterminedDamage() + GetStat(WeaponDamage))); }
 
-	// TO DO: Replace the 'player health' var by the average monster health at player level. 
+	//TODO: Replace the 'player health' var by the average monster health at player level. 
 	Ogre::Real PotentialMonstersKilledPerSecond() { return (PotentialDamagePerSec() / GetStat(MaxHealth)); }
 
 	Ogre::Real PotentialHealPerSec() { return (int)(GetStat(HealthPerSec) + (GetStat(AttackSpeed) * GetStat(HealthPerHit)) + (PotentialMonstersKilledPerSecond() * GetStat(HealthPerKill))); }
 	
 	Ogre::Real PotentialProtectionPerSec() { return (int)(MaxDeterminedHealth() * (1 + ArmorToughnessFactor()) * (1 + ResistanceToughnessFactor())); }
 	
+
 private:
 	std::vector<Stat> _stats;
 	int _level;
