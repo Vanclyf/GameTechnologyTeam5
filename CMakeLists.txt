@@ -28,6 +28,7 @@ set(HDRS
 	./Diabro/Diabro/CharacterStats.h
 	./Diabro/Diabro/LevelManager.h
 	./Diabro/Diabro/BasicEnemy.h
+        ./Diabro/Diabro/BasicPrincess.h
 	./Diabro/Diabro/Character.h
 	./Diabro/Diabro/BaseItem.h
 	./Diabro/Diabro/ItemInstance.h
@@ -63,6 +64,7 @@ set(HDRS
 	./Diabro/Diabro/BaseArmor.h
 	./Diabro/Diabro/BuildingType.h
 	./Diabro/Diabro/CityManager.h
+        
 )
  
 set(SRCS
@@ -74,6 +76,7 @@ set(SRCS
 	./Diabro/Diabro/LevelManager.cpp
 	./Diabro/Diabro/BaseItem.cpp
 	./Diabro/Diabro/BasicEnemy.cpp
+        ./Diabro/Diabro/BasicPrincess.cpp
 	./Diabro/Diabro/ItemInstance.cpp
 	./Diabro/Diabro/Character.cpp
 	./Diabro/Diabro/BaseEquipment.cpp
@@ -99,6 +102,7 @@ set(SRCS
 	./Diabro/Diabro/BaseArmor.cpp
 	./Diabro/Diabro/BuildingType.cpp
 	./Diabro/Diabro/CityManager.cpp
+
 )
  
 include("tools/cmake/common.cmake") 
