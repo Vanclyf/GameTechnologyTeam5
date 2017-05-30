@@ -71,21 +71,8 @@ bool BasicPrincess::dialog(Ogre::Vector3 pPlayerPos)
 
 			GameManager::getSingletonPtr()->getUIManager()->createDialog("You found the princess\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress Space to Continue");
 
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-			FILE* fpr;
-			freopen_s(&fpr, "CONOUT$", "w", stdout);
-			printf("dialog on\n");
-			fclose(fpr);
-#endif
-
 			return true;
 		}
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-		FILE* fpr;
-		freopen_s(&fpr, "CONOUT$", "w", stdout);
-		printf("out of range for dialog\n");
-		fclose(fpr);
-#endif
 
 		return false;
 }
@@ -95,11 +82,20 @@ bool BasicPrincess::dialog(Ogre::Vector3 pPlayerPos)
 /// </summary>
 void BasicPrincess::continueDialog()
 {
-	if (_inDialog == true)
-	{
-		GameManager::getSingletonPtr()->getUIManager()->destroyDialog();
-		_inDialog = false;
-		//TODO: create ending sequence
+	int _dialogCount = 0;
+	if (_inDialog == true) {
+		 _dialogCount++;
+		if (_dialogCount == 1) {
+			GameManager::getSingletonPtr()->getUIManager()->appendDialogText("thank you for saving me senpai... I princess Kinny am forever in your favor");
+		}
+		else if (_dialogCount == 2) {
+			GameManager::getSingletonPtr()->getUIManager()->appendDialogText("and the lived happily ever after... until Kinney died of herpes");
+		}
+		else if (_dialogCount >= 3) {
+			GameManager::getSingletonPtr()->getUIManager()->destroyDialog();
+			_dialogCount = 0;
+			_inDialog = false;
+		}
 	}
 }
 
