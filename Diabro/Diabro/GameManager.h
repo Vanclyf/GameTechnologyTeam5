@@ -14,6 +14,7 @@ Filename:    GameManager.h
 #include "ItemManager.h"
 #include "QuestContentManager.h"
 #include <ctime>
+#include "btBulletDynamicsCommon.h"
 
 //---------------------------------------------------------------------------
 

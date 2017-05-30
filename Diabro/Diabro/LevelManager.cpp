@@ -230,7 +230,7 @@ void LevelManager::initPhysicsWorld() {
 
 	boxShape = new btBoxShape(btVector3(10,10,10));
 
-	fallShape = new btSphereShape(1);
+	fallShape = new btBoxShape(btVector3(10, 10, 10));
 
 	//ground
 	groundMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -1, 0)));
@@ -309,20 +309,10 @@ void::LevelManager::setupWalls() {
 
 }
 
-void::LevelManager::forwardForce() {
-	fallRigidBody->applyCentralForce(btVector3(0,1000,1000));
-}
 
-void::LevelManager::backwardForce() {
-	fallRigidBody->applyCentralForce(btVector3(0, 1000, 0));
-}
-
-void::LevelManager::leftForce() {
-	fallRigidBody->applyCentralForce(btVector3(1000, 1000, 0));
-}
-
-void::LevelManager::rightForce() {
-	fallRigidBody->applyCentralForce(btVector3(-1000, 1000, 0));
+void::LevelManager::translatePlayer(btVector3& pMyTranslation) {
+	fallRigidBody->activate();
+	fallRigidBody->translate(pMyTranslation);
 }
 
 

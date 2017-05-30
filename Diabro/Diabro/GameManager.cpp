@@ -249,16 +249,16 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 		dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[0])->continueDialog();
 		break;
 	case OIS::KC_I:
-		_levelManager->forwardForce();
+		_levelManager->translatePlayer(btVector3(0, 0, 5));
 		break;
 	case OIS::KC_K:
-		_levelManager->backwardForce();
+		_levelManager->translatePlayer(btVector3(0, 0, -5));
 		break;
 	case OIS::KC_J:
-		_levelManager->leftForce();
+		_levelManager->translatePlayer(btVector3(5, 0, 0));
 		break;
 	case OIS::KC_L:
-		_levelManager->rightForce();
+		_levelManager->translatePlayer(btVector3(-5, 0, 0));
 		break;
 	default:
 		break;
