@@ -30,11 +30,10 @@ public:
 	Ogre::SceneNode* getCamNode() const { return _camNode; }
 
 	Player* getPlayer() const { return playerScript; }
+	BasicPrincess* getPrincess()  const { return princessScript; }
 	std::vector<Character*> getFriendlyNpcs() const { return _friendlyNpcScripts; }
 	std::vector<Character*> getHostileNpcs() const { return _hostileNpcScripts; }
-	std::vector<Character*> getPrincessNpcs() const { return _basicPrincessScripts; }
 	std::vector<ItemInstance*> getItemInstances() const { return _instanceScripts; }
-	std::vector<Character*> getPrincessInstance() const { return _basicPrincessScripts; }
 
 	//---------------------------------------------------------------------------------
 	int subscribeHostileNPC(BasicEnemy*);

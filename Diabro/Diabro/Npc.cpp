@@ -92,6 +92,8 @@ bool Npc::dialog(Ogre::Vector3 pPlayerPos)
 		_inDialog = true;
 
 		GameManager::getSingletonPtr()->getUIManager()->createDialog("Quest Dialog\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress Space to Continue");
+		GameManager::getSingletonPtr()->getUIManager()->appendDialogText(_startDialogText);
+		GameManager::getSingletonPtr()->getUIManager()->appendDialogText(_endDialogText);
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 		FILE* fp;
@@ -127,13 +129,16 @@ void Npc::die() {
 /// Toggles the dialog.
 /// </summary>
 void Npc::toggleDialog() {
-	_inDialog = false;
-	try {
-		GameManager::getSingletonPtr()->getUIManager()->destroyDialog();
+	if (_inDialog)
+	{
+		_inDialog = false;
+		try {
+			GameManager::getSingletonPtr()->getUIManager()->destroyDialog();
+		}
+		catch (...) {
+			return;
+		};
 	}
-	catch (...) {
-		return;
-	};
 }
 
 //TODO fix this ugly quickfix

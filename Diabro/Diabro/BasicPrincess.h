@@ -23,6 +23,7 @@ public:
 	void toggleDialog();
 
 private:
+	int _dialogCount;
 	bool _inDialog;
 };
 

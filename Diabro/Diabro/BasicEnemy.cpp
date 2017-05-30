@@ -29,6 +29,32 @@ void BasicEnemy::update(Ogre::Real pDeltatime)
 
 bool BasicEnemy::dialog(Ogre::Vector3 pPlayerPos)
 {
+
+	Ogre::Real distance = _myNode->getPosition().distance(pPlayerPos);
+
+	if (distance < 500) // needs to be tweaked
+	{
+		_inDialog = true;
+
+		GameManager::getSingletonPtr()->getUIManager()->createEnemyDialog("An enemy\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress Space to Continue");
+
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+		FILE* fpr;
+		freopen_s(&fpr, "CONOUT$", "w", stdout);
+		printf("dialog on\n");
+		fclose(fpr);
+#endif
+
+		return true;
+	}
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+	FILE* fpr;
+	freopen_s(&fpr, "CONOUT$", "w", stdout);
+	printf("out of range for dialog\n");
+	fclose(fpr);
+#endif
+
+	return false;
 	if (getInDialog() == true)
 	{
 		toggleDialog();
@@ -44,7 +70,7 @@ bool BasicEnemy::dialog(Ogre::Vector3 pPlayerPos)
 void BasicEnemy::toggleDialog() {
 	_inDialog = false;
 	try {
-		GameManager::getSingletonPtr()->getUIManager()->destroyDialog();
+		GameManager::getSingletonPtr()->getUIManager()->destroyEnemyDialog();
 	}
 	catch (...) {
 		return;
@@ -56,19 +82,11 @@ void BasicEnemy::toggleDialog() {
 /// Continues the dialog.
 /// </summary>
 void BasicEnemy::continueDialog() {
-	if (_inDialog == true) {
-		_dialogCount++;
-		if (_dialogCount == 1) {
-			GameManager::getSingletonPtr()->getUIManager()->appendDialogText(_startDialogText);
-		}
-		else if (_dialogCount == 2) {
-			GameManager::getSingletonPtr()->getUIManager()->appendDialogText(_endDialogText);
-		}
-		else if (_dialogCount >= 3) {
-			GameManager::getSingletonPtr()->getUIManager()->destroyDialog();
-			_dialogCount = 0;
-			_inDialog = false;
-		}
+	if (_inDialog == true)
+	{
+		GameManager::getSingletonPtr()->getUIManager()->destroyEnemyDialog();
+		_inDialog = false;
+		//TODO: create ending sequence
 	}
 }
 
@@ -99,8 +117,6 @@ void BasicEnemy::die() {
 	
 	GameManager::getSingletonPtr()->getItemManager()->getItemGenerator()->generateRandomItem(GameManager::getSingletonPtr()->getLevelManager()->getLevelNode(), GameManager::getSingletonPtr()->getRandomInRange(1, 5), getPosition());
 	GameManager::getSingletonPtr()->getLevelManager()->detachHostileNPC(id);
-	GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->gainXP(10);
-	GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->adjustKarma(-10);
 }
 
 
