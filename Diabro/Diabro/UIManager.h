@@ -16,6 +16,7 @@ public:
 
 	void adjustHealthBar(Ogre::Real, Ogre::Real);
 	void adjustStaminaBar(Ogre::Real, Ogre::Real);
+	void adjustTimer(Ogre::Real);
 	void createDialog(Ogre::String);
 	void createPrincessDialog(Ogre::String);
 	void createEnemyDialog(Ogre::String);
@@ -36,10 +37,13 @@ private:
 	OgreBites::DecorWidget*		_healthBarWidget;
 	OgreBites::DecorWidget*		_staminaBarWidget;
 	OgreBites::Slider*		_karmaBarWidget;
+	OgreBites::ParamsPanel*		_gameTimer;
 	Ogre::SceneNode*			_uiNode;
 
 	Ogre::Real					_maxWidthBar;
 	Ogre::Real					_heightBar;
+	Ogre::StringVector			_ParamValues;
+	Ogre::StringVector			_ParamNames;
 };
 
 #endif
