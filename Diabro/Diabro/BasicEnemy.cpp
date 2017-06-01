@@ -21,19 +21,6 @@ BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNod
 void BasicEnemy::update(Ogre::Real pDeltatime)
 {
 	BaseNpc::update(pDeltatime);
-
-	if (GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->isKarmaPositive())
-	{
-		if (_playerDetected)
-		{
-			walkTo(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition());
-
-			if (getPosition().distance(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition()) < _attackDistance)
-			{
-				lightAttack();
-			}
-		}
-	}
 }
 
 bool BasicEnemy::dialog(Ogre::Vector3 pPlayerPos)
@@ -99,30 +86,6 @@ void BasicEnemy::continueDialog()
 		_inDialog = false;
 		//TODO: create ending sequence
 	}
-}
-
-bool BasicEnemy::lightAttack()
-{
-	if (!Character::lightAttack())
-	{
-		return false;
-	}
-
-	std::vector<Character*> targets;
-	targets.push_back(GameManager::getSingletonPtr()->getLevelManager()->getPlayer());
-	findTarget(targets);
-
-	if (_target == nullptr)
-	{
-		return false;
-	}
-
-	//deal damage 
-	_target->adjustHealth(_stats->DeterminedDamage());
-
-	_canAttack = false;
-	_currAttackCooldown = _lightAttackCooldown;
-	return true;
 }
 
 void BasicEnemy::die()

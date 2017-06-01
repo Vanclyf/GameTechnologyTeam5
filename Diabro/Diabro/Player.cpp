@@ -66,8 +66,11 @@ bool Player::lightAttack()
 	{
 		return false;
 	}
-
-	std::vector<Character*> targets = GameManager::getSingletonPtr()->getLevelManager()->getHostileNpcs();
+	auto levelManager = GameManager::getSingletonPtr()->getLevelManager();
+	//get all posible targets
+	std::vector<Character*> targets = levelManager->getHostileNpcs();
+	findTarget(targets);
+	targets = levelManager->getFriendlyNpcs();
 	findTarget(targets);
 	if (_target == nullptr)
 	{
@@ -122,7 +125,7 @@ int Player::calcXpTillLevel(int pLevel)
 /// </returns>
 bool Player::isKarmaPositive() const
 {
-	if (_karmaPoints > 0)
+	if (_karmaPoints >= 0)
 	{
 		return true;
 	}
