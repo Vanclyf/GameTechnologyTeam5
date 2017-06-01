@@ -74,6 +74,18 @@ bool Player::lightAttack()
 	}
 
 	_target->adjustHealth(_stats->DeterminedDamage());
+	switch(_target->getTypeNpc())
+	{
+	case NpcType::Good:
+		reinterpret_cast<Npc*>(_target)->getEntity()->setMaterial(Ogre::MaterialManager::getSingleton().getByName("Houses/HitRed"));
+		break;
+	case NpcType::Bad:
+		reinterpret_cast<BasicEnemy*>(_target)->hit();
+		reinterpret_cast<BasicEnemy*>(_target)->getEntity()->setMaterial(Ogre::MaterialManager::getSingleton().getByName("Houses/HitRed"));
+		break;
+	case NpcType::Princess:
+		break;
+	}
 	_canAttack = false;
 	_currAttackCooldown = _lightAttackCooldown;
 

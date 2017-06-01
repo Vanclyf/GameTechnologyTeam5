@@ -13,11 +13,28 @@ BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNod
 {
 	id = GameManager::getSingletonPtr()->getLevelManager()->subscribeHostileNPC(this);
 	setTypeNpc(NpcType::Bad);
+	_hitTimer = new Ogre::Timer();
 }
 
 void BasicEnemy::update(Ogre::Real pDeltatime)
 {
 	BaseNpc::update(pDeltatime);
+	if (_isHit)
+	{
+		if (_hitCountdown <= 0)
+		{
+			_hitCountdown = 0;
+			//change material
+			_myEntity->setMaterial(Ogre::MaterialManager::getSingletonPtr()->getByName("Houses/Red"));
+			_isHit = false;
+		}
+		else
+		{
+			Ogre::Real deltaTime = _hitTimer->getMilliseconds();
+			_hitTimer->reset();
+			_hitCountdown -= deltaTime;
+		}
+	}
 
 	if(_playerDetected) {
 		walkTo(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition());
@@ -89,6 +106,12 @@ void BasicEnemy::continueDialog() {
 		_inDialog = false;
 		//TODO: create ending sequence
 	}
+}
+
+void BasicEnemy::hit()
+{
+	_hitCountdown = 750;
+	_isHit = true;
 }
 
 bool BasicEnemy::lightAttack()
