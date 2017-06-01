@@ -139,3 +139,30 @@ void Player::levelUp()
 
 	// Increase _stats
 }
+
+void Player::adjustLook(Ogre::Entity *pPlayerEntity)
+{
+	if (_karmaPoints >=10 && _karmaPoints <40)
+	{
+
+		pPlayerEntity->setMaterialName("Houses/Green");
+	}
+	else if (_karmaPoints >=40 )
+	{
+
+		pPlayerEntity->setMaterialName("Houses/darkGreen");
+	}
+	else if(_karmaPoints <= -10 && _karmaPoints> -40)
+	{
+		pPlayerEntity->setMaterialName("Houses/Red");
+	}
+	else if(_karmaPoints <= -40)
+	{
+		pPlayerEntity->setMaterialName("Houses/darkRed");
+	}
+	else
+	{
+		pPlayerEntity->setMaterialName("Houses/White");
+	}
+		
+}
