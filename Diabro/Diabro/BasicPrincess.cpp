@@ -86,20 +86,20 @@ void BasicPrincess::continueDialog()
 {
 	
 	int karma = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getKarma();
-	if (_inDialog == true && karma > 10) {
+	if (_inDialog == true && karma > 0) {
 		_dialogCount++;
 		if (_dialogCount == 1) {
 			GameManager::getSingletonPtr()->getUIManager()->appendDialogText("thank you for saving me senpai... I princess Kinny am forever in your favor \n");
 		}
 		else if (_dialogCount == 2) {
-			GameManager::getSingletonPtr()->getUIManager()->appendDialogText("and the lived happily ever after... until Kinney died of herpes \n");
+			GameManager::getSingletonPtr()->getUIManager()->appendDialogText("and they lived happily ever after... until Kinney died of herpes \n");
 		}
 		else if (_dialogCount >= 3) {
 			toggleDialog();
 			_dialogCount = 0;
 			_inDialog = false;
 		}
-	}else if(_inDialog == true && karma < -10)
+	}else if(_inDialog == true && karma < 0)
 	{
 		_dialogCount++;
 		if (_dialogCount == 1) {
