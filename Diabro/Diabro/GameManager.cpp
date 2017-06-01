@@ -8,6 +8,7 @@ Filename:    GameManager.cpp
 #include "SdkTrays.h"
 #include "TestFSM.h"
 #include "Tree.h"
+#include "SoundManager.h"
 
 //---------------------------------------------------------------------------
 
@@ -66,7 +67,7 @@ void GameManager::createScene(void)
 	_itemInstanceNumber = 0;
     // set lights
 	setupLights(mSceneMgr);
-	
+	SoundManager::PlayBackgroundMusic("intromusic.mp3");
 	// set shadow technique
 	mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 

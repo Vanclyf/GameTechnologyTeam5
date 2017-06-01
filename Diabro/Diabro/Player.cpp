@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "GameManager.h"
+#include "SoundManager.h"
 
 /// <summary>
 /// Creates a new instance of the <see cref="Player"/> class.
@@ -65,7 +66,7 @@ bool Player::lightAttack()
 	if (!Character::lightAttack()) {
 		return false;
 	}
-
+	SoundManager::PlaySmallSound("PlayerHit.wav");
 	std::vector<Character*> targets = GameManager::getSingletonPtr()->getLevelManager()->getHostileNpcs();
 	findTarget(targets);
 	if (_target == nullptr) {

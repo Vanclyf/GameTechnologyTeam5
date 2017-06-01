@@ -42,8 +42,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\Supernat0r\Documents\Common;D:\Program Files %28x86%29\DirectX-SDK\Include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Program Files %28x86%29\DirectX-SDK\Lib\x86;C:\Users\Supernat0r\Documents\Common;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Supernat0r\Documents\Common;D:\Program Files %28x86%29\DirectX-SDK\Include;$(OGRE_HOME)\irrKlang-1.5.0\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Program Files %28x86%29\DirectX-SDK\Lib\x86;C:\Users\Supernat0r\Documents\Common;$(OGRE_HOME)\irrKlang-1.5.0\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -55,17 +55,21 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(OGRE_HOME)\include;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\Samples\Common\include;$(OGRE_HOME)\boost;$(OGRE_HOME)\include\OGRE\Overlay;&lt;boost_path&gt;\stage\lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(OGRE_HOME)\include;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\Samples\Common\include;$(OGRE_HOME)\boost;$(OGRE_HOME)\include\OGRE\Overlay;&lt;boost_path&gt;\stage\lib;$(OGRE_HOME)\irrKlang-1.5.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <BrowseInformation>true</BrowseInformation>
+
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(OGRE_HOME)\boost\lib;$(OGRE_HOME)\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>OgreMain_d.lib;OIS_d.lib;OgreOverlay_d.lib;libboost_thread-vc100-mt-gd-1_55.lib;libboost_system-vc100-mt-gd-1_55.lib;libboost_date_time-vc100-mt-gd-1_55.lib;libboost_chrono-vc100-mt-gd-1_55.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OGRE_HOME)\boost\lib;$(OGRE_HOME)\lib\$(Configuration);$(OGRE_HOME)\irrKlang-1.5.0\lib\Win32-visualStudio;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>OgreMain_d.lib;OIS_d.lib;OgreOverlay_d.lib;libboost_thread-vc100-mt-gd-1_55.lib;libboost_system-vc100-mt-gd-1_55.lib;libboost_date_time-vc100-mt-gd-1_55.lib;libboost_chrono-vc100-mt-gd-1_55.lib;irrKlang.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(OutDir)\$(TargetFileName)" "$(OGRE_HOME)\Bin\$(Configuration)"</Command>
+      <Command>copy "$(OutDir)\$(TargetFileName)" "$(OGRE_HOME)\Bin\$(Configuration)"
+copy "$(OGRE_HOME)\irrKlang-1.5.0\dllFiles\ikpFlac.dll" "$(SolutionDir)Diabro\bin\debug"
+copy "$(OGRE_HOME)\irrKlang-1.5.0\dllFiles\ikpMP3.dll" "$(SolutionDir)Diabro\bin\debug"
+copy "$(OGRE_HOME)\irrKlang-1.5.0\dllFiles\irrKlang.dll" "$(SolutionDir)Diabro\bin\debug"</Command>
     </PostBuildEvent>
     <PreLinkEvent>
       <Command>
@@ -138,6 +142,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="QuestContentManager.cpp" />
     <ClCompile Include="QuestItemContainer.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="TestFSM.cpp" />
     <ClCompile Include="QuestItemGenerator.cpp" />
@@ -180,6 +185,7 @@
     <ClInclude Include="Modifier.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="SoundManager.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="QuestContentManager.h" />
     <ClInclude Include="QuestItem.h" />
