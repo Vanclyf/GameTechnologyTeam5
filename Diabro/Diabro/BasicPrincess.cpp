@@ -86,7 +86,7 @@ void BasicPrincess::continueDialog()
 {
 	
 	int karma = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getKarma();
-	if (_inDialog == true && karma > 0) {
+	if (_inDialog == true && karma >= 0) {
 		_dialogCount++;
 		if (_dialogCount == 1) {
 			GameManager::getSingletonPtr()->getUIManager()->appendDialogText("thank you for saving me senpai... I princess Kinny am forever in your favor \n");
