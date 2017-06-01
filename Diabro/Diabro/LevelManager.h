@@ -50,7 +50,7 @@ public:
 	void translatePlayer(btVector3& pMyTranslation);
 
 	//Creating a wall model
-	void createCube(Ogre::Entity* pMyEntity, Ogre::SceneNode* pMyNode, Ogre::Vector3 pMyPosition, Ogre::Vector3 pMyScale, Ogre::Degree pMyRotation,  Ogre::String pMyNodeName);
+	void createCube(Ogre::Entity* pMyEntity, Ogre::SceneNode* pMyNode, Ogre::Vector3 pMyPosition, Ogre::Vector3 pMyScale, Ogre::Degree pMyRotation);
 	
 	LevelGenerator* levelGenerator;
 	// for now public so that game manager can access it. 
@@ -107,26 +107,8 @@ private:
 	Ogre::Vector3 _playerPosition;
 
 	//Wall nodes and entities
-	Ogre::Entity* TestEntity3;
-	Ogre::SceneNode* TestSceneNode3;
-	Ogre::Entity* TestEntity4;
-	Ogre::SceneNode* TestSceneNode4;
-	Ogre::Entity* TestEntity5;
-	Ogre::SceneNode* TestSceneNode5;
-	Ogre::Entity* TestEntity6;
-	Ogre::SceneNode* TestSceneNode6;
-	Ogre::Entity* TestEntity7;
-	Ogre::SceneNode* TestSceneNode7;
-	Ogre::Entity* TestEntity8;
-	Ogre::SceneNode* TestSceneNode8;
-	Ogre::Entity* TestEntity9;
-	Ogre::SceneNode* TestSceneNode9;
-	Ogre::Entity* TestEntity10;
-	Ogre::SceneNode* TestSceneNode10;
-	Ogre::Entity* TestEntity11;
-	Ogre::SceneNode* TestSceneNode11;
-	Ogre::Entity* TestEntity12;
-	Ogre::SceneNode* TestSceneNode12;
+	std::vector <Ogre::SceneNode*> wallNodes;
+	Ogre::Entity* wallEntity;
 };
 
 #endif
