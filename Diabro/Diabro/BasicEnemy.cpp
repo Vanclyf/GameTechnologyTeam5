@@ -11,25 +11,33 @@
 BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity) : BaseNpc(pMyNode, pMyRotationNode, pMyEntity)
 {
 	id = GameManager::getSingletonPtr()->getLevelManager()->subscribeHostileNPC(this);
-	setTypeNpc(NpcType::Bad);
+	setTypeNpc(Bad);
 }
 
+/// <summary>
+/// Updates the basic enmey movement
+/// </summary>
+/// <param name="pDeltatime">The deltatime.</param>
 void BasicEnemy::update(Ogre::Real pDeltatime)
 {
 	BaseNpc::update(pDeltatime);
 
-	if(_playerDetected) {
-		walkTo(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition());
+	if (GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->isKarmaPositive())
+	{
+		if (_playerDetected)
+		{
+			walkTo(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition());
 
-		if (getPosition().distance(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition()) < _attackDistance) {
-			lightAttack();
+			if (getPosition().distance(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition()) < _attackDistance)
+			{
+				lightAttack();
+			}
 		}
 	}
 }
 
 bool BasicEnemy::dialog(Ogre::Vector3 pPlayerPos)
 {
-
 	Ogre::Real distance = _myNode->getPosition().distance(pPlayerPos);
 
 	if (distance < 500) // needs to be tweaked
@@ -67,21 +75,24 @@ bool BasicEnemy::dialog(Ogre::Vector3 pPlayerPos)
 /// <summary>
 /// Toggles the dialog.
 /// </summary>
-void BasicEnemy::toggleDialog() {
+void BasicEnemy::toggleDialog()
+{
 	_inDialog = false;
-	try {
+	try
+	{
 		GameManager::getSingletonPtr()->getUIManager()->destroyEnemyDialog();
 	}
-	catch (...) {
-		return;
-	};
+	catch (...)
+	{
+	}
 }
 
 //TODO fix this ugly quickfix
 /// <summary>
 /// Continues the dialog.
 /// </summary>
-void BasicEnemy::continueDialog() {
+void BasicEnemy::continueDialog()
+{
 	if (_inDialog == true)
 	{
 		GameManager::getSingletonPtr()->getUIManager()->destroyEnemyDialog();
@@ -92,7 +103,8 @@ void BasicEnemy::continueDialog() {
 
 bool BasicEnemy::lightAttack()
 {
-	if (!Character::lightAttack()) {
+	if (!Character::lightAttack())
+	{
 		return false;
 	}
 
@@ -100,23 +112,23 @@ bool BasicEnemy::lightAttack()
 	targets.push_back(GameManager::getSingletonPtr()->getLevelManager()->getPlayer());
 	findTarget(targets);
 
-	if (_target == nullptr) {
+	if (_target == nullptr)
+	{
 		return false;
 	}
 
 	//deal damage 
 	_target->adjustHealth(_stats->DeterminedDamage());
-	
+
 	_canAttack = false;
 	_currAttackCooldown = _lightAttackCooldown;
 	return true;
 }
 
-void BasicEnemy::die() {
+void BasicEnemy::die()
+{
 	Character::die();
-	
+
 	GameManager::getSingletonPtr()->getItemManager()->getItemGenerator()->generateRandomItem(GameManager::getSingletonPtr()->getLevelManager()->getLevelNode(), GameManager::getSingletonPtr()->getRandomInRange(1, 5), getPosition());
 	GameManager::getSingletonPtr()->getLevelManager()->detachHostileNPC(id);
 }
-
-

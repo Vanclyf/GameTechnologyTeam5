@@ -42,7 +42,7 @@ bool Player::adjustHealth(float pAdjust)
 {
 	if (!Character::adjustHealth(pAdjust)) { return false; }
 
-	GameManager::getSingleton().getUIManager()->adjustHealthBar(_currentHealth, _stats->GetStat(StatType::MaxHealth));
+	GameManager::getSingleton().getUIManager()->adjustHealthBar(_currentHealth, _stats->GetStat(MaxHealth));
 	return true;
 }
 
@@ -62,13 +62,15 @@ bool Player::adjustStaminaOverTime(Ogre::Real pDeltaTime)
 
 bool Player::lightAttack()
 {
-	if (!Character::lightAttack()) {
+	if (!Character::lightAttack())
+	{
 		return false;
 	}
 
 	std::vector<Character*> targets = GameManager::getSingletonPtr()->getLevelManager()->getHostileNpcs();
 	findTarget(targets);
-	if (_target == nullptr) {
+	if (_target == nullptr)
+	{
 		return false;
 	}
 
@@ -110,6 +112,21 @@ int Player::calcXpTillLevel(int pLevel)
 	newXP = Ogre::Math::Floor(newXP / 4);
 
 	return newXP;
+}
+
+/// <summary>
+/// Determines whether [is karma positive].
+/// </summary>
+/// <returns>
+///   <c>true</c> if [karma positive]; otherwise, <c>false</c>.
+/// </returns>
+bool Player::isKarmaPositive() const
+{
+	if (_karmaPoints > 0)
+	{
+		return true;
+	}
+	return false;
 }
 
 /// <summary>
