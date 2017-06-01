@@ -54,6 +54,7 @@ void BasicPrincess::update(Ogre::Real pDeltatime)
 void BasicPrincess::die()
 {
 	Character::die();
+	GameManager::getSingletonPtr()->getLevelManager()->detachHostileNPC(id);
 	//TODO: create game over method.
 }
 
