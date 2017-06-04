@@ -25,6 +25,7 @@ public:
 	void update(const Ogre::FrameEvent&);
 	void initPhysicsWorld();
 	void destroyPhysicsWorld();
+	void updatePlayer();
 	static void createGroundMesh();
 	void setupWalls();
 
@@ -61,6 +62,7 @@ public:
 
 private:
 	Ogre::Entity* _playerEntity;
+	Ogre::SceneNode* playerNode;
 	//Test physics engine entity
 	Ogre::Entity* _testEntity;
 	Ogre::SceneNode* testNode;

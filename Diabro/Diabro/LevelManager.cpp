@@ -18,16 +18,23 @@ playerScript(0), _levelNode(0), _camNode(0), npcSpawner(0)
 /// </summary>
 void LevelManager::initialize()
 {
-	//initialize the physics world 
-	initPhysicsWorld();
-
 	// create level node, the root node for everything in the level
 	_levelNode = GameManager::getSingletonPtr()->getSceneManager()->getRootSceneNode()->createChildSceneNode("LevelNode");
+
+	//physics engine test entity
+	testNode = _levelNode->createChildSceneNode("TestNode");
+	_testEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("ogrehead.mesh");
+	testNode->createChildSceneNode()->attachObject(_testEntity);
+	testNode->setPosition(Ogre::Vector3(0, 0, 0));
+	
+
+	//initialize the physics world 
+	initPhysicsWorld();
 
 	//setup the level
 	setupWalls();
 
-	levelGenerator = new LevelGenerator();
+	//levelGenerator = new LevelGenerator();
 
 	//creating a tilemesh
 	//std::string name = "Tile One";
@@ -36,14 +43,9 @@ void LevelManager::initialize()
 	//entity->setMaterialName("Examples/Rockwall");
 	//_levelNode->attachObject(entity);
 
-	Ogre::SceneNode* playerNode = _levelNode->createChildSceneNode("PlayerNode");
+	playerNode = _levelNode->createChildSceneNode("PlayerNode");
 	_camNode = playerNode->createChildSceneNode("CameraNode");
 
-	//physics engine test entity
-	testNode = _levelNode->createChildSceneNode("TestNode");
-	_testEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("ogrehead.mesh");
-	testNode->createChildSceneNode()->attachObject(_testEntity);
-	testNode->setPosition(Ogre::Vector3(0, 0, 0));
 
 	//player
 	_playerEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("ninja.mesh");
@@ -153,16 +155,11 @@ void LevelManager::update(const Ogre::FrameEvent& pFE)
 	//simulate physics world
 	dynamicsWorld->stepSimulation(pFE.timeSinceLastFrame, 10);
 
-	fallRigidBody->getMotionState()->getWorldTransform(trans);
+	//fallRigidBody->getMotionState()->getWorldTransform(trans);
 
-	testNode->setPosition(Ogre::Vector3(trans.getOrigin().getX(), trans.getOrigin().getY() + 20, trans.getOrigin().getZ()));
+	//testNode->setPosition(Ogre::Vector3(trans.getOrigin().getX(), trans.getOrigin().getY() + 20, trans.getOrigin().getZ()));
 
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	FILE* fp;
-	freopen_s(&fp, "CONOUT$", "w", stdout);
-	std::cout << "sphere y: " << trans.getOrigin().getY() << std::endl << "sphere x: " << trans.getOrigin().getX() << std::endl << "sphere z: " << trans.getOrigin().getZ() << std::endl;
-	fclose(fp);
-#endif
+	updatePlayer();
 
 
 	//_playerPosition = playerScript->getPosition();
@@ -242,17 +239,14 @@ void LevelManager::initPhysicsWorld() {
 
 	//falling box
 	fallMotionState =
-		new btDefaultMotionState(btTransform(btQuaternion(90, 0, 0, 1), btVector3(0, 100, 0)));
+		new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 100, 0)));
 	mass = 10;
 	fallInertia = btVector3(0, 0, 0);
 	fallShape->calculateLocalInertia(mass, fallInertia);
 	btRigidBody::btRigidBodyConstructionInfo fallRigidBodyCI(mass, fallMotionState, fallShape, fallInertia);
 	fallRigidBody = new btRigidBody(fallRigidBodyCI);
 	dynamicsWorld->addRigidBody(fallRigidBody);
-
-	//btQuaternion quat;
-	//quat = fallRigidBody->getOrientation();
-	//testNode->yaw(Ogre::Degree(90));
+	
 
 	//box
 	btDefaultMotionState* boxMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
@@ -337,6 +331,36 @@ void::LevelManager::translatePlayer(btVector3& pMyTranslation) {
 	fallRigidBody->activate();
 	fallRigidBody->translate(pMyTranslation);
 }
+
+void::LevelManager::updatePlayer() {
+	
+	fallRigidBody->activate();
+	btTransform playerTransForm;
+	fallRigidBody->getMotionState()->getWorldTransform(playerTransForm);
+	btQuaternion btQuat;
+
+	btQuat.setEuler(GameManager::getSingletonPtr()->getCamera()->getDerivedOrientation().getYaw().valueDegrees()
+		, GameManager::getSingletonPtr()->getCamera()->getDerivedOrientation().getPitch().valueDegrees()
+		, GameManager::getSingletonPtr()->getCamera()->getDerivedOrientation().getRoll().valueDegrees());
+
+	fallRigidBody->getWorldTransform().setRotation(btQuat);
+	fallRigidBody->setCenterOfMassTransform(playerTransForm);
+	testNode->setOrientation(GameManager::getSingletonPtr()->getCamera()->getDerivedOrientation());
+	testNode->setPosition(Ogre::Vector3(playerTransForm.getOrigin().getX(), playerTransForm.getOrigin().getY() + 20, playerTransForm.getOrigin().getZ()));
+	
+
+
+	//playerTransForm.setRotation(btQuat);
+
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+	FILE* fp;
+	freopen_s(&fp, "CONOUT$", "w", stdout);
+	std::cout << "Roll: " << btQuat.getAngle() << std::endl << " Pitch : " << GameManager::getSingletonPtr()->getCamera()->getDerivedOrientation().getPitch().valueDegrees() << std::endl << "Yaw: " << GameManager::getSingletonPtr()->getCamera()->getDerivedOrientation().getYaw().valueDegrees() << std::endl;
+	fclose(fp);
+#endif
+
+
+};
 
 
 
