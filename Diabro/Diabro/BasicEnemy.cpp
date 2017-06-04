@@ -13,7 +13,6 @@ BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNod
 {
 	id = GameManager::getSingletonPtr()->getLevelManager()->subscribeHostileNPC(this);
 	setTypeNpc(NpcType::Bad);
-	_hitTimer = new Ogre::Timer();
 }
 
 void BasicEnemy::update(Ogre::Real pDeltatime)
@@ -106,12 +105,6 @@ void BasicEnemy::continueDialog() {
 		_inDialog = false;
 		//TODO: create ending sequence
 	}
-}
-
-void BasicEnemy::hit()
-{
-	_hitCountdown = 750;
-	_isHit = true;
 }
 
 bool BasicEnemy::lightAttack()

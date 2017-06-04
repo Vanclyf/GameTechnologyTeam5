@@ -60,6 +60,8 @@ public:
 	void swapEquipmentSlot(ArmorInstance*, int);
 	void swapEquipmentSlot(WeaponInstance*, int);
 	void setHealth(int health) { _currentHealth = health; }
+	Ogre::Entity* getEntity() { return _myEntity; }
+	void hit();
 
 	virtual bool adjustHealth(float);
 	virtual bool adjustStaminaOverTime(Ogre::Real);
@@ -113,6 +115,9 @@ private:
 	Ogre::Entity* _weaponEntity;
 	Ogre::SceneNode* _weaponNode;
 	NpcType _typeNpc;
+	Ogre::Timer* _hitTimer;
+	Ogre::Real _hitCountdown;
+	bool _isHit;
 };
 
 #endif

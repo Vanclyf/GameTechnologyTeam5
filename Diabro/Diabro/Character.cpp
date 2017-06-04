@@ -26,7 +26,7 @@ bool Character::initialize()
 
 	_currentHealth = _stats->GetStat(MaxHealth);
 	_currentStamina = _stats->GetStat(MaxStamina);
-
+	_hitTimer = new Ogre::Timer();
 
 	//show what is in the gear slots.
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
@@ -64,6 +64,35 @@ void Character::update(Ogre::Real pDeltatime)
 	}
 	else {
 		_hitted = false;
+	}
+
+	if (_isHit)
+	{
+		if (_hitCountdown <= 0)
+		{
+			_hitCountdown = 0;
+			//change material
+			switch(getTypeNpc())
+			{
+			case NpcType::Good:
+				_myEntity->setMaterial(Ogre::MaterialManager::getSingletonPtr()->getByName("Houses/Green"));
+				break;
+			case NpcType::Bad:
+				_myEntity->setMaterial(Ogre::MaterialManager::getSingletonPtr()->getByName("Houses/Red"));
+				break;
+			case NpcType::Princess:
+				_myEntity->setMaterial(Ogre::MaterialManager::getSingletonPtr()->getByName("Houses/Green"));
+				break;
+
+			}
+			_isHit = false;
+		}
+		else
+		{
+			Ogre::Real deltaTime = _hitTimer->getMilliseconds();
+			_hitTimer->reset();
+			_hitCountdown -= deltaTime;
+		}
 	}
 
 	_myNode->translate(_dirVec * getSpeed() * pDeltatime, Ogre::Node::TS_LOCAL);
@@ -161,7 +190,7 @@ bool Character::adjustHealth(float pAdjust)
 
 	_hitTime = _totalHitTime;
 	_hitted = true;
-
+	hit();
 	if ((_currentHealth -= pAdjust) <= 0)
 	{
 		die();
@@ -169,6 +198,12 @@ bool Character::adjustHealth(float pAdjust)
 	}
 
 	return true;
+}
+
+void Character::hit()
+{
+	_hitCountdown = 750;
+	_isHit = true;
 }
 
 /// <summary>

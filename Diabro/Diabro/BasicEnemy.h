@@ -11,7 +11,6 @@ public:
 	~BasicEnemy() {}
 	bool getInDialog() const { return _inDialog; }
 	int getTypeNpc() { return _typeNpc; }
-	Ogre::Entity* getEntity() { return _myEntity; }
 
 	void hit();
 	bool dialog(Ogre::Vector3);

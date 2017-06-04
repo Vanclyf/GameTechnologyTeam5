@@ -154,7 +154,7 @@ void LevelManager::detachHostileNPC(int id)
 void LevelManager::update(const Ogre::FrameEvent& pFE)
 {
 	// update characters
-	playerScript->update(pFE.timeSinceLastFrame);
+	getPlayer()->update(pFE);
 
 	for (int i = 0; i < _friendlyNpcScripts.size(); i++)
 	{
