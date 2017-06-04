@@ -57,11 +57,11 @@ void LevelManager::initialize()
 	playerScript->initialize();
 
 	// ground 
-	/*createGroundMesh();
+	createGroundMesh();
 	_groundEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("ground");
 	_levelNode->createChildSceneNode()->attachObject(_groundEntity);
 	_groundEntity->setMaterialName("Examples/Rockwall");
-	*/
+	
 
 	// camera
 	_camNode->attachObject(GameManager::getSingletonPtr()->getCamera());
@@ -291,7 +291,7 @@ void LevelManager::createCube(Ogre::Entity* pMyEntity, Ogre::SceneNode* pMyNode,
 };
 
 void::LevelManager::setupWalls() {
-	for (int i = 0; i < 20; i++) {
+	for (int i = 0; i < 40; i++) {
 		std::stringstream sstm;
 		sstm << "WallNode-" << i;
 		std::string s = sstm.str();
@@ -321,9 +321,13 @@ void::LevelManager::setupWalls() {
 	//hallway 1
 	createCube(wallEntity, wallNodes[15], Ogre::Vector3(1051, 0, 3451), Ogre::Vector3(50, 500, 500), Ogre::Degree(0));
 	createCube(wallEntity, wallNodes[16], Ogre::Vector3(1849, 0, 3451), Ogre::Vector3(50, 500, 500), Ogre::Degree(0));
+	createCube(wallEntity, wallNodes[17], Ogre::Vector3(1849, 0, 4451), Ogre::Vector3(50, 500, 500), Ogre::Degree(0));
 
 	//hallway 1 room 1
-	createCube(wallEntity, wallNodes[17], Ogre::Vector3(550, 0, 3500), Ogre::Vector3(50, 500, 500), Ogre::Degree(90));
+	createCube(wallEntity, wallNodes[18], Ogre::Vector3(550, 0, 3500), Ogre::Vector3(50, 500, 500), Ogre::Degree(90));
+	createCube(wallEntity, wallNodes[19], Ogre::Vector3(550, 0, 4500), Ogre::Vector3(50, 500, 500), Ogre::Degree(90));
+	createCube(wallEntity, wallNodes[20], Ogre::Vector3(0, 0, 3950), Ogre::Vector3(50, 500, 500), Ogre::Degree(0));
+	createCube(wallEntity, wallNodes[21], Ogre::Vector3(1050, 0, 4750), Ogre::Vector3(50, 500, 500), Ogre::Degree(0));
 }
 
 
