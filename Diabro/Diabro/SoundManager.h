@@ -3,6 +3,8 @@
 
 #include <string>
 #include <OgreVector3.h>
+#include <ik_ISound.h>
+#include <ik_ISoundEngine.h>
 
 /// <summary>
 /// In order to easily play a sound, this class has only static methods.
@@ -18,7 +20,10 @@ public:
 
 	static void PlaySmallSound(std::string pFileName);
 	static void PlayBackgroundMusic(std::string pFileName);
-	static void Play3DSound(std::string pFileName, Ogre::Vector3 pPosition);
+	static irrklang::ISoundEngine* Play3DSound(std::string pFileName, Ogre::Vector3 pPosition);
+
+private:
+	
 };
 
 #endif

@@ -53,7 +53,7 @@ void SoundManager::PlayBackgroundMusic(std::string pFileName)
 /// Plays a 3D sound effect
 /// </summary>
 /// <param name="pFileName">Name of the p file.</param>
-void SoundManager::Play3DSound(std::string pFileName, Ogre::Vector3 pPosition)
+irrklang::ISoundEngine* SoundManager::Play3DSound(std::string pFileName, Ogre::Vector3 pPosition)
 {
 	irrklang::ISoundEngine* _soundEngines = irrklang::createIrrKlangDevice();
 	std::string soundFileLocation = "../../Resources/Music/";
@@ -66,9 +66,16 @@ void SoundManager::Play3DSound(std::string pFileName, Ogre::Vector3 pPosition)
 
 	
 	irrklang::ISound* music = _soundEngines->play3D(convertedLocation,
-		irrklang::vec3df(x, 0, z), true);
+		irrklang::vec3df(x, 0, z), true, true);
 
-	
+	if (music)
+	{
+		music->setMinDistance(2000);
+		music->setIsPaused(false);
+		music->getPlayPosition();
+	}
+
+	return _soundEngines;
 }
 
 
