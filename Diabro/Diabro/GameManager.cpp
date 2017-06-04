@@ -160,7 +160,6 @@ void GameManager::createFrameListener(void)
 bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& pFE)
 {
 	bool ret = BaseApplication::frameRenderingQueued(pFE);
-	SoundManager::Play3DSound("PrincessHelp.wav", _levelManager->getPrincess()->getPosition());
 	_levelManager->update(pFE);
  
 	return ret;

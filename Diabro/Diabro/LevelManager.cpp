@@ -1,5 +1,6 @@
 #include "GameManager.h"
 #include "LevelManager.h"
+#include "SoundManager.h"
 
 /// <summary>
 /// Initializes a new instance of the <see cref="LevelManager" /> class.
@@ -47,6 +48,8 @@ void LevelManager::initialize()
 	_camNode->attachObject(GameManager::getSingletonPtr()->getCamera());
 	_camNode->pitch(Ogre::Degree(10), Ogre::Node::TS_LOCAL);
 	startPitchCam = _camNode->getOrientation().getPitch();
+	SoundManager::Play3DSound("BackgroundMusic.mp3", getPrincess()->getPosition());
+
 }
 
 /// <summary>

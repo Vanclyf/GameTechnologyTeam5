@@ -43,6 +43,7 @@ void SoundManager::PlayBackgroundMusic(std::string pFileName)
 	const char * convertedLocation = location.c_str();
 
 	_soundEngines->play2D(convertedLocation, true);
+	
 }
 
 /// <summary>
@@ -55,22 +56,16 @@ void SoundManager::Play3DSound(std::string pFileName, Ogre::Vector3 pPosition)
 	std::string soundFileLocation = "../../Resources/Music/";
 	std::string location = soundFileLocation + pFileName;
 	const char * convertedLocation = location.c_str();
-	//Convert OGRE::POSITION to irrklangs position
-	//irrklang::vec3d vector(pPosition.UNIT_X.x, pPosition.UNIT_Y.y, pPosition.UNIT_Z.z);
-
-
-	irrklang::ISound* music = _soundEngines->play3D(convertedLocation,
-		irrklang::vec3df(0, 0, 0), true, false, false);
 
 	float x = pPosition.x;
 	float y = pPosition.y;
 	float z = pPosition.z;
 
-	irrklang::vec3df pos3d(x, y, z);
+	
+	irrklang::ISound* music = _soundEngines->play3D(convertedLocation,
+		irrklang::vec3df(x, 0, z), true);
 
-	_soundEngines->setListenerPosition(irrklang::vec3df(0, 0, 0), irrklang::vec3df(0, 0, 1));
-	if (music)
-		music->setPosition(pos3d);
+	
 }
 
 
