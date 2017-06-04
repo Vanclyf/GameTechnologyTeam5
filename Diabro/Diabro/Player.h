@@ -24,6 +24,7 @@ public:
 	bool adjustHealth(float) override;
 	bool adjustStaminaOverTime(Ogre::Real) override;
 	bool adjustStamina(float) override;
+	void adjustLook(Ogre::Entity *);
 
 private:
 	int _currentXP;
