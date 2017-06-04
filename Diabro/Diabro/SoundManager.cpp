@@ -1,7 +1,6 @@
 #include "SoundManager.h"
 #include <irrKlang.h>
 #include <conio.h>
-#include <iostream>
 
 
 SoundManager::SoundManager()
@@ -22,6 +21,8 @@ SoundManager::~SoundManager()
 void SoundManager::PlaySmallSound(std::string pFileName)
 {
 	irrklang::ISoundEngine* _soundEngines = irrklang::createIrrKlangDevice();
+	if (_soundEngines == NULL)
+		return;
 	std::string soundFileLocation = "../../Resources/Music/";
 	std::string location = soundFileLocation + pFileName;
 	const char * convertedLocation = location.c_str();
@@ -38,6 +39,8 @@ void SoundManager::PlaySmallSound(std::string pFileName)
 void SoundManager::PlayBackgroundMusic(std::string pFileName)
 {
 	irrklang::ISoundEngine* _soundEngines = irrklang::createIrrKlangDevice();
+	if (_soundEngines == NULL)
+		return;
 	std::string soundFileLocation = "../../Resources/Music/";
 	std::string location = soundFileLocation + pFileName;
 	const char * convertedLocation = location.c_str();
