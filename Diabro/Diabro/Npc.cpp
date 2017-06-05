@@ -141,7 +141,7 @@ void Npc::rumourDialog() {
 			GameManager::getSingletonPtr()->getUIManager()->appendDialogText("Getting rid of bandits surely will increase your favor with the princess \n");
 			break;
 		case 2:
-			GameManager::getSingletonPtr()->getUIManager()->appendDialogText("Please don't hurt my friends, or the princess will never side with you! \n");
+			GameManager::getSingletonPtr()->getUIManager()->appendDialogText("Please don't hurt my friends, or the princess we will never side with you! \n");
 			break;
 		default:
 			break;
