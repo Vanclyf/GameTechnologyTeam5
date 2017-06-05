@@ -256,25 +256,23 @@ bool Character::adjustStamina(float pAdjust)
 /// </summary>
 void Character::die()
 {
+	Player *player = GameManager::getSingletonPtr()->getLevelManager()->getPlayer();
 	_myNode->setVisible(false);
-	//_myNode->removeAndDestroyAllChildren();
-	//GameManager::getSingletonPtr()->getSceneManager()->destroySceneNode(_myNode);
-	//GameManager::getSingletonPtr()->getSceneManager()->destroyEntity(_myEntity);
-	//TODO: clean up the memory.. 
+ 
 
 	switch(getTypeNpc())
 	{
 	case NpcType::Good:
-		GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->adjustKarma(-10);
+		player->adjustKarma(-10);		
 		break;
 	case NpcType::Bad:
-		GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->adjustKarma(10);
+		player->adjustKarma(10);
 		break;
 	case NpcType::Princess:
-		GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->adjustKarma(-100);
+		player->adjustKarma(-100);
 		break;
 	}
-	GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->gainXP(10);
+	player->gainXP(10);
 	//TODO: actually destroy the node and its children
 	//_myNode->removeAndDestroyAllChildren();
 	//GameManager::getSingletonPtr()->getSceneManager()->destroySceneNode(_myNode);

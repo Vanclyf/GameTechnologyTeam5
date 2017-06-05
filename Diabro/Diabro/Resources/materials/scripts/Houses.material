@@ -14,6 +14,54 @@ material Houses/Pink
    }
 }
 
+material Houses/White
+{
+	technique
+   {
+      pass
+      {
+	  	lighting off
+        
+         texture_unit
+         {
+			texture whiteBox.jpg
+         }
+      }
+   }
+}
+
+material Houses/darkRed
+{
+	technique
+   {
+      pass
+      {
+	  	lighting off
+        
+         texture_unit
+         {
+			texture darkRedBox.jpg
+         }
+      }
+   }
+}
+
+material Houses/darkGreen
+{
+	technique
+   {
+      pass
+      {
+	  	lighting off
+        
+         texture_unit
+         {
+			texture darkGreenBox.jpg
+         }
+      }
+   }
+}
+
 material Houses/Red
 {
    technique

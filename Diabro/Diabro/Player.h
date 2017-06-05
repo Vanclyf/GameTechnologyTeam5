@@ -26,6 +26,7 @@ public:
 	bool adjustStaminaOverTime(Ogre::Real) override;
 	bool adjustStamina(float) override;
 	void update(const Ogre::FrameEvent&);
+	void adjustLook(Ogre::Entity *);
 
 private:
 	int _currentXP;
