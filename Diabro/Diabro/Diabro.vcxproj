@@ -141,6 +141,7 @@
     <ClCompile Include="State.cpp" />
     <ClCompile Include="TestFSM.cpp" />
     <ClCompile Include="QuestItemGenerator.cpp" />
+    <ClCompile Include="TimerManager.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
     <ClCompile Include="Tree.cpp" />
     <ClCompile Include="TreeNode.cpp" />
@@ -187,6 +188,7 @@
     <ClInclude Include="QuestItemGenerator.h" />
     <ClInclude Include="StatRange.h" />
     <ClInclude Include="TestFSM.h" />
+    <ClInclude Include="TimerManager.h" />
     <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="Tree.h" />
     <ClInclude Include="TreeNode.h" />

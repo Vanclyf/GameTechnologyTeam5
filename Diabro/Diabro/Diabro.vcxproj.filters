@@ -107,6 +107,9 @@
     <ClCompile Include="BasicPrincess.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="TimerManager.cpp">
+      <Filter>Sources\Managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicEnemy.h">
@@ -238,6 +241,9 @@
     </ClInclude>
     <ClInclude Include="BaseNpc.h">
       <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="TimerManager.h">
+      <Filter>Headers\Managers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
