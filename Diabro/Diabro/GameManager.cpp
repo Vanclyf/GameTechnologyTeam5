@@ -287,7 +287,7 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 				dynamic_cast<BasicEnemy*>(_levelManager->getHostileNpcs()[i])->toggleDialog();
 			}
 		}
-		_levelManager->getPrincess()->continueDialog();
+		_levelManager->getPrincess()->endingSequence(true);
 		break;
 
 	default:

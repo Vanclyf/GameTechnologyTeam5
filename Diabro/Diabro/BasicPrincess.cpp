@@ -54,9 +54,11 @@ void BasicPrincess::update(Ogre::Real pDeltatime)
 /// </summary>
 void BasicPrincess::die()
 {
+	endingSequence(false);
 	Character::die();
 	GameManager::getSingletonPtr()->getLevelManager()->detachHostileNPC(id);
-	//TODO: create game over method.
+	
+	
 }
 
 /// <summary>
@@ -68,53 +70,16 @@ bool BasicPrincess::dialog(Ogre::Vector3 pPlayerPos)
 {
 		Ogre::Real distance = _myNode->getPosition().distance(pPlayerPos);
 
-		if (distance < 500) // needs to be tweaked
+		if (distance < 800) // needs to be tweaked
 		{
 			_inDialog = true;
 
 			GameManager::getSingletonPtr()->getUIManager()->createPrincessDialog("You found the princess\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress Space to Continue");
-
+			endingSequence(true);
 			return true;
 		}
 
 		return false;
-}
-
-/// <summary>
-/// Continues the dialog.
-/// </summary>
-void BasicPrincess::continueDialog()
-{
-	
-	int karma = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getKarma();
-	if (_inDialog == true && karma >= 0) {
-		_dialogCount++;
-		if (_dialogCount == 1) {
-			GameManager::getSingletonPtr()->getUIManager()->appendDialogText("thank you for saving me senpai... I princess Kinny am forever in your favor \n");
-		}
-		else if (_dialogCount == 2) {
-			GameManager::getSingletonPtr()->getUIManager()->appendDialogText("and they lived happily ever after... until Kinney died of herpes \n");
-		}
-		else if (_dialogCount >= 3) {
-			toggleDialog();
-			_dialogCount = 0;
-			_inDialog = false;
-		}
-	}else if(_inDialog == true && karma < 0)
-	{
-		_dialogCount++;
-		if (_dialogCount == 1) {
-			GameManager::getSingletonPtr()->getUIManager()->appendDialogText("I cannot come with you senpai san... you changed too much \n");
-		}
-		else if (_dialogCount == 2) {
-			GameManager::getSingletonPtr()->getUIManager()->appendDialogText("Princess Kinney left... never to return... and probably died \n");
-		}
-		else if (_dialogCount >= 3) {
-			toggleDialog();
-			_dialogCount = 0;
-			_inDialog = false;
-		}
-	}
 }
 
 /// <summary>
@@ -128,5 +93,67 @@ void BasicPrincess::toggleDialog() {
 	catch (...) {
 		return;
 	};
+}
+
+void BasicPrincess::endingSequence(bool ending)
+{
+	if (ending)
+	{
+		int karma = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getKarma();
+		if (_inDialog == true && karma >= 0) {
+			_dialogCount++;
+			if (_dialogCount == 1) {
+				GameManager::getSingletonPtr()->getUIManager()->appendDialogText("thank you for saving me senpai... I princess Kinny am forever in your favor \n");
+			}
+			else if (_dialogCount == 2) {
+				GameManager::getSingletonPtr()->getUIManager()->appendDialogText("and they lived happily ever after... until Kinney died of herpes \n");
+				
+			}
+			else if (_dialogCount >= 3) {
+				toggleDialog();
+				_dialogCount = 0;
+				Ogre::RenderWindow *target = (Ogre::RenderWindow*)Ogre::Root::getSingleton().getRenderTarget("TutorialApplication Render Window");
+				target->destroy();
+				_inDialog = false;
+			}
+		}
+		else if (_inDialog == true && karma < 0)
+		{
+			_dialogCount++;
+			if (_dialogCount == 1) {
+				GameManager::getSingletonPtr()->getUIManager()->appendDialogText("I cannot come with you senpai san... you changed too much \n");
+			}
+			else if (_dialogCount == 2) {
+				GameManager::getSingletonPtr()->getUIManager()->appendDialogText("Princess Kinney left... never to return... and probably died \n");			
+			}
+			else if (_dialogCount >= 3) {
+				toggleDialog();
+				_dialogCount = 0;
+				Ogre::RenderWindow *target = (Ogre::RenderWindow*)Ogre::Root::getSingleton().getRenderTarget("TutorialApplication Render Window");
+				target->destroy();
+				_inDialog = false;
+			}
+		}
+		
+	}else
+	{
+		_inDialog = true;
+		_dialogCount++;
+		if (_dialogCount == 1) {
+			GameManager::getSingletonPtr()->getUIManager()->createPrincessDialog("You Killed the princess\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress Space to Continue");
+				
+		}
+		else if (_dialogCount == 2) {
+			GameManager::getSingletonPtr()->getUIManager()->appendDialogText("You killed princess Kinny, A terrible shock went through the player, what now? He Felt empty \n");
+				
+		}
+		else if (_dialogCount >= 3) {
+			toggleDialog();
+			_dialogCount = 0;
+			Ogre::RenderWindow *target = (Ogre::RenderWindow*)Ogre::Root::getSingleton().getRenderTarget("TutorialApplication Render Window");
+			target->destroy();
+			_inDialog = false;
+		}	
+	}
 }
 
