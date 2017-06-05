@@ -31,7 +31,6 @@ BasicPrincess::~BasicPrincess()
 /// <returns></returns>
 bool BasicPrincess::adjustHealth(float pAdjust)
 {
-	//TODO: add bad karma ending sequence.
 	die();
 	return false;
 }
@@ -112,8 +111,7 @@ void BasicPrincess::endingSequence(bool ending)
 			else if (_dialogCount >= 3) {
 				toggleDialog();
 				_dialogCount = 0;
-				Ogre::RenderWindow *target = (Ogre::RenderWindow*)Ogre::Root::getSingleton().getRenderTarget("TutorialApplication Render Window");
-				target->destroy();
+				closeGame();
 				_inDialog = false;
 			}
 		}
@@ -129,8 +127,7 @@ void BasicPrincess::endingSequence(bool ending)
 			else if (_dialogCount >= 3) {
 				toggleDialog();
 				_dialogCount = 0;
-				Ogre::RenderWindow *target = (Ogre::RenderWindow*)Ogre::Root::getSingleton().getRenderTarget("TutorialApplication Render Window");
-				target->destroy();
+				closeGame();
 				_inDialog = false;
 			}
 		}
@@ -150,10 +147,14 @@ void BasicPrincess::endingSequence(bool ending)
 		else if (_dialogCount >= 3) {
 			toggleDialog();
 			_dialogCount = 0;
-			Ogre::RenderWindow *target = (Ogre::RenderWindow*)Ogre::Root::getSingleton().getRenderTarget("TutorialApplication Render Window");
-			target->destroy();
+			closeGame();
 			_inDialog = false;
 		}	
 	}
 }
 
+void BasicPrincess::closeGame()
+{
+	Ogre::RenderWindow *target = (Ogre::RenderWindow*)Ogre::Root::getSingleton().getRenderTarget("TutorialApplication Render Window");
+	target->destroy();
+}

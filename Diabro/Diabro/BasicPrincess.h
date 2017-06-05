@@ -23,11 +23,11 @@ public:
 	//void continueDialog();
 	void toggleDialog();
 	void endingSequence(bool);
+	void closeGame();
 
 private:
 	int _dialogCount;
 	bool _inDialog;
-	BaseApplication *_base;
 };
 
 
