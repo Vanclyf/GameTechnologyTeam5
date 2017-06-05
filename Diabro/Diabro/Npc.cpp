@@ -87,7 +87,7 @@ bool Npc::dialog(Ogre::Vector3 pPlayerPos)
 {
 	Ogre::Real distance = _myNode->getPosition().distance(pPlayerPos);
 
-	if (distance < 800) // needs to be tweaked
+	if (distance < 500) // needs to be tweaked
 	{
 		_inDialog = true;
 
