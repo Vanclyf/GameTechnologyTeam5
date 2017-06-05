@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "GameManager.h"
+#include "SoundManager.h"
 
 /// <summary>
 /// Creates a new instance of the <see cref="Player"/> class.
@@ -65,7 +66,7 @@ bool Player::lightAttack()
 	if (!Character::lightAttack()) {
 		return false;
 	}
-
+	SoundManager::PlaySmallSound("PlayerHit.wav");
 	std::vector<Character*> targets = GameManager::getSingletonPtr()->getLevelManager()->getHostileNpcs();
 	findTarget(targets);
 	if (_target == nullptr) {
@@ -143,4 +144,31 @@ void Player::levelUp()
 	_xpTillNextLevel = calcXpTillLevel(_currentLevel + 1);
 
 	// Increase _stats
+}
+
+void Player::adjustLook(Ogre::Entity *pPlayerEntity)
+{
+	if (_karmaPoints >=10 && _karmaPoints <40)
+	{
+		pPlayerEntity->setMaterialName("Houses/darkGreen");
+		
+	}
+	else if (_karmaPoints >=40 )
+	{
+
+		pPlayerEntity->setMaterialName("Houses/Green");
+	}
+	else if(_karmaPoints <= -10 && _karmaPoints> -40)
+	{
+		pPlayerEntity->setMaterialName("Houses/Red");
+	}
+	else if(_karmaPoints <= -40)
+	{
+		pPlayerEntity->setMaterialName("Houses/darkRed");
+	}
+	else
+	{
+		pPlayerEntity->setMaterialName("Houses/White");
+	}
+		
 }
