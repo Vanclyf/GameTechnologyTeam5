@@ -10,7 +10,7 @@ class UIManager
 {
 public:
 	UIManager();
-	
+
 	void init();
 	void setupUI();
 
@@ -23,6 +23,7 @@ public:
 	void destroyPrincessDialog();
 	void destroyEnemyDialog();
 	void appendDialogText(Ogre::String);
+	void updateEventLogText(Ogre::String);
 	static Ogre::Real calcBarSize(Ogre::Real, Ogre::Real, Ogre::Real);
 
 private:
@@ -35,7 +36,8 @@ private:
 	OgreBites::TextBox*			_mDialogTextArea;
 	OgreBites::DecorWidget*		_healthBarWidget;
 	OgreBites::DecorWidget*		_staminaBarWidget;
-	OgreBites::Slider*		_karmaBarWidget;
+	OgreBites::Slider*		    _karmaBarWidget;
+	OgreBites::TextBox*         _eventLogTextBox;
 	Ogre::SceneNode*			_uiNode;
 
 	Ogre::Real					_maxWidthBar;

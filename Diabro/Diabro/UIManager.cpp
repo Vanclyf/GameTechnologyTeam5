@@ -34,7 +34,13 @@ void UIManager::setupUI()
 
 	// create health bar
 	_healthBarWidget = _mSdkTrayMgr->createDecorWidget(OgreBites::TL_TOPLEFT, "Health", "UI/Green");
-	_karmaBarWidget = _mSdkTrayMgr->createLongSlider(OgreBites::TL_TOPRIGHT, "Karma", "Karma",200,50,-300,300, 60);
+	// create karma bar
+	_karmaBarWidget = _mSdkTrayMgr->createLongSlider(OgreBites::TL_TOPRIGHT, "Karma", "Karma", 200, 50, -300, 300, 60);
+	//create eventlogtextbox
+	_eventLogTextBox = _mSdkTrayMgr->createTextBox(OgreBites::TL_BOTTOMLEFT, "Eventlog", "Event Log", 300, 200);
+	
+	
+	
 }
 
 void UIManager::createDialog(Ogre::String pDialogText) {
@@ -83,6 +89,15 @@ void UIManager::appendDialogText(Ogre::String pDialogText) {
 }
 
 /// <summary>
+/// Updates the event log text.
+/// </summary>
+/// <param name="eventLogText">The event log text.</param>
+void UIManager::updateEventLogText(Ogre::String eventLogText)
+{
+	_eventLogTextBox->setText(eventLogText);
+}
+
+/// <summary>
 /// Adjusts the health bar pValue.
 /// </summary>
 /// <param name="pValue">The pValue.</param>
@@ -111,5 +126,6 @@ void UIManager::adjustStaminaBar(Ogre::Real pValue, Ogre::Real pMaxValue)
 /// <returns></returns>
 Ogre::Real UIManager::calcBarSize(Ogre::Real pValue, Ogre::Real pMaxValue, Ogre::Real pMaxSize)
 {
-return((pValue / pMaxValue) * pMaxSize);
+	return((pValue / pMaxValue) * pMaxSize);
 }
+
