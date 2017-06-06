@@ -56,6 +56,12 @@ GameManager& GameManager::getSingleton(void)
 
 //---------------------------------------------------------------------------
 
+void GameManager::enter()
+{
+	OgreFramework::getSingletonPtr()->m_pLog->logMessage("Entering GameState");
+
+
+}
 
 
 /// <summary>

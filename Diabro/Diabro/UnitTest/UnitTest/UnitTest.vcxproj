@@ -90,6 +90,7 @@
     <ClCompile Include="LevelGenerationTest.cpp" />
     <ClCompile Include="MainTest.cpp" />
     <ClCompile Include="PlayerClassTest.cpp" />
+    <ClCompile Include="SoundManagerTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\DiabloLib\DiabloLib.vcxproj">

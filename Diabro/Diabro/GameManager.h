@@ -14,10 +14,11 @@ Filename:    GameManager.h
 #include "ItemManager.h"
 #include "QuestContentManager.h"
 #include <ctime>
+#include "AppState.hpp"
 
 //---------------------------------------------------------------------------
 
-class GameManager : public BaseApplication, public Ogre::Singleton<GameManager>
+class GameManager : public BaseApplication, public Ogre::Singleton<GameManager>, public AppState
 {
 public:
 	GameManager(void);
@@ -27,6 +28,11 @@ public:
 
 	static GameManager& getSingleton(void);
 	static GameManager* getSingletonPtr(void);
+	
+	void enter();
+	void exit();
+	bool pause();
+	void resume();
 
 
 	Ogre::SceneManager* getSceneManager(void) { return mSceneMgr; }

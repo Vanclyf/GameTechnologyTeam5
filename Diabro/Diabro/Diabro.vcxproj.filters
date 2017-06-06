@@ -104,12 +104,17 @@
     <ClCompile Include="TreeNode.cpp">
       <Filter>Sources\TreeDatastructure</Filter>
     </ClCompile>
-    <ClCompile Include="SoundManager.cpp" >
-	<Filter>Sources</Filter>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="BasicPrincess.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="AdvancedOgreFramework.cpp" />
+    <ClCompile Include="DotSceneLoader.cpp" />
+    <ClCompile Include="MenuState.cpp" />
+    <ClCompile Include="PauseState.cpp" />
+    <ClCompile Include="GameState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicEnemy.h">
@@ -236,15 +241,22 @@
     <ClInclude Include="TreeNode.h">
       <Filter>Headers\TreeDatastructure</Filter>
     </ClInclude>
-    <ClInclude Include="SoundManager.h" >
-	<Filter>Headers</Filter>
-</ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
     <ClInclude Include="BasicPrincess.h">
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="BaseNpc.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="AdvancedOgreFramework.hpp" />
+    <ClInclude Include="DotSceneLoader.hpp" />
+    <ClInclude Include="MenuState.hpp" />
+    <ClInclude Include="PauseState.hpp" />
+    <ClInclude Include="rapidxml.hpp" />
+    <ClInclude Include="GameState.h" />
+    <ClInclude Include="AppState.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GameObjStandard.cg" />
