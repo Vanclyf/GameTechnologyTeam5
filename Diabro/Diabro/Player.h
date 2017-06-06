@@ -17,7 +17,7 @@ public:
 	bool lightAttack() override;
 
 	bool initialize() override;
-	int getKarma();
+	
 	int _attackSpeed;
 	int _AttackCD;
 
