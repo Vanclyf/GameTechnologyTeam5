@@ -1,6 +1,7 @@
 #include "GameManager.h"
 #include "LevelManager.h"
 #include <btBulletDynamicsCommon.h>
+# define M_PI           3.14159265358979323846  /* pi */
 
 
 /// <summary>
@@ -158,20 +159,6 @@ void LevelManager::update(const Ogre::FrameEvent& pFE)
 	dynamicsWorld->stepSimulation(pFE.timeSinceLastFrame, 10);
 
 	updatePlayer();
-	if (_bulletDirVec.getX() <= 2 && _bulletDirVec.getX() >= -2 || _bulletDirVec.getZ() <= 2 && _bulletDirVec.getZ() >= -2) {
-		translatePlayer(_bulletDirVec);
-	}
-
-	/*
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	FILE* fp;
-	freopen_s(&fp, "CONOUT$", "w", stdout);
-	std::cout << "testnode z: " << testNode->getPosition().z << std::endl << "testnode x: " << testNode->getPosition().x << std::endl;
-	fclose(fp);
-#endif
-*/
-
-
 
 // update characters
 	playerScript->update(pFE.timeSinceLastFrame);
@@ -231,16 +218,26 @@ void LevelManager::initPhysicsWorld() {
 
 	fallShape = new btBoxShape(btVector3(10, 10, 10));
 
+	btCollisionShape* newGroundShape = new btBoxShape(btVector3(10000, 1, 10000));
+	btRigidBody* newGroundRigidBody;
+
 	//ground
-	groundMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -1, 0)));
+	//groundMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -1, 0)));
+	//btRigidBody::btRigidBodyConstructionInfo
+	//	groundRigidBodyCI(0, groundMotionState, groundShape, btVector3(0, 0, 0));
+	//groundRigidBody = new btRigidBody(groundRigidBodyCI);
+	//dynamicsWorld->addRigidBody(groundRigidBody);
+
+	//new ground
+	btDefaultMotionState* newGroundMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -1, 0)));
 	btRigidBody::btRigidBodyConstructionInfo
-		groundRigidBodyCI(0, groundMotionState, groundShape, btVector3(0, 0, 0));
-	groundRigidBody = new btRigidBody(groundRigidBodyCI);
-	dynamicsWorld->addRigidBody(groundRigidBody);
+		newGroundRigidBodyCI(0, newGroundMotionState, newGroundShape, btVector3(0, 0, 0));
+	newGroundRigidBody = new btRigidBody(newGroundRigidBodyCI);
+	dynamicsWorld->addRigidBody(newGroundRigidBody);
 
 	//falling box
 	fallMotionState =
-		new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-1000, 100, -1000)));
+		new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(500, 100, 500)));
 	mass = 10;
 	fallInertia = btVector3(0, 0, 0);
 	fallShape->calculateLocalInertia(mass, fallInertia);
@@ -288,7 +285,37 @@ void LevelManager::createCube(Ogre::Entity* pMyEntity, Ogre::SceneNode* pMyNode,
 	pMyNode->setPosition(pMyPosition);
 	pMyNode->pitch(Ogre::Degree(90));
 	pMyNode->roll(pMyRotation);
+
 	pMyEntity->setMaterialName("Examples/Rockwall");
+
+	//physics engine cubes
+
+
+	if (pMyRotation.valueDegrees() == 90) {
+		btCollisionShape* wallShape = new btBoxShape(btVector3(500,500,50));
+		btDefaultMotionState* wallMotionState;
+		wallMotionState = new btDefaultMotionState(btTransform(btQuaternion(0,0,0, 1), btVector3(pMyPosition.x, 0, pMyPosition.z)));
+		btRigidBody::btRigidBodyConstructionInfo
+			wallRigidBodyCI(0, wallMotionState, wallShape, btVector3(0, 0, 0));
+
+		btRigidBody* wallRigidBody = new btRigidBody(wallRigidBodyCI);
+		dynamicsWorld->addRigidBody(wallRigidBody);
+	}
+	else if (pMyRotation.valueDegrees() == 0) {
+		btCollisionShape* wallShape = new btBoxShape(btVector3(pMyScale.x, pMyScale.y, pMyScale.z));
+		btDefaultMotionState* wallMotionState;
+		wallMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(pMyPosition.x, 0, pMyPosition.z)));
+		btRigidBody::btRigidBodyConstructionInfo
+			wallRigidBodyCI(0, wallMotionState, wallShape, btVector3(0, 0, 0));
+
+		btRigidBody* wallRigidBody = new btRigidBody(wallRigidBodyCI);
+		dynamicsWorld->addRigidBody(wallRigidBody);
+	}
+
+	
+
+
+
 };
 
 void::LevelManager::setupWalls() {
@@ -299,6 +326,7 @@ void::LevelManager::setupWalls() {
 		wallNodes.push_back(_levelNode->createChildSceneNode(s));
 
 	}
+
 	//test cube
 	createCube(wallEntity, wallNodes[99], Ogre::Vector3(-1000, 0, -1000), Ogre::Vector3(50, 50, 50), Ogre::Degree(0));
 
@@ -403,9 +431,20 @@ void::LevelManager::setupWalls() {
 }
 
 
-void::LevelManager::translatePlayer(btVector3& pMyTranslation) {
+void::LevelManager::translatePlayer(btVector3& pMyTranslation, btQuaternion& pMyRotation) {
 	fallRigidBody->activate();
-	fallRigidBody->translate(pMyTranslation);
+	// extract the vector part of the quaternion
+	btVector3 u(pMyRotation.getX(), pMyRotation.getY(), pMyRotation.getZ());
+
+	// Extract the scalar part of the quaternion
+	float s = pMyRotation.getW();
+
+
+	btVector3 rotatedDirection = 2.0f * u.dot(pMyTranslation) * u
+		+ (s*s - u.dot(u)) * pMyTranslation
+		+ 2.0f * s * u.cross(pMyTranslation);
+
+	fallRigidBody->translate(rotatedDirection);
 }
 
 
@@ -415,41 +454,15 @@ void::LevelManager::updatePlayer() {
 	fallRigidBody->activate();
 	btTransform playerTransForm;
 	fallRigidBody->getMotionState()->getWorldTransform(playerTransForm);
-	btQuaternion btQuat;
+	btQuaternion btPlayerRotation = btQuaternion(playerNode->getOrientation().getYaw().valueRadians(), 0, 0);
 
-
-
-
-	btQuat.setEuler(GameManager::getSingletonPtr()->getCamera()->getDerivedOrientation().getYaw().valueDegrees()
-		, GameManager::getSingletonPtr()->getCamera()->getDerivedOrientation().getPitch().valueDegrees()
-		, GameManager::getSingletonPtr()->getCamera()->getDerivedOrientation().getRoll().valueDegrees());
-
-	fallRigidBody->getWorldTransform().setRotation(btQuat);
+	playerTransForm.setRotation(btPlayerRotation);
 	fallRigidBody->setCenterOfMassTransform(playerTransForm);
-	testNode->setOrientation(GameManager::getSingletonPtr()->getCamera()->getDerivedOrientation());
-	testNode->setPosition(Ogre::Vector3(playerTransForm.getOrigin().getX(), playerTransForm.getOrigin().getY() + 20, playerTransForm.getOrigin().getZ()));
+	playerNode->setOrientation(Ogre::Quaternion(btPlayerRotation.getW(), btPlayerRotation.getX(), btPlayerRotation.getY(), btPlayerRotation.getZ()));
+	playerNode->setPosition(Ogre::Vector3(playerTransForm.getOrigin().getX(), playerTransForm.getOrigin().getY() - 10, playerTransForm.getOrigin().getZ()));
+
+	if (_bulletDirVec.getX() <= 2 && _bulletDirVec.getX() >= -2 || _bulletDirVec.getZ() <= 2 && _bulletDirVec.getZ() >= -2) {
+		translatePlayer(_bulletDirVec, btPlayerRotation);
+	}
 
 };
-
-
-
-/*
-void::LevelManager::updatePlayer() {
-fallRigidBody->activate();
-btTransform playerTransForm = fallRigidBody->getCenterOfMassTransform();
-Ogre::Vector3 playerPosition;
-playerPosition = playerScript->getPosition();
-playerTransForm.setOrigin(btVector3(playerPosition.x, playerPosition.y, playerPosition.z));
-fallRigidBody->setCenterOfMassTransform(playerTransForm);
-testNode->setPosition(playerPosition);
-
-
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-FILE* fp;
-freopen_s(&fp, "CONOUT$", "w", stdout);
-std::cout << fallRigidBody->checkCollideWithOverride(boxRigidBody) << std::endl;
-fclose(fp);
-#endif
-
-};
-*/

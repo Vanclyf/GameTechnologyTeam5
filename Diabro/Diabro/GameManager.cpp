@@ -18,6 +18,7 @@ Filename:    GameManager.cpp
 /// </summary>
 GameManager::GameManager() : _levelManager(0), _uiManager(0), _itemManager(0), _questContentManager(0), _gameTimer(0)
 {
+	_playerSpeed = 5;
 }
 //---------------------------------------------------------------------------
 /// <summary>
@@ -175,7 +176,7 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 	Ogre::Vector3 dirVec = _levelManager->playerScript->getDirVector();
 	btVector3 bulletDirVec = _levelManager->getDirVector();
 
-	if (bulletDirVec.getX() >= 2 || bulletDirVec.getX() <= -2 || bulletDirVec.getY() >= 2 || bulletDirVec.getY() <= -2 || bulletDirVec.getZ() >= 2 || bulletDirVec.getZ() <= -2) {
+	if (bulletDirVec.getX() >= _playerSpeed || bulletDirVec.getX() <= _playerSpeed || bulletDirVec.getY() >= _playerSpeed || bulletDirVec.getY() <= _playerSpeed || bulletDirVec.getZ() >= _playerSpeed || bulletDirVec.getZ() <= -_playerSpeed) {
 		bulletDirVec = btVector3(0, 0, 0);
 	}
 
@@ -187,22 +188,26 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 		break;
 	case OIS::KC_UP:
 	case OIS::KC_W:
-		dirVec.z = -1;
+		//dirVec.z = -1;
+		bulletDirVec.setZ(-_playerSpeed);
 		break;
 
 	case OIS::KC_DOWN:
 	case OIS::KC_S:
-		dirVec.z = 1;
+		//dirVec.z = 1;
+		bulletDirVec.setZ(_playerSpeed);
 		break;
 
 	case OIS::KC_LEFT:
 	case OIS::KC_A:
-		dirVec.x = -1;
+		//dirVec.x = -1;
+		bulletDirVec.setX(-_playerSpeed);
 		break;
 
 	case OIS::KC_RIGHT:
 	case OIS::KC_D:
-		dirVec.x = 1;
+		//dirVec.x = 1;
+		bulletDirVec.setX(_playerSpeed);
 		break;
 	
 	case OIS::KC_LSHIFT:
@@ -253,24 +258,12 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 	case OIS::KC_SPACE:
 		dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[0])->continueDialog();
 		break;
-	case OIS::KC_I:
-		bulletDirVec.setZ(1);
-		break;
-	case OIS::KC_K:
-		bulletDirVec.setZ(-1);
-		break;
-	case OIS::KC_J:
-		bulletDirVec.setX(1);
-		break;
-	case OIS::KC_L:
-		bulletDirVec.setX(-1);
-		break;
 	default:
 		break;
 	}
 
 	_levelManager->playerScript->setDirVector(dirVec);
-	if (bulletDirVec.getX() <= 2 && bulletDirVec.getX() >= -2 && bulletDirVec.getZ() <= 2 && bulletDirVec.getZ() >= -2) {
+	if (bulletDirVec.getX() <= _playerSpeed && bulletDirVec.getX() >= -_playerSpeed && bulletDirVec.getZ() <= _playerSpeed && bulletDirVec.getZ() >= -_playerSpeed) {
 		_levelManager->setDirVector(btVector3(bulletDirVec.getX(), 0, bulletDirVec.getZ()));
 	}
 	
@@ -304,22 +297,26 @@ bool GameManager::keyReleased(const OIS::KeyEvent& pKE)
 	{
 	case OIS::KC_UP:
 	case OIS::KC_W:
-		dirVec.z = 0;
+		//dirVec.z = 0;
+		bulletDirVec.setZ(0);
 		break;
 
 	case OIS::KC_DOWN:
 	case OIS::KC_S:
-		dirVec.z = 0;
+		//dirVec.z = 0;
+		bulletDirVec.setZ(0);
 		break;
 
 	case OIS::KC_LEFT:
 	case OIS::KC_A:
-		dirVec.x = 0;
+		//dirVec.x = 0;
+		bulletDirVec.setX(0);
 		break;
 
 	case OIS::KC_RIGHT:
 	case OIS::KC_D:
-		dirVec.x = 0;
+		//dirVec.x = 0;
+		bulletDirVec.setX(0);
 		break;
 
 	case OIS::KC_LSHIFT:

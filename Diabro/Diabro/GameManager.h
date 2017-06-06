@@ -68,6 +68,7 @@ private:
 	QuestContentManager* _questContentManager;
 
 	Ogre::Timer* _gameTimer;
+	int _playerSpeed;
 };
 
 //---------------------------------------------------------------------------
