@@ -10,6 +10,7 @@
 #include "CharacterSpawner.h"
 #include "LevelGenerator.h"
 #include "BasicPrincess.h"
+#include <ik_ISoundEngine.h>
 
 
 class LevelManager
@@ -60,7 +61,7 @@ private:
 	//TODO replace all with spawners
 	Ogre::Entity* _npcEntity;
 	Ogre::Entity* _basicEnemyEntity;
-
+	irrklang::ISoundEngine* engine;
 	CharacterSpawner<Npc>* npcSpawner;
 	CharacterSpawner<BasicEnemy>* enemySpawner;
 	CharacterSpawner<BasicPrincess>* princessSpawner;
