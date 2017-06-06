@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "GameManager.h"
+#include "SoundManager.h"
 
 /// <summary>
 /// Creates a new instance of the <see cref="Player"/> class.
@@ -29,8 +30,24 @@ Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pM
 bool Player::initialize()
 {
 	Character::initialize();
-
+	_attackTimer = new Ogre::Timer();
 	return true;
+}
+
+
+void Player::update(const Ogre::FrameEvent& pFE)
+{
+	Character::update(pFE.timeSinceLastFrame);
+	if (_attackCountDown <= 0)
+	{
+		_attackCountDown = 0;
+	}
+	else
+	{
+		Ogre::Real deltaTime = _attackTimer->getMilliseconds();
+		_attackTimer->reset();
+		_attackCountDown -= deltaTime;
+	}
 }
 
 /// <summary>
@@ -42,7 +59,7 @@ bool Player::adjustHealth(float pAdjust)
 {
 	if (!Character::adjustHealth(pAdjust)) { return false; }
 
-	GameManager::getSingleton().getUIManager()->adjustHealthBar(_currentHealth, _stats->GetStat(StatType::MaxHealth));
+	GameManager::getSingleton().getUIManager()->adjustHealthBar(_currentHealth, _stats->GetStat(MaxHealth));
 	return true;
 }
 
@@ -65,54 +82,45 @@ bool Player::lightAttack()
 	if (_attackCountDown <= 0)
 	{
 		_attackCountDown = 1200;
-		if (!Character::lightAttack()) {
+		if (!Character::lightAttack())
+		{
 			return false;
 		}
 		auto levelManager = GameManager::getSingletonPtr()->getLevelManager();
-	        //get all posible targets
-	        std::vector<Character*> Targets = levelManager->getHostileNpcs();
-	        std::vector<Character*>npcTargets = levelManager->getFriendlyNpcs();
-	        Targets.insert(Targets.end(), npcTargets.begin(), npcTargets.end());
-	        findTarget(Targets);
-		if (_Target == nullptr) {
+		//get all posible targets
+		std::vector<Character*> targets = levelManager->getHostileNpcs();
+		std::vector<Character*> npcTargets = levelManager->getFriendlyNpcs();
+		targets.insert(targets.end(), npcTargets.begin(), npcTargets.end());
+		findTarget(targets);
+		if (_target == nullptr)
+		{
 			return false;
 		}
-		return false;
-	}
-	auto levelManager = GameManager::getSingletonPtr()->getLevelManager();
-	//get all posible targets
-	std::vector<Character*> Targets = levelManager->getHostileNpcs();
-	std::vector<Character*>npcTargets = levelManager->getFriendlyNpcs();
-	Targets.insert(Targets.end(), npcTargets.begin(), npcTargets.end());
-	findTarget(Targets);
-	if (_target == nullptr)
-	{
-		return false;
-	}
 
-	_target->adjustHealth(_stats->DeterminedDamage());
-SoundManager::PlaySmallSound("PlayerHit.wav");
+		_target->adjustHealth(_stats->DeterminedDamage());
+		SoundManager::PlaySmallSound("PlayerHit.wav");
 
 		switch (_target->getTypeNpc())
 		{
-		case NpcType::Good:
+		case Good:
 			_target->hit();
 
 			_target->getEntity()->setMaterial(Ogre::MaterialManager::getSingleton().getByName("Houses/HitGreen"));
 			break;
-		case NpcType::Bad:
+		case Bad:
 			_target->hit();
 
 			_target->getEntity()->setMaterial(Ogre::MaterialManager::getSingleton().getByName("Houses/HitRed"));
 			break;
-		case NpcType::Princess:
+		case Princess:
 			break;
 		}
 
-	_canAttack = false;
-	_currAttackCooldown = _lightAttackCooldown;
+		_canAttack = false;
+		_currAttackCooldown = _lightAttackCooldown;
 
-	return true;
+		return true;
+	}
 }
 
 /// <summary>
@@ -174,4 +182,44 @@ void Player::levelUp()
 	_xpTillNextLevel = calcXpTillLevel(_currentLevel + 1);
 
 	// Increase _stats
+}
+/// <summary>
+/// Determines whether [is karma positive].
+/// </summary>
+/// <returns>
+///   <c>true</c> if [karma positive]; otherwise, <c>false</c>.
+/// </returns>
+bool Player::isKarmaPositive() const
+{
+	if (_karmaPoints >= 0)
+	{
+		return true;
+	}
+	return false;
+}
+void Player::adjustLook(Ogre::Entity *pPlayerEntity)
+{
+	if (_karmaPoints >= 10 && _karmaPoints <40)
+	{
+		pPlayerEntity->setMaterialName("Houses/darkGreen");
+
+	}
+	else if (_karmaPoints >= 40)
+	{
+
+		pPlayerEntity->setMaterialName("Houses/Green");
+	}
+	else if (_karmaPoints <= -10 && _karmaPoints> -40)
+	{
+		pPlayerEntity->setMaterialName("Houses/Red");
+	}
+	else if (_karmaPoints <= -40)
+	{
+		pPlayerEntity->setMaterialName("Houses/darkRed");
+	}
+	else
+	{
+		pPlayerEntity->setMaterialName("Houses/White");
+	}
+
 }

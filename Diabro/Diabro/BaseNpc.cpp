@@ -45,7 +45,6 @@ void BaseNpc::update(Ogre::Real pDeltatime)
 		switch (getTypeNpc())
 		{
 		case Good:	
-			_dirVec = Ogre::Vector3(0, 0, 0);
 			if (!_isFriendly)
 			{
 				attackPlayer();
