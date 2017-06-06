@@ -47,6 +47,7 @@ void Player::update(const Ogre::FrameEvent& pFE)
 			_attackTimer->reset();
 			_attackCountDown -= deltaTime;
 		}
+		GameManager::getSingletonPtr()->getUIManager()->updateStatsPanel(getStats());
 }
 
 /// <summary>

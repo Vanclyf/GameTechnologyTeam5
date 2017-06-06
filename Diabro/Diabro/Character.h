@@ -44,6 +44,7 @@ public:
 
 	Ogre::Vector3 getPosition() { return _myNode->getPosition(); }
 	NpcType getTypeNpc() { return _typeNpc; }
+	CharacterStats* getStats() { return _stats; }
 	void setTypeNpc(NpcType pType) { _typeNpc = pType; }
 
 	int getLevel() { return _currentLevel; }

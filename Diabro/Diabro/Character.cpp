@@ -23,8 +23,14 @@ bool Character::initialize()
 	_isRunning = false;
 
 	setUpStats();
-
-	_currentHealth = _stats->GetStat(MaxHealth);
+	if(getTypeNpc() == NpcType::Good || getTypeNpc() == NpcType::Bad)
+	{
+		_currentHealth = _stats->GetStat(MaxHealth);
+	}
+	else
+	{
+		_currentHealth = _stats->GetStat(MaxHealth);
+	}
 	_currentStamina = _stats->GetStat(MaxStamina);
 	_hitTimer = new Ogre::Timer();
 
@@ -545,27 +551,32 @@ void Character::setEquipmentSlot(ItemInstance* pItem)
 /// <param name="pItem">The item of which the stats should be added.</param>
 void Character::addStats(EquipmentInstance* pItem)
 {
+	Ogre::Real strength;
+	Ogre::Real damage;
+	Ogre::Real vitality;
+	Ogre::Real armor;
 	std::vector<Stat> tempStats;
 	switch(pItem->getType())
 	{
 	case 0:
 		//weapon
 		tempStats = _stats->GetStats();
-		for (int i = 0; i < reinterpret_cast<WeaponInstance*>(pItem)->getBaseStats().size(); i++)
-		{
-			tempStats.at((int)i).value += reinterpret_cast<WeaponInstance*>(pItem)->getBaseStats().at((int)i)->value;
-			_stats->GetStats().at((int)i) = tempStats.at((int)i);
-		}
+		damage = reinterpret_cast<WeaponInstance*>(pItem)->getBaseStats().at(0)->value;
+		_stats->addStat(StatType::WeaponDamage, damage);
+		
 
 		break;
 	case 1:
 		//armor
 		tempStats = _stats->GetStats();
-		for (int i = 0; i < reinterpret_cast<ArmorInstance*>(pItem)->getBaseStats().size(); i++)
-		{
-			tempStats.at((int)i).value += reinterpret_cast<ArmorInstance*>(pItem)->getBaseStats().at((int)i)->value;
-			_stats->GetStats().at((int)i) = tempStats.at((int)i);
-		}
+		
+		strength = reinterpret_cast<WeaponInstance*>(pItem)->getBaseStats().at(2)->value;
+		armor = reinterpret_cast<WeaponInstance*>(pItem)->getBaseStats().at(0)->value;
+		vitality = reinterpret_cast<WeaponInstance*>(pItem)->getBaseStats().at(1)->value;
+		
+		_stats->addStat(StatType::Strength, strength);
+		_stats->addStat(StatType::Armor, armor);
+		_stats->addStat(StatType::Vitality, vitality);
 
 		break;
 	}
@@ -577,28 +588,32 @@ void Character::addStats(EquipmentInstance* pItem)
 /// <param name="pItem">The item of which the stats should be removed.</param>
 void Character::removeStats(EquipmentInstance* pItem)
 {
+	Ogre::Real strength;
+	Ogre::Real damage;
+	Ogre::Real vitality;
+	Ogre::Real armor;
 	std::vector<Stat> tempStats;
 	switch (pItem->getType())
 	{
 	case 0:
 		//weapon
-		tempStats = _stats->GetStats();
-		for (int i = 0; i < reinterpret_cast<WeaponInstance*>(pItem)->getBaseStats().size(); i++)
-		{
-			tempStats.at((int)i).value -= reinterpret_cast<WeaponInstance*>(pItem)->getBaseStats().at((int)i)->value;
-			_stats->GetStats().at((int)i) = tempStats.at((int)i);
-		}
+		damage = reinterpret_cast<WeaponInstance*>(pItem)->getBaseStats().at(0)->value;
+
+		_stats->removeStat(StatType::WeaponDamage, damage);
+
 
 		break;
 	case 1:
 		//armor
 		tempStats = _stats->GetStats();
-		for (int i = 0; i < reinterpret_cast<ArmorInstance*>(pItem)->getBaseStats().size(); i++)
-		{
-			tempStats.at((int)i).value -= reinterpret_cast<ArmorInstance*>(pItem)->getBaseStats().at((int)i)->value;
-			_stats->GetStats().at((int)i) = tempStats.at((int)i);
-		}
-		
+
+		strength = reinterpret_cast<WeaponInstance*>(pItem)->getBaseStats().at(2)->value;
+		armor = reinterpret_cast<WeaponInstance*>(pItem)->getBaseStats().at(0)->value;
+		vitality = reinterpret_cast<WeaponInstance*>(pItem)->getBaseStats().at(1)->value;
+
+		_stats->removeStat(StatType::Strength, strength);
+		_stats->removeStat(StatType::Armor, armor);
+		_stats->removeStat(StatType::Vitality, vitality);
 		break;
 	}
 }

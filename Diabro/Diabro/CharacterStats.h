@@ -61,7 +61,8 @@ public:
 
 	std::vector<Stat> GetStats() { return _stats; }
 	Ogre::Real GetStat(StatType pID) { return _stats.at((int)pID).value; }
-
+	void addStat(StatType pID, Ogre::Real pValue) { _stats.at((int)pID).value = _stats.at((int)pID).value + pValue; }
+	void removeStat(StatType pID, Ogre::Real pValue) { _stats.at((int)pID).value = _stats.at((int)pID).value - pValue; }
 	Ogre::Real MaxDeterminedHealth() { return (int)(GetStat(MaxHealth) + (GetStat(Vitality) * 10)); }
 	Ogre::Real DeterminedDamage() { return GetStat(Damage) * (1 + (GetStat(Strength) / 100)); }
 	Ogre::Real DeterminedArmor() { return GetStat(Armor) * (1 + (GetStat(Strength) / 100)); }
