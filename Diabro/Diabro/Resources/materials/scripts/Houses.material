@@ -77,6 +77,21 @@ material Houses/Red
       }
    }
 }
+material Houses/HitRed
+{
+   technique
+   {
+      pass
+      {
+	  	lighting off
+        
+         texture_unit
+         {
+			texture darkRedBox.jpg
+         }
+      }
+   }
+}
 
 material Houses/Yellow
 {
@@ -108,6 +123,21 @@ material Houses/Blue
       }
    }
 }
+material Houses/HitBlue
+{
+   technique
+   {
+      pass
+      {
+	  	lighting off
+        
+         texture_unit
+         {
+			texture blueBox.jpg
+         }
+      }
+   }
+}
 
 material Houses/Green
 {
@@ -120,6 +150,22 @@ material Houses/Green
          texture_unit
          {
 			texture greenBox.jpg
+         }
+      }
+   }
+}
+
+material Houses/HitGreen
+{
+   technique
+   {
+      pass
+      {
+	  	lighting off
+        
+         texture_unit
+         {
+			texture darkGreenBox.jpg
          }
       }
    }

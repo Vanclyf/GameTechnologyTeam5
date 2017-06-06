@@ -30,8 +30,23 @@ Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pM
 bool Player::initialize()
 {
 	Character::initialize();
-
+	_attackTimer = new Ogre::Timer();
 	return true;
+}
+
+void Player::update(const Ogre::FrameEvent& pFE)
+{
+	Character::update(pFE.timeSinceLastFrame);
+		if (_attackCountDown <= 0)
+		{
+			_attackCountDown = 0;
+		}
+		else
+		{
+			Ogre::Real deltaTime = _attackTimer->getMilliseconds();
+			_attackTimer->reset();
+			_attackCountDown -= deltaTime;
+		}
 }
 
 /// <summary>
@@ -61,20 +76,46 @@ bool Player::adjustStaminaOverTime(Ogre::Real pDeltaTime)
 
 bool Player::lightAttack()
 {
-	if (!Character::lightAttack()) {
-		return false;
-	}
-	std::vector<Character*> targets = GameManager::getSingletonPtr()->getLevelManager()->getHostileNpcs();
-	findTarget(targets);
-	if (_target == nullptr) {
-		return false;
-	}
-	SoundManager::PlaySmallSound("PlayerHit.wav");
-	_target->adjustHealth(_stats->DeterminedDamage());
-	_canAttack = false;
-	_currAttackCooldown = _lightAttackCooldown;
+	if (_attackCountDown <= 0)
+	{
+		_attackCountDown = 1200;
+		if (!Character::lightAttack()) {
+			return false;
+		}
+		std::vector<Character*> targets = GameManager::getSingletonPtr()->getLevelManager()->getHostileNpcs();
+		findTarget(targets);
+		if (_target == nullptr) {
+			return false;
+		}
 
-	return true;
+		_target->adjustHealth(_stats->DeterminedDamage());
+		SoundManager::PlaySmallSound("PlayerHit.wav");
+
+		switch (_target->getTypeNpc())
+		{
+		case NpcType::Good:
+			_target->hit();
+
+			_target->getEntity()->setMaterial(Ogre::MaterialManager::getSingleton().getByName("Houses/HitGreen"));
+			break;
+		case NpcType::Bad:
+			_target->hit();
+
+			_target->getEntity()->setMaterial(Ogre::MaterialManager::getSingleton().getByName("Houses/HitRed"));
+			break;
+		case NpcType::Princess:
+			break;
+		}
+		_canAttack = false;
+		_currAttackCooldown = _lightAttackCooldown;
+
+		return true;
+	}
+
+	else
+	{
+		return false;
+	}
 }
 
 /// <summary>

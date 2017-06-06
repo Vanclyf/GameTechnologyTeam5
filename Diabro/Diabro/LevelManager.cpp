@@ -27,10 +27,9 @@ void LevelManager::initialize()
 
 
 	//player
-	_playerEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("ninja.mesh");
-	_playerEntity->setMaterialName("Houses/White");
+	_playerEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("sphere.mesh");
 	playerNode->createChildSceneNode()->attachObject(_playerEntity);
-	Ogre::Vector3 position = Ogre::Vector3((levelGenerator->GetZone(0, 0).cities[0].position.x + (levelGenerator->GetZone(0, 0).cities[0].width / 2.0f)) * levelGenerator->scalar, 0, (levelGenerator->GetZone(0, 0).cities[0].position.z + (levelGenerator->GetZone(0, 0).cities[0].depth / 2.0f)) * levelGenerator->scalar);
+	Ogre::Vector3 position = Ogre::Vector3((levelGenerator->GetZone(0, 0).cities[0].position.x + (levelGenerator->GetZone(0, 0).cities[0].width / 2.0f)) * levelGenerator->scalar,30, (levelGenerator->GetZone(0, 0).cities[0].position.z + (levelGenerator->GetZone(0, 0).cities[0].depth / 2.0f)) * levelGenerator->scalar);
 	playerNode->setPosition(position);
 	playerNode->setScale(0.5f, 0.5f, 0.5f);
 	playerScript = new Player(playerNode, _playerEntity);
@@ -64,10 +63,6 @@ int LevelManager::subscribeFriendlyNPC(Npc* friendly)
 
 	return _friendlyNpcScripts.size() - 1;
 }
-
-
-	
-
 
 /// <summary>
 /// Subscribes the hostile NPC.
@@ -119,6 +114,7 @@ void LevelManager::detachItemInstance(int id)
 		(*it)->id -= 1;
 	}
 }
+
 /// <summary>
 /// Detaches the friendly NPC.
 /// </summary>
@@ -128,7 +124,6 @@ void LevelManager::detachFriendlyNPC(int id)
 	//reinterpret_cast<Npc*>(_friendlyNpcScripts[id])->_mySpawner->instanceDeath();
 
 	_friendlyNpcScripts.erase(_friendlyNpcScripts.begin() + id);
-	playerScript->adjustLook(_playerEntity);
 	//reset id values
 	for (std::vector<Character*>::iterator it = _friendlyNpcScripts.begin() + id; it < _friendlyNpcScripts.end(); ++it)
 	{
@@ -146,7 +141,6 @@ void LevelManager::detachHostileNPC(int id)
 	//reinterpret_cast<BasicEnemy*>(_friendlyNpcScripts[id])->_mySpawner->instanceDeath();
 
 	_hostileNpcScripts.erase(_hostileNpcScripts.begin() + id);
-	playerScript->adjustLook(_playerEntity);
 	//reset id values
 	for (std::vector<Character*>::iterator it = _hostileNpcScripts.begin() + id; it < _hostileNpcScripts.end(); ++it)
 	{
@@ -163,7 +157,7 @@ void LevelManager::detachHostileNPC(int id)
 void LevelManager::update(const Ogre::FrameEvent& pFE)
 {
 	// update characters
-	playerScript->update(pFE.timeSinceLastFrame);
+	getPlayer()->update(pFE);
 
 	float playerX = playerScript->getPosition().x;
 	float playerY = playerScript->getPosition().y;
