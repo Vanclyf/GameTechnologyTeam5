@@ -34,6 +34,14 @@ void BaseNpc::update(Ogre::Real pDeltatime)
 	}
 	else
 	{
+		if (_hitted)
+		{
+			_isAngry = true;
+		}
+		if (_isAngry)
+		{
+			attackPlayer();
+		}
 		switch (getTypeNpc())
 		{
 		case Good:	
@@ -51,14 +59,7 @@ void BaseNpc::update(Ogre::Real pDeltatime)
 			break;
 		default: ;
 		}
-		if (_hitted)
-		{
-		  _isAngry = true;
-		}
-		if (_isAngry)
-		{
-			attackPlayer();
-		}
+		
 	}
 }
 
@@ -67,10 +68,15 @@ void BaseNpc::update(Ogre::Real pDeltatime)
 /// </summary>
 void BaseNpc::attackPlayer()
 {
-	walkTo(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition());
-	if (getPosition().distance(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition()) < _attackDistance)
+	Ogre::Vector3 playerPosition = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition();
+	Ogre::Real distance = _myNode->getPosition().distance(playerPosition);
+	if (distance < _attackDistance)
 	{
+		_dirVec = Ogre::Vector3(0, 0, 0);
 		lightAttack();
+	}else
+	{
+		walkTo(playerPosition);
 	}
 }
 
@@ -119,7 +125,7 @@ void BaseNpc::rotatePivot(Ogre::Vector3 pRotationDegrees)
 /// </summary>
 void BaseNpc::detectPlayer()
 {
-	if (getPosition().distance(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition()) < _noticeDistance)
+	if (_myNode->getPosition().distance(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition()) < _noticeDistance)
 	{
 		_playerDetected = true;
 	}

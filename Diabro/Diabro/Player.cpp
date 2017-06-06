@@ -68,10 +68,10 @@ bool Player::lightAttack()
 	}
 	auto levelManager = GameManager::getSingletonPtr()->getLevelManager();
 	//get all posible targets
-	std::vector<Character*> targets = levelManager->getHostileNpcs();
-	findTarget(targets);
-	targets = levelManager->getFriendlyNpcs();
-	findTarget(targets);
+	std::vector<Character*> Targets = levelManager->getHostileNpcs();
+	std::vector<Character*>npcTargets = levelManager->getFriendlyNpcs();
+	Targets.insert(Targets.end(), npcTargets.begin(), npcTargets.end());
+	findTarget(Targets);
 	if (_target == nullptr)
 	{
 		return false;

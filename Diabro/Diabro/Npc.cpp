@@ -70,8 +70,6 @@ Npc::~Npc() {
 void Npc::update(Ogre::Real pDeltatime)
 {
 	BaseNpc::update(pDeltatime);
-
-	
 }
 
 
