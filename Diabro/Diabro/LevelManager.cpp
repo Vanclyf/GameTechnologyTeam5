@@ -50,7 +50,7 @@ void LevelManager::initialize()
 	//player
 	_playerEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("ninja.mesh");
 	playerNode->createChildSceneNode()->attachObject(_playerEntity);
-	Ogre::Vector3 position = Ogre::Vector3(3630, 0, 7699);/*Ogre::Vector3((levelGenerator->GetZone(0, 0).cities[0].position.x + (levelGenerator->GetZone(0, 0).cities[0].width / 2.0f))* levelGenerator->scalar, 0, (levelGenerator->GetZone(0, 0).cities[0].position.z + (levelGenerator->GetZone(0, 0).cities[0].depth / 2.0f)) * levelGenerator->scalar);*/
+	Ogre::Vector3 position = Ogre::Vector3(5000, 0, 6000);/*Ogre::Vector3((levelGenerator->GetZone(0, 0).cities[0].position.x + (levelGenerator->GetZone(0, 0).cities[0].width / 2.0f))* levelGenerator->scalar, 0, (levelGenerator->GetZone(0, 0).cities[0].position.z + (levelGenerator->GetZone(0, 0).cities[0].depth / 2.0f)) * levelGenerator->scalar);*/
 	playerNode->setPosition(position);
 	playerNode->setScale(0.5f, 0.5f, 0.5f);
 	playerNode->yaw(Ogre::Degree(180));
@@ -292,7 +292,7 @@ void LevelManager::createCube(Ogre::Entity* pMyEntity, Ogre::SceneNode* pMyNode,
 };
 
 void::LevelManager::setupWalls() {
-	for (int i = 0; i < 40; i++) {
+	for (int i = 0; i < 100; i++) {
 		std::stringstream sstm;
 		sstm << "WallNode-" << i;
 		std::string s = sstm.str();
@@ -357,7 +357,45 @@ void::LevelManager::setupWalls() {
 	//Hallway split left wing
 	createCube(wallEntity, wallNodes[38], Ogre::Vector3(3400, 0, 3650), Ogre::Vector3(50, 500, 500), Ogre::Degree(90));
 	createCube(wallEntity, wallNodes[39], Ogre::Vector3(3651, 0, 4200), Ogre::Vector3(50, 500, 500), Ogre::Degree(90));
+	createCube(wallEntity, wallNodes[40], Ogre::Vector3(3651, 0, 3649), Ogre::Vector3(50, 500, 500), Ogre::Degree(90));
 
+	//Left Wing maze outer walls
+	createCube(wallEntity, wallNodes[41], Ogre::Vector3(4102, 0, 4651), Ogre::Vector3(50, 500, 500), Ogre::Degree(0));
+	createCube(wallEntity, wallNodes[42], Ogre::Vector3(4102, 0, 3198), Ogre::Vector3(50, 500, 500), Ogre::Degree(0));
+	createCube(wallEntity, wallNodes[43], Ogre::Vector3(4650, 0, 5151), Ogre::Vector3(50, 500, 500), Ogre::Degree(90));
+	createCube(wallEntity, wallNodes[44], Ogre::Vector3(4650, 0, 2698), Ogre::Vector3(50, 500, 500), Ogre::Degree(90));
+	createCube(wallEntity, wallNodes[45], Ogre::Vector3(5650, 0, 5151), Ogre::Vector3(50, 500, 500), Ogre::Degree(90));
+	createCube(wallEntity, wallNodes[46], Ogre::Vector3(5650, 0, 2698), Ogre::Vector3(50, 500, 500), Ogre::Degree(90));
+	createCube(wallEntity, wallNodes[47], Ogre::Vector3(6650, 0, 5151), Ogre::Vector3(50, 500, 500), Ogre::Degree(90));
+	createCube(wallEntity, wallNodes[48], Ogre::Vector3(6650, 0, 2698), Ogre::Vector3(50, 500, 500), Ogre::Degree(90));
+	createCube(wallEntity, wallNodes[49], Ogre::Vector3(7100, 0, 4651), Ogre::Vector3(50, 500, 500), Ogre::Degree(0));
+	createCube(wallEntity, wallNodes[50], Ogre::Vector3(7100, 0, 3198), Ogre::Vector3(50, 500, 500), Ogre::Degree(0));
+
+
+	//Left Wing maze inner walls
+	createCube(wallEntity, wallNodes[61], Ogre::Vector3(4602, 0, 4651), Ogre::Vector3(50, 500, 500), Ogre::Degree(0));
+	createCube(wallEntity, wallNodes[62], Ogre::Vector3(4602, 0, 3651), Ogre::Vector3(50, 500, 500), Ogre::Degree(0));
+	createCube(wallEntity, wallNodes[63], Ogre::Vector3(5102, 0, 3651), Ogre::Vector3(50, 500, 500), Ogre::Degree(0));
+	createCube(wallEntity, wallNodes[64], Ogre::Vector3(5101, 0, 4151), Ogre::Vector3(50, 500, 500), Ogre::Degree(0));
+	createCube(wallEntity, wallNodes[65], Ogre::Vector3(5552, 0, 4602), Ogre::Vector3(50, 500, 500), Ogre::Degree(90));
+	createCube(wallEntity, wallNodes[66], Ogre::Vector3(6552, 0, 4602), Ogre::Vector3(50, 500, 500), Ogre::Degree(90));
+	createCube(wallEntity, wallNodes[67], Ogre::Vector3(5602, 0, 3651), Ogre::Vector3(50, 500, 500), Ogre::Degree(0));
+	createCube(wallEntity, wallNodes[68], Ogre::Vector3(6649, 0, 3649), Ogre::Vector3(50, 500, 500), Ogre::Degree(90));
+	createCube(wallEntity, wallNodes[69], Ogre::Vector3(6149, 0, 3651), Ogre::Vector3(50, 500, 500), Ogre::Degree(90));
+	createCube(wallEntity, wallNodes[70], Ogre::Vector3(6053, 0, 3198), Ogre::Vector3(50, 500, 500), Ogre::Degree(90));
+
+	//Right Wing maze outer walls
+	createCube(wallEntity, wallNodes[51], Ogre::Vector3(4102, 0, 8151), Ogre::Vector3(50, 500, 500), Ogre::Degree(0));
+	createCube(wallEntity, wallNodes[52], Ogre::Vector3(4102, 0, 6698), Ogre::Vector3(50, 500, 500), Ogre::Degree(0));
+	createCube(wallEntity, wallNodes[53], Ogre::Vector3(4650, 0, 8651), Ogre::Vector3(50, 500, 500), Ogre::Degree(90));
+	createCube(wallEntity, wallNodes[54], Ogre::Vector3(4650, 0, 6198), Ogre::Vector3(50, 500, 500), Ogre::Degree(90));
+	createCube(wallEntity, wallNodes[55], Ogre::Vector3(5650, 0, 8651), Ogre::Vector3(50, 500, 500), Ogre::Degree(90));
+	createCube(wallEntity, wallNodes[56], Ogre::Vector3(5650, 0, 6198), Ogre::Vector3(50, 500, 500), Ogre::Degree(90));
+	createCube(wallEntity, wallNodes[57], Ogre::Vector3(6650, 0, 8651), Ogre::Vector3(50, 500, 500), Ogre::Degree(90));
+	createCube(wallEntity, wallNodes[58], Ogre::Vector3(6650, 0, 6198), Ogre::Vector3(50, 500, 500), Ogre::Degree(90));
+	createCube(wallEntity, wallNodes[59], Ogre::Vector3(7100, 0, 8151), Ogre::Vector3(50, 500, 500), Ogre::Degree(0));
+	createCube(wallEntity, wallNodes[60], Ogre::Vector3(7100, 0, 6698), Ogre::Vector3(50, 500, 500), Ogre::Degree(0));
+	
 }
 
 
