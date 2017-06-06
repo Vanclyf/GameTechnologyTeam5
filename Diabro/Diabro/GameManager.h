@@ -13,6 +13,7 @@ Filename:    GameManager.h
 #include "UIManager.h"
 #include "ItemManager.h"
 #include "QuestContentManager.h"
+#include "TimerManager.h"
 #include <ctime>
 
 //---------------------------------------------------------------------------
@@ -64,6 +65,7 @@ private:
 	LevelManager* _levelManager;
 	UIManager* _uiManager;
 	ItemManager* _itemManager;
+	TimerManager* _timerManager;
 	QuestContentManager* _questContentManager;
 
 	Ogre::Timer* _gameTimer;

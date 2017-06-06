@@ -76,6 +76,9 @@ void GameManager::createScene(void)
 	_levelManager = new LevelManager();
 	_levelManager->initialize();
 
+	_timerManager = new TimerManager();
+	_timerManager->initialize();
+
 	_questContentManager = new QuestContentManager();
 
 	_uiManager = new UIManager();
@@ -161,6 +164,7 @@ bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& pFE)
 {
 	bool ret = BaseApplication::frameRenderingQueued(pFE);
 	_levelManager->update(pFE);
+	_timerManager->update(pFE);
  
 	return ret;
 }
