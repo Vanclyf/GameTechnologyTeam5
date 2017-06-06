@@ -122,7 +122,7 @@ void LevelManager::detachItemInstance(int id)
 void LevelManager::detachFriendlyNPC(int id)
 {
 	//reinterpret_cast<Npc*>(_friendlyNpcScripts[id])->_mySpawner->instanceDeath();
-
+	playerScript->adjustLook(_playerEntity);
 	_friendlyNpcScripts.erase(_friendlyNpcScripts.begin() + id);
 	//reset id values
 	for (std::vector<Character*>::iterator it = _friendlyNpcScripts.begin() + id; it < _friendlyNpcScripts.end(); ++it)
@@ -139,7 +139,7 @@ void LevelManager::detachFriendlyNPC(int id)
 void LevelManager::detachHostileNPC(int id)
 {
 	//reinterpret_cast<BasicEnemy*>(_friendlyNpcScripts[id])->_mySpawner->instanceDeath();
-
+	playerScript->adjustLook(_playerEntity);
 	_hostileNpcScripts.erase(_hostileNpcScripts.begin() + id);
 	//reset id values
 	for (std::vector<Character*>::iterator it = _hostileNpcScripts.begin() + id; it < _hostileNpcScripts.end(); ++it)
