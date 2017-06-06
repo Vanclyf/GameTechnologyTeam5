@@ -2,6 +2,7 @@
 #define BASE_PRINCESS_H_
 
 #include "BaseNpc.h"
+#include "BaseApplication.h"
 
 class BasicPrincess : public BaseNpc
 {
@@ -19,10 +20,13 @@ public:
 	
 
 	bool dialog(Ogre::Vector3);
-	void continueDialog();
+	//void continueDialog();
 	void toggleDialog();
+	void endingSequence(bool);
+	void closeGame();
 
 private:
+	int _dialogCount;
 	bool _inDialog;
 };
 

@@ -1,6 +1,7 @@
 #include "BasicEnemy.h"
 #include "GameManager.h"
 #include "Player.h"
+#include "SoundManager.h"
 
 /// <summary>
 /// Creates a new instance of the <see cref="BasicEnemy"/> class.
@@ -21,6 +22,30 @@ BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNod
 void BasicEnemy::update(Ogre::Real pDeltatime)
 {
 	BaseNpc::update(pDeltatime);
+	if (_isHit)
+	{
+		if (_hitCountdown <= 0)
+		{
+			_hitCountdown = 0;
+			//change material
+			_myEntity->setMaterial(Ogre::MaterialManager::getSingletonPtr()->getByName("Houses/Red"));
+			_isHit = false;
+		}
+		else
+		{
+			Ogre::Real deltaTime = _hitTimer->getMilliseconds();
+			_hitTimer->reset();
+			_hitCountdown -= deltaTime;
+		}
+	}
+
+	if(_playerDetected) {
+		walkTo(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition());
+
+		if (getPosition().distance(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition()) < _attackDistance) {
+			lightAttack();
+		}
+	}
 }
 
 bool BasicEnemy::dialog(Ogre::Vector3 pPlayerPos)
@@ -90,6 +115,28 @@ void BasicEnemy::continueDialog()
 
 void BasicEnemy::die()
 {
+	if (!Character::lightAttack()) {
+		return false;
+	}
+	SoundManager::PlaySmallSound("EnemyHit.wav");
+	std::vector<Character*> targets;
+	targets.push_back(GameManager::getSingletonPtr()->getLevelManager()->getPlayer());
+	findTarget(targets);
+
+	if (_target == nullptr) {
+		return false;
+	}
+
+	//deal damage 
+	_target->adjustHealth(_stats->DeterminedDamage());
+	
+	_canAttack = false;
+	_currAttackCooldown = _lightAttackCooldown;
+	return true;
+}
+
+void BasicEnemy::die() {
+	SoundManager::PlaySmallSound("EnemyDead.wav");
 	Character::die();
 
 	GameManager::getSingletonPtr()->getItemManager()->getItemGenerator()->generateRandomItem(GameManager::getSingletonPtr()->getLevelManager()->getLevelNode(), GameManager::getSingletonPtr()->getRandomInRange(1, 5), getPosition());

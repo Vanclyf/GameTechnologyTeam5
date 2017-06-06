@@ -42,7 +42,7 @@ bool Player::adjustHealth(float pAdjust)
 {
 	if (!Character::adjustHealth(pAdjust)) { return false; }
 
-	GameManager::getSingleton().getUIManager()->adjustHealthBar(_currentHealth, _stats->GetStat(MaxHealth));
+	GameManager::getSingleton().getUIManager()->adjustHealthBar(_currentHealth, _stats->GetStat(StatType::MaxHealth));
 	return true;
 }
 
@@ -62,8 +62,21 @@ bool Player::adjustStaminaOverTime(Ogre::Real pDeltaTime)
 
 bool Player::lightAttack()
 {
-	if (!Character::lightAttack())
+	if (_attackCountDown <= 0)
 	{
+		_attackCountDown = 1200;
+		if (!Character::lightAttack()) {
+			return false;
+		}
+		auto levelManager = GameManager::getSingletonPtr()->getLevelManager();
+	        //get all posible targets
+	        std::vector<Character*> Targets = levelManager->getHostileNpcs();
+	        std::vector<Character*>npcTargets = levelManager->getFriendlyNpcs();
+	        Targets.insert(Targets.end(), npcTargets.begin(), npcTargets.end());
+	        findTarget(Targets);
+		if (_Target == nullptr) {
+			return false;
+		}
 		return false;
 	}
 	auto levelManager = GameManager::getSingletonPtr()->getLevelManager();
@@ -78,6 +91,24 @@ bool Player::lightAttack()
 	}
 
 	_target->adjustHealth(_stats->DeterminedDamage());
+SoundManager::PlaySmallSound("PlayerHit.wav");
+
+		switch (_target->getTypeNpc())
+		{
+		case NpcType::Good:
+			_target->hit();
+
+			_target->getEntity()->setMaterial(Ogre::MaterialManager::getSingleton().getByName("Houses/HitGreen"));
+			break;
+		case NpcType::Bad:
+			_target->hit();
+
+			_target->getEntity()->setMaterial(Ogre::MaterialManager::getSingleton().getByName("Houses/HitRed"));
+			break;
+		case NpcType::Princess:
+			break;
+		}
+
 	_canAttack = false;
 	_currAttackCooldown = _lightAttackCooldown;
 
@@ -115,21 +146,6 @@ int Player::calcXpTillLevel(int pLevel)
 	newXP = Ogre::Math::Floor(newXP / 4);
 
 	return newXP;
-}
-
-/// <summary>
-/// Determines whether [is karma positive].
-/// </summary>
-/// <returns>
-///   <c>true</c> if [karma positive]; otherwise, <c>false</c>.
-/// </returns>
-bool Player::isKarmaPositive() const
-{
-	if (_karmaPoints >= 0)
-	{
-		return true;
-	}
-	return false;
 }
 
 /// <summary>

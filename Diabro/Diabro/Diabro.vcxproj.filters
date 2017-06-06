@@ -104,8 +104,14 @@
     <ClCompile Include="TreeNode.cpp">
       <Filter>Sources\TreeDatastructure</Filter>
     </ClCompile>
+    <ClCompile Include="SoundManager.cpp" >
+	<Filter>Sources</Filter>
+    </ClCompile>
     <ClCompile Include="BasicPrincess.cpp">
       <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="TimerManager.cpp">
+      <Filter>Sources\Managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -233,11 +239,17 @@
     <ClInclude Include="TreeNode.h">
       <Filter>Headers\TreeDatastructure</Filter>
     </ClInclude>
+    <ClInclude Include="SoundManager.h" >
+	<Filter>Headers</Filter>
+</ClInclude>
     <ClInclude Include="BasicPrincess.h">
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="BaseNpc.h">
       <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="TimerManager.h">
+      <Filter>Headers\Managers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
