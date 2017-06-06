@@ -75,6 +75,7 @@ void UIManager::destroyPrincessDialog() {
 }
 void UIManager::destroyEnemyDialog() {
 	_mSdkTrayMgr->destroyWidget("EnemyDialogTextArea");
+	
 }
 
 /// <summary>

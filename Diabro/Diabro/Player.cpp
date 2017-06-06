@@ -168,6 +168,11 @@ void Player::adjustKarma(int pKarma)
 	_karmaPoints += pKarma;
 }
 
+int Player::getKarma()
+{
+	return _karmaPoints;
+}
+
 /// <summary>
 /// Levels up the player.
 /// </summary>

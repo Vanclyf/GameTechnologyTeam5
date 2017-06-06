@@ -31,6 +31,7 @@ private:
 	OgreBites::SdkTrayListener* _mSdkTrayListener;
 
 	Ogre::RenderWindow*			_mWindow;
+
 	OgreBites::InputContext     _mInputContext;
 
 	OgreBites::TextBox*			_mDialogTextArea;
