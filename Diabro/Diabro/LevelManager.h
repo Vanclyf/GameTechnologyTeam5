@@ -37,6 +37,11 @@ public:
 	std::vector<Character*> getHostileNpcs() { return _hostileNpcScripts; }
 	std::vector<ItemInstance*> getItemInstances() { return _instanceScripts; }
 
+
+	btVector3 setDirVector(btVector3& pMoveVec) { return _bulletDirVec = pMoveVec; }
+	btVector3 getDirVector() { return _bulletDirVec; }
+	btVector3 _bulletDirVec;
+
 	int subscribeHostileNPC(BasicEnemy*);
 	int subscribeFriendlyNPC(Npc*);
 	int subscribeItemInstance(ItemInstance*);
@@ -106,7 +111,6 @@ private:
 	btRigidBody* fallRigidBody;
 	btRigidBody* boxRigidBody;
 	btTransform trans;
-	Ogre::Vector3 _playerPosition;
 
 	//Wall nodes and entities
 	std::vector <Ogre::SceneNode*> wallNodes;

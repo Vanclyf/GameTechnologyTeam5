@@ -173,6 +173,11 @@ bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& pFE)
 bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 {
 	Ogre::Vector3 dirVec = _levelManager->playerScript->getDirVector();
+	btVector3 bulletDirVec = _levelManager->getDirVector();
+
+	if (bulletDirVec.getX() >= 2 || bulletDirVec.getX() <= -2 || bulletDirVec.getY() >= 2 || bulletDirVec.getY() <= -2 || bulletDirVec.getZ() >= 2 || bulletDirVec.getZ() <= -2) {
+		bulletDirVec = btVector3(0, 0, 0);
+	}
 
 	switch (pKE.key)
 	{
@@ -249,22 +254,37 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 		dynamic_cast<Npc*>(_levelManager->getFriendlyNpcs()[0])->continueDialog();
 		break;
 	case OIS::KC_I:
-		_levelManager->translatePlayer(btVector3(0, 0, 5));
+		bulletDirVec.setZ(1);
 		break;
 	case OIS::KC_K:
-		_levelManager->translatePlayer(btVector3(0, 0, -5));
+		bulletDirVec.setZ(-1);
 		break;
 	case OIS::KC_J:
-		_levelManager->translatePlayer(btVector3(5, 0, 0));
+		bulletDirVec.setX(1);
 		break;
 	case OIS::KC_L:
-		_levelManager->translatePlayer(btVector3(-5, 0, 0));
+		bulletDirVec.setX(-1);
 		break;
 	default:
 		break;
 	}
 
 	_levelManager->playerScript->setDirVector(dirVec);
+	if (bulletDirVec.getX() <= 2 && bulletDirVec.getX() >= -2 && bulletDirVec.getZ() <= 2 && bulletDirVec.getZ() >= -2) {
+		_levelManager->setDirVector(btVector3(bulletDirVec.getX(), 0, bulletDirVec.getZ()));
+	}
+	
+
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+		FILE* fp;
+		freopen_s(&fp, "CONOUT$", "w", stdout);
+		std::cout << "dirvec z: " << bulletDirVec.getX() << std::endl << "dirvec x: " << bulletDirVec.getZ() << std::endl;
+		fclose(fp);
+#endif
+	
+
+	
+	
 	return true;
 }
 
@@ -276,6 +296,9 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 bool GameManager::keyReleased(const OIS::KeyEvent& pKE)
 {
 	Ogre::Vector3 dirVec = _levelManager->playerScript->getDirVector();
+	btVector3 bulletDirVec = _levelManager->getDirVector();
+
+
 
 	switch (pKE.key)
 	{
@@ -307,11 +330,25 @@ bool GameManager::keyReleased(const OIS::KeyEvent& pKE)
 	//TODO: maybe write own casts for character types
 	case OIS::KC_F:
 		break;
+	case OIS::KC_I:
+		bulletDirVec.setZ(0);
+		break;
+	case OIS::KC_K:
+		bulletDirVec.setZ(0);
+		break;
+	case OIS::KC_J:
+		bulletDirVec.setX(0);
+		break;
+	case OIS::KC_L:
+		bulletDirVec.setX(0);
+		break;
 	default:
 		break;
 	}
 
 	_levelManager->playerScript->setDirVector(dirVec);
+	_levelManager->setDirVector(btVector3(bulletDirVec.getX(), 0, bulletDirVec.getZ()));
+	
 	return true;
 }
 
