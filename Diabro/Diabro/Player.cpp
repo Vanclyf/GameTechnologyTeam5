@@ -54,8 +54,6 @@ bool Player::adjustHealth(float pAdjust)
 /// <returns>False if the player runs out of statina.</returns>
 bool Player::adjustStaminaOverTime(Ogre::Real pDeltaTime)
 {
-	//Character::adjustStaminaOverTime(pDeltaTime);
-
 	GameManager::getSingleton().getUIManager()->adjustStaminaBar(_karmaPoints, Ogre::Real(200));
 
 	return true;
@@ -66,13 +64,12 @@ bool Player::lightAttack()
 	if (!Character::lightAttack()) {
 		return false;
 	}
-	SoundManager::PlaySmallSound("PlayerHit.wav");
 	std::vector<Character*> targets = GameManager::getSingletonPtr()->getLevelManager()->getHostileNpcs();
 	findTarget(targets);
 	if (_target == nullptr) {
 		return false;
 	}
-
+	SoundManager::PlaySmallSound("PlayerHit.wav");
 	_target->adjustHealth(_stats->DeterminedDamage());
 	_canAttack = false;
 	_currAttackCooldown = _lightAttackCooldown;

@@ -1,6 +1,7 @@
 #include "BasicPrincess.h"
 #include "GameManager.h"
 #include "Player.h"
+#include "SoundManager.h"
 
 /// <summary>
 /// Creates a new instance of the <see cref="BasicPrincess"/> class.

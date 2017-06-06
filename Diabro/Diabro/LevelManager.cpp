@@ -1,5 +1,6 @@
 #include "GameManager.h"
 #include "LevelManager.h"
+#include "SoundManager.h"
 
 /// <summary>
 /// Initializes a new instance of the <see cref="LevelManager" /> class.
@@ -48,6 +49,8 @@ void LevelManager::initialize()
 	_camNode->attachObject(GameManager::getSingletonPtr()->getCamera());
 	_camNode->pitch(Ogre::Degree(10), Ogre::Node::TS_LOCAL);
 	startPitchCam = _camNode->getOrientation().getPitch();
+	engine = SoundManager::Play3DSound("PrincessHelp.wav", getPrincess()->getPosition());
+
 }
 
 /// <summary>
@@ -162,6 +165,12 @@ void LevelManager::update(const Ogre::FrameEvent& pFE)
 	// update characters
 	playerScript->update(pFE.timeSinceLastFrame);
 
+	float playerX = playerScript->getPosition().x;
+	float playerY = playerScript->getPosition().y;
+	float playerZ = playerScript->getPosition().z;
+
+	engine->setListenerPosition(irrklang::vec3df(playerX, playerY, playerZ), irrklang::vec3df(10, 0, 0), irrklang::vec3df(0, 0, 0), 
+		irrklang::vec3df(0, 1, 0));
 	for (int i = 0; i < _friendlyNpcScripts.size(); i++)
 	{
 		_friendlyNpcScripts[i]->update(pFE.timeSinceLastFrame);
