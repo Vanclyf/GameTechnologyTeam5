@@ -43,7 +43,7 @@ void UIManager::setupUI()
 	_ParamNames.push_back("Vitality");
 	_ParamNames.push_back("Armor");
 	_ParamNames.push_back("Damage");
-	_statsPanel = _mSdkTrayMgr->createParamsPanel(OgreBites::TL_BOTTOMRIGHT, "Stats",250, _ParamNames);
+	_statsPanel = _mSdkTrayMgr->createParamsPanel(OgreBites::TL_BOTTOMRIGHT, "Stats",150, _ParamNames);
 	//_gameTimer->getOverlayElement()->setLeft(-200);
 }
 

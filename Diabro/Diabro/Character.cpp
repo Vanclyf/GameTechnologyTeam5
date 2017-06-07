@@ -150,7 +150,7 @@ bool Character::setUpStats()
 	tempStats.at((int)Strength).value += 2;
 
 	tempStats.at((int)Armor).value = 18;
-	tempStats.at((int)Damage).value = 2;
+	tempStats.at((int)Damage).value = 5;
 	tempStats.at((int)Resistance).value = 1;
 	tempStats.at((int)MaxHealth).value = 40;
 	tempStats.at((int)MaxStamina).value = 125;
