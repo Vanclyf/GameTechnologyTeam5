@@ -137,12 +137,9 @@ void BasicPrincess::endingSequence(bool ending)
 	}else
 	{
 		_inDialog = true;
-		_dialogCount++;
-		if (_dialogCount == 1) {
-			GameManager::getSingletonPtr()->getUIManager()->createPrincessDialog("You Killed the princess\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress Space to Continue");
-				
-		}
-		else if (_dialogCount == 2) {
+		_dialogCount = 2;
+		if (_dialogCount == 2) {
+			GameManager::getSingletonPtr()->getUIManager()->createPrincessDialog("You Killed the princess\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress Space to Continue");	
 			GameManager::getSingletonPtr()->getUIManager()->appendDialogText("You killed princess Kinny, A terrible shock went through the player, what now? He Felt empty \n");
 				
 		}
