@@ -67,6 +67,7 @@ public:
 	virtual bool adjustHealth(float);
 	virtual bool adjustStaminaOverTime(Ogre::Real);
 	virtual bool adjustStamina(float);
+	virtual bool regenHealth(float);
 	virtual void die();
 	int id; //may only be changed by levelmanager, death scenario 
 

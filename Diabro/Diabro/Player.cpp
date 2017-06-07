@@ -19,7 +19,7 @@ Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pM
 	_xpTillNextLevel = calcXpTillLevel(_currentLevel + 1);
 
 	_karmaPoints = 0;
-	_attackDistance = 100;
+	_attackDistance = 140;
 	_lightAttackCooldown = 1.2f;
 }
 
@@ -31,6 +31,7 @@ bool Player::initialize()
 {
 	Character::initialize();
 	_attackTimer = new Ogre::Timer();
+	_regenCounter = 0;
 	return true;
 }
 
@@ -48,6 +49,13 @@ void Player::update(const Ogre::FrameEvent& pFE)
 			_attackCountDown -= deltaTime;
 		}
 		GameManager::getSingletonPtr()->getUIManager()->updateStatsPanel(getStats());
+		Character::regenHealth(0.004);
+		_regenCounter++;
+		if (_regenCounter >= 10)
+		{
+			_regenCounter = 0;
+			GameManager::getSingleton().getUIManager()->adjustHealthBar(_currentHealth, _stats->GetStat(StatType::MaxHealth));
+		}
 }
 
 /// <summary>
@@ -79,7 +87,7 @@ bool Player::lightAttack()
 {
 	if (_attackCountDown <= 0)
 	{
-		_attackCountDown = 1200;
+		_attackCountDown = 900;
 		if (!Character::lightAttack()) {
 			return false;
 		}

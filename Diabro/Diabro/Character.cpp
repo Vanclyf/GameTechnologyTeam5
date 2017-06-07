@@ -10,7 +10,7 @@
 /// <param name="pMyEntity">My entity.</param>
 Character::Character(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : _myNode(pMyNode), _myEntity(pMyEntity), _stats(0), _dirVec(0, 0, 0),
 _movespeed(100), _runspeed(250), _rotationspeed(0.13), _isRunning(false), _currentLevel(1), _currentHealth(0), _currentStamina(0), _canAttack(true),
-_attackDistance(20), _currAttackCooldown(0), _lightAttackCooldown(5.0f), _hitted(false), _totalHitTime(.5f), _weapon(0)
+_attackDistance(80), _currAttackCooldown(0), _lightAttackCooldown(5.0f), _hitted(false), _totalHitTime(.5f), _weapon(0)
 {
 }
 
@@ -204,6 +204,22 @@ bool Character::adjustHealth(float pAdjust)
 	}
 
 	return true;
+}
+
+bool Character::regenHealth(float pRegen)
+{
+	if (_currentHealth < _stats->GetStat(MaxHealth))
+	{
+		_currentHealth += pRegen;
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+		FILE* fp;
+		freopen_s(&fp, "CONOUT$", "w", stdout);
+		printf("I got healed... %f \n", _currentHealth);
+		fclose(fp);
+#endif
+		return true;
+	}
+	return false;
 }
 
 void Character::hit()

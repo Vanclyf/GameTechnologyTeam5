@@ -148,6 +148,7 @@ void UIManager::updateStatsPanel(CharacterStats* pChar)
 	armorString << armor;
 	_ParamValues.push_back(armorString.str());
 	std::stringstream damageString;
+	damage = damage * (1 + (strength / 50));
 	damageString << damage;
 	_ParamValues.push_back(damageString.str());
 
