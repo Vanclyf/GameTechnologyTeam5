@@ -309,6 +309,14 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 			}
 		}
 		_levelManager->getPrincess()->endingSequence(true);
+		if(_timerManager->GetCountDown() <=0)
+		{
+			_levelManager->getPrincess()->closeGame();
+		}
+		else if(_levelManager->getPlayer()->getDeath())
+		{
+			_levelManager->getPrincess()->closeGame();
+		}
 		break;
 	default:
 		break;

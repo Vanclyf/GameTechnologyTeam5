@@ -40,6 +40,7 @@ public:
 	LevelManager* getLevelManager(void) { return _levelManager; }
 	UIManager* getUIManager(void) { return _uiManager; }
 	ItemManager* getItemManager(void) { return _itemManager; }
+	TimerManager* getTimeManager(void) { return _timerManager; }
 	QuestContentManager* getQuestContentManager(void) { return _questContentManager; }
 
 	static int getRandomInRange(int pLO, int pHI) {

@@ -33,6 +33,7 @@ bool Player::initialize()
 	_attackTimer = new Ogre::Timer();
 	_regenCounter = 0;
 	_stats->addStat(StatType::Damage, 2);
+	_death = false;
 	return true;
 }
 
@@ -58,6 +59,10 @@ void Player::update(const Ogre::FrameEvent& pFE)
 			_regenCounter = 0;
 			GameManager::getSingleton().getUIManager()->adjustHealthBar(_currentHealth, _stats->GetStat(StatType::MaxHealth));
 		}
+	if(getDeath() == true && !_death)
+	{
+		GameManager::getSingletonPtr()->getLevelManager()->getPrincess()->endingSequence(true);
+	}
 
 }
 

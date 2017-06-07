@@ -101,7 +101,39 @@ void BasicPrincess::endingSequence(bool ending)
 	if (ending)
 	{
 		int karma = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getKarma();
-		if (_inDialog == true && karma >= 0) {
+		if (GameManager::getSingletonPtr()->getTimeManager()->GetCountDown() <= 0)
+		{
+			_inDialog = true;
+			_dialogCount = 2;
+			if (_dialogCount == 2) {
+				GameManager::getSingletonPtr()->getUIManager()->createPrincessDialog("Your Time has run out\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress Space to Continue");
+				GameManager::getSingletonPtr()->getUIManager()->appendDialogText("Next time try killing some of your friend for FREE time! \n");
+
+			}
+			else if (_dialogCount >= 3) {
+				toggleDialog();
+				_dialogCount = 0;
+				closeGame();
+				_inDialog = false;
+			}
+		}
+		else if(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getDeath())
+		{
+			_inDialog = true;
+			_dialogCount = 2;
+			if (_dialogCount == 2) {
+				GameManager::getSingletonPtr()->getUIManager()->createPrincessDialog("You have died\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress Space to Continue");
+				GameManager::getSingletonPtr()->getUIManager()->appendDialogText("Oh no you have DIED! Game Over! \n");
+
+			}
+			else if (_dialogCount >= 3) {
+				toggleDialog();
+				_dialogCount = 0;
+				closeGame();
+				_inDialog = false;
+			}
+		}
+		else if (_inDialog == true && karma >= 0) {
 			_dialogCount++;
 			if (_dialogCount == 1) {
 				GameManager::getSingletonPtr()->getUIManager()->appendDialogText("thank you for saving me senpai... I princess Kinny am forever in your favor \n");
