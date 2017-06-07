@@ -24,6 +24,9 @@ public:
 	void destroyEnemyDialog();
 	void appendDialogText(Ogre::String);
 	void setStandardEventLogText();
+	void setStandardEventLogActive();
+	void setNPCEventLogText();
+	void setPickUpEventLogText();
 	static Ogre::Real calcBarSize(Ogre::Real, Ogre::Real, Ogre::Real);
 
 private:
@@ -42,6 +45,10 @@ private:
 
 	Ogre::Real					_maxWidthBar;
 	Ogre::Real					_heightBar;
+
+	bool _isStandardDialogActive;
+	bool _isNPCDialogActive;
+	bool _isPickUpActive;
 };
 
 #endif

@@ -7,7 +7,7 @@
 /// This class is created by the <see cref="GameManager" /> and contains all UI information, 
 /// e.g. the in-game and menu UI.
 /// </summary>
-UIManager::UIManager() : _mSdkTrayMgr(nullptr), _mWindow(nullptr), _healthBarWidget(nullptr), _staminaBarWidget(nullptr), _uiNode(nullptr), _maxWidthBar(0), _heightBar(0)
+UIManager::UIManager() : _mSdkTrayMgr(nullptr), _mWindow(nullptr), _healthBarWidget(nullptr), _staminaBarWidget(nullptr), _uiNode(nullptr), _maxWidthBar(0), _heightBar(0),_isStandardDialogActive(false),_isNPCDialogActive(false),_isPickUpActive(false)
 {
 }
 
@@ -113,15 +113,72 @@ void UIManager::appendDialogText(Ogre::String pDialogText)
 /// <param name="eventLogText">The event log text.</param>
 void UIManager::setStandardEventLogText()
 {
-	_eventLogTextBox->appendText(
-		"-----------------W------------------"
-		"-------------A---S---D--------------"
-		"-------------To---walk--------------"
-		"------------------------------------"
-		"--------Right-Mouse-Click-----------"
-		"-----------To--attack---------------"
-		"------------------------------------"
-		"------------------------------------");
+	if(_isStandardDialogActive == false)
+	{
+		_isStandardDialogActive = true;
+		_isNPCDialogActive = false;
+		_isPickUpActive = false;
+		_eventLogTextBox->setText(
+			"----------W-----------"
+			"------A---S---D-------"
+			"------To---walk-------"
+			"----------------------"
+			"---Left-Mouse-Click---"
+			"-----To--attack-------"
+			"----------------------"
+			"----------------------");
+	}
+	
+}
+
+/// <summary>
+/// Sets the standard event log active.
+/// </summary>
+void UIManager::setStandardEventLogActive()
+{
+	_isStandardDialogActive = false;
+}
+
+/// <summary>
+/// Sets the NPC event log text.
+/// </summary>
+void UIManager::setNPCEventLogText()
+{
+	if (_isNPCDialogActive == false)
+	{
+		_isNPCDialogActive = true;
+		_isPickUpActive = false;
+		_eventLogTextBox->setText(
+			"----------------------"
+			"-----------Press-F----"
+			"-----------To--Talk---"
+			"----------------------"
+			"----------------------"
+			"----------------------"
+			"----------------------"
+			"----------------------");
+	}
+}
+
+/// <summary>
+/// Sets the pick up event log text.
+/// </summary>
+void UIManager::setPickUpEventLogText()
+{
+	if (_isPickUpActive == false)
+	{
+		_isNPCDialogActive = false;
+		_isPickUpActive = true;
+		_eventLogTextBox->setText(
+			"----------------------"
+			"-------Press-E--------"
+			"-----To-Pickup-Item---"
+			"----------------------"
+			"----------------------"
+			"----------------------"
+			"----------------------"
+		    "----------------------");
+	}
 }
 
 /// <summary>

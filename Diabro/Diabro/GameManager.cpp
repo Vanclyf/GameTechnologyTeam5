@@ -209,6 +209,8 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 		break;
 
 	case OIS::KC_E:
+		_uiManager->setStandardEventLogActive();
+		_uiManager->setStandardEventLogText();
 		for (int i = 0; i < _levelManager->getItemInstances().size(); i++)
 		{
 			ItemInstance* item = _levelManager->getItemInstances()[i];

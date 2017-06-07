@@ -221,9 +221,9 @@ bool Character::adjustStamina(float pAdjust)
 /// </summary>
 void Character::die()
 {
+	GameManager::getSingletonPtr()->getUIManager()->setPickUpEventLogText();
 	Player *player = GameManager::getSingletonPtr()->getLevelManager()->getPlayer();
 	_myNode->setVisible(false);
- 
 
 	switch(getTypeNpc())
 	{
