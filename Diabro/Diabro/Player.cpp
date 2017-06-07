@@ -77,8 +77,13 @@ bool Player::adjustStaminaOverTime(Ogre::Real pDeltaTime)
 	return true;
 }
 
+/// <summary>
+/// This is the method for attack of npc and enemies
+/// </summary>
+/// <returns></returns>
 bool Player::lightAttack()
 {
+	//checks your attack cooldown
 	if (_attackCountDown <= 0)
 	{
 		_attackCountDown = 1200;
@@ -90,8 +95,11 @@ bool Player::lightAttack()
 		//get all posible targets
 		std::vector<Character*> targets = levelManager->getHostileNpcs();
 		std::vector<Character*> npcTargets = levelManager->getFriendlyNpcs();
+		//add to vector together
 		targets.insert(targets.end(), npcTargets.begin(), npcTargets.end());
+		//find the target that you can attack
 		findTarget(targets);
+		//if target is null do nothing
 		if (_target == nullptr)
 		{
 			return false;

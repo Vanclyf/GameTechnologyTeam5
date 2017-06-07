@@ -63,24 +63,29 @@ void BaseNpc::update(Ogre::Real pDeltatime)
 }
 
 /// <summary>
-/// The BaseNpc walks to enemy and if he is close he called lightattack;
+/// The BaseNpc walks to enemy and if he is close he calleds lightattack
+/// This method is in BaseNpc so the enemies and npc can use it
 /// </summary>
 void BaseNpc::attackPlayer()
 {
+	//get player position
 	Ogre::Vector3 playerPosition = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition();
+	//distance between playe and npc/enemy
 	Ogre::Real distance = _myNode->getPosition().distance(playerPosition);
+	//if in attack distance then stop and attack
 	if (distance < _attackDistance)
 	{
 		_dirVec = Ogre::Vector3(0, 0, 0);
 		lightAttack();
 	}else
 	{
+		//otherwise walk to player
 		walkTo(playerPosition);
 	}
 }
 
 /// <summary>
-/// Attack the player
+/// This method is light attack
 /// </summary>
 /// <returns></returns>
 bool BaseNpc::lightAttack()
