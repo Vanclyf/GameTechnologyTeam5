@@ -102,7 +102,8 @@ void BasicEnemy::continueDialog() {
 void BasicEnemy::die() {
 	SoundManager::PlaySmallSound("EnemyDead.wav");
 	Character::die();
+	
+	GameManager::getSingletonPtr()->getItemManager()->getItemGenerator()->generateRandomItem(GameManager::getSingletonPtr()->getLevelManager()->getLevelNode(), GameManager::getSingletonPtr()->getRandomInRange(1, 2), getPosition());
 
-	GameManager::getSingletonPtr()->getItemManager()->getItemGenerator()->generateRandomItem(GameManager::getSingletonPtr()->getLevelManager()->getLevelNode(), GameManager::getSingletonPtr()->getRandomInRange(1, 5), getPosition());
 	GameManager::getSingletonPtr()->getLevelManager()->detachHostileNPC(id);
 }

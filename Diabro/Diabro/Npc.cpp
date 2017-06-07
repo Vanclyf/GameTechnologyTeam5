@@ -1,5 +1,6 @@
 #include "Npc.h"
 #include "GameManager.h"
+#include "SoundManager.h"
 
 /// <summary>
 /// Creates a new instance of the <see cref="Npc"/> class.
@@ -103,7 +104,7 @@ bool Npc::dialog(Ogre::Vector3 pPlayerPos)
 /// </summary>
 void Npc::die() {
 	Character::die();
-	
+	SoundManager::PlaySmallSound("NPCDead.wav");
 	GameManager::getSingletonPtr()->getLevelManager()->detachFriendlyNPC(id);
 }
 

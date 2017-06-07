@@ -34,6 +34,7 @@ private:
 	int _currentXP;
 	int _xpTillNextLevel;
 	int _karmaPoints;
+	int _regenCounter;
 
 	int calcXpTillLevel(int);
 	void levelUp();

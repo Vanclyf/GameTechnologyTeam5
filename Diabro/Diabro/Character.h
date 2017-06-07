@@ -44,6 +44,7 @@ public:
 
 	Ogre::Vector3 getPosition() { return _myNode->getPosition(); }
 	NpcType getTypeNpc() { return _typeNpc; }
+	CharacterStats* getStats() { return _stats; }
 	void setTypeNpc(NpcType pType) { _typeNpc = pType; }
 
 	int getLevel() { return _currentLevel; }
@@ -66,6 +67,7 @@ public:
 	virtual bool adjustHealth(float);
 	virtual bool adjustStaminaOverTime(Ogre::Real);
 	virtual bool adjustStamina(float);
+	virtual bool regenHealth(float);
 	virtual void die();
 	int id; //may only be changed by levelmanager, death scenario 
 

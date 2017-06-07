@@ -19,7 +19,7 @@ Player::Player(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : Character(pM
 	_xpTillNextLevel = calcXpTillLevel(_currentLevel + 1);
 
 	_karmaPoints = 0;
-	_attackDistance = 100;
+	_attackDistance = 140;
 	_lightAttackCooldown = 1.2f;
 }
 
@@ -31,6 +31,8 @@ bool Player::initialize()
 {
 	Character::initialize();
 	_attackTimer = new Ogre::Timer();
+	_regenCounter = 0;
+	_stats->addStat(StatType::Damage, 2);
 	return true;
 }
 
@@ -38,16 +40,25 @@ bool Player::initialize()
 void Player::update(const Ogre::FrameEvent& pFE)
 {
 	Character::update(pFE.timeSinceLastFrame);
-	if (_attackCountDown <= 0)
-	{
-		_attackCountDown = 0;
-	}
-	else
-	{
-		Ogre::Real deltaTime = _attackTimer->getMilliseconds();
-		_attackTimer->reset();
-		_attackCountDown -= deltaTime;
-	}
+		if (_attackCountDown <= 0)
+		{
+			_attackCountDown = 0;
+		}
+		else
+		{
+			Ogre::Real deltaTime = _attackTimer->getMilliseconds();
+			_attackTimer->reset();
+			_attackCountDown -= deltaTime;
+		}
+		GameManager::getSingletonPtr()->getUIManager()->updateStatsPanel(getStats());
+		Character::regenHealth(0.004);
+		_regenCounter++;
+		if (_regenCounter >= 10)
+		{
+			_regenCounter = 0;
+			GameManager::getSingleton().getUIManager()->adjustHealthBar(_currentHealth, _stats->GetStat(StatType::MaxHealth));
+		}
+
 }
 
 /// <summary>
@@ -57,8 +68,12 @@ void Player::update(const Ogre::FrameEvent& pFE)
 /// <returns>False if the player runs out of health and dies.</returns>
 bool Player::adjustHealth(float pAdjust)
 {
-	if (!Character::adjustHealth(pAdjust)) { return false; }
-
+	if (!Character::adjustHealth(pAdjust))
+	{
+		SoundManager::PlaySmallSound("PlayerDead.wav");
+		return false;
+	}
+	SoundManager::PlaySmallSound("EnemyHit.wav");
 	GameManager::getSingleton().getUIManager()->adjustHealthBar(_currentHealth, _stats->GetStat(MaxHealth));
 	return true;
 }
@@ -86,9 +101,11 @@ bool Player::lightAttack()
 	//checks your attack cooldown
 	if (_attackCountDown <= 0)
 	{
+
 		_attackCountDown = 1200;
 		if (!Character::lightAttack())
 		{
+
 			return false;
 		}
 		auto levelManager = GameManager::getSingletonPtr()->getLevelManager();
