@@ -73,7 +73,7 @@ void GameManager::createScene(void)
 	_itemInstanceNumber = 0;
     // set lights
 	setupLights(mSceneMgr);
-	SoundManager::PlayBackgroundMusic("intromusic.mp3");
+	SoundManager::PlayBackgroundMusic("BackgroundMusic.mp3");
 	// set shadow technique
 	mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 
@@ -81,6 +81,9 @@ void GameManager::createScene(void)
 
 	_levelManager = new LevelManager();
 	_levelManager->initialize();
+
+	_timerManager = new TimerManager();
+	_timerManager->initialize();
 
 	_questContentManager = new QuestContentManager();
 
@@ -166,8 +169,8 @@ void GameManager::createFrameListener(void)
 bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& pFE)
 {
 	bool ret = BaseApplication::frameRenderingQueued(pFE);
-
 	_levelManager->update(pFE);
+	_timerManager->update(pFE);
  
 	return ret;
 }
@@ -223,11 +226,13 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 				{
 				case 0:
 					//weapon
+					SoundManager::PlaySmallSound("ItemPickup.wav");
 					_levelManager->getPlayer()->setEquipmentSlot(reinterpret_cast<WeaponInstance*>(item));
 					item->destroyItemInWorld();
 					break;
 				case 1:
 					//gear
+					SoundManager::PlaySmallSound("ItemPickup.wav");
 					_levelManager->getPlayer()->setEquipmentSlot(reinterpret_cast<ArmorInstance*>(item));
 					item->destroyItemInWorld();
 					break;
@@ -293,7 +298,7 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 				dynamic_cast<BasicEnemy*>(_levelManager->getHostileNpcs()[i])->toggleDialog();
 			}
 		}
-		_levelManager->getPrincess()->continueDialog();
+		_levelManager->getPrincess()->endingSequence(true);
 		break;
 
 	default:

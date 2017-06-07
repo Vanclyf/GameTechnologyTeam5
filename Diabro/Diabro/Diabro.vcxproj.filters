@@ -115,6 +115,9 @@
     <ClCompile Include="MenuState.cpp" />
     <ClCompile Include="PauseState.cpp" />
     <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="TimerManager.cpp">
+      <Filter>Sources\Managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicEnemy.h">
@@ -257,6 +260,9 @@
     <ClInclude Include="rapidxml.hpp" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="AppState.hpp" />
+    <ClInclude Include="TimerManager.h">
+      <Filter>Headers\Managers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="GameObjStandard.cg" />

@@ -18,6 +18,22 @@ BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNod
 void BasicEnemy::update(Ogre::Real pDeltatime)
 {
 	BaseNpc::update(pDeltatime);
+	if (_isHit)
+	{
+		if (_hitCountdown <= 0)
+		{
+			_hitCountdown = 0;
+			//change material
+			_myEntity->setMaterial(Ogre::MaterialManager::getSingletonPtr()->getByName("Houses/Red"));
+			_isHit = false;
+		}
+		else
+		{
+			Ogre::Real deltaTime = _hitTimer->getMilliseconds();
+			_hitTimer->reset();
+			_hitCountdown -= deltaTime;
+		}
+	}
 
 	if(_playerDetected) {
 		walkTo(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition());

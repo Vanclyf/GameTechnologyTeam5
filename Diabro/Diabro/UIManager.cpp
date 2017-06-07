@@ -33,8 +33,11 @@ void UIManager::setupUI()
 	_uiNode->setPosition(0, 0, 0);
 
 	// create health bar
+	_ParamNames.push_back("Timer");
+	_karmaBarWidget = _mSdkTrayMgr->createLongSlider(OgreBites::TL_TOPRIGHT, "Karma", "Karma", 150, 50, -300, 300, 60);
+	_gameTimer = _mSdkTrayMgr->createParamsPanel(OgreBites::TL_TOP, "Timer", 110, _ParamNames);
+	_gameTimer->getOverlayElement()->setLeft(-200);
 	_healthBarWidget = _mSdkTrayMgr->createDecorWidget(OgreBites::TL_TOPLEFT, "Health", "UI/Green");
-	_karmaBarWidget = _mSdkTrayMgr->createLongSlider(OgreBites::TL_TOPRIGHT, "Karma", "Karma",200,50,-300,300, 60);
 }
 
 void UIManager::createDialog(Ogre::String pDialogText) {
@@ -72,6 +75,7 @@ void UIManager::destroyPrincessDialog() {
 }
 void UIManager::destroyEnemyDialog() {
 	_mSdkTrayMgr->destroyWidget("EnemyDialogTextArea");
+	
 }
 
 /// <summary>
@@ -100,6 +104,24 @@ void UIManager::adjustHealthBar(Ogre::Real pValue, Ogre::Real pMaxValue)
 void UIManager::adjustStaminaBar(Ogre::Real pValue, Ogre::Real pMaxValue)
 {
 	_karmaBarWidget->setValue(Ogre::Real(pValue), false);
+}
+
+/// <summary>
+/// Adjusts the timer.
+/// </summary>
+/// <param name="Time">The current time.</param>
+void UIManager::adjustTimer(Ogre::Real pTime)
+{
+	_ParamValues.clear();
+	int iTime = pTime / 1000;
+	int mins = (iTime / 60);
+	int secs = iTime % 60;
+	std::stringstream timeStr;
+	timeStr << mins << ":" << secs;
+	_ParamValues.push_back(timeStr.str());
+	_ParamValues.push_back(timeStr.str());
+
+	_gameTimer->setAllParamValues(_ParamValues);
 }
 
 /// <summary>

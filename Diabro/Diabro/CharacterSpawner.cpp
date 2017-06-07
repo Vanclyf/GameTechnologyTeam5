@@ -47,15 +47,25 @@ void CharacterSpawner<T>::spawnInstance() {
 	if(std::is_same<T,BasicPrincess>::value)
 	{
 		_entityMeshName = "sphere.mesh";
-		instanceNode->setScale(1, 1, 1);
+		_entityMaterialName = "Houses/Pink";
+		instanceNode->setScale(.5, .5, .5);
 	}else if(std::is_same<T, Npc>::value)
 	{
-		_entityMeshName = "penguin.mesh";
+		_entityMeshName = "cube.mesh";
+		_entityMaterialName = "Houses/Green";
+		instanceNode->setScale(.5, .5, .5);
 	}else
 	{
-		_entityMeshName = "robot.mesh";
+		_entityMeshName = "cube.mesh";
+		_entityMaterialName = "Houses/Red";
+		instanceNode->setScale(.5, .5, .5);
 	}
 	Ogre::Entity* instanceEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity(_entityMeshName);
+	Ogre::MaterialPtr materialPtr = Ogre::MaterialManager::getSingleton().getByName(_entityMaterialName);
+	//Ogre::TextureUnitState* ptus = materialPtr->getTechnique(0)->getPass(1)->getTextureUnitState(0); //2nd pass, first texture unit
+	//ptus->setAlphaOperation(Ogre::LBX_MODULATE, Ogre::LBS_MANUAL, Ogre::LBS_TEXTURE, 0);
+//	materialPtr->load();
+	instanceEntity->setMaterial(materialPtr);
 	//rotateNode
 	Ogre::SceneNode* rotationNode = instanceNode->createChildSceneNode();
 		

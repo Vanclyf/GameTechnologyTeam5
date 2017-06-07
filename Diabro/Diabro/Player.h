@@ -13,9 +13,11 @@ public:
 
 	void gainXP(int);
 	void adjustKarma(int);
+	int getKarma() { return _karmaPoints; }
 	bool lightAttack() override;
 
 	bool initialize() override;
+	
 	int _attackSpeed;
 	int _AttackCD;
 
@@ -24,6 +26,7 @@ public:
 	bool adjustHealth(float) override;
 	bool adjustStaminaOverTime(Ogre::Real) override;
 	bool adjustStamina(float) override;
+	void update(const Ogre::FrameEvent&);
 	void adjustLook(Ogre::Entity *);
 
 private:
@@ -34,6 +37,8 @@ private:
 	int calcXpTillLevel(int);
 	void levelUp();
 	bool _canAttack;
+	Ogre::Real _attackCountDown;
+	Ogre::Timer* _attackTimer;
 };
 
 #endif
