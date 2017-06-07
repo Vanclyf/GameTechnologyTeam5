@@ -24,7 +24,6 @@ public:
 private:
 	//TODO: this code may be moved to the BaseNPC 
 	// so that all NPC's can attack
-	bool lightAttack() override;
 	bool _inDialog;
 	bool _isHit;
 	int _dialogCount;

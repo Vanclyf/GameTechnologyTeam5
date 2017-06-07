@@ -33,6 +33,7 @@ bool Character::initialize()
 	}
 	_currentStamina = _stats->GetStat(MaxStamina);
 	_hitTimer = new Ogre::Timer();
+	_isDead = false;
 
 	//show what is in the gear slots.
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
@@ -55,54 +56,56 @@ bool Character::initialize()
 /// <param name="pDeltatime">The time since last frame.</param>
 void Character::update(Ogre::Real pDeltatime)
 {
-
-	adjustStaminaOverTime(pDeltatime);
-
-	if (_currAttackCooldown > 0) {
-		_currAttackCooldown -= pDeltatime;
-	}else {
-		_canAttack = true;
-	}
-
-	if (_hitTime > 0) {
-		_hitTime -= pDeltatime;
-		return;
-	}
-	else {
-		_hitted = false;
-	}
-
-	if (_isHit)
+	if (!_isDead)
 	{
-		if (_hitCountdown <= 0)
+		adjustStaminaOverTime(pDeltatime);
+
+		if (_currAttackCooldown > 0) {
+			_currAttackCooldown -= pDeltatime;
+		}
+		else {
+			_canAttack = true;
+		}
+
+		if (_hitTime > 0) {
+			_hitTime -= pDeltatime;
+			return;
+		}
+		else {
+			_hitted = false;
+		}
+
+		if (_isHit)
 		{
-			_hitCountdown = 0;
-			//change material
-			switch(getTypeNpc())
+			if (_hitCountdown <= 0)
 			{
-			case NpcType::Good:
-				_myEntity->setMaterial(Ogre::MaterialManager::getSingletonPtr()->getByName("Houses/Green"));
-				break;
-			case NpcType::Bad:
-				_myEntity->setMaterial(Ogre::MaterialManager::getSingletonPtr()->getByName("Houses/Red"));
-				break;
-			case NpcType::Princess:
-				_myEntity->setMaterial(Ogre::MaterialManager::getSingletonPtr()->getByName("Houses/Green"));
-				break;
+				_hitCountdown = 0;
+				//change material
+				switch (getTypeNpc())
+				{
+				case NpcType::Good:
+					_myEntity->setMaterial(Ogre::MaterialManager::getSingletonPtr()->getByName("Houses/Green"));
+					break;
+				case NpcType::Bad:
+					_myEntity->setMaterial(Ogre::MaterialManager::getSingletonPtr()->getByName("Houses/Red"));
+					break;
+				case NpcType::Princess:
+					_myEntity->setMaterial(Ogre::MaterialManager::getSingletonPtr()->getByName("Houses/Green"));
+					break;
 
+				}
+				_isHit = false;
 			}
-			_isHit = false;
+			else
+			{
+				Ogre::Real deltaTime = _hitTimer->getMilliseconds();
+				_hitTimer->reset();
+				_hitCountdown -= deltaTime;
+			}
 		}
-		else
-		{
-			Ogre::Real deltaTime = _hitTimer->getMilliseconds();
-			_hitTimer->reset();
-			_hitCountdown -= deltaTime;
-		}
+
+		_myNode->translate(_dirVec * getSpeed() * pDeltatime, Ogre::Node::TS_LOCAL);
 	}
-
-	_myNode->translate(_dirVec * getSpeed() * pDeltatime, Ogre::Node::TS_LOCAL);
-
 }
 
 //TODO: these methods should be generic
@@ -289,6 +292,7 @@ void Character::die()
 		break;
 	}
 	player->gainXP(10);
+	_isDead = true;
 	//TODO: actually destroy the node and its children
 	//_myNode->removeAndDestroyAllChildren();
 	//GameManager::getSingletonPtr()->getSceneManager()->destroySceneNode(_myNode);

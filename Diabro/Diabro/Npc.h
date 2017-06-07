@@ -33,7 +33,7 @@ public:
 	void update(Ogre::Real) override;
 	bool dialog(Ogre::Vector3);
 	void toggleDialog();
-	void continueDialog();
+	void rumourDialog();
 	void die() override;
 	bool _inDialog;
 private:

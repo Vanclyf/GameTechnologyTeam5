@@ -120,6 +120,7 @@ private:
 	Ogre::Timer* _hitTimer;
 	Ogre::Real _hitCountdown;
 	bool _isHit;
+	bool _isDead;
 };
 
 #endif

@@ -70,11 +70,6 @@ Npc::~Npc() {
 void Npc::update(Ogre::Real pDeltatime)
 {
 	BaseNpc::update(pDeltatime);
-
-	if(_playerDetected)
-	{
-		_dirVec = Ogre::Vector3::ZERO;
-	} 
 }
 
 
@@ -86,34 +81,18 @@ void Npc::update(Ogre::Real pDeltatime)
 bool Npc::dialog(Ogre::Vector3 pPlayerPos)
 {
 	Ogre::Real distance = _myNode->getPosition().distance(pPlayerPos);
-	
+
 	if (distance < 500) // needs to be tweaked
 	{
 		_inDialog = true;
 
-		GameManager::getSingletonPtr()->getUIManager()->createDialog("Quest Dialog\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress Space to Continue");
-		GameManager::getSingletonPtr()->getUIManager()->appendDialogText(_startDialogText);
-		GameManager::getSingletonPtr()->getUIManager()->appendDialogText(_endDialogText);
 
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-		FILE* fp;
-		freopen_s(&fp, "CONOUT$", "w", stdout);
-		printf("dialog on\n");
-		fclose(fp);
-#endif
-		
+		GameManager::getSingletonPtr()->getUIManager()->createDialog("I heard some rumours\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress Space to Continue");
+		rumourDialog();
 		return true;
-	} else
-	{
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-		FILE* fp;
-		freopen_s(&fp, "CONOUT$", "w", stdout);
-		printf("out of range for dialog\n");
-		fclose(fp);
-#endif
-		
-		return false;
 	}
+
+	return false;
 }
 
 /// <summary>
@@ -145,21 +124,24 @@ void Npc::toggleDialog() {
 /// <summary>
 /// Continues the dialog.
 /// </summary>
-void Npc::continueDialog() {
-	if (_inDialog == true) {
-		_dialogCount++;
-		if (_dialogCount == 1) {
-			GameManager::getSingletonPtr()->getUIManager()->appendDialogText(_startDialogText);
-		}
-		else if (_dialogCount == 2) {
-			GameManager::getSingletonPtr()->getUIManager()->appendDialogText(_endDialogText);
-		}
-		else if (_dialogCount >= 3) {
-			GameManager::getSingletonPtr()->getUIManager()->destroyDialog();
-			_dialogCount = 0;
-			_inDialog = false;
-		}
+void Npc::rumourDialog() {
+	int roles = rand() % 3;
+
+	switch (roles) // assign building random professions by giving them a rolenode
+	{
+		case 0:
+			GameManager::getSingletonPtr()->getUIManager()->appendDialogText("I heard that the princess is being held somewhere, carefull bandits are trying to stop you! \n");
+			break;
+		case 1:
+			GameManager::getSingletonPtr()->getUIManager()->appendDialogText("Getting rid of bandits surely will increase your favor with the princess \n");
+			break;
+		case 2:
+			GameManager::getSingletonPtr()->getUIManager()->appendDialogText("Please don't hurt my friends, or the princess we will never side with you! \n");
+			break;
+		default:
+			break;
 	}
+	
 }
 
 /// <summary>

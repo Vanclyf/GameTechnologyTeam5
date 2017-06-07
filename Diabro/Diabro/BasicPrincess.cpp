@@ -5,7 +5,8 @@
 
 /// <summary>
 /// Creates a new instance of the <see cref="BasicPrincess"/> class.
-/// This the class for the princess object.
+/// This class is inherited from the base npc class.
+/// This class is used to created the princess object in the game.
 /// </summary>
 /// <param name="pMyNode">My node.</param>
 /// <param name="pMyEntity">My entity.</param>
@@ -136,12 +137,9 @@ void BasicPrincess::endingSequence(bool ending)
 	}else
 	{
 		_inDialog = true;
-		_dialogCount++;
-		if (_dialogCount == 1) {
-			GameManager::getSingletonPtr()->getUIManager()->createPrincessDialog("You Killed the princess\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress Space to Continue");
-				
-		}
-		else if (_dialogCount == 2) {
+		_dialogCount = 2;
+		if (_dialogCount == 2) {
+			GameManager::getSingletonPtr()->getUIManager()->createPrincessDialog("You Killed the princess\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress Space to Continue");	
 			GameManager::getSingletonPtr()->getUIManager()->appendDialogText("You killed princess Kinny, A terrible shock went through the player, what now? He Felt empty \n");
 				
 		}
