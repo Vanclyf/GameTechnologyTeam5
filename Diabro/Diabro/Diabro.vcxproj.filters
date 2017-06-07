@@ -64,7 +64,6 @@
     <ClCompile Include="ArmorInstance.cpp">
       <Filter>Sources\Items\Instance</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp" />
     <ClCompile Include="GenericFSM.cpp">
       <Filter>Sources\Finite State Machines</Filter>
     </ClCompile>
@@ -77,32 +76,8 @@
     <ClCompile Include="State.cpp">
       <Filter>Sources\Finite State Machines\States</Filter>
     </ClCompile>
-    <ClCompile Include="QuestItemContainer.cpp">
-      <Filter>Sources\QuestContent</Filter>
-    </ClCompile>
-    <ClCompile Include="QuestItemGenerator.cpp">
-      <Filter>Sources\QuestContent</Filter>
-    </ClCompile>
-    <ClCompile Include="QuestContentManager.cpp">
-      <Filter>Sources\QuestContent</Filter>
-    </ClCompile>
     <ClCompile Include="tinyxml2.cpp">
       <Filter>Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="LevelGenerator.cpp">
-      <Filter>Sources\LevelGeneration</Filter>
-    </ClCompile>
-    <ClCompile Include="City.cpp">
-      <Filter>Sources\LevelGeneration</Filter>
-    </ClCompile>
-    <ClCompile Include="Zone.cpp">
-      <Filter>Sources\LevelGeneration</Filter>
-    </ClCompile>
-    <ClCompile Include="Tree.cpp">
-      <Filter>Sources\TreeDatastructure</Filter>
-    </ClCompile>
-    <ClCompile Include="TreeNode.cpp">
-      <Filter>Sources\TreeDatastructure</Filter>
     </ClCompile>
     <ClCompile Include="SoundManager.cpp">
       <Filter>Sources</Filter>
@@ -110,14 +85,24 @@
     <ClCompile Include="BasicPrincess.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="AdvancedOgreFramework.cpp" />
-    <ClCompile Include="DotSceneLoader.cpp" />
-    <ClCompile Include="MenuState.cpp" />
-    <ClCompile Include="PauseState.cpp" />
-    <ClCompile Include="GameState.cpp" />
     <ClCompile Include="TimerManager.cpp">
       <Filter>Sources\Managers</Filter>
     </ClCompile>
+    <ClCompile Include="AdvancedOgreFramework.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuState.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="PauseState.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="DiabroApp.cpp" />
+    <ClCompile Include="AppStateManager.cpp" />
+    <ClCompile Include="GameState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicEnemy.h">
@@ -195,7 +180,6 @@
     <ClInclude Include="ArmorInstance.h">
       <Filter>Headers\Items\Instance</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h" />
     <ClInclude Include="GenericFSM.h">
       <Filter>Headers\States</Filter>
     </ClInclude>
@@ -229,12 +213,6 @@
     <ClInclude Include="tinyxml2.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Zone.h">
-      <Filter>Headers\LevelGeneration</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelGenerator.h">
-      <Filter>Headers\LevelGeneration</Filter>
-    </ClInclude>
     <ClInclude Include="City.h">
       <Filter>Headers\LevelGeneration</Filter>
     </ClInclude>
@@ -253,16 +231,30 @@
     <ClInclude Include="BaseNpc.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="AdvancedOgreFramework.hpp" />
-    <ClInclude Include="DotSceneLoader.hpp" />
-    <ClInclude Include="MenuState.hpp" />
-    <ClInclude Include="PauseState.hpp" />
-    <ClInclude Include="rapidxml.hpp" />
-    <ClInclude Include="GameState.h" />
-    <ClInclude Include="AppState.hpp" />
     <ClInclude Include="TimerManager.h">
       <Filter>Headers\Managers</Filter>
     </ClInclude>
+    <ClInclude Include="AdvancedOgreFramework.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="AppState.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuState.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseState.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="rapidxml.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="DiabroApp.h" />
+    <ClInclude Include="AppStateManager.h" />
+    <ClInclude Include="GameState.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GameObjStandard.cg" />
@@ -313,9 +305,6 @@
     <Filter Include="Headers\QuestContent">
       <UniqueIdentifier>{00e4bb5e-9f04-498a-ad5e-7802f8e9a5f2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\QuestContent">
-      <UniqueIdentifier>{941f42a8-19a0-45a9-9d67-1dba844f3563}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\LevelGeneration">
       <UniqueIdentifier>{4496d5fd-f0d4-4d38-823d-210e643542b6}</UniqueIdentifier>
     </Filter>
@@ -324,9 +313,6 @@
     </Filter>
     <Filter Include="Headers\TreeDatastructure">
       <UniqueIdentifier>{f6751de5-7943-4b62-9e2a-36ed8343b8f6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\TreeDatastructure">
-      <UniqueIdentifier>{99432b15-230d-40ae-8f8d-eb742dc805a4}</UniqueIdentifier>
     </Filter>
     <Filter Include="Headers\States">
       <UniqueIdentifier>{08a08f48-5a8f-443d-9cc6-cb465548c300}</UniqueIdentifier>

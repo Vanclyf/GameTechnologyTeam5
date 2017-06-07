@@ -2,7 +2,6 @@
 #define ITEMGENERATOR_H
 
 #pragma once
-#include <OgreEntity.h>
 #include "ItemInstance.h"
 #include "LevelManager.h"
 

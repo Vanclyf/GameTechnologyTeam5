@@ -6,12 +6,10 @@
 #include "BaseApplication.h"
 #include "BasicEnemy.h"
 #include "EquimentInstance.h"
-#include <OgreSceneManager.h>
 #include "CharacterSpawner.h"
 #include "LevelGenerator.h"
 #include "BasicPrincess.h"
-#include <ik_ISoundEngine.h>
-
+#include <irrKlang.h>
 
 class LevelManager
 {

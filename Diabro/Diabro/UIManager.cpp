@@ -1,5 +1,6 @@
 #include "UIManager.h"
 #include "GameManager.h"
+#include "GameState.h"
 
 /// <summary>
 /// Creates a new instance of the <see cref="UIManager"/> class.
@@ -29,7 +30,7 @@ void UIManager::init()
 /// </summary>
 void UIManager::setupUI()
 {
-	_uiNode = GameManager::getSingleton().getLevelManager()->getCamNode()->createChildSceneNode("UINode");
+	_uiNode = GameState::getSingleton().getLevelManager()->getCamNode()->createChildSceneNode("UINode");
 	_uiNode->setPosition(0, 0, 0);
 
 	// create health bar

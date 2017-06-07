@@ -1,5 +1,6 @@
 #include "BaseNpc.h"
 #include "GameManager.h"
+#include "GameState.h"
 
 /// <summary>
 /// Creates a new instance of the <see cref="BaseNpc" /> class.
@@ -50,7 +51,7 @@ void BaseNpc::rotatePivot(Ogre::Vector3 pRotationDegrees) {
 /// </summary>
 void BaseNpc::detectPlayer()
 {
-	if (getPosition().distance(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition()) < _noticeDistance) {
+	if (getPosition().distance(GameState::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition()) < _noticeDistance) {
 		_playerDetected = true;
 	}
 	else {

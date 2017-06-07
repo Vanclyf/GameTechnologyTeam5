@@ -2,6 +2,7 @@
 #include "GameManager.h"
 #include "Player.h"
 #include "SoundManager.h"
+#include "GameState.h"
 
 /// <summary>
 /// Creates a new instance of the <see cref="BasicEnemy"/> class.
@@ -11,7 +12,7 @@
 /// <param name="pMyEntity">My entity.</param>
 BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity) : BaseNpc(pMyNode, pMyRotationNode, pMyEntity)
 {
-	id = GameManager::getSingletonPtr()->getLevelManager()->subscribeHostileNPC(this);
+	id = GameState::getSingletonPtr()->getLevelManager()->subscribeHostileNPC(this);
 	setTypeNpc(NpcType::Bad);
 }
 
@@ -36,9 +37,9 @@ void BasicEnemy::update(Ogre::Real pDeltatime)
 	}
 
 	if(_playerDetected) {
-		walkTo(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition());
+		walkTo(GameState::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition());
 
-		if (getPosition().distance(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition()) < _attackDistance) {
+		if (getPosition().distance(GameState::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition()) < _attackDistance) {
 			lightAttack();
 		}
 	}
@@ -53,7 +54,7 @@ bool BasicEnemy::dialog(Ogre::Vector3 pPlayerPos)
 	{
 		_inDialog = true;
 
-		GameManager::getSingletonPtr()->getUIManager()->createEnemyDialog("An enemy\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress Space to Continue");
+		GameState::getSingletonPtr()->getUIManager()->createEnemyDialog("An enemy\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress Space to Continue");
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 		FILE* fpr;
@@ -87,7 +88,7 @@ bool BasicEnemy::dialog(Ogre::Vector3 pPlayerPos)
 void BasicEnemy::toggleDialog() {
 	_inDialog = false;
 	try {
-		GameManager::getSingletonPtr()->getUIManager()->destroyEnemyDialog();
+		GameState::getSingletonPtr()->getUIManager()->destroyEnemyDialog();
 	}
 	catch (...) {
 		return;
@@ -101,7 +102,7 @@ void BasicEnemy::toggleDialog() {
 void BasicEnemy::continueDialog() {
 	if (_inDialog == true)
 	{
-		GameManager::getSingletonPtr()->getUIManager()->destroyEnemyDialog();
+		GameState::getSingletonPtr()->getUIManager()->destroyEnemyDialog();
 		_inDialog = false;
 		//TODO: create ending sequence
 	}
@@ -114,7 +115,7 @@ bool BasicEnemy::lightAttack()
 	}
 	SoundManager::PlaySmallSound("EnemyHit.wav");
 	std::vector<Character*> targets;
-	targets.push_back(GameManager::getSingletonPtr()->getLevelManager()->getPlayer());
+	targets.push_back(GameState::getSingletonPtr()->getLevelManager()->getPlayer());
 	findTarget(targets);
 
 	if (_target == nullptr) {
@@ -133,8 +134,8 @@ void BasicEnemy::die() {
 	SoundManager::PlaySmallSound("EnemyDead.wav");
 	Character::die();
 	
-	GameManager::getSingletonPtr()->getItemManager()->getItemGenerator()->generateRandomItem(GameManager::getSingletonPtr()->getLevelManager()->getLevelNode(), GameManager::getSingletonPtr()->getRandomInRange(1, 5), getPosition());
-	GameManager::getSingletonPtr()->getLevelManager()->detachHostileNPC(id);
+	GameState::getSingletonPtr()->getItemManager()->getItemGenerator()->generateRandomItem(GameState::getSingletonPtr()->getLevelManager()->getLevelNode(), GameState::getSingletonPtr()->getRandomInRange(1, 5), getPosition());
+	GameState::getSingletonPtr()->getLevelManager()->detachHostileNPC(id);
 }
 
 

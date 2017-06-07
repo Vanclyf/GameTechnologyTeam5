@@ -77,6 +77,10 @@ public:
 
     virtual void go(void);
 
+	Ogre::SceneManager* GetSceneManager() { return mSceneMgr; }
+	Ogre::Camera* GetCamera() { return mCamera; }
+	Ogre::Root* GetRoot() { return mRoot; }
+
 protected:
     virtual bool setup();
     virtual bool configure(void);

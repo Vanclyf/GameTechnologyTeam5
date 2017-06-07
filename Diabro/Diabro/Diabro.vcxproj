@@ -115,6 +115,7 @@ copy "$(OGRE_HOME)\irrKlang-1.5.0\dllFiles\irrKlang.dll" "$(SolutionDir)Diabro\b
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AdvancedOgreFramework.cpp" />
+    <ClCompile Include="AppStateManager.cpp" />
     <ClCompile Include="ArmorInstance.cpp" />
     <ClCompile Include="BaseApplication.cpp" />
     <ClCompile Include="BaseArmor.cpp" />
@@ -126,8 +127,7 @@ copy "$(OGRE_HOME)\irrKlang-1.5.0\dllFiles\irrKlang.dll" "$(SolutionDir)Diabro\b
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="BaseWeapon.cpp" />
     <ClCompile Include="CharacterSpawner.cpp" />
-    <ClCompile Include="City.cpp" />
-    <ClCompile Include="DotSceneLoader.cpp" />
+    <ClCompile Include="DiabroApp.cpp" />
     <ClCompile Include="EquimentInstance.cpp" />
     <ClCompile Include="FloatRange.cpp" />
     <ClCompile Include="GameManager.cpp" />
@@ -138,30 +138,24 @@ copy "$(OGRE_HOME)\irrKlang-1.5.0\dllFiles\irrKlang.dll" "$(SolutionDir)Diabro\b
     <ClCompile Include="ItemGenerator.cpp" />
     <ClCompile Include="ItemInstance.cpp" />
     <ClCompile Include="ItemManager.cpp" />
-    <ClCompile Include="LevelGenerator.cpp" />
     <ClCompile Include="MenuState.cpp" />
     <ClCompile Include="Npc.cpp" />
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="PauseState.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="QuestContentManager.cpp" />
-    <ClCompile Include="QuestItemContainer.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="TestFSM.cpp" />
-    <ClCompile Include="QuestItemGenerator.cpp" />
     <ClCompile Include="TimerManager.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
-    <ClCompile Include="Tree.cpp" />
-    <ClCompile Include="TreeNode.cpp" />
     <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="WeaponInstance.cpp" />
-    <ClCompile Include="Zone.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AdvancedOgreFramework.hpp" />
     <ClInclude Include="Affix.h" />
     <ClInclude Include="AppState.hpp" />
+    <ClInclude Include="AppStateManager.h" />
     <ClInclude Include="ArmorInstance.h" />
     <ClInclude Include="BaseApplication.h" />
     <ClInclude Include="BaseArmor.h" />
@@ -176,7 +170,7 @@ copy "$(OGRE_HOME)\irrKlang-1.5.0\dllFiles\irrKlang.dll" "$(SolutionDir)Diabro\b
     <ClInclude Include="CharacterSpawner.h" />
     <ClInclude Include="CharacterStats.h" />
     <ClInclude Include="City.h" />
-    <ClInclude Include="DotSceneLoader.hpp" />
+    <ClInclude Include="DiabroApp.h" />
     <ClInclude Include="EquimentInstance.h" />
     <ClInclude Include="FloatRange.h" />
     <ClInclude Include="GameManager.h" />
@@ -187,7 +181,6 @@ copy "$(OGRE_HOME)\irrKlang-1.5.0\dllFiles\irrKlang.dll" "$(SolutionDir)Diabro\b
     <ClInclude Include="ItemGenerator.h" />
     <ClInclude Include="ItemInstance.h" />
     <ClInclude Include="ItemManager.h" />
-    <ClInclude Include="LevelGenerator.h" />
     <ClInclude Include="MenuState.hpp" />
     <ClInclude Include="Needs.h" />
     <ClInclude Include="Npc.h" />
@@ -211,7 +204,6 @@ copy "$(OGRE_HOME)\irrKlang-1.5.0\dllFiles\irrKlang.dll" "$(SolutionDir)Diabro\b
     <ClInclude Include="TreeNode.h" />
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="WeaponInstance.h" />
-    <ClInclude Include="Zone.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Diabro.rc" />

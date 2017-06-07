@@ -1,5 +1,6 @@
 #include "CharacterSpawner.h"
 #include "GameManager.h"
+#include "GameState.h"
 
 template<class T>
 ::CharacterSpawner<T>::CharacterSpawner(Ogre::SceneNode* pMyNode, int pNumOfSpawns, Ogre::Vector3 pSpawnPosition, City* pMyCity)
@@ -60,7 +61,7 @@ void CharacterSpawner<T>::spawnInstance() {
 		_entityMaterialName = "Houses/Red";
 		instanceNode->setScale(.5, .5, .5);
 	}
-	Ogre::Entity* instanceEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity(_entityMeshName);
+	Ogre::Entity* instanceEntity = GameState::getSingletonPtr()->getSceneManager()->createEntity(_entityMeshName);
 	Ogre::MaterialPtr materialPtr = Ogre::MaterialManager::getSingleton().getByName(_entityMaterialName);
 	//Ogre::TextureUnitState* ptus = materialPtr->getTechnique(0)->getPass(1)->getTextureUnitState(0); //2nd pass, first texture unit
 	//ptus->setAlphaOperation(Ogre::LBX_MODULATE, Ogre::LBS_MANUAL, Ogre::LBS_TEXTURE, 0);

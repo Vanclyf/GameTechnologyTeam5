@@ -1,5 +1,6 @@
 #include "Npc.h"
 #include "GameManager.h"
+#include "GameState.h"
 
 /// <summary>
 /// Creates a new instance of the <see cref="Npc"/> class.
@@ -8,7 +9,7 @@
 /// <param name="pMyEntity">My entity.</param>
 Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity) : BaseNpc(pMyNode, pMyRotationNode, pMyEntity), _inDialog(false)
 {
-	id = GameManager::getSingletonPtr()->getLevelManager()->subscribeFriendlyNPC(this);
+	id = GameState::getSingletonPtr()->getLevelManager()->subscribeFriendlyNPC(this);
 	rotatePivot(Ogre::Vector3(0, 90, 0));
 	_dialogFile.open("DialogText.txt");
 	if (_dialogFile.fail()) {
@@ -39,7 +40,7 @@ Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entit
 
 	//TODO: discuss if this should be moved to some NPC generator class ----------------------------------------
 	// randomly assign a profession
-	int randomRoll = GameManager::getSingletonPtr()->getRandomInRange(0, Profession::AMOUNT_OF_PROFS);
+	int randomRoll = GameState::getSingletonPtr()->getRandomInRange(0, Profession::AMOUNT_OF_PROFS);
 	_profession = (Profession)randomRoll;
 
 	// randomly assign needs
@@ -48,7 +49,7 @@ Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entit
 	for (int i = 0; i < NeedType::AMOUNT_OF_NEEDTYPES; ++i) {
 		tempNeed.type = (NeedType)i;
 
-		randomRoll = GameManager::getSingletonPtr()->getRandomInRange(10, 100);
+		randomRoll = GameState::getSingletonPtr()->getRandomInRange(10, 100);
 		tempNeed.value = randomRoll;
 		tempNeeds.push_back(tempNeed);
 	};
@@ -91,9 +92,9 @@ bool Npc::dialog(Ogre::Vector3 pPlayerPos)
 	{
 		_inDialog = true;
 
-		GameManager::getSingletonPtr()->getUIManager()->createDialog("Quest Dialog\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress Space to Continue");
-		GameManager::getSingletonPtr()->getUIManager()->appendDialogText(_startDialogText);
-		GameManager::getSingletonPtr()->getUIManager()->appendDialogText(_endDialogText);
+		GameState::getSingletonPtr()->getUIManager()->createDialog("Quest Dialog\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress Space to Continue");
+		GameState::getSingletonPtr()->getUIManager()->appendDialogText(_startDialogText);
+		GameState::getSingletonPtr()->getUIManager()->appendDialogText(_endDialogText);
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 		FILE* fp;
@@ -122,7 +123,7 @@ bool Npc::dialog(Ogre::Vector3 pPlayerPos)
 void Npc::die() {
 	Character::die();
 	
-	GameManager::getSingletonPtr()->getLevelManager()->detachFriendlyNPC(id);
+	GameState::getSingletonPtr()->getLevelManager()->detachFriendlyNPC(id);
 }
 
 /// <summary>
@@ -133,7 +134,7 @@ void Npc::toggleDialog() {
 	{
 		_inDialog = false;
 		try {
-			GameManager::getSingletonPtr()->getUIManager()->destroyDialog();
+			GameState::getSingletonPtr()->getUIManager()->destroyDialog();
 		}
 		catch (...) {
 			return;
@@ -149,13 +150,13 @@ void Npc::continueDialog() {
 	if (_inDialog == true) {
 		_dialogCount++;
 		if (_dialogCount == 1) {
-			GameManager::getSingletonPtr()->getUIManager()->appendDialogText(_startDialogText);
+			GameState::getSingletonPtr()->getUIManager()->appendDialogText(_startDialogText);
 		}
 		else if (_dialogCount == 2) {
-			GameManager::getSingletonPtr()->getUIManager()->appendDialogText(_endDialogText);
+			GameState::getSingletonPtr()->getUIManager()->appendDialogText(_endDialogText);
 		}
 		else if (_dialogCount >= 3) {
-			GameManager::getSingletonPtr()->getUIManager()->destroyDialog();
+			GameState::getSingletonPtr()->getUIManager()->destroyDialog();
 			_dialogCount = 0;
 			_inDialog = false;
 		}

@@ -8,7 +8,6 @@ class BaseNpc : public Character
 {
 public:
 	BaseNpc(Ogre::SceneNode*, Ogre::SceneNode*, Ogre::Entity*);
-	//~BaseNpc();
 
 	void update(Ogre::Real) override;
 
@@ -24,8 +23,6 @@ protected:
 	//object pivot
 	Ogre::SceneNode* _myRotationNode;
 	
-	// temporary vars for spawning, spawning should be handled by some content placer script
-
 private:
 	float _timeSince;
 

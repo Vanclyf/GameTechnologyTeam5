@@ -1,5 +1,6 @@
 #include "Character.h"
 #include "GameManager.h"
+#include "GameState.h"
 
 /// <summary>
 /// Initializes a new instance of the <see cref="Character"/> class.
@@ -256,7 +257,7 @@ bool Character::adjustStamina(float pAdjust)
 /// </summary>
 void Character::die()
 {
-	Player *player = GameManager::getSingletonPtr()->getLevelManager()->getPlayer();
+	Player *player = GameState::getSingletonPtr()->getLevelManager()->getPlayer();
 	_myNode->setVisible(false);
  
 
@@ -335,7 +336,7 @@ void Character::setEquipmentSlot(ArmorInstance* pArmor)
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 		FILE* fp;
 		freopen_s(&fp, "CONOUT$", "w", stdout);
-		std::cout << "Cannot equip item too high level: " << reinterpret_cast<EquipmentInstance*>(pArmor)->getLevel() << " current level: " << GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getLevel() << std::endl;
+		std::cout << "Cannot equip item too high level: " << reinterpret_cast<EquipmentInstance*>(pArmor)->getLevel() << " current level: " << GameState::getSingletonPtr()->getLevelManager()->getPlayer()->getLevel() << std::endl;
 		fclose(fp);
 #endif
 
@@ -398,7 +399,7 @@ void Character::setEquipmentSlot(WeaponInstance* pWeapon)
 		#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 			FILE* fp;
 			freopen_s(&fp, "CONOUT$", "w", stdout);
-			std::cout << "Cannot equip item too high level: " << reinterpret_cast<EquipmentInstance*>(pWeapon)->getLevel() << " current level: " << GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getLevel() << std::endl;
+			std::cout << "Cannot equip item too high level: " << reinterpret_cast<EquipmentInstance*>(pWeapon)->getLevel() << " current level: " << GameState::getSingletonPtr()->getLevelManager()->getPlayer()->getLevel() << std::endl;
 			fclose(fp);
 		#endif
 
@@ -531,7 +532,7 @@ void Character::setEquipmentSlot(ItemInstance* pItem)
 			#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 				FILE* fp;
 				freopen_s(&fp, "CONOUT$", "w", stdout);
-				std::cout << "Cannot equip item too high level: " << reinterpret_cast<EquipmentInstance*>(pItem)->getLevel() << " current level: " << GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getLevel() << std::endl;
+				std::cout << "Cannot equip item too high level: " << reinterpret_cast<EquipmentInstance*>(pItem)->getLevel() << " current level: " << GameState::getSingletonPtr()->getLevelManager()->getPlayer()->getLevel() << std::endl;
 				fclose(fp);
 			#endif
 

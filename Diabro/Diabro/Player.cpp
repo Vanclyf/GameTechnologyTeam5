@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "GameManager.h"
 #include "SoundManager.h"
+#include "GameState.h"
 
 /// <summary>
 /// Creates a new instance of the <see cref="Player"/> class.
@@ -58,7 +59,7 @@ bool Player::adjustHealth(float pAdjust)
 {
 	if (!Character::adjustHealth(pAdjust)) { return false; }
 
-	GameManager::getSingleton().getUIManager()->adjustHealthBar(_currentHealth, _stats->GetStat(StatType::MaxHealth));
+	GameState::getSingleton().getUIManager()->adjustHealthBar(_currentHealth, _stats->GetStat(StatType::MaxHealth));
 	return true;
 }
 
@@ -69,7 +70,7 @@ bool Player::adjustHealth(float pAdjust)
 /// <returns>False if the player runs out of statina.</returns>
 bool Player::adjustStaminaOverTime(Ogre::Real pDeltaTime)
 {
-	GameManager::getSingleton().getUIManager()->adjustStaminaBar(_karmaPoints, Ogre::Real(200));
+	GameState::getSingleton().getUIManager()->adjustStaminaBar(_karmaPoints, Ogre::Real(200));
 
 	return true;
 }
@@ -82,7 +83,7 @@ bool Player::lightAttack()
 		if (!Character::lightAttack()) {
 			return false;
 		}
-		std::vector<Character*> targets = GameManager::getSingletonPtr()->getLevelManager()->getHostileNpcs();
+		std::vector<Character*> targets = GameState::getSingletonPtr()->getLevelManager()->getHostileNpcs();
 		findTarget(targets);
 		if (_target == nullptr) {
 			return false;
@@ -127,7 +128,7 @@ bool Player::adjustStamina(float pAdjust)
 {
 	//Character::adjustStamina(pAdjust);
 
-	GameManager::getSingleton().getUIManager()->adjustStaminaBar(_karmaPoints, Ogre::Real(200));
+	GameState::getSingleton().getUIManager()->adjustStaminaBar(_karmaPoints, Ogre::Real(200));
 
 	return true;
 }

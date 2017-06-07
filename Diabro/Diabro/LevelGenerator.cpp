@@ -4,6 +4,7 @@
 #include <OgreRoot.h>
 #include <OgreHardwareBufferManager.h>
 #include "GameManager.h"
+#include "GameState.h"
 
 LevelGenerator::LevelGenerator():
 scalar(1000)
@@ -20,14 +21,14 @@ scalar(1000)
 		_zone[0].cities[i].init();
 
 		//place spawner
-		if (GameManager::getSingletonPtr()->getRandomInRange(0,10) < 5){
-			Ogre::SceneNode* npcSpawnerNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode("npcSpawn" + i);
+		if (GameState::getSingletonPtr()->getRandomInRange(0,10) < 5){
+			Ogre::SceneNode* npcSpawnerNode = GameState::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode("npcSpawn" + i);
 			//0.5f for height difference
 			CharacterSpawner<Npc>* npcSpawner = new CharacterSpawner<Npc>(npcSpawnerNode, 3, Ogre::Vector3((c.position.x + c.width / 2) * 1000, 25, (c.position.z + c.depth / 2) * 1000), &_zone[0].cities[i]);
 		}
 		else
 		{
-			Ogre::SceneNode* enemySpawnerNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode("enemySpawn" + i);
+			Ogre::SceneNode* enemySpawnerNode = GameState::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode("enemySpawn" + i);
 			CharacterSpawner<BasicEnemy>* enemySpawner = new CharacterSpawner<BasicEnemy>(enemySpawnerNode, 3, Ogre::Vector3((c.position.x + c.width / 2) * 1000, 0, (c.position.z + c.depth / 2) * 1000) + 20, &_zone[0].cities[i]);
 		}
 	}
@@ -50,7 +51,7 @@ void LevelGenerator::drawDungeonFloor(int pScalar, Zone pZone) {
 	for (int ix = 0; ix < pZone.getResolution().x; ++ix) {
 		for (int iz = 0; iz < pZone.getResolution().z; ++iz) {
 			if (pZone.getTile(ix, iz) > 0) {
-				Ogre::SceneNode* thisSceneNode = GameManager::getSingleton().getSceneManager()->getRootSceneNode()->createChildSceneNode();
+				Ogre::SceneNode* thisSceneNode = GameState::getSingleton().getSceneManager()->getRootSceneNode()->createChildSceneNode();
 				thisSceneNode->setPosition(ix * pScalar, 0, iz * pScalar);
 
 				std::stringstream name;
@@ -58,7 +59,7 @@ void LevelGenerator::drawDungeonFloor(int pScalar, Zone pZone) {
 
 				createPlane(pScalar, name.str());
 
-				Ogre::Entity* zoneEntity = GameManager::getSingleton().getSceneManager()->createEntity("entity: " + name.str(), name.str());
+				Ogre::Entity* zoneEntity = GameState::getSingleton().getSceneManager()->createEntity("entity: " + name.str(), name.str());
 				zoneEntity->setMaterialName("Examples/Rockwall");
 				thisSceneNode->attachObject(zoneEntity);
 			}

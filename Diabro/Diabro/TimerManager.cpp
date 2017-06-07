@@ -1,5 +1,6 @@
 #include "TimerManager.h"
 #include "GameManager.h"
+#include "GameState.h"
 
 /// <summary>
 /// Initializes a new instance of the <see cref="CountDownTimer"/> class.
@@ -34,7 +35,7 @@ void TimerManager::update(const Ogre::FrameEvent& pFE)
 		_gameTimer->reset(); // Reset the timer, so time is delta between updates
 		_countDown -= deltaTime;
 	}
-	GameManager::getSingleton().getUIManager()->adjustTimer(_countDown);
+	GameState::getSingleton().getUIManager()->adjustTimer(_countDown);
 }
 
 /// <summary>

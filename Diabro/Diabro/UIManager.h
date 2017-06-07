@@ -2,8 +2,6 @@
 #define UI_MANAGER_H_
 
 #pragma once
-#include <OgreBillboardSet.h>
-#include "BaseApplication.h"
 #include "SdkTrays.h"
 
 class UIManager

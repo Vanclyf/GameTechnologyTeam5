@@ -1,6 +1,7 @@
 #include "GameManager.h"
 #include "LevelManager.h"
 #include "SoundManager.h"
+#include "GameState.h"
 
 /// <summary>
 /// Initializes a new instance of the <see cref="LevelManager" /> class.
@@ -18,19 +19,17 @@ LevelManager::LevelManager() : playerScript(nullptr), _playerEntity(nullptr), _n
 void LevelManager::initialize()
 {
 	// create level node, the root node for everything in the level
-	_levelNode = GameManager::getSingletonPtr()->getSceneManager()->getRootSceneNode()->createChildSceneNode("LevelNode");
-
-	levelGenerator = new LevelGenerator();
+	//_levelNode = GameState::getSingletonPtr()->getSceneManager()->getRootSceneNode()->createChildSceneNode("LevelNode");
 
 	Ogre::SceneNode* playerNode = _levelNode->createChildSceneNode("PlayerNode");
-	_camNode = playerNode->createChildSceneNode("CameraNode");
+	//_camNode = playerNode->createChildSceneNode("CameraNode");
 
 
 	//player
-	_playerEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("sphere.mesh");
+	_playerEntity = GameState::getSingletonPtr()->getSceneManager()->createEntity("sphere.mesh");
 	playerNode->createChildSceneNode()->attachObject(_playerEntity);
-	Ogre::Vector3 position = Ogre::Vector3((levelGenerator->GetZone(0, 0).cities[0].position.x + (levelGenerator->GetZone(0, 0).cities[0].width / 2.0f)) * levelGenerator->scalar,30, (levelGenerator->GetZone(0, 0).cities[0].position.z + (levelGenerator->GetZone(0, 0).cities[0].depth / 2.0f)) * levelGenerator->scalar);
-	playerNode->setPosition(position);
+	//Ogre::Vector3 position = Ogre::Vector3((levelGenerator->GetZone(0, 0).cities[0].position.x + (levelGenerator->GetZone(0, 0).cities[0].width / 2.0f)) * levelGenerator->scalar,30, (levelGenerator->GetZone(0, 0).cities[0].position.z + (levelGenerator->GetZone(0, 0).cities[0].depth / 2.0f)) * levelGenerator->scalar);
+	//playerNode->setPosition(position);
 	playerNode->setScale(0.5f, 0.5f, 0.5f);
 	playerScript = new Player(playerNode, _playerEntity);
 	playerScript->initialize();
@@ -41,11 +40,11 @@ void LevelManager::initialize()
 	_levelNode->createChildSceneNode()->attachObject(_groundEntity);
 	_groundEntity->setMaterialName("Examples/Rockwall");*/
 
-	Ogre::SceneNode* princessSpawnerNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode("princessSpawn");
+	Ogre::SceneNode* princessSpawnerNode = GameState::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode("princessSpawn");
 	CharacterSpawner<BasicPrincess>* princessSpawner = new CharacterSpawner<BasicPrincess>(princessSpawnerNode, 1, Ogre::Vector3(1000, 25, 500));
 
 	// camera
-	_camNode->attachObject(GameManager::getSingletonPtr()->getCamera());
+	_camNode->attachObject(GameState::getSingletonPtr()->getCamera());
 	_camNode->pitch(Ogre::Degree(10), Ogre::Node::TS_LOCAL);
 	startPitchCam = _camNode->getOrientation().getPitch();
 	engine = SoundManager::Play3DSound("PrincessHelp.wav", getPrincess()->getPosition());

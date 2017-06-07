@@ -2,6 +2,7 @@
 #include "GameManager.h"
 #include "WeaponInstance.h"
 #include "ArmorInstance.h"
+#include "GameState.h"
 
 class BaseArmor;
 
@@ -54,17 +55,17 @@ ItemInstance* ItemGenerator::generateRandomItem(Ogre::SceneNode* pNode, Ogre::Ve
 
 
 
-	GameManager::getSingletonPtr()->addItemNumber();
-	int itemnumber = GameManager::getSingleton().getItemNumber();
-	Ogre::Entity* itemEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("sphere.mesh");
+	GameState::getSingletonPtr()->addItemNumber();
+	int itemnumber = GameState::getSingleton().getItemNumber();
+	Ogre::Entity* itemEntity = GameState::getSingletonPtr()->getSceneManager()->createEntity("sphere.mesh");
 
 	
 	std::stringstream nodename("_itemNode");
 	nodename << itemnumber << "_" << "0";
-	_itemNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode(nodename.str());
+	_itemNode = GameState::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode(nodename.str());
 	_itemNode->createChildSceneNode()->attachObject(itemEntity);
-	position.x += GameManager::getSingletonPtr()->getRandomInRange(0, 200) - 100;
-	position.z += GameManager::getSingletonPtr()->getRandomInRange(0, 200) - 100;
+	position.x += GameState::getSingletonPtr()->getRandomInRange(0, 200) - 100;
+	position.z += GameState::getSingletonPtr()->getRandomInRange(0, 200) - 100;
 	position.y += 10;
 	_itemNode->setPosition(position);
 	_itemNode->setScale(.2, .2, .2);
@@ -77,7 +78,7 @@ ItemInstance* ItemGenerator::generateRandomItem(Ogre::SceneNode* pNode, Ogre::Ve
 	Quality quality = Quality::Poor;
 
 	// determine random quality by rolling and checking the probabiliies in the map
-	int randomRoll = (int)GameManager::getSingletonPtr()->getRandomInRange(0, _summedQualityProbability);
+	int randomRoll = (int)GameState::getSingletonPtr()->getRandomInRange(0, _summedQualityProbability);
 	int counter = 0;
 	for (std::map<Quality, int>::iterator it = _qualityProbablity.begin(); it != _qualityProbablity.end(); ++it) {
 		counter += it->second;
@@ -89,10 +90,10 @@ ItemInstance* ItemGenerator::generateRandomItem(Ogre::SceneNode* pNode, Ogre::Ve
 	}
 
 	//int level = (int)((int)(quality + 1) * GameManager::getSingletonPtr()->getRandomInRange(1.0f, 2.5f));
-	int offset = GameManager::getSingletonPtr()->getRandomInRange(2, 7);
-	int playerLevel = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getLevel();
-	int level = GameManager::getSingletonPtr()->getRandomInRange((playerLevel - offset) + quality, playerLevel + quality);
-	double multiplier = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getKarma() * 0.00167;
+	int offset = GameState::getSingletonPtr()->getRandomInRange(2, 7);
+	int playerLevel = GameState::getSingletonPtr()->getLevelManager()->getPlayer()->getLevel();
+	int level = GameState::getSingletonPtr()->getRandomInRange((playerLevel - offset) + quality, playerLevel + quality);
+	double multiplier = GameState::getSingletonPtr()->getLevelManager()->getPlayer()->getKarma() * 0.00167;
 	if (multiplier < 0) {
 		multiplier = multiplier * -1;
 	}else
@@ -123,7 +124,7 @@ ItemInstance* ItemGenerator::generateRandomItem(Ogre::SceneNode* pNode, Ogre::Ve
 	case 2: {
 		// create variables for gen
 		std::vector<Stat*> baseStats;
-		int typeSelection = GameManager::getSingletonPtr()->getRandomInRange(1, 2);;
+		int typeSelection = GameState::getSingletonPtr()->getRandomInRange(1, 2);;
 		Ogre::String genName = "";
 
 		//TODO: these are defined here to enable using them after the following switch case. This is kind of ugly.
@@ -143,8 +144,8 @@ ItemInstance* ItemGenerator::generateRandomItem(Ogre::SceneNode* pNode, Ogre::Ve
 
 				// weapon
 		case 1: {
-			randomObj = (int)GameManager::getSingletonPtr()->getRandomInRange(0, GameManager::getSingletonPtr()->getItemManager()->getItemContianer()->getWeapons().size());
-			weapon = GameManager::getSingletonPtr()->getItemManager()->getItemContianer()->getWeapons()[randomObj];
+			randomObj = (int)GameState::getSingletonPtr()->getRandomInRange(0, GameState::getSingletonPtr()->getItemManager()->getItemContianer()->getWeapons().size());
+			weapon = GameState::getSingletonPtr()->getItemManager()->getItemContianer()->getWeapons()[randomObj];
 			
 			_type = EquipmentWeapon;
 			genName = weapon->getName();
@@ -163,8 +164,8 @@ ItemInstance* ItemGenerator::generateRandomItem(Ogre::SceneNode* pNode, Ogre::Ve
 				// armor
 		case 2: {
 			//TODO: armor gen 
-			randomObj = (int)GameManager::getSingletonPtr()->getRandomInRange(0, GameManager::getSingletonPtr()->getItemManager()->getItemContianer()->itemAmount());
-			armor = GameManager::getSingletonPtr()->getItemManager()->getItemContianer()->GetArmors()[randomObj];
+			randomObj = (int)GameState::getSingletonPtr()->getRandomInRange(0, GameState::getSingletonPtr()->getItemManager()->getItemContianer()->itemAmount());
+			armor = GameState::getSingletonPtr()->getItemManager()->getItemContianer()->GetArmors()[randomObj];
 
 			_type = EquipmentArmor;
 			genName = armor->getName();
@@ -211,14 +212,14 @@ ItemInstance* ItemGenerator::generateRandomItem(Ogre::SceneNode* pNode, Ogre::Ve
 		case 1: {
 			returnItem = new WeaponInstance(weapon, quality, itemEntity, level, genName, baseStats, _slot, _itemNode);
 			//TODO: add set subID to all instances so i cann add subid after creating the returnitem.
-			returnItem->id = GameManager::getSingletonPtr()->getLevelManager()->subscribeItemInstance(returnItem);
+			returnItem->id = GameState::getSingletonPtr()->getLevelManager()->subscribeItemInstance(returnItem);
 			break;
 		}
 
 		case 2: {
 			//TODO: add armor instance to itemlist
 			returnItem = new ArmorInstance(armor, quality, itemEntity, level, genName, baseStats, _slot, _itemNode);
-			returnItem->id = GameManager::getSingletonPtr()->getLevelManager()->subscribeItemInstance(returnItem);
+			returnItem->id = GameState::getSingletonPtr()->getLevelManager()->subscribeItemInstance(returnItem);
 			break;
 		}
 

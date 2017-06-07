@@ -2,6 +2,7 @@
 #include "GameManager.h"
 #include "Player.h"
 #include "SoundManager.h"
+#include "GameState.h"
 
 /// <summary>
 /// Creates a new instance of the <see cref="BasicPrincess"/> class.
@@ -11,11 +12,11 @@
 /// <param name="pMyEntity">My entity.</param>
 BasicPrincess::BasicPrincess(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity) : BaseNpc(pMyNode, pMyRotationNode, pMyEntity)
 {
-	id = GameManager::getSingletonPtr()->getLevelManager()->subscribeHostileNPC(this);
+	id = GameState::getSingletonPtr()->getLevelManager()->subscribeHostileNPC(this);
 	setHealth(1);
 	_dialogCount = 0;
 	setTypeNpc(NpcType::Princess);
-	GameManager::getSingletonPtr()->getLevelManager()->princessScript = this;
+	GameState::getSingletonPtr()->getLevelManager()->princessScript = this;
 }
 
 /// <summary>
@@ -56,9 +57,7 @@ void BasicPrincess::die()
 {
 	endingSequence(false);
 	Character::die();
-	GameManager::getSingletonPtr()->getLevelManager()->detachHostileNPC(id);
-	
-	
+	GameState::getSingletonPtr()->getLevelManager()->detachHostileNPC(id);
 }
 
 /// <summary>
@@ -74,7 +73,7 @@ bool BasicPrincess::dialog(Ogre::Vector3 pPlayerPos)
 		{
 			_inDialog = true;
 
-			GameManager::getSingletonPtr()->getUIManager()->createPrincessDialog("You found the princess\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress Space to Continue");
+			GameState::getSingletonPtr()->getUIManager()->createPrincessDialog("You found the princess\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress Space to Continue");
 			endingSequence(true);
 			return true;
 		}
@@ -88,7 +87,7 @@ bool BasicPrincess::dialog(Ogre::Vector3 pPlayerPos)
 void BasicPrincess::toggleDialog() {
 	_inDialog = false;
 	try {
-		GameManager::getSingletonPtr()->getUIManager()->destroyPrincessDialog();
+		GameState::getSingletonPtr()->getUIManager()->destroyPrincessDialog();
 	}
 	catch (...) {
 		return;
@@ -99,14 +98,14 @@ void BasicPrincess::endingSequence(bool ending)
 {
 	if (ending)
 	{
-		int karma = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getKarma();
+		int karma = GameState::getSingletonPtr()->getLevelManager()->getPlayer()->getKarma();
 		if (_inDialog == true && karma >= 0) {
 			_dialogCount++;
 			if (_dialogCount == 1) {
-				GameManager::getSingletonPtr()->getUIManager()->appendDialogText("thank you for saving me senpai... I princess Kinny am forever in your favor \n");
+				GameState::getSingletonPtr()->getUIManager()->appendDialogText("thank you for saving me senpai... I princess Kinny am forever in your favor \n");
 			}
 			else if (_dialogCount == 2) {
-				GameManager::getSingletonPtr()->getUIManager()->appendDialogText("and they lived happily ever after... until Kinney died of herpes \n");
+				GameState::getSingletonPtr()->getUIManager()->appendDialogText("and they lived happily ever after... until Kinney died of herpes \n");
 				
 			}
 			else if (_dialogCount >= 3) {
@@ -120,10 +119,10 @@ void BasicPrincess::endingSequence(bool ending)
 		{
 			_dialogCount++;
 			if (_dialogCount == 1) {
-				GameManager::getSingletonPtr()->getUIManager()->appendDialogText("I cannot come with you senpai san... you changed too much \n");
+				GameState::getSingletonPtr()->getUIManager()->appendDialogText("I cannot come with you senpai san... you changed too much \n");
 			}
 			else if (_dialogCount == 2) {
-				GameManager::getSingletonPtr()->getUIManager()->appendDialogText("Princess Kinney left... never to return... and probably died \n");			
+				GameState::getSingletonPtr()->getUIManager()->appendDialogText("Princess Kinney left... never to return... and probably died \n");
 			}
 			else if (_dialogCount >= 3) {
 				toggleDialog();
@@ -138,11 +137,11 @@ void BasicPrincess::endingSequence(bool ending)
 		_inDialog = true;
 		_dialogCount++;
 		if (_dialogCount == 1) {
-			GameManager::getSingletonPtr()->getUIManager()->createPrincessDialog("You Killed the princess\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress Space to Continue");
+			GameState::getSingletonPtr()->getUIManager()->createPrincessDialog("You Killed the princess\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress Space to Continue");
 				
 		}
 		else if (_dialogCount == 2) {
-			GameManager::getSingletonPtr()->getUIManager()->appendDialogText("You killed princess Kinny, A terrible shock went through the player, what now? He Felt empty \n");
+			GameState::getSingletonPtr()->getUIManager()->appendDialogText("You killed princess Kinny, A terrible shock went through the player, what now? He Felt empty \n");
 				
 		}
 		else if (_dialogCount >= 3) {

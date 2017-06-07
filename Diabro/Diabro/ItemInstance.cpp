@@ -1,5 +1,6 @@
 #include "ItemInstance.h"
 #include "GameManager.h"
+#include "GameState.h"
 
 /// <summary>
 /// Initializes a new instance of the <see cref="ItemInstance"/> class.
@@ -28,9 +29,9 @@ void ItemInstance::destroyItemInWorld()
 {
 	_itemNode->removeAndDestroyAllChildren();
 	_nodeName = _itemNode->getName();
-	GameManager::getSingletonPtr()->getSceneManager()->destroyEntity(_myDroppedEntity);
-	GameManager::getSingletonPtr()->getSceneManager()->destroySceneNode(_itemNode);
-	GameManager::getSingletonPtr()->getLevelManager()->detachItemInstance(id);
+	GameState::getSingletonPtr()->getSceneManager()->destroyEntity(_myDroppedEntity);
+	GameState::getSingletonPtr()->getSceneManager()->destroySceneNode(_itemNode);
+	GameState::getSingletonPtr()->getLevelManager()->detachItemInstance(id);
 }
 
 /// <summary>
