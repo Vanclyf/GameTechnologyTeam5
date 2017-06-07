@@ -34,19 +34,20 @@ bool Player::initialize()
 	return true;
 }
 
+
 void Player::update(const Ogre::FrameEvent& pFE)
 {
 	Character::update(pFE.timeSinceLastFrame);
-		if (_attackCountDown <= 0)
-		{
-			_attackCountDown = 0;
-		}
-		else
-		{
-			Ogre::Real deltaTime = _attackTimer->getMilliseconds();
-			_attackTimer->reset();
-			_attackCountDown -= deltaTime;
-		}
+	if (_attackCountDown <= 0)
+	{
+		_attackCountDown = 0;
+	}
+	else
+	{
+		Ogre::Real deltaTime = _attackTimer->getMilliseconds();
+		_attackTimer->reset();
+		_attackCountDown -= deltaTime;
+	}
 }
 
 /// <summary>
@@ -58,7 +59,7 @@ bool Player::adjustHealth(float pAdjust)
 {
 	if (!Character::adjustHealth(pAdjust)) { return false; }
 
-	GameManager::getSingleton().getUIManager()->adjustHealthBar(_currentHealth, _stats->GetStat(StatType::MaxHealth));
+	GameManager::getSingleton().getUIManager()->adjustHealthBar(_currentHealth, _stats->GetStat(MaxHealth));
 	return true;
 }
 
@@ -69,22 +70,38 @@ bool Player::adjustHealth(float pAdjust)
 /// <returns>False if the player runs out of statina.</returns>
 bool Player::adjustStaminaOverTime(Ogre::Real pDeltaTime)
 {
+	//Character::adjustStaminaOverTime(pDeltaTime);
+
 	GameManager::getSingleton().getUIManager()->adjustStaminaBar(_karmaPoints, Ogre::Real(200));
 
 	return true;
 }
 
+/// <summary>
+/// This is the method for attack of npc and enemies
+/// </summary>
+/// <returns></returns>
 bool Player::lightAttack()
 {
+	//checks your attack cooldown
 	if (_attackCountDown <= 0)
 	{
 		_attackCountDown = 1200;
-		if (!Character::lightAttack()) {
+		if (!Character::lightAttack())
+		{
 			return false;
 		}
-		std::vector<Character*> targets = GameManager::getSingletonPtr()->getLevelManager()->getHostileNpcs();
+		auto levelManager = GameManager::getSingletonPtr()->getLevelManager();
+		//get all posible targets
+		std::vector<Character*> targets = levelManager->getHostileNpcs();
+		std::vector<Character*> npcTargets = levelManager->getFriendlyNpcs();
+		//add to vector together
+		targets.insert(targets.end(), npcTargets.begin(), npcTargets.end());
+		//find the target that you can attack
 		findTarget(targets);
-		if (_target == nullptr) {
+		//if target is null do nothing
+		if (_target == nullptr)
+		{
 			return false;
 		}
 
@@ -93,28 +110,24 @@ bool Player::lightAttack()
 
 		switch (_target->getTypeNpc())
 		{
-		case NpcType::Good:
+		case Good:
 			_target->hit();
 
 			_target->getEntity()->setMaterial(Ogre::MaterialManager::getSingleton().getByName("Houses/HitGreen"));
 			break;
-		case NpcType::Bad:
+		case Bad:
 			_target->hit();
 
 			_target->getEntity()->setMaterial(Ogre::MaterialManager::getSingleton().getByName("Houses/HitRed"));
 			break;
-		case NpcType::Princess:
+		case Princess:
 			break;
 		}
+
 		_canAttack = false;
 		_currAttackCooldown = _lightAttackCooldown;
 
 		return true;
-	}
-
-	else
-	{
-		return false;
 	}
 }
 
@@ -168,7 +181,6 @@ void Player::adjustKarma(int pKarma)
 	_karmaPoints += pKarma;
 }
 
-
 /// <summary>
 /// Levels up the player.
 /// </summary>
@@ -179,24 +191,37 @@ void Player::levelUp()
 
 	// Increase _stats
 }
-
+/// <summary>
+/// Determines whether [is karma positive].
+/// </summary>
+/// <returns>
+///   <c>true</c> if [karma positive]; otherwise, <c>false</c>.
+/// </returns>
+bool Player::isKarmaPositive() const
+{
+	if (_karmaPoints >= 0)
+	{
+		return true;
+	}
+	return false;
+}
 void Player::adjustLook(Ogre::Entity *pPlayerEntity)
 {
-	if (_karmaPoints >=10 && _karmaPoints <40)
+	if (_karmaPoints >= 10 && _karmaPoints <40)
 	{
 		pPlayerEntity->setMaterialName("Houses/darkGreen");
-		
+
 	}
-	else if (_karmaPoints >=40 )
+	else if (_karmaPoints >= 40)
 	{
 
 		pPlayerEntity->setMaterialName("Houses/Green");
 	}
-	else if(_karmaPoints <= -10 && _karmaPoints> -40)
+	else if (_karmaPoints <= -10 && _karmaPoints> -40)
 	{
 		pPlayerEntity->setMaterialName("Houses/Red");
 	}
-	else if(_karmaPoints <= -40)
+	else if (_karmaPoints <= -40)
 	{
 		pPlayerEntity->setMaterialName("Houses/darkRed");
 	}
@@ -204,5 +229,5 @@ void Player::adjustLook(Ogre::Entity *pPlayerEntity)
 	{
 		pPlayerEntity->setMaterialName("Houses/White");
 	}
-		
+
 }

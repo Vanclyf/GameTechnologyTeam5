@@ -192,7 +192,4 @@ void LevelManager::createGroundMesh()
 		Ogre::Vector3::UNIT_Z);
 }
 
-int LevelManager::testunittwo(int i)
-{
-	return ++i;
-}
+

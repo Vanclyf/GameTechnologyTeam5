@@ -5,7 +5,8 @@
 
 /// <summary>
 /// Creates a new instance of the <see cref="BasicPrincess"/> class.
-/// This the class for the princess object.
+/// This class is inherited from the base npc class.
+/// This class is used to created the princess object in the game.
 /// </summary>
 /// <param name="pMyNode">My node.</param>
 /// <param name="pMyEntity">My entity.</param>

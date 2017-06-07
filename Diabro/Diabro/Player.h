@@ -11,6 +11,7 @@ public:
 	Player(Ogre::SceneNode*, Ogre::Entity*);
 	~Player(){}
 
+	bool isKarmaPositive() const;
 	void gainXP(int);
 	void adjustKarma(int);
 	int getKarma() { return _karmaPoints; }
