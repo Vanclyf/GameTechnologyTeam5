@@ -30,6 +30,7 @@ protected:
 
 private:
 	float _timeSince;
+	Ogre::Vector3 _spawnPos;
 	void attackPlayer();
 	void wander();
 	static Coordinate getRandomPoint();
