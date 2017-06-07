@@ -239,7 +239,6 @@ void BaseApplication::go(void)
         return;
 
     mRoot->startRendering();
-
     // Clean up
     destroyScene();
 }

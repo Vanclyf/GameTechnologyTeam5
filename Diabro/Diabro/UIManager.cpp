@@ -1,12 +1,13 @@
 #include "UIManager.h"
 #include "GameManager.h"
+#include <ik_ISoundStopEventReceiver.h>
 
 /// <summary>
 /// Creates a new instance of the <see cref="UIManager"/> class.
 /// This class is created by the <see cref="GameManager" /> and contains all UI information, 
 /// e.g. the in-game and menu UI.
 /// </summary>
-UIManager::UIManager() : _uiNode(0), _healthBarWidget(0), _staminaBarWidget(0), _maxWidthBar(0), _heightBar(0), _mSdkTrayMgr(0), _mWindow(0)
+UIManager::UIManager() : _mSdkTrayMgr(nullptr), _mWindow(nullptr), _healthBarWidget(nullptr), _staminaBarWidget(nullptr), _uiNode(nullptr), _maxWidthBar(0), _heightBar(0)
 {
 }
 
@@ -37,46 +38,63 @@ void UIManager::setupUI()
 	// create karma bar
 	_karmaBarWidget = _mSdkTrayMgr->createLongSlider(OgreBites::TL_TOPRIGHT, "Karma", "Karma", 200, 50, -300, 300, 60);
 	//create eventlogtextbox
-	_eventLogTextBox = _mSdkTrayMgr->createTextBox(OgreBites::TL_BOTTOMLEFT, "Eventlog", "Event Log", 300, 200);
-	
-	
-	
+	_eventLogTextBox = _mSdkTrayMgr->createTextBox(OgreBites::TL_BOTTOMLEFT, "Eventlog", "Eventlog", 200, 200);
+
+
+	//_eventLogTextBox->setText(displaystring);
 }
 
-void UIManager::createDialog(Ogre::String pDialogText) {
-	try {
+void UIManager::createDialog(Ogre::String pDialogText)
+{
+	try
+	{
 		destroyDialog();
 	}
-	catch (...) {}
-	_mDialogTextArea = _mSdkTrayMgr->createTextBox(OgreBites::TL_CENTER, "DialogTextArea", pDialogText, 400, 400);
+	catch (...)
+	{
+	}
+	_mDialogTextArea = _mSdkTrayMgr->createTextBox(OgreBites::TL_CENTER, "DialogTextArea", pDialogText, 200, 200);
 }
 
-void UIManager::createPrincessDialog(Ogre::String pDialogText) {
-	try {
+void UIManager::createPrincessDialog(Ogre::String pDialogText)
+{
+	try
+	{
 		destroyPrincessDialog();
 	}
-	catch (...) {}
+	catch (...)
+	{
+	}
 	_mDialogTextArea = _mSdkTrayMgr->createTextBox(OgreBites::TL_CENTER, "PrincessDialogTextArea", pDialogText, 400, 400);
 }
 
-void UIManager::createEnemyDialog(Ogre::String pDialogText) {
-	try {
+void UIManager::createEnemyDialog(Ogre::String pDialogText)
+{
+	try
+	{
 		destroyEnemyDialog();
 	}
-	catch (...) {}
+	catch (...)
+	{
+	}
 	_mDialogTextArea = _mSdkTrayMgr->createTextBox(OgreBites::TL_CENTER, "EnemyDialogTextArea", pDialogText, 400, 400);
 }
 
 /// <summary>
 /// Destroys the dialog.
 /// </summary>
-void UIManager::destroyDialog() {
+void UIManager::destroyDialog()
+{
 	_mSdkTrayMgr->destroyWidget("DialogTextArea");
 }
-void UIManager::destroyPrincessDialog() {
+
+void UIManager::destroyPrincessDialog()
+{
 	_mSdkTrayMgr->destroyWidget("PrincessDialogTextArea");
 }
-void UIManager::destroyEnemyDialog() {
+
+void UIManager::destroyEnemyDialog()
+{
 	_mSdkTrayMgr->destroyWidget("EnemyDialogTextArea");
 }
 
@@ -84,7 +102,8 @@ void UIManager::destroyEnemyDialog() {
 /// Appends the dialog text.
 /// </summary>
 /// <param name="pDialogText">The p dialog text.</param>
-void UIManager::appendDialogText(Ogre::String pDialogText) {
+void UIManager::appendDialogText(Ogre::String pDialogText)
+{
 	_mDialogTextArea->appendText(pDialogText);
 }
 
@@ -92,9 +111,17 @@ void UIManager::appendDialogText(Ogre::String pDialogText) {
 /// Updates the event log text.
 /// </summary>
 /// <param name="eventLogText">The event log text.</param>
-void UIManager::updateEventLogText(Ogre::String eventLogText)
+void UIManager::setStandardEventLogText()
 {
-	_eventLogTextBox->setText(eventLogText);
+	_eventLogTextBox->appendText(
+		"-----------------W------------------"
+		"-------------A---S---D--------------"
+		"-------------To---walk--------------"
+		"------------------------------------"
+		"--------Right-Mouse-Click-----------"
+		"-----------To--attack---------------"
+		"------------------------------------"
+		"------------------------------------");
 }
 
 /// <summary>
@@ -126,6 +153,5 @@ void UIManager::adjustStaminaBar(Ogre::Real pValue, Ogre::Real pMaxValue)
 /// <returns></returns>
 Ogre::Real UIManager::calcBarSize(Ogre::Real pValue, Ogre::Real pMaxValue, Ogre::Real pMaxSize)
 {
-	return((pValue / pMaxValue) * pMaxSize);
+	return ((pValue / pMaxValue) * pMaxSize);
 }
-

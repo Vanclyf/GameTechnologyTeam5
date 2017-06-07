@@ -67,6 +67,7 @@ private:
 	QuestContentManager* _questContentManager;
 
 	Ogre::Timer* _gameTimer;
+	bool _isEventLogTrigger;
 };
 
 //---------------------------------------------------------------------------

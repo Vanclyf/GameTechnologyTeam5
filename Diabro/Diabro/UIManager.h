@@ -23,7 +23,7 @@ public:
 	void destroyPrincessDialog();
 	void destroyEnemyDialog();
 	void appendDialogText(Ogre::String);
-	void updateEventLogText(Ogre::String);
+	void setStandardEventLogText();
 	static Ogre::Real calcBarSize(Ogre::Real, Ogre::Real, Ogre::Real);
 
 private:
