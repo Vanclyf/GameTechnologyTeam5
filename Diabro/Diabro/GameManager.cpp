@@ -176,9 +176,14 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 	Ogre::Vector3 dirVec = _levelManager->playerScript->getDirVector();
 	btVector3 bulletDirVec = _levelManager->getDirVector();
 
-	if (bulletDirVec.getX() >= _playerSpeed || bulletDirVec.getX() <= _playerSpeed || bulletDirVec.getY() >= _playerSpeed || bulletDirVec.getY() <= _playerSpeed || bulletDirVec.getZ() >= _playerSpeed || bulletDirVec.getZ() <= -_playerSpeed) {
+	//if (bulletDirVec.getX() >= _playerSpeed || bulletDirVec.getX() <= _playerSpeed || bulletDirVec.getY() >= _playerSpeed || bulletDirVec.getY() <= _playerSpeed || bulletDirVec.getZ() >= _playerSpeed || bulletDirVec.getZ() <= -_playerSpeed) {
+		//bulletDirVec = btVector3(0, 0, 0);
+	//}
+
+	if (bulletDirVec.getX() <= -100 || bulletDirVec.getZ() <= -100) {
 		bulletDirVec = btVector3(0, 0, 0);
 	}
+
 
 	switch (pKE.key)
 	{
@@ -212,6 +217,7 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 	
 	case OIS::KC_LSHIFT:
 		_levelManager->playerScript->toggleRun(true);
+		_playerSpeed *= 2;
 		break;
 
 	case OIS::KC_E:
@@ -321,6 +327,7 @@ bool GameManager::keyReleased(const OIS::KeyEvent& pKE)
 
 	case OIS::KC_LSHIFT:
 		_levelManager->playerScript->toggleRun(false);
+		_playerSpeed /= 2;
 		break;
 
 	//TODO: this code should end the conversation with the current talking to NPC
@@ -328,16 +335,16 @@ bool GameManager::keyReleased(const OIS::KeyEvent& pKE)
 	case OIS::KC_F:
 		break;
 	case OIS::KC_I:
-		bulletDirVec.setZ(0);
+		//bulletDirVec.setZ(0);
 		break;
 	case OIS::KC_K:
-		bulletDirVec.setZ(0);
+		//bulletDirVec.setZ(0);
 		break;
 	case OIS::KC_J:
-		bulletDirVec.setX(0);
+		//bulletDirVec.setX(0);
 		break;
 	case OIS::KC_L:
-		bulletDirVec.setX(0);
+		//bulletDirVec.setX(0);
 		break;
 	default:
 		break;

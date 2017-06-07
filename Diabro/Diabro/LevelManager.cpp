@@ -218,7 +218,7 @@ void LevelManager::initPhysicsWorld() {
 
 	fallShape = new btBoxShape(btVector3(10, 10, 10));
 
-	btCollisionShape* newGroundShape = new btBoxShape(btVector3(10000, 1, 10000));
+	btCollisionShape* newGroundShape = new btBoxShape(btVector3(100000, 1, 100000));
 	btRigidBody* newGroundRigidBody;
 
 	//ground
@@ -235,9 +235,9 @@ void LevelManager::initPhysicsWorld() {
 	newGroundRigidBody = new btRigidBody(newGroundRigidBodyCI);
 	dynamicsWorld->addRigidBody(newGroundRigidBody);
 
-	//falling box
+	//player
 	fallMotionState =
-		new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(500, 100, 500)));
+		new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(9000, 3000, 7000)));
 	mass = 10;
 	fallInertia = btVector3(0, 0, 0);
 	fallShape->calculateLocalInertia(mass, fallInertia);
@@ -247,11 +247,11 @@ void LevelManager::initPhysicsWorld() {
 
 
 	//box
-	btDefaultMotionState* boxMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-1000, 0, -1000)));
-	btRigidBody::btRigidBodyConstructionInfo
-		boxRigidBodyCI(0, boxMotionState, boxShape, btVector3(0, 0, 0));
-	boxRigidBody = new btRigidBody(boxRigidBodyCI);
-	dynamicsWorld->addRigidBody(boxRigidBody);
+	//btDefaultMotionState* boxMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-1000, 0, -1000)));
+	//btRigidBody::btRigidBodyConstructionInfo
+	//	boxRigidBodyCI(0, boxMotionState, boxShape, btVector3(0, 0, 0));
+	//boxRigidBody = new btRigidBody(boxRigidBodyCI);
+	//dynamicsWorld->addRigidBody(boxRigidBody);
 
 }
 
@@ -311,11 +311,6 @@ void LevelManager::createCube(Ogre::Entity* pMyEntity, Ogre::SceneNode* pMyNode,
 		btRigidBody* wallRigidBody = new btRigidBody(wallRigidBodyCI);
 		dynamicsWorld->addRigidBody(wallRigidBody);
 	}
-
-	
-
-
-
 };
 
 void::LevelManager::setupWalls() {
@@ -326,9 +321,6 @@ void::LevelManager::setupWalls() {
 		wallNodes.push_back(_levelNode->createChildSceneNode(s));
 
 	}
-
-	//test cube
-	createCube(wallEntity, wallNodes[99], Ogre::Vector3(-1000, 0, -1000), Ogre::Vector3(50, 50, 50), Ogre::Degree(0));
 
 	//room 1
 	createCube(wallEntity, wallNodes[1], Ogre::Vector3(0, 0, 500), Ogre::Vector3(50, 500, 500), Ogre::Degree(0));
@@ -399,7 +391,7 @@ void::LevelManager::setupWalls() {
 	createCube(wallEntity, wallNodes[46], Ogre::Vector3(5650, 0, 2698), Ogre::Vector3(50, 500, 500), Ogre::Degree(90));
 	createCube(wallEntity, wallNodes[47], Ogre::Vector3(6650, 0, 5151), Ogre::Vector3(50, 500, 500), Ogre::Degree(90));
 	createCube(wallEntity, wallNodes[48], Ogre::Vector3(6650, 0, 2698), Ogre::Vector3(50, 500, 500), Ogre::Degree(90));
-	createCube(wallEntity, wallNodes[49], Ogre::Vector3(7100, 0, 4651), Ogre::Vector3(50, 500, 500), Ogre::Degree(0));
+	createCube(wallEntity, wallNodes[49], Ogre::Vector3(7101, 0, 4700), Ogre::Vector3(50, 500, 500), Ogre::Degree(0));
 	createCube(wallEntity, wallNodes[50], Ogre::Vector3(7100, 0, 3198), Ogre::Vector3(50, 500, 500), Ogre::Degree(0));
 
 
@@ -425,7 +417,16 @@ void::LevelManager::setupWalls() {
 	createCube(wallEntity, wallNodes[57], Ogre::Vector3(6650, 0, 8651), Ogre::Vector3(50, 500, 500), Ogre::Degree(90));
 	createCube(wallEntity, wallNodes[58], Ogre::Vector3(6650, 0, 6198), Ogre::Vector3(50, 500, 500), Ogre::Degree(90));
 	createCube(wallEntity, wallNodes[59], Ogre::Vector3(7100, 0, 8151), Ogre::Vector3(50, 500, 500), Ogre::Degree(0));
-	createCube(wallEntity, wallNodes[60], Ogre::Vector3(7100, 0, 6698), Ogre::Vector3(50, 500, 500), Ogre::Degree(0));
+	createCube(wallEntity, wallNodes[60], Ogre::Vector3(7101, 0, 6650), Ogre::Vector3(50, 500, 500), Ogre::Degree(0));
+	
+	//Right Wing hallway to the princess
+	createCube(wallEntity, wallNodes[71], Ogre::Vector3(7600, 0, 5650), Ogre::Vector3(50, 500, 500), Ogre::Degree(0));
+	createCube(wallEntity, wallNodes[72], Ogre::Vector3(7600, 0, 4650), Ogre::Vector3(50, 500, 500), Ogre::Degree(0));
+	createCube(wallEntity, wallNodes[73], Ogre::Vector3(7600, 0, 6650), Ogre::Vector3(50, 500, 500), Ogre::Degree(0));
+	createCube(wallEntity, wallNodes[74], Ogre::Vector3(7600, 0, 7650), Ogre::Vector3(50, 500, 500), Ogre::Degree(0));
+	createCube(wallEntity, wallNodes[75], Ogre::Vector3(7600, 0, 3650), Ogre::Vector3(50, 500, 500), Ogre::Degree(0));
+	createCube(wallEntity, wallNodes[76], Ogre::Vector3(7551, 0, 7699), Ogre::Vector3(50, 500, 500), Ogre::Degree(90));
+	createCube(wallEntity, wallNodes[77], Ogre::Vector3(7601, 0, 3648), Ogre::Vector3(50, 500, 500), Ogre::Degree(90));
 
 
 }
