@@ -10,7 +10,7 @@
 /// like characters and the environment.
 /// </summary>
 LevelManager::LevelManager() : playerScript(nullptr), _playerEntity(nullptr), _npcEntity(nullptr), _basicEnemyEntity(nullptr),
-                               npcSpawner(nullptr), _groundEntity(nullptr), _levelNode(nullptr), _camNode(nullptr)
+npcSpawner(nullptr), _groundEntity(nullptr), _levelNode(nullptr), _camNode(nullptr)
 {
 }
 
@@ -37,12 +37,16 @@ void LevelManager::initialize()
 
 	//levelGenerator = new LevelGenerator();
 
-	//creating a tilemesh
-	//std::string name = "Tile One";
-	//levelGenerator->createTileMesh(Coordinate(0, 0), name, Ogre::ColourValue(0, 0, 1, 1));
-	//Ogre::Entity* entity = GameManager::getSingleton().getSceneManager()->createEntity("entity: " + name, name);
-	//entity->setMaterialName("Examples/Rockwall");
-	//_levelNode->attachObject(entity);
+	//if (GameManager::getSingletonPtr()->getRandomInRange(0, 10) < 5) {
+		Ogre::SceneNode* npcSpawnerNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode("npcSpawn");
+		//0.5f for height difference
+		CharacterSpawner<Npc>* npcSpawner = new CharacterSpawner<Npc>(npcSpawnerNode, 3, Ogre::Vector3(500,0,500));
+	//}
+	//else
+	//{
+		Ogre::SceneNode* enemySpawnerNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode("enemySpawn");
+		CharacterSpawner<BasicEnemy>* enemySpawner = new CharacterSpawner<BasicEnemy>(enemySpawnerNode, 3, Ogre::Vector3(500, 0, 500));
+	//}
 
 	playerNode = _levelNode->createChildSceneNode("PlayerNode");
 	_camNode = playerNode->createChildSceneNode("CameraNode");
@@ -58,7 +62,7 @@ void LevelManager::initialize()
 	playerNode->yaw(Ogre::Degree(180));
 	playerScript = new Player(playerNode, _playerEntity);
 	playerScript->initialize();
-	
+
 	// ground 
 	createGroundMesh();
 	_groundEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("ground");
@@ -67,7 +71,7 @@ void LevelManager::initialize()
 
 
 	Ogre::SceneNode* princessSpawnerNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode("princessSpawn");
-	CharacterSpawner<BasicPrincess>* princessSpawner = new CharacterSpawner<BasicPrincess>(princessSpawnerNode, 1, Ogre::Vector3(1000, 25, 500));
+	CharacterSpawner<BasicPrincess>* princessSpawner = new CharacterSpawner<BasicPrincess>(princessSpawnerNode, 1, Ogre::Vector3(3750, 25, 4500));
 
 	// camera
 	_camNode->attachObject(GameManager::getSingletonPtr()->getCamera());
@@ -189,14 +193,14 @@ void LevelManager::update(const Ogre::FrameEvent& pFE)
 
 	updatePlayer();
 
-// update characters
+	// update characters
 	playerScript->update(pFE);
 
 	float playerX = playerScript->getPosition().x;
 	float playerY = playerScript->getPosition().y;
 	float playerZ = playerScript->getPosition().z;
 
-	engine->setListenerPosition(irrklang::vec3df(playerX, playerY, playerZ), irrklang::vec3df(10, 0, 0), irrklang::vec3df(0, 0, 0), 
+	engine->setListenerPosition(irrklang::vec3df(playerX, playerY, playerZ), irrklang::vec3df(10, 0, 0), irrklang::vec3df(0, 0, 0),
 		irrklang::vec3df(0, 1, 0));
 
 	for (int i = 0; i < _friendlyNpcScripts.size(); i++)
@@ -250,7 +254,7 @@ void LevelManager::initPhysicsWorld() {
 
 	boxShape = new btBoxShape(btVector3(50, 50, 50));
 
-	fallShape = new btBoxShape(btVector3(10, 10, 10));
+	fallShape = new btSphereShape(50.0f);
 
 	btCollisionShape* newGroundShape = new btBoxShape(btVector3(100000, 1, 100000));
 	btRigidBody* newGroundRigidBody;
@@ -326,9 +330,9 @@ void LevelManager::createCube(Ogre::Entity* pMyEntity, Ogre::SceneNode* pMyNode,
 
 
 	if (pMyRotation.valueDegrees() == 90) {
-		btCollisionShape* wallShape = new btBoxShape(btVector3(500,500,50));
+		btCollisionShape* wallShape = new btBoxShape(btVector3(500, 500, 50));
 		btDefaultMotionState* wallMotionState;
-		wallMotionState = new btDefaultMotionState(btTransform(btQuaternion(0,0,0, 1), btVector3(pMyPosition.x, 0, pMyPosition.z)));
+		wallMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(pMyPosition.x, 0, pMyPosition.z)));
 		btRigidBody::btRigidBodyConstructionInfo
 			wallRigidBodyCI(0, wallMotionState, wallShape, btVector3(0, 0, 0));
 
@@ -452,7 +456,7 @@ void::LevelManager::setupWalls() {
 	createCube(wallEntity, wallNodes[58], Ogre::Vector3(6650, 0, 6198), Ogre::Vector3(50, 500, 500), Ogre::Degree(90));
 	createCube(wallEntity, wallNodes[59], Ogre::Vector3(7100, 0, 8151), Ogre::Vector3(50, 500, 500), Ogre::Degree(0));
 	createCube(wallEntity, wallNodes[60], Ogre::Vector3(7101, 0, 6650), Ogre::Vector3(50, 500, 500), Ogre::Degree(0));
-	
+
 	//Right Wing hallway to the princess
 	createCube(wallEntity, wallNodes[71], Ogre::Vector3(7600, 0, 5650), Ogre::Vector3(50, 500, 500), Ogre::Degree(0));
 	createCube(wallEntity, wallNodes[72], Ogre::Vector3(7600, 0, 4650), Ogre::Vector3(50, 500, 500), Ogre::Degree(0));
@@ -494,7 +498,7 @@ void::LevelManager::updatePlayer() {
 	playerTransForm.setRotation(btPlayerRotation);
 	fallRigidBody->setCenterOfMassTransform(playerTransForm);
 	playerNode->setOrientation(Ogre::Quaternion(btPlayerRotation.getW(), btPlayerRotation.getX(), btPlayerRotation.getY(), btPlayerRotation.getZ()));
-	playerNode->setPosition(Ogre::Vector3(playerTransForm.getOrigin().getX(), playerTransForm.getOrigin().getY()+40, playerTransForm.getOrigin().getZ()));
+	playerNode->setPosition(Ogre::Vector3(playerTransForm.getOrigin().getX(), playerTransForm.getOrigin().getY(), playerTransForm.getOrigin().getZ()));
 
 	if (_bulletDirVec.getX() <= 2 && _bulletDirVec.getX() >= -2 || _bulletDirVec.getZ() <= 2 && _bulletDirVec.getZ() >= -2) {
 		translatePlayer(_bulletDirVec, btPlayerRotation);
