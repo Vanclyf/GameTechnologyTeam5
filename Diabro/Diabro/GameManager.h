@@ -15,6 +15,7 @@ Filename:    GameManager.h
 #include "QuestContentManager.h"
 #include "TimerManager.h"
 #include <ctime>
+#include "btBulletDynamicsCommon.h"
 
 //---------------------------------------------------------------------------
 
@@ -69,6 +70,7 @@ private:
 	QuestContentManager* _questContentManager;
 
 	Ogre::Timer* _gameTimer;
+	int _playerSpeed;
 };
 
 //---------------------------------------------------------------------------
