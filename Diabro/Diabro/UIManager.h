@@ -5,6 +5,8 @@
 #include <OgreBillboardSet.h>
 #include "BaseApplication.h"
 #include "SdkTrays.h"
+#include "CharacterStats.h"
+
 
 class UIManager
 {
@@ -24,6 +26,7 @@ public:
 	void destroyPrincessDialog();
 	void destroyEnemyDialog();
 	void appendDialogText(Ogre::String);
+	void updateStatsPanel(CharacterStats*);
 	static Ogre::Real calcBarSize(Ogre::Real, Ogre::Real, Ogre::Real);
 
 private:
@@ -39,6 +42,7 @@ private:
 	OgreBites::DecorWidget*		_staminaBarWidget;
 	OgreBites::Slider*		_karmaBarWidget;
 	OgreBites::ParamsPanel*		_gameTimer;
+	OgreBites::ParamsPanel*		_statsPanel;
 	Ogre::SceneNode*			_uiNode;
 
 	Ogre::Real					_maxWidthBar;

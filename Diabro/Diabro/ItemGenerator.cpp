@@ -91,7 +91,7 @@ ItemInstance* ItemGenerator::generateRandomItem(Ogre::SceneNode* pNode, Ogre::Ve
 	//int level = (int)((int)(quality + 1) * GameManager::getSingletonPtr()->getRandomInRange(1.0f, 2.5f));
 	int offset = GameManager::getSingletonPtr()->getRandomInRange(2, 7);
 	int playerLevel = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getLevel();
-	int level = GameManager::getSingletonPtr()->getRandomInRange((playerLevel - offset) + quality, playerLevel + quality);
+	int level = playerLevel;
 	double multiplier = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getKarma() * 0.00167;
 	if (multiplier < 0) {
 		multiplier = multiplier * -1;
