@@ -32,6 +32,7 @@ bool Player::initialize()
 	Character::initialize();
 	_attackTimer = new Ogre::Timer();
 	_regenCounter = 0;
+	_stats->addStat(StatType::Damage, 2);
 	return true;
 }
 

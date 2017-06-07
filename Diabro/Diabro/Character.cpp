@@ -211,12 +211,6 @@ bool Character::regenHealth(float pRegen)
 	if (_currentHealth < _stats->GetStat(MaxHealth))
 	{
 		_currentHealth += pRegen;
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-		FILE* fp;
-		freopen_s(&fp, "CONOUT$", "w", stdout);
-		printf("I got healed... %f \n", _currentHealth);
-		fclose(fp);
-#endif
 		return true;
 	}
 	return false;

@@ -64,7 +64,7 @@ public:
 	void addStat(StatType pID, Ogre::Real pValue) { _stats.at((int)pID).value = _stats.at((int)pID).value + pValue; }
 	void removeStat(StatType pID, Ogre::Real pValue) { _stats.at((int)pID).value = _stats.at((int)pID).value - pValue; }
 	Ogre::Real MaxDeterminedHealth() { return (int)(GetStat(MaxHealth) + (GetStat(Vitality) * 10)); }
-	Ogre::Real DeterminedDamage() { return GetStat(Damage) * (1 + (GetStat(Strength) / 50)); }
+	Ogre::Real DeterminedDamage() { return GetStat(Damage) * (1 + (GetStat(Strength) / 40)); }
 	Ogre::Real DeterminedArmor() { return GetStat(Armor) * (1 + (GetStat(Strength) / 100)); }
 	Ogre::Real DeterminedResistance() { return GetStat(Resistance) * (1 + (GetStat(Intelligence) / 100)); }
 	Ogre::Real DeterminedDodgeChance() { return GetStat(DodgeChance) * (1 + (GetStat(Dexterity) / 100)); }
