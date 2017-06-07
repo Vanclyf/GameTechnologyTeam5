@@ -68,8 +68,12 @@ void Player::update(const Ogre::FrameEvent& pFE)
 /// <returns>False if the player runs out of health and dies.</returns>
 bool Player::adjustHealth(float pAdjust)
 {
-	if (!Character::adjustHealth(pAdjust)) { return false; }
-
+	if (!Character::adjustHealth(pAdjust))
+	{
+		SoundManager::PlaySmallSound("PlayerDead.wav");
+		return false;
+	}
+	SoundManager::PlaySmallSound("EnemyHit.wav");
 	GameManager::getSingleton().getUIManager()->adjustHealthBar(_currentHealth, _stats->GetStat(MaxHealth));
 	return true;
 }

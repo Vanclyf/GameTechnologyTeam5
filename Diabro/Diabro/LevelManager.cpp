@@ -40,12 +40,23 @@ void LevelManager::initialize()
 	//if (GameManager::getSingletonPtr()->getRandomInRange(0, 10) < 5) {
 		Ogre::SceneNode* npcSpawnerNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode("npcSpawn");
 		//0.5f for height difference
-		CharacterSpawner<Npc>* npcSpawner = new CharacterSpawner<Npc>(npcSpawnerNode, 3, Ogre::Vector3(500,0,500));
+		CharacterSpawner<Npc>* npcSpawner = new CharacterSpawner<Npc>(npcSpawnerNode, 2, Ogre::Vector3(1250,0,1800));
+		CharacterSpawner<Npc>* npcSpawner2 = new CharacterSpawner<Npc>(npcSpawnerNode, 4, Ogre::Vector3(2300, 0, 4000)); 
+		CharacterSpawner<Npc>* npcSpawner3 = new CharacterSpawner<Npc>(npcSpawnerNode, 1, Ogre::Vector3(6350, 0, 8451)); 
+		CharacterSpawner<Npc>* npcSpawner5 = new CharacterSpawner<Npc>(npcSpawnerNode, 1, Ogre::Vector3(4650, 0, 8651));
+		CharacterSpawner<Npc>* npcSpawner6 = new CharacterSpawner<Npc>(npcSpawnerNode, 4, Ogre::Vector3(2300, 0, 6000));
+
 	//}
 	//else
 	//{
 		Ogre::SceneNode* enemySpawnerNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode("enemySpawn");
-		CharacterSpawner<BasicEnemy>* enemySpawner = new CharacterSpawner<BasicEnemy>(enemySpawnerNode, 3, Ogre::Vector3(500, 0, 500));
+		CharacterSpawner<BasicEnemy>* enemySpawner = new CharacterSpawner<BasicEnemy>(enemySpawnerNode, 1, Ogre::Vector3(1450, 0, 4000));
+		CharacterSpawner<BasicEnemy>* enemySpawner2 = new CharacterSpawner<BasicEnemy>(enemySpawnerNode, 4, Ogre::Vector3(3750, 25, 4500));
+		CharacterSpawner<BasicEnemy>* enemySpawner3 = new CharacterSpawner<BasicEnemy>(enemySpawnerNode, 2, Ogre::Vector3(3650, 0, 3650));
+		CharacterSpawner<BasicEnemy>* enemySpawner4 = new CharacterSpawner<BasicEnemy>(enemySpawnerNode, 3, Ogre::Vector3(5950, 0, 8451)); 
+		CharacterSpawner<BasicEnemy>* enemySpawner5 = new CharacterSpawner<BasicEnemy>(enemySpawnerNode, 2, Ogre::Vector3(5101, 0, 4151));
+		CharacterSpawner<BasicEnemy>* enemySpawner6 = new CharacterSpawner<BasicEnemy>(enemySpawnerNode, 1, Ogre::Vector3(4602, 0, 3651));
+
 	//}
 
 	playerNode = _levelNode->createChildSceneNode("PlayerNode");

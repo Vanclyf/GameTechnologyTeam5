@@ -10,7 +10,7 @@
 BaseNpc::BaseNpc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity) : Character(pMyNode, pMyEntity), _noticeDistance(400.0f), _isFriendly(false), _timeSince(0), _isAngry(false)
 {
 	_myRotationNode = pMyRotationNode;
-	wander();
+	//wander();
 }
 
 /// <summary>
@@ -29,7 +29,8 @@ void BaseNpc::update(Ogre::Real pDeltatime)
 		if (_timeSince > 2)
 		{
 			_timeSince = 0;
-			wander();
+			//wander();
+
 		}
 	}
 	else
