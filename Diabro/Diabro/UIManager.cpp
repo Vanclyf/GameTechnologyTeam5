@@ -33,14 +33,35 @@ void UIManager::setupUI()
 	_uiNode->setPosition(0, 0, 0);
 
 	// create health bar
+	_ParamNames.push_back("Timer");
+	_karmaBarWidget = _mSdkTrayMgr->createLongSlider(OgreBites::TL_TOPRIGHT, "Karma", "Karma", 150, 50, -300, 300, 60);
+	_gameTimer = _mSdkTrayMgr->createParamsPanel(OgreBites::TL_TOP, "Timer", 110, _ParamNames);
+	_gameTimer->getOverlayElement()->setLeft(-200);
 	_healthBarWidget = _mSdkTrayMgr->createDecorWidget(OgreBites::TL_TOPLEFT, "Health", "UI/Green");
-	_staminaBarWidget = _mSdkTrayMgr->createDecorWidget(OgreBites::TL_TOPRIGHT, "Stamina", "UI/Yellow");
-	//_staminaBarWidget->getOverlayElement()->setHorizontalAlignment(Ogre::GuiHorizontalAlignment::GHA_LEFT);
-	_staminaBarWidget->getOverlayElement()->setLeft(-128);
 }
 
 void UIManager::createDialog(Ogre::String pDialogText) {
+	try {
+		destroyDialog();
+	}
+	catch (...) {}
 	_mDialogTextArea = _mSdkTrayMgr->createTextBox(OgreBites::TL_CENTER, "DialogTextArea", pDialogText, 400, 400);
+}
+
+void UIManager::createPrincessDialog(Ogre::String pDialogText) {
+	try {
+		destroyPrincessDialog();
+	}
+	catch (...) {}
+	_mDialogTextArea = _mSdkTrayMgr->createTextBox(OgreBites::TL_CENTER, "PrincessDialogTextArea", pDialogText, 400, 400);
+}
+
+void UIManager::createEnemyDialog(Ogre::String pDialogText) {
+	try {
+		destroyEnemyDialog();
+	}
+	catch (...) {}
+	_mDialogTextArea = _mSdkTrayMgr->createTextBox(OgreBites::TL_CENTER, "EnemyDialogTextArea", pDialogText, 400, 400);
 }
 
 /// <summary>
@@ -48,6 +69,13 @@ void UIManager::createDialog(Ogre::String pDialogText) {
 /// </summary>
 void UIManager::destroyDialog() {
 	_mSdkTrayMgr->destroyWidget("DialogTextArea");
+}
+void UIManager::destroyPrincessDialog() {
+	_mSdkTrayMgr->destroyWidget("PrincessDialogTextArea");
+}
+void UIManager::destroyEnemyDialog() {
+	_mSdkTrayMgr->destroyWidget("EnemyDialogTextArea");
+	
 }
 
 /// <summary>
@@ -75,8 +103,25 @@ void UIManager::adjustHealthBar(Ogre::Real pValue, Ogre::Real pMaxValue)
 /// <param name="pMaxValue">The maximum pValue.</param>
 void UIManager::adjustStaminaBar(Ogre::Real pValue, Ogre::Real pMaxValue)
 {
-	_staminaBarWidget->getOverlayElement()->setWidth(calcBarSize(pValue, pMaxValue, _maxWidthBar));
-	_staminaBarWidget->getOverlayElement()->setLeft(pMaxValue - calcBarSize(pValue, pMaxValue, _maxWidthBar) + 1);
+	_karmaBarWidget->setValue(Ogre::Real(pValue), false);
+}
+
+/// <summary>
+/// Adjusts the timer.
+/// </summary>
+/// <param name="Time">The current time.</param>
+void UIManager::adjustTimer(Ogre::Real pTime)
+{
+	_ParamValues.clear();
+	int iTime = pTime / 1000;
+	int mins = (iTime / 60);
+	int secs = iTime % 60;
+	std::stringstream timeStr;
+	timeStr << mins << ":" << secs;
+	_ParamValues.push_back(timeStr.str());
+	_ParamValues.push_back(timeStr.str());
+
+	_gameTimer->setAllParamValues(_ParamValues);
 }
 
 /// <summary>
@@ -88,5 +133,5 @@ void UIManager::adjustStaminaBar(Ogre::Real pValue, Ogre::Real pMaxValue)
 /// <returns></returns>
 Ogre::Real UIManager::calcBarSize(Ogre::Real pValue, Ogre::Real pMaxValue, Ogre::Real pMaxSize)
 {
-	return((pValue / pMaxValue) * pMaxSize);
+return((pValue / pMaxValue) * pMaxSize);
 }

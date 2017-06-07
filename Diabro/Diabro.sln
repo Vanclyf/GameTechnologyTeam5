@@ -9,11 +9,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitTest", "Diabro\UnitTest
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DiabloLib", "DiabloLib\DiabloLib.vcxproj", "{D6CA3B3F-0AC0-47F7-86EF-6357E303C9AA}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BulletDynamics", "D:\bullet-2.81-rev2613\build\vs2010\BulletDynamics.vcxproj", "{28D36A0F-B790-D748-BC8C-8FB422E45492}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BulletDynamics", "..\..\..\bullet-2.81-rev2613\build\vs2010\BulletDynamics.vcxproj", "{28D36A0F-B790-D748-BC8C-8FB422E45492}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BulletCollision", "D:\bullet-2.81-rev2613\build\vs2010\BulletCollision.vcxproj", "{54AE91C7-48D4-9C49-A5B1-0CED554CADFA}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BulletCollision", "..\..\..\bullet-2.81-rev2613\build\vs2010\BulletCollision.vcxproj", "{54AE91C7-48D4-9C49-A5B1-0CED554CADFA}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LinearMath", "D:\bullet-2.81-rev2613\build\vs2010\LinearMath.vcxproj", "{58D08522-C69F-904C-A7ED-733DA229F1BA}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LinearMath", "..\..\..\bullet-2.81-rev2613\build\vs2010\LinearMath.vcxproj", "{58D08522-C69F-904C-A7ED-733DA229F1BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

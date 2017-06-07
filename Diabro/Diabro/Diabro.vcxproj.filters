@@ -104,6 +104,15 @@
     <ClCompile Include="TreeNode.cpp">
       <Filter>Sources\TreeDatastructure</Filter>
     </ClCompile>
+    <ClCompile Include="SoundManager.cpp" >
+	<Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="BasicPrincess.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="TimerManager.cpp">
+      <Filter>Sources\Managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicEnemy.h">
@@ -181,9 +190,6 @@
     <ClInclude Include="ArmorInstance.h">
       <Filter>Headers\Items\Instance</Filter>
     </ClInclude>
-    <ClInclude Include="BaseNpc.h">
-      <Filter>Headers\Stats</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h" />
     <ClInclude Include="GenericFSM.h">
       <Filter>Headers\States</Filter>
@@ -232,6 +238,18 @@
     </ClInclude>
     <ClInclude Include="TreeNode.h">
       <Filter>Headers\TreeDatastructure</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundManager.h" >
+	<Filter>Headers</Filter>
+</ClInclude>
+    <ClInclude Include="BasicPrincess.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseNpc.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="TimerManager.h">
+      <Filter>Headers\Managers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

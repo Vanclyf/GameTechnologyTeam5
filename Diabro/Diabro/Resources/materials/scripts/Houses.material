@@ -14,6 +14,54 @@ material Houses/Pink
    }
 }
 
+material Houses/White
+{
+	technique
+   {
+      pass
+      {
+	  	lighting off
+        
+         texture_unit
+         {
+			texture whiteBox.jpg
+         }
+      }
+   }
+}
+
+material Houses/darkRed
+{
+	technique
+   {
+      pass
+      {
+	  	lighting off
+        
+         texture_unit
+         {
+			texture darkRedBox.jpg
+         }
+      }
+   }
+}
+
+material Houses/darkGreen
+{
+	technique
+   {
+      pass
+      {
+	  	lighting off
+        
+         texture_unit
+         {
+			texture darkGreenBox.jpg
+         }
+      }
+   }
+}
+
 material Houses/Red
 {
    technique
@@ -25,6 +73,21 @@ material Houses/Red
          texture_unit
          {
 			texture redBox.jpg
+         }
+      }
+   }
+}
+material Houses/HitRed
+{
+   technique
+   {
+      pass
+      {
+	  	lighting off
+        
+         texture_unit
+         {
+			texture darkRedBox.jpg
          }
       }
    }
@@ -60,6 +123,21 @@ material Houses/Blue
       }
    }
 }
+material Houses/HitBlue
+{
+   technique
+   {
+      pass
+      {
+	  	lighting off
+        
+         texture_unit
+         {
+			texture blueBox.jpg
+         }
+      }
+   }
+}
 
 material Houses/Green
 {
@@ -72,6 +150,22 @@ material Houses/Green
          texture_unit
          {
 			texture greenBox.jpg
+         }
+      }
+   }
+}
+
+material Houses/HitGreen
+{
+   technique
+   {
+      pass
+      {
+	  	lighting off
+        
+         texture_unit
+         {
+			texture darkGreenBox.jpg
          }
       }
    }

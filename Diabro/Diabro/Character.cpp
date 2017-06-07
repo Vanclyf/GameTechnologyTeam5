@@ -26,7 +26,8 @@ bool Character::initialize()
 
 	_currentHealth = _stats->GetStat(MaxHealth);
 	_currentStamina = _stats->GetStat(MaxStamina);
-
+	_hitTimer = new Ogre::Timer();
+	_isDead = false;
 
 	//show what is in the gear slots.
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
@@ -49,25 +50,56 @@ bool Character::initialize()
 /// <param name="pDeltatime">The time since last frame.</param>
 void Character::update(Ogre::Real pDeltatime)
 {
+	if (!_isDead)
+	{
+		adjustStaminaOverTime(pDeltatime);
 
-	adjustStaminaOverTime(pDeltatime);
+		if (_currAttackCooldown > 0) {
+			_currAttackCooldown -= pDeltatime;
+		}
+		else {
+			_canAttack = true;
+		}
 
-	if (_currAttackCooldown > 0) {
-		_currAttackCooldown -= pDeltatime;
-	}else {
-		_canAttack = true;
+		if (_hitTime > 0) {
+			_hitTime -= pDeltatime;
+			return;
+		}
+		else {
+			_hitted = false;
+		}
+
+		if (_isHit)
+		{
+			if (_hitCountdown <= 0)
+			{
+				_hitCountdown = 0;
+				//change material
+				switch (getTypeNpc())
+				{
+				case NpcType::Good:
+					_myEntity->setMaterial(Ogre::MaterialManager::getSingletonPtr()->getByName("Houses/Green"));
+					break;
+				case NpcType::Bad:
+					_myEntity->setMaterial(Ogre::MaterialManager::getSingletonPtr()->getByName("Houses/Red"));
+					break;
+				case NpcType::Princess:
+					_myEntity->setMaterial(Ogre::MaterialManager::getSingletonPtr()->getByName("Houses/Green"));
+					break;
+
+				}
+				_isHit = false;
+			}
+			else
+			{
+				Ogre::Real deltaTime = _hitTimer->getMilliseconds();
+				_hitTimer->reset();
+				_hitCountdown -= deltaTime;
+			}
+		}
+
+		_myNode->translate(_dirVec * getSpeed() * pDeltatime, Ogre::Node::TS_LOCAL);
 	}
-
-	if (_hitTime > 0) {
-		_hitTime -= pDeltatime;
-		return;
-	}
-	else {
-		_hitted = false;
-	}
-
-	_myNode->translate(_dirVec * getSpeed() * pDeltatime, Ogre::Node::TS_LOCAL);
-
 }
 
 //TODO: these methods should be generic
@@ -161,7 +193,7 @@ bool Character::adjustHealth(float pAdjust)
 
 	_hitTime = _totalHitTime;
 	_hitted = true;
-
+	hit();
 	if ((_currentHealth -= pAdjust) <= 0)
 	{
 		die();
@@ -169,6 +201,12 @@ bool Character::adjustHealth(float pAdjust)
 	}
 
 	return true;
+}
+
+void Character::hit()
+{
+	_hitCountdown = 750;
+	_isHit = true;
 }
 
 /// <summary>
@@ -221,10 +259,24 @@ bool Character::adjustStamina(float pAdjust)
 /// </summary>
 void Character::die()
 {
+	Player *player = GameManager::getSingletonPtr()->getLevelManager()->getPlayer();
 	_myNode->setVisible(false);
+ 
 
-	//TODO: clean up the memory.. 
-
+	switch(getTypeNpc())
+	{
+	case NpcType::Good:
+		player->adjustKarma(-10);		
+		break;
+	case NpcType::Bad:
+		player->adjustKarma(10);
+		break;
+	case NpcType::Princess:
+		player->adjustKarma(-100);
+		break;
+	}
+	player->gainXP(10);
+	_isDead = true;
 	//TODO: actually destroy the node and its children
 	//_myNode->removeAndDestroyAllChildren();
 	//GameManager::getSingletonPtr()->getSceneManager()->destroySceneNode(_myNode);

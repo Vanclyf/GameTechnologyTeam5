@@ -42,8 +42,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\Program Files %28x86%29\DirectX-SDK\Include;$(BULLET_HOME)\src;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Program Files %28x86%29\DirectX-SDK\Lib\x86;C:\Users\Supernat0r\Documents\Common;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Supernat0r\Documents\Common;D:\Program Files %28x86%29\DirectX-SDK\Include;$(OGRE_HOME)\irrKlang-1.5.0\include;$(BULLET_HOME)\src;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Program Files %28x86%29\DirectX-SDK\Lib\x86;C:\Users\Supernat0r\Documents\Common;$(OGRE_HOME)\irrKlang-1.5.0\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -55,21 +55,28 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(OGRE_HOME)\include;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\Samples\Common\include;$(OGRE_HOME)\boost;$(OGRE_HOME)\include\OGRE\Overlay;&lt;boost_path&gt;\stage\lib;$(BULLET_HOME)\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(OGRE_HOME)\include;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\Samples\Common\include;$(OGRE_HOME)\boost;$(OGRE_HOME)\include\OGRE\Overlay;&lt;boost_path&gt;\stage\lib;$(OGRE_HOME)\irrKlang-1.5.0\include;$(BULLET_HOME)\src%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(OGRE_HOME)\boost\lib;$(OGRE_HOME)\lib\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>OgreMain_d.lib;OIS_d.lib;OgreOverlay_d.lib;libboost_thread-vc100-mt-gd-1_55.lib;libboost_system-vc100-mt-gd-1_55.lib;libboost_date_time-vc100-mt-gd-1_55.lib;libboost_chrono-vc100-mt-gd-1_55.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OGRE_HOME)\boost\lib;$(OGRE_HOME)\lib\$(Configuration);$(OGRE_HOME)\irrKlang-1.5.0\lib\Win32-visualStudio;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>OgreMain_d.lib;OIS_d.lib;OgreOverlay_d.lib;libboost_thread-vc100-mt-gd-1_55.lib;libboost_system-vc100-mt-gd-1_55.lib;libboost_date_time-vc100-mt-gd-1_55.lib;libboost_chrono-vc100-mt-gd-1_55.lib;irrKlang.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(OutDir)\$(TargetFileName)" "$(OGRE_HOME)\Bin\$(Configuration)"</Command>
+      <Command>copy "$(OutDir)\$(TargetFileName)" "$(OGRE_HOME)\Bin\$(Configuration)"
+copy "$(OGRE_HOME)\irrKlang-1.5.0\dllFiles\ikpFlac.dll" "$(SolutionDir)Diabro\bin\debug"
+copy "$(OGRE_HOME)\irrKlang-1.5.0\dllFiles\ikpMP3.dll" "$(SolutionDir)Diabro\bin\debug"
+copy "$(OGRE_HOME)\irrKlang-1.5.0\dllFiles\irrKlang.dll" "$(SolutionDir)Diabro\bin\debug"</Command>
     </PostBuildEvent>
     <PreLinkEvent>
       <Command>
       </Command>
     </PreLinkEvent>
+    <Bscmake>
+      <PreserveSBR>true</PreserveSBR>
+    </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -114,6 +121,7 @@
     <ClCompile Include="BaseItem.cpp" />
     <ClCompile Include="BaseNpc.cpp" />
     <ClCompile Include="BasicEnemy.cpp" />
+    <ClCompile Include="BasicPrincess.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="BaseWeapon.cpp" />
     <ClCompile Include="CharacterSpawner.cpp" />
@@ -133,9 +141,11 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="QuestContentManager.cpp" />
     <ClCompile Include="QuestItemContainer.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="TestFSM.cpp" />
     <ClCompile Include="QuestItemGenerator.cpp" />
+    <ClCompile Include="TimerManager.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
     <ClCompile Include="Tree.cpp" />
     <ClCompile Include="TreeNode.cpp" />
@@ -151,6 +161,7 @@
     <ClInclude Include="BaseEquipment.h" />
     <ClInclude Include="BaseItem.h" />
     <ClInclude Include="BaseNpc.h" />
+    <ClInclude Include="BasicPrincess.h" />
     <ClInclude Include="BaseQuestItem.h" />
     <ClInclude Include="BasicEnemy.h" />
     <ClInclude Include="Character.h" />
@@ -174,6 +185,7 @@
     <ClInclude Include="Modifier.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="SoundManager.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="QuestContentManager.h" />
     <ClInclude Include="QuestItem.h" />
@@ -181,6 +193,7 @@
     <ClInclude Include="QuestItemGenerator.h" />
     <ClInclude Include="StatRange.h" />
     <ClInclude Include="TestFSM.h" />
+    <ClInclude Include="TimerManager.h" />
     <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="Tree.h" />
     <ClInclude Include="TreeNode.h" />
@@ -192,13 +205,13 @@
     <ResourceCompile Include="Diabro.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="D:\bullet-2.81-rev2613\build\vs2010\BulletCollision.vcxproj">
+    <ProjectReference Include="..\..\..\..\bullet-2.81-rev2613\build\vs2010\BulletCollision.vcxproj">
       <Project>{54ae91c7-48d4-9c49-a5b1-0ced554cadfa}</Project>
     </ProjectReference>
-    <ProjectReference Include="D:\bullet-2.81-rev2613\build\vs2010\BulletDynamics.vcxproj">
+    <ProjectReference Include="..\..\..\..\bullet-2.81-rev2613\build\vs2010\BulletDynamics.vcxproj">
       <Project>{28d36a0f-b790-d748-bc8c-8fb422e45492}</Project>
     </ProjectReference>
-    <ProjectReference Include="D:\bullet-2.81-rev2613\build\vs2010\LinearMath.vcxproj">
+    <ProjectReference Include="..\..\..\..\bullet-2.81-rev2613\build\vs2010\LinearMath.vcxproj">
       <Project>{58d08522-c69f-904c-a7ed-733da229f1ba}</Project>
     </ProjectReference>
   </ItemGroup>

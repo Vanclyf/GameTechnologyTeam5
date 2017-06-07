@@ -28,7 +28,7 @@ scalar(1000)
 		else
 		{
 			Ogre::SceneNode* enemySpawnerNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode("enemySpawn" + i);
-			CharacterSpawner<BasicEnemy>* enemySpawner = new CharacterSpawner<BasicEnemy>(enemySpawnerNode, 3, Ogre::Vector3((c.position.x + c.width / 2) * 1000, 0, (c.position.z + c.depth / 2) * 1000), &_zone[0].cities[i]);
+			CharacterSpawner<BasicEnemy>* enemySpawner = new CharacterSpawner<BasicEnemy>(enemySpawnerNode, 3, Ogre::Vector3((c.position.x + c.width / 2) * 1000, 0, (c.position.z + c.depth / 2) * 1000) + 20, &_zone[0].cities[i]);
 		}
 	}
 	drawDungeonFloor(scalar, _zone[0]);
