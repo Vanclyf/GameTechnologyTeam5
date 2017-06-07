@@ -232,41 +232,37 @@ void LevelManager::createGroundMesh()
 		Ogre::Vector3::UNIT_Z);
 }
 
+/// <summary>
+/// Testunittwoes the specified i.
+/// </summary>
+/// <param name="i">The i.</param>
+/// <returns></returns>
 int LevelManager::testunittwo(int i)
 {
 	return ++i;
 }
 
+/// <summary>
+/// Initializes the physics world by creating the dynamics world consisting of the dispatcher, broadphase, solver and collisionconfiguration.
+/// Initializes some of the basic shapes we are using and the initial values of the player.
+/// </summary>
 void LevelManager::initPhysicsWorld() {
+	//setting standard variables for setting up the dynamicsworld
 	broadphase = new btDbvtBroadphase();
 	collisionConfiguration = new btDefaultCollisionConfiguration();
-
 	dispatcher = new btCollisionDispatcher(collisionConfiguration);
-
 	solver = new btSequentialImpulseConstraintSolver;
-
 	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
-
 	dynamicsWorld->setGravity(btVector3(0, -10, 0));
 
-
+	//shapes
 	groundShape = new btStaticPlaneShape(btVector3(0, 1, 0), 1);
-
 	boxShape = new btBoxShape(btVector3(50, 50, 50));
-
 	fallShape = new btSphereShape(50.0f);
-
 	btCollisionShape* newGroundShape = new btBoxShape(btVector3(100000, 1, 100000));
 	btRigidBody* newGroundRigidBody;
 
 	//ground
-	//groundMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -1, 0)));
-	//btRigidBody::btRigidBodyConstructionInfo
-	//	groundRigidBodyCI(0, groundMotionState, groundShape, btVector3(0, 0, 0));
-	//groundRigidBody = new btRigidBody(groundRigidBodyCI);
-	//dynamicsWorld->addRigidBody(groundRigidBody);
-
-	//new ground
 	btDefaultMotionState* newGroundMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -1, 0)));
 	btRigidBody::btRigidBodyConstructionInfo
 		newGroundRigidBodyCI(0, newGroundMotionState, newGroundShape, btVector3(0, 0, 0));
@@ -282,18 +278,12 @@ void LevelManager::initPhysicsWorld() {
 	btRigidBody::btRigidBodyConstructionInfo fallRigidBodyCI(mass, fallMotionState, fallShape, fallInertia);
 	fallRigidBody = new btRigidBody(fallRigidBodyCI);
 	dynamicsWorld->addRigidBody(fallRigidBody);
-
-
-	//box
-	//btDefaultMotionState* boxMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-1000, 0, -1000)));
-	//btRigidBody::btRigidBodyConstructionInfo
-	//	boxRigidBodyCI(0, boxMotionState, boxShape, btVector3(0, 0, 0));
-	//boxRigidBody = new btRigidBody(boxRigidBodyCI);
-	//dynamicsWorld->addRigidBody(boxRigidBody);
-
 }
 
 
+/// <summary>
+/// Destroys the physics world.
+/// </summary>
 void LevelManager::destroyPhysicsWorld() {
 	dynamicsWorld->removeRigidBody(fallRigidBody);
 	delete fallRigidBody->getMotionState();
@@ -316,6 +306,15 @@ void LevelManager::destroyPhysicsWorld() {
 	delete broadphase;
 }
 
+/// <summary>
+/// Creates a cube. Can be called from any class to create a cube with a standard mesh on any given position.
+/// This makes it possible to add walls with different attribues iteratively throughout the map.
+/// </summary>
+/// <param name="pMyEntity">The Ogre::Entity* that the mesh will be created on</param>
+/// <param name="pMyNode">The Ogre::Node* Where the entity gets attached on and where the scaling, rotating and positioning will be invoked.</param>
+/// <param name="pMyPosition">The position of the cube</param>
+/// <param name="pMyScale">The scale of the cube</param>
+/// <param name="pMyRotation">The rotation of the cube's roll</param>
 void LevelManager::createCube(Ogre::Entity* pMyEntity, Ogre::SceneNode* pMyNode, Ogre::Vector3 pMyPosition, Ogre::Vector3 pMyScale, Ogre::Degree pMyRotation) {
 	pMyEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("wall.mesh");
 	pMyNode->createChildSceneNode()->attachObject(pMyEntity);
@@ -323,22 +322,23 @@ void LevelManager::createCube(Ogre::Entity* pMyEntity, Ogre::SceneNode* pMyNode,
 	pMyNode->setPosition(pMyPosition);
 	pMyNode->pitch(Ogre::Degree(90));
 	pMyNode->roll(pMyRotation);
-
 	pMyEntity->setMaterialName("Examples/Rockwall");
 
-	//physics engine cubes
-
-
+	//physics engine cubes rotated 90 degrees
 	if (pMyRotation.valueDegrees() == 90) {
+		//shape of the cube defined by a vector3
 		btCollisionShape* wallShape = new btBoxShape(btVector3(500, 500, 50));
+		//motionstate defined by a quaternion to set the rotation and a vector3 to set the position
 		btDefaultMotionState* wallMotionState;
 		wallMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(pMyPosition.x, 0, pMyPosition.z)));
+		//put all the construction information into a new rigidbody
 		btRigidBody::btRigidBodyConstructionInfo
 			wallRigidBodyCI(0, wallMotionState, wallShape, btVector3(0, 0, 0));
-
 		btRigidBody* wallRigidBody = new btRigidBody(wallRigidBodyCI);
+		//add the rigidbody to the physics world
 		dynamicsWorld->addRigidBody(wallRigidBody);
 	}
+	//physics engine cubes without rotation
 	else if (pMyRotation.valueDegrees() == 0) {
 		btCollisionShape* wallShape = new btBoxShape(btVector3(pMyScale.x, pMyScale.y, pMyScale.z));
 		btDefaultMotionState* wallMotionState;
@@ -351,6 +351,9 @@ void LevelManager::createCube(Ogre::Entity* pMyEntity, Ogre::SceneNode* pMyNode,
 	}
 };
 
+/// <summary>
+/// Setups the walls.
+/// </summary>
 void::LevelManager::setupWalls() {
 	for (int i = 0; i < 100; i++) {
 		std::stringstream sstm;
@@ -470,6 +473,11 @@ void::LevelManager::setupWalls() {
 }
 
 
+/// <summary>
+/// Translates the player.
+/// </summary>
+/// <param name="pMyTranslation">The p my translation.</param>
+/// <param name="pMyRotation">The p my rotation.</param>
 void::LevelManager::translatePlayer(btVector3& pMyTranslation, btQuaternion& pMyRotation) {
 	fallRigidBody->activate();
 	// extract the vector part of the quaternion
@@ -477,8 +485,6 @@ void::LevelManager::translatePlayer(btVector3& pMyTranslation, btQuaternion& pMy
 
 	// Extract the scalar part of the quaternion
 	float s = pMyRotation.getW();
-
-
 	btVector3 rotatedDirection = 2.0f * u.dot(pMyTranslation) * u
 		+ (s*s - u.dot(u)) * pMyTranslation
 		+ 2.0f * s * u.cross(pMyTranslation);
@@ -488,6 +494,9 @@ void::LevelManager::translatePlayer(btVector3& pMyTranslation, btQuaternion& pMy
 
 
 
+/// <summary>
+/// Updates the player.
+/// </summary>
 void::LevelManager::updatePlayer() {
 
 	fallRigidBody->activate();

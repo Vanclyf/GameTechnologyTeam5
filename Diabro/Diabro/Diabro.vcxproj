@@ -205,13 +205,13 @@ copy "$(OGRE_HOME)\irrKlang-1.5.0\dllFiles\irrKlang.dll" "$(SolutionDir)Diabro\b
     <ResourceCompile Include="Diabro.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\tools\bullet-2.81-rev2613\build\vs2010\BulletCollision.vcxproj">
+    <ProjectReference Include="D:\bullet-2.81-rev2613\build\vs2010\BulletCollision.vcxproj">
       <Project>{54ae91c7-48d4-9c49-a5b1-0ced554cadfa}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\tools\bullet-2.81-rev2613\build\vs2010\BulletDynamics.vcxproj">
+    <ProjectReference Include="D:\bullet-2.81-rev2613\build\vs2010\BulletDynamics.vcxproj">
       <Project>{28d36a0f-b790-d748-bc8c-8fb422e45492}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\tools\bullet-2.81-rev2613\build\vs2010\LinearMath.vcxproj">
+    <ProjectReference Include="D:\bullet-2.81-rev2613\build\vs2010\LinearMath.vcxproj">
       <Project>{58d08522-c69f-904c-a7ed-733da229f1ba}</Project>
     </ProjectReference>
   </ItemGroup>

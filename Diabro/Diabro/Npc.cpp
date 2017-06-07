@@ -4,13 +4,16 @@
 /// <summary>
 /// Creates a new instance of the <see cref="Npc"/> class.
 /// </summary>
-/// <param name="pMyNode">My node.</param>
-/// <param name="pMyEntity">My entity.</param>
+/// <param name="pMyNode">The node where the NPC's position and rotation will be invoked.</param>
+/// <param name="pMyEntity">The Entity which gets attached to the node.</param>
 Npc::Npc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity) : BaseNpc(pMyNode, pMyRotationNode, pMyEntity), _inDialog(false)
 {
+	//subscribes itself and returns an id.
 	id = GameManager::getSingletonPtr()->getLevelManager()->subscribeFriendlyNPC(this);
+	//rotate the NPC
 	rotatePivot(Ogre::Vector3(0, 90, 0));
 	_dialogFile.open("DialogText.txt");
+	//When the dialog can't be reached print to console
 	if (_dialogFile.fail()) {
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 		FILE* fp;
