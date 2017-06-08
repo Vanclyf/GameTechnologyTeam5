@@ -21,7 +21,8 @@ public:
 	
 	int _attackSpeed;
 	int _AttackCD;
-
+	bool _beginDialog;
+	bool _dialogTrigger;
 	BasicEnemy* _BasicEnemy;
 	
 	bool adjustHealth(float) override;
@@ -35,6 +36,7 @@ private:
 	int _xpTillNextLevel;
 	int _karmaPoints;
 	int _regenCounter;
+	bool _death;
 
 	int calcXpTillLevel(int);
 	void levelUp();

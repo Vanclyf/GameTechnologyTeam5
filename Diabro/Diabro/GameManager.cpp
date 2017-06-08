@@ -17,7 +17,7 @@ Filename:    GameManager.cpp
 /// This class is the central manager of the game and has therefore the only singleton instance.
 /// It contains all other managers.
 /// </summary>
-GameManager::GameManager() : _levelManager(0), _uiManager(0), _itemManager(0), _questContentManager(0), _gameTimer(0)
+GameManager::GameManager() : _levelManager(0), _uiManager(0), _itemManager(0), _questContentManager(0), _gameTimer(0), _isEventLogTrigger(false)
 {
 	_playerSpeed = 5;
 }
@@ -153,7 +153,6 @@ void GameManager::createViewports()
 void GameManager::createFrameListener(void)
 {
 	BaseApplication::createFrameListener();
-
 	return;
 }
 
@@ -164,6 +163,11 @@ void GameManager::createFrameListener(void)
 bool GameManager::frameRenderingQueued(const Ogre::FrameEvent& pFE)
 {
 	bool ret = BaseApplication::frameRenderingQueued(pFE);
+	if(_isEventLogTrigger ==  false)
+	{
+		_uiManager->setStandardEventLogText();
+	}
+	_isEventLogTrigger = true;
 	_levelManager->update(pFE);
 	_timerManager->update(pFE);
  
@@ -217,6 +221,8 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 		break;
 
 	case OIS::KC_E:
+		_uiManager->setStandardEventLogActive();
+		_uiManager->setStandardEventLogText();
 		for (int i = 0; i < _levelManager->getItemInstances().size(); i++)
 		{
 			ItemInstance* item = _levelManager->getItemInstances()[i];
@@ -301,6 +307,22 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 			}
 		}
 		_levelManager->getPrincess()->endingSequence(true);
+		if(_timerManager->GetCountDown() <=0)
+		{
+			_levelManager->getPrincess()->closeGame();
+		}
+		else if(_levelManager->getPlayer()->getDeath())
+		{
+			_levelManager->getPrincess()->closeGame();
+		}
+		else if(_levelManager->getPlayer()->_beginDialog)
+		{
+			_levelManager->getPrincess()->toggleDialog();
+			_levelManager->getPlayer()->_beginDialog = false;
+		}
+		break;
+	case OIS::KC_Y:
+		_uiManager->setStandardEventLogText();
 		break;
 	default:
 		break;

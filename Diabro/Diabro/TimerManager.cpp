@@ -26,7 +26,7 @@ void TimerManager::update(const Ogre::FrameEvent& pFE)
 	if (_countDown <= 0)
 	{
 		_countDown = 0;
-		//TODO: start ending sequence 
+		GameManager::getSingletonPtr()->getLevelManager()->getPrincess()->endingSequence(true);
 	}
 	else
 	{

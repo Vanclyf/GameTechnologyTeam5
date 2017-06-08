@@ -44,9 +44,10 @@ bool BasicPrincess::adjustHealth(float pAdjust)
 void BasicPrincess::update(Ogre::Real pDeltatime)
 {
 	//BaseNpc::update(pDeltatime);
-
+	detectPlayer();
 	if (_playerDetected)
 	{
+		GameManager::getSingletonPtr()->getUIManager()->setPrincessEventLogText();
 	}
 }
 
@@ -101,39 +102,73 @@ void BasicPrincess::endingSequence(bool ending)
 	if (ending)
 	{
 		int karma = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getKarma();
-		if (_inDialog == true && karma >= 0) {
-			_dialogCount++;
-			if (_dialogCount == 1) {
-				GameManager::getSingletonPtr()->getUIManager()->appendDialogText("thank you for saving me senpai... I princess Kinny am forever in your favor \n");
-			}
-			else if (_dialogCount == 2) {
-				GameManager::getSingletonPtr()->getUIManager()->appendDialogText("and they lived happily ever after... until Kinney died of herpes \n");
-				
-			}
-			else if (_dialogCount >= 3) {
-				toggleDialog();
-				_dialogCount = 0;
-				closeGame();
-				_inDialog = false;
-			}
-		}
-		else if (_inDialog == true && karma < 0)
+		if(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->_beginDialog)
 		{
-			_dialogCount++;
-			if (_dialogCount == 1) {
-				GameManager::getSingletonPtr()->getUIManager()->appendDialogText("I cannot come with you senpai san... you changed too much \n");
-			}
-			else if (_dialogCount == 2) {
-				GameManager::getSingletonPtr()->getUIManager()->appendDialogText("Princess Kinney left... never to return... and probably died \n");			
-			}
-			else if (_dialogCount >= 3) {
-				toggleDialog();
+			_inDialog = true;
+			_dialogCount = 2;
+			if (_dialogCount == 2) {
+				GameManager::getSingletonPtr()->getUIManager()->createPrincessDialog("Safe the princess she has been captured!\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress Space to Continue");
+				GameManager::getSingletonPtr()->getUIManager()->appendDialogText("Are you Good or Bad? \n");
 				_dialogCount = 0;
-				closeGame();
-				_inDialog = false;
 			}
 		}
-		
+		else
+		{
+			if (GameManager::getSingletonPtr()->getTimeManager()->GetCountDown() <= 0)
+			{
+				_inDialog = true;
+				_dialogCount = 2;
+				if (_dialogCount == 2) {
+					GameManager::getSingletonPtr()->getUIManager()->createPrincessDialog("Your Time has run out\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress Space to Continue");
+					GameManager::getSingletonPtr()->getUIManager()->appendDialogText("Next time try killing some of your friend for FREE time! \n");
+					_dialogCount = 0;
+
+				}
+			}
+			else if (GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getDeath())
+			{
+				_inDialog = true;
+				_dialogCount = 2;
+				if (_dialogCount == 2) {
+					GameManager::getSingletonPtr()->getUIManager()->createPrincessDialog("You have died\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPress Space to Continue");
+					GameManager::getSingletonPtr()->getUIManager()->appendDialogText("Oh no you have DIED! Game Over! \n");
+					_dialogCount = 0;
+
+				}
+			}
+			else if (_inDialog == true && karma >= 0) {
+				_dialogCount++;
+				if (_dialogCount == 1) {
+					GameManager::getSingletonPtr()->getUIManager()->appendDialogText("thank you for saving me senpai... I princess Kinny am forever in your favor \n");
+				}
+				else if (_dialogCount == 2) {
+					GameManager::getSingletonPtr()->getUIManager()->appendDialogText("and they lived happily ever after... until Kinney died of herpes \n");
+
+				}
+				else if (_dialogCount >= 3) {
+					toggleDialog();
+					_dialogCount = 0;
+					closeGame();
+					_inDialog = false;
+				}
+			}
+			else if (_inDialog == true && karma < 0)
+			{
+				_dialogCount++;
+				if (_dialogCount == 1) {
+					GameManager::getSingletonPtr()->getUIManager()->appendDialogText("I cannot come with you senpai san... you changed too much \n");
+				}
+				else if (_dialogCount == 2) {
+					GameManager::getSingletonPtr()->getUIManager()->appendDialogText("Princess Kinney left... never to return... and probably died \n");
+				}
+				else if (_dialogCount >= 3) {
+					toggleDialog();
+					_dialogCount = 0;
+					closeGame();
+					_inDialog = false;
+				}
+			}
+		}
 	}else
 	{
 		_inDialog = true;

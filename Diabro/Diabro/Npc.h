@@ -5,6 +5,7 @@
 #include <fstream>
 #include "Needs.h"
 
+
 enum Profession
 {
 	None = 0,

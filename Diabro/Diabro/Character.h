@@ -46,7 +46,7 @@ public:
 	NpcType getTypeNpc() { return _typeNpc; }
 	CharacterStats* getStats() { return _stats; }
 	void setTypeNpc(NpcType pType) { _typeNpc = pType; }
-
+	bool getDeath() { return _isDead; }
 	int getLevel() { return _currentLevel; }
 
 	WeaponInstance* getCurrentWeapon() { return _weapon; }

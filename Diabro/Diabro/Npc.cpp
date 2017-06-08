@@ -74,6 +74,12 @@ Npc::~Npc() {
 void Npc::update(Ogre::Real pDeltatime)
 {
 	BaseNpc::update(pDeltatime);
+
+	if(_playerDetected)
+	{
+		_dirVec = Ogre::Vector3::ZERO;
+		GameManager::getSingletonPtr()->getUIManager()->setNPCEventLogText();
+	} 
 }
 
 
