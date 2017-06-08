@@ -109,6 +109,9 @@ bool BaseNpc::lightAttack()
 	//deal damage 
 	_target->adjustHealth(_stats->DeterminedDamage());
 
+	//push back player
+	GameManager::getSingletonPtr()->getLevelManager()->pushBackPlayer();
+
 	_canAttack = false;
 	_currAttackCooldown = _lightAttackCooldown;
 	return true;
