@@ -31,7 +31,7 @@ public:
 	void updatePlayer();
 	static void createGroundMesh();
 	void setupWalls();
-
+	void pushBackPlayer();
 	// -------------------------------------------------------------------------------
 	// Properties
 
@@ -46,6 +46,7 @@ public:
 
 	btVector3 setDirVector(btVector3& pMoveVec) { return _bulletDirVec = pMoveVec; }
 	btVector3 getDirVector() { return _bulletDirVec; }
+	btVector3 rotateVectorByQuaternion(btVector3& pMyVector3, btQuaternion& pMyQuaternion);
 
 	int subscribeHostileNPC(BasicEnemy*);
 	int subscribeHostileNPC(BasicPrincess*);
@@ -124,6 +125,8 @@ private:
 	btRigidBody* fallRigidBody;
 	btRigidBody* boxRigidBody;
 	btTransform trans;
+
+	btQuaternion _playerRotationQuaternion;
 
 	//Wall nodes and entities
 	std::vector <Ogre::SceneNode*> wallNodes;

@@ -264,7 +264,7 @@ void LevelManager::initPhysicsWorld() {
 	dispatcher = new btCollisionDispatcher(collisionConfiguration);
 	solver = new btSequentialImpulseConstraintSolver;
 	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
-	dynamicsWorld->setGravity(btVector3(0, -10, 0));
+	dynamicsWorld->setGravity(btVector3(0, -100, 0));
 
 	//shapes
 	groundShape = new btStaticPlaneShape(btVector3(0, 1, 0), 1);
@@ -499,6 +499,24 @@ void::LevelManager::translatePlayer(btVector3& pMyTranslation, btQuaternion& pMy
 
 	fallRigidBody->translate(rotatedDirection);
 }
+
+void::LevelManager::pushBackPlayer() {
+	fallRigidBody->activate();
+	btVector3 pushBackForce = rotateVectorByQuaternion(btVector3(0, 0, 100), fallRigidBody->getOrientation());
+	fallRigidBody->translate(btVector3(pushBackForce.getX(), 40, pushBackForce.getZ()));
+};
+
+btVector3 LevelManager::rotateVectorByQuaternion(btVector3& pMyVector3, btQuaternion& pMyQuaternion) {
+	// extract the vector part of the quaternion
+	btVector3 u(pMyQuaternion.getX(), pMyQuaternion.getY(), pMyQuaternion.getZ());
+
+	// Extract the scalar part of the quaternion
+	float s = pMyQuaternion.getW();
+	btVector3 rotatedDirection = 2.0f * u.dot(pMyVector3) * u
+		+ (s*s - u.dot(u)) * pMyVector3
+		+ 2.0f * s * u.cross(pMyVector3);
+	return rotatedDirection;
+};
 
 
 /// <summary>
