@@ -71,6 +71,7 @@ private:
 
 	Ogre::Timer* _gameTimer;
 	int _playerSpeed;
+	bool _isEventLogTrigger;
 };
 
 //---------------------------------------------------------------------------

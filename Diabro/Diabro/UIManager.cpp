@@ -1,12 +1,13 @@
 #include "UIManager.h"
 #include "GameManager.h"
+#include <ik_ISoundStopEventReceiver.h>
 
 /// <summary>
 /// Creates a new instance of the <see cref="UIManager"/> class.
 /// This class is created by the <see cref="GameManager" /> and contains all UI information, 
 /// e.g. the in-game and menu UI.
 /// </summary>
-UIManager::UIManager() : _uiNode(0), _healthBarWidget(0), _staminaBarWidget(0), _maxWidthBar(0), _heightBar(0), _mSdkTrayMgr(0), _mWindow(0)
+UIManager::UIManager() : _mSdkTrayMgr(nullptr), _mWindow(nullptr), _healthBarWidget(nullptr), _staminaBarWidget(nullptr), _uiNode(nullptr), _maxWidthBar(0), _heightBar(0),_isStandardDialogActive(false),_isNPCDialogActive(false),_isPickUpActive(false)
 {
 }
 
@@ -45,42 +46,64 @@ void UIManager::setupUI()
 	_ParamNames.push_back("Damage");
 	_statsPanel = _mSdkTrayMgr->createParamsPanel(OgreBites::TL_BOTTOMRIGHT, "Stats",150, _ParamNames);
 	//_gameTimer->getOverlayElement()->setLeft(-200);
+	//create eventlogtextbox
+	_eventLogTextBox = _mSdkTrayMgr->createTextBox(OgreBites::TL_BOTTOMLEFT, "Eventlog", "Eventlog", 200, 200);
+
+
+	//_eventLogTextBox->setText(displaystring);
 }
 
-void UIManager::createDialog(Ogre::String pDialogText) {
-	try {
+void UIManager::createDialog(Ogre::String pDialogText)
+{
+	try
+	{
 		destroyDialog();
 	}
-	catch (...) {}
-	_mDialogTextArea = _mSdkTrayMgr->createTextBox(OgreBites::TL_CENTER, "DialogTextArea", pDialogText, 400, 400);
+	catch (...)
+	{
+	}
+	_mDialogTextArea = _mSdkTrayMgr->createTextBox(OgreBites::TL_CENTER, "DialogTextArea", pDialogText, 200, 200);
 }
 
-void UIManager::createPrincessDialog(Ogre::String pDialogText) {
-	try {
+void UIManager::createPrincessDialog(Ogre::String pDialogText)
+{
+	try
+	{
 		destroyPrincessDialog();
 	}
-	catch (...) {}
+	catch (...)
+	{
+	}
 	_mDialogTextArea = _mSdkTrayMgr->createTextBox(OgreBites::TL_CENTER, "PrincessDialogTextArea", pDialogText, 400, 400);
 }
 
-void UIManager::createEnemyDialog(Ogre::String pDialogText) {
-	try {
+void UIManager::createEnemyDialog(Ogre::String pDialogText)
+{
+	try
+	{
 		destroyEnemyDialog();
 	}
-	catch (...) {}
+	catch (...)
+	{
+	}
 	_mDialogTextArea = _mSdkTrayMgr->createTextBox(OgreBites::TL_CENTER, "EnemyDialogTextArea", pDialogText, 400, 400);
 }
 
 /// <summary>
 /// Destroys the dialog.
 /// </summary>
-void UIManager::destroyDialog() {
+void UIManager::destroyDialog()
+{
 	_mSdkTrayMgr->destroyWidget("DialogTextArea");
 }
-void UIManager::destroyPrincessDialog() {
+
+void UIManager::destroyPrincessDialog()
+{
 	_mSdkTrayMgr->destroyWidget("PrincessDialogTextArea");
 }
-void UIManager::destroyEnemyDialog() {
+
+void UIManager::destroyEnemyDialog()
+{
 	_mSdkTrayMgr->destroyWidget("EnemyDialogTextArea");
 	
 }
@@ -89,8 +112,96 @@ void UIManager::destroyEnemyDialog() {
 /// Appends the dialog text.
 /// </summary>
 /// <param name="pDialogText">The p dialog text.</param>
-void UIManager::appendDialogText(Ogre::String pDialogText) {
+void UIManager::appendDialogText(Ogre::String pDialogText)
+{
 	_mDialogTextArea->appendText(pDialogText);
+}
+
+/// <summary>
+/// Updates the event log text.
+/// </summary>
+/// <param name="eventLogText">The event log text.</param>
+void UIManager::setStandardEventLogText()
+{
+	if(_isStandardDialogActive == false)
+	{
+		_isStandardDialogActive = true;
+		_isNPCDialogActive = false;
+		_isPickUpActive = false;
+		_eventLogTextBox->setText(
+			"----------W-----------"
+			"------A---S---D-------"
+			"------To---walk-------"
+			"----------------------"
+			"---Left-Mouse-Click---"
+			"-----To--attack-------"
+			"----------------------"
+			"----------------------");
+	}
+	
+}
+
+/// <summary>
+/// Sets the standard event log active.
+/// </summary>
+void UIManager::setStandardEventLogActive()
+{
+	_isStandardDialogActive = false;
+}
+
+/// <summary>
+/// Sets the NPC event log text.
+/// </summary>
+void UIManager::setNPCEventLogText()
+{
+	if (_isNPCDialogActive == false)
+	{
+		_isNPCDialogActive = true;
+		_isPickUpActive = false;
+		_eventLogTextBox->setText(
+			"----------------------"
+			"------Press-F---------"
+			"-----To--Talk---------"
+			"----------------------"
+			"----------------------"
+			"----------------------"
+			"----------------------"
+			"----------------------");
+	}
+}
+
+/// <summary>
+/// Sets the pick up event log text.
+/// </summary>
+void UIManager::setPickUpEventLogText()
+{
+	if (_isPickUpActive == false)
+	{
+		_isNPCDialogActive = false;
+		_isPickUpActive = true;
+		_eventLogTextBox->setText(
+			"----------------------"
+			"-------Press-E--------"
+			"-----To-Pickup-Item---"
+			"----------------------"
+			"----------------------"
+			"----------------------"
+			"----------------------"
+		    "----------------------");
+	}
+}
+
+void UIManager::setPrincessEventLogText()
+{
+	_eventLogTextBox->setText(
+		"----------------------"
+		"-------Press-E--------"
+		"-----To-Interact------"
+		"---With-the-princess--"
+		"----------------------"
+		"----------------------"
+		"----------------------"
+		"----------------------");
 }
 
 /// <summary>
@@ -164,5 +275,5 @@ void UIManager::updateStatsPanel(CharacterStats* pChar)
 /// <returns></returns>
 Ogre::Real UIManager::calcBarSize(Ogre::Real pValue, Ogre::Real pMaxValue, Ogre::Real pMaxSize)
 {
-return((pValue / pMaxValue) * pMaxSize);
+	return ((pValue / pMaxValue) * pMaxSize);
 }
