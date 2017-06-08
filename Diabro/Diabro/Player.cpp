@@ -34,6 +34,8 @@ bool Player::initialize()
 	_regenCounter = 0;
 	_stats->addStat(StatType::Damage, 2);
 	_death = false;
+	_beginDialog = true;
+	_dialogTrigger = true;
 	return true;
 }
 
@@ -41,7 +43,13 @@ bool Player::initialize()
 void Player::update(const Ogre::FrameEvent& pFE)
 {
 	Character::update(pFE.timeSinceLastFrame);
-		if (_attackCountDown <= 0)
+		if(_dialogTrigger)
+		{
+			GameManager::getSingletonPtr()->getLevelManager()->getPrincess()->endingSequence(true);
+			_dialogTrigger = false;
+		}
+	
+	if (_attackCountDown <= 0)
 		{
 			_attackCountDown = 0;
 		}

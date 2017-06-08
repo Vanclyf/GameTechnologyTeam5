@@ -21,7 +21,8 @@ public:
 	
 	int _attackSpeed;
 	int _AttackCD;
-
+	bool _beginDialog;
+	bool _dialogTrigger;
 	BasicEnemy* _BasicEnemy;
 	
 	bool adjustHealth(float) override;

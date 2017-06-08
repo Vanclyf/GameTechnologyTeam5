@@ -317,6 +317,11 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 		{
 			_levelManager->getPrincess()->closeGame();
 		}
+		else if(_levelManager->getPlayer()->_beginDialog)
+		{
+			_levelManager->getPrincess()->toggleDialog();
+			_levelManager->getPlayer()->_beginDialog = false;
+		}
 		break;
 	default:
 		break;
