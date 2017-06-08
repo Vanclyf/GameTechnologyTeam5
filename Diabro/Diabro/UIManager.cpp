@@ -150,8 +150,8 @@ void UIManager::setNPCEventLogText()
 		_isPickUpActive = false;
 		_eventLogTextBox->setText(
 			"----------------------"
-			"-----------Press-F----"
-			"-----------To--Talk---"
+			"------Press-F---------"
+			"-----To--Talk---------"
 			"----------------------"
 			"----------------------"
 			"----------------------"
@@ -179,6 +179,19 @@ void UIManager::setPickUpEventLogText()
 			"----------------------"
 		    "----------------------");
 	}
+}
+
+void UIManager::setPrincessEventLogText()
+{
+	_eventLogTextBox->setText(
+		"----------------------"
+		"-------Press-E--------"
+		"-----To-Interact------"
+		"---With-the-princess--"
+		"----------------------"
+		"----------------------"
+		"----------------------"
+		"----------------------");
 }
 
 /// <summary>

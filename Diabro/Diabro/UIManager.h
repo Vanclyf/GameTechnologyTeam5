@@ -27,6 +27,7 @@ public:
 	void setStandardEventLogActive();
 	void setNPCEventLogText();
 	void setPickUpEventLogText();
+	void setPrincessEventLogText();
 	static Ogre::Real calcBarSize(Ogre::Real, Ogre::Real, Ogre::Real);
 
 private:

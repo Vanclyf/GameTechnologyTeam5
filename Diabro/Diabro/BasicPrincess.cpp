@@ -43,9 +43,10 @@ bool BasicPrincess::adjustHealth(float pAdjust)
 void BasicPrincess::update(Ogre::Real pDeltatime)
 {
 	//BaseNpc::update(pDeltatime);
-
+	detectPlayer();
 	if (_playerDetected)
 	{
+		GameManager::getSingletonPtr()->getUIManager()->setPrincessEventLogText();
 	}
 }
 
