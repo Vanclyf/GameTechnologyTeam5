@@ -10,7 +10,7 @@
 /// like characters and the environment.
 /// </summary>
 LevelManager::LevelManager() : playerScript(nullptr), _playerEntity(nullptr), _npcEntity(nullptr), _basicEnemyEntity(nullptr),
-                               npcSpawner(nullptr), _groundEntity(nullptr), _levelNode(nullptr), _camNode(nullptr)
+npcSpawner(nullptr), _groundEntity(nullptr), _levelNode(nullptr), _camNode(nullptr)
 {
 }
 
@@ -37,12 +37,27 @@ void LevelManager::initialize()
 
 	//levelGenerator = new LevelGenerator();
 
-	//creating a tilemesh
-	//std::string name = "Tile One";
-	//levelGenerator->createTileMesh(Coordinate(0, 0), name, Ogre::ColourValue(0, 0, 1, 1));
-	//Ogre::Entity* entity = GameManager::getSingleton().getSceneManager()->createEntity("entity: " + name, name);
-	//entity->setMaterialName("Examples/Rockwall");
-	//_levelNode->attachObject(entity);
+	//if (GameManager::getSingletonPtr()->getRandomInRange(0, 10) < 5) {
+		Ogre::SceneNode* npcSpawnerNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode("npcSpawn");
+		//0.5f for height difference
+		CharacterSpawner<Npc>* npcSpawner = new CharacterSpawner<Npc>(npcSpawnerNode, 2, Ogre::Vector3(1250,0,1800));
+		CharacterSpawner<Npc>* npcSpawner2 = new CharacterSpawner<Npc>(npcSpawnerNode, 4, Ogre::Vector3(2300, 0, 4000)); 
+		CharacterSpawner<Npc>* npcSpawner3 = new CharacterSpawner<Npc>(npcSpawnerNode, 1, Ogre::Vector3(6350, 0, 8451)); 
+		CharacterSpawner<Npc>* npcSpawner5 = new CharacterSpawner<Npc>(npcSpawnerNode, 1, Ogre::Vector3(4650, 0, 8651));
+		CharacterSpawner<Npc>* npcSpawner6 = new CharacterSpawner<Npc>(npcSpawnerNode, 4, Ogre::Vector3(2300, 0, 6000));
+
+	//}
+	//else
+	//{
+		Ogre::SceneNode* enemySpawnerNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode("enemySpawn");
+		CharacterSpawner<BasicEnemy>* enemySpawner = new CharacterSpawner<BasicEnemy>(enemySpawnerNode, 1, Ogre::Vector3(1450, 0, 4000));
+		CharacterSpawner<BasicEnemy>* enemySpawner2 = new CharacterSpawner<BasicEnemy>(enemySpawnerNode, 4, Ogre::Vector3(3750, 25, 4500));
+		CharacterSpawner<BasicEnemy>* enemySpawner3 = new CharacterSpawner<BasicEnemy>(enemySpawnerNode, 2, Ogre::Vector3(3650, 0, 3650));
+		CharacterSpawner<BasicEnemy>* enemySpawner4 = new CharacterSpawner<BasicEnemy>(enemySpawnerNode, 3, Ogre::Vector3(5950, 0, 8451)); 
+		CharacterSpawner<BasicEnemy>* enemySpawner5 = new CharacterSpawner<BasicEnemy>(enemySpawnerNode, 2, Ogre::Vector3(5101, 0, 4151));
+		CharacterSpawner<BasicEnemy>* enemySpawner6 = new CharacterSpawner<BasicEnemy>(enemySpawnerNode, 1, Ogre::Vector3(4602, 0, 3651));
+
+	//}
 
 	playerNode = _levelNode->createChildSceneNode("PlayerNode");
 	_camNode = playerNode->createChildSceneNode("CameraNode");
@@ -58,7 +73,7 @@ void LevelManager::initialize()
 	playerNode->yaw(Ogre::Degree(180));
 	playerScript = new Player(playerNode, _playerEntity);
 	playerScript->initialize();
-	
+
 	// ground 
 	createGroundMesh();
 	_groundEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("ground");
@@ -67,7 +82,7 @@ void LevelManager::initialize()
 
 
 	Ogre::SceneNode* princessSpawnerNode = GameManager::getSingletonPtr()->getLevelManager()->getLevelNode()->createChildSceneNode("princessSpawn");
-	CharacterSpawner<BasicPrincess>* princessSpawner = new CharacterSpawner<BasicPrincess>(princessSpawnerNode, 1, Ogre::Vector3(1000, 25, 500));
+	CharacterSpawner<BasicPrincess>* princessSpawner = new CharacterSpawner<BasicPrincess>(princessSpawnerNode, 1, Ogre::Vector3(3750, 25, 4500));
 
 	// camera
 	_camNode->attachObject(GameManager::getSingletonPtr()->getCamera());
@@ -189,14 +204,14 @@ void LevelManager::update(const Ogre::FrameEvent& pFE)
 
 	updatePlayer();
 
-// update characters
+	// update characters
 	playerScript->update(pFE);
 
 	float playerX = playerScript->getPosition().x;
 	float playerY = playerScript->getPosition().y;
 	float playerZ = playerScript->getPosition().z;
 
-	engine->setListenerPosition(irrklang::vec3df(playerX, playerY, playerZ), irrklang::vec3df(10, 0, 0), irrklang::vec3df(0, 0, 0), 
+	engine->setListenerPosition(irrklang::vec3df(playerX, playerY, playerZ), irrklang::vec3df(10, 0, 0), irrklang::vec3df(0, 0, 0),
 		irrklang::vec3df(0, 1, 0));
 
 	for (int i = 0; i < _friendlyNpcScripts.size(); i++)
@@ -228,41 +243,37 @@ void LevelManager::createGroundMesh()
 		Ogre::Vector3::UNIT_Z);
 }
 
+/// <summary>
+/// Testunittwoes the specified i.
+/// </summary>
+/// <param name="i">The i.</param>
+/// <returns></returns>
 int LevelManager::testunittwo(int i)
 {
 	return ++i;
 }
 
+/// <summary>
+/// Initializes the physics world by creating the dynamics world consisting of the dispatcher, broadphase, solver and collisionconfiguration.
+/// Initializes some of the basic shapes we are using and the initial values of the player.
+/// </summary>
 void LevelManager::initPhysicsWorld() {
+	//setting standard variables for setting up the dynamicsworld
 	broadphase = new btDbvtBroadphase();
 	collisionConfiguration = new btDefaultCollisionConfiguration();
-
 	dispatcher = new btCollisionDispatcher(collisionConfiguration);
-
 	solver = new btSequentialImpulseConstraintSolver;
-
 	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
-
 	dynamicsWorld->setGravity(btVector3(0, -10, 0));
 
-
+	//shapes
 	groundShape = new btStaticPlaneShape(btVector3(0, 1, 0), 1);
-
 	boxShape = new btBoxShape(btVector3(50, 50, 50));
-
-	fallShape = new btBoxShape(btVector3(10, 10, 10));
-
+	fallShape = new btSphereShape(50.0f);
 	btCollisionShape* newGroundShape = new btBoxShape(btVector3(100000, 1, 100000));
 	btRigidBody* newGroundRigidBody;
 
 	//ground
-	//groundMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -1, 0)));
-	//btRigidBody::btRigidBodyConstructionInfo
-	//	groundRigidBodyCI(0, groundMotionState, groundShape, btVector3(0, 0, 0));
-	//groundRigidBody = new btRigidBody(groundRigidBodyCI);
-	//dynamicsWorld->addRigidBody(groundRigidBody);
-
-	//new ground
 	btDefaultMotionState* newGroundMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -1, 0)));
 	btRigidBody::btRigidBodyConstructionInfo
 		newGroundRigidBodyCI(0, newGroundMotionState, newGroundShape, btVector3(0, 0, 0));
@@ -278,18 +289,12 @@ void LevelManager::initPhysicsWorld() {
 	btRigidBody::btRigidBodyConstructionInfo fallRigidBodyCI(mass, fallMotionState, fallShape, fallInertia);
 	fallRigidBody = new btRigidBody(fallRigidBodyCI);
 	dynamicsWorld->addRigidBody(fallRigidBody);
-
-
-	//box
-	//btDefaultMotionState* boxMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(-1000, 0, -1000)));
-	//btRigidBody::btRigidBodyConstructionInfo
-	//	boxRigidBodyCI(0, boxMotionState, boxShape, btVector3(0, 0, 0));
-	//boxRigidBody = new btRigidBody(boxRigidBodyCI);
-	//dynamicsWorld->addRigidBody(boxRigidBody);
-
 }
 
 
+/// <summary>
+/// Destroys the physics world.
+/// </summary>
 void LevelManager::destroyPhysicsWorld() {
 	dynamicsWorld->removeRigidBody(fallRigidBody);
 	delete fallRigidBody->getMotionState();
@@ -312,6 +317,15 @@ void LevelManager::destroyPhysicsWorld() {
 	delete broadphase;
 }
 
+/// <summary>
+/// Creates a cube. Can be called from any class to create a cube with a standard mesh on any given position.
+/// This makes it possible to add walls with different attribues iteratively throughout the map.
+/// </summary>
+/// <param name="pMyEntity">The Ogre::Entity* that the mesh will be created on</param>
+/// <param name="pMyNode">The Ogre::Node* Where the entity gets attached on and where the scaling, rotating and positioning will be invoked.</param>
+/// <param name="pMyPosition">The position of the cube</param>
+/// <param name="pMyScale">The scale of the cube</param>
+/// <param name="pMyRotation">The rotation of the cube's roll</param>
 void LevelManager::createCube(Ogre::Entity* pMyEntity, Ogre::SceneNode* pMyNode, Ogre::Vector3 pMyPosition, Ogre::Vector3 pMyScale, Ogre::Degree pMyRotation) {
 	pMyEntity = GameManager::getSingletonPtr()->getSceneManager()->createEntity("wall.mesh");
 	pMyNode->createChildSceneNode()->attachObject(pMyEntity);
@@ -319,22 +333,23 @@ void LevelManager::createCube(Ogre::Entity* pMyEntity, Ogre::SceneNode* pMyNode,
 	pMyNode->setPosition(pMyPosition);
 	pMyNode->pitch(Ogre::Degree(90));
 	pMyNode->roll(pMyRotation);
-
 	pMyEntity->setMaterialName("Examples/Rockwall");
 
-	//physics engine cubes
-
-
+	//physics engine cubes rotated 90 degrees
 	if (pMyRotation.valueDegrees() == 90) {
-		btCollisionShape* wallShape = new btBoxShape(btVector3(500,500,50));
+		//shape of the cube defined by a vector3
+		btCollisionShape* wallShape = new btBoxShape(btVector3(500, 500, 50));
+		//motionstate defined by a quaternion to set the rotation and a vector3 to set the position
 		btDefaultMotionState* wallMotionState;
-		wallMotionState = new btDefaultMotionState(btTransform(btQuaternion(0,0,0, 1), btVector3(pMyPosition.x, 0, pMyPosition.z)));
+		wallMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(pMyPosition.x, 0, pMyPosition.z)));
+		//put all the construction information into a new rigidbody
 		btRigidBody::btRigidBodyConstructionInfo
 			wallRigidBodyCI(0, wallMotionState, wallShape, btVector3(0, 0, 0));
-
 		btRigidBody* wallRigidBody = new btRigidBody(wallRigidBodyCI);
+		//add the rigidbody to the physics world
 		dynamicsWorld->addRigidBody(wallRigidBody);
 	}
+	//physics engine cubes without rotation
 	else if (pMyRotation.valueDegrees() == 0) {
 		btCollisionShape* wallShape = new btBoxShape(btVector3(pMyScale.x, pMyScale.y, pMyScale.z));
 		btDefaultMotionState* wallMotionState;
@@ -347,6 +362,9 @@ void LevelManager::createCube(Ogre::Entity* pMyEntity, Ogre::SceneNode* pMyNode,
 	}
 };
 
+/// <summary>
+/// Setups the walls.
+/// </summary>
 void::LevelManager::setupWalls() {
 	for (int i = 0; i < 100; i++) {
 		std::stringstream sstm;
@@ -452,7 +470,7 @@ void::LevelManager::setupWalls() {
 	createCube(wallEntity, wallNodes[58], Ogre::Vector3(6650, 0, 6198), Ogre::Vector3(50, 500, 500), Ogre::Degree(90));
 	createCube(wallEntity, wallNodes[59], Ogre::Vector3(7100, 0, 8151), Ogre::Vector3(50, 500, 500), Ogre::Degree(0));
 	createCube(wallEntity, wallNodes[60], Ogre::Vector3(7101, 0, 6650), Ogre::Vector3(50, 500, 500), Ogre::Degree(0));
-	
+
 	//Right Wing hallway to the princess
 	createCube(wallEntity, wallNodes[71], Ogre::Vector3(7600, 0, 5650), Ogre::Vector3(50, 500, 500), Ogre::Degree(0));
 	createCube(wallEntity, wallNodes[72], Ogre::Vector3(7600, 0, 4650), Ogre::Vector3(50, 500, 500), Ogre::Degree(0));
@@ -466,15 +484,15 @@ void::LevelManager::setupWalls() {
 }
 
 
+/// </summary>
+/// <param name="pMyTranslation">The p my translation.</param>
+/// <param name="pMyRotation">The p my rotation.</param>
 void::LevelManager::translatePlayer(btVector3& pMyTranslation, btQuaternion& pMyRotation) {
 	fallRigidBody->activate();
 	// extract the vector part of the quaternion
 	btVector3 u(pMyRotation.getX(), pMyRotation.getY(), pMyRotation.getZ());
-
 	// Extract the scalar part of the quaternion
 	float s = pMyRotation.getW();
-
-
 	btVector3 rotatedDirection = 2.0f * u.dot(pMyTranslation) * u
 		+ (s*s - u.dot(u)) * pMyTranslation
 		+ 2.0f * s * u.cross(pMyTranslation);
@@ -483,7 +501,9 @@ void::LevelManager::translatePlayer(btVector3& pMyTranslation, btQuaternion& pMy
 }
 
 
-
+/// <summary>
+/// Updates the player.
+/// </summary>
 void::LevelManager::updatePlayer() {
 
 	fallRigidBody->activate();
@@ -494,7 +514,7 @@ void::LevelManager::updatePlayer() {
 	playerTransForm.setRotation(btPlayerRotation);
 	fallRigidBody->setCenterOfMassTransform(playerTransForm);
 	playerNode->setOrientation(Ogre::Quaternion(btPlayerRotation.getW(), btPlayerRotation.getX(), btPlayerRotation.getY(), btPlayerRotation.getZ()));
-	playerNode->setPosition(Ogre::Vector3(playerTransForm.getOrigin().getX(), playerTransForm.getOrigin().getY()+40, playerTransForm.getOrigin().getZ()));
+	playerNode->setPosition(Ogre::Vector3(playerTransForm.getOrigin().getX(), playerTransForm.getOrigin().getY(), playerTransForm.getOrigin().getZ()));
 
 	if (_bulletDirVec.getX() <= 2 && _bulletDirVec.getX() >= -2 || _bulletDirVec.getZ() <= 2 && _bulletDirVec.getZ() >= -2) {
 		translatePlayer(_bulletDirVec, btPlayerRotation);

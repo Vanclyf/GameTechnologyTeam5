@@ -10,7 +10,8 @@
 BaseNpc::BaseNpc(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNode, Ogre::Entity* pMyEntity) : Character(pMyNode, pMyEntity), _noticeDistance(400.0f), _isFriendly(false), _timeSince(0), _isAngry(false)
 {
 	_myRotationNode = pMyRotationNode;
-	wander();
+	_spawnPos = getPosition();
+	//wander();
 }
 
 /// <summary>
@@ -26,10 +27,11 @@ void BaseNpc::update(Ogre::Real pDeltatime)
 	{
 		_timeSince += pDeltatime;
 
-		if (_timeSince > 2)
+		if (_timeSince > 1.4)
 		{
 			_timeSince = 0;
 			wander();
+
 		}
 	}
 	else
@@ -147,14 +149,22 @@ void BaseNpc::wander()
 	//Switch direction
 	//generate a random integer value 1-4 every second
 	Coordinate coord = getRandomPoint();
+	Ogre::Real boxRadius = 500;
 
 	//TODO: shouldn't be able to walk out of the level, clamp
-	walkTo(Ogre::Vector3(coord.x, getPosition().y, coord.z));
+	if (getPosition().x < _spawnPos.x + boxRadius && getPosition().x > _spawnPos.x - boxRadius && getPosition().z < _spawnPos.z + boxRadius && getPosition().z > _spawnPos.z - boxRadius)
+	{
+		walkTo(Ogre::Vector3(coord.x, getPosition().y, coord.z));
+	}
+	else
+	{
+		walkTo(_spawnPos);
+	}
 }
 
 Coordinate BaseNpc::getRandomPoint() {
-	int xPos = GameManager::getSingletonPtr()->getRandomInRange(1 * 1000, (19 - 1) * 1000);
-	int zPos = GameManager::getSingletonPtr()->getRandomInRange(1 * 1000, (19 - 1) * 1000);
+	int xPos = GameManager::getSingletonPtr()->getRandomInRange(-1 * 250, (19 - 1) * 500);
+	int zPos = GameManager::getSingletonPtr()->getRandomInRange(-1 * 250, (19 - 1) * 500);
 
 	return Coordinate(xPos, zPos);
 }

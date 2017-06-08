@@ -46,7 +46,6 @@ public:
 
 	btVector3 setDirVector(btVector3& pMoveVec) { return _bulletDirVec = pMoveVec; }
 	btVector3 getDirVector() { return _bulletDirVec; }
-	btVector3 _bulletDirVec;
 
 	int subscribeHostileNPC(BasicEnemy*);
 	int subscribeHostileNPC(BasicPrincess*);
@@ -56,12 +55,14 @@ public:
 	void detachHostileNPC(int);
 	void detachFriendlyNPC(int);
 	void detachItemInstance(int);
+	
 
 	static int testunit(int i) { return ++i; };
 	static int testunittwo(int i);
 
-	//physics engine test
+	//physics engine
 	void translatePlayer(btVector3& pMyTranslation, btQuaternion& pMyRotation);
+	btVector3 _bulletDirVec;
 
 	//Creating a wall model
 	void createCube(Ogre::Entity* pMyEntity, Ogre::SceneNode* pMyNode, Ogre::Vector3 pMyPosition, Ogre::Vector3 pMyScale, Ogre::Degree pMyRotation);

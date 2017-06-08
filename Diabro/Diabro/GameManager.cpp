@@ -184,10 +184,6 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 	Ogre::Vector3 dirVec = _levelManager->playerScript->getDirVector();
 	btVector3 bulletDirVec = _levelManager->getDirVector();
 
-	//if (bulletDirVec.getX() >= _playerSpeed || bulletDirVec.getX() <= _playerSpeed || bulletDirVec.getY() >= _playerSpeed || bulletDirVec.getY() <= _playerSpeed || bulletDirVec.getZ() >= _playerSpeed || bulletDirVec.getZ() <= -_playerSpeed) {
-		//bulletDirVec = btVector3(0, 0, 0);
-	//}
-
 	if (bulletDirVec.getX() <= -100 || bulletDirVec.getZ() <= -100) {
 		bulletDirVec = btVector3(0, 0, 0);
 	}
@@ -201,25 +197,21 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 		break;
 	case OIS::KC_UP:
 	case OIS::KC_W:
-		//dirVec.z = -1;
 		bulletDirVec.setZ(-_playerSpeed);
 		break;
 
 	case OIS::KC_DOWN:
 	case OIS::KC_S:
-		//dirVec.z = 1;
 		bulletDirVec.setZ(_playerSpeed);
 		break;
 
 	case OIS::KC_LEFT:
 	case OIS::KC_A:
-		//dirVec.x = -1;
 		bulletDirVec.setX(-_playerSpeed);
 		break;
 
 	case OIS::KC_RIGHT:
 	case OIS::KC_D:
-		//dirVec.x = 1;
 		bulletDirVec.setX(_playerSpeed);
 		break;
 	
