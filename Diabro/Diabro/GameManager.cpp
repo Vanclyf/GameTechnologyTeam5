@@ -315,6 +315,19 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 			}
 		}
 		_levelManager->getPrincess()->endingSequence(true);
+		if(_timerManager->GetCountDown() <=0)
+		{
+			_levelManager->getPrincess()->closeGame();
+		}
+		else if(_levelManager->getPlayer()->getDeath())
+		{
+			_levelManager->getPrincess()->closeGame();
+		}
+		else if(_levelManager->getPlayer()->_beginDialog)
+		{
+			_levelManager->getPrincess()->toggleDialog();
+			_levelManager->getPlayer()->_beginDialog = false;
+		}
 		break;
 	case OIS::KC_Y:
 		_uiManager->setStandardEventLogText();

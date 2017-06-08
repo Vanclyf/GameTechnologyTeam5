@@ -2,6 +2,8 @@
 #define TIMER_MANAGER_H_
 
 #include <OgreTimer.h>
+#include "BasicPrincess.h"
+
 class TimerManager
 {
 public:
