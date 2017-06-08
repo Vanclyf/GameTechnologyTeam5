@@ -340,7 +340,7 @@ void Character::setEquipmentSlot(ArmorInstance* pArmor)
 			armors.push_back(pArmor);
 			_armorEquipSlots = armors;
 			addStats(reinterpret_cast<EquipmentInstance*>(pArmor));
-
+			_isActivated = true;
 			#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 				FILE* fp;
 				freopen_s(&fp, "CONOUT$", "w", stdout);

@@ -13,6 +13,8 @@ public:
 	void update(Ogre::Real) override;
 
 	void rotatePivot(Ogre::Vector3);
+	bool getAngry() { return _isAngry; }
+
 protected:
 	float _noticeDistance;
 	bool _playerDetected;

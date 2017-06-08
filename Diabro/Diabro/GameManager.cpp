@@ -19,7 +19,7 @@ Filename:    GameManager.cpp
 /// </summary>
 GameManager::GameManager() : _levelManager(0), _uiManager(0), _itemManager(0), _questContentManager(0), _gameTimer(0), _isEventLogTrigger(false)
 {
-	_playerSpeed = 5;
+	_playerSpeed = 7;
 }
 //---------------------------------------------------------------------------
 /// <summary>
@@ -215,10 +215,7 @@ bool GameManager::keyPressed(const OIS::KeyEvent& pKE)
 		bulletDirVec.setX(_playerSpeed);
 		break;
 	
-	case OIS::KC_LSHIFT:
-		_levelManager->playerScript->toggleRun(true);
-		_playerSpeed *= 2;
-		break;
+
 
 	case OIS::KC_E:
 		_uiManager->setStandardEventLogActive();
@@ -385,10 +382,6 @@ bool GameManager::keyReleased(const OIS::KeyEvent& pKE)
 		bulletDirVec.setX(0);
 		break;
 
-	case OIS::KC_LSHIFT:
-		_levelManager->playerScript->toggleRun(false);
-		_playerSpeed /= 2;
-		break;
 
 	//TODO: this code should end the conversation with the current talking to NPC
 	//TODO: maybe write own casts for character types

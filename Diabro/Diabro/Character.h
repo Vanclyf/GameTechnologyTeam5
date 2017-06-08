@@ -48,6 +48,7 @@ public:
 	void setTypeNpc(NpcType pType) { _typeNpc = pType; }
 	bool getDeath() { return _isDead; }
 	int getLevel() { return _currentLevel; }
+	bool getEquippedItem() {return _isActivated;}
 
 	WeaponInstance* getCurrentWeapon() { return _weapon; }
 
@@ -121,6 +122,7 @@ private:
 	Ogre::Real _hitCountdown;
 	bool _isHit;
 	bool _isDead;
+	bool _isActivated;
 };
 
 #endif

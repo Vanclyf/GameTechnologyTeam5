@@ -75,7 +75,7 @@ void Npc::update(Ogre::Real pDeltatime)
 {
 	BaseNpc::update(pDeltatime);
 
-	if(_playerDetected)
+	if(_playerDetected && !getAngry() && GameManager::getSingletonPtr()->getLevelManager()->playerScript->getKarma() > 0)
 	{
 		_dirVec = Ogre::Vector3::ZERO;
 		GameManager::getSingletonPtr()->getUIManager()->setNPCEventLogText();
@@ -110,6 +110,7 @@ bool Npc::dialog(Ogre::Vector3 pPlayerPos)
 /// </summary>
 void Npc::die() {
 	Character::die();
+	GameManager::getSingletonPtr()->getTimeManager()->addTime(Ogre::Real(15));
 	SoundManager::PlaySmallSound("NPCDead.wav");
 	GameManager::getSingletonPtr()->getLevelManager()->detachFriendlyNPC(id);
 }

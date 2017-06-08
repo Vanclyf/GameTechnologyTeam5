@@ -154,9 +154,16 @@ void BaseNpc::wander()
 	Coordinate coord = getRandomPoint();
 	Ogre::Real boxRadius = 500;
 
-	//TODO: shouldn't be able to walk out of the level, clamp
-	if (getPosition().x < _spawnPos.x + boxRadius && getPosition().x > _spawnPos.x - boxRadius && getPosition().z < _spawnPos.z + boxRadius && getPosition().z > _spawnPos.z - boxRadius)
+	if (_isAngry)
 	{
+		walkTo(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition());
+		return;
+	}
+	//TODO: shouldn't be able to walk out of the level, clamp
+	else if (getPosition().x < _spawnPos.x + boxRadius && getPosition().x > _spawnPos.x - boxRadius && getPosition().z < _spawnPos.z + boxRadius && getPosition().z > _spawnPos.z - boxRadius)
+	{
+		
+
 		walkTo(Ogre::Vector3(coord.x, getPosition().y, coord.z));
 	}
 	else
@@ -181,6 +188,7 @@ void BaseNpc::walkTo(Ogre::Vector3 targetPos)
 
 	_myNode->lookAt(Ogre::Vector3(targetPos.x, getPosition().y, targetPos.z), Ogre::Node::TS_WORLD, Ogre::Vector3::UNIT_X);
 	_dirVec = Ogre::Vector3(1, 0, 0);
+
 }
 
 

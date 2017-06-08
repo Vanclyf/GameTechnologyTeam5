@@ -105,6 +105,8 @@ int LevelManager::subscribeFriendlyNPC(Npc* friendly)
 
 	_friendlyNpcScripts.push_back(friendly);
 
+
+
 	return _friendlyNpcScripts.size() - 1;
 }
 

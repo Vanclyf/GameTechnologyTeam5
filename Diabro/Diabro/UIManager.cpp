@@ -191,6 +191,8 @@ void UIManager::setPickUpEventLogText()
 	}
 }
 
+
+
 void UIManager::setPrincessEventLogText()
 {
 	_eventLogTextBox->setText(
@@ -238,7 +240,7 @@ void UIManager::adjustTimer(Ogre::Real pTime)
 	timeStr << mins << ":" << secs;
 	_ParamValues.push_back(timeStr.str());
 	_ParamValues.push_back(timeStr.str());
-
+	
 	_gameTimer->setAllParamValues(_ParamValues);
 }
 

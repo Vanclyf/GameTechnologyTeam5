@@ -44,7 +44,7 @@ void TimerManager::update(const Ogre::FrameEvent& pFE)
 /// <returns></returns>
 Ogre::Real TimerManager::addTime(Ogre::Real pTime)
 {
-	_countDown += pTime;
+	_countDown += 17000;
 	return _countDown;
 }
 
