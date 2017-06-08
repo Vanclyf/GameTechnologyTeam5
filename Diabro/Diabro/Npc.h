@@ -29,11 +29,12 @@ public:
 	// Properties
 	static Ogre::String getMeshName() { return "penguin.mesh"; }
 	bool getInDialog() const { return _inDialog; }
+	Ogre::Entity* getEntity() { return _myEntity; }
 	// -------------------------------------------------------------------------------
 	void update(Ogre::Real) override;
 	bool dialog(Ogre::Vector3);
 	void toggleDialog();
-	void continueDialog();
+	void rumourDialog();
 	void die() override;
 	bool _inDialog;
 private:

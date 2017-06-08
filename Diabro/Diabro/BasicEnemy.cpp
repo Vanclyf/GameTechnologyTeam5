@@ -18,12 +18,20 @@ BasicEnemy::BasicEnemy(Ogre::SceneNode* pMyNode, Ogre::SceneNode* pMyRotationNod
 void BasicEnemy::update(Ogre::Real pDeltatime)
 {
 	BaseNpc::update(pDeltatime);
-
-	if(_playerDetected) {
-		walkTo(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition());
-
-		if (getPosition().distance(GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getPosition()) < _attackDistance) {
-			lightAttack();
+	if (_isHit)
+	{
+		if (_hitCountdown <= 0)
+		{
+			_hitCountdown = 0;
+			//change material
+			_myEntity->setMaterial(Ogre::MaterialManager::getSingletonPtr()->getByName("Houses/Red"));
+			_isHit = false;
+		}
+		else
+		{
+			Ogre::Real deltaTime = _hitTimer->getMilliseconds();
+			_hitTimer->reset();
+			_hitCountdown -= deltaTime;
 		}
 	}
 }
@@ -91,34 +99,11 @@ void BasicEnemy::continueDialog() {
 	}
 }
 
-bool BasicEnemy::lightAttack()
-{
-	if (!Character::lightAttack()) {
-		return false;
-	}
-	SoundManager::PlaySmallSound("EnemyHit.wav");
-	std::vector<Character*> targets;
-	targets.push_back(GameManager::getSingletonPtr()->getLevelManager()->getPlayer());
-	findTarget(targets);
-
-	if (_target == nullptr) {
-		return false;
-	}
-
-	//deal damage 
-	_target->adjustHealth(_stats->DeterminedDamage());
-	
-	_canAttack = false;
-	_currAttackCooldown = _lightAttackCooldown;
-	return true;
-}
-
 void BasicEnemy::die() {
 	SoundManager::PlaySmallSound("EnemyDead.wav");
 	Character::die();
 	
-	GameManager::getSingletonPtr()->getItemManager()->getItemGenerator()->generateRandomItem(GameManager::getSingletonPtr()->getLevelManager()->getLevelNode(), GameManager::getSingletonPtr()->getRandomInRange(1, 5), getPosition());
+	GameManager::getSingletonPtr()->getItemManager()->getItemGenerator()->generateRandomItem(GameManager::getSingletonPtr()->getLevelManager()->getLevelNode(), GameManager::getSingletonPtr()->getRandomInRange(1, 2), getPosition());
+
 	GameManager::getSingletonPtr()->getLevelManager()->detachHostileNPC(id);
 }
-
-

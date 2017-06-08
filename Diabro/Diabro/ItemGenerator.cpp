@@ -91,7 +91,14 @@ ItemInstance* ItemGenerator::generateRandomItem(Ogre::SceneNode* pNode, Ogre::Ve
 	//int level = (int)((int)(quality + 1) * GameManager::getSingletonPtr()->getRandomInRange(1.0f, 2.5f));
 	int offset = GameManager::getSingletonPtr()->getRandomInRange(2, 7);
 	int playerLevel = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getLevel();
-	int level = GameManager::getSingletonPtr()->getRandomInRange((playerLevel - offset) + quality, playerLevel + quality);
+	int level = playerLevel;
+	double multiplier = GameManager::getSingletonPtr()->getLevelManager()->getPlayer()->getKarma() * 0.00167;
+	if (multiplier < 0) {
+		multiplier = multiplier * -1;
+	}else
+	{
+		multiplier = multiplier + 1;
+	}
 
 	// switch based on the type of item to generate it
 	switch (itemType) {
@@ -145,8 +152,8 @@ ItemInstance* ItemGenerator::generateRandomItem(Ogre::SceneNode* pNode, Ogre::Ve
 			int numb = weapon->getMainStat();
 			int damageValue = (int)weapon->getValueOfStat(weapon->getMainStat()).randomInRange();
 			float attackSpeedValue = (float)weapon->getValueOfStat(StatType::AttackSpeed).randomInRange();
-			Stat* damage = new Stat(StatType::WeaponDamage, damageValue);
-			Stat* attackSpeed = new Stat(StatType::AttackSpeed, attackSpeedValue);
+			Stat* damage = new Stat(StatType::WeaponDamage, damageValue * multiplier);
+			Stat* attackSpeed = new Stat(StatType::AttackSpeed, attackSpeedValue * multiplier);
 			baseStats.push_back(damage);
 			baseStats.push_back(attackSpeed);
 
@@ -167,9 +174,9 @@ ItemInstance* ItemGenerator::generateRandomItem(Ogre::SceneNode* pNode, Ogre::Ve
 			int armorValue = (int)armor->getValueOfStat(armor->getMainStat()).randomInRange();
 			int vitalityValue = (int)armor->getValueOfStat(StatType::Vitality).randomInRange();
 			int strengthValue = (int)armor->getValueOfStat(StatType::Strength).randomInRange();
-			Stat* armorStat = new Stat(StatType::Armor, armorValue);
-			Stat* vitalityStat = new Stat(StatType::Vitality, vitalityValue);
-			Stat* strengthStat = new Stat(StatType::Strength, strengthValue);
+			Stat* armorStat = new Stat(StatType::Armor, armorValue * multiplier);
+			Stat* vitalityStat = new Stat(StatType::Vitality, vitalityValue * multiplier);
+			Stat* strengthStat = new Stat(StatType::Strength, strengthValue * multiplier);
 			baseStats.push_back(armorStat);
 			baseStats.push_back(vitalityStat);
 			baseStats.push_back(strengthStat);

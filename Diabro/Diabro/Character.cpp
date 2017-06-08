@@ -10,7 +10,7 @@
 /// <param name="pMyEntity">My entity.</param>
 Character::Character(Ogre::SceneNode* pMyNode, Ogre::Entity* pMyEntity) : _myNode(pMyNode), _myEntity(pMyEntity), _stats(0), _dirVec(0, 0, 0),
 _movespeed(100), _runspeed(250), _rotationspeed(0.13), _isRunning(false), _currentLevel(1), _currentHealth(0), _currentStamina(0), _canAttack(true),
-_attackDistance(20), _currAttackCooldown(0), _lightAttackCooldown(5.0f), _hitted(false), _totalHitTime(.5f), _weapon(0)
+_attackDistance(80), _currAttackCooldown(0), _lightAttackCooldown(5.0f), _hitted(false), _totalHitTime(.5f), _weapon(0)
 {
 }
 
@@ -23,10 +23,17 @@ bool Character::initialize()
 	_isRunning = false;
 
 	setUpStats();
-
-	_currentHealth = _stats->GetStat(MaxHealth);
+	if(getTypeNpc() == NpcType::Good || getTypeNpc() == NpcType::Bad)
+	{
+		_currentHealth = _stats->GetStat(MaxHealth);
+	}
+	else
+	{
+		_currentHealth = _stats->GetStat(MaxHealth);
+	}
 	_currentStamina = _stats->GetStat(MaxStamina);
-
+	_hitTimer = new Ogre::Timer();
+	_isDead = false;
 
 	//show what is in the gear slots.
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
@@ -49,25 +56,56 @@ bool Character::initialize()
 /// <param name="pDeltatime">The time since last frame.</param>
 void Character::update(Ogre::Real pDeltatime)
 {
+	if (!_isDead)
+	{
+		adjustStaminaOverTime(pDeltatime);
 
-	adjustStaminaOverTime(pDeltatime);
+		if (_currAttackCooldown > 0) {
+			_currAttackCooldown -= pDeltatime;
+		}
+		else {
+			_canAttack = true;
+		}
 
-	if (_currAttackCooldown > 0) {
-		_currAttackCooldown -= pDeltatime;
-	}else {
-		_canAttack = true;
+		if (_hitTime > 0) {
+			_hitTime -= pDeltatime;
+			return;
+		}
+		else {
+			_hitted = false;
+		}
+
+		if (_isHit)
+		{
+			if (_hitCountdown <= 0)
+			{
+				_hitCountdown = 0;
+				//change material
+				switch (getTypeNpc())
+				{
+				case NpcType::Good:
+					_myEntity->setMaterial(Ogre::MaterialManager::getSingletonPtr()->getByName("Houses/Green"));
+					break;
+				case NpcType::Bad:
+					_myEntity->setMaterial(Ogre::MaterialManager::getSingletonPtr()->getByName("Houses/Red"));
+					break;
+				case NpcType::Princess:
+					_myEntity->setMaterial(Ogre::MaterialManager::getSingletonPtr()->getByName("Houses/Green"));
+					break;
+
+				}
+				_isHit = false;
+			}
+			else
+			{
+				Ogre::Real deltaTime = _hitTimer->getMilliseconds();
+				_hitTimer->reset();
+				_hitCountdown -= deltaTime;
+			}
+		}
+
+		_myNode->translate(_dirVec * getSpeed() * pDeltatime, Ogre::Node::TS_LOCAL);
 	}
-
-	if (_hitTime > 0) {
-		_hitTime -= pDeltatime;
-		return;
-	}
-	else {
-		_hitted = false;
-	}
-
-	_myNode->translate(_dirVec * getSpeed() * pDeltatime, Ogre::Node::TS_LOCAL);
-
 }
 
 //TODO: these methods should be generic
@@ -115,7 +153,7 @@ bool Character::setUpStats()
 	tempStats.at((int)Strength).value += 2;
 
 	tempStats.at((int)Armor).value = 18;
-	tempStats.at((int)Damage).value = 2;
+	tempStats.at((int)Damage).value = 5;
 	tempStats.at((int)Resistance).value = 1;
 	tempStats.at((int)MaxHealth).value = 40;
 	tempStats.at((int)MaxStamina).value = 125;
@@ -161,7 +199,7 @@ bool Character::adjustHealth(float pAdjust)
 
 	_hitTime = _totalHitTime;
 	_hitted = true;
-
+	hit();
 	if ((_currentHealth -= pAdjust) <= 0)
 	{
 		die();
@@ -169,6 +207,22 @@ bool Character::adjustHealth(float pAdjust)
 	}
 
 	return true;
+}
+
+bool Character::regenHealth(float pRegen)
+{
+	if (_currentHealth < _stats->GetStat(MaxHealth))
+	{
+		_currentHealth += pRegen;
+		return true;
+	}
+	return false;
+}
+
+void Character::hit()
+{
+	_hitCountdown = 750;
+	_isHit = true;
 }
 
 /// <summary>
@@ -238,6 +292,7 @@ void Character::die()
 		break;
 	}
 	player->gainXP(10);
+	_isDead = true;
 	//TODO: actually destroy the node and its children
 	//_myNode->removeAndDestroyAllChildren();
 	//GameManager::getSingletonPtr()->getSceneManager()->destroySceneNode(_myNode);
@@ -510,27 +565,32 @@ void Character::setEquipmentSlot(ItemInstance* pItem)
 /// <param name="pItem">The item of which the stats should be added.</param>
 void Character::addStats(EquipmentInstance* pItem)
 {
+	Ogre::Real strength;
+	Ogre::Real damage;
+	Ogre::Real vitality;
+	Ogre::Real armor;
 	std::vector<Stat> tempStats;
 	switch(pItem->getType())
 	{
 	case 0:
 		//weapon
 		tempStats = _stats->GetStats();
-		for (int i = 0; i < reinterpret_cast<WeaponInstance*>(pItem)->getBaseStats().size(); i++)
-		{
-			tempStats.at((int)i).value += reinterpret_cast<WeaponInstance*>(pItem)->getBaseStats().at((int)i)->value;
-			_stats->GetStats().at((int)i) = tempStats.at((int)i);
-		}
+		damage = reinterpret_cast<WeaponInstance*>(pItem)->getBaseStats().at(0)->value;
+		_stats->addStat(StatType::WeaponDamage, damage);
+		
 
 		break;
 	case 1:
 		//armor
 		tempStats = _stats->GetStats();
-		for (int i = 0; i < reinterpret_cast<ArmorInstance*>(pItem)->getBaseStats().size(); i++)
-		{
-			tempStats.at((int)i).value += reinterpret_cast<ArmorInstance*>(pItem)->getBaseStats().at((int)i)->value;
-			_stats->GetStats().at((int)i) = tempStats.at((int)i);
-		}
+		
+		strength = reinterpret_cast<WeaponInstance*>(pItem)->getBaseStats().at(2)->value;
+		armor = reinterpret_cast<WeaponInstance*>(pItem)->getBaseStats().at(0)->value;
+		vitality = reinterpret_cast<WeaponInstance*>(pItem)->getBaseStats().at(1)->value;
+		
+		_stats->addStat(StatType::Strength, strength);
+		_stats->addStat(StatType::Armor, armor);
+		_stats->addStat(StatType::Vitality, vitality);
 
 		break;
 	}
@@ -542,28 +602,32 @@ void Character::addStats(EquipmentInstance* pItem)
 /// <param name="pItem">The item of which the stats should be removed.</param>
 void Character::removeStats(EquipmentInstance* pItem)
 {
+	Ogre::Real strength;
+	Ogre::Real damage;
+	Ogre::Real vitality;
+	Ogre::Real armor;
 	std::vector<Stat> tempStats;
 	switch (pItem->getType())
 	{
 	case 0:
 		//weapon
-		tempStats = _stats->GetStats();
-		for (int i = 0; i < reinterpret_cast<WeaponInstance*>(pItem)->getBaseStats().size(); i++)
-		{
-			tempStats.at((int)i).value -= reinterpret_cast<WeaponInstance*>(pItem)->getBaseStats().at((int)i)->value;
-			_stats->GetStats().at((int)i) = tempStats.at((int)i);
-		}
+		damage = reinterpret_cast<WeaponInstance*>(pItem)->getBaseStats().at(0)->value;
+
+		_stats->removeStat(StatType::WeaponDamage, damage);
+
 
 		break;
 	case 1:
 		//armor
 		tempStats = _stats->GetStats();
-		for (int i = 0; i < reinterpret_cast<ArmorInstance*>(pItem)->getBaseStats().size(); i++)
-		{
-			tempStats.at((int)i).value -= reinterpret_cast<ArmorInstance*>(pItem)->getBaseStats().at((int)i)->value;
-			_stats->GetStats().at((int)i) = tempStats.at((int)i);
-		}
-		
+
+		strength = reinterpret_cast<WeaponInstance*>(pItem)->getBaseStats().at(2)->value;
+		armor = reinterpret_cast<WeaponInstance*>(pItem)->getBaseStats().at(0)->value;
+		vitality = reinterpret_cast<WeaponInstance*>(pItem)->getBaseStats().at(1)->value;
+
+		_stats->removeStat(StatType::Strength, strength);
+		_stats->removeStat(StatType::Armor, armor);
+		_stats->removeStat(StatType::Vitality, vitality);
 		break;
 	}
 }

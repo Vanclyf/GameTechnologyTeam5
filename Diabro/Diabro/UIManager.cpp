@@ -34,7 +34,18 @@ void UIManager::setupUI()
 	_uiNode->setPosition(0, 0, 0);
 
 	// create health bar
+	_ParamNames.push_back("Timer");
+	_karmaBarWidget = _mSdkTrayMgr->createLongSlider(OgreBites::TL_TOPRIGHT, "Karma", "Karma", 150, 50, -300, 300, 60);
+	_gameTimer = _mSdkTrayMgr->createParamsPanel(OgreBites::TL_TOP, "Timer", 110, _ParamNames);
+	_gameTimer->getOverlayElement()->setLeft(-200);
 	_healthBarWidget = _mSdkTrayMgr->createDecorWidget(OgreBites::TL_TOPLEFT, "Health", "UI/Green");
+	_ParamNames.clear();
+	_ParamNames.push_back("Strength");
+	_ParamNames.push_back("Vitality");
+	_ParamNames.push_back("Armor");
+	_ParamNames.push_back("Damage");
+	_statsPanel = _mSdkTrayMgr->createParamsPanel(OgreBites::TL_BOTTOMRIGHT, "Stats",150, _ParamNames);
+	//_gameTimer->getOverlayElement()->setLeft(-200);
 	// create karma bar
 	_karmaBarWidget = _mSdkTrayMgr->createLongSlider(OgreBites::TL_TOPRIGHT, "Karma", "Karma", 200, 50, -300, 300, 60);
 	//create eventlogtextbox
@@ -96,6 +107,7 @@ void UIManager::destroyPrincessDialog()
 void UIManager::destroyEnemyDialog()
 {
 	_mSdkTrayMgr->destroyWidget("EnemyDialogTextArea");
+	
 }
 
 /// <summary>
@@ -212,6 +224,48 @@ void UIManager::adjustHealthBar(Ogre::Real pValue, Ogre::Real pMaxValue)
 void UIManager::adjustStaminaBar(Ogre::Real pValue, Ogre::Real pMaxValue)
 {
 	_karmaBarWidget->setValue(Ogre::Real(pValue), false);
+}
+
+/// <summary>
+/// Adjusts the timer.
+/// </summary>
+/// <param name="Time">The current time.</param>
+void UIManager::adjustTimer(Ogre::Real pTime)
+{
+	_ParamValues.clear();
+	int iTime = pTime / 1000;
+	int mins = (iTime / 60);
+	int secs = iTime % 60;
+	std::stringstream timeStr;
+	timeStr << mins << ":" << secs;
+	_ParamValues.push_back(timeStr.str());
+	_ParamValues.push_back(timeStr.str());
+
+	_gameTimer->setAllParamValues(_ParamValues);
+}
+
+void UIManager::updateStatsPanel(CharacterStats* pChar)
+{
+	_ParamValues.clear();
+	int strength = pChar->GetStat(StatType::Strength);
+	int vitality = pChar->GetStat(StatType::Vitality);
+	int armor = pChar->GetStat(StatType::Armor);
+	int damage = pChar->GetStat(StatType::Damage);
+	std::stringstream strengthString;
+	strengthString << strength;
+	_ParamValues.push_back(strengthString.str());
+	std::stringstream vitalityString;
+	vitalityString << vitality;
+	_ParamValues.push_back(vitalityString.str());
+	std::stringstream armorString;
+	armorString << armor;
+	_ParamValues.push_back(armorString.str());
+	std::stringstream damageString;
+	damage = damage * (1 + (strength / 40));
+	damageString << damage;
+	_ParamValues.push_back(damageString.str());
+
+	_statsPanel->setAllParamValues(_ParamValues);
 }
 
 /// <summary>

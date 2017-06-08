@@ -13,7 +13,9 @@ Filename:    GameManager.h
 #include "UIManager.h"
 #include "ItemManager.h"
 #include "QuestContentManager.h"
+#include "TimerManager.h"
 #include <ctime>
+#include "btBulletDynamicsCommon.h"
 
 //---------------------------------------------------------------------------
 
@@ -40,7 +42,7 @@ public:
 	ItemManager* getItemManager(void) { return _itemManager; }
 	QuestContentManager* getQuestContentManager(void) { return _questContentManager; }
 
-	int getRandomInRange(int pLO, int pHI) {
+	static int getRandomInRange(int pLO, int pHI) {
 		return rand() % pHI + pLO;
 	}
 
@@ -64,9 +66,11 @@ private:
 	LevelManager* _levelManager;
 	UIManager* _uiManager;
 	ItemManager* _itemManager;
+	TimerManager* _timerManager;
 	QuestContentManager* _questContentManager;
 
 	Ogre::Timer* _gameTimer;
+	int _playerSpeed;
 	bool _isEventLogTrigger;
 };
 

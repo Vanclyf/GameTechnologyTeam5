@@ -42,7 +42,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\Supernat0r\Documents\Common;D:\Program Files %28x86%29\DirectX-SDK\Include;$(OGRE_HOME)\irrKlang-1.5.0\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\Supernat0r\Documents\Common;D:\Program Files %28x86%29\DirectX-SDK\Include;$(OGRE_HOME)\irrKlang-1.5.0\include;$(BULLET_HOME)\src;$(IncludePath)</IncludePath>
     <LibraryPath>D:\Program Files %28x86%29\DirectX-SDK\Lib\x86;C:\Users\Supernat0r\Documents\Common;$(OGRE_HOME)\irrKlang-1.5.0\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -55,9 +55,8 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(OGRE_HOME)\include;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\Samples\Common\include;$(OGRE_HOME)\boost;$(OGRE_HOME)\include\OGRE\Overlay;&lt;boost_path&gt;\stage\lib;$(OGRE_HOME)\irrKlang-1.5.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(OGRE_HOME)\include;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\Samples\Common\include;$(OGRE_HOME)\boost;$(OGRE_HOME)\include\OGRE\Overlay;&lt;boost_path&gt;\stage\lib;$(OGRE_HOME)\irrKlang-1.5.0\include;$(BULLET_HOME)\src%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <BrowseInformation>true</BrowseInformation>
-
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -146,6 +145,7 @@ copy "$(OGRE_HOME)\irrKlang-1.5.0\dllFiles\irrKlang.dll" "$(SolutionDir)Diabro\b
     <ClCompile Include="State.cpp" />
     <ClCompile Include="TestFSM.cpp" />
     <ClCompile Include="QuestItemGenerator.cpp" />
+    <ClCompile Include="TimerManager.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
     <ClCompile Include="Tree.cpp" />
     <ClCompile Include="TreeNode.cpp" />
@@ -193,6 +193,7 @@ copy "$(OGRE_HOME)\irrKlang-1.5.0\dllFiles\irrKlang.dll" "$(SolutionDir)Diabro\b
     <ClInclude Include="QuestItemGenerator.h" />
     <ClInclude Include="StatRange.h" />
     <ClInclude Include="TestFSM.h" />
+    <ClInclude Include="TimerManager.h" />
     <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="Tree.h" />
     <ClInclude Include="TreeNode.h" />
@@ -202,6 +203,17 @@ copy "$(OGRE_HOME)\irrKlang-1.5.0\dllFiles\irrKlang.dll" "$(SolutionDir)Diabro\b
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Diabro.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\bullet-2.81-rev2613\build\vs2010\BulletCollision.vcxproj">
+      <Project>{54ae91c7-48d4-9c49-a5b1-0ced554cadfa}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\bullet-2.81-rev2613\build\vs2010\BulletDynamics.vcxproj">
+      <Project>{28d36a0f-b790-d748-bc8c-8fb422e45492}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\bullet-2.81-rev2613\build\vs2010\LinearMath.vcxproj">
+      <Project>{58d08522-c69f-904c-a7ed-733da229f1ba}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

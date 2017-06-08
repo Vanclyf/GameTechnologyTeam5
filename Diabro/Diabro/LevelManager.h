@@ -13,6 +13,11 @@
 #include <ik_ISoundEngine.h>
 
 
+//bulletphysics
+#include "btBulletDynamicsCommon.h"
+#include "LinearMath/btVector3.h"
+#include "LinearMath/btAlignedObjectArray.h" 
+
 class LevelManager
 {
 public:
@@ -21,8 +26,11 @@ public:
 	void initialize();
 
 	void update(const Ogre::FrameEvent&);
-
+	void initPhysicsWorld();
+	void destroyPhysicsWorld();
+	void updatePlayer();
 	static void createGroundMesh();
+	void setupWalls();
 
 	// -------------------------------------------------------------------------------
 	// Properties
@@ -36,7 +44,10 @@ public:
 	std::vector<Character*> getHostileNpcs() const { return _hostileNpcScripts; }
 	std::vector<ItemInstance*> getItemInstances() const { return _instanceScripts; }
 
-	//---------------------------------------------------------------------------------
+	btVector3 setDirVector(btVector3& pMoveVec) { return _bulletDirVec = pMoveVec; }
+	btVector3 getDirVector() { return _bulletDirVec; }
+	btVector3 _bulletDirVec;
+
 	int subscribeHostileNPC(BasicEnemy*);
 	int subscribeHostileNPC(BasicPrincess*);
 	int subscribeFriendlyNPC(Npc*);
@@ -45,9 +56,16 @@ public:
 	void detachHostileNPC(int);
 	void detachFriendlyNPC(int);
 	void detachItemInstance(int);
+
 	static int testunit(int i) { return ++i; };
 	static int testunittwo(int i);
 
+	//physics engine test
+	void translatePlayer(btVector3& pMyTranslation, btQuaternion& pMyRotation);
+
+	//Creating a wall model
+	void createCube(Ogre::Entity* pMyEntity, Ogre::SceneNode* pMyNode, Ogre::Vector3 pMyPosition, Ogre::Vector3 pMyScale, Ogre::Degree pMyRotation);
+	
 	LevelGenerator* levelGenerator;
 	// for now public so that game manager can access it. 
 	Player* playerScript;
@@ -58,6 +76,15 @@ public:
 
 private:
 	Ogre::Entity* _playerEntity;
+	Ogre::SceneNode* playerNode;
+	//Test physics engine entity
+	Ogre::Entity* _testEntity;
+	Ogre::SceneNode* testNode;
+	//test mesh entity
+	Ogre::Entity* _testEntity2;
+	Ogre::SceneNode* testNode2;
+	//test wall setup
+
 	//TODO replace all with spawners
 	Ogre::Entity* _npcEntity;
 	Ogre::Entity* _basicEnemyEntity;
@@ -77,6 +104,29 @@ private:
 	std::vector<ItemInstance*> _instanceScripts;
 	std::vector<Character*> _basicPrincessScripts;
 	// TODO: lists of different scripts (NPC's, enemies, e.d.) 
+
+
+	//Physics engine
+	btBroadphaseInterface* broadphase;
+	btDefaultCollisionConfiguration* collisionConfiguration;
+	btCollisionDispatcher* dispatcher;
+	btSequentialImpulseConstraintSolver* solver;
+	btDiscreteDynamicsWorld* dynamicsWorld;
+	btCollisionShape* groundShape;
+	btCollisionShape* fallShape;
+	btCollisionShape* boxShape;
+	btDefaultMotionState* groundMotionState;
+	btDefaultMotionState* fallMotionState;
+	btScalar mass;
+	btVector3 fallInertia;
+	btRigidBody* groundRigidBody;
+	btRigidBody* fallRigidBody;
+	btRigidBody* boxRigidBody;
+	btTransform trans;
+
+	//Wall nodes and entities
+	std::vector <Ogre::SceneNode*> wallNodes;
+	Ogre::Entity* wallEntity;
 };
 
 #endif

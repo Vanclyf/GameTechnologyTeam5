@@ -44,6 +44,7 @@ public:
 
 	Ogre::Vector3 getPosition() { return _myNode->getPosition(); }
 	NpcType getTypeNpc() { return _typeNpc; }
+	CharacterStats* getStats() { return _stats; }
 	void setTypeNpc(NpcType pType) { _typeNpc = pType; }
 
 	int getLevel() { return _currentLevel; }
@@ -60,10 +61,13 @@ public:
 	void swapEquipmentSlot(ArmorInstance*, int);
 	void swapEquipmentSlot(WeaponInstance*, int);
 	void setHealth(int health) { _currentHealth = health; }
+	Ogre::Entity* getEntity() { return _myEntity; }
+	void hit();
 
 	virtual bool adjustHealth(float);
 	virtual bool adjustStaminaOverTime(Ogre::Real);
 	virtual bool adjustStamina(float);
+	virtual bool regenHealth(float);
 	virtual void die();
 	int id; //may only be changed by levelmanager, death scenario 
 
@@ -113,6 +117,10 @@ private:
 	Ogre::Entity* _weaponEntity;
 	Ogre::SceneNode* _weaponNode;
 	NpcType _typeNpc;
+	Ogre::Timer* _hitTimer;
+	Ogre::Real _hitCountdown;
+	bool _isHit;
+	bool _isDead;
 };
 
 #endif
