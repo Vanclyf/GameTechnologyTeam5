@@ -46,7 +46,6 @@ public:
 
 	btVector3 setDirVector(btVector3& pMoveVec) { return _bulletDirVec = pMoveVec; }
 	btVector3 getDirVector() { return _bulletDirVec; }
-	btQuaternion getPLayerRotationQuaternion() { return _btPlayerRotation; }
 
 	int subscribeHostileNPC(BasicEnemy*);
 	int subscribeHostileNPC(BasicPrincess*);
@@ -62,9 +61,8 @@ public:
 	static int testunittwo(int i);
 
 	//physics engine
-	void translatePlayerWithRotation(btVector3& pMyTranslation, btQuaternion& pMyRotation);
-	btVector3 rotateVectorByQuaternion(btVector3& pMyVector3, btQuaternion& pMyQuaternion);
-	void pushBackPlayer();
+	void translatePlayer(btVector3& pMyTranslation, btQuaternion& pMyRotation);
+	btVector3 _bulletDirVec;
 
 	//Creating a wall model
 	void createCube(Ogre::Entity* pMyEntity, Ogre::SceneNode* pMyNode, Ogre::Vector3 pMyPosition, Ogre::Vector3 pMyScale, Ogre::Degree pMyRotation);
@@ -126,9 +124,6 @@ private:
 	btRigidBody* fallRigidBody;
 	btRigidBody* boxRigidBody;
 	btTransform trans;
-
-	btVector3 _bulletDirVec;
-	btQuaternion _btPlayerRotation;
 
 	//Wall nodes and entities
 	std::vector <Ogre::SceneNode*> wallNodes;
