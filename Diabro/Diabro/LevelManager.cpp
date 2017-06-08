@@ -264,7 +264,7 @@ void LevelManager::initPhysicsWorld() {
 	dispatcher = new btCollisionDispatcher(collisionConfiguration);
 	solver = new btSequentialImpulseConstraintSolver;
 	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
-	dynamicsWorld->setGravity(btVector3(0, -10, 0));
+	dynamicsWorld->setGravity(btVector3(0, -100, 0));
 
 	//shapes
 	groundShape = new btStaticPlaneShape(btVector3(0, 1, 0), 1);
@@ -489,19 +489,28 @@ void::LevelManager::setupWalls() {
 /// </summary>
 /// <param name="pMyTranslation">The p my translation.</param>
 /// <param name="pMyRotation">The p my rotation.</param>
-void::LevelManager::translatePlayer(btVector3& pMyTranslation, btQuaternion& pMyRotation) {
+void::LevelManager::translatePlayerWithRotation(btVector3& pMyTranslation, btQuaternion& pMyRotation) {
 	fallRigidBody->activate();
+	fallRigidBody->translate(rotateVectorByQuaternion(pMyTranslation, pMyRotation));
+};
+
+void::LevelManager::pushBackPlayer() {
+	fallRigidBody->activate();
+	btVector3 pushBackForce = rotateVectorByQuaternion(btVector3(0, 0, 100), fallRigidBody->getOrientation());
+	fallRigidBody->translate(btVector3(pushBackForce.getX(), 40, pushBackForce.getZ()));
+};
+
+btVector3 LevelManager::rotateVectorByQuaternion(btVector3& pMyVector3, btQuaternion& pMyQuaternion) {
 	// extract the vector part of the quaternion
-	btVector3 u(pMyRotation.getX(), pMyRotation.getY(), pMyRotation.getZ());
+	btVector3 u(pMyQuaternion.getX(), pMyQuaternion.getY(), pMyQuaternion.getZ());
 
 	// Extract the scalar part of the quaternion
-	float s = pMyRotation.getW();
-	btVector3 rotatedDirection = 2.0f * u.dot(pMyTranslation) * u
-		+ (s*s - u.dot(u)) * pMyTranslation
-		+ 2.0f * s * u.cross(pMyTranslation);
-
-	fallRigidBody->translate(rotatedDirection);
-}
+	float s = pMyQuaternion.getW();
+	btVector3 rotatedDirection = 2.0f * u.dot(pMyVector3) * u
+		+ (s*s - u.dot(u)) * pMyVector3
+		+ 2.0f * s * u.cross(pMyVector3);
+	return rotatedDirection;
+};
 
 
 
@@ -513,15 +522,15 @@ void::LevelManager::updatePlayer() {
 	fallRigidBody->activate();
 	btTransform playerTransForm;
 	fallRigidBody->getMotionState()->getWorldTransform(playerTransForm);
-	btQuaternion btPlayerRotation = btQuaternion(playerNode->getOrientation().getYaw().valueRadians(), 0, 0);
+	_btPlayerRotation = btQuaternion(playerNode->getOrientation().getYaw().valueRadians(), 0, 0);
 
-	playerTransForm.setRotation(btPlayerRotation);
+	playerTransForm.setRotation(_btPlayerRotation);
 	fallRigidBody->setCenterOfMassTransform(playerTransForm);
-	playerNode->setOrientation(Ogre::Quaternion(btPlayerRotation.getW(), btPlayerRotation.getX(), btPlayerRotation.getY(), btPlayerRotation.getZ()));
+	playerNode->setOrientation(Ogre::Quaternion(_btPlayerRotation.getW(), _btPlayerRotation.getX(), _btPlayerRotation.getY(), _btPlayerRotation.getZ()));
 	playerNode->setPosition(Ogre::Vector3(playerTransForm.getOrigin().getX(), playerTransForm.getOrigin().getY(), playerTransForm.getOrigin().getZ()));
 
 	if (_bulletDirVec.getX() <= 2 && _bulletDirVec.getX() >= -2 || _bulletDirVec.getZ() <= 2 && _bulletDirVec.getZ() >= -2) {
-		translatePlayer(_bulletDirVec, btPlayerRotation);
+		translatePlayerWithRotation(_bulletDirVec, _btPlayerRotation);
 	}
 
 };
