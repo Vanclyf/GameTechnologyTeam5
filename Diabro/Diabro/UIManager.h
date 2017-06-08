@@ -48,7 +48,6 @@ private:
 	OgreBites::Slider*		_karmaBarWidget;
 	OgreBites::ParamsPanel*		_gameTimer;
 	OgreBites::ParamsPanel*		_statsPanel;
-	OgreBites::Slider*		    _karmaBarWidget;
 	OgreBites::TextBox*         _eventLogTextBox;
 	Ogre::SceneNode*			_uiNode;
 

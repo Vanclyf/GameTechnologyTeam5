@@ -46,8 +46,6 @@ void UIManager::setupUI()
 	_ParamNames.push_back("Damage");
 	_statsPanel = _mSdkTrayMgr->createParamsPanel(OgreBites::TL_BOTTOMRIGHT, "Stats",150, _ParamNames);
 	//_gameTimer->getOverlayElement()->setLeft(-200);
-	// create karma bar
-	_karmaBarWidget = _mSdkTrayMgr->createLongSlider(OgreBites::TL_TOPRIGHT, "Karma", "Karma", 200, 50, -300, 300, 60);
 	//create eventlogtextbox
 	_eventLogTextBox = _mSdkTrayMgr->createTextBox(OgreBites::TL_BOTTOMLEFT, "Eventlog", "Eventlog", 200, 200);
 
